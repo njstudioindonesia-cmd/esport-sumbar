@@ -73,4 +73,8 @@ export class ProxyService {
   createIngestorProxy(): RequestHandler {
     return this.createServiceProxy(this.config.NEWS_INGESTOR_URL, 'News Ingestor');
   }
+
+  createCommunityProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.COMMUNITY_SERVICE_URL, 'Community Service');
+  }
 }

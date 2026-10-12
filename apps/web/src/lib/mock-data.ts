@@ -1,4 +1,12 @@
-import { Article, EventItem, Community } from '@esport-sumbar/contracts';
+import {
+  Article,
+  EventItem,
+  Community,
+  CommunityMember,
+  CommunityPost,
+  CommunityComment,
+  ContentReport,
+} from '@esport-sumbar/contracts';
 
 export interface LiveMatchTicker {
   id: string;
@@ -305,4 +313,185 @@ export const MOCK_COMMUNITIES: Community[] = [
     memberCount: 980,
     createdAt: new Date().toISOString(),
   },
+  {
+    id: 'com-005',
+    gameId: 'mobile-legends',
+    name: 'MLBB Kota Solok & Solok Selatan Squad',
+    slug: 'mlbb-solok-squad',
+    description: 'Sub-komunitas regional khusus tim dan pemain Mobile Legends area Solok Raya.',
+    type: 'USER',
+    region: 'Solok',
+    memberCount: 540,
+    createdAt: new Date().toISOString(),
+  },
 ];
+
+export const MOCK_COMMUNITY_MEMBERS: CommunityMember[] = [
+  {
+    userId: 'usr-admin-1',
+    nickname: 'CoachRian_PDG',
+    city: 'Padang',
+    communityId: 'com-001',
+    role: 'OWNER',
+    joinedAt: new Date(Date.now() - 86400000 * 60).toISOString(),
+  },
+  {
+    userId: 'usr-mod-1',
+    nickname: 'GarudaMinang_Mod',
+    city: 'Bukittinggi',
+    communityId: 'com-001',
+    role: 'MODERATOR',
+    joinedAt: new Date(Date.now() - 86400000 * 45).toISOString(),
+  },
+  {
+    userId: 'usr-player-1',
+    nickname: 'RizkySlayer99',
+    city: 'Payakumbuh',
+    communityId: 'com-001',
+    role: 'MEMBER',
+    joinedAt: new Date(Date.now() - 86400000 * 20).toISOString(),
+  },
+  {
+    userId: 'usr-player-2',
+    nickname: 'NabilaMage_BKT',
+    city: 'Bukittinggi',
+    communityId: 'com-001',
+    role: 'MEMBER',
+    joinedAt: new Date(Date.now() - 86400000 * 12).toISOString(),
+  },
+  {
+    userId: 'usr-player-3',
+    nickname: 'FajarHyper_PRY',
+    city: 'Pariaman',
+    communityId: 'com-001',
+    role: 'MEMBER',
+    joinedAt: new Date(Date.now() - 86400000 * 5).toISOString(),
+  },
+];
+
+export const MOCK_COMMUNITY_POSTS: CommunityPost[] = [
+  {
+    id: 'post-001',
+    communityId: 'com-001',
+    authorId: 'usr-mod-1',
+    authorNickname: 'GarudaMinang_Mod',
+    authorRole: 'MODERATOR',
+    content:
+      '[PENGUMUMAN RESMI] Jadwal Scrim Gabungan Persiapan Minang Super League Season 4 dibuka setiap Jumat & Sabtu pukul 20.00 WIB. Silakan daftarkan nama squad dan ID Kapten di kolom komentar! Pastikan seluruh anggota mematuhi kode etik fair-play.',
+    media: [],
+    pinned: true,
+    likesCount: 42,
+    commentsCount: 2,
+    status: 'PUBLISHED',
+    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
+  },
+  {
+    id: 'post-002',
+    communityId: 'com-001',
+    authorId: 'usr-player-1',
+    authorNickname: 'RizkySlayer99',
+    authorRole: 'MEMBER',
+    content:
+      'Info tim yang butuh Roamer / EXP Laner area Kota Padang untuk turnamen offline UNP minggu depan. Tier Mythical Glory 85 bintang siap latihan rutin malam.',
+    media: [],
+    pinned: false,
+    likesCount: 15,
+    commentsCount: 1,
+    status: 'PUBLISHED',
+    createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+  },
+  {
+    id: 'post-003',
+    communityId: 'com-002',
+    authorId: 'usr-mod-1',
+    authorNickname: 'GarudaMinang_Mod',
+    authorRole: 'MODERATOR',
+    content:
+      'Kopdar & Mabar Komunitas Free Fire Bukittinggi akhir pekan ini di Pelataran Jam Gadang. Tersedia custom room berhadiah diamond bagi 3 squad teratas!',
+    media: [],
+    pinned: true,
+    likesCount: 31,
+    commentsCount: 0,
+    status: 'PUBLISHED',
+    createdAt: new Date(Date.now() - 3600000 * 8).toISOString(),
+  },
+];
+
+export const MOCK_COMMUNITY_COMMENTS: CommunityComment[] = [
+  {
+    id: 'cmt-001',
+    postId: 'post-001',
+    authorId: 'usr-player-1',
+    authorNickname: 'RizkySlayer99',
+    authorRole: 'MEMBER',
+    parentId: null,
+    content: 'Hadir bang! Squad Padang Pride siap ikut slot Jumat malam.',
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+  },
+  {
+    id: 'cmt-002',
+    postId: 'post-001',
+    authorId: 'usr-mod-1',
+    authorNickname: 'GarudaMinang_Mod',
+    authorRole: 'MODERATOR',
+    parentId: 'cmt-001',
+    content: 'Mantap! Sudah dicatat di bracket latihan Grup A ya.',
+    createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+  },
+  {
+    id: 'cmt-003',
+    postId: 'post-002',
+    authorId: 'usr-player-2',
+    authorNickname: 'NabilaMage_BKT',
+    authorRole: 'MEMBER',
+    parentId: null,
+    content: 'Cek DM bang, tim kami lagi cari Roamer buat kualifikasi Padang.',
+    createdAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+  },
+];
+
+export const MOCK_COMMUNITY_REPORTS: ContentReport[] = [
+  {
+    id: 'rep-001',
+    communityId: 'com-001',
+    targetType: 'POST',
+    targetId: 'post-spam-99',
+    targetPreview: 'Jual akun murah tanpa rekber hubungi WA 0812xxxx cepat sebelum kehabisan...',
+    reporterId: 'usr-player-1',
+    reporterNickname: 'RizkySlayer99',
+    reason: 'Indikasi penipuan jual beli akun tanpa rekber resmi di forum diskusi',
+    category: 'SPAM',
+    status: 'PENDING',
+    aiFlagged: false,
+    createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+  },
+  {
+    id: 'rep-002',
+    communityId: 'com-001',
+    targetType: 'POST',
+    targetId: 'auto-blocked-101',
+    targetPreview: 'Info link slot gacor maxwin malam ini deposit pulsa tanpa potongan...',
+    reporterId: 'system-ai-moderator',
+    reporterNickname: 'AI Safety Engine',
+    reason: 'Otomatis diblokir AI Pre-Moderation: Terdeteksi promosi judi online ilegal',
+    category: 'JUDI',
+    status: 'PENDING',
+    aiFlagged: true,
+    createdAt: new Date(Date.now() - 3600000 * 1).toISOString(),
+  },
+  {
+    id: 'rep-003',
+    communityId: 'com-003',
+    targetType: 'COMMENT',
+    targetId: 'cmt-toxic-55',
+    targetPreview: 'Tim noob gak usah ikut turnamen bikin malu daerah aja...',
+    reporterId: 'usr-player-2',
+    reporterNickname: 'NabilaMage_BKT',
+    reason: 'Komentar merendahkan dan memicu keributan antar tim komunitas',
+    category: 'TOXIC',
+    status: 'PENDING',
+    aiFlagged: true,
+    createdAt: new Date(Date.now() - 1800000).toISOString(),
+  },
+];
+

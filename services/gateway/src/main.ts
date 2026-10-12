@@ -74,11 +74,16 @@ async function bootstrap(): Promise<void> {
   const newsProxy = proxyService.createNewsProxy();
   const aiProxy = proxyService.createAiProxy();
   const ingestorProxy = proxyService.createIngestorProxy();
+  const communityProxy = proxyService.createCommunityProxy();
   const identityProxy = proxyService.createIdentityProxy();
 
   // News routes
   app.use('/api/news', newsProxy);
   app.use('/api/admin/news', newsProxy);
+
+  // Community & Moderation routes
+  app.use('/api/communities', communityProxy);
+  app.use('/api/admin/moderation', communityProxy);
 
   // AI engine routes
   app.use('/api/ai', aiProxy);

@@ -95,21 +95,85 @@ export type Article = z.infer<typeof ArticleSchema>;
 
 // Community DTOs
 export const CommunityTypeEnum = z.enum(['OFFICIAL', 'USER']);
+export type CommunityType = z.infer<typeof CommunityTypeEnum>;
+
 export const CommunityRoleEnum = z.enum(['MEMBER', 'MODERATOR', 'OWNER']);
+export type CommunityRole = z.infer<typeof CommunityRoleEnum>;
 
 export const CommunitySchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   gameId: z.string(),
   name: z.string(),
   slug: z.string(),
   description: z.string().optional(),
   type: CommunityTypeEnum,
-  ownerId: z.string().uuid().nullable().optional(),
+  ownerId: z.string().nullable().optional(),
   region: z.string().optional(),
   memberCount: z.number().int().default(0),
   createdAt: z.string().datetime(),
 });
 export type Community = z.infer<typeof CommunitySchema>;
+
+export const CommunityMemberSchema = z.object({
+  userId: z.string(),
+  nickname: z.string(),
+  city: z.string().optional(),
+  communityId: z.string(),
+  role: CommunityRoleEnum,
+  joinedAt: z.string().datetime(),
+});
+export type CommunityMember = z.infer<typeof CommunityMemberSchema>;
+
+export const CommunityCommentSchema = z.object({
+  id: z.string(),
+  postId: z.string(),
+  authorId: z.string(),
+  authorNickname: z.string(),
+  authorRole: CommunityRoleEnum.optional(),
+  parentId: z.string().nullable().optional(),
+  content: z.string(),
+  createdAt: z.string().datetime(),
+});
+export type CommunityComment = z.infer<typeof CommunityCommentSchema>;
+
+export const PostStatusEnum = z.enum(['PUBLISHED', 'FLAGGED', 'REJECTED']);
+export type PostStatus = z.infer<typeof PostStatusEnum>;
+
+export const CommunityPostSchema = z.object({
+  id: z.string(),
+  communityId: z.string(),
+  authorId: z.string(),
+  authorNickname: z.string(),
+  authorRole: CommunityRoleEnum.optional(),
+  content: z.string(),
+  media: z.array(z.string()).default([]),
+  pinned: z.boolean().default(false),
+  likesCount: z.number().int().default(0),
+  commentsCount: z.number().int().default(0),
+  status: PostStatusEnum.default('PUBLISHED'),
+  moderationReason: z.string().optional(),
+  createdAt: z.string().datetime(),
+});
+export type CommunityPost = z.infer<typeof CommunityPostSchema>;
+
+export const ReportTargetTypeEnum = z.enum(['POST', 'COMMENT']);
+export const ReportStatusEnum = z.enum(['PENDING', 'RESOLVED', 'DISMISSED']);
+
+export const ContentReportSchema = z.object({
+  id: z.string(),
+  communityId: z.string(),
+  targetType: ReportTargetTypeEnum,
+  targetId: z.string(),
+  targetPreview: z.string(),
+  reporterId: z.string(),
+  reporterNickname: z.string(),
+  reason: z.string(),
+  category: z.enum(['SPAM', 'TOXIC', 'SARA', 'JUDI', 'LAINNYA']),
+  status: ReportStatusEnum.default('PENDING'),
+  aiFlagged: z.boolean().default(false),
+  createdAt: z.string().datetime(),
+});
+export type ContentReport = z.infer<typeof ContentReportSchema>;
 
 // Event & EO DTOs
 export const EventScopeEnum = z.enum(['SUMBAR', 'NASIONAL', 'GLOBAL']);
