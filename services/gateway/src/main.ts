@@ -71,8 +71,22 @@ async function bootstrap(): Promise<void> {
 
   // Setup Upstream Microservice Proxies
   const proxyService = app.get(ProxyService);
+  const newsProxy = proxyService.createNewsProxy();
+  const aiProxy = proxyService.createAiProxy();
+  const ingestorProxy = proxyService.createIngestorProxy();
   const identityProxy = proxyService.createIdentityProxy();
 
+  // News routes
+  app.use('/api/news', newsProxy);
+  app.use('/api/admin/news', newsProxy);
+
+  // AI engine routes
+  app.use('/api/ai', aiProxy);
+
+  // Ingestor pipeline routes
+  app.use('/api/ingest', ingestorProxy);
+
+  // Identity / Auth routes (and fallback)
   app.use('/api', identityProxy);
 
   // Swagger Documentation

@@ -23,6 +23,9 @@ export class HealthController {
       timestamp: new Date().toISOString(),
       upstream: {
         identityService: this.config.IDENTITY_SERVICE_URL,
+        newsService: this.config.NEWS_SERVICE_URL,
+        aiService: this.config.AI_SERVICE_URL,
+        newsIngestor: this.config.NEWS_INGESTOR_URL,
       },
       memoryUsageMb: {
         rss: Math.round((mem.rss / 1024 / 1024) * 100) / 100,

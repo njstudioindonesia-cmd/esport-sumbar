@@ -11,10 +11,11 @@ export class ProxyService {
 
   constructor(@Inject(ENV_CONFIG_TOKEN) private readonly config: EnvConfig) {}
 
-  createIdentityProxy(): RequestHandler {
+  createServiceProxy(targetUrl: string, serviceName: string): RequestHandler {
     return createProxyMiddleware({
-      target: this.config.IDENTITY_SERVICE_URL,
+      target: targetUrl,
       changeOrigin: true,
+      pathRewrite: (_path, req: any) => req.originalUrl.replace(/^\/api/, ''),
       on: {
         proxyReq: (proxyReq, req: any) => {
           const correlationId = getOrGenerateCorrelationId(req.headers[CORRELATION_HEADER]);
@@ -22,8 +23,11 @@ export class ProxyService {
           if (req.headers.authorization) {
             proxyReq.setHeader('authorization', req.headers.authorization);
           }
+          if (req.headers['x-user-id']) {
+            proxyReq.setHeader('x-user-id', req.headers['x-user-id']);
+          }
           this.logger.debug(
-            `Proxying ${req.method} ${req.originalUrl} -> ${this.config.IDENTITY_SERVICE_URL}${proxyReq.path}`,
+            `Proxying ${req.method} ${req.originalUrl} -> ${targetUrl}${proxyReq.path}`,
             'ProxyService',
             undefined,
             correlationId,
@@ -32,7 +36,7 @@ export class ProxyService {
         error: (err, req: any, res: any) => {
           const correlationId = (req as any).correlationId;
           this.logger.error(
-            `Proxy error connecting to Identity Service at ${this.config.IDENTITY_SERVICE_URL}`,
+            `Proxy error connecting to ${serviceName} at ${targetUrl}`,
             err as Error,
             'ProxyService',
             undefined,
@@ -43,7 +47,7 @@ export class ProxyService {
               success: false,
               error: {
                 code: 'BAD_GATEWAY',
-                message: 'Tidak dapat terhubung ke upstream Identity Service',
+                message: `Tidak dapat terhubung ke upstream ${serviceName}`,
               },
               correlationId,
               timestamp: new Date().toISOString(),
@@ -52,5 +56,21 @@ export class ProxyService {
         },
       },
     });
+  }
+
+  createIdentityProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.IDENTITY_SERVICE_URL, 'Identity Service');
+  }
+
+  createNewsProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.NEWS_SERVICE_URL, 'News Service');
+  }
+
+  createAiProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.AI_SERVICE_URL, 'AI Service');
+  }
+
+  createIngestorProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.NEWS_INGESTOR_URL, 'News Ingestor');
   }
 }
