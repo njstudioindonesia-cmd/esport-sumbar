@@ -2,7 +2,8 @@
   "extends": "@esport-sumbar/config/tsconfig/nest.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": "./"
   },
   "include": ["src/**/*"]
 }

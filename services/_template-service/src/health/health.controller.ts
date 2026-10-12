@@ -2,13 +2,14 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { HealthService, HealthCheckResult } from './health.service';
 import { EnvConfig } from '../config/env.config';
+import { ENV_CONFIG_TOKEN } from '../config/config.module';
 
 @ApiTags('Health')
 @Controller('health')
 export class HealthController {
   constructor(
     private readonly healthService: HealthService,
-    @Inject('ENV_CONFIG') private readonly envConfig: EnvConfig,
+    @Inject(ENV_CONFIG_TOKEN) private readonly envConfig: EnvConfig,
   ) {}
 
   @Get()
