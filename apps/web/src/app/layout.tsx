@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import { ToastProvider } from '@/components/ui/toast';
 
 export const metadata: Metadata = {
   title: 'ESPORT SUMBAR — Portal Esport Sumatera Barat',
@@ -24,9 +25,11 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-dark-900 text-accent-text100 flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <Footer />
+        <ToastProvider>
+          <Navbar />
+          <main className="flex-1 flex flex-col">{children}</main>
+          <Footer />
+        </ToastProvider>
       </body>
     </html>
   );
