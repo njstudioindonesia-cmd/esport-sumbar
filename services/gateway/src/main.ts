@@ -75,6 +75,8 @@ async function bootstrap(): Promise<void> {
   const aiProxy = proxyService.createAiProxy();
   const ingestorProxy = proxyService.createIngestorProxy();
   const communityProxy = proxyService.createCommunityProxy();
+  const eventProxy = proxyService.createEventProxy();
+  const mediaProxy = proxyService.createMediaProxy();
   const identityProxy = proxyService.createIdentityProxy();
 
   // News routes
@@ -84,6 +86,13 @@ async function bootstrap(): Promise<void> {
   // Community & Moderation routes
   app.use('/api/communities', communityProxy);
   app.use('/api/admin/moderation', communityProxy);
+
+  // Event & EO Tools routes
+  app.use('/api/events', eventProxy);
+  app.use('/api/eo', eventProxy);
+
+  // Media & Event Storage routes
+  app.use('/api/media', mediaProxy);
 
   // AI engine routes
   app.use('/api/ai', aiProxy);

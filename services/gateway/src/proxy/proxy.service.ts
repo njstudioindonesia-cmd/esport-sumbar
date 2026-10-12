@@ -26,6 +26,9 @@ export class ProxyService {
           if (req.headers['x-user-id']) {
             proxyReq.setHeader('x-user-id', req.headers['x-user-id']);
           }
+          if (req.headers['x-user-role']) {
+            proxyReq.setHeader('x-user-role', req.headers['x-user-role']);
+          }
           this.logger.debug(
             `Proxying ${req.method} ${req.originalUrl} -> ${targetUrl}${proxyReq.path}`,
             'ProxyService',
@@ -76,5 +79,13 @@ export class ProxyService {
 
   createCommunityProxy(): RequestHandler {
     return this.createServiceProxy(this.config.COMMUNITY_SERVICE_URL, 'Community Service');
+  }
+
+  createEventProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.EVENT_SERVICE_URL, 'Event Service');
+  }
+
+  createMediaProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.MEDIA_SERVICE_URL, 'Media Service');
   }
 }

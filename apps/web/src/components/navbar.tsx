@@ -44,21 +44,43 @@ export function Navbar() {
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link
             href="/berita"
-            className="text-accent-text400 hover:text-white transition-colors"
+            className={
+              pathname?.startsWith('/berita')
+                ? 'text-brand-500 font-bold'
+                : 'text-accent-text400 hover:text-white transition-colors'
+            }
           >
             Berita
           </Link>
           <Link
             href="/komunitas"
-            className="text-accent-text400 hover:text-white transition-colors"
+            className={
+              pathname?.startsWith('/komunitas')
+                ? 'text-brand-500 font-bold'
+                : 'text-accent-text400 hover:text-white transition-colors'
+            }
           >
             Komunitas
           </Link>
           <Link
             href="/event"
-            className="text-accent-text400 hover:text-white transition-colors"
+            className={
+              pathname?.startsWith('/event')
+                ? 'text-brand-500 font-bold'
+                : 'text-accent-text400 hover:text-white transition-colors'
+            }
           >
-            Event
+            Event & Turnamen
+          </Link>
+          <Link
+            href="/eo/dashboard"
+            className={
+              pathname?.startsWith('/eo')
+                ? 'text-brand-500 font-bold'
+                : 'text-accent-text400 hover:text-white transition-colors'
+            }
+          >
+            Panel EO
           </Link>
         </nav>
 

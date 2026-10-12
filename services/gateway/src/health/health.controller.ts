@@ -27,6 +27,8 @@ export class HealthController {
         aiService: this.config.AI_SERVICE_URL,
         newsIngestor: this.config.NEWS_INGESTOR_URL,
         communityService: this.config.COMMUNITY_SERVICE_URL,
+        eventService: this.config.EVENT_SERVICE_URL,
+        mediaService: this.config.MEDIA_SERVICE_URL,
       },
       memoryUsageMb: {
         rss: Math.round((mem.rss / 1024 / 1024) * 100) / 100,
