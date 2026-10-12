@@ -134,6 +134,11 @@ export default function EventDetailPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link href={`/event/${event.slug}/bracket`}>
+                <Button variant="secondary" size="md">
+                  Live Bracket & Klasemen
+                </Button>
+              </Link>
               <Link href={`/eo/event/${event.id}`}>
                 <Button variant="secondary" size="md">
                   Kelola di Panel EO

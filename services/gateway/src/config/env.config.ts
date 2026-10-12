@@ -13,6 +13,7 @@ export const EnvSchema = z.object({
   COMMUNITY_SERVICE_URL: z.string().default('http://localhost:4004'),
   EVENT_SERVICE_URL: z.string().default('http://localhost:4005'),
   MEDIA_SERVICE_URL: z.string().default('http://localhost:4006'),
+  BRACKET_SERVICE_URL: z.string().default('http://localhost:4007'),
   RATE_LIMIT_WINDOW_MS: z.coerce.number().default(60000), // 1 minute
   RATE_LIMIT_MAX_REQUESTS: z.coerce.number().default(100), // 100 requests per window
 });

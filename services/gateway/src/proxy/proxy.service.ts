@@ -88,4 +88,8 @@ export class ProxyService {
   createMediaProxy(): RequestHandler {
     return this.createServiceProxy(this.config.MEDIA_SERVICE_URL, 'Media Service');
   }
+
+  createBracketProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.BRACKET_SERVICE_URL, 'Bracket Service');
+  }
 }

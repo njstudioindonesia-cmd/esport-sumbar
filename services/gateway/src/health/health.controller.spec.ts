@@ -17,6 +17,7 @@ describe('Gateway HealthController', () => {
     COMMUNITY_SERVICE_URL: 'http://localhost:4004',
     EVENT_SERVICE_URL: 'http://localhost:4005',
     MEDIA_SERVICE_URL: 'http://localhost:4006',
+    BRACKET_SERVICE_URL: 'http://localhost:4007',
     RATE_LIMIT_WINDOW_MS: 60000,
     RATE_LIMIT_MAX_REQUESTS: 100,
   };
@@ -40,6 +41,7 @@ describe('Gateway HealthController', () => {
     expect(res.upstream.communityService).toBe('http://localhost:4004');
     expect(res.upstream.eventService).toBe('http://localhost:4005');
     expect(res.upstream.mediaService).toBe('http://localhost:4006');
+    expect(res.upstream.bracketService).toBe('http://localhost:4007');
     expect(res.uptimeSeconds).toBeGreaterThanOrEqual(0);
     expect(res.memoryUsageMb.rss).toBeGreaterThan(0);
   });

@@ -335,13 +335,149 @@ export const EventStorageSummarySchema = z.object({
 });
 export type EventStorageSummary = z.infer<typeof EventStorageSummarySchema>;
 
-// Tournament Bracket DTOs
+// Tournament Bracket & Leaderboard DTOs
 export const TournamentFormatEnum = z.enum([
   'SINGLE_ELIMINATION',
   'DOUBLE_ELIMINATION',
   'ROUND_ROBIN',
   'SWISS',
+  'GROUP_PLAYOFF',
   'LEADERBOARD',
 ]);
 export type TournamentFormat = z.infer<typeof TournamentFormatEnum>;
+
+export const SeedingTypeEnum = z.enum(['MANUAL', 'RANDOM', 'RATING']);
+export type SeedingType = z.infer<typeof SeedingTypeEnum>;
+
+export const BracketStageEnum = z.enum([
+  'UPPER',
+  'LOWER',
+  'GRAND_FINAL',
+  'ROUND_ROBIN',
+  'SWISS',
+  'GROUP_A',
+  'GROUP_B',
+  'PLAYOFF',
+]);
+export type BracketStage = z.infer<typeof BracketStageEnum>;
+
+export const MatchStateEnum = z.enum([
+  'PENDING',
+  'IN_PROGRESS',
+  'COMPLETED',
+  'BYE',
+]);
+export type MatchState = z.infer<typeof MatchStateEnum>;
+
+export const BracketParticipantSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  seed: z.number().int().positive(),
+  rating: z.number().optional(),
+  city: z.string().optional(),
+  communityId: z.string().optional(),
+});
+export type BracketParticipant = z.infer<typeof BracketParticipantSchema>;
+
+export const BracketMatchSchema = z.object({
+  id: z.string(),
+  tournamentId: z.string(),
+  stage: BracketStageEnum,
+  round: z.number().int().positive(),
+  matchNumber: z.number().int().positive(),
+  slotA: z.string().nullable().optional(),
+  slotB: z.string().nullable().optional(),
+  participantAName: z.string().nullable().optional(),
+  participantBName: z.string().nullable().optional(),
+  scoreA: z.number().int().default(0),
+  scoreB: z.number().int().default(0),
+  winnerId: z.string().nullable().optional(),
+  nextMatchId: z.string().nullable().optional(),
+  nextMatchSlot: z.enum(['A', 'B']).nullable().optional(),
+  loserNextMatchId: z.string().nullable().optional(),
+  loserNextMatchSlot: z.enum(['A', 'B']).nullable().optional(),
+  scheduledAt: z.string().datetime().nullable().optional(),
+  state: MatchStateEnum.default('PENDING'),
+});
+export type BracketMatch = z.infer<typeof BracketMatchSchema>;
+
+export const PointRuleConfigSchema = z.object({
+  winPoints: z.number().default(3),
+  drawPoints: z.number().default(1),
+  lossPoints: z.number().default(0),
+  killPointValue: z.number().default(1),
+  placementPointsMap: z.record(z.number()).default({
+    '1': 12,
+    '2': 9,
+    '3': 8,
+    '4': 7,
+    '5': 6,
+    '6': 5,
+    '7': 4,
+    '8': 3,
+    '9': 2,
+    '10': 1,
+    '11': 0,
+    '12': 0,
+  }),
+  tiebreakerOrder: z
+    .array(
+      z.enum([
+        'TOTAL_POINTS',
+        'KILL_POINTS',
+        'HEAD_TO_HEAD',
+        'SCORE_DIFF',
+        'BUCHHOLZ',
+      ]),
+    )
+    .default([
+      'TOTAL_POINTS',
+      'KILL_POINTS',
+      'HEAD_TO_HEAD',
+      'SCORE_DIFF',
+      'BUCHHOLZ',
+    ]),
+});
+export type PointRuleConfig = z.infer<typeof PointRuleConfigSchema>;
+
+export const StandingEntrySchema = z.object({
+  rank: z.number().int().positive(),
+  participantId: z.string(),
+  participantName: z.string(),
+  city: z.string().optional(),
+  group: z.string().optional(),
+  played: z.number().int().nonnegative(),
+  wins: z.number().int().nonnegative(),
+  draws: z.number().int().nonnegative(),
+  losses: z.number().int().nonnegative(),
+  scoreFor: z.number().int().nonnegative(),
+  scoreAgainst: z.number().int().nonnegative(),
+  scoreDiff: z.number().int(),
+  placementPoints: z.number().nonnegative(),
+  killPoints: z.number().nonnegative(),
+  totalPoints: z.number().nonnegative(),
+  headToHeadWins: z.number().int().nonnegative(),
+  buchholzScore: z.number().nonnegative(),
+});
+export type StandingEntry = z.infer<typeof StandingEntrySchema>;
+
+export const TournamentSchema = z.object({
+  id: z.string(),
+  eventId: z.string(),
+  eventSlug: z.string(),
+  eventTitle: z.string(),
+  organizerId: z.string(),
+  gameId: z.string(),
+  format: TournamentFormatEnum,
+  seedingType: SeedingTypeEnum,
+  bestOf: z.number().int().positive().default(3),
+  pointConfig: PointRuleConfigSchema,
+  status: z.enum(['DRAFT', 'ACTIVE', 'COMPLETED']).default('ACTIVE'),
+  participants: z.array(BracketParticipantSchema),
+  matches: z.array(BracketMatchSchema),
+  standings: z.array(StandingEntrySchema),
+  updatedAt: z.string().datetime(),
+});
+export type Tournament = z.infer<typeof TournamentSchema>;
+
 

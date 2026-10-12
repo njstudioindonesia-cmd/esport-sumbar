@@ -475,6 +475,12 @@ export default function EoEventWorkspacePage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
+              <Link href={`/event/${event.slug}/bracket`}>
+                <Button variant="secondary" size="sm">
+                  Bracket & Klasemen Live
+                  <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+                </Button>
+              </Link>
               <Link href={`/event/${event.slug}`}>
                 <Button variant="secondary" size="sm">
                   Halaman Publik

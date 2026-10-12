@@ -77,6 +77,7 @@ async function bootstrap(): Promise<void> {
   const communityProxy = proxyService.createCommunityProxy();
   const eventProxy = proxyService.createEventProxy();
   const mediaProxy = proxyService.createMediaProxy();
+  const bracketProxy = proxyService.createBracketProxy();
   const identityProxy = proxyService.createIdentityProxy();
 
   // News routes
@@ -93,6 +94,9 @@ async function bootstrap(): Promise<void> {
 
   // Media & Event Storage routes
   app.use('/api/media', mediaProxy);
+
+  // Bracket, Leaderboard & Realtime SSE routes
+  app.use('/api/brackets', bracketProxy);
 
   // AI engine routes
   app.use('/api/ai', aiProxy);
