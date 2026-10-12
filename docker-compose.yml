@@ -1,0 +1,78 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: esport_sumbar_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: postgres
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/docker/postgres/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: esport_sumbar_redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nats:
+    image: nats:latest
+    container_name: esport_sumbar_nats
+    restart: unless-stopped
+    command: ["-js", "-m", "8222"]
+    ports:
+      - "${NATS_PORT:-4222}:4222"
+      - "${NATS_MONITOR_PORT:-8222}:8222"
+    volumes:
+      - nats_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8222/healthz"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: esport_sumbar_minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-supersecret123}
+    ports:
+      - "${MINIO_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:
+  nats_data:
+  minio_data:
+
+networks:
+  default:
+    name: esport_sumbar_network

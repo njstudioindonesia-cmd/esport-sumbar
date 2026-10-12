@@ -1,0 +1,79 @@
+:root {
+  /* Dark-first Primary Brand Colors */
+  --red-500: #E10600; /* Primary */
+  --red-600: #B80500; /* Hover / Pressed */
+  --red-400: #FF3B30; /* Bright Accent */
+
+  /* Neutral Dark Surfaces */
+  --bg-900: #0B0B0D; /* Background Utama */
+  --bg-800: #131316; /* Surface */
+  --bg-700: #1C1C21; /* Card */
+  --bg-600: #25252C; /* Elevated Surface */
+
+  /* Borders & Lines */
+  --line: #2A2A31; /* Subtle Border */
+  --line-strong: #3F3F4A;
+
+  /* Typography Colors */
+  --text-100: #F5F5F7; /* High contrast text */
+  --text-400: #9A9AA5; /* Secondary text */
+  --text-muted: #636370;
+
+  /* Feedback Colors */
+  --success: #22C55E;
+  --warning: #F5A524;
+  --info: #3B82F6;
+  --error: #E10600;
+
+  /* Geometry & Chamfer */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-chamfer: 12px;
+}
+
+/* Light mode overrides (optional fallback per Section 7) */
+[data-theme='light'] {
+  --bg-900: #F7F7F8;
+  --bg-800: #FFFFFF;
+  --bg-700: #F0F0F3;
+  --bg-600: #E4E4E8;
+  --line: #D8D8E0;
+  --line-strong: #BCBCC8;
+  --text-100: #101014;
+  --text-400: #555562;
+  --text-muted: #8E8E9A;
+}
+
+/* Base Body Styles */
+body {
+  background-color: var(--bg-900);
+  color: var(--text-100);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Chamfer & Gaming Utility Classes */
+.chamfer-tr {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.chamfer-br {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.chamfer-opposite {
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.font-display {
+  font-family: 'Rajdhani', 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tabular-numbers {
+  font-variant-numeric: tabular-nums;
+}

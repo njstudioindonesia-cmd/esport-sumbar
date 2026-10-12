@@ -1,0 +1,23 @@
+{
+  "name": "@esport-sumbar/utils",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared utility helpers, correlation tracking, and structured logging",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@esport-sumbar/config": "workspace:*",
+    "@types/node": "^22.13.9",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.8.2"
+  }
+}

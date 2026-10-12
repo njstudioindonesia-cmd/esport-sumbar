@@ -1,0 +1,22 @@
+{
+  "name": "@esport-sumbar/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared Zod contracts, event bus schemas, and DTO types",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@esport-sumbar/config": "workspace:*",
+    "@types/node": "^22.13.9",
+    "typescript": "^5.8.2"
+  }
+}
