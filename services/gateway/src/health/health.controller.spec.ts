@@ -47,4 +47,10 @@ describe('Gateway HealthController', () => {
     expect(res.uptimeSeconds).toBeGreaterThanOrEqual(0);
     expect(res.memoryUsageMb.rss).toBeGreaterThan(0);
   });
+
+  it('should return valid Prometheus metrics string', () => {
+    const prom = controller.metrics();
+    expect(prom).toContain('esport_gateway_uptime_seconds{service="api-gateway"}');
+    expect(prom).toContain('esport_gateway_memory_rss_bytes{service="api-gateway"}');
+  });
 });

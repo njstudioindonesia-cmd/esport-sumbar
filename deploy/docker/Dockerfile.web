@@ -1,0 +1,59 @@
+# ==============================================================================
+# ESPORT SUMBAR - Multi-Stage Production Dockerfile for Next.js 15 Frontend
+# ==============================================================================
+
+# 1. Base Stage
+FROM node:22-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && apk add --no-cache libc6-compat dumb-init
+
+WORKDIR /app
+
+# 2. Dependencies Stage
+FROM base AS dependencies
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml turbo.json ./
+COPY packages/config/package.json ./packages/config/
+COPY packages/contracts/package.json ./packages/contracts/
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/utils/package.json ./packages/utils/
+COPY apps/web/package.json ./apps/web/
+
+RUN pnpm install --frozen-lockfile
+
+# 3. Builder Stage
+FROM dependencies AS builder
+COPY packages/ ./packages/
+COPY apps/web/ ./apps/web/
+
+# Build shared packages
+RUN pnpm --filter @esport-sumbar/config build 2>/dev/null || true
+RUN pnpm --filter @esport-sumbar/contracts build
+RUN pnpm --filter @esport-sumbar/utils build
+
+# Build Next.js web application
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
+RUN pnpm --filter @esport-sumbar/web build
+
+# 4. Runner Stage
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+
+# Copy Next.js standalone and static output
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/apps/web/.next ./apps/web/.next
+COPY --from=builder /app/apps/web/public ./apps/web/public 2>/dev/null || true
+COPY --from=builder /app/apps/web/package.json ./apps/web/package.json
+
+WORKDIR /app/apps/web
+
+USER node
+EXPOSE 3000
+
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node_modules/.bin/next", "start", "-p", "3000"]

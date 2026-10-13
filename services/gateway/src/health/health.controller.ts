@@ -39,4 +39,23 @@ export class HealthController {
       },
     };
   }
+
+  @Get('metrics')
+  @ApiOperation({ summary: 'Prometheus Metrics Exposition Format' })
+  metrics() {
+    const mem = process.memoryUsage();
+    const uptime = Math.floor((Date.now() - this.startTime) / 1000);
+    return [
+      `# HELP esport_gateway_uptime_seconds Total Gateway uptime in seconds`,
+      `# TYPE esport_gateway_uptime_seconds gauge`,
+      `esport_gateway_uptime_seconds{service="${this.config.SERVICE_NAME}"} ${uptime}`,
+      `# HELP esport_gateway_memory_rss_bytes Memory RSS in bytes`,
+      `# TYPE esport_gateway_memory_rss_bytes gauge`,
+      `esport_gateway_memory_rss_bytes{service="${this.config.SERVICE_NAME}"} ${mem.rss}`,
+      `# HELP esport_gateway_memory_heap_used_bytes Memory Heap Used in bytes`,
+      `# TYPE esport_gateway_memory_heap_used_bytes gauge`,
+      `esport_gateway_memory_heap_used_bytes{service="${this.config.SERVICE_NAME}"} ${mem.heapUsed}`,
+    ].join('\n');
+  }
 }
+

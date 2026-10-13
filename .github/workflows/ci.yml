@@ -79,5 +79,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate Docker Compose
-        run: docker compose config -q
+      - name: Validate Docker Compose (Dev & Prod)
+        run: |
+          docker compose config -q
+          docker compose -f docker-compose.prod.yml config -q

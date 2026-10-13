@@ -10,5 +10,6 @@
     "moduleResolution": "node",
     "target": "ES2022"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.spec.ts"]
 }
