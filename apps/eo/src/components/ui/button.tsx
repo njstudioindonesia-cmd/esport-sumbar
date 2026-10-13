@@ -4,7 +4,7 @@ import React from 'react';
 import { Loader2 } from 'lucide-react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  variant?: 'primary' | 'marawa' | 'secondary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   chamfer?: boolean;
@@ -42,6 +42,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const variantStyles = {
       primary:
         'bg-brand-500 hover:bg-brand-600 text-white shadow-md shadow-brand-500/20 active:translate-y-0.5',
+      marawa:
+        'bg-[#F5B700] hover:bg-[#D9A100] text-black shadow-md shadow-[#F5B700]/25 active:translate-y-0.5 font-black',
       secondary:
         'bg-dark-700 hover:bg-dark-600 text-white border border-line hover:border-line-strong active:translate-y-0.5',
       outline:

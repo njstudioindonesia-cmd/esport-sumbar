@@ -80,7 +80,7 @@ export class BracketEngine {
     const totalRounds = Math.ceil(Math.log2(count));
     const bracketSize = Math.pow(2, totalRounds);
     const seedMap = new Map<number, BracketParticipant>();
-    participants.forEach((p, idx) => seedMap.set(idx + 1, p));
+    participants.forEach((p, idx) => seedMap.set(p.seed ?? idx + 1, p));
 
     const matchesByRound: BracketMatch[][] = [];
     let globalMatchCounter = 1;
