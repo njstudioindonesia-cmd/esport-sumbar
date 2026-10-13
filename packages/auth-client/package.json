@@ -1,0 +1,22 @@
+{
+  "name": "@esport-sumbar/auth-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-portal authentication client, audience validation, and session guard",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@esport-sumbar/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@esport-sumbar/config": "workspace:*",
+    "@types/node": "^22.13.9",
+    "typescript": "^5.8.2"
+  }
+}

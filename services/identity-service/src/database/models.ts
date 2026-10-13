@@ -8,6 +8,9 @@ export interface UserEntity {
   role: UserRole;
   city?: string | null;
   mainGames: string[];
+  twoFactorEnabled?: boolean;
+  twoFactorSecret?: string | null;
+  twoFactorRecoveryCodes?: string[];
   createdAt: Date;
   updatedAt: Date;
 }

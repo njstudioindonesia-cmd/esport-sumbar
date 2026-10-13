@@ -57,6 +57,37 @@ export class IdentityRepository {
     return user;
   }
 
+  async setTwoFactorSecret(userId: string, secret: string): Promise<void> {
+    const user = this.users.get(userId);
+    if (user) {
+      user.twoFactorSecret = secret;
+      user.updatedAt = new Date();
+      this.users.set(userId, user);
+    }
+  }
+
+  async enableTwoFactor(userId: string, secret: string, recoveryCodes: string[]): Promise<void> {
+    const user = this.users.get(userId);
+    if (user) {
+      user.twoFactorEnabled = true;
+      user.twoFactorSecret = secret;
+      user.twoFactorRecoveryCodes = recoveryCodes;
+      user.updatedAt = new Date();
+      this.users.set(userId, user);
+    }
+  }
+
+  async disableTwoFactor(userId: string): Promise<void> {
+    const user = this.users.get(userId);
+    if (user) {
+      user.twoFactorEnabled = false;
+      user.twoFactorSecret = null;
+      user.twoFactorRecoveryCodes = [];
+      user.updatedAt = new Date();
+      this.users.set(userId, user);
+    }
+  }
+
   // --- Organizer Profiles ---
   async createOrganizerProfile(
     profile: Omit<OrganizerProfileEntity, 'createdAt' | 'updatedAt' | 'status'>,

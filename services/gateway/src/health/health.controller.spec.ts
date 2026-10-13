@@ -21,6 +21,7 @@ describe('Gateway HealthController', () => {
     NOTIFICATION_SERVICE_URL: 'http://localhost:4009',
     RATE_LIMIT_WINDOW_MS: 60000,
     RATE_LIMIT_MAX_REQUESTS: 100,
+    JWT_ACCESS_SECRET: 'test_jwt_secret_12345',
   };
 
   beforeEach(() => {

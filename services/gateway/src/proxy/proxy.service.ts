@@ -15,7 +15,13 @@ export class ProxyService {
     return createProxyMiddleware({
       target: targetUrl,
       changeOrigin: true,
-      pathRewrite: (_path, req: any) => req.originalUrl.replace(/^\/api/, ''),
+      pathRewrite: (_path, req: any) => {
+        const url = req.originalUrl;
+        if (url.startsWith('/api/public/')) {
+          return url.replace(/^\/api\/public/, '');
+        }
+        return url.replace(/^\/api/, '');
+      },
       on: {
         proxyReq: (proxyReq, req: any) => {
           const correlationId = getOrGenerateCorrelationId(req.headers[CORRELATION_HEADER]);

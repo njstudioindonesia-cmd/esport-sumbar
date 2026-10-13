@@ -6,6 +6,7 @@ import rateLimit from 'express-rate-limit';
 import { AppModule } from './app.module';
 import { validateEnv } from './config/env.config';
 import { ProxyService } from './proxy/proxy.service';
+import { createPortalGuardMiddleware } from './middleware/portal-guard.middleware';
 import { StructuredLogger, getOrGenerateCorrelationId, CORRELATION_HEADER } from '@esport-sumbar/utils';
 
 async function bootstrap(): Promise<void> {
@@ -69,6 +70,9 @@ async function bootstrap(): Promise<void> {
   app.use('/api/auth/login', authLimiter);
   app.use('/api/auth/register', authLimiter);
 
+  // Portal Isolation & Audience Guard Middleware
+  app.use(createPortalGuardMiddleware(env.JWT_ACCESS_SECRET));
+
   // Setup Upstream Microservice Proxies
   const proxyService = app.get(ProxyService);
   const newsProxy = proxyService.createNewsProxy();
@@ -81,35 +85,40 @@ async function bootstrap(): Promise<void> {
   const notificationProxy = proxyService.createNotificationProxy();
   const identityProxy = proxyService.createIdentityProxy();
 
-  // News routes
-  app.use('/api/news', newsProxy);
-  app.use('/api/admin/news', newsProxy);
+  // === 1. Dedicated Public Portal Routes (/api/public/*) ===
+  app.use('/api/public/news', newsProxy);
+  app.use('/api/public/events', eventProxy);
+  app.use('/api/public/communities', communityProxy);
+  app.use('/api/public/brackets', bracketProxy);
+  app.use('/api/public/media', mediaProxy);
+  app.use('/api/public/search', aiProxy);
+  app.use('/api/public/ai', aiProxy);
+  app.use('/api/public/notifications', notificationProxy);
+  app.use('/api/public', identityProxy);
 
-  // Community & Moderation routes
-  app.use('/api/communities', communityProxy);
-  app.use('/api/admin/moderation', communityProxy);
-
-  // Event & EO Tools routes
-  app.use('/api/events', eventProxy);
+  // === 2. Dedicated EO Studio Routes (/api/eo/*) ===
+  app.use('/api/eo/events', eventProxy);
+  app.use('/api/eo/brackets', bracketProxy);
+  app.use('/api/eo/media', mediaProxy);
   app.use('/api/eo', eventProxy);
 
-  // Media & Event Storage routes
+  // === 3. Dedicated Admin Console Routes (/api/admin/*) ===
+  app.use('/api/admin/news', newsProxy);
+  app.use('/api/admin/moderation', communityProxy);
+  app.use('/api/admin/eo', identityProxy);
+  app.use('/api/admin/audit', identityProxy);
+  app.use('/api/admin', identityProxy);
+
+  // === 4. Legacy /api Routes for Backward Compatibility ===
+  app.use('/api/news', newsProxy);
+  app.use('/api/communities', communityProxy);
+  app.use('/api/events', eventProxy);
   app.use('/api/media', mediaProxy);
-
-  // Bracket, Leaderboard & Realtime SSE routes
   app.use('/api/brackets', bracketProxy);
-
-  // Notifications routes
   app.use('/api/notifications', notificationProxy);
-
-  // AI & Semantic Search routes
   app.use('/api/search', aiProxy);
   app.use('/api/ai', aiProxy);
-
-  // Ingestor pipeline routes
   app.use('/api/ingest', ingestorProxy);
-
-  // Identity / Auth routes (and fallback)
   app.use('/api', identityProxy);
 
   // Swagger Documentation

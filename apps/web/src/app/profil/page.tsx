@@ -177,9 +177,29 @@ export default function ProfilPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 text-xs text-accent-text400 bg-dark-900/60 border border-line px-3 py-2 rounded">
-            <MapPin className="w-3.5 h-3.5 text-brand-400" />
-            <span>{session.city || 'Sumatera Barat'}</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-3 text-xs text-accent-text400 bg-dark-900/60 border border-line px-3 py-2 rounded">
+              <MapPin className="w-3.5 h-3.5 text-brand-400" />
+              <span>{session.city || 'Sumatera Barat'}</span>
+            </div>
+            {(session.role === 'ORGANIZER' || session.role === 'ADMIN') && (
+              <a
+                href="http://localhost:3001"
+                className="chamfer-btn bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 flex items-center gap-1.5 transition-colors"
+              >
+                Buka EO Studio
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {session.role === 'ADMIN' && (
+              <a
+                href="http://localhost:3002"
+                className="chamfer-btn bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 flex items-center gap-1.5 transition-colors"
+              >
+                Buka Admin Console
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         </div>
       </div>

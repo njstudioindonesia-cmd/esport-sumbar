@@ -2,7 +2,7 @@ import { TokenService } from './token.service';
 import { JwtService } from '@nestjs/jwt';
 import { IdentityRepository } from '../database/identity.repository';
 import { UserEntity } from '../database/models';
-import { UnauthorizedException } from '@nestjs/common';
+import { UnauthorizedException, ForbiddenException } from '@nestjs/common';
 import { EnvConfig } from '../config/env.config';
 
 describe('TokenService', () => {
@@ -36,13 +36,37 @@ describe('TokenService', () => {
     updatedAt: new Date(),
   };
 
+  const mockOrganizer: UserEntity = {
+    id: '22222222-2222-2222-2222-222222222222',
+    email: 'eo@sumbar.id',
+    passwordHash: 'hash',
+    nickname: 'PadangArenaEO',
+    role: 'ORGANIZER',
+    city: 'Padang',
+    mainGames: ['Valorant'],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
+  const mockAdmin: UserEntity = {
+    id: '33333333-3333-3333-3333-333333333333',
+    email: 'admin@sumbar.id',
+    passwordHash: 'hash',
+    nickname: 'SuperAdmin',
+    role: 'ADMIN',
+    city: 'Padang',
+    mainGames: [],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
   beforeEach(() => {
     repository = new IdentityRepository();
     jwtService = new JwtService({});
     tokenService = new TokenService(jwtService, repository, mockConfig);
   });
 
-  it('should generate valid access and refresh tokens', async () => {
+  it('should generate valid access and refresh tokens with default public audience', async () => {
     const tokens = await tokenService.generateTokens(mockUser);
 
     expect(tokens.accessToken).toBeDefined();
@@ -53,6 +77,35 @@ describe('TokenService', () => {
     expect(decoded.sub).toBe(mockUser.id);
     expect(decoded.email).toBe(mockUser.email);
     expect(decoded.role).toBe(mockUser.role);
+    expect(decoded.aud).toBe('public');
+  });
+
+  it('should reject non-admin users requesting admin audience', async () => {
+    await expect(tokenService.generateTokens(mockUser, undefined, 'admin')).rejects.toThrow(
+      ForbiddenException,
+    );
+    await expect(tokenService.generateTokens(mockOrganizer, undefined, 'admin')).rejects.toThrow(
+      ForbiddenException,
+    );
+  });
+
+  it('should allow admin users requesting admin, eo, or public audience', async () => {
+    const adminTokens = await tokenService.generateTokens(mockAdmin, undefined, 'admin');
+    expect(tokenService.verifyAccessToken(adminTokens.accessToken).aud).toBe('admin');
+
+    const eoTokens = await tokenService.generateTokens(mockAdmin, undefined, 'eo');
+    expect(tokenService.verifyAccessToken(eoTokens.accessToken).aud).toBe('eo');
+
+    const publicTokens = await tokenService.generateTokens(mockAdmin, undefined, 'public');
+    expect(tokenService.verifyAccessToken(publicTokens.accessToken).aud).toBe('public');
+  });
+
+  it('should reject normal user from requesting eo audience, but allow organizer', async () => {
+    await expect(tokenService.generateTokens(mockUser, undefined, 'eo')).rejects.toThrow(
+      ForbiddenException,
+    );
+    const eoTokens = await tokenService.generateTokens(mockOrganizer, undefined, 'eo');
+    expect(tokenService.verifyAccessToken(eoTokens.accessToken).aud).toBe('eo');
   });
 
   it('should rotate refresh token and return new tokens', async () => {

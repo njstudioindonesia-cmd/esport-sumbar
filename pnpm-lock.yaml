@@ -176,6 +176,122 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  apps/admin:
+    dependencies:
+      '@esport-sumbar/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
+      '@esport-sumbar/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
+      '@esport-sumbar/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@esport-sumbar/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@esport-sumbar/ui-dashboard':
+        specifier: workspace:*
+        version: link:../../packages/ui-dashboard
+      '@esport-sumbar/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.55.0(@types/react@19.3.0)(react@19.3.0)
+      next:
+        specifier: ^15.2.1
+        version: 15.5.27(@babel/core@7.29.7(supports-color@8.1.1))(@playwright/test@1.64.0)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.3.0(react@19.3.0)
+    devDependencies:
+      '@esport-sumbar/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.5
+      '@types/react':
+        specifier: ^19.0.10
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.0.4
+        version: 19.3.0(@types/react@19.3.0)
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.6.1(postcss@8.5.29)
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.29
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.19
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  apps/eo:
+    dependencies:
+      '@esport-sumbar/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
+      '@esport-sumbar/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
+      '@esport-sumbar/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@esport-sumbar/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@esport-sumbar/ui-dashboard':
+        specifier: workspace:*
+        version: link:../../packages/ui-dashboard
+      '@esport-sumbar/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.55.0(@types/react@19.3.0)(react@19.3.0)
+      next:
+        specifier: ^15.2.1
+        version: 15.5.27(@babel/core@7.29.7(supports-color@8.1.1))(@playwright/test@1.64.0)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.3.0(react@19.3.0)
+    devDependencies:
+      '@esport-sumbar/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.5
+      '@types/react':
+        specifier: ^19.0.10
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.0.4
+        version: 19.3.0(@types/react@19.3.0)
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.6.1(postcss@8.5.29)
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.29
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.19
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
   apps/web:
     dependencies:
       '@esport-sumbar/contracts':
@@ -228,6 +344,41 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  packages/api-client:
+    dependencies:
+      '@esport-sumbar/auth-client':
+        specifier: workspace:*
+        version: link:../auth-client
+      '@esport-sumbar/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+    devDependencies:
+      '@esport-sumbar/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.5
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  packages/auth-client:
+    dependencies:
+      '@esport-sumbar/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+    devDependencies:
+      '@esport-sumbar/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.5
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
   packages/config: {}
 
   packages/contracts:
@@ -254,6 +405,37 @@ importers:
       '@types/node':
         specifier: ^22.13.9
         version: 22.20.5
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  packages/ui-dashboard:
+    dependencies:
+      '@esport-sumbar/ui':
+        specifier: workspace:*
+        version: link:../ui
+      lucide-react:
+        specifier: ^1.16.0
+        version: 1.55.0(@types/react@19.3.0)(react@19.3.0)
+    devDependencies:
+      '@esport-sumbar/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.5
+      '@types/react':
+        specifier: ^19.0.10
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.0.4
+        version: 19.3.0(@types/react@19.3.0)
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.3.0(react@19.3.0)
       typescript:
         specifier: ^5.8.2
         version: 5.9.3

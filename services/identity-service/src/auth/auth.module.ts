@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PasswordService } from './password.service';
 import { TokenService } from './token.service';
+import { TotpService } from './totp.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { IdentityRepository } from '../database/identity.repository';
@@ -17,6 +18,7 @@ import { IdentityRepository } from '../database/identity.repository';
     AuthService,
     PasswordService,
     TokenService,
+    TotpService,
     JwtAuthGuard,
     RolesGuard,
     IdentityRepository,
@@ -25,6 +27,7 @@ import { IdentityRepository } from '../database/identity.repository';
     AuthService,
     PasswordService,
     TokenService,
+    TotpService,
     JwtAuthGuard,
     RolesGuard,
     IdentityRepository,

@@ -27,6 +27,7 @@ export class UsersService {
       role: user.role,
       city: user.city,
       mainGames: user.mainGames,
+      twoFactorEnabled: !!user.twoFactorEnabled,
       createdAt: user.createdAt.toISOString(),
     };
   }

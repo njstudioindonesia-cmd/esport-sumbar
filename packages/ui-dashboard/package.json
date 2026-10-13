@@ -1,0 +1,31 @@
+{
+  "name": "@esport-sumbar/ui-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dashboard layout components, dense data tables, stat cards, and command palette for EO & Admin portals",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "lint": "eslint \"src/**/*.{ts,tsx}\""
+  },
+  "dependencies": {
+    "@esport-sumbar/ui": "workspace:*",
+    "lucide-react": "^1.16.0"
+  },
+  "devDependencies": {
+    "@esport-sumbar/config": "workspace:*",
+    "@types/node": "^22.13.9",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  }
+}

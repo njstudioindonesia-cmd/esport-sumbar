@@ -1,6 +1,7 @@
 import { AuthService } from './auth.service';
 import { PasswordService } from './password.service';
 import { TokenService } from './token.service';
+import { TotpService } from './totp.service';
 import { IdentityRepository } from '../database/identity.repository';
 import { JwtService } from '@nestjs/jwt';
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
@@ -11,6 +12,7 @@ describe('AuthService', () => {
   let repository: IdentityRepository;
   let passwordService: PasswordService;
   let tokenService: TokenService;
+  let totpService: TotpService;
 
   const mockConfig: EnvConfig = {
     NODE_ENV: 'test',
@@ -30,7 +32,8 @@ describe('AuthService', () => {
     repository = new IdentityRepository();
     passwordService = new PasswordService();
     tokenService = new TokenService(new JwtService({}), repository, mockConfig);
-    authService = new AuthService(repository, passwordService, tokenService);
+    totpService = new TotpService();
+    authService = new AuthService(repository, passwordService, tokenService, totpService);
   });
 
   it('should register a new user successfully', async () => {
@@ -102,5 +105,45 @@ describe('AuthService', () => {
         password: 'WrongPassword!',
       }),
     ).rejects.toThrow(UnauthorizedException);
+  });
+
+  it('should handle 2FA setup, verification, and enforced login', async () => {
+    const reg = await authService.register({
+      email: 'secure_user@sumbar.id',
+      password: 'StrongPassword123!',
+      nickname: 'SecurityEnthusiast',
+      city: 'Padang',
+      mainGames: [],
+    });
+
+    // Setup 2FA
+    const setup = await authService.setupTwoFactor(reg.user.id);
+    expect(setup.secret).toBeDefined();
+    expect(setup.otpauthUrl).toContain('otpauth://totp/');
+
+    // Generate valid TOTP token using secret
+    const code = totpService.generateTotp(setup.secret);
+
+    // Verify & enable
+    const verifyRes = await authService.verifyAndEnableTwoFactor(reg.user.id, code);
+    expect(verifyRes.enabled).toBe(true);
+    expect(verifyRes.recoveryCodes.length).toBe(8);
+
+    // Now login without 2FA code should be rejected
+    await expect(
+      authService.login({
+        email: 'secure_user@sumbar.id',
+        password: 'StrongPassword123!',
+      }),
+    ).rejects.toThrow('Akun ini membutuhkan verifikasi kode 2FA TOTP');
+
+    // Login with valid 2FA code succeeds
+    const validLogin = await authService.login({
+      email: 'secure_user@sumbar.id',
+      password: 'StrongPassword123!',
+      code2fa: code,
+    });
+    expect(validLogin.user.twoFactorEnabled).toBe(true);
+    expect(validLogin.tokens.accessToken).toBeDefined();
   });
 });

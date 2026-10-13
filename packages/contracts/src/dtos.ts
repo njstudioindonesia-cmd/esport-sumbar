@@ -4,6 +4,9 @@ import { z } from 'zod';
 export const UserRoleEnum = z.enum(['USER', 'ORGANIZER', 'ADMIN']);
 export type UserRole = z.infer<typeof UserRoleEnum>;
 
+export const PortalAudienceEnum = z.enum(['public', 'eo', 'admin']);
+export type PortalAudience = z.infer<typeof PortalAudienceEnum>;
+
 export const SumbarCityEnum = z.enum([
   'Padang',
   'Bukittinggi',
@@ -42,11 +45,14 @@ export type RegisterDto = z.infer<typeof RegisterDtoSchema>;
 export const LoginDtoSchema = z.object({
   email: z.string().email(),
   password: z.string(),
+  audience: PortalAudienceEnum.optional(),
+  code2fa: z.string().optional(),
 });
 export type LoginDto = z.infer<typeof LoginDtoSchema>;
 
 export const RefreshTokenDtoSchema = z.object({
   refreshToken: z.string(),
+  audience: PortalAudienceEnum.optional(),
 });
 export type RefreshTokenDto = z.infer<typeof RefreshTokenDtoSchema>;
 
@@ -57,6 +63,7 @@ export const UserProfileSchema = z.object({
   role: UserRoleEnum,
   city: z.string().nullable().optional(),
   mainGames: z.array(z.string()),
+  twoFactorEnabled: z.boolean().optional().default(false),
   createdAt: z.string().datetime(),
 });
 export type UserProfile = z.infer<typeof UserProfileSchema>;
@@ -560,6 +567,80 @@ export const AiRecommendationSchema = z.object({
   ),
 });
 export type AiRecommendation = z.infer<typeof AiRecommendationSchema>;
+
+// ==============================================================================
+// UPDATE v2 CONTRACTS & SCHEMAS
+// ==============================================================================
+
+// Two-Factor Authentication (2FA TOTP)
+export const TwoFactorSetupResponseSchema = z.object({
+  secret: z.string(),
+  otpauthUrl: z.string(),
+  qrCodeUrl: z.string().optional(),
+});
+export type TwoFactorSetupResponse = z.infer<typeof TwoFactorSetupResponseSchema>;
+
+export const TwoFactorVerifyRequestSchema = z.object({
+  token: z.string().length(6),
+  secret: z.string().optional(),
+});
+export type TwoFactorVerifyRequest = z.infer<typeof TwoFactorVerifyRequestSchema>;
+
+// Admin Audit Log
+export const AdminAuditLogSchema = z.object({
+  id: z.string(),
+  actorId: z.string(),
+  actorRole: z.enum(['USER', 'ORGANIZER', 'ADMIN', 'SYSTEM']),
+  action: z.string(),
+  entity: z.string(),
+  entityId: z.string().optional(),
+  diff: z.record(z.unknown()).optional(),
+  ipAddress: z.string().optional(),
+  timestamp: z.string().datetime(),
+});
+export type AdminAuditLog = z.infer<typeof AdminAuditLogSchema>;
+
+// Instagram Graph API Connection & Sync
+export const InstagramConnectionSchema = z.object({
+  id: z.string(),
+  igUserId: z.string(),
+  username: z.string().default('esportsumbar'),
+  expiresAt: z.string().datetime(),
+  daysRemaining: z.number().int(),
+  lastSyncAt: z.string().datetime().optional(),
+  mode: z.enum(['REVIEW', 'AUTO']).default('REVIEW'),
+  status: z.enum(['CONNECTED', 'EXPIRING', 'EXPIRED', 'DISCONNECTED']).default('CONNECTED'),
+});
+export type InstagramConnection = z.infer<typeof InstagramConnectionSchema>;
+
+// Event Draft Extracted from Instagram / External Feeds
+export const EventDraftSchema = z.object({
+  id: z.string(),
+  fromArticleId: z.string().optional(),
+  extractedTitle: z.string(),
+  extractedGame: z.string().optional(),
+  extractedCity: z.string().optional(),
+  extractedDate: z.string().optional(),
+  extractedPrize: z.string().optional(),
+  rawCaption: z.string(),
+  status: z.enum(['PENDING', 'APPROVED', 'REJECTED']).default('PENDING'),
+  createdAt: z.string().datetime(),
+});
+export type EventDraft = z.infer<typeof EventDraftSchema>;
+
+// Participant / Winner Certificate
+export const CertificateSchema = z.object({
+  id: z.string(),
+  eventId: z.string(),
+  eventTitle: z.string(),
+  participantId: z.string(),
+  participantName: z.string(),
+  type: z.enum(['PARTICIPATION', 'WINNER', 'RUNNER_UP', 'THIRD_PLACE', 'MVP']),
+  issuedAt: z.string().datetime(),
+  verificationCode: z.string(),
+});
+export type Certificate = z.infer<typeof CertificateSchema>;
+
 
 
 

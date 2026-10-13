@@ -72,16 +72,20 @@ export function Navbar() {
           >
             Event & Turnamen
           </Link>
-          <Link
-            href="/eo/dashboard"
-            className={
-              pathname?.startsWith('/eo')
-                ? 'text-brand-500 font-bold'
-                : 'text-accent-text400 hover:text-white transition-colors'
-            }
+          <a
+            href="http://localhost:3001"
+            className="text-accent-text400 hover:text-white transition-colors"
           >
-            Panel EO
-          </Link>
+            EO Studio
+          </a>
+          {session?.role === 'ADMIN' && (
+            <a
+              href="http://localhost:3002"
+              className="text-rose-400 hover:text-rose-300 font-semibold transition-colors"
+            >
+              Admin Console
+            </a>
+          )}
         </nav>
 
         {/* User Actions */}

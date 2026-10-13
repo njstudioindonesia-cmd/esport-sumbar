@@ -17,6 +17,7 @@ export const EnvSchema = z.object({
   NOTIFICATION_SERVICE_URL: z.string().default('http://localhost:4009'),
   RATE_LIMIT_WINDOW_MS: z.coerce.number().default(60000), // 1 minute
   RATE_LIMIT_MAX_REQUESTS: z.coerce.number().default(100), // 100 requests per window
+  JWT_ACCESS_SECRET: z.string().default('dev_jwt_access_secret_super_secure_key_12345'),
 });
 
 export type EnvConfig = z.infer<typeof EnvSchema>;

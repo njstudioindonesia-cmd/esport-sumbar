@@ -1,4 +1,4 @@
-import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Inject, UnauthorizedException, ForbiddenException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,13 +6,14 @@ import { UserEntity } from '../database/models';
 import { IdentityRepository } from '../database/identity.repository';
 import { EnvConfig } from '../config/env.config';
 import { ENV_CONFIG_TOKEN } from '../config/config.module';
-import { UserRole } from '@esport-sumbar/contracts';
+import { UserRole, PortalAudience } from '@esport-sumbar/contracts';
 
 export interface JwtPayload {
   sub: string;
   email: string;
   role: UserRole;
   nickname: string;
+  aud?: PortalAudience;
 }
 
 export interface AuthTokens {
@@ -33,12 +34,24 @@ export class TokenService {
     return crypto.createHash('sha256').update(token).digest('hex');
   }
 
-  async generateTokens(user: UserEntity, existingFamilyId?: string): Promise<AuthTokens> {
+  async generateTokens(
+    user: UserEntity,
+    existingFamilyId?: string,
+    audience: PortalAudience = 'public',
+  ): Promise<AuthTokens> {
+    if (audience === 'admin' && user.role !== 'ADMIN') {
+      throw new ForbiddenException('Akses ditolak: Pengguna tidak memiliki izin ke Admin Console');
+    }
+    if (audience === 'eo' && user.role !== 'ORGANIZER' && user.role !== 'ADMIN') {
+      throw new ForbiddenException('Akses ditolak: Pengguna tidak memiliki izin ke EO Studio');
+    }
+
     const payload: JwtPayload = {
       sub: user.id,
       email: user.email,
       role: user.role,
       nickname: user.nickname,
+      aud: audience,
     };
 
     const accessToken = this.jwtService.sign(payload, {
@@ -71,7 +84,10 @@ export class TokenService {
     };
   }
 
-  async rotateRefreshToken(refreshTokenString: string): Promise<{ tokens: AuthTokens; user: UserEntity }> {
+  async rotateRefreshToken(
+    refreshTokenString: string,
+    audience?: PortalAudience,
+  ): Promise<{ tokens: AuthTokens; user: UserEntity }> {
     const parts = refreshTokenString.split(':');
     if (parts.length !== 2 || !parts[0] || !parts[1]) {
       throw new UnauthorizedException('Token refresh tidak valid');
@@ -107,7 +123,7 @@ export class TokenService {
     }
 
     // Generate new token pair in same family
-    const tokens = await this.generateTokens(user, familyId);
+    const tokens = await this.generateTokens(user, familyId, audience);
     return { tokens, user };
   }
 

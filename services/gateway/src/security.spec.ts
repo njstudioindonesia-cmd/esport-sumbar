@@ -1,3 +1,4 @@
+import * as crypto from 'crypto';
 import {
   sanitizeText,
   sanitizeObject,
@@ -5,8 +6,36 @@ import {
   AuditLogger,
   ServiceMetricsCollector,
 } from '@esport-sumbar/utils';
+import {
+  createPortalGuardMiddleware,
+  DecodedToken,
+} from './middleware/portal-guard.middleware';
+
+function createMockToken(payload: Partial<DecodedToken>, secret: string): string {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const fullPayload = {
+    sub: 'usr-test-123',
+    email: 'test@esportsumbar.id',
+    role: 'USER',
+    nickname: 'TestUser',
+    aud: 'public',
+    exp: Math.floor(Date.now() / 1000) + 3600,
+    ...payload,
+  };
+
+  const b64Header = Buffer.from(JSON.stringify(header)).toString('base64url');
+  const b64Payload = Buffer.from(JSON.stringify(fullPayload)).toString('base64url');
+  const signature = crypto
+    .createHmac('sha256', secret)
+    .update(`${b64Header}.${b64Payload}`)
+    .digest('base64url');
+
+  return `${b64Header}.${b64Payload}.${signature}`;
+}
 
 describe('Security & Observability Utilities', () => {
+  const testSecret = 'test_gateway_super_secret_jwt_key_12345';
+
   describe('sanitizeText & sanitizeObject', () => {
     it('strips script tags and inline event handlers to prevent XSS', () => {
       const malicious = '<script>alert("hacked")</script>Padang Slayers <img src=x onerror=alert(1)>';
@@ -89,6 +118,110 @@ describe('Security & Observability Utilities', () => {
       expect(promStr).toContain('esport_http_requests_total{service="gateway"} 3');
       expect(promStr).toContain('esport_http_errors_total{service="gateway"} 1');
       expect(promStr).toContain('esport_active_connections{service="gateway"} 1');
+    });
+  });
+
+  describe('Gateway Portal Isolation Middleware', () => {
+    const middleware = createPortalGuardMiddleware(testSecret);
+
+    const createMockReqRes = (path: string, authHeader?: string) => {
+      const req: any = {
+        path,
+        url: path,
+        headers: authHeader ? { authorization: authHeader } : {},
+      };
+      let statusValue = 200;
+      let jsonValue: any = null;
+      const res: any = {
+        status: (code: number) => {
+          statusValue = code;
+          return res;
+        },
+        json: (val: any) => {
+          jsonValue = val;
+          return res;
+        },
+      };
+      let nextCalled = false;
+      const next = () => {
+        nextCalled = true;
+      };
+
+      return { req, res, next, getStatus: () => statusValue, getJson: () => jsonValue, isNextCalled: () => nextCalled };
+    };
+
+    it('allows public route without auth token', () => {
+      const { req, res, next, isNextCalled } = createMockReqRes('/api/public/events');
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(true);
+    });
+
+    it('rejects unauthenticated request to admin route with 401', () => {
+      const { req, res, next, getStatus, getJson, isNextCalled } = createMockReqRes('/api/admin/news/review');
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(false);
+      expect(getStatus()).toBe(401);
+      expect(getJson().error.code).toBe('UNAUTHORIZED');
+    });
+
+    it('rejects normal user token from accessing admin portal with 403', () => {
+      const token = createMockToken({ role: 'USER', aud: 'public' }, testSecret);
+      const { req, res, next, getStatus, getJson, isNextCalled } = createMockReqRes(
+        '/api/admin/news/review',
+        `Bearer ${token}`,
+      );
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(false);
+      expect(getStatus()).toBe(403);
+      expect(getJson().error.code).toBe('FORBIDDEN_PORTAL_ACCESS');
+    });
+
+    it('rejects admin user with public token from accessing admin portal with 403', () => {
+      const token = createMockToken({ role: 'ADMIN', aud: 'public' }, testSecret);
+      const { req, res, next, getStatus, getJson, isNextCalled } = createMockReqRes(
+        '/api/admin/news/review',
+        `Bearer ${token}`,
+      );
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(false);
+      expect(getStatus()).toBe(403);
+      expect(getJson().error.code).toBe('INVALID_AUDIENCE');
+    });
+
+    it('allows valid admin token with admin audience to access admin portal', () => {
+      const token = createMockToken({ role: 'ADMIN', aud: 'admin' }, testSecret);
+      const { req, res, next, isNextCalled } = createMockReqRes(
+        '/api/admin/news/review',
+        `Bearer ${token}`,
+      );
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(true);
+      expect(req.headers['x-user-role']).toBe('ADMIN');
+      expect(req.headers['x-portal-audience']).toBe('admin');
+    });
+
+    it('rejects regular user from accessing EO portal with 403', () => {
+      const token = createMockToken({ role: 'USER', aud: 'public' }, testSecret);
+      const { req, res, next, getStatus, getJson, isNextCalled } = createMockReqRes(
+        '/api/eo/dashboard',
+        `Bearer ${token}`,
+      );
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(false);
+      expect(getStatus()).toBe(403);
+      expect(getJson().error.code).toBe('FORBIDDEN_PORTAL_ACCESS');
+    });
+
+    it('allows organizer with eo audience to access EO portal', () => {
+      const token = createMockToken({ role: 'ORGANIZER', aud: 'eo' }, testSecret);
+      const { req, res, next, isNextCalled } = createMockReqRes(
+        '/api/eo/dashboard',
+        `Bearer ${token}`,
+      );
+      middleware(req, res, next);
+      expect(isNextCalled()).toBe(true);
+      expect(req.headers['x-user-role']).toBe('ORGANIZER');
+      expect(req.headers['x-portal-audience']).toBe('eo');
     });
   });
 });
