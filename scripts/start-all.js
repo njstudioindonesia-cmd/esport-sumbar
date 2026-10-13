@@ -98,6 +98,22 @@ const SERVICES = [
     args: [path.join(ROOT_DIR, 'apps', 'web', 'node_modules', 'next', 'dist', 'bin', 'next'), 'start', '-p', '3000'],
     healthPath: '/',
   },
+  {
+    name: 'eo',
+    port: 3001,
+    cwd: path.join(ROOT_DIR, 'apps', 'eo'),
+    command: process.execPath,
+    args: [path.join(ROOT_DIR, 'apps', 'eo', 'node_modules', 'next', 'dist', 'bin', 'next'), 'start', '-p', '3001'],
+    healthPath: '/',
+  },
+  {
+    name: 'admin',
+    port: 3002,
+    cwd: path.join(ROOT_DIR, 'apps', 'admin'),
+    command: process.execPath,
+    args: [path.join(ROOT_DIR, 'apps', 'admin', 'node_modules', 'next', 'dist', 'bin', 'next'), 'start', '-p', '3002'],
+    healthPath: '/',
+  },
 ];
 
 const children = [];
@@ -173,6 +189,8 @@ async function startAll() {
   console.log('='.repeat(70));
   console.log('✨ SELURUH SISTEM ESPORT SUMBAR AKTIF & SIAP DIAKSES:');
   console.log('   - Web Portal       : http://localhost:3000');
+  console.log('   - EO Studio        : http://localhost:3001');
+  console.log('   - Admin Console    : http://localhost:3002');
   console.log('   - API Gateway      : http://localhost:4000');
   console.log('   - Gateway Docs     : http://localhost:4000/docs');
   console.log('   - Gateway Health   : http://localhost:4000/health');
