@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Post,
   Patch,
   Param,
   Body,
@@ -8,13 +9,19 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { NewsService } from './news.service';
+import { NewsService, CreateArticleDto } from './news.service';
 import { ArticleStatus } from '@esport-sumbar/contracts';
 
 @ApiTags('Admin Editorial & Review Queue')
 @Controller('admin/news')
 export class AdminNewsController {
   constructor(private readonly newsService: NewsService) {}
+
+  @Post('curated')
+  @ApiOperation({ summary: 'Menerima artikel hasil kurasi pipeline Instagram/RSS' })
+  async createCuratedArticle(@Body() body: CreateArticleDto) {
+    return this.newsService.createArticle(body);
+  }
 
   @Get('review')
   @ApiOperation({ summary: 'Mendapatkan antrean artikel AI yang butuh kurasi/review redaksi' })

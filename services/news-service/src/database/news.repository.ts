@@ -55,6 +55,7 @@ export class NewsRepository {
       body: 'Padang Pride membuktikan dominasinya di scene kompetitif Mobile Legends Sumatera Barat. Dengan kombinasi draft hero agresif dan rotasi disiplin, skuad asuhan Coach Rian berhasil membalikkan keadaan setelah tertinggal 1-2 di awal series.\n\nKemenangan ini memastikan langkah Padang Pride mewakili Sumatera Barat dalam turnamen kualifikasi tingkat nasional yang akan digelar bulan depan.',
       sourceName: 'Esports ID Regional',
       sourceUrl: 'https://esports.id/padang-pride-mpl',
+      sourceType: 'RSS',
       category: 'Sumbar',
       gameId: 'Mobile Legends',
       tags: ['Mobile Legends', 'MPL', 'Padang', 'Turnamen'],
@@ -74,6 +75,7 @@ export class NewsRepository {
       body: 'Turnamen akbar tahunan bertajuk Piala Gubernur Sumbar resmi membuka pendaftaran hari ini. Kompetisi mempertandingkan dua game battle royale populer dengan sistem poin placement dan eliminasi ketat.\n\nBabak kualifikasi akan berlangsung secara hybrid online dan grand final offline di pelataran Jam Gadang Bukittinggi.',
       sourceName: 'Harian Singgalang',
       sourceUrl: 'https://hariansinggalang.co.id/piala-gubernur-esport',
+      sourceType: 'RSS',
       category: 'Sumbar',
       gameId: 'Free Fire',
       tags: ['Free Fire', 'PUBG Mobile', 'Bukittinggi', 'Piala Gubernur'],
@@ -93,6 +95,7 @@ export class NewsRepository {
       body: 'Patch anyar membawa dampak signifikan pada kontrol map. Berdasarkan data pertandingan kualifikasi regional, pick-rate Cypher melonjak hingga 84% di map Ascent.',
       sourceName: 'VLR Global Digest',
       sourceUrl: 'https://vlr.example.com/meta-breakdown-patch',
+      sourceType: 'RSS',
       category: 'Dunia',
       gameId: 'Valorant',
       tags: ['Valorant', 'Meta', 'Analisis', 'Patch'],
@@ -103,9 +106,62 @@ export class NewsRepository {
       updatedAt: new Date().toISOString(),
     };
 
+    const a4: Article = {
+      id: 'art-ig-001',
+      title: 'Pendaftaran Kualifikasi Mobile Legends Padang Cup Season 4 Resmi Dibuka!',
+      slug: 'pendaftaran-kualifikasi-mobile-legends-padang-cup-season-4',
+      summary:
+        'Segera amankan slot tim kamu sebelum kuota 32 tim penuh! Total prize pool Rp 25.000.000 bertempat di GOR Prayoga Padang.',
+      body:
+        'SIAPKAN TIM TERBAIKMU! Pendaftaran Kualifikasi Mobile Legends Padang Cup Season 4 resmi dibuka mulai hari ini!\n\nLokasi: GOR Prayoga Padang\nTanggal: 20-22 November 2026\nTotal Prize Pool: Rp 25.000.000\nGame: Mobile Legends: Bang Bang\n\n---\n**Sumber: Instagram @esportsumbar**  \nLihat postingan asli: [https://www.instagram.com/p/DB123mlbb01/](https://www.instagram.com/p/DB123mlbb01/)',
+      sourceName: 'Instagram @esportsumbar',
+      sourceUrl: 'https://www.instagram.com/p/DB123mlbb01/',
+      sourceType: 'INSTAGRAM',
+      igMediaId: 'ig-1804291823901',
+      igPermalink: 'https://www.instagram.com/p/DB123mlbb01/',
+      mediaGallery: ['https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200'],
+      category: 'Sumbar',
+      gameId: 'Mobile Legends',
+      tags: ['Instagram', '@esportsumbar', 'Mobile Legends', 'Padang'],
+      viralScore: 96,
+      status: 'PUBLISHED',
+      publishedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const a5: Article = {
+      id: 'art-ig-002',
+      title: 'Padang Slayers Raih Juara 1 Valorant Minang Pride Cup 2026!',
+      slug: 'padang-slayers-raih-juara-1-valorant-minang-pride-cup-2026',
+      summary:
+        'Permainan disiplin dan clutch dari sang duelist memastikan trofi bergengsi Minang Pride Cup tetap di Kota Padang setelah menundukkan Bukittinggi Cyber 3-1.',
+      body:
+        'CHAMPIONS OF MINANG PRIDE CUP 2026!\n\nSelamat kepada @padang.slayers yang berhasil keluar sebagai jawara dalam turnamen Valorant Minang Pride Cup 2026 setelah menumbangkan Bukittinggi Cyber 3-1 di grand final.\n\n---\n**Sumber: Instagram @esportsumbar**  \nLihat postingan asli: [https://www.instagram.com/p/DB124val02/](https://www.instagram.com/p/DB124val02/)',
+      sourceName: 'Instagram @esportsumbar',
+      sourceUrl: 'https://www.instagram.com/p/DB124val02/',
+      sourceType: 'INSTAGRAM',
+      igMediaId: 'ig-1804291823902',
+      igPermalink: 'https://www.instagram.com/p/DB124val02/',
+      mediaGallery: [
+        'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200',
+        'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200',
+      ],
+      category: 'Sumbar',
+      gameId: 'Valorant',
+      tags: ['Instagram', '@esportsumbar', 'Valorant', 'SumbarPride'],
+      viralScore: 99,
+      status: 'PUBLISHED',
+      publishedAt: new Date(Date.now() - 3600000 * 18).toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
     this.articles.set(a1.id, a1);
     this.articles.set(a2.id, a2);
     this.articles.set(a3.id, a3);
+    this.articles.set(a4.id, a4);
+    this.articles.set(a5.id, a5);
   }
 
   // --- Articles ---
@@ -137,6 +193,7 @@ export class NewsRepository {
     status?: ArticleStatus;
     category?: string;
     gameId?: string;
+    sourceType?: string;
     search?: string;
     page?: number;
     limit?: number;
@@ -148,6 +205,9 @@ export class NewsRepository {
     }
     if (filters.category && filters.category !== 'Semua') {
       list = list.filter((a) => a.category.toLowerCase() === filters.category!.toLowerCase());
+    }
+    if (filters.sourceType && filters.sourceType !== 'Semua') {
+      list = list.filter((a) => (a.sourceType || 'RSS').toUpperCase() === filters.sourceType!.toUpperCase());
     }
     if (filters.gameId) {
       list = list.filter((a) => (a.gameId || '').toLowerCase() === filters.gameId!.toLowerCase());

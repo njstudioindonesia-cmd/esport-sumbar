@@ -9,6 +9,13 @@ export const EnvSchema = z.object({
   AI_SERVICE_URL: z.string().default('http://localhost:4008'),
   NEWS_SERVICE_URL: z.string().default('http://localhost:4002'),
   INGEST_INTERVAL_MS: z.coerce.number().default(300000), // 5 minutes
+  IG_APP_ID: z.string().optional().default(''),
+  IG_APP_SECRET: z.string().optional().default(''),
+  IG_USER_ID: z.string().optional().default('1784140029381'),
+  IG_ACCESS_TOKEN: z.string().optional().default(''),
+  IG_WEBHOOK_VERIFY_TOKEN: z.string().optional().default('esportsumbar_secret_verify_token'),
+  IG_POLL_INTERVAL_MIN: z.coerce.number().default(15),
+  IG_PUBLISH_MODE: z.enum(['REVIEW', 'AUTO']).default('REVIEW'),
 });
 
 export type EnvConfig = z.infer<typeof EnvSchema>;

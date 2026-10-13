@@ -103,6 +103,7 @@ async function bootstrap(): Promise<void> {
   app.use('/api/eo', eventProxy);
 
   // === 3. Dedicated Admin Console Routes (/api/admin/*) ===
+  app.use('/api/admin/instagram', ingestorProxy);
   app.use('/api/admin/news', newsProxy);
   app.use('/api/admin/moderation', communityProxy);
   app.use('/api/admin/eo', identityProxy);
@@ -110,6 +111,7 @@ async function bootstrap(): Promise<void> {
   app.use('/api/admin', identityProxy);
 
   // === 4. Legacy /api Routes for Backward Compatibility ===
+  app.use('/api/instagram', ingestorProxy);
   app.use('/api/news', newsProxy);
   app.use('/api/communities', communityProxy);
   app.use('/api/events', eventProxy);

@@ -2,6 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { ExternalLink } from 'lucide-react';
+import { InstagramIcon } from '@/components/icons';
 import { MOCK_ARTICLES } from '../../lib/mock-data';
 import { Card } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
@@ -10,10 +12,12 @@ import { useToast } from '../../components/ui/toast';
 import { Article } from '@esport-sumbar/contracts';
 
 const CATEGORIES = ['Semua', 'Sumbar', 'Nasional', 'Dunia'];
+const SOURCES = ['Semua Sumber', 'Instagram @esportsumbar', 'Media Partner / RSS'];
 const GAMES = ['Semua Game', 'Mobile Legends', 'Free Fire', 'Valorant', 'PUBG Mobile'];
 
 export default function BeritaPage() {
   const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [selectedSource, setSelectedSource] = useState('Semua Sumber');
   const [selectedGame, setSelectedGame] = useState('Semua Game');
   const [searchQuery, setSearchQuery] = useState('');
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
@@ -29,6 +33,12 @@ export default function BeritaPage() {
         selectedCategory === 'Semua' ||
         article.category.toLowerCase() === selectedCategory.toLowerCase();
 
+      const matchSource =
+        selectedSource === 'Semua Sumber' ||
+        (selectedSource === 'Instagram @esportsumbar'
+          ? article.sourceType === 'INSTAGRAM' || article.sourceName.toLowerCase().includes('instagram')
+          : article.sourceType !== 'INSTAGRAM' && !article.sourceName.toLowerCase().includes('instagram'));
+
       const matchGame =
         selectedGame === 'Semua Game' ||
         (article.gameId &&
@@ -41,9 +51,9 @@ export default function BeritaPage() {
         article.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      return matchCat && matchGame && matchSearch;
+      return matchCat && matchSource && matchGame && matchSearch;
     });
-  }, [publishedArticles, selectedCategory, selectedGame, searchQuery]);
+  }, [publishedArticles, selectedCategory, selectedSource, selectedGame, searchQuery]);
 
   const headline = filteredArticles[0] || publishedArticles[0];
   const listArticles = headline
@@ -138,6 +148,25 @@ export default function BeritaPage() {
               className="bg-[var(--bg-900)] border-[var(--line)] text-xs py-1.5"
             />
           </div>
+        </div>
+
+        {/* Source Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[var(--line)]">
+          <span className="text-xs font-bold uppercase text-[var(--text-400)] mr-2">Sumber:</span>
+          {SOURCES.map((source) => (
+            <button
+              key={source}
+              onClick={() => setSelectedSource(source)}
+              className={`px-2.5 py-1 text-xs font-medium rounded-sm transition-all flex items-center gap-1.5 ${
+                selectedSource === source
+                  ? 'bg-[#F5B700] text-black font-extrabold shadow-md'
+                  : 'text-[var(--text-400)] hover:text-white bg-[var(--bg-900)]/60 border border-transparent'
+              }`}
+            >
+              {source.includes('Instagram') && <InstagramIcon className="w-3 h-3 text-purple-400" />}
+              {source}
+            </button>
+          ))}
         </div>
 
         {/* Game Filter Pills */}
@@ -247,6 +276,12 @@ export default function BeritaPage() {
                           <Badge variant="neutral" size="sm">
                             {article.category}
                           </Badge>
+                          {article.sourceType === 'INSTAGRAM' && (
+                            <Badge variant="marawa" size="sm" className="flex items-center gap-1">
+                              <InstagramIcon className="w-2.5 h-2.5 text-purple-400" />
+                              IG
+                            </Badge>
+                          )}
                           <span className="text-[10px] text-[var(--text-400)]">
                             {new Date(article.publishedAt || article.createdAt).toLocaleDateString('id-ID', {
                               day: 'numeric',
@@ -276,7 +311,20 @@ export default function BeritaPage() {
                     </div>
 
                     <div className="pt-3 border-t border-[var(--line)] flex items-center justify-between text-[11px] text-[var(--text-400)]">
-                      <span>{article.sourceName}</span>
+                      <span className="flex items-center gap-1">
+                        {article.sourceName}
+                        {article.igPermalink && (
+                          <a
+                            href={article.igPermalink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-[#F5B700] hover:underline inline-flex items-center ml-1"
+                            title="Buka postingan asli di Instagram"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </span>
                       <span className="text-[var(--warning)] font-semibold">🔥 {article.viralScore}</span>
                     </div>
                   </Card>

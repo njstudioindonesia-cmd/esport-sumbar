@@ -19,12 +19,14 @@ export class NewsController {
   @Get()
   @ApiOperation({ summary: 'Mendapatkan daftar artikel berita terpublikasi dengan filter' })
   @ApiQuery({ name: 'category', required: false, description: 'Kategori (Semua, Sumbar, Nasional, Dunia)' })
+  @ApiQuery({ name: 'sourceType', required: false, description: 'Tipe Sumber Berita (Semua, INSTAGRAM, RSS)' })
   @ApiQuery({ name: 'gameId', required: false, description: 'Filter cabang game' })
   @ApiQuery({ name: 'search', required: false, description: 'Kata kunci pencarian judul atau ringkasan' })
   @ApiQuery({ name: 'page', required: false, example: 1 })
   @ApiQuery({ name: 'limit', required: false, example: 10 })
   async getArticles(
     @Query('category') category?: string,
+    @Query('sourceType') sourceType?: string,
     @Query('gameId') gameId?: string,
     @Query('search') search?: string,
     @Query('page') page?: string,
@@ -34,6 +36,7 @@ export class NewsController {
     const limitNum = limit ? parseInt(limit, 10) : 10;
     return this.newsService.listPublishedArticles({
       category,
+      sourceType,
       gameId,
       search,
       page: pageNum,

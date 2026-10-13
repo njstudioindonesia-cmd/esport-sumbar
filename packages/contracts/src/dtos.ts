@@ -80,6 +80,9 @@ export type ApplyOrganizerDto = z.infer<typeof ApplyOrganizerDtoSchema>;
 export const ArticleStatusEnum = z.enum(['DRAFT', 'REVIEW', 'PUBLISHED', 'REJECTED']);
 export type ArticleStatus = z.infer<typeof ArticleStatusEnum>;
 
+export const ArticleSourceTypeEnum = z.enum(['INSTAGRAM', 'RSS', 'MANUAL', 'AI']);
+export type ArticleSourceType = z.infer<typeof ArticleSourceTypeEnum>;
+
 export const ArticleSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
@@ -88,6 +91,10 @@ export const ArticleSchema = z.object({
   body: z.string(),
   sourceName: z.string(),
   sourceUrl: z.string().url(),
+  sourceType: ArticleSourceTypeEnum.optional(),
+  igMediaId: z.string().optional(),
+  igPermalink: z.string().url().optional(),
+  mediaGallery: z.array(z.string()).optional(),
   category: z.string(),
   gameId: z.string().nullable().optional(),
   tags: z.array(z.string()),
@@ -600,11 +607,23 @@ export const AdminAuditLogSchema = z.object({
 });
 export type AdminAuditLog = z.infer<typeof AdminAuditLogSchema>;
 
+// Raw Item (Idempotent ingestion tracking)
+export const RawItemSchema = z.object({
+  id: z.string(),
+  source: z.string(),
+  externalId: z.string(),
+  payload: z.record(z.unknown()),
+  status: z.enum(['PENDING', 'PROCESSED', 'REJECTED', 'DUPLICATE']),
+  fetchedAt: z.string().datetime(),
+});
+export type RawItem = z.infer<typeof RawItemSchema>;
+
 // Instagram Graph API Connection & Sync
 export const InstagramConnectionSchema = z.object({
   id: z.string(),
   igUserId: z.string(),
   username: z.string().default('esportsumbar'),
+  tokenEncrypted: z.string().optional(),
   expiresAt: z.string().datetime(),
   daysRemaining: z.number().int(),
   lastSyncAt: z.string().datetime().optional(),
@@ -617,6 +636,7 @@ export type InstagramConnection = z.infer<typeof InstagramConnectionSchema>;
 export const EventDraftSchema = z.object({
   id: z.string(),
   fromArticleId: z.string().optional(),
+  igMediaId: z.string().optional(),
   extractedTitle: z.string(),
   extractedGame: z.string().optional(),
   extractedCity: z.string().optional(),

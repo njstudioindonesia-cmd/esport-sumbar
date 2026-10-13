@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { getSession, clearSession, UserSession } from '@/lib/api';
 import { User, LogOut, ChevronRight, Search, Bell } from 'lucide-react';
+import { InstagramIcon } from '@/components/icons';
 
 export function Navbar() {
   const [session, setSession] = useState<UserSession | null>(null);
@@ -90,6 +91,18 @@ export function Navbar() {
 
         {/* User Actions */}
         <div className="flex items-center gap-3">
+          {/* Follow Instagram Button */}
+          <a
+            href="https://www.instagram.com/esportsumbar"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#181822] hover:bg-[#22222E] border border-[#2A2A38] text-xs font-bold text-[#F5B700] hover:text-white transition-all shadow-sm"
+            title="Follow Instagram Resmi @esportsumbar"
+          >
+            <InstagramIcon className="w-3.5 h-3.5 text-rose-500" />
+            <span>@esportsumbar</span>
+          </a>
+
           {/* Global Smart Search */}
           <Link
             href="/cari"

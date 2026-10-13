@@ -18,7 +18,9 @@ import {
   Calendar,
   MapPin,
   ArrowRight,
+  Heart,
 } from 'lucide-react';
+import { InstagramIcon } from '@/components/icons';
 import { AiRecommendationsSection } from '@/components/ai-recommendations';
 
 export default function HomePage() {
@@ -36,27 +38,33 @@ export default function HomePage() {
   const instagramFeeds = [
     {
       id: 'ig-1',
-      title: 'Pendaftaran GOR Prayoga Cup Resmi Dibuka!',
+      title: 'Pendaftaran Kualifikasi Mobile Legends Padang Cup Season 4 Resmi Dibuka!',
       game: 'Mobile Legends',
       likes: '1.420',
       date: '2 Jam Lalu',
       image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80',
+      permalink: 'https://www.instagram.com/p/DB123mlbb01/',
+      slug: 'pendaftaran-kualifikasi-mobile-legends-padang-cup-season-4',
     },
     {
       id: 'ig-2',
-      title: 'Keseruan Babak Penyisihan Valorant Padang Arena',
+      title: 'Padang Slayers Raih Juara 1 Valorant Minang Pride Cup 2026!',
       game: 'Valorant',
       likes: '984',
-      date: '5 Jam Lalu',
+      date: '1 Hari Lalu',
       image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80',
+      permalink: 'https://www.instagram.com/p/DB124val02/',
+      slug: 'padang-slayers-raih-juara-1-valorant-minang-pride-cup-2026',
     },
     {
       id: 'ig-3',
-      title: 'Daftar Roster Juara Minangkabau Cup Musim Ini',
+      title: 'Piala Gubernur Esport Sumatera Barat 2026 Digelar Serentak di Bukittinggi',
       game: 'Free Fire',
       likes: '2.105',
-      date: '1 Hari Lalu',
+      date: '2 Hari Lalu',
       image: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=600&q=80',
+      permalink: 'https://www.instagram.com/p/DB125ff03/',
+      slug: 'piala-gubernur-esport-sumatera-barat-2026',
     },
   ];
 
@@ -439,6 +447,91 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 6. Section: Dari Instagram @esportsumbar */}
+      <section className="py-16 px-4 max-w-7xl mx-auto w-full border-t border-[#2A2A38]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white">
+                <InstagramIcon className="w-3 h-3" />
+              </div>
+              <span className="text-xs uppercase font-mono tracking-widest font-extrabold text-[#F5B700]">
+                Official Meta Instagram Feed
+              </span>
+            </div>
+            <h2 className="font-display font-extrabold text-2xl sm:text-3xl uppercase tracking-wide text-white">
+              Dari Instagram @esportsumbar
+            </h2>
+            <p className="text-xs text-[#9A9AA5] mt-1 max-w-xl">
+              Liputan visual turnamen, pengumuman jadwal, dan momen juara langsung dari feed resmi Meta Graph API.
+            </p>
+          </div>
+
+          <Link
+            href="https://www.instagram.com/esportsumbar"
+            target="_blank"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 via-rose-600 to-amber-500 hover:opacity-90 text-white text-xs font-bold uppercase tracking-wider transition-opacity shadow-lg shadow-rose-600/20 shrink-0"
+          >
+            <InstagramIcon className="w-4 h-4" />
+            Ikuti @esportsumbar
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {instagramFeeds.map((feed) => (
+            <Card
+              key={feed.id}
+              chamfer
+              className="p-4 bg-[#121217] border-[#2A2A38] hover:border-[#F5B700]/50 transition-all flex flex-col justify-between group space-y-4"
+            >
+              <div className="space-y-3">
+                <div className="relative h-48 rounded-lg overflow-hidden bg-neutral-900 border border-[#2A2A38]">
+                  <img
+                    src={feed.image}
+                    alt={feed.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-2 left-2 flex items-center gap-1.5">
+                    <Badge variant="marawa">{feed.game}</Badge>
+                  </div>
+                  <div className="absolute bottom-2 left-2 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded text-[11px] font-mono text-white flex items-center gap-1">
+                    <Heart className="w-3 h-3 text-rose-500 fill-rose-500" />
+                    {feed.likes}
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-[11px] text-[#9A9AA5] font-mono">{feed.date}</span>
+                  <Link href={`/berita/${feed.slug}`}>
+                    <h3 className="font-bold text-sm text-white group-hover:text-[#F5B700] transition-colors leading-snug line-clamp-2 mt-0.5">
+                      {feed.title}
+                    </h3>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-[#2A2A38] flex items-center justify-between text-xs">
+                <Link
+                  href={`/berita/${feed.slug}`}
+                  className="font-bold text-white hover:text-[#F5B700] flex items-center gap-1 text-[11px]"
+                >
+                  Baca Warta <ChevronRight className="w-3 h-3" />
+                </Link>
+                <Link
+                  href={feed.permalink}
+                  target="_blank"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#F5B700] hover:underline"
+                >
+                  Buka di IG
+                  <ExternalLink className="w-3 h-3" />
+                </Link>
+              </div>
+            </Card>
+          ))}
         </div>
       </section>
     </div>

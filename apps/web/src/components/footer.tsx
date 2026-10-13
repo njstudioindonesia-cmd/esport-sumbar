@@ -1,3 +1,5 @@
+import { InstagramIcon } from '@/components/icons';
+
 export function Footer() {
   return (
     <footer className="border-t border-[#2A2A38] bg-[#08080A] mt-auto py-12 text-sm relative overflow-hidden">
@@ -15,6 +17,17 @@ export function Footer() {
           <p className="text-accent-text400 text-xs max-w-sm leading-relaxed">
             Pusat turnamen, ekosistem atlet, liputan berita AI, dan komunitas kompetitif di 19 kota & kabupaten Sumatera Barat.
           </p>
+          <div className="mt-3">
+            <a
+              href="https://www.instagram.com/esportsumbar"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#F5B700] hover:text-white transition-colors"
+            >
+              <InstagramIcon className="w-4 h-4 text-rose-500" />
+              Follow @esportsumbar di Instagram →
+            </a>
+          </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 text-xs text-accent-text400 font-mono">

@@ -20,6 +20,9 @@ export class ProxyService {
         if (url.startsWith('/api/public/')) {
           return url.replace(/^\/api\/public/, '');
         }
+        if (url.startsWith('/api/admin/instagram')) {
+          return url.replace(/^\/api\/admin/, '');
+        }
         return url.replace(/^\/api/, '');
       },
       on: {

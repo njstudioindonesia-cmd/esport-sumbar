@@ -10,6 +10,10 @@ export interface CreateArticleDto {
   body: string;
   sourceName: string;
   sourceUrl: string;
+  sourceType?: 'INSTAGRAM' | 'RSS' | 'MANUAL' | 'AI';
+  igMediaId?: string;
+  igPermalink?: string;
+  mediaGallery?: string[];
   category: string;
   gameId?: string | null;
   tags: string[];
@@ -28,6 +32,7 @@ export class NewsService {
   async listPublishedArticles(query: {
     category?: string;
     gameId?: string;
+    sourceType?: string;
     search?: string;
     page?: number;
     limit?: number;
@@ -36,6 +41,7 @@ export class NewsService {
       status: 'PUBLISHED',
       category: query.category,
       gameId: query.gameId,
+      sourceType: query.sourceType,
       search: query.search,
       page: query.page,
       limit: query.limit,
@@ -81,6 +87,10 @@ export class NewsService {
       body: dto.body,
       sourceName: dto.sourceName,
       sourceUrl: dto.sourceUrl,
+      sourceType: dto.sourceType || 'RSS',
+      igMediaId: dto.igMediaId,
+      igPermalink: dto.igPermalink,
+      mediaGallery: dto.mediaGallery,
       category: dto.category,
       gameId: dto.gameId,
       tags: dto.tags || [],
