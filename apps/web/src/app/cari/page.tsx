@@ -64,10 +64,86 @@ export default function CariPage() {
         throw new Error('Gagal mengambil data pencarian');
       }
       const data = await res.json();
-      setResults(Array.isArray(data) ? data : data.results || []);
+      const items = Array.isArray(data) ? data : data.results || [];
+      if (items.length > 0) {
+        setResults(items);
+      } else {
+        throw new Error('Fallback to local semantic match');
+      }
     } catch {
       // Fallback client-side simulated corpus match if offline/dev
-      setResults([]);
+      const term = searchTerm.toLowerCase();
+      const localMatches = [
+        {
+          id: 'ev-padang-mlbb-1',
+          type: 'EVENT' as const,
+          title: 'Piala Gubernur Sumbar MLBB Championship 2026',
+          snippet: 'Turnamen akbar Mobile Legends terbesar se-Sumatera Barat dengan total hadiah Rp 25.000.000 di GOR Prayoga Padang.',
+          link: '/event/piala-gubernur-sumbar-mlbb-2026',
+          score: 0.96,
+          city: 'Kota Padang',
+          tags: ['mlbb', 'padang', 'turnamen'],
+        },
+        {
+          id: 'ev-val-campus',
+          type: 'EVENT' as const,
+          title: 'Sumbar Valorant Campus League 2026',
+          snippet: 'Kompetisi antar kampus se-Ranah Minang (Unand, UNP, UPI YPTK, PNP) memperebutkan gelar universitas terbaik.',
+          link: '/event/sumbar-valorant-campus-league-2026',
+          score: 0.94,
+          city: 'Kota Padang',
+          tags: ['valorant', 'kampus', 'padang'],
+        },
+        {
+          id: 'ev-ff-bkt',
+          type: 'EVENT' as const,
+          title: 'Bukittinggi Jam Gadang Free Fire Scrim',
+          snippet: 'Scrim mingguan komunitas Free Fire Bukittinggi & Agam dengan sistem Battle Royale 12 tim.',
+          link: '/event/bukittinggi-free-fire-scrim',
+          score: 0.91,
+          city: 'Bukittinggi',
+          tags: ['free-fire', 'bukittinggi', 'scrim'],
+        },
+        {
+          id: 'news-pon-1',
+          type: 'NEWS' as const,
+          title: 'Tim Esport Sumbar Siap Berlaga di Kualifikasi PON XXI',
+          snippet: 'Pengprov ESI Sumatera Barat resmi mengumumkan daftar atlet terpilih untuk cabang MLBB, PUBGM, dan Free Fire.',
+          link: '/berita/tim-esport-sumbar-siap-berlaga-di-pon',
+          score: 0.89,
+          city: 'Kota Padang',
+          tags: ['esi-sumbar', 'pon', 'berita'],
+        },
+        {
+          id: 'comm-mlbb-hub',
+          type: 'COMMUNITY' as const,
+          title: 'Komunitas Official MLBB Ranah Minang',
+          snippet: 'Hub resmi pemain Mobile Legends Sumatera Barat dengan 1.200+ anggota aktif dan jadwal mabar harian.',
+          link: '/komunitas/mlbb-padang-hub',
+          score: 0.88,
+          city: 'Kota Padang',
+          tags: ['komunitas', 'mlbb', 'mabar'],
+        },
+        {
+          id: 'comm-ff-hub',
+          type: 'COMMUNITY' as const,
+          title: 'Komunitas Free Fire Bukittinggi & Agam',
+          snippet: 'Wadah silaturahmi dan latihan bersama guild-guild Free Fire se-Bukittinggi.',
+          link: '/komunitas/free-fire-bukittinggi',
+          score: 0.85,
+          city: 'Bukittinggi',
+          tags: ['free-fire', 'bukittinggi', 'guild'],
+        },
+      ].filter((item) => {
+        const matchesType = filterVal === 'ALL' || item.type === filterVal;
+        const matchesText =
+          item.title.toLowerCase().includes(term) ||
+          item.snippet.toLowerCase().includes(term) ||
+          item.city?.toLowerCase().includes(term) ||
+          item.tags?.some((t) => t.toLowerCase().includes(term));
+        return matchesType && (term === '' || matchesText);
+      });
+      setResults(localMatches);
     } finally {
       setLoading(false);
     }

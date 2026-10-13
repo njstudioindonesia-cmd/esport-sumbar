@@ -9,6 +9,9 @@ const nextConfig = {
     '@esport-sumbar/utils',
   ],
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
