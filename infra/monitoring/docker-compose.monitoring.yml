@@ -1,0 +1,70 @@
+# ==============================================================================
+# ESPORT SUMBAR v2 - Observability Stack
+# Prometheus + Grafana + Loki + Promtail + Uptime Kuma
+# ==============================================================================
+
+name: esport-sumbar-monitoring
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: esport-monitoring-prometheus
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - esport_network
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: esport-monitoring-grafana
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-GrafanaSumbar2026!}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3003:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - esport_network
+
+  loki:
+    image: grafana/loki:3.0.0
+    container_name: esport-monitoring-loki
+    restart: always
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - esport_network
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: esport-monitoring-uptime-kuma
+    restart: always
+    volumes:
+      - uptime_kuma_data:/app/data
+    ports:
+      - "3004:3001"
+    networks:
+      - esport_network
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  uptime_kuma_data:
+
+networks:
+  esport_network:
+    external: true
+    name: esport_prod_network

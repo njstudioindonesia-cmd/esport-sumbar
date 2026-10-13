@@ -1,0 +1,194 @@
+# ==============================================================================
+# ESPORT SUMBAR v2 - Production Caddy Configuration
+# Domains: esportsumbar.id, eo.esportsumbar.id, admin.esportsumbar.id, api.esportsumbar.id
+# Automatic HTTPS via Let's Encrypt / ZeroSSL + Cloudflare Compatible
+# ==============================================================================
+
+{
+    email {$ACME_EMAIL:ops@esportsumbar.id}
+    admin off
+    # Log configuration
+    log {
+        output stdout
+        format json
+        level INFO
+    }
+}
+
+# Snippet for standard security headers
+(security_headers) {
+    header {
+        # Strict Transport Security (HSTS)
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        # Prevent MIME type sniffing
+        X-Content-Type-Options "nosniff"
+        # XSS Protection
+        X-XSS-Protection "1; mode=block"
+        # Referrer Policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+        # Feature / Permissions Policy
+        Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+        # Hide Caddy Server identity
+        -Server
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 1. PUBLIC PORTAL (esportsumbar.id & www.esportsumbar.id)
+# ------------------------------------------------------------------------------
+{$PUBLIC_DOMAIN:esportsumbar.id}, www.{$PUBLIC_DOMAIN:esportsumbar.id} {
+    import security_headers
+    encode zstd gzip
+
+    # Redirect www to apex
+    @www header_regexp host Host ^www\.(.*)$
+    handle @www {
+        redir https://{re.host.1}{uri} permanent
+    }
+
+    # Static caching for Next.js static assets
+    @static path /_next/static/* /favicon.ico /robots.txt /sitemap.xml
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    # API Proxy pass-through to API Gateway
+    handle /api/* {
+        reverse_proxy gateway:4000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Portal-Audience "web"
+        }
+    }
+
+    # Reverse proxy to Public Next.js app
+    handle {
+        reverse_proxy web:3000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    log {
+        output file /var/log/caddy/public_access.log {
+            roll_size 10MB
+            roll_keep 10
+        }
+        format json
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 2. EO STUDIO PORTAL (eo.esportsumbar.id)
+# ------------------------------------------------------------------------------
+{$EO_DOMAIN:eo.esportsumbar.id} {
+    import security_headers
+    encode zstd gzip
+
+    header {
+        X-Frame-Options "SAMEORIGIN"
+    }
+
+    # API Proxy pass-through to API Gateway
+    handle /api/* {
+        reverse_proxy gateway:4000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Portal-Audience "eo"
+        }
+    }
+
+    # Reverse proxy to EO Studio Next.js app
+    handle {
+        reverse_proxy eo:3001 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    log {
+        output file /var/log/caddy/eo_access.log {
+            roll_size 10MB
+            roll_keep 10
+        }
+        format json
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 3. ADMIN CONSOLE PORTAL (admin.esportsumbar.id)
+# ------------------------------------------------------------------------------
+{$ADMIN_DOMAIN:admin.esportsumbar.id} {
+    import security_headers
+    encode zstd gzip
+
+    # Stricter Frame Options for Admin
+    header {
+        X-Frame-Options "DENY"
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https: wss:; frame-ancestors 'none';"
+    }
+
+    # API Proxy pass-through to API Gateway
+    handle /api/* {
+        reverse_proxy gateway:4000 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Portal-Audience "admin"
+        }
+    }
+
+    # Reverse proxy to Admin Console Next.js app
+    handle {
+        reverse_proxy admin:3002 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+        }
+    }
+
+    log {
+        output file /var/log/caddy/admin_access.log {
+            roll_size 10MB
+            roll_keep 10
+        }
+        format json
+    }
+}
+
+# ------------------------------------------------------------------------------
+# 4. API GATEWAY DOMAIN (api.esportsumbar.id)
+# ------------------------------------------------------------------------------
+{$API_DOMAIN:api.esportsumbar.id} {
+    import security_headers
+    encode zstd gzip
+
+    # Media and asset uploads max size limit (50MB)
+    request_body {
+        max_size 50MB
+    }
+
+    # Direct reverse proxy to Central API Gateway
+    reverse_proxy gateway:4000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+
+    log {
+        output file /var/log/caddy/api_access.log {
+            roll_size 20MB
+            roll_keep 10
+        }
+        format json
+    }
+}

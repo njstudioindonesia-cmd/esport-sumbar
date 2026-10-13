@@ -1,59 +1,72 @@
 # ==============================================================================
-# ESPORT SUMBAR - Multi-Stage Production Dockerfile for Next.js 15 Frontend
+# ESPORT SUMBAR v2 - Multi-Stage Production Dockerfile for Next.js 15 Portals
 # ==============================================================================
-
-# 1. Base Stage
 FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && apk add --no-cache libc6-compat dumb-init
+RUN corepack enable && apk add --no-cache libc6-compat dumb-init curl
 
 WORKDIR /app
 
-# 2. Dependencies Stage
 FROM base AS dependencies
 COPY pnpm-lock.yaml package.json pnpm-workspace.yaml turbo.json ./
 COPY packages/config/package.json ./packages/config/
 COPY packages/contracts/package.json ./packages/contracts/
 COPY packages/ui/package.json ./packages/ui/
+COPY packages/ui-dashboard/package.json ./packages/ui-dashboard/
+COPY packages/auth-client/package.json ./packages/auth-client/
+COPY packages/api-client/package.json ./packages/api-client/
 COPY packages/utils/package.json ./packages/utils/
-COPY apps/web/package.json ./apps/web/
+
+ARG APP_NAME=web
+COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 
 RUN pnpm install --frozen-lockfile
 
-# 3. Builder Stage
 FROM dependencies AS builder
 COPY packages/ ./packages/
-COPY apps/web/ ./apps/web/
+ARG APP_NAME=web
+COPY apps/${APP_NAME}/ ./apps/${APP_NAME}/
 
-# Build shared packages
-RUN pnpm --filter @esport-sumbar/config build 2>/dev/null || true
 RUN pnpm --filter @esport-sumbar/contracts build
 RUN pnpm --filter @esport-sumbar/utils build
+RUN pnpm --filter @esport-sumbar/auth-client build
+RUN pnpm --filter @esport-sumbar/api-client build
+RUN pnpm --filter @esport-sumbar/ui build
+RUN pnpm --filter @esport-sumbar/ui-dashboard build
 
-# Build Next.js web application
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-RUN pnpm --filter @esport-sumbar/web build
+ARG NEXT_PUBLIC_API_URL=/api
+ARG NEXT_PUBLIC_PORTAL_TYPE=web
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_PORTAL_TYPE=${NEXT_PUBLIC_PORTAL_TYPE}
 
-# 4. Runner Stage
+RUN pnpm --filter @esport-sumbar/${APP_NAME} build
+
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=3000
 
-# Copy Next.js standalone and static output
+ARG APP_NAME=web
+ARG PORT=3000
+ENV PORT=${PORT}
+ENV APP_NAME=${APP_NAME}
+
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY --from=builder /app/packages ./packages
-COPY --from=builder /app/apps/web/.next ./apps/web/.next
-COPY --from=builder /app/apps/web/public ./apps/web/public 2>/dev/null || true
-COPY --from=builder /app/apps/web/package.json ./apps/web/package.json
+COPY --from=builder /app/apps/${APP_NAME}/.next ./apps/${APP_NAME}/.next
+COPY --from=builder /app/apps/${APP_NAME}/public ./apps/${APP_NAME}/public 2>/dev/null || true
+COPY --from=builder /app/apps/${APP_NAME}/package.json ./apps/${APP_NAME}/package.json
 
-WORKDIR /app/apps/web
+WORKDIR /app/apps/${APP_NAME}
 
 USER node
-EXPOSE 3000
+EXPOSE ${PORT}
+
+HEALTHCHECK --interval=20s --timeout=5s --start-period=15s --retries=3 \
+  CMD curl -f http://localhost:${PORT}/api/health || exit 0
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["node_modules/.bin/next", "start", "-p", "3000"]
+CMD ["sh", "-c", "exec node_modules/.bin/next start -p ${PORT:-3000}"]

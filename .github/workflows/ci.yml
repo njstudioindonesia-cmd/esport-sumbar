@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint-and-typecheck:
-    name: Lint & Typecheck
+    name: Lint, Typecheck & Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -41,14 +41,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build shared packages
+      - name: Build monorepo packages & apps
         run: pnpm run build
 
       - name: Run lint
         run: pnpm run lint
 
   unit-tests:
-    name: Unit Tests
+    name: Unit & Contract Tests
     runs-on: ubuntu-latest
     needs: [lint-and-typecheck]
     steps:
@@ -69,17 +69,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run tests
+      - name: Run tests across monorepo
         run: pnpm run test
 
-  docker-lint:
-    name: Verify Docker Setup
+  docker-verification:
+    name: Verify Docker & Compose Configurations
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate Docker Compose (Dev & Prod)
+      - name: Validate Compose Configs
         run: |
-          docker compose config -q
+          docker compose -f docker-compose.yml config -q
           docker compose -f docker-compose.prod.yml config -q
+          docker compose -f infra/compose/docker-compose.prod.yml config -q
+          docker compose -f infra/compose/docker-compose.staging.yml config -q

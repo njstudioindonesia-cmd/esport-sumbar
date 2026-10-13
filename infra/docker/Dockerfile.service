@@ -1,0 +1,71 @@
+# ==============================================================================
+# ESPORT SUMBAR v2 - Multi-Stage Production Dockerfile for NestJS Microservices
+# Optimized, Non-Root, Alpine-based, Minimal footprint
+# ==============================================================================
+
+# 1. Base Setup with Alpine & PNPM
+FROM node:22-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && apk add --no-cache libc6-compat dumb-init curl
+
+WORKDIR /app
+
+# 2. Dependencies Resolution Stage
+FROM base AS dependencies
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml turbo.json ./
+COPY packages/config/package.json ./packages/config/
+COPY packages/contracts/package.json ./packages/contracts/
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/ui-dashboard/package.json ./packages/ui-dashboard/
+COPY packages/auth-client/package.json ./packages/auth-client/
+COPY packages/api-client/package.json ./packages/api-client/
+COPY packages/utils/package.json ./packages/utils/
+
+ARG SERVICE_NAME
+COPY services/${SERVICE_NAME}/package.json ./services/${SERVICE_NAME}/
+
+RUN pnpm install --frozen-lockfile
+
+# 3. Build Stage
+FROM dependencies AS builder
+COPY packages/ ./packages/
+COPY services/${SERVICE_NAME}/ ./services/${SERVICE_NAME}/
+
+# Build internal shared packages in dependency order
+RUN pnpm --filter @esport-sumbar/contracts build
+RUN pnpm --filter @esport-sumbar/utils build
+RUN pnpm --filter @esport-sumbar/auth-client build
+RUN pnpm --filter @esport-sumbar/api-client build
+
+# Build target microservice
+ARG SERVICE_NAME
+RUN pnpm --filter @esport-sumbar/${SERVICE_NAME} build
+
+# 4. Production Runner Stage (Minimal & Secure non-root)
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+
+ARG SERVICE_NAME
+ARG SERVICE_PORT=4000
+ENV SERVICE_PORT=${SERVICE_PORT}
+ENV PORT=${SERVICE_PORT}
+
+# Copy built artifacts and necessary production node_modules
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/services/${SERVICE_NAME}/dist ./services/${SERVICE_NAME}/dist
+COPY --from=builder /app/services/${SERVICE_NAME}/package.json ./services/${SERVICE_NAME}/package.json
+
+WORKDIR /app/services/${SERVICE_NAME}
+
+# Set non-root user for container security
+USER node
+EXPOSE ${SERVICE_PORT}
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:${SERVICE_PORT}/health || exit 1
+
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "dist/main.js"]
