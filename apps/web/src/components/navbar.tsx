@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { getSession, clearSession, UserSession } from '@/lib/api';
-import { User, LogOut, ChevronRight } from 'lucide-react';
+import { User, LogOut, ChevronRight, Search, Bell } from 'lucide-react';
 
 export function Navbar() {
   const [session, setSession] = useState<UserSession | null>(null);
@@ -86,6 +86,33 @@ export function Navbar() {
 
         {/* User Actions */}
         <div className="flex items-center gap-3">
+          {/* Global Smart Search */}
+          <Link
+            href="/cari"
+            title="Pencarian Cerdas AI"
+            className={`p-2 rounded border transition-colors flex items-center justify-center ${
+              pathname?.startsWith('/cari')
+                ? 'bg-[#E10600]/20 text-[#E10600] border-[#E10600]/40'
+                : 'text-accent-text400 hover:text-white hover:bg-dark-800 border-transparent hover:border-line'
+            }`}
+          >
+            <Search className="w-4 h-4" />
+          </Link>
+
+          {/* In-App Notifications */}
+          <Link
+            href="/notifikasi"
+            title="Pusat Notifikasi"
+            className={`relative p-2 rounded border transition-colors flex items-center justify-center ${
+              pathname?.startsWith('/notifikasi')
+                ? 'bg-[#E10600]/20 text-[#E10600] border-[#E10600]/40'
+                : 'text-accent-text400 hover:text-white hover:bg-dark-800 border-transparent hover:border-line'
+            }`}
+          >
+            <Bell className="w-4 h-4" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#E10600] animate-pulse" />
+          </Link>
+
           {session ? (
             <div className="flex items-center gap-3">
               <Link

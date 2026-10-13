@@ -19,6 +19,7 @@ import {
   Shield,
   Layers,
 } from 'lucide-react';
+import { AiRecommendationsSection } from '@/components/ai-recommendations';
 
 export default function HomePage() {
   const leadArticle = MOCK_ARTICLES[0]!;
@@ -282,7 +283,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. EO Hub Banner & Styleguide Shortcut */}
+      {/* 5. AI Recommendations Section */}
+      <AiRecommendationsSection />
+
+      {/* 6. EO Hub Banner & Styleguide Shortcut */}
       <section className="max-w-7xl mx-auto w-full px-4 pb-16">
         <div className="bg-dark-800 border border-line rounded-xl p-8 chamfer-card relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">

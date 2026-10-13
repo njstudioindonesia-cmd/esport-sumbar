@@ -71,6 +71,44 @@ export class MockLlmProvider implements ILlmProvider {
       };
     }
 
+    // EO Assistant task
+    if (systemPrompt.includes('EO_ASSISTANT') || systemPrompt.includes('Tournament Architect')) {
+      const lower = userPrompt.toLowerCase();
+      const isBr = lower.includes('battle royale') || lower.includes('free fire') || lower.includes('pubg');
+      const isVal = lower.includes('valorant');
+      const gameTitle = isBr ? 'Free Fire' : isVal ? 'Valorant' : 'Mobile Legends: Bang Bang';
+      const cityMention = lower.includes('bukittinggi') ? 'Bukittinggi' : lower.includes('payakumbuh') ? 'Payakumbuh' : 'Padang';
+
+      const format = isBr ? 'LEADERBOARD' : isVal ? 'SWISS' : 'DOUBLE_ELIMINATION';
+
+      const eoResult = {
+        title: `Piala Ranah Minang ${gameTitle} Championship 2026`,
+        description: `Turnamen esport resmi bergengsi di ${cityMention}, Sumatera Barat yang mempertemukan talenta-talenta muda berbakat se-Ranah Minang. Diselenggarakan dengan standar kompetisi profesional untuk mengasah sportivitas dan strategi tim.\n\nBabak penyisihan berlangsung secara kompetitif menuju Grand Final LAN yang disiarkan langsung melalui portal resmi ESPORT SUMBAR. Raih total hadiah jutaan rupiah dan trofi bergengsi kebanggaan daerah!\n\nSeluruh peserta diwajibkan mematuhi kode etik kompetisi dan jadwal technical meeting panitia.`,
+        rulebook: `1. KETENTUAN UMUM: Setiap tim wajib terdiri dari 5 pemain inti dan maksimal 1 cadangan. Seluruh pemain dilarang menggunakan emulator PC / tablet khusus pada cabang mobile.\n2. SISTEM PERTANDINGAN: Menggunakan format ${format} dengan Best of 3 pada babak eliminasi.\n3. ATURAN PAUSE: Masing-masing tim memiliki jatah 2x tactical pause (maksimal 3 menit per pause) dengan melapor kepada wasit pertandingan.\n4. KODE ETIK & INTEGRITAS: Segala bentuk cheat, maphack, bug exploitation, joki akun, serta toxic/chat kasar berakibat diskualifikasi langsung tanpa pengembalian biaya pendaftaran.\n5. JADWAL & CHECK-IN: Seluruh kapten tim wajib hadir di Discord technical meeting H-1 dan melakukan check-in paling lambat 30 menit sebelum match dimulai.`,
+        recommendedFormat: format,
+        recommendedBestOf: isBr ? 4 : 3,
+        prizeDistribution: 'Juara 1: Rp 7.500.000 + Trofi Juara · Juara 2: Rp 4.500.000 + Medali · Juara 3: Rp 2.000.000 + Sertifikat · MVP Player: Rp 1.000.000',
+        suggestedFormFields: [
+          'ID Game & Nomor Server Kapten',
+          'Nomor WhatsApp Aktif Kapten',
+          'Kabupaten/Kota Asal Tim di Sumatera Barat',
+          'Kartu Identitas (KTP / Kartu Pelajar / KTM Mahasiswa)',
+        ],
+      };
+
+      return {
+        content: JSON.stringify(eoResult),
+        provider: this.name,
+        usage: {
+          promptTokens: 520,
+          completionTokens: 380,
+          totalTokens: 900,
+          latencyMs: Date.now() - startTime + 60,
+          estimatedCostUsd: 0.0018,
+        },
+      };
+    }
+
     // Default to moderation engine
     const textToCheck = userPrompt.toLowerCase();
     const isJudi = textToCheck.includes('slot') || textToCheck.includes('gacor') || textToCheck.includes('judi');

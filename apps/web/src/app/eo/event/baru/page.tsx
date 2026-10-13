@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, PlusCircle } from 'lucide-react';
+import { ArrowLeft, PlusCircle, Sparkles, Wand2, FileText, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +31,60 @@ export default function CreateEoEventPage() {
   const [description, setDescription] = useState(
     'Turnamen kompetitif resmi untuk menjaring talenta esport terbaik Sumatera Barat.',
   );
+
+  // EO AI Assistant State
+  const [aiPrompt, setAiPrompt] = useState(
+    'Turnamen Mobile Legends di Bukittinggi untuk 32 tim prize pool 5jt rupiah babak eliminasi di Jam Gadang',
+  );
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiPackage, setAiPackage] = useState<any>(null);
+  const [showAiRulebook, setShowAiRulebook] = useState(false);
+
+  const handleAiGenerate = async () => {
+    if (!aiPrompt.trim()) return;
+    setAiLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/ai/eo-assistant`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: aiPrompt,
+          game: gameId,
+          city: city,
+          targetTeams: quota,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || 'Gagal memanggil EO AI Assistant');
+      }
+
+      const pkg = data.package || data;
+      setAiPackage(pkg);
+
+      if (pkg.title) setTitle(pkg.title);
+      if (pkg.description) setDescription(pkg.description);
+      if (pkg.prizeDistribution) setPrizeDescription(pkg.prizeDistribution);
+      if (pkg.recommendedBestOf) {
+        // AI format recommended
+      }
+
+      toast({
+        type: 'success',
+        title: '✨ AI Assistant Berhasil Menghasilkan Proposal!',
+        message: 'Judul, deskripsi, pembagian hadiah, dan rulebook turnamen telah otomatis terisi.',
+      });
+    } catch (err: any) {
+      toast({
+        type: 'error',
+        title: 'Gagal Menjalankan AI Assistant',
+        message: err.message,
+      });
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,16 +140,16 @@ export default function CreateEoEventPage() {
 
   return (
     <div className="min-h-screen bg-[#0B0B0D] text-[#F5F5F7] py-10 px-4 pb-20">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto space-y-6">
         <Link
           href="/eo/dashboard"
-          className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A9AA5] hover:text-white mb-6"
+          className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A9AA5] hover:text-white"
         >
           <ArrowLeft className="w-4 h-4 text-[#E10600]" />
           Kembali ke Dashboard EO
         </Link>
 
-        <div className="mb-6">
+        <div>
           <Badge variant="brand">WIZARD TURNAMEN BARU</Badge>
           <h1 className="font-display text-3xl md:text-4xl font-extrabold uppercase text-white mt-2">
             Buat Event / <span className="text-[#E10600]">Turnamen Esport</span>
@@ -104,6 +158,121 @@ export default function CreateEoEventPage() {
             Sistem akan otomatis menyiapkan halaman publik, Form Builder pendaftaran
             dinamis, dan bucket Event Storage terisolasi (kuota 50 MB).
           </p>
+        </div>
+
+        {/* EO AI ASSISTANT GENERATOR CARD */}
+        <div className="bg-gradient-to-r from-[#171113] via-[#15151A] to-[#121217] border border-[#E10600]/40 rounded-xl p-5 shadow-xl relative overflow-hidden">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded bg-[#E10600]/20 border border-[#E10600]/30 flex items-center justify-center text-[#E10600]">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
+                  EO AI Assistant · <span className="text-[#E10600]">Auto Proposal & Format</span>
+                </h3>
+                <span className="text-[11px] text-[#9A9AA5]">
+                  Claude/Mock LLM v1.0.0 siap meracik judul, regulasi resmi Minang, dan format bracket
+                </span>
+              </div>
+            </div>
+            <Badge variant="brand" className="font-mono text-[10px] hidden sm:inline-block">
+              AI ENGINE READY
+            </Badge>
+          </div>
+
+          <div className="space-y-3">
+            <div className="relative">
+              <textarea
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+                rows={2}
+                placeholder="Tulis ide turnamen Anda, cth: Turnamen Valorant mahasiswa Padang 16 tim prize 3 juta rupiah..."
+                className="w-full bg-[#0D0D10] border border-[#2A2A31] focus:border-[#E10600] rounded-lg p-3 text-xs md:text-sm text-white placeholder-[#5A5A66] outline-none resize-none"
+              />
+            </div>
+
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div className="flex items-center gap-2 text-[11px] text-[#9A9AA5]">
+                <span>Contoh:</span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setAiPrompt(
+                      'Turnamen Mobile Legends di Bukittinggi untuk 32 tim prize pool 5jt rupiah babak eliminasi di Jam Gadang',
+                    )
+                  }
+                  className="hover:text-white underline decoration-dotted"
+                >
+                  MLBB Bukittinggi
+                </button>
+                <span>·</span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setAiPrompt(
+                      'Turnamen Valorant Campus Series antar mahasiswa Unand dan UNP Padang 16 tim prize pool 10jt',
+                    )
+                  }
+                  className="hover:text-white underline decoration-dotted"
+                >
+                  Valorant Kampus Padang
+                </button>
+              </div>
+
+              <Button
+                type="button"
+                variant="primary"
+                size="sm"
+                chamfer={false}
+                onClick={handleAiGenerate}
+                disabled={aiLoading}
+                className="text-xs uppercase font-display font-bold flex items-center gap-1.5 shadow-md shadow-[#E10600]/20"
+              >
+                <Wand2 className={`w-3.5 h-3.5 ${aiLoading ? 'animate-spin' : ''}`} />
+                {aiLoading ? 'Meracik Proposal...' : 'Generate dengan AI'}
+              </Button>
+            </div>
+
+            {aiPackage && (
+              <div className="mt-4 pt-3 border-t border-[#26262B] space-y-3 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-emerald-400 flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5" /> Proposal & Aturan Berhasil Digenerate
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowAiRulebook(!showAiRulebook)}
+                    className="text-[#E10600] hover:underline flex items-center gap-1 font-semibold"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    {showAiRulebook ? 'Sembunyikan Rulebook' : 'Lihat Rulebook Lengkap'}
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] bg-[#0E0E12] p-2.5 rounded border border-[#222228]">
+                  <div>
+                    <span className="text-[#5A5A66] block">Format Rekomendasi:</span>
+                    <strong className="text-white font-mono">
+                      {aiPackage.recommendedFormat} (Best of {aiPackage.recommendedBestOf})
+                    </strong>
+                  </div>
+                  <div>
+                    <span className="text-[#5A5A66] block">Kolom Formulir Dianjurkan:</span>
+                    <span className="text-[#9A9AA5]">
+                      {aiPackage.suggestedFormFields?.slice(0, 2).join(', ')}...
+                    </span>
+                  </div>
+                </div>
+
+                {showAiRulebook && (
+                  <div className="bg-[#09090C] border border-[#26262B] rounded p-3 max-h-48 overflow-y-auto font-mono text-[11px] text-[#A0A0B0] whitespace-pre-wrap leading-relaxed">
+                    {aiPackage.rulebook}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <form onSubmit={handleCreate}>

@@ -15,7 +15,11 @@ import {
   FileText,
   Phone,
   Building,
+  Sparkles,
+  Trophy,
+  ArrowRight,
 } from 'lucide-react';
+import Link from 'next/link';
 
 const SUMBAR_CITIES = [
   'Padang',
@@ -58,6 +62,9 @@ export default function ProfilPage() {
   const [eoMessage, setEoMessage] = useState<string | null>(null);
   const [eoError, setEoError] = useState<string | null>(null);
 
+  // AI Personalization State
+  const [aiRecs, setAiRecs] = useState<any>(null);
+
   useEffect(() => {
     const { user, token } = getSession();
     if (!token || !user) {
@@ -72,7 +79,8 @@ export default function ProfilPage() {
     Promise.all([
       apiRequest<any>('/users/me'),
       apiRequest<any>('/organizer/status'),
-    ]).then(([profileRes, eoRes]) => {
+      apiRequest<any>(`/ai/recommendations?city=${user.city || 'Padang'}`),
+    ]).then(([profileRes, eoRes, aiRes]) => {
       if (profileRes.success && profileRes.data) {
         setSession(profileRes.data);
         setNickname(profileRes.data.nickname);
@@ -80,6 +88,9 @@ export default function ProfilPage() {
       }
       if (eoRes.success && eoRes.data) {
         setEoStatus(eoRes.data);
+      }
+      if (aiRes.success && aiRes.data) {
+        setAiRecs(aiRes.data);
       }
       setLoading(false);
     });
@@ -252,6 +263,64 @@ export default function ProfilPage() {
                 </button>
               </div>
             </form>
+          </div>
+
+          {/* AI Gamer Personalization */}
+          <div className="bg-[#121217] border border-[#E10600]/30 rounded-lg p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-line">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#E10600]" />
+                <h3 className="text-sm font-display font-bold uppercase text-white tracking-wide">
+                  Rekomendasi AI Khusus Gamer {city}
+                </h3>
+              </div>
+              <Link
+                href="/cari"
+                className="text-xs text-[#E10600] font-semibold flex items-center gap-1 hover:underline"
+              >
+                Cari Semantik AI <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <div className="bg-dark-900 border border-line rounded p-3 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-amber-400 font-bold uppercase text-[11px]">
+                  <Trophy className="w-3.5 h-3.5" /> Turnamen Terdekat di {city}
+                </div>
+                <div className="text-white font-semibold">
+                  {aiRecs?.recommendedEvents?.[0]?.title || 'Minangkabau Esport Cup Season 4'}
+                </div>
+                <p className="text-accent-text400 text-[11px]">
+                  {aiRecs?.recommendedEvents?.[0]?.reason ||
+                    `Slot pendaftaran kualifikasi daerah terbuka untuk cabang game favorit Anda di ${city}.`}
+                </p>
+                <Link
+                  href="/event"
+                  className="text-[#E10600] text-[11px] font-semibold inline-flex items-center gap-1 mt-1"
+                >
+                  Daftar Sekarang &rarr;
+                </Link>
+              </div>
+
+              <div className="bg-dark-900 border border-line rounded p-3 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-blue-400 font-bold uppercase text-[11px]">
+                  <Sparkles className="w-3.5 h-3.5" /> Hub Komunitas Minang
+                </div>
+                <div className="text-white font-semibold">
+                  {aiRecs?.recommendedCommunities?.[0]?.name || 'Mobile Legends Sumatera Barat'}
+                </div>
+                <p className="text-accent-text400 text-[11px]">
+                  {aiRecs?.recommendedCommunities?.[0]?.reason ||
+                    'Pusat mabar, scrim kompetitif, dan info turnamen se-Sumatera Barat.'}
+                </p>
+                <Link
+                  href="/komunitas"
+                  className="text-blue-400 text-[11px] font-semibold inline-flex items-center gap-1 mt-1"
+                >
+                  Buka Komunitas &rarr;
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -30,6 +30,7 @@ export class HealthController {
         eventService: this.config.EVENT_SERVICE_URL,
         mediaService: this.config.MEDIA_SERVICE_URL,
         bracketService: this.config.BRACKET_SERVICE_URL,
+        notificationService: this.config.NOTIFICATION_SERVICE_URL,
       },
       memoryUsageMb: {
         rss: Math.round((mem.rss / 1024 / 1024) * 100) / 100,

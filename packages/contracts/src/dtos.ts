@@ -480,4 +480,86 @@ export const TournamentSchema = z.object({
 });
 export type Tournament = z.infer<typeof TournamentSchema>;
 
+// Phase 7: Notifications & Notification Service DTOs
+export const NotificationChannelEnum = z.enum(['IN_APP', 'EMAIL']);
+export type NotificationChannel = z.infer<typeof NotificationChannelEnum>;
+
+export const NotificationTypeEnum = z.enum([
+  'REGISTRATION_STATUS',
+  'EVENT_REMINDER',
+  'ANNOUNCEMENT',
+  'COMMUNITY_ALERT',
+]);
+export type NotificationType = z.infer<typeof NotificationTypeEnum>;
+
+export const NotificationItemSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  type: NotificationTypeEnum,
+  title: z.string(),
+  message: z.string(),
+  link: z.string().optional(),
+  read: z.boolean().default(false),
+  channel: NotificationChannelEnum.default('IN_APP'),
+  createdAt: z.string().datetime(),
+});
+export type NotificationItem = z.infer<typeof NotificationItemSchema>;
+
+// Phase 7: EO AI Assistant DTOs
+export const EoAssistantResponseSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  rulebook: z.string(),
+  recommendedFormat: TournamentFormatEnum,
+  recommendedBestOf: z.number().int().positive(),
+  prizeDistribution: z.string(),
+  suggestedFormFields: z.array(z.string()),
+});
+export type EoAssistantResponse = z.infer<typeof EoAssistantResponseSchema>;
+
+// Phase 7: Smart Search DTOs
+export const SearchResultTypeEnum = z.enum(['NEWS', 'COMMUNITY', 'EVENT']);
+export type SearchResultType = z.infer<typeof SearchResultTypeEnum>;
+
+export const SearchResultItemSchema = z.object({
+  id: z.string(),
+  type: SearchResultTypeEnum,
+  title: z.string(),
+  snippet: z.string(),
+  link: z.string(),
+  score: z.number().min(0).max(1),
+  category: z.string().optional(),
+  city: z.string().optional(),
+  tags: z.array(z.string()).default([]),
+});
+export type SearchResultItem = z.infer<typeof SearchResultItemSchema>;
+
+// Phase 7: AI Personalization Recommendations DTOs
+export const AiRecommendationSchema = z.object({
+  userId: z.string(),
+  userCity: z.string().optional(),
+  recommendedCommunities: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      slug: z.string(),
+      gameId: z.string(),
+      reason: z.string(),
+    }),
+  ),
+  recommendedEvents: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      slug: z.string(),
+      gameId: z.string(),
+      city: z.string().optional(),
+      prizePool: z.number(),
+      reason: z.string(),
+    }),
+  ),
+});
+export type AiRecommendation = z.infer<typeof AiRecommendationSchema>;
+
+
 

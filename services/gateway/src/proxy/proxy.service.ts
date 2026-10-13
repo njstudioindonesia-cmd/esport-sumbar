@@ -92,4 +92,9 @@ export class ProxyService {
   createBracketProxy(): RequestHandler {
     return this.createServiceProxy(this.config.BRACKET_SERVICE_URL, 'Bracket Service');
   }
+
+  createNotificationProxy(): RequestHandler {
+    return this.createServiceProxy(this.config.NOTIFICATION_SERVICE_URL, 'Notification Service');
+  }
 }
+

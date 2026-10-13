@@ -67,4 +67,43 @@ describe('AiService', () => {
     expect(result.decision).toBe('REJECT');
     expect(result.categoriesFlagged).toContain('judi');
   });
+
+  it('should generate structured tournament package from EO assistant prompt', async () => {
+    const prompt = 'Turnamen MLBB di Bukittinggi untuk 32 tim prize pool 5jt rupiah';
+    const res = await aiService.generateEoPackage(prompt, {
+      game: 'Mobile Legends: Bang Bang',
+      city: 'Bukittinggi',
+      targetTeams: 32,
+    });
+
+    expect(res).toBeDefined();
+    expect(res.package).toBeDefined();
+    expect(res.package.title).toContain('Mobile Legends');
+    expect(res.package.description).toBeDefined();
+    expect(res.package.rulebook).toContain('KETENTUAN UMUM');
+    expect(res.package.recommendedFormat).toBeDefined();
+    expect(res.package.recommendedBestOf).toBe(3);
+    expect(res.package.prizeDistribution).toContain('Juara 1');
+    expect(res.package.suggestedFormFields.length).toBeGreaterThan(0);
+    expect(res.telemetry.latencyMs).toBeGreaterThan(0);
+  });
+
+  it('should return ranked semantic search results matching query across categories', async () => {
+    const results = await aiService.searchSemantic('Turnamen MLBB Padang', undefined, 5);
+
+    expect(results).toBeDefined();
+    expect(results.length).toBeGreaterThan(0);
+    expect(results[0].score).toBeGreaterThan(0);
+    expect(['EVENT', 'NEWS', 'COMMUNITY']).toContain(results[0].type);
+  });
+
+  it('should provide personalized AI recommendations for gamer profile', async () => {
+    const recs = await aiService.recommendPersonalized('usr-gamer-1', 'Padang', ['MLBB', 'VALORANT']);
+
+    expect(recs).toBeDefined();
+    expect(recs.recommendedEvents.length).toBeGreaterThan(0);
+    expect(recs.recommendedCommunities.length).toBeGreaterThan(0);
+    expect(recs.userCity).toBe('Padang');
+  });
 });
+

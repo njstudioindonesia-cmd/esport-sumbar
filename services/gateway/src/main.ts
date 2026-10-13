@@ -78,6 +78,7 @@ async function bootstrap(): Promise<void> {
   const eventProxy = proxyService.createEventProxy();
   const mediaProxy = proxyService.createMediaProxy();
   const bracketProxy = proxyService.createBracketProxy();
+  const notificationProxy = proxyService.createNotificationProxy();
   const identityProxy = proxyService.createIdentityProxy();
 
   // News routes
@@ -98,7 +99,11 @@ async function bootstrap(): Promise<void> {
   // Bracket, Leaderboard & Realtime SSE routes
   app.use('/api/brackets', bracketProxy);
 
-  // AI engine routes
+  // Notifications routes
+  app.use('/api/notifications', notificationProxy);
+
+  // AI & Semantic Search routes
+  app.use('/api/search', aiProxy);
   app.use('/api/ai', aiProxy);
 
   // Ingestor pipeline routes

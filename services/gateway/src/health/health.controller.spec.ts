@@ -18,6 +18,7 @@ describe('Gateway HealthController', () => {
     EVENT_SERVICE_URL: 'http://localhost:4005',
     MEDIA_SERVICE_URL: 'http://localhost:4006',
     BRACKET_SERVICE_URL: 'http://localhost:4007',
+    NOTIFICATION_SERVICE_URL: 'http://localhost:4009',
     RATE_LIMIT_WINDOW_MS: 60000,
     RATE_LIMIT_MAX_REQUESTS: 100,
   };
@@ -42,6 +43,7 @@ describe('Gateway HealthController', () => {
     expect(res.upstream.eventService).toBe('http://localhost:4005');
     expect(res.upstream.mediaService).toBe('http://localhost:4006');
     expect(res.upstream.bracketService).toBe('http://localhost:4007');
+    expect(res.upstream.notificationService).toBe('http://localhost:4009');
     expect(res.uptimeSeconds).toBeGreaterThanOrEqual(0);
     expect(res.memoryUsageMb.rss).toBeGreaterThan(0);
   });
