@@ -27,15 +27,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-brand-500 flex items-center justify-center font-display text-white font-bold text-lg chamfer-badge group-hover:bg-brand-400 transition-colors">
+          <div className="w-8 h-8 bg-gradient-to-tr from-[#E10600] via-[#FF3B30] to-[#F5B700] flex items-center justify-center font-display text-black font-black text-lg chamfer-badge shadow-md shadow-[#F5B700]/20 group-hover:scale-105 transition-transform">
             ES
           </div>
           <div className="flex flex-col">
             <span className="font-display font-black text-xl tracking-wider text-white leading-none">
-              ESPORT <span className="text-brand-500">SUMBAR</span>
+              ESPORT <span className="text-[#F5B700]">SUMBAR</span>
             </span>
-            <span className="text-[10px] text-accent-text400 tracking-widest uppercase">
-              Sumatera Barat
+            <span className="text-[10px] text-[#9A9AA5] tracking-widest uppercase font-semibold">
+              Ranah Minang
             </span>
           </div>
         </Link>
@@ -46,7 +46,7 @@ export function Navbar() {
             href="/berita"
             className={
               pathname?.startsWith('/berita')
-                ? 'text-brand-500 font-bold'
+                ? 'text-[#F5B700] font-bold'
                 : 'text-accent-text400 hover:text-white transition-colors'
             }
           >
@@ -56,7 +56,7 @@ export function Navbar() {
             href="/komunitas"
             className={
               pathname?.startsWith('/komunitas')
-                ? 'text-brand-500 font-bold'
+                ? 'text-[#F5B700] font-bold'
                 : 'text-accent-text400 hover:text-white transition-colors'
             }
           >
@@ -66,7 +66,7 @@ export function Navbar() {
             href="/event"
             className={
               pathname?.startsWith('/event')
-                ? 'text-brand-500 font-bold'
+                ? 'text-[#F5B700] font-bold'
                 : 'text-accent-text400 hover:text-white transition-colors'
             }
           >
@@ -147,10 +147,10 @@ export function Navbar() {
               </Link>
               <Link
                 href="/daftar"
-                className="chamfer-btn bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold uppercase tracking-wider px-4 py-2 flex items-center gap-1 transition-colors"
+                className="chamfer-btn bg-[#F5B700] hover:bg-[#D9A100] text-black text-sm font-black uppercase tracking-wider px-4 py-2 flex items-center gap-1 transition-transform hover:scale-[1.02] shadow-md shadow-[#F5B700]/20"
               >
                 Daftar
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 text-black" />
               </Link>
             </div>
           )}

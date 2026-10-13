@@ -3,15 +3,25 @@
 @tailwind utilities;
 
 :root {
+  --marawa-gold: #F5B700;
+  --marawa-gold-hover: #D9A100;
+  --marawa-red: #E10600;
+  --marawa-black: #08080A;
+
   --red-500: #E10600;
   --red-600: #B80500;
   --red-400: #FF3B30;
-  --bg-900: #0B0B0D;
-  --bg-800: #131316;
-  --bg-700: #1C1C21;
-  --line: #2A2A31;
+  --bg-900: #08080A;
+  --bg-800: #121217;
+  --bg-700: #181822;
+  --line: #2A2A38;
   --text-100: #F5F5F7;
   --text-400: #9A9AA5;
+}
+
+::selection {
+  background-color: #F5B700;
+  color: #000000;
 }
 
 body {
@@ -33,3 +43,21 @@ body {
 .chamfer-badge {
   clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
 }
+
+/* Cyber Songket Geometric Background */
+.bg-cyber-songket {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

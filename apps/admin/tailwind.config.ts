@@ -9,6 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        marawa: {
+          gold: '#F5B700',
+          'gold-hover': '#D9A100',
+          'gold-light': '#FFC72C',
+          red: '#E10600',
+          dark: '#08080A',
+        },
         brand: {
           500: '#E10600',
           600: '#B80500',

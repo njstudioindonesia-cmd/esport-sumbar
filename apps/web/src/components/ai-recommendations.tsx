@@ -98,21 +98,21 @@ export function AiRecommendationsSection() {
 
   return (
     <section className="max-w-7xl mx-auto w-full px-4 py-8">
-      <div className="bg-[#121217] border border-[#E10600]/30 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-2xl">
+      <div className="bg-[#121217] border border-[#F5B700]/30 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-2xl">
         {/* Glow ambient background */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#E10600]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#F5B700]/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#26262B]">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#2A2A38]">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Sparkles className={`w-4 h-4 text-[#E10600] ${loading ? 'animate-spin' : ''}`} />
-              <span className="text-xs font-mono uppercase tracking-widest text-[#E10600] font-bold">
+              <Sparkles className={`w-4 h-4 text-[#F5B700] ${loading ? 'animate-spin' : ''}`} />
+              <span className="text-xs font-mono uppercase tracking-widest text-[#F5B700] font-bold">
                 Smart Feed AI {loading && '(Memuat...)'}
               </span>
             </div>
             <h3 className="font-display font-black text-2xl md:text-3xl uppercase tracking-wide text-white">
-              Rekomendasi Pintar <span className="text-[#E10600]">Gamers Ranah Minang</span>
+              Rekomendasi Pintar <span className="text-[#F5B700]">Gamers Ranah Minang</span>
             </h3>
             <p className="text-xs text-[#9A9AA5] max-w-xl">
               Turnamen dan komunitas yang dipersonalisasi berdasarkan domisili kota di Sumatera Barat dan preferensi game kompetitif Anda.
@@ -121,18 +121,18 @@ export function AiRecommendationsSection() {
 
           {/* Interactive City Selector */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 shrink-0">
-            <span className="text-[11px] font-mono uppercase text-[#5A5A66] flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-[#E10600]" /> Kota:
+            <span className="text-[11px] font-mono uppercase text-[#9A9AA5] flex items-center gap-1 font-bold">
+              <MapPin className="w-3.5 h-3.5 text-[#F5B700]" /> Wilayah:
             </span>
             <div className="flex items-center gap-1.5 flex-wrap">
               {SUMBAR_CITIES.map((city) => (
                 <button
                   key={city}
                   onClick={() => handleCityChange(city)}
-                  className={`px-2.5 py-1 rounded text-xs font-semibold uppercase tracking-wider transition-all ${
+                  className={`px-3 py-1 rounded text-xs font-semibold uppercase tracking-wider transition-all ${
                     selectedCity.toLowerCase() === city.toLowerCase()
-                      ? 'bg-[#E10600] text-white shadow-md shadow-[#E10600]/30 font-bold'
-                      : 'bg-[#1A1A22] text-[#9A9AA5] hover:text-white border border-[#2B2B36]'
+                      ? 'bg-[#F5B700] text-black shadow-md shadow-[#F5B700]/25 font-black'
+                      : 'bg-[#181822] text-[#9A9AA5] hover:text-white border border-[#2A2A38]'
                   }`}
                 >
                   {city}

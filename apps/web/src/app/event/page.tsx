@@ -109,39 +109,39 @@ export default function EventCatalogPage() {
     }).format(amount);
 
   return (
-    <div className="min-h-screen bg-[#0B0B0D] text-[#F5F5F7] pb-20">
+    <div className="min-h-screen bg-[#08080A] text-[#F5F5F7] pb-20">
       {/* Broadcast Top Header */}
-      <section className="relative border-b border-[#2A2A31] bg-gradient-to-b from-[#16161B] to-[#0B0B0D] py-12 overflow-hidden">
-        <div className="absolute inset-0 songket-pattern opacity-10 pointer-events-none" />
+      <section className="relative border-b border-[#2A2A38] bg-gradient-to-b from-[#140D04] via-[#0B0B0E] to-[#08080A] py-12 overflow-hidden">
+        <div className="absolute inset-0 bg-cyber-songket opacity-10 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <Badge variant="brand">KALENDER KOMPETISI RESMI</Badge>
-                <Badge variant="outline">SUMBAR · NASIONAL · GLOBAL</Badge>
+                <Badge variant="marawa">KALENDER KOMPETISI RESMI</Badge>
+                <Badge variant="outline">19 KOTA/KABUPATEN · NASIONAL · GLOBAL</Badge>
               </div>
               <h1 className="font-display text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-white">
-                Turnamen & <span className="text-[#E10600]">Event Esport</span>
+                Turnamen & <span className="text-[#F5B700]">Event Ranah Minang</span>
               </h1>
               <p className="text-[#9A9AA5] mt-2 max-w-2xl text-sm md:text-base">
-                Temukan turnamen lokal Sumatera Barat hingga kualifikasi tingkat dunia. Daftar
+                Temukan turnamen lokal di 19 kota & kabupaten Sumatera Barat hingga kualifikasi tingkat nasional. Daftar
                 sebagai individu, skuad, atau kontingen komunitas daerah.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Link href="/eo/dashboard">
+              <a href="http://localhost:3001" className="inline-flex">
                 <Button variant="secondary" size="md">
-                  <SlidersHorizontal className="w-4 h-4 mr-2 text-[#E10600]" />
-                  Dashboard EO
+                  <SlidersHorizontal className="w-4 h-4 mr-2 text-[#F5B700]" />
+                  EO Studio
                 </Button>
-              </Link>
-              <Link href="/eo/event/baru">
-                <Button variant="primary" size="md">
-                  <PlusCircle className="w-4 h-4 mr-2" />
+              </a>
+              <a href="http://localhost:3001/event/baru" className="inline-flex">
+                <Button variant="marawa" size="md">
+                  <PlusCircle className="w-4 h-4 mr-2 text-black" />
                   Buat Event / Turnamen
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
 

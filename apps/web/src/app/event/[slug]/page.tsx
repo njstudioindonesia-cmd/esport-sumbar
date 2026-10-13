@@ -82,22 +82,23 @@ export default function EventDetailPage() {
     }).format(amount);
 
   return (
-    <div className="min-h-screen bg-[#0B0B0D] text-[#F5F5F7] pb-20">
+    <div className="min-h-screen bg-[#08080A] text-[#F5F5F7] pb-20">
       {/* Broadcast Hero */}
-      <section className="border-b border-[#2A2A31] bg-gradient-to-b from-[#1A0D10] via-[#131316] to-[#0B0B0D] py-10">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="border-b border-[#2A2A38] bg-gradient-to-b from-[#140D04] via-[#0B0B0E] to-[#08080A] py-10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-cyber-songket opacity-10 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <Link
             href="/event"
-            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A9AA5] hover:text-white mb-6"
+            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A9AA5] hover:text-[#F5B700] mb-6 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 text-[#E10600]" />
+            <ArrowLeft className="w-4 h-4 text-[#F5B700]" />
             Kembali ke Kalender Event
           </Link>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-3 max-w-3xl">
               <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="brand">{event.gameId}</Badge>
+                <Badge variant="marawa">{event.gameId}</Badge>
                 <Badge variant="warning">{event.scope}</Badge>
                 <Badge variant="outline">{event.mode}</Badge>
                 <Badge
@@ -115,11 +116,11 @@ export default function EventDetailPage() {
 
               <div className="flex flex-wrap items-center gap-5 text-xs md:text-sm text-[#9A9AA5]">
                 <span className="flex items-center gap-1.5">
-                  <Shield className="w-4 h-4 text-[#E10600]" />
+                  <Shield className="w-4 h-4 text-[#F5B700]" />
                   EO: <strong className="text-white">{event.organizerName}</strong>
                 </span>
                 <span className="flex items-center gap-1.5 tabular-nums">
-                  <Calendar className="w-4 h-4 text-[#E10600]" />
+                  <Calendar className="w-4 h-4 text-[#F5B700]" />
                   {new Date(event.startAt).toLocaleDateString('id-ID', {
                     day: '2-digit',
                     month: 'long',
@@ -139,14 +140,14 @@ export default function EventDetailPage() {
                   Live Bracket & Klasemen
                 </Button>
               </Link>
-              <Link href={`/eo/event/${event.id}`}>
+              <a href={`http://localhost:3001/event/${event.id}`} className="inline-flex">
                 <Button variant="secondary" size="md">
-                  Kelola di Panel EO
+                  Kelola di EO Studio →
                 </Button>
-              </Link>
+              </a>
               {event.status === 'REGISTRATION_OPEN' && !event.isExternal && (
                 <Link href={`/event/${event.slug}/daftar`}>
-                  <Button variant="primary" size="lg">
+                  <Button variant="marawa" size="lg">
                     Daftar Turnamen Sekarang
                   </Button>
                 </Link>
@@ -156,12 +157,12 @@ export default function EventDetailPage() {
 
           {/* Key Broadcast Stats Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-            <Card chamfer className="p-4 bg-[#131316]">
+            <Card chamfer className="p-4 bg-[#121217] border-[#2A2A38]">
               <div className="text-xs uppercase text-[#9A9AA5] flex items-center gap-1.5">
-                <Trophy className="w-4 h-4 text-[#F5A524]" />
+                <Trophy className="w-4 h-4 text-[#F5B700]" />
                 Prize Pool
               </div>
-              <div className="font-display text-2xl font-extrabold text-white tabular-nums mt-1">
+              <div className="font-display text-2xl font-extrabold text-[#F5B700] tabular-nums mt-1">
                 {formatRupiah(event.prizePool)}
               </div>
             </Card>

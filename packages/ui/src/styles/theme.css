@@ -1,28 +1,34 @@
 :root {
-  /* Dark-first Primary Brand Colors */
-  --red-500: #E10600; /* Primary */
+  /* Marawa Minangkabau Brand Colors */
+  --marawa-gold: #F5B700;
+  --marawa-gold-hover: #D9A100;
+  --marawa-red: #E10600;
+  --marawa-black: #08080A;
+
+  /* Primary Brand Accent */
+  --red-500: #E10600; /* Primary Merah Marawa */
   --red-600: #B80500; /* Hover / Pressed */
   --red-400: #FF3B30; /* Bright Accent */
 
-  /* Neutral Dark Surfaces */
-  --bg-900: #0B0B0D; /* Background Utama */
-  --bg-800: #131316; /* Surface */
-  --bg-700: #1C1C21; /* Card */
-  --bg-600: #25252C; /* Elevated Surface */
+  /* Neutral Dark Surfaces (Hitam Cyber Minang) */
+  --bg-900: #08080A; /* Background Utama */
+  --bg-800: #121217; /* Surface */
+  --bg-700: #181822; /* Card */
+  --bg-600: #22222E; /* Elevated Surface */
 
   /* Borders & Lines */
-  --line: #2A2A31; /* Subtle Border */
-  --line-strong: #3F3F4A;
+  --line: #2A2A38; /* Subtle Border */
+  --line-strong: #3E3E50;
 
   /* Typography Colors */
   --text-100: #F5F5F7; /* High contrast text */
   --text-400: #9A9AA5; /* Secondary text */
-  --text-muted: #636370;
+  --text-muted: #686878;
 
   /* Feedback Colors */
-  --success: #22C55E;
-  --warning: #F5A524;
-  --info: #3B82F6;
+  --success: #10B981;
+  --warning: #F5B700; /* Marawa Gold */
+  --info: #38BDF8;
   --error: #E10600;
 
   /* Geometry & Chamfer */
@@ -77,3 +83,21 @@ body {
 .tabular-numbers {
   font-variant-numeric: tabular-nums;
 }
+
+/* Cyber Songket Pattern Utility */
+.bg-cyber-songket {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -1,23 +1,23 @@
+import React from 'react';
 import Link from 'next/link';
 import {
   MOCK_LIVE_TICKER,
   MOCK_ARTICLES,
   MOCK_EVENTS,
-  MOCK_COMMUNITIES,
 } from '@/lib/mock-data';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import {
-  Flame,
-  Calendar,
-  MapPin,
-  Users,
+  Trophy,
+  Crown,
+  Medal,
   ChevronRight,
   Radio,
+  Flame,
+  ExternalLink,
+  Calendar,
+  MapPin,
   ArrowRight,
-  Shield,
-  Layers,
 } from 'lucide-react';
 import { AiRecommendationsSection } from '@/components/ai-recommendations';
 
@@ -25,75 +25,378 @@ export default function HomePage() {
   const leadArticle = MOCK_ARTICLES[0]!;
   const sideArticles = MOCK_ARTICLES.slice(1, 4);
 
+  const regionalLeaderboard = [
+    { rank: 1, city: 'Kota Padang', points: 4850, activeTeams: 142, championCount: 18, eloBadge: 'Tier 1' },
+    { rank: 2, city: 'Kota Bukittinggi', points: 3920, activeTeams: 98, championCount: 12, eloBadge: 'Tier 1' },
+    { rank: 3, city: 'Kota Payakumbuh', points: 3100, activeTeams: 74, championCount: 8, eloBadge: 'Tier 2' },
+    { rank: 4, city: 'Kota Solok', points: 2640, activeTeams: 56, championCount: 5, eloBadge: 'Tier 2' },
+    { rank: 5, city: 'Kota Pariaman', points: 2210, activeTeams: 48, championCount: 4, eloBadge: 'Tier 3' },
+  ];
+
+  const instagramFeeds = [
+    {
+      id: 'ig-1',
+      title: 'Pendaftaran GOR Prayoga Cup Resmi Dibuka!',
+      game: 'Mobile Legends',
+      likes: '1.420',
+      date: '2 Jam Lalu',
+      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 'ig-2',
+      title: 'Keseruan Babak Penyisihan Valorant Padang Arena',
+      game: 'Valorant',
+      likes: '984',
+      date: '5 Jam Lalu',
+      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80',
+    },
+    {
+      id: 'ig-3',
+      title: 'Daftar Roster Juara Minangkabau Cup Musim Ini',
+      game: 'Free Fire',
+      likes: '2.105',
+      date: '1 Hari Lalu',
+      image: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=600&q=80',
+    },
+  ];
+
   return (
-    <div className="flex-1 flex flex-col">
-      {/* 1. Live Match Ticker Bar */}
-      <div className="bg-dark-800/90 border-b border-line text-xs py-2 px-4 overflow-x-auto">
-        <div className="max-w-7xl mx-auto flex items-center gap-6 whitespace-nowrap">
-          <div className="flex items-center gap-2 text-brand-400 font-display font-extrabold uppercase shrink-0">
-            <Radio className="w-3.5 h-3.5 text-brand-500 animate-pulse" />
-            <span>LIVE STANDINGS // SUMBAR</span>
+    <div className="flex-1 flex flex-col bg-[#08080A] text-[#F5F5F7] antialiased">
+      {/* 1. Marawa Match Ticker Bar */}
+      <div className="bg-[#121217] border-b border-[#2A2A38] text-xs py-2.5 px-4 overflow-x-auto whitespace-nowrap">
+        <div className="max-w-7xl mx-auto flex items-center gap-6">
+          <div className="flex items-center gap-2 text-[#F5B700] font-display font-black uppercase tracking-wider shrink-0">
+            <Radio className="w-3.5 h-3.5 text-[#E10600] animate-pulse" />
+            <span>SUMBAR LEAGUE LIVE SCORE</span>
           </div>
 
-          <div className="flex items-center gap-6 overflow-x-auto text-[11px] no-scrollbar">
+          <div className="flex items-center gap-4 overflow-x-auto text-[11px] no-scrollbar">
             {MOCK_LIVE_TICKER.map((m) => (
               <div
                 key={m.id}
-                className="flex items-center gap-2 bg-dark-900/60 px-3 py-1 rounded border border-line shrink-0"
+                className="flex items-center gap-2.5 bg-[#181822] px-3 py-1 rounded border border-[#2A2A38] shrink-0"
               >
-                <span className="text-accent-text400 uppercase font-mono">{m.game}:</span>
+                <span className="text-[#9A9AA5] uppercase font-mono">{m.game}:</span>
                 <span className="font-semibold text-white">{m.teamA}</span>
-                <span className="font-mono tabular-nums text-brand-400 font-bold px-1.5 py-0.5 rounded bg-dark-700">
+                <span className="font-mono tabular-nums text-[#F5B700] font-bold px-1.5 py-0.5 rounded bg-[#08080A] border border-[#2A2A38]">
                   {m.scoreA} - {m.scoreB}
                 </span>
                 <span className="font-semibold text-white">{m.teamB}</span>
-                <span className="text-[10px] text-accent-text400">({m.round})</span>
+                <span className={`text-[10px] px-1 py-0.2 rounded font-bold ${
+                  m.status === 'LIVE' ? 'bg-[#E10600]/20 text-[#FF4D4D]' : 'text-[#9A9AA5]'
+                }`}>
+                  ({m.round})
+                </span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* 2. Editorial News Grid (Hero Section) */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8">
-        <div className="flex items-center justify-between mb-6 pb-2 border-b border-line">
+      {/* 2. Hero Section: Ranah Minang Modern & Cyber Minangkabau */}
+      <section className="relative pt-12 pb-20 px-4 overflow-hidden border-b border-[#2A2A38] bg-gradient-to-b from-[#140D04] via-[#0B0B0E] to-[#08080A]">
+        {/* Minang Marawa (Hitam, Merah, Kuning) Ambient Glows */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[320px] bg-[#F5B700]/10 blur-[140px] pointer-events-none rounded-full" />
+        <div className="absolute top-12 left-10 w-[420px] h-[300px] bg-[#E10600]/15 blur-[120px] pointer-events-none rounded-full" />
+
+        {/* Cyber Songket Geometric Pattern Backdrop */}
+        <div className="absolute inset-0 bg-cyber-songket pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+          <div className="lg:col-span-7 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#F5B700]/15 border border-[#F5B700]/40 text-[#F5B700] text-xs font-black uppercase tracking-widest shadow-sm shadow-[#F5B700]/10">
+              <Crown className="w-3.5 h-3.5" />
+              MARAWA ESPORT SUMATERA BARAT
+            </div>
+
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white leading-[0.96]">
+              BANGKITKAN JAWARA <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5B700] via-[#E10600] to-[#FF4D4D]">
+                RANAH MINANG
+              </span>
+            </h1>
+
+            <p className="text-sm md:text-base text-[#9A9AA5] max-w-xl leading-relaxed">
+              Wadah ekosistem kompetisi resmi atlet esport di 19 kota & kabupaten Sumatera Barat. Dari Jam Gadang Bukittinggi hingga Pantai Padang, buktikan kehebatan tim Anda di panggung regional dan nasional.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link href="/event">
+                <button
+                  type="button"
+                  className="chamfer-btn bg-[#F5B700] hover:bg-[#D9A100] text-black font-display font-black text-sm uppercase tracking-wider px-6 py-3.5 flex items-center gap-2 shadow-xl shadow-[#F5B700]/25 transition-transform hover:scale-[1.02]"
+                >
+                  <Trophy className="w-4 h-4 text-black" />
+                  Ikuti Turnamen Daerah
+                </button>
+              </Link>
+              <Link href="/komunitas">
+                <button
+                  type="button"
+                  className="chamfer-btn bg-[#181822] hover:bg-[#22222E] border border-[#2A2A38] text-white font-display font-bold text-sm uppercase tracking-wider px-6 py-3.5 flex items-center gap-2 transition-colors"
+                >
+                  <Crown className="w-4 h-4 text-[#F5B700]" />
+                  Komunitas 19 Wilayah
+                </button>
+              </Link>
+            </div>
+
+            {/* Quick Regional Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#2A2A38] max-w-lg">
+              <div>
+                <div className="text-[10px] uppercase font-bold text-[#9A9AA5] tracking-wider">Wilayah Aktif</div>
+                <div className="font-display text-2xl font-black text-white tabular-nums">19 Kota/Kab</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase font-bold text-[#9A9AA5] tracking-wider">Tim Terdaftar</div>
+                <div className="font-display text-2xl font-black text-[#F5B700] tabular-nums">480+ Tim</div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase font-bold text-[#9A9AA5] tracking-wider">Total Hadiah 2026</div>
+                <div className="font-display text-2xl font-black text-white tabular-nums">Rp 150 Jt+</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Regional Pride Spotlight: Klasemen Daerah Sumbar */}
+          <div className="lg:col-span-5">
+            <div className="bg-[#121217] border border-[#F5B700]/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden chamfer-card">
+              <div className="flex items-center justify-between pb-4 border-b border-[#2A2A38]">
+                <div className="flex items-center gap-2">
+                  <Medal className="w-5 h-5 text-[#F5B700]" />
+                  <span className="font-display text-sm font-bold uppercase tracking-wider text-white">
+                    KLASEMEN KOTA / KABUPATEN
+                  </span>
+                </div>
+                <Badge variant="marawa">SUMBAR LEAGUE</Badge>
+              </div>
+
+              <div className="divide-y divide-[#2A2A38]/70 my-2">
+                {regionalLeaderboard.map((r) => (
+                  <div key={r.rank} className="py-3 flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-3">
+                      <span className={`w-6 h-6 rounded-md flex items-center justify-center font-bold text-[11px] ${
+                        r.rank === 1 ? 'bg-[#F5B700] text-black font-black shadow-md shadow-[#F5B700]/20' :
+                        r.rank === 2 ? 'bg-[#E10600] text-white font-bold' :
+                        'bg-[#181822] text-[#9A9AA5] border border-[#2A2A38]'
+                      }`}>
+                        #{r.rank}
+                      </span>
+                      <div>
+                        <div className="font-bold text-white text-sm">{r.city}</div>
+                        <div className="text-[10px] text-[#9A9AA5]">{r.activeTeams} Tim Aktif · {r.championCount} Juara</div>
+                      </div>
+                    </div>
+
+                    <div className="text-right">
+                      <div className="font-mono font-bold text-[#F5B700] tabular-nums text-sm">
+                        {r.points.toLocaleString('id-ID')} Poin
+                      </div>
+                      <div className="text-[10px] text-emerald-400 font-semibold">{r.eloBadge}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-3 border-t border-[#2A2A38] text-center">
+                <Link href="/komunitas" className="text-xs text-[#F5B700] hover:underline font-bold inline-flex items-center gap-1">
+                  Lihat Peringkat Lengkap 19 Kota/Kabupaten
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Section: Agenda Kompetisi & Turnamen Daerah */}
+      <section className="py-14 px-4 max-w-7xl mx-auto w-full border-b border-[#2A2A38]">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <div className="text-xs font-black uppercase text-[#F5B700] tracking-widest flex items-center gap-1.5">
+              <Trophy className="w-3.5 h-3.5" />
+              AGENDA KOMPETISI KULTURAL
+            </div>
+            <h2 className="font-display text-3xl font-extrabold uppercase text-white mt-1">
+              Turnamen Bergengsi Sumatera Barat
+            </h2>
+          </div>
+          <Link
+            href="/event"
+            className="text-xs font-display font-bold uppercase tracking-wider text-[#F5B700] hover:text-white flex items-center gap-1 transition-colors"
+          >
+            Semua Turnamen <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {MOCK_EVENTS.slice(0, 3).map((evt) => (
+            <Card
+              key={evt.id}
+              chamfer
+              ticketNotch
+              className="p-6 bg-[#121217] border-[#2A2A38] hover:border-[#F5B700] transition-all flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <Badge variant="marawa">{evt.gameId}</Badge>
+                  <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    {evt.status === 'REGISTRATION_OPEN' ? 'PENDAFTARAN BUKA' : evt.status}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-xl font-black uppercase text-white group-hover:text-[#F5B700] transition-colors leading-tight">
+                  {evt.title}
+                </h3>
+
+                <p className="text-xs text-[#9A9AA5] line-clamp-2">
+                  {evt.prizeDescription || 'Turnamen resmi dengan kualifikasi atlet daerah.'}
+                </p>
+
+                <div className="flex flex-col gap-1 text-xs text-[#9A9AA5] pt-2">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-[#F5B700]" />
+                    <span>{new Date(evt.startAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#E10600]" />
+                    <span>{evt.location || 'Kota Padang, Sumbar'}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-[#2A2A38] flex items-center justify-between">
+                <div>
+                  <div className="text-[10px] text-[#9A9AA5] uppercase font-bold">Total Hadiah</div>
+                  <div className="font-display text-base font-black text-[#F5B700] tabular-nums">
+                    Rp {evt.prizePool.toLocaleString('id-ID')}
+                  </div>
+                </div>
+                <Link href={`/event/${evt.slug}/daftar`}>
+                  <button
+                    type="button"
+                    className="chamfer-btn bg-[#F5B700] hover:bg-[#D9A100] text-black font-display font-black text-xs uppercase px-4 py-2 transition-transform hover:scale-105"
+                  >
+                    Daftar Tim
+                  </button>
+                </Link>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. Section: Trending Dari @esportsumbar (Meta Graph API Official Feed) */}
+      <section className="py-14 px-4 max-w-7xl mx-auto w-full border-b border-[#2A2A38]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2.5 h-2.5 bg-gradient-to-tr from-[#F5B700] via-[#E10600] to-purple-600 rounded-sm inline-block" />
+              <span className="text-xs uppercase tracking-widest font-black text-[#F5B700]">
+                META GRAPH API OFFICIAL FEED
+              </span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold uppercase text-white">
+              Trending Dari <span className="text-[#F5B700]">@esportsumbar</span>
+            </h2>
+          </div>
+
+          <a
+            href="https://instagram.com/esportsumbar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#121217] hover:bg-[#181822] border border-[#2A2A38] text-xs font-bold uppercase tracking-wider text-white transition-colors"
+          >
+            Follow @esportsumbar di Instagram
+            <ExternalLink className="w-3.5 h-3.5 text-[#F5B700]" />
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {instagramFeeds.map((item) => (
+            <Card
+              key={item.id}
+              chamfer
+              className="p-5 bg-[#121217] border-[#2A2A38] hover:border-[#F5B700]/60 transition-all duration-300 group flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="h-44 rounded-lg bg-[#181822] overflow-hidden relative border border-[#2A2A38]">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2.5 left-2.5">
+                    <Badge variant="marawa">{item.game}</Badge>
+                  </div>
+                  <div className="absolute bottom-2.5 right-2.5 bg-black/80 backdrop-blur px-2 py-0.5 rounded text-[10px] text-white font-mono">
+                    ❤️ {item.likes}
+                  </div>
+                </div>
+
+                <div className="text-[11px] text-[#9A9AA5]">{item.date}</div>
+                <h3 className="font-bold text-sm text-white group-hover:text-[#F5B700] transition-colors leading-snug">
+                  {item.title}
+                </h3>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-[#2A2A38] flex items-center justify-between text-xs">
+                <span className="text-[#9A9AA5]">Postingan Resmi IG</span>
+                <span className="text-[#F5B700] font-bold group-hover:underline inline-flex items-center gap-1">
+                  Lihat Detail
+                  <ChevronRight className="w-3 h-3" />
+                </span>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Section: Rekomendasi Cerdas AI */}
+      <AiRecommendationsSection />
+
+      {/* 6. Section: Headline Berita & Liputan Khusus Esport Sumbar */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-14">
+        <div className="flex items-center justify-between mb-8 pb-3 border-b border-[#2A2A38]">
           <div className="flex items-center gap-3">
-            <div className="w-2.5 h-6 bg-brand-500 chamfer-badge"></div>
+            <div className="w-2.5 h-6 bg-[#F5B700] chamfer-badge"></div>
             <h2 className="font-display font-black text-2xl uppercase tracking-wider text-white">
-              Headline Berita Esport
+              Liputan Berita Ranah Minang
             </h2>
           </div>
           <Link
             href="/berita"
-            className="text-xs font-display font-bold uppercase tracking-wider text-brand-400 hover:text-white flex items-center gap-1 transition-colors"
+            className="text-xs font-display font-bold uppercase tracking-wider text-[#F5B700] hover:text-white flex items-center gap-1 transition-colors"
           >
             Semua Berita <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Massive Lead Editorial Article */}
-          <div className="lg:col-span-7 bg-dark-800 border border-line rounded-lg p-6 chamfer-card relative group hover:border-brand-500/50 transition-all flex flex-col justify-between">
+          {/* Main Lead Editorial Article */}
+          <div className="lg:col-span-7 bg-[#121217] border border-[#2A2A38] rounded-xl p-6 chamfer-card relative group hover:border-[#F5B700]/50 transition-all flex flex-col justify-between">
             <div className="space-y-4">
               <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="brand">{leadArticle.category}</Badge>
+                <Badge variant="marawa">{leadArticle.category}</Badge>
                 <Badge variant="neutral">{leadArticle.gameId}</Badge>
-                <span className="flex items-center gap-1 text-[11px] font-mono text-amber-400 font-semibold ml-auto">
-                  <Flame className="w-3.5 h-3.5 fill-amber-400" />
+                <span className="flex items-center gap-1 text-[11px] font-mono text-[#F5B700] font-semibold ml-auto">
+                  <Flame className="w-3.5 h-3.5 text-[#E10600]" />
                   VIRAL {leadArticle.viralScore}%
                 </span>
               </div>
 
-              <h3 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-wide text-white leading-tight group-hover:text-brand-400 transition-colors">
-                {leadArticle.title}
-              </h3>
+              <Link href={`/berita/${leadArticle.slug}`}>
+                <h3 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-wide text-white leading-tight group-hover:text-[#F5B700] transition-colors">
+                  {leadArticle.title}
+                </h3>
+              </Link>
 
-              <p className="text-accent-text400 text-sm leading-relaxed">
+              <p className="text-[#9A9AA5] text-sm leading-relaxed">
                 {leadArticle.summary}
               </p>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-line flex items-center justify-between text-xs text-accent-text400">
+            <div className="mt-8 pt-4 border-t border-[#2A2A38] flex items-center justify-between text-xs text-[#9A9AA5]">
               <div className="flex items-center gap-2">
                 <span className="text-white font-medium">Sumber: {leadArticle.sourceName}</span>
                 <span>•</span>
@@ -101,9 +404,9 @@ export default function HomePage() {
               </div>
               <Link
                 href={`/berita/${leadArticle.slug}`}
-                className="text-brand-400 font-bold uppercase tracking-wider hover:underline flex items-center gap-1 font-display"
+                className="font-bold text-[#F5B700] hover:underline flex items-center gap-1"
               >
-                Baca Lengkap <ArrowRight className="w-3.5 h-3.5" />
+                Baca Selengkapnya <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -111,208 +414,30 @@ export default function HomePage() {
           {/* Side Editorial Articles */}
           <div className="lg:col-span-5 flex flex-col gap-4">
             {sideArticles.map((art) => (
-              <div
+              <Link
                 key={art.id}
-                className="bg-dark-800 border border-line rounded-lg p-4 chamfer-card hover:border-brand-500/40 transition-colors group flex flex-col justify-between"
+                href={`/berita/${art.slug}`}
+                className="p-4 rounded-xl bg-[#121217] border border-[#2A2A38] hover:border-[#F5B700]/50 transition-all group flex flex-col justify-between flex-1"
               >
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge size="sm" variant="outline">
-                      {art.category}
-                    </Badge>
-                    <span className="text-[10px] text-accent-text400 ml-auto font-mono">
-                      {art.sourceName}
+                  <div className="flex items-center justify-between text-[11px] mb-2">
+                    <span className="text-[#F5B700] font-mono uppercase font-bold">
+                      {art.category} • {art.gameId}
                     </span>
+                    <span className="text-[#9A9AA5]">3 Jam Lalu</span>
                   </div>
-                  <h4 className="font-display font-bold text-base uppercase text-white leading-snug group-hover:text-brand-400 transition-colors line-clamp-2">
+                  <h4 className="font-bold text-sm text-white group-hover:text-[#F5B700] transition-colors leading-snug line-clamp-2">
                     {art.title}
                   </h4>
                 </div>
-                <div className="mt-3 flex items-center justify-between text-[11px] text-accent-text400">
-                  <span>Viral Score: {art.viralScore}%</span>
-                  <Link
-                    href={`/berita/${art.slug}`}
-                    className="text-brand-400 font-bold font-display uppercase hover:underline"
-                  >
-                    Detail →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Upcoming Tournaments & Event Organizer Section */}
-      <section className="bg-dark-900/60 border-y border-line py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8 pb-2 border-b border-line">
-            <div className="flex items-center gap-3">
-              <div className="w-2.5 h-6 bg-brand-500 chamfer-badge"></div>
-              <div>
-                <h2 className="font-display font-black text-2xl uppercase tracking-wider text-white">
-                  Turnamen & Event Terdekat
-                </h2>
-                <p className="text-xs text-accent-text400">
-                  Daftarkan tim atau kontingen komunitas ke kompetisi se-Sumatera Barat
-                </p>
-              </div>
-            </div>
-            <Link
-              href="/event"
-              className="text-xs font-display font-bold uppercase tracking-wider text-brand-400 hover:text-white flex items-center gap-1 transition-colors"
-            >
-              Lihat Kalender Event <ChevronRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {MOCK_EVENTS.map((event) => (
-              <Card key={event.id} className="flex flex-col justify-between hover:border-brand-500/60 transition-colors group">
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge variant={event.scope === 'SUMBAR' ? 'brand' : 'info'}>
-                      {event.scope}
-                    </Badge>
-                    <span className="text-[11px] font-mono font-bold text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
-                      PENDAFTARAN BUKA
-                    </span>
-                  </div>
-                  <CardTitle className="group-hover:text-brand-400 transition-colors">
-                    {event.title}
-                  </CardTitle>
-                  <CardDescription className="flex items-center gap-1 text-[11px] text-accent-text400 mt-2">
-                    <MapPin className="w-3.5 h-3.5 text-brand-500 shrink-0" />
-                    <span>{event.location}</span>
-                  </CardDescription>
-                </CardHeader>
-
-                <div className="px-5 py-3 bg-dark-900/70 border-y border-line space-y-1">
-                  <span className="text-[10px] text-accent-text400 uppercase tracking-widest font-mono">
-                    Total Prize Pool
+                <div className="mt-3 flex items-center justify-between text-[11px] text-[#9A9AA5]">
+                  <span>{art.sourceName}</span>
+                  <span className="text-[#F5B700] group-hover:underline flex items-center">
+                    Baca <ChevronRight className="w-3 h-3" />
                   </span>
-                  <div className="text-xl font-display font-extrabold text-white tracking-wide">
-                    Rp {event.prizePool.toLocaleString('id-ID')}
-                  </div>
-                  <p className="text-[10px] text-accent-text400 line-clamp-1">
-                    {event.prizeDescription}
-                  </p>
                 </div>
-
-                <CardFooter className="pt-4">
-                  <div className="flex items-center gap-1 text-[11px] text-accent-text400">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>
-                      {new Date(event.startAt).toLocaleDateString('id-ID', {
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric',
-                      })}
-                    </span>
-                  </div>
-                  <Link href={`/event/${event.slug}/daftar`}>
-                    <Button size="sm" variant="primary">
-                      Daftar Tim
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
+              </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Official Communities per Game in Sumbar */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="flex items-center justify-between mb-8 pb-2 border-b border-line">
-          <div className="flex items-center gap-3">
-            <div className="w-2.5 h-6 bg-brand-500 chamfer-badge"></div>
-            <div>
-              <h2 className="font-display font-black text-2xl uppercase tracking-wider text-white">
-                Komunitas Esport Daerah
-              </h2>
-              <p className="text-xs text-accent-text400">
-                Wadah scrim, diskusi, dan koordinasi kontingen atlet 19 Kota/Kabupaten
-              </p>
-            </div>
-          </div>
-          <Link
-            href="/komunitas"
-            className="text-xs font-display font-bold uppercase tracking-wider text-brand-400 hover:text-white flex items-center gap-1 transition-colors"
-          >
-            Jelajahi Komunitas <ChevronRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {MOCK_COMMUNITIES.map((com) => (
-            <div
-              key={com.id}
-              className="bg-dark-800 border border-line rounded-lg p-5 chamfer-card hover:border-brand-500/50 transition-colors flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-dark-700 text-accent-text400 border border-line">
-                    {com.region}
-                  </span>
-                  <Badge size="sm" variant={com.type === 'OFFICIAL' ? 'brand' : 'neutral'}>
-                    {com.type}
-                  </Badge>
-                </div>
-                <h4 className="font-display font-bold text-base uppercase text-white leading-tight mb-2">
-                  {com.name}
-                </h4>
-                <p className="text-xs text-accent-text400 line-clamp-2 leading-relaxed">
-                  {com.description}
-                </p>
-              </div>
-
-              <div className="mt-5 pt-3 border-t border-line flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-xs text-accent-text400 font-mono">
-                  <Users className="w-3.5 h-3.5 text-brand-400" />
-                  {com.memberCount.toLocaleString('id-ID')} Member
-                </span>
-                <Link href={`/komunitas/${com.slug}`}>
-                  <Button size="sm" variant="secondary" chamfer={false}>
-                    Join
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. AI Recommendations Section */}
-      <AiRecommendationsSection />
-
-      {/* 6. EO Hub Banner & Styleguide Shortcut */}
-      <section className="max-w-7xl mx-auto w-full px-4 pb-16">
-        <div className="bg-dark-800 border border-line rounded-xl p-8 chamfer-card relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 max-w-xl">
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-brand-500" />
-              <span className="text-xs font-display font-bold uppercase tracking-widest text-brand-400">
-                Portal Event Organizer (EO)
-              </span>
-            </div>
-            <h3 className="font-display font-black text-2xl uppercase tracking-wide text-white">
-              Punya Komunitas atau Ingin Gelar Turnamen di Sumbar?
-            </h3>
-            <p className="text-xs text-accent-text400 leading-relaxed">
-              Dapatkan tools pendaftaran peserta, penyimpanan berkas event privat, dan builder bracket Single/Double Elimination custom dengan update skor real-time.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <Link href="/profil">
-              <Button variant="primary">Ajukan Akun EO</Button>
-            </Link>
-            <Link href="/styleguide">
-              <Button variant="outline" leftIcon={<Layers className="w-4 h-4" />}>
-                Review Styleguide
-              </Button>
-            </Link>
           </div>
         </div>
       </section>

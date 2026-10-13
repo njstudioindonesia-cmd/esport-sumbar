@@ -173,13 +173,14 @@ export default function KomunitasCatalogPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Link href="/admin/moderasi">
-            <Button variant="outline" size="sm" className="text-xs border-[var(--line)]">
-              🛡️ Antrean Moderasi AI
-            </Button>
-          </Link>
+          <a
+            href="http://localhost:3002/moderasi"
+            className="text-xs px-3 py-1.5 rounded border border-[#2A2A38] hover:border-[#F5B700] text-[#9A9AA5] hover:text-[#F5B700] transition-colors"
+          >
+            🛡️ Moderasi Admin Console →
+          </a>
           <Button
-            variant="primary"
+            variant="marawa"
             size="sm"
             onClick={() => setIsCreateOpen(true)}
             className="text-xs"
@@ -200,7 +201,7 @@ export default function KomunitasCatalogPage() {
                 onClick={() => setSelectedGame(g.value)}
                 className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors chamfer-cut-sm ${
                   selectedGame === g.value
-                    ? 'bg-[var(--red-500)] text-white'
+                    ? 'bg-[#F5B700] text-black font-black shadow-md shadow-[#F5B700]/20'
                     : 'bg-[var(--bg-700)] text-[var(--text-400)] hover:text-white'
                 }`}
               >

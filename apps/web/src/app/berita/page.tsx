@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { MOCK_ARTICLES } from '../../lib/mock-data';
 import { Card } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
-import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/form';
 import { useToast } from '../../components/ui/toast';
 import { Article } from '@esport-sumbar/contracts';
@@ -100,11 +99,12 @@ export default function BeritaPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link href="/admin/berita">
-            <Button variant="outline" size="sm" className="border-[var(--line)] hover:border-[var(--red-500)] text-xs">
-              Antrean Review Redaksi →
-            </Button>
-          </Link>
+          <a
+            href="http://localhost:3002/berita"
+            className="text-xs px-3 py-1.5 rounded border border-[#2A2A38] hover:border-[#F5B700] text-[#9A9AA5] hover:text-[#F5B700] transition-colors"
+          >
+            Review Redaksi Admin →
+          </a>
         </div>
       </div>
 
@@ -120,7 +120,7 @@ export default function BeritaPage() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors chamfer-cut-sm ${
                   selectedCategory === cat
-                    ? 'bg-[var(--red-500)] text-white'
+                    ? 'bg-[#F5B700] text-black font-black shadow-md shadow-[#F5B700]/20'
                     : 'bg-[var(--bg-700)] text-[var(--text-400)] hover:text-white hover:bg-[var(--line)]'
                 }`}
               >

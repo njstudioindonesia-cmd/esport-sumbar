@@ -366,7 +366,7 @@ export default function CommunityDetailPage() {
           {/* Action & Demo Role Switcher */}
           <div className="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end gap-3 shrink-0">
             <Button
-              variant={isJoined ? 'outline' : 'primary'}
+              variant={isJoined ? 'outline' : 'marawa'}
               onClick={handleToggleJoin}
               className="text-xs"
             >
@@ -383,7 +383,7 @@ export default function CommunityDetailPage() {
                   onClick={() => setMyRole(r)}
                   className={`px-2 py-1 text-[10px] font-bold uppercase transition-colors ${
                     myRole === r
-                      ? 'bg-[var(--red-500)] text-white'
+                      ? 'bg-[#F5B700] text-black font-black'
                       : 'text-[var(--text-400)] hover:text-white'
                   }`}
                 >
@@ -410,7 +410,7 @@ export default function CommunityDetailPage() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-5 py-3 text-xs font-extrabold uppercase tracking-wider transition-all ${
               activeTab === tab.id
-                ? 'bg-[var(--red-500)] text-white chamfer-cut-sm'
+                ? 'bg-[#F5B700] text-black font-black chamfer-btn shadow-md shadow-[#F5B700]/20'
                 : 'bg-[var(--bg-800)] text-[var(--text-400)] hover:text-white'
             }`}
           >

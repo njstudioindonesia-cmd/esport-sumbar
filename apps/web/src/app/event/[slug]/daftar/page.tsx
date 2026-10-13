@@ -252,9 +252,9 @@ export default function EventRegistrationPage() {
               <Link href={`/event/${event.slug}`}>
                 <Button variant="secondary">Kembali ke Halaman Event</Button>
               </Link>
-              <Link href={`/eo/event/${event.id}`}>
-                <Button variant="primary">Lihat di Manajemen Peserta EO</Button>
-              </Link>
+              <a href={`http://localhost:3001/event/${event.id}`} className="inline-flex">
+                <Button variant="marawa">Lihat di Manajemen Peserta EO →</Button>
+              </a>
             </div>
           </Card>
         </div>
@@ -263,22 +263,22 @@ export default function EventRegistrationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0B0D] text-[#F5F5F7] py-10 px-4 pb-20">
+    <div className="min-h-screen bg-[#08080A] text-[#F5F5F7] py-10 px-4 pb-20">
       <div className="max-w-4xl mx-auto">
         <Link
           href={`/event/${event.slug}`}
-          className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A9AA5] hover:text-white mb-6"
+          className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#9A9AA5] hover:text-[#F5B700] mb-6 transition-colors"
         >
-          <ArrowLeft className="w-4 h-4 text-[#E10600]" />
+          <ArrowLeft className="w-4 h-4 text-[#F5B700]" />
           Kembali ke Detail Event
         </Link>
 
         {/* Header */}
-        <Card chamfer className="p-6 mb-8 bg-gradient-to-r from-[#1A0D10] to-[#131316]">
+        <Card chamfer className="p-6 mb-8 bg-gradient-to-r from-[#140D04] via-[#121217] to-[#08080A] border-[#2A2A38]">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Badge variant="brand">FORMULIR PENDAFTARAN DINAMIS</Badge>
+                <Badge variant="marawa">FORMULIR PENDAFTARAN RESMI</Badge>
                 <Badge variant="outline">{event.gameId}</Badge>
               </div>
               <h1 className="font-display text-2xl md:text-3xl font-extrabold uppercase text-white">
@@ -290,7 +290,7 @@ export default function EventRegistrationPage() {
                   {event.registeredCount} / {form?.quota || event.quota} Tim
                 </strong>{' '}
                 · Biaya:{' '}
-                <strong className="text-[#F5A524] tabular-nums">
+                <strong className="text-[#F5B700] tabular-nums">
                   {form?.fee > 0
                     ? `Rp ${Number(form.fee).toLocaleString('id-ID')}`
                     : 'GRATIS'}
@@ -302,9 +302,9 @@ export default function EventRegistrationPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Section 1: Identitas Tim / Peserta & Kontingen Komunitas */}
-          <Card chamfer className="p-6 space-y-5">
+          <Card chamfer className="p-6 space-y-5 bg-[#121217] border-[#2A2A38]">
             <h2 className="font-display text-xl font-bold uppercase text-white flex items-center gap-2">
-              <Users className="w-5 h-5 text-[#E10600]" />
+              <Users className="w-5 h-5 text-[#F5B700]" />
               1. Identitas Pendaftar & Afiliasi Komunitas
             </h2>
 
@@ -321,8 +321,8 @@ export default function EventRegistrationPage() {
                       onClick={() => setParticipantType(type)}
                       className={`py-2.5 px-3 rounded border text-xs font-bold uppercase transition-colors ${
                         participantType === type
-                          ? 'bg-[#E10600] border-[#E10600] text-white'
-                          : 'bg-[#131316] border-[#2A2A31] text-[#9A9AA5]'
+                          ? 'bg-[#F5B700] border-[#F5B700] text-black font-black'
+                          : 'bg-[#181822] border-[#2A2A38] text-[#9A9AA5]'
                       }`}
                     >
                       {type === 'TEAM' ? 'Tim / Skuad' : 'Individu / Solo'}

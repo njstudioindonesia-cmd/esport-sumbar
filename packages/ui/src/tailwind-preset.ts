@@ -11,6 +11,7 @@ export const esportSumbarPreset = {
         border: colors.border,
         text: colors.text,
         feedback: colors.feedback,
+        marawa: colors.marawa,
         brand: {
           500: '#E10600',
           600: '#B80500',
