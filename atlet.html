@@ -226,38 +226,10 @@
         </button>
       </div>
 
-      <!-- Mobile Hamburger -->
-      <button onclick="toggleMobileNav()" class="lg:hidden w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap" aria-label="Toggle Navigation Menu">
-        <i data-lucide="menu" class="w-5 h-5"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobileNavMenu" class="hidden lg:hidden mt-2 p-3 bg-white/95 backdrop-blur-xl rounded-2xl border border-black/10 shadow-xl flex flex-col gap-1 transition-all">
-      <a href="/" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Beranda</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <a href="/#direktori" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Kartu Player</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <a href="/#wilayah" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Peta 19 Wilayah</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <a href="/atlet" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-crimson-800 text-paper flex items-center justify-between">
-        <span>Galeri Kartu Atlet</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-paper/70"></i>
-      </a>
-      <a href="/about" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Tentang Platform</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <div class="pt-2 border-t border-black/5">
-        <button onclick="toggleMobileNav(); openRegistrationModal();" class="w-full cut-corner-btn py-2.5 bg-gradient-to-r from-crimson-600 to-crimson-800 text-paper text-xs font-mono font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md">
-          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
-          <span>Buat Kartu Digital Resmi</span>
+      <!-- Mobile Header Actions (Clean, Non-Redundant, Native App Feel) -->
+      <div class="lg:hidden flex items-center gap-2">
+        <button onclick="document.getElementById('athleteSearchInput')?.focus()" class="w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap" title="Cari Atlet">
+          <i data-lucide="search" class="w-4 h-4"></i>
         </button>
       </div>
     </div>
@@ -273,8 +245,8 @@
           <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500 animate-spin" style="animation-duration: 6s;"></i>
           <span class="text-[11px] font-mono font-bold tracking-wider text-ink uppercase">SHOWCASE KARTU DIGITAL RESMI</span>
         </div>
-        <h1 class="font-display text-4xl sm:text-6xl text-ink tracking-tight uppercase leading-none">
-          GALERI KARTU ATLET & <br class="hidden sm:inline" />
+        <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight uppercase leading-none">
+          GALERI KARTU ATLET & <br />
           <span class="text-crimson-600">TALENTA SUMBAR</span>
         </h1>
         <p class="font-sans text-xs sm:text-sm text-ink/75 max-w-xl mt-2">

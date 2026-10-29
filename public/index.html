@@ -238,127 +238,80 @@
         </button>
       </div>
 
-      <!-- Mobile Hamburger -->
-      <button onclick="toggleMobileNav()" class="lg:hidden w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap" aria-label="Toggle Navigation Menu">
-        <i data-lucide="menu" class="w-5 h-5"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobileNavMenu" class="hidden lg:hidden mt-2 p-3 bg-white/95 backdrop-blur-xl rounded-2xl border border-black/10 shadow-xl flex flex-col gap-1 transition-all">
-      <a href="/" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-crimson-800 text-paper flex items-center justify-between">
-        <span>Beranda</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-paper/70"></i>
-      </a>
-      <a href="#direktori" onclick="toggleMobileNav()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Kartu Player</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <a href="#wilayah" onclick="toggleMobileNav()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Peta 19 Wilayah</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <a href="/atlet" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Galeri Atlet</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <a href="/about" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Tentang Platform & ESI</span>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
-      </a>
-      <div class="pt-2 border-t border-black/5">
-        <button onclick="toggleMobileNav(); openRegistrationModal();" class="w-full cut-corner-btn py-2.5 bg-gradient-to-r from-crimson-600 to-crimson-800 text-paper text-xs font-mono font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md">
-          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
-          <span>Buat Kartu Digital</span>
-        </button>
+      <!-- Mobile Header Actions (Clean, Non-Redundant, Native App Feel) -->
+      <div class="lg:hidden flex items-center gap-2">
+        <a href="#direktori" class="w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap" title="Cari Data Atlet & Player">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </a>
       </div>
     </div>
   </header>
 
   <!-- ============================================================== -->
-  <!-- 2. REGION STORIES AVATAR REEL (19 Wilayah)                      -->
+  <!-- 2. TACTICAL REGION SEGMENTED PILLS (19 Wilayah Sumbar)         -->
   <!-- ============================================================== -->
-  <div class="px-4 sm:px-6 lg:px-12 pt-3 max-w-7xl mx-auto">
-    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-      <button onclick="filterCategory('all')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-crimson-600 to-amber-500 shadow-sm">
-          <div class="w-full h-full rounded-full bg-crimson-800 flex items-center justify-center text-paper font-display text-xs tracking-wider">
-            ALL
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80 group-hover:text-crimson-600">Semua</span>
+  <div class="px-3 sm:px-6 lg:px-12 pt-3 pb-1 max-w-7xl mx-auto">
+    <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-1">
+      
+      <!-- Semua Wilayah -->
+      <button onclick="selectRegion('all')" id="region-pill-all" class="region-pill px-3.5 py-1.5 rounded-full bg-crimson-800 text-white font-mono text-[11px] sm:text-xs font-bold whitespace-nowrap shadow-md shadow-crimson-900/30 flex items-center gap-1.5 transition-all app-tap">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>Semua Wilayah (19)</span>
       </button>
 
-      <button onclick="selectRegion('Kota Padang')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            PDG
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Padang</span>
+      <!-- Kota Padang -->
+      <button onclick="selectRegion('Kota Padang')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Padang</span>
       </button>
 
-      <button onclick="selectRegion('Kota Bukittinggi')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            BKT
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Bukittinggi</span>
+      <!-- Kota Bukittinggi -->
+      <button onclick="selectRegion('Kota Bukittinggi')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Bukittinggi</span>
       </button>
 
-      <button onclick="selectRegion('Kota Payakumbuh')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            PYK
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Payakumbuh</span>
+      <!-- Kota Payakumbuh -->
+      <button onclick="selectRegion('Kota Payakumbuh')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Payakumbuh</span>
       </button>
 
-      <button onclick="selectRegion('Kota Solok')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            SLK
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Solok</span>
+      <!-- Kota Solok -->
+      <button onclick="selectRegion('Kota Solok')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Solok</span>
       </button>
 
-      <button onclick="selectRegion('Kota Pariaman')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            PRM
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Pariaman</span>
+      <!-- Kota Pariaman -->
+      <button onclick="selectRegion('Kota Pariaman')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Pariaman</span>
       </button>
 
-      <button onclick="selectRegion('Kab. Agam')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            AGM
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Agam</span>
+      <!-- Kab. Agam -->
+      <button onclick="selectRegion('Kab. Agam')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kab. Agam</span>
       </button>
 
-      <button onclick="selectRegion('Kab. Tanah Datar')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            TD
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Tanah Datar</span>
+      <!-- Kab. Tanah Datar -->
+      <button onclick="selectRegion('Kab. Tanah Datar')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kab. Tanah Datar</span>
       </button>
 
-      <button onclick="selectRegion('Kab. Pesisir Selatan')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
-        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
-          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
-            PESEL
-          </div>
-        </div>
-        <span class="text-[10px] font-medium text-ink/80">Pessel</span>
+      <!-- Kab. Pesisir Selatan -->
+      <button onclick="selectRegion('Kab. Pesisir Selatan')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kab. Pesisir Selatan</span>
+      </button>
+
+      <!-- Kab. Lima Puluh Kota -->
+      <button onclick="selectRegion('Kab. 50 Kota')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kab. 50 Kota</span>
+      </button>
+
+      <!-- Kota Padang Panjang -->
+      <button onclick="selectRegion('Kota Padang Panjang')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Padang Panjang</span>
+      </button>
+
+      <!-- Kota Sawahlunto -->
+      <button onclick="selectRegion('Kota Sawahlunto')" class="region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap">
+        <span>Kota Sawahlunto</span>
       </button>
     </div>
   </div>
@@ -382,33 +335,33 @@
           SUMATERA BARAT
         </h1>
 
-        <p class="font-sans text-xs sm:text-sm text-ink/75 max-w-xl mb-6 leading-relaxed">
-          Setiap player, atlet, dan penggiat yang terdaftar memiliki <strong class="text-ink font-bold">Kartu Digital Resmi</strong> berlisensi ESI. Desain depan putih elegan dengan data real-time, dan desain belakang merah prestisius khas Esport Sumbar. Ketuk atau sentuh kartu untuk memutar sisi kartu!
+        <p class="font-sans text-xs sm:text-sm text-ink/75 max-w-xl mb-3.5 sm:mb-6 leading-relaxed">
+          Pangkalan data resmi atlet & talenta esports 19 kabupaten/kota Sumatera Barat berlisensi ESI. Desain depan putih elegan, belakang merah prestisius. Ketuk kartu untuk memutar!
         </p>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap items-center gap-3">
-          <button onclick="openRegistrationModal()" class="cut-corner-btn px-6 py-3.5 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-lg shadow-crimson-900/30 flex items-center gap-2.5 app-tap">
-            <i data-lucide="badge-plus" class="w-4 h-4 text-amber-300"></i>
-            <span>Daftar & Terbitkan Kartu</span>
+        <!-- CTA Buttons (Responsive Native Mobile Layout) -->
+        <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-3 mb-3.5">
+          <button onclick="openRegistrationModal()" class="cut-corner-btn px-2 sm:px-6 py-2.5 sm:py-3.5 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-lg shadow-crimson-900/30 flex items-center justify-center gap-1.5 app-tap">
+            <i data-lucide="badge-plus" class="w-4 h-4 text-amber-300 flex-shrink-0"></i>
+            <span>Daftar</span>
           </button>
           
-          <a href="#direktori" class="cut-corner-btn px-5 py-3.5 bg-white hover:bg-black/5 text-ink border border-black/15 font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 app-tap">
-            <i data-lucide="layers" class="w-4 h-4 text-crimson-600"></i>
-            <span>Jelajahi Galeri Kartu</span>
+          <a href="#direktori" class="cut-corner-btn px-2 sm:px-5 py-2.5 sm:py-3.5 bg-white hover:bg-black/5 text-ink border border-black/15 font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 app-tap">
+            <i data-lucide="layers" class="w-4 h-4 text-crimson-600 flex-shrink-0"></i>
+            <span>Galeri</span>
           </a>
         </div>
 
-        <!-- Technical Badges -->
-        <div class="flex items-center gap-4 mt-6 text-[11px] font-mono text-ink/70">
-          <span class="flex items-center gap-1.5 font-semibold text-crimson-600">
-            <i data-lucide="rotate-3d" class="w-4 h-4"></i> 3D Gyroscope Tilt
+        <!-- Technical Telemetry Badges (Compact HUD Styling) -->
+        <div class="flex flex-wrap items-center gap-2.5 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-ink/70">
+          <span class="px-2.5 py-1 rounded-lg bg-black/5 border border-black/10 flex items-center gap-1.5 font-semibold text-crimson-600">
+            <i data-lucide="rotate-3d" class="w-3.5 h-3.5"></i> 3D Gyroscope
           </span>
-          <span class="flex items-center gap-1.5 font-semibold text-amber-600">
-            <i data-lucide="sparkles" class="w-4 h-4"></i> Holographic Prismatic Sheen
+          <span class="px-2.5 py-1 rounded-lg bg-black/5 border border-black/10 flex items-center gap-1.5 font-semibold text-amber-600">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Holographic Foil
           </span>
-          <span class="hidden sm:flex items-center gap-1.5 font-semibold text-sky-600">
-            <i data-lucide="repeat" class="w-4 h-4"></i> 2-Sided White & Red
+          <span class="px-2.5 py-1 rounded-lg bg-black/5 border border-black/10 flex items-center gap-1.5 font-semibold text-sky-600">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Lisensi ESI
           </span>
         </div>
       </div>
@@ -1455,13 +1408,51 @@
     };
 
     function selectRegion(name) {
+      // Highlight active region pill
+      document.querySelectorAll('.region-pill').forEach(pill => {
+        pill.className = "region-pill px-3.5 py-1.5 rounded-full bg-white/95 border border-black/10 text-ink/80 hover:text-crimson-600 hover:border-crimson-600/40 font-mono text-[11px] sm:text-xs font-semibold whitespace-nowrap shadow-sm flex items-center gap-1.5 transition-all app-tap";
+      });
+
+      if (name === 'all') {
+        const allPill = document.getElementById('region-pill-all');
+        if (allPill) {
+          allPill.className = "region-pill px-3.5 py-1.5 rounded-full bg-crimson-800 text-white font-mono text-[11px] sm:text-xs font-bold whitespace-nowrap shadow-md shadow-crimson-900/30 flex items-center gap-1.5 transition-all app-tap";
+        }
+        const select = document.getElementById("regionFilterSelect");
+        if (select) {
+          select.value = "all";
+          handleDirectorySearch();
+        }
+        return;
+      }
+
+      // Highlight selected pill
+      document.querySelectorAll('.region-pill').forEach(pill => {
+        if (pill.innerText.trim().toLowerCase().includes(name.toLowerCase())) {
+          pill.className = "region-pill px-3.5 py-1.5 rounded-full bg-crimson-800 text-white font-mono text-[11px] sm:text-xs font-bold whitespace-nowrap shadow-md shadow-crimson-900/30 flex items-center gap-1.5 transition-all app-tap";
+        }
+      });
+
       const data = regionInfoData[name] || { desc: "Kabupaten/Kota aktif dalam ekosistem pendataan terpadu Esport Sumbar.", penggiat: "1.100", atlet: "540", klub: "25", venue: "6" };
-      document.getElementById("inspectorRegionName").innerText = name;
-      document.getElementById("inspectorRegionDesc").innerText = data.desc;
-      document.getElementById("inspectorStatPenggiat").innerText = data.penggiat;
-      document.getElementById("inspectorStatAtlet").innerText = data.atlet;
-      document.getElementById("inspectorStatKlub").innerText = data.klub;
-      document.getElementById("inspectorStatVenue").innerText = data.venue;
+      const inspectorName = document.getElementById("inspectorRegionName");
+      if (inspectorName) inspectorName.innerText = name;
+      const inspectorDesc = document.getElementById("inspectorRegionDesc");
+      if (inspectorDesc) inspectorDesc.innerText = data.desc;
+      const pEl = document.getElementById("inspectorStatPenggiat");
+      if (pEl) pEl.innerText = data.penggiat;
+      const aEl = document.getElementById("inspectorStatAtlet");
+      if (aEl) aEl.innerText = data.atlet;
+      const kEl = document.getElementById("inspectorStatKlub");
+      if (kEl) kEl.innerText = data.klub;
+      const vEl = document.getElementById("inspectorStatVenue");
+      if (vEl) vEl.innerText = data.venue;
+
+      // Automatically filter directory table & cards
+      const select = document.getElementById("regionFilterSelect");
+      if (select) {
+        select.value = name;
+        handleDirectorySearch();
+      }
     }
 
     function filterBySelectedRegion() {
