@@ -48,9 +48,36 @@
     ::-webkit-scrollbar-track { background: #080b12; }
     ::-webkit-scrollbar-thumb { background: #1c2438; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #2e3a59; }
+
+    /* ========================================================== */
+    /* NATIVE MOBILE APP UX ENHANCEMENTS                          */
+    /* ========================================================== */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .safe-bottom {
+      padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+    }
+    
+    .app-tap {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .app-tap:active {
+      transform: scale(0.93);
+      opacity: 0.82;
+    }
+
+    @keyframes slideUpSheet {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .animate-slide-up {
+      animation: slideUpSheet 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   </style>
 </head>
-<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white min-h-screen">
+<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white min-h-screen pb-28 md:pb-0">
 
     <!-- FLOATING MODERN TOP BAR -->
   <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6 transition-all">
@@ -104,7 +131,11 @@
         
 
         <!-- Mobile Menu Toggle Button -->
-        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+        <!-- Mobile App Quick Actions -->
+        <a href="/" class="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 flex items-center justify-center app-tap" title="Beranda">
+          <i data-lucide="home" class="w-4 h-4"></i>
+        </a>
+        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors app-tap">
           <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
 
@@ -544,5 +575,56 @@
 
     lucide.createIcons();
   </script>
+
+  <!-- ============================================== -->
+  <!-- NATIVE MOBILE APP DOCK (FIXED BOTTOM NAVIGATION) -->
+  <!-- ============================================== -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-[#070b14]/94 backdrop-blur-2xl border-t border-white/[0.08] px-3 pt-2.5 pb-5 safe-bottom shadow-[0_-8px_32px_rgba(0,0,0,0.85)]">
+    <div class="max-w-md mx-auto grid grid-cols-5 gap-1 items-center">
+      
+      <!-- Tab 1: Beranda -->
+      <a href="/" class="app-tap flex flex-col items-center justify-center py-1 group text-slate-400 hover:text-white">
+        <div class="relative w-9 h-7 flex items-center justify-center rounded-xl text-slate-400 group-hover:text-rose-400 transition-all">
+          <i data-lucide="home" class="w-4 h-4"></i>
+        </div>
+        <span class="text-[10px] font-medium text-slate-400 tracking-tight mt-1">Beranda</span>
+      </a>
+
+      <!-- Tab 2: Peta 19 Wilayah -->
+      <a href="/#peta-wilayah" class="app-tap flex flex-col items-center justify-center py-1 text-slate-400 hover:text-white font-medium group">
+        <div class="relative w-9 h-7 flex items-center justify-center rounded-xl text-slate-400 group-hover:text-cyan-400 transition-colors">
+          <i data-lucide="compass" class="w-4 h-4"></i>
+        </div>
+        <span class="text-[10px] font-medium tracking-tight mt-1 text-slate-400">Peta 19</span>
+      </a>
+
+      <!-- Tab 3: Divisi Game (Elevated Center Action) -->
+      <a href="/#divisi" class="app-tap flex flex-col items-center justify-center -mt-3.5 group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 via-rose-500 to-amber-500 text-white shadow-lg shadow-rose-600/50 border-2 border-[#070b14] flex items-center justify-center group-active:scale-95 transition-transform">
+          <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+        </div>
+        <span class="text-[10px] font-bold text-amber-400 tracking-tight mt-0.5">Divisi</span>
+      </a>
+
+      <!-- Tab 4: Direktori Atlet -->
+      <a href="/atlet" class="app-tap flex flex-col items-center justify-center py-1 group text-slate-400 hover:text-white">
+        <div class="relative w-9 h-7 flex items-center justify-center rounded-xl text-slate-400 group-hover:text-rose-400 transition-all">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span class="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+        </div>
+        <span class="text-[10px] font-medium text-slate-400 tracking-tight mt-1">Atlet</span>
+      </a>
+
+      <!-- Tab 5: Profil PBESI -->
+      <a href="/about" class="app-tap flex flex-col items-center justify-center py-1 group text-rose-500">
+        <div class="relative w-9 h-7 flex items-center justify-center rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-500 shadow-sm transition-all">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+        </div>
+        <span class="text-[10px] font-bold text-rose-400 tracking-tight mt-1">PBESI</span>
+      </a>
+
+    </div>
+  </nav>
+
 </body>
 </html>
