@@ -1,748 +1,477 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tentang Kami — Pengprov Esports Indonesia (ESI) Sumatera Barat</title>
-  <meta name="description" content="Profil, filosofi pembinaan, struktur organisasi, dan visi misi Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Tentang Kami – ESPORT SUMBAR (Partner Resmi ESI Sumbar)</title>
+  <meta name="description" content="Profil platform Provider Esport Sumatera Barat dan kolaborasi strategis dengan Pengprov ESI Sumbar untuk memajukan ekosistem olahraga elektronik di 19 kabupaten dan kota." />
 
-  <!-- Tailwind CSS -->
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            heading: ['"Outfit"', 'sans-serif'],
-          },
           colors: {
-            brand: {
-              navy: '#080b12',
-              surface: '#121c30',
-              card: '#18253f',
-              cardHover: '#1f2f4f',
-              line: 'rgba(255, 255, 255, 0.08)',
-              lineHover: 'rgba(255, 255, 255, 0.18)',
-              rose: '#e11d48',
-              amber: '#f59e0b',
-              cyan: '#06b6d4',
-              emerald: '#10b981',
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              600: "#B3121B",
+              800: "#7A0B12",
+              900: "#50060B",
             }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
           }
         }
       }
-    }
+    };
   </script>
 
-  <style>
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #080b12; }
-    ::-webkit-scrollbar-thumb { background: #1c2438; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #2e3a59; }
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-    /* ========================================================== */
-    /* NATIVE MOBILE APP UX ENHANCEMENTS                          */
-    /* ========================================================== */
+  <!-- Favicon & Brand Icons: ESPORT SUMBAR -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+  <meta property="og:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
+  <meta name="twitter:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
+
+  <style>
+    /* Chamfered (Cut) Corners */
+    .cut-corner-hero {
+      clip-path: polygon(36px 0%, 100% 0%, 100% calc(100% - 36px), calc(100% - 36px) 100%, 0% 100%, 0% 36px);
+    }
+    .cut-corner-banner {
+      clip-path: polygon(40px 0%, 100% 0%, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0% 100%, 0% 40px);
+    }
+    .cut-corner-card {
+      clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0% calc(100% - 14px), 0% 14px);
+    }
+    .cut-corner-btn {
+      clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+    }
+    .cut-corner-sm {
+      clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
+    }
+
+    .bg-crimson-gradient {
+      background: linear-gradient(135deg, #B3121B 0%, #7A0B12 100%);
+    }
+    .bg-smoke-overlay {
+      background-image: 
+        radial-gradient(circle at 75% 30%, rgba(224, 34, 45, 0.45) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(122, 11, 18, 0.6) 0%, transparent 60%);
+    }
+
+    /* Ghost title motion-blur duplicate effect */
+    .ghost-title-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .ghost-title-blur {
+      position: absolute;
+      inset: 0;
+      filter: blur(8px);
+      opacity: 0.35;
+      transform: translateX(4px) skewX(-6deg);
+      user-select: none;
+      pointer-events: none;
+    }
+
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    .safe-bottom {
-      padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
-    }
-    
-    .app-tap {
-      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .app-tap:active {
-      transform: scale(0.93);
-      opacity: 0.82;
-    }
-
-    @keyframes slideUpSheet {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-    .animate-slide-up {
-      animation: slideUpSheet 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    /* ========================================================== */
-    /* MASTER NATIVE MOBILE APP UX STYLES                         */
-    /* ========================================================== */
-    html, body {
-      overflow-x: hidden !important;
-      max-width: 100vw !important;
-      width: 100% !important;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    .no-scrollbar::-webkit-scrollbar { display: none !important; }
-    .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-    
-    .safe-bottom {
-      padding-bottom: max(1.25rem, env(safe-area-inset-bottom)) !important;
-    }
-    
-    .app-tap {
-      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    .app-tap:active {
-      transform: scale(0.93) !important;
-      opacity: 0.82 !important;
-    }
-
-    @keyframes slideUpSheet {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-    .animate-slide-up {
-      animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
   </style>
-    <!-- Favicon & Brand Icons: ESPORT SUMBAR -->
-    <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
-    <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
-    <meta property="og:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
-    <meta name="twitter:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
-  </head>
-<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white min-h-screen pb-28 md:pb-0">
+</head>
 
-    <!-- FLOATING MODERN TOP BAR -->
-  
+<body class="bg-[#D9D9DB] text-[#0B0B0C] font-sans antialiased min-h-screen selection:bg-[#B3121B] selection:text-white pb-24 md:pb-0">
+
   <!-- ============================================== -->
-  <!-- NATIVE MOBILE APP TOP BAR & DESKTOP NAVBAR    -->
+  <!-- 1. TOP NAVBAR                                  -->
   <!-- ============================================== -->
-  <header class="fixed top-0 md:top-4 inset-x-0 z-50 px-0 md:px-6 transition-all">
-    <div class="max-w-7xl mx-auto md:rounded-2xl bg-[#070b14]/95 md:bg-[#0b0f19]/85 backdrop-blur-xl border-b md:border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-6 h-14 md:h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 px-3 sm:px-6 lg:px-12 pt-3 sm:pt-4 transition-all">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.06)] px-4 sm:px-6 h-16 flex items-center justify-between">
       
-      <!-- Brand Logo & Official PBESI Emblem -->
-      <a href="/" class="flex items-center gap-2.5 group">
-        <div class="h-8 md:h-9 w-auto flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-          <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(255,27,81,0.5)]" />
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="h-9 w-auto flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="h-9 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(179,18,27,0.4)]" />
         </div>
         <div>
-          <span class="font-heading font-extrabold text-sm md:text-lg tracking-tight text-white flex items-center gap-1.5 leading-none">
-            ESPORT <span class="text-rose-500">SUMBAR</span>
+          <span class="font-display text-xl sm:text-2xl tracking-wide text-ink flex items-center gap-1.5 leading-none">
+            ESPORT <span class="text-crimson-600">SUMBAR</span>
           </span>
-          <span class="text-[8.5px] md:text-[10px] text-slate-400 block font-mono uppercase tracking-wider mt-0.5">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse"></span>PBESI Pengprov
+          <span class="text-[9px] sm:text-[10px] text-ink/60 block font-mono font-bold uppercase tracking-wider mt-0.5">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>Partner Resmi ESI Sumbar
           </span>
         </div>
       </a>
 
-      <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center p-1 rounded-xl bg-black/40 border border-white/5">
-        <a href="/" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
-          
+      <!-- Desktop Nav Pills -->
+      <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-black/5 border border-black/5">
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
           <span>Beranda</span>
         </a>
-        <a href="/about" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-semibold bg-white/[0.1] text-white shadow-sm border border-white/10">
-          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-          <span>Tentang Kami</span>
+        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
+          <span>Direktori 7 Pilar</span>
         </a>
-        <a href="/atlet" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
-          
-          <span>Direktori Atlet</span>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold">8.4K</span>
+        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
+          <span>Database Atlet</span>
+        </a>
+        <a href="/about" class="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-crimson-800 text-paper shadow-sm">
+          <span>Tentang Kami</span>
         </a>
       </nav>
 
-      <!-- Right Action Area -->
+      <!-- Right Action: Open Self-Registration Modal -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Live Verified Badge (Desktop) -->
-        <div class="hidden lg:flex items-center gap-2 text-xs text-slate-300 bg-brand-surface border border-brand-line px-3 py-1.5 rounded-xl">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="font-mono text-[11px] text-slate-300"><strong>14.852</strong> Penggiat</span>
-        </div>
-
-        <!-- Quick Route Button to /atlet (Desktop) -->
-        <a href="/atlet" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs transition-all shadow-md shadow-rose-600/30 hover:scale-[1.02]">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <span>Cari Atlet</span>
+        <a href="/#direktori" class="cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md flex items-center gap-2">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span>Cari di Database</span>
         </a>
 
-        <!-- Mobile Quick Search -->
-        <a href="/atlet" class="md:hidden w-8 h-8 rounded-xl bg-rose-600/15 border border-rose-500/30 text-rose-400 flex items-center justify-center app-tap" title="Cari Atlet">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </a>
-
-        <!-- Mobile Menu Toggle Button -->
-        <button onclick="toggleMobileNav()" class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors app-tap" aria-label="Toggle Menu">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <button onclick="toggleMobileNav()" class="md:hidden w-10 h-10 rounded-xl bg-black/5 hover:bg-black/10 text-ink flex items-center justify-center transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
 
     </div>
 
-    <!-- Mobile Drawer Menu (Slide-Down Glass Panel) -->
-    <div id="mobileNavMenu" class="md:hidden hidden mx-2 mt-2 rounded-2xl bg-[#0b0f19]/96 backdrop-blur-2xl border border-white/[0.1] shadow-2xl p-4 space-y-2">
-      <div class="pb-2 border-b border-white/10 mb-2 flex items-center justify-between">
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileNavMenu" class="md:hidden hidden mx-2 mt-2 rounded-2xl bg-white/98 backdrop-blur-2xl border border-black/10 shadow-2xl p-4 space-y-2">
+      <div class="pb-2 border-b border-black/10 mb-2 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-5 h-5 object-contain drop-shadow-[0_2px_6px_rgba(255,27,81,0.5)]" />
-          <span class="font-heading font-bold text-xs text-white">ESPORT <span class="text-rose-500">SUMBAR</span></span>
+          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-6 h-6 object-contain" />
+          <span class="font-display text-lg text-ink">ESPORT <span class="text-crimson-600">SUMBAR</span></span>
         </div>
-        <span class="text-[10px] font-mono text-emerald-400">● PBESI Terverifikasi</span>
+        <span class="text-[10px] font-mono text-emerald-600 font-bold">● Partner Resmi ESI</span>
       </div>
-      <a href="/" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-white hover:bg-white/5 text-xs app-tap">
-        <span class="flex items-center gap-2">🏠 Beranda Portal</span>
-        <span>→</span>
+      <a href="/" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+        <span>Beranda</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
       </a>
-      <a href="/about" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-rose-600/20 text-rose-300 border border-rose-500/30 font-semibold text-xs app-tap">
-        <span class="flex items-center gap-2">🛡️ Tentang Kami (Profil PBESI)</span>
-        <span>→</span>
+      <a href="/#direktori" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+        <span>Direktori 7 Pilar</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
       </a>
-      <a href="/atlet" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-200 hover:bg-white/5 text-xs app-tap">
-        <span class="flex items-center gap-2">
-          <span>👥 Direktori Atlet Binaan</span>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">8.4K</span>
-        </span>
-        <span>→</span>
+      <a href="/atlet" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+        <span>Database Atlet (8.4K)</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
       </a>
-      <div class="pt-2 border-t border-white/10 mt-2">
-        <a href="/#peta-wilayah" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-slate-400 hover:text-white text-xs app-tap">
-          <span>📍 Peta Sebaran 19 Daerah</span>
-        </a>
-        <a href="/#divisi" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-slate-400 hover:text-white text-xs app-tap">
-          <span>🎮 6 Divisi Game Resmi</span>
-        </a>
-      </div>
+      <a href="/about" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-crimson-800 text-paper font-semibold text-xs">
+        <span>Tentang & Kemitraan ESI</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </a>
     </div>
   </header>
-  
 
-  <main class="pt-20">
+  <!-- ============================================== -->
+  <!-- 2. HERO BANNER: TENTANG KAMI                   -->
+  <!-- ============================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16">
     
-    <!-- PAGE HERO: TENTANG KAMI -->
-    <section class="py-16 sm:py-24 border-b border-white/10 relative overflow-hidden">
-      <!-- Section Background Image -->
-      <div class="absolute inset-0 z-0">
-        <img 
-          src="/images/arena-stage-lights.jpg" 
-          alt="Esports Arena Lights" 
-          class="w-full h-full object-cover object-center opacity-25 filter contrast-85 brightness-90"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0b1328]/92 via-[#0e1933]/85 to-[#0b1328]/92"></div>
-      </div>
-      <div class="absolute -top-40 right-1/4 w-[600px] h-[600px] bg-rose-600/5 blur-[140px] pointer-events-none rounded-full"></div>
+    <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-6 sm:p-10 lg:p-16 border border-crimson-400/40 shadow-2xl overflow-hidden mb-12 text-paper">
       
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div class="max-w-3xl">
-          <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-3 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
-            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-            <span>Profil Resmi Organisasi</span>
-          </div>
-          <h1 class="font-heading text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-            Membangun Ekosistem Esports yang Berintegritas & Berprestasi
+      <div class="max-w-3xl relative z-10 space-y-4">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/20 text-xs font-mono font-bold tracking-wider">
+          <i data-lucide="info" class="w-3.5 h-3.5 text-crimson-400"></i>
+          <span>PROFIL EKOSISTEM & KEMITRAAN RESMI</span>
+        </div>
+
+        <div class="ghost-title-wrap select-none">
+          <span class="ghost-title-blur font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight text-black/50">
+            TENTANG KAMI
+          </span>
+          <h1 class="relative font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.88] transform -skew-x-6 text-paper">
+            TENTANG KAMI & MISI KAMI
           </h1>
-          <p class="mt-4 text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat adalah induk organisasi cabang olahraga elektronik resmi di bawah naungan PBESI dan KONI Sumbar, menaungi 19 Pengurus Cabang Kabupaten dan Kota.
-          </p>
         </div>
 
-        <!-- 3 Macro Pillars -->
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface shadow-xl">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
-              <i data-lucide="compass" class="w-5 h-5"></i>
+        <p class="font-sans text-xs sm:text-sm text-paper/85 leading-relaxed max-w-2xl font-medium">
+          <strong>ESPORT SUMBAR</strong> adalah platform penyedia teknologi, pangkalan data, dan sistem penjaringan esports independen di Sumatera Barat. Kami berkolaborasi erat dengan <strong>Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat</strong> untuk memastikan standardisasi kompetisi, akreditasi wasit, dan pembinaan atlet berjenjang.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a href="#sinergi" class="cut-corner-btn px-6 py-3 bg-paper text-ink hover:text-crimson-800 font-display text-xs sm:text-sm tracking-wider shadow-lg flex items-center gap-2">
+            <span>Lihat Sinergi Dua Pilar</span>
+            <i data-lucide="arrow-down" class="w-4 h-4"></i>
+          </a>
+          <a href="/atlet" class="cut-corner-btn px-6 py-3 bg-black/40 hover:bg-black/60 text-paper border border-white/20 font-display text-xs sm:text-sm tracking-wider flex items-center gap-2">
+            <span>Buka Direktori Atlet</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- 3. SINERGI DUA PILAR: PROVIDER x INDUK ESI    -->
+    <!-- ============================================== -->
+    <section id="sinergi" class="mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold text-crimson-600 uppercase tracking-widest block mb-1">
+          Sinergi Dua Pilar Ekosistem
+        </span>
+        <h2 class="font-display text-4xl sm:text-5xl text-ink uppercase tracking-tight">
+          Harmoni Provider Digital & Induk Olahraga
+        </h2>
+        <p class="font-sans text-xs sm:text-sm text-ink/70 mt-1">
+          Memadukan kebebasan teknologi mesin pencari dengan otoritas regulasi resmi keolahragaan nasional.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        
+        <!-- Card 1: ESPORT SUMBAR (Platform Provider) -->
+        <div class="cut-corner-card bg-white p-6 sm:p-8 border-2 border-crimson-600 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="h-14 w-auto flex items-center mb-4">
+              <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar Logo" class="h-12 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(179,18,27,0.4)]" />
             </div>
-            <h3 class="font-heading font-bold text-lg text-white">19 Pengcab Mandiri</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Struktur pembinaan terdesentralisasi dari Padang, Bukittinggi, hingga Kepulauan Mentawai untuk menjaring talenta nagari.
+            <span class="text-[10px] font-mono text-crimson-600 uppercase tracking-widest font-bold block mb-1">
+              PLATFORM PROVIDER & ENGINE
+            </span>
+            <h3 class="font-display text-3xl text-ink uppercase tracking-tight">
+              ESPORT SUMBAR
+            </h3>
+            <p class="font-sans text-xs text-ink/75 mt-3 leading-relaxed">
+              Bertindak sebagai mesin pencari independen, direktori real-time 7 pilar, penyedia pendaftaran mandiri (talent scouting), pemetaan geolokasi 19 wilayah, dan promotor turnamen akar rumput di Ranah Minang.
             </p>
+
+            <ul class="mt-5 space-y-2 text-xs text-ink/80 font-medium">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-crimson-600 shrink-0"></i>
+                <span>Mesin pencari terpadu 7 pilar (atlet, tim, venue, kampus, dll.)</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-crimson-600 shrink-0"></i>
+                <span>Sistem pendaftaran mandiri player LFT & scouting tim</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-crimson-600 shrink-0"></i>
+                <span>Portal informasi kompetisi, scrim, dan event komunitas nagari</span>
+              </li>
+            </ul>
           </div>
 
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface shadow-xl">
-            <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center mb-4">
-              <i data-lucide="shield-check" class="w-5 h-5"></i>
-            </div>
-            <h3 class="font-heading font-bold text-lg text-white">Standar PBESI Nasional</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Standardisasi regulasi turnamen, sertifikasi wasit resmi, sistem lisensi pemain, dan protokol fairplay anti-cheat terpadu.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface shadow-xl">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4">
-              <i data-lucide="trophy" class="w-5 h-5"></i>
-            </div>
-            <h3 class="font-heading font-bold text-lg text-white">Jalur Porprov & PON</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Pemusatan latihan daerah (Pelatda) berkesinambungan untuk menyiapkan atlet berprestasi di panggung kompetisi multievent nasional.
-            </p>
+          <div class="mt-6 pt-4 border-t border-black/10 flex items-center justify-between text-xs font-mono font-bold text-crimson-600">
+            <span>STATUS: PLATFORM DIGITAL INDEPENDEN</span>
+            <span>esport-sumbar.vercel.app</span>
           </div>
         </div>
+
+        <!-- Card 2: PENGPROV ESI SUMATERA BARAT (Induk Olahraga) -->
+        <div class="cut-corner-card bg-white p-6 sm:p-8 border border-black/10 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="h-14 w-auto flex items-center mb-4">
+              <img src="/pbesi-logo.png" alt="PBESI Logo" class="h-12 w-auto object-contain" />
+            </div>
+            <span class="text-[10px] font-mono text-emerald-600 uppercase tracking-widest font-bold block mb-1">
+              INDUK ORGANISASI CABANG OLAHRAGA
+            </span>
+            <h3 class="font-display text-3xl text-ink uppercase tracking-tight">
+              PENGPROV ESI SUMATERA BARAT
+            </h3>
+            <p class="font-sans text-xs text-ink/75 mt-3 leading-relaxed">
+              Pengurus Provinsi Esports Indonesia (ESI) di bawah KONI Sumatera Barat & PBESI Nasional. Memegang otoritas hukum keolahragaan prestasi, standardisasi turnamen, sertifikasi wasit, dan pemusatan latihan daerah (Pelatda PON).
+            </p>
+
+            <ul class="mt-5 space-y-2 text-xs text-ink/80 font-medium">
+              <li class="flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Penerbitan lisensi resmi atlet dan wasit berstandar PBESI</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Seleksi atlet kontingen Sumatera Barat menuju PON XXI / Kejurda</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>Koordinasi 19 Pengurus Cabang (Pengcab) Kabupaten & Kota</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-black/10 flex items-center justify-between text-xs font-mono font-bold text-emerald-600">
+            <span>STATUS: INDUK RESMI TERAKREDITASI PBESI</span>
+            <span>19 Pengcab Terdaftar</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SECTION: FILOSOFI & PEMBINAAN -->
-        <!-- SECTION: FILOSOFI PEMBINAAN & KEARIFAN SILEK MINANG (BESPOKE EDITORIAL MINIMALIST) -->
-    <section id="filosofi" class="py-20 lg:py-28 border-b border-white/10 relative overflow-hidden">
-      <!-- Section Background Image (Esports Athletes In Competition, Soft Contrast) -->
-      <div class="absolute inset-0 z-0">
-        <img 
-          src="/images/arena-iem-katowice.jpg" 
-          alt="Esports Athletes Strategy Focus" 
-          class="w-full h-full object-cover object-center opacity-22 filter contrast-85 brightness-90"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0a1122]/95 via-[#0d172e]/90 to-[#0a1122]/95"></div>
-      </div>
-      
-      <!-- Subtle ambient aura -->
-      <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-rose-600/5 blur-[160px] pointer-events-none rounded-full"></div>
 
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <!-- ============================================== -->
+    <!-- 4. FILOSOFI MINANGKABAU DALAM ESPORTS          -->
+    <!-- ============================================== -->
+    <section class="mb-16">
+      <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-6 sm:p-10 lg:p-12 border border-crimson-400/40 shadow-2xl text-paper">
         
-        <!-- Editorial Header: Bold, Poetic, Human -->
-        <div class="max-w-3xl mb-12 lg:mb-16">
-          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-rose-500 mb-3 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
-            <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
-            <span>Filosofi & Nilai Pembinaan</span>
-          </div>
-
-          <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
-            "Lahir Silek Mancari Kawan, <br class="hidden sm:inline" />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-rose-500 to-amber-400">Batin Silek Menjaga Kehormatan.</span>"
+        <div class="max-w-3xl mb-8 space-y-2">
+          <span class="text-xs font-mono text-paper/70 font-bold uppercase tracking-widest block">
+            NILAI & FILOSOFI PEMBINAAN
+          </span>
+          <h2 class="font-display text-4xl sm:text-5xl uppercase tracking-tight text-paper">
+            "Lahir Silek Mancari Kawan, Batin Silek Menjaga Kehormatan."
           </h2>
-
-          <p class="text-slate-300 text-base sm:text-lg mt-5 leading-relaxed font-light">
-            Di panggung olahraga elektronik modern, ketangkasan leluhur Minangkabau diwariskan bukan sebagai bela diri fisik, melainkan ketajaman insting membaca pergerakan lawan, ketenangan batin di bawah tekanan turnamen, dan integritas sportivitas tanpa cela.
+          <p class="font-sans text-xs sm:text-sm text-paper/85 leading-relaxed">
+            Di panggung olahraga elektronik modern, ketangkasan leluhur Minangkabau diwariskan bukan sebagai bela diri fisik, melainkan ketajaman insting membaca strategi, ketenangan mental di bawah tekanan, dan integritas sportivitas tanpa cela.
           </p>
         </div>
 
-        <!-- Cinematic Widescreen Visual (Tournament Intensity Stage) -->
-        <div class="w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl group bg-[#090d16]">
-          <img 
-            src="/images/arena-ti-stage.jpg" 
-            alt="Esports Arena Tournament Intensity Sumatera Barat" 
-            class="w-full h-full object-cover object-center filter brightness-90 contrast-105 group-hover:scale-105 transition-transform duration-1000 ease-out"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#060911] via-[#060911]/30 to-transparent"></div>
-          
-          <!-- Bottom Manifesto Overlay -->
-          <div class="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-black/65 border border-white/10 backdrop-blur-md">
-            <div class="max-w-xl">
-              <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-semibold block mb-1">
-                PRINSIP ARENA PBESI SUMATERA BARAT
-              </span>
-              <p class="text-sm sm:text-base text-white font-medium italic leading-snug">
-                "Kemenangan sejati di arena bukan sekadar meruntuhkan markas lawan, melainkan menjaga martabat, kejujuran taktis, dan solidaritas Ranah Minang di setiap kompetisi."
-              </p>
-            </div>
-            <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-2 rounded-xl border border-emerald-500/20 shrink-0 self-start sm:self-end">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>Pusat Pelatda GOR H. Agus Salim</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 Clean Editorial Columns (No boxy repetitive cards - pure minimalist typography) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 pt-12 mt-12 border-t border-white/10">
-          
-          <!-- Column 01 -->
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-xs font-bold text-rose-500 uppercase tracking-widest">01 / KETANGKASAN MIKRO</span>
-              <div class="h-px flex-1 bg-white/10"></div>
-            </div>
-            <h3 class="font-heading font-extrabold text-xl text-white tracking-tight">
-              Kilek Taktis & Bakat Dini
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
-              Menjaring dan membina talenta usia muda di 19 kabupaten dan kota melalui kompetisi pelajar terstruktur, melatih refleks milidetik serta intuisi pembacaan tempo pertandingan.
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="cut-corner-card bg-paper p-5 text-ink shadow-lg">
+            <span class="font-display text-xl text-crimson-600 font-bold block mb-1">01 Kilek Taktis</span>
+            <p class="font-sans text-xs text-ink/75 leading-relaxed">
+              Menjaring dan melatih reflek milidetik serta kemampuan membaca tempo permainan lawan secara presisi.
             </p>
           </div>
-
-          <!-- Column 02 -->
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">02 / KETAHANAN BATIN</span>
-              <div class="h-px flex-1 bg-white/10"></div>
-            </div>
-            <h3 class="font-heading font-extrabold text-xl text-white tracking-tight">
-              Integritas Regulasi PBESI
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
-              Penegakan fairplay tanpa kompromi, sistem sertifikasi wasit berlisensi, dan pengawasan anti-cheat ketat guna membentuk atlet dengan kedisiplinan dan ketenangan mental juara.
+          <div class="cut-corner-card bg-paper p-5 text-ink shadow-lg">
+            <span class="font-display text-xl text-crimson-600 font-bold block mb-1">02 Integritas Fairplay</span>
+            <p class="font-sans text-xs text-ink/75 leading-relaxed">
+              Standardisasi anti-cheat dan penegakan etika bertanding tanpa kompromi demi martabat Ranah Minang.
             </p>
           </div>
-
-          <!-- Column 03 -->
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest">03 / GELANGGANG PRESTASI</span>
-              <div class="h-px flex-1 bg-white/10"></div>
-            </div>
-            <h3 class="font-heading font-extrabold text-xl text-white tracking-tight">
-              Jalur Prestasi PON & Nasional
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
-              Pemusatan latihan daerah (Pelatda) intensif dengan bimbingan pelatih dan analis taktis bersertifikat untuk mengantarkan kontingen Sumatera Barat merebut medali emas nasional.
+          <div class="cut-corner-card bg-paper p-5 text-ink shadow-lg">
+            <span class="font-display text-xl text-crimson-600 font-bold block mb-1">03 Jalur Prestasi PON</span>
+            <p class="font-sans text-xs text-ink/75 leading-relaxed">
+              Pemusatan latihan daerah berkesinambungan bersama pelatih berlisensi untuk meraih medali emas nasional.
             </p>
           </div>
-
+          <div class="cut-corner-card bg-paper p-5 text-ink shadow-lg">
+            <span class="font-display text-xl text-crimson-600 font-bold block mb-1">04 Ekosistem Kreatif</span>
+            <p class="font-sans text-xs text-ink/75 leading-relaxed">
+              Membuka peluang karir tidak hanya bagi player, namun juga caster, analis, pelatih, wasit, dan konten kreator.
+            </p>
+          </div>
         </div>
 
       </div>
     </section>
 
 
-    <!-- SECTION: VISI & MISI -->
-    <section class="py-20 border-b border-white/10 relative overflow-hidden">
-      <!-- Section Background Image -->
-      <div class="absolute inset-0 z-0 pointer-events-none">
-        <img 
-          src="/images/arena-stage-lights.jpg" 
-          alt="Stadium Floodlights" 
-          class="w-full h-full object-cover object-center opacity-15 filter contrast-85 brightness-85"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0b1328]/92 via-[#0e1933]/85 to-[#0b1328]/92"></div>
-      </div>
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          <div class="lg:col-span-5 space-y-4">
-            <span class="text-xs font-semibold text-rose-500 uppercase tracking-widest block">Arah Perjuangan</span>
-            <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-              Visi & Misi Jangka Panjang
-            </h2>
-            <p class="text-slate-300 text-sm leading-relaxed font-light">
-              Menjadikan Sumatera Barat sebagai lumbung talenta olahraga elektronik terkemuka di Indonesia yang mengedepankan sportivitas, etika digital, dan daya saing profesional.
-            </p>
-
-            <div class="p-5 rounded-2xl border border-white/10 bg-brand-card mt-6">
-              <h4 class="font-heading font-bold text-white text-base flex items-center gap-2">
-                <i data-lucide="target" class="w-4 h-4 text-rose-500"></i> Target ESI Sumbar 2026–2028
-              </h4>
-              <ul class="mt-3 space-y-2 text-xs text-slate-300">
-                <li class="flex items-start gap-2">
-                  <span class="text-rose-500 font-bold">•</span>
-                  <span>Meraih medali emas di cabang game resmi PON XXI.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-rose-500 font-bold">•</span>
-                  <span>100% digitalisasi registrasi lisensi atlet di 19 kabupaten/kota.</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="text-rose-500 font-bold">•</span>
-                  <span>Pembentukan akademi esports binaan di perguruan tinggi Sumbar.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- 4 Misi Cards -->
-          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
-            <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-              <span class="text-xs font-mono font-bold text-rose-500 block mb-2">MISI 01</span>
-              <h4 class="font-heading font-bold text-lg text-white">Pembinaan Atlet Usia Dini</h4>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Membentuk sirkuit kompetisi berjenjang dari tingkat sekolah dasar, menengah, hingga universitas di seluruh Ranah Minang.
-              </p>
-            </div>
-
-            <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-              <span class="text-xs font-mono font-bold text-amber-500 block mb-2">MISI 02</span>
-              <h4 class="font-heading font-bold text-lg text-white">Standardisasi & Lisensi</h4>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Menyelenggarakan penataran wasit, juri, pelatih, serta registrasi klub resmi secara transparan dan akuntabel.
-              </p>
-            </div>
-
-            <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-              <span class="text-xs font-mono font-bold text-cyan-400 block mb-2">MISI 03</span>
-              <h4 class="font-heading font-bold text-lg text-white">Pemberdayaan 19 Pengcab</h4>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Memberikan pendampingan teknis dan fasilitas bagi pengurus cabang kabupaten/kota agar mandiri menyelenggarakan kejuaraan daerah.
-              </p>
-            </div>
-
-            <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-              <span class="text-xs font-mono font-bold text-emerald-400 block mb-2">MISI 04</span>
-              <h4 class="font-heading font-bold text-lg text-white">Ekosistem Digital Kreatif</h4>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Membuka peluang karier esports tidak hanya bagi atlet, tapi juga caster, analis, event organizer, kreator konten, dan jurnalis.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: STRUKTUR PENGURUS -->
-    <section class="py-20 border-b border-brand-line">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        
-        <div class="max-w-2xl mb-12">
-          <span class="text-xs font-semibold text-rose-500 uppercase tracking-widest block mb-1">Tata Kelola Organisasi</span>
-          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-            Struktur Pengurus ESI Sumbar
-          </h2>
-          <p class="text-slate-400 text-sm mt-1">
-            Kepengurusan resmi Pengurus Provinsi Esports Indonesia Sumatera Barat periode berjalan.
+    <!-- ============================================== -->
+    <!-- 5. SEKRETARIAT & PUSAT LAYANAN KEMITRAAN       -->
+    <!-- ============================================== -->
+    <section class="p-6 sm:p-10 rounded-2xl bg-white border border-black/10 shadow-lg">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div class="max-w-xl">
+          <span class="text-xs font-mono text-crimson-600 font-bold uppercase tracking-widest block mb-1">
+            SEKRETARIAT & PUSAT KOORDINASI
+          </span>
+          <h3 class="font-display text-3xl sm:text-4xl text-ink uppercase tracking-tight">
+            Gedung Olahraga H. Agus Salim, Padang
+          </h3>
+          <p class="font-sans text-xs sm:text-sm text-ink/70 mt-2 leading-relaxed">
+            Pusat administrasi pangkalan data atlet, verifikasi klub & venue gaming, serta koordinasi kejuaraan resmi se-Sumatera Barat.
           </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider block">Pimpinan Organisasi</span>
-            <h4 class="font-heading font-bold text-xl text-white mt-1">Ketua Umum Pengprov ESI</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Bertanggung jawab penuh atas arah kebijakan umum, koordinasi dengan PBESI Pusat dan KONI Sumatera Barat.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-wider block">Manajemen Operasional</span>
-            <h4 class="font-heading font-bold text-xl text-white mt-1">Ketua Harian & Sekum</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Menjalankan tata kelola harian, administrasi organisasi, legalitas pengcab, dan keuangan lembaga.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] font-mono text-rose-400 uppercase tracking-wider block">Bidang Teknis</span>
-            <h4 class="font-heading font-bold text-xl text-white mt-1">Bidang Atlet & Prestasi</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Mengelola talent scouting, seleksi daerah, pemusatan latihan atlet (Pelatda PON), dan monitoring performa tim.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block">Regulasi & Wasit</span>
-            <h4 class="font-heading font-bold text-xl text-white mt-1">Bidang Wasit & Kompetisi</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Menyusun rulebook kompetisi, pengawasan fairplay, akreditasi wasit/juri, dan penanganan sengketa turnamen.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] font-mono text-purple-400 uppercase tracking-wider block">Komunikasi & Media</span>
-            <h4 class="font-heading font-bold text-xl text-white mt-1">Bidang Humas & Komunitas</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Membangun kemitraan media, pengelolaan kanal publikasi resmi, dan penghubung antarkomunitas esports nagari.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Wilayah & Daerah</span>
-            <h4 class="font-heading font-bold text-xl text-white mt-1">Koordinator 19 Pengcab</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Menjembatani aspirasi, agenda pembinaan, dan penerbitan SK kepengurusan Pengcab di 19 kota dan kabupaten.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: SEKRETARIAT & LEGALITAS -->
-    
-    <!-- SECTION: SINERGI IDENTITAS (ESPORT SUMBAR x PBESI SUMATERA BARAT) -->
-    <section class="py-14 sm:py-20 border-b border-white/10 relative overflow-hidden bg-brand-surface/40">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        
-        <div class="text-center max-w-2xl mx-auto mb-12">
-          <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-2 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
-            <span>Sinergi Kelembagaan & Komunitas</span>
-          </div>
-          <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Dua Pilar Ekosistem Esports Ranah Minang
-          </h2>
-          <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-            Menyelaraskan wadah pembinaan atlet, platform kompetisi digital, dan induk organisasi resmi PBESI.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
-          
-          <!-- Card 1: ESPORT SUMBAR (Brand Platform & Komunitas) -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#111728] to-[#0a0f1d] border border-rose-500/30 shadow-xl relative overflow-hidden flex flex-col justify-between">
-            <div class="absolute top-0 right-0 w-44 h-44 bg-rose-600/10 blur-[80px] pointer-events-none rounded-full"></div>
-            <div>
-              <div class="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/10 p-2.5 flex items-center justify-center mb-5 shadow-lg shadow-rose-950/40">
-                <img src="/images/esport-sumbar-logo.png" alt="Logo ESPORT SUMBAR" class="w-full h-full object-contain filter drop-shadow-[0_4px_12px_rgba(255,27,81,0.5)]" />
-              </div>
-              <div class="inline-block text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold mb-1">Brand & Portal Digital</div>
-              <h3 class="font-heading font-black text-xl text-white">ESPORT SUMBAR</h3>
-              <p class="text-xs text-slate-300 mt-2.5 leading-relaxed">
-                Wadah sentral digital untuk 14.852 penggiat, 8.420 atlet binaan, dan 485 squad di 19 kabupaten/kota. Menggerakkan kompetisi tingkat nagari hingga panggung kejuaraan daerah.
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
-              <span class="text-rose-400 font-bold">● Platform Resmi</span>
-              <span>esport-sumbar.vercel.app</span>
-            </div>
-          </div>
-
-          <!-- Card 2: PENGPROV ESI SUMBAR (Induk Organisasi Resmi PBESI) -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#111728] to-[#0a0f1d] border border-white/10 shadow-xl relative overflow-hidden flex flex-col justify-between">
-            <div class="absolute top-0 right-0 w-44 h-44 bg-cyan-600/10 blur-[80px] pointer-events-none rounded-full"></div>
-            <div>
-              <div class="w-16 h-16 rounded-full bg-white p-2 flex items-center justify-center mb-5 shadow-lg shadow-black/50">
-                <img src="/pbesi-logo.png" alt="Logo PBESI" class="w-full h-full object-contain" />
-              </div>
-              <div class="inline-block text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold mb-1">Induk Olahraga Prestasi</div>
-              <h3 class="font-heading font-black text-xl text-white">PENGPROV ESI SUMATERA BARAT</h3>
-              <p class="text-xs text-slate-300 mt-2.5 leading-relaxed">
-                Pengurus Provinsi Esports Indonesia (ESI) di bawah KONI Sumatera Barat & PBESI Nasional. Memegang otoritas sertifikasi wasit, standardisasi turnamen, dan seleksi Pelatda menuju PON.
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
-              <span class="text-emerald-400 font-bold">● Akreditasi Penuh</span>
-              <span>19 Pengcab Terdaftar</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <section class="py-16">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        
-        <div class="p-8 sm:p-12 rounded-2xl border border-brand-line bg-brand-surface flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div class="max-w-xl">
-            <span class="text-xs font-semibold text-rose-500 uppercase tracking-wider block mb-1">Sekretariat Resmi</span>
-            <h3 class="font-heading text-2xl sm:text-3xl font-bold text-white">
-              Gedung Olahraga H. Agus Salim, Padang
-            </h3>
-            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
-              Pusat layanan administrasi atlet, verifikasi keabsahan klub, dan informasi kejuaraan resmi Pengprov ESI Sumatera Barat.
-            </p>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-3">
-            <a href="/atlet" class="px-5 py-2.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs text-white font-medium transition-colors shadow-lg shadow-rose-600/30">
-              Lihat Direktori Atlet
-            </a>
-            <a href="https://wa.me/" target="_blank" class="px-5 py-2.5 rounded-lg border border-brand-line bg-brand-card hover:bg-slate-800 text-xs text-white font-medium transition-colors">
-              Kontak Sekretariat
-            </a>
+          <div class="mt-4 flex items-center gap-4 text-xs font-mono text-ink/80">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-crimson-600"></i>
+              <span>Kawasan GOR Agus Salim, Kota Padang</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="mail" class="w-4 h-4 text-crimson-600"></i>
+              <span>kontak@esportsumbar.id</span>
+            </span>
           </div>
         </div>
 
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="https://wa.me/" target="_blank" class="cut-corner-btn px-6 py-3.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md flex items-center gap-2">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Hubungi WhatsApp Helpdesk</span>
+          </a>
+          <a href="/atlet" class="cut-corner-btn px-6 py-3.5 bg-black/5 hover:bg-black/10 text-ink font-display text-xs sm:text-sm tracking-wider transition-all flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>Jelajahi Database</span>
+          </a>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-brand-line py-12 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-brand-line">
-        
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 p-1.5 flex items-center justify-center shrink-0 shadow-lg shadow-rose-950/30">
-            <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(255,27,81,0.4)]" />
-          </div>
-          <div>
-            <span class="font-heading font-bold text-base text-white tracking-tight">ESPORT <span class="text-rose-500">SUMBAR</span></span>
-            <span class="text-[11px] text-slate-400 block -mt-0.5">Pengurus Provinsi ESI Sumatera Barat</span>
-          </div>
-        </div>
 
-        <!-- Quick Page Links -->
-        <div class="flex flex-wrap items-center justify-center gap-6 text-slate-300 font-medium">
-          <a href="/" class="hover:text-rose-400 transition-colors">Beranda</a>
-          <a href="/about" class="text-white font-semibold transition-colors">Tentang Kami</a>
-          <a href="/atlet" class="hover:text-rose-400 transition-colors">Direktori Atlet</a>
-        </div>
+  <!-- ============================================================== -->
+  <!-- 6. NATIVE MOBILE APP DOCK                                      -->
+  <!-- ============================================================== -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-xl border-t border-black/10 px-4 py-2 flex items-center justify-around shadow-2xl">
+    <a href="/" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <span>Beranda</span>
+    </a>
+    <a href="/#direktori" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="search" class="w-5 h-5"></i>
+      <span>Cari Data</span>
+    </a>
+    <a href="/atlet" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="users" class="w-5 h-5"></i>
+      <span>Database</span>
+    </a>
+    <a href="/#peta-wilayah" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="map-pin" class="w-5 h-5"></i>
+      <span>Peta 19</span>
+    </a>
+    <a href="/about" class="flex flex-col items-center gap-1 text-crimson-600 font-bold text-[10px]">
+      <i data-lucide="info" class="w-5 h-5"></i>
+      <span>Tentang</span>
+    </a>
+  </nav>
 
+
+  <!-- ============================================== -->
+  <!-- 7. FOOTER                                     -->
+  <!-- ============================================== -->
+  <footer class="bg-ink text-paper py-12 px-4 sm:px-6 lg:px-8 border-t border-crimson-600/30">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-auto flex items-center justify-center">
+          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="h-10 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(224,34,45,0.4)]" />
+        </div>
+        <div>
+          <span class="font-display text-xl text-paper tracking-wider">ESPORT <span class="text-crimson-400">SUMBAR</span></span>
+          <span class="text-[11px] text-paper/60 block font-mono">Platform Provider Esport & Database Ranah Minang</span>
+        </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
-        <div>
-          <p class="font-semibold text-slate-300">Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat</p>
-          <p class="text-slate-500 mt-0.5">Sekretariat: Stadion GOR H. Agus Salim, Kota Padang, Sumatera Barat 25111</p>
-        </div>
-        <div class="sm:text-right">
-          <p>© 2026 ESPORT SUMBAR. Hak cipta dilindungi.</p>
-          <p class="text-slate-600 mt-0.5">Bernaung di bawah KONI Sumbar & PBESI</p>
-        </div>
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-paper/70 font-semibold">
+        <a href="/" class="hover:text-crimson-400 transition-colors">Beranda</a>
+        <a href="/#direktori" class="hover:text-crimson-400 transition-colors">Direktori 7 Pilar</a>
+        <a href="/#peta-wilayah" class="hover:text-crimson-400 transition-colors">Peta 19 Wilayah</a>
+        <a href="/about" class="hover:text-crimson-400 transition-colors">Tentang Kami</a>
+        <a href="/atlet" class="hover:text-crimson-400 transition-colors">Database Atlet</a>
+      </div>
+
+      <div class="text-xs text-paper/50 font-mono text-center md:text-right">
+        © 2026 ESPORT SUMBAR. Official Partner ESI Sumatera Barat.
       </div>
     </div>
   </footer>
 
   <script>
-    
     function toggleMobileNav() {
-      const menu = document.getElementById('mobileNavMenu');
-      if (menu) menu.classList.toggle('hidden');
+      const menu = document.getElementById("mobileNavMenu");
+      menu.classList.toggle("hidden");
     }
-
-    lucide.createIcons();
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
   </script>
 
-  
-
-
-  <!-- ============================================================== -->
-  <!-- NATIVE MOBILE APP DOCK (FIXED 5 TABS - 100% INLINE SVG ICONS) -->
-  <!-- ============================================================== -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-[#070b14]/96 backdrop-blur-2xl border-t border-white/[0.08] px-1 pt-1.5 pb-4 safe-bottom shadow-[0_-8px_32px_rgba(0,0,0,0.85)] select-none w-full">
-    <div class="w-full grid grid-cols-5 items-end justify-items-center">
-      
-          <a href="/" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-slate-400 hover:text-white">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all text-slate-400">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              
-            </div>
-            <span class="text-[9.5px] font-medium text-slate-400 tracking-tight mt-0.5">Beranda</span>
-          </a>
-        
-          <a href="/#peta-wilayah" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-slate-400 hover:text-white">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all text-slate-400">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
-              
-            </div>
-            <span class="text-[9.5px] font-medium text-slate-400 tracking-tight mt-0.5">Peta 19</span>
-          </a>
-        
-            <a href="/#divisi" class="flex flex-col items-center justify-center -mt-5 group app-tap w-full text-center">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 via-rose-500 to-amber-500 text-white shadow-lg shadow-rose-600/50 border-2 border-[#070b14] flex items-center justify-center group-active:scale-90 transition-transform">
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="6"/></svg>
-              </div>
-              <span class="text-[9.5px] font-bold text-amber-400 tracking-tight mt-0.5">Divisi</span>
-            </a>
-          
-          <a href="/atlet" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-slate-400 hover:text-white">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all text-slate-400">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-            </div>
-            <span class="text-[9.5px] font-medium text-slate-400 tracking-tight mt-0.5">Atlet</span>
-          </a>
-        
-          <a href="/about" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-rose-500">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all bg-rose-500/15 border border-rose-500/30 text-rose-500">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-              
-            </div>
-            <span class="text-[9.5px] font-bold text-rose-400 tracking-tight mt-0.5">PBESI</span>
-          </a>
-        
-    </div>
-  </nav>
-  
 </body>
 </html>

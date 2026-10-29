@@ -1,1244 +1,845 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Direktori & Database Atlet — ESPORT SUMBAR (Pengprov ESI)</title>
-  <meta name="description" content="Pencarian publik direktori atlet esports resmi Sumatera Barat. Cek lisensi atlet, IGN, squad, prestasi, dan statistik dari 19 kabupaten dan kota.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Database Atlet & Talenta – ESPORT SUMBAR</title>
+  <meta name="description" content="Pangkalan data resmi atlet esports, talenta muda, dan player pencari tim (LFT) di 19 kabupaten/kota Sumatera Barat. Mitra resmi Pengprov ESI Sumbar." />
 
-  <!-- Tailwind CSS -->
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            heading: ['"Outfit"', 'sans-serif'],
-          },
           colors: {
-            brand: {
-              navy: '#080b12',
-              surface: '#121c30',
-              card: '#18253f',
-              cardHover: '#1f2f4f',
-              line: 'rgba(255, 255, 255, 0.08)',
-              lineHover: 'rgba(255, 255, 255, 0.18)',
-              rose: '#e11d48',
-              amber: '#f59e0b',
-              cyan: '#06b6d4',
-              emerald: '#10b981',
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              600: "#B3121B",
+              800: "#7A0B12",
+              900: "#50060B",
             }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
           }
         }
       }
-    }
+    };
   </script>
 
-  <style>
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #080b12; }
-    ::-webkit-scrollbar-thumb { background: #1c2438; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #2e3a59; }
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-    /* ========================================================== */
-    /* NATIVE MOBILE APP UX ENHANCEMENTS                          */
-    /* ========================================================== */
+  <!-- Favicon & Brand Icons: ESPORT SUMBAR -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+  <meta property="og:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
+  <meta name="twitter:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
+
+  <style>
+    /* Chamfered (Cut) Corners */
+    .cut-corner-hero {
+      clip-path: polygon(36px 0%, 100% 0%, 100% calc(100% - 36px), calc(100% - 36px) 100%, 0% 100%, 0% 36px);
+    }
+    .cut-corner-banner {
+      clip-path: polygon(40px 0%, 100% 0%, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0% 100%, 0% 40px);
+    }
+    .cut-corner-card {
+      clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0% calc(100% - 14px), 0% 14px);
+    }
+    .cut-corner-btn {
+      clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+    }
+    .cut-corner-sm {
+      clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
+    }
+
+    .bg-crimson-gradient {
+      background: linear-gradient(135deg, #B3121B 0%, #7A0B12 100%);
+    }
+    .bg-smoke-overlay {
+      background-image: 
+        radial-gradient(circle at 75% 30%, rgba(224, 34, 45, 0.45) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(122, 11, 18, 0.6) 0%, transparent 60%);
+    }
+
+    /* Ghost title motion-blur duplicate effect */
+    .ghost-title-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .ghost-title-blur {
+      position: absolute;
+      inset: 0;
+      filter: blur(8px);
+      opacity: 0.35;
+      transform: translateX(4px) skewX(-6deg);
+      user-select: none;
+      pointer-events: none;
+    }
+
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    .safe-bottom {
-      padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
-    }
-    
-    .app-tap {
-      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .app-tap:active {
-      transform: scale(0.93);
-      opacity: 0.82;
-    }
 
-    @keyframes slideUpSheet {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
+    @keyframes floatChip {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
     }
-    .animate-slide-up {
-      animation: slideUpSheet 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    /* ========================================================== */
-    /* MASTER NATIVE MOBILE APP UX STYLES                         */
-    /* ========================================================== */
-    html, body {
-      overflow-x: hidden !important;
-      max-width: 100vw !important;
-      width: 100% !important;
-      -webkit-font-smoothing: antialiased;
-    }
-    
-    .no-scrollbar::-webkit-scrollbar { display: none !important; }
-    .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-    
-    .safe-bottom {
-      padding-bottom: max(1.25rem, env(safe-area-inset-bottom)) !important;
-    }
-    
-    .app-tap {
-      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    .app-tap:active {
-      transform: scale(0.93) !important;
-      opacity: 0.82 !important;
-    }
-
-    @keyframes slideUpSheet {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-    .animate-slide-up {
-      animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+    .animate-float-1 { animation: floatChip 3.5s ease-in-out infinite; }
+    .animate-float-2 { animation: floatChip 4s ease-in-out infinite 0.8s; }
   </style>
-    <!-- Favicon & Brand Icons: ESPORT SUMBAR -->
-    <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
-    <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
-    <meta property="og:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
-    <meta name="twitter:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
-  </head>
-<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white min-h-screen pb-28 md:pb-0">
+</head>
 
-    <!-- FLOATING MODERN TOP BAR -->
-  
+<body class="bg-[#D9D9DB] text-[#0B0B0C] font-sans antialiased min-h-screen selection:bg-[#B3121B] selection:text-white pb-24 md:pb-0">
+
   <!-- ============================================== -->
-  <!-- NATIVE MOBILE APP TOP BAR & DESKTOP NAVBAR    -->
+  <!-- 1. TOP NAVBAR                                  -->
   <!-- ============================================== -->
-  <header class="fixed top-0 md:top-4 inset-x-0 z-50 px-0 md:px-6 transition-all">
-    <div class="max-w-7xl mx-auto md:rounded-2xl bg-[#070b14]/95 md:bg-[#0b0f19]/85 backdrop-blur-xl border-b md:border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-6 h-14 md:h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 px-3 sm:px-6 lg:px-12 pt-3 sm:pt-4 transition-all">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.06)] px-4 sm:px-6 h-16 flex items-center justify-between">
       
-      <!-- Brand Logo & Official PBESI Emblem -->
-      <a href="/" class="flex items-center gap-2.5 group">
-        <div class="h-8 md:h-9 w-auto flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-          <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="h-8 md:h-9 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(255,27,81,0.5)]" />
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="h-9 w-auto flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="h-9 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(179,18,27,0.4)]" />
         </div>
         <div>
-          <span class="font-heading font-extrabold text-sm md:text-lg tracking-tight text-white flex items-center gap-1.5 leading-none">
-            ESPORT <span class="text-rose-500">SUMBAR</span>
+          <span class="font-display text-xl sm:text-2xl tracking-wide text-ink flex items-center gap-1.5 leading-none">
+            ESPORT <span class="text-crimson-600">SUMBAR</span>
           </span>
-          <span class="text-[8.5px] md:text-[10px] text-slate-400 block font-mono uppercase tracking-wider mt-0.5">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse"></span>PBESI Pengprov
+          <span class="text-[9px] sm:text-[10px] text-ink/60 block font-mono font-bold uppercase tracking-wider mt-0.5">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>Partner Resmi ESI Sumbar
           </span>
         </div>
       </a>
 
-      <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center p-1 rounded-xl bg-black/40 border border-white/5">
-        <a href="/" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
-          
+      <!-- Desktop Nav Pills -->
+      <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-black/5 border border-black/5">
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
           <span>Beranda</span>
         </a>
-        <a href="/about" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
-          
-          <span>Tentang Kami</span>
+        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
+          <span>Direktori 7 Pilar</span>
         </a>
-        <a href="/atlet" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-semibold bg-white/[0.1] text-white shadow-sm border border-white/10">
-          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-          <span>Direktori Atlet</span>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold">8.4K</span>
+        <a href="/atlet" class="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-crimson-800 text-paper shadow-sm">
+          <span>Database Atlet</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-paper/20">8.4K</span>
+        </a>
+        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
+          <span>Tentang Kami</span>
         </a>
       </nav>
 
-      <!-- Right Action Area -->
+      <!-- Right Action: Open Self-Registration Modal -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Live Verified Badge (Desktop) -->
-        <div class="hidden lg:flex items-center gap-2 text-xs text-slate-300 bg-brand-surface border border-brand-line px-3 py-1.5 rounded-xl">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="font-mono text-[11px] text-slate-300"><strong>14.852</strong> Penggiat</span>
-        </div>
+        <button onclick="openRegistrationModal()" class="cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md flex items-center gap-2">
+          <i data-lucide="user-plus" class="w-4 h-4"></i>
+          <span>Daftar Jadi Atlet / Player</span>
+        </button>
 
-        <!-- Quick Route Button to /atlet (Desktop) -->
-        <a href="/atlet" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs transition-all shadow-md shadow-rose-600/30 hover:scale-[1.02]">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <span>Cari Atlet</span>
-        </a>
-
-        <!-- Mobile Quick Search -->
-        <a href="/atlet" class="md:hidden w-8 h-8 rounded-xl bg-rose-600/15 border border-rose-500/30 text-rose-400 flex items-center justify-center app-tap" title="Cari Atlet">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </a>
-
-        <!-- Mobile Menu Toggle Button -->
-        <button onclick="toggleMobileNav()" class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors app-tap" aria-label="Toggle Menu">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <button onclick="toggleMobileNav()" class="md:hidden w-10 h-10 rounded-xl bg-black/5 hover:bg-black/10 text-ink flex items-center justify-center transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
 
     </div>
 
-    <!-- Mobile Drawer Menu (Slide-Down Glass Panel) -->
-    <div id="mobileNavMenu" class="md:hidden hidden mx-2 mt-2 rounded-2xl bg-[#0b0f19]/96 backdrop-blur-2xl border border-white/[0.1] shadow-2xl p-4 space-y-2">
-      <div class="pb-2 border-b border-white/10 mb-2 flex items-center justify-between">
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileNavMenu" class="md:hidden hidden mx-2 mt-2 rounded-2xl bg-white/98 backdrop-blur-2xl border border-black/10 shadow-2xl p-4 space-y-2">
+      <div class="pb-2 border-b border-black/10 mb-2 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-5 h-5 object-contain drop-shadow-[0_2px_6px_rgba(255,27,81,0.5)]" />
-          <span class="font-heading font-bold text-xs text-white">ESPORT <span class="text-rose-500">SUMBAR</span></span>
+          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-6 h-6 object-contain" />
+          <span class="font-display text-lg text-ink">ESPORT <span class="text-crimson-600">SUMBAR</span></span>
         </div>
-        <span class="text-[10px] font-mono text-emerald-400">● PBESI Terverifikasi</span>
+        <span class="text-[10px] font-mono text-emerald-600 font-bold">● Partner Resmi ESI</span>
       </div>
-      <a href="/" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-white hover:bg-white/5 text-xs app-tap">
-        <span class="flex items-center gap-2">🏠 Beranda Portal</span>
-        <span>→</span>
+      <a href="/" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+        <span>Beranda</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
       </a>
-      <a href="/about" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-200 hover:bg-white/5 text-xs app-tap">
-        <span class="flex items-center gap-2">🛡️ Tentang Kami (Profil PBESI)</span>
-        <span>→</span>
+      <a href="/#direktori" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+        <span>Direktori 7 Pilar</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
       </a>
-      <a href="/atlet" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-rose-600/20 text-rose-300 border border-rose-500/30 font-semibold text-xs app-tap">
-        <span class="flex items-center gap-2">
-          <span>👥 Direktori Atlet Binaan</span>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">8.4K</span>
-        </span>
-        <span>→</span>
+      <a href="/atlet" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-crimson-800 text-paper font-semibold text-xs">
+        <span>Database Atlet (8.4K)</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
       </a>
-      <div class="pt-2 border-t border-white/10 mt-2">
-        <a href="/#peta-wilayah" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-slate-400 hover:text-white text-xs app-tap">
-          <span>📍 Peta Sebaran 19 Daerah</span>
-        </a>
-        <a href="/#divisi" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-slate-400 hover:text-white text-xs app-tap">
-          <span>🎮 6 Divisi Game Resmi</span>
-        </a>
-      </div>
+      <a href="/about" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+        <span>Tentang & Kemitraan ESI</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </a>
     </div>
   </header>
-  
 
-  <main class="pt-20">
+  <!-- ============================================== -->
+  <!-- 2. HERO BANNER: DIREKTORI ATLET & TALENTA      -->
+  <!-- ============================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16">
     
-    <!-- PAGE HERO: DIREKTORI ATLET -->
-    <section class="py-14 sm:py-20 border-b border-white/10 relative overflow-hidden">
-      <!-- Section Background Image -->
-      <div class="absolute inset-0 z-0">
-        <img 
-          src="/images/arena-iem-katowice.jpg" 
-          alt="Esports Arena Crowd" 
-          class="w-full h-full object-cover object-center opacity-25 filter contrast-85 brightness-90"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0b1328]/92 via-[#0e1933]/85 to-[#0b1328]/92"></div>
-      </div>
-      <div class="absolute -top-40 right-1/4 w-[600px] h-[600px] bg-rose-600/5 blur-[140px] pointer-events-none rounded-full"></div>
+    <!-- Chamfered Crimson Hero Banner -->
+    <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-6 sm:p-10 lg:p-14 border border-crimson-400/40 shadow-2xl overflow-hidden mb-10 text-paper">
       
-      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div class="max-w-3xl">
-          <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-3 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
-            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-            <span>Database Resmi ESI Sumatera Barat</span>
-          </div>
-          <h1 class="font-heading text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-            Direktori & Profil Atlet Esports
+      <!-- Floating Chips inside Banner -->
+      <div class="animate-float-1 absolute top-6 right-8 z-20 hidden sm:block px-3.5 py-1.5 rounded-xl bg-paper/20 backdrop-blur-md border border-paper/40 font-display text-sm tracking-wider">
+        8.420 ATLET TERDATA
+      </div>
+      <div class="animate-float-2 absolute bottom-6 right-12 z-20 hidden sm:block px-3.5 py-1.5 rounded-xl bg-paper/20 backdrop-blur-md border border-paper/40 font-display text-sm tracking-wider">
+        180 PELATDA PON SUMBAR
+      </div>
+
+      <div class="max-w-2xl relative z-10 space-y-4">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/20 text-xs font-mono font-bold tracking-wider">
+          <i data-lucide="shield" class="w-3.5 h-3.5 text-crimson-400"></i>
+          <span>PANGKALAN DATA ATLET & TALENTA RESMI</span>
+        </div>
+
+        <div class="ghost-title-wrap select-none">
+          <span class="ghost-title-blur font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight text-black/50">
+            DATABASE ATLET
+          </span>
+          <h1 class="relative font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.88] transform -skew-x-6 text-paper">
+            DATABASE ATLET & TALENTA
           </h1>
-          <p class="mt-4 text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Temukan profil atlet binaan berlisensi PBESI, talenta Pelatda PON, juara Kejurda, dan squad terverifikasi dari 19 kabupaten dan kota se-Sumatera Barat.
-          </p>
         </div>
 
-        <!-- 4 Metrics Pods -->
-        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] text-slate-400 uppercase font-mono block">Atlet Berlisensi</span>
-            <div class="font-heading font-black text-2xl text-white mt-1">8.420</div>
-            <span class="text-[11px] text-emerald-400 mt-0.5 block">100% Terverifikasi</span>
-          </div>
-          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
-            <div class="font-heading font-black text-2xl text-rose-500 mt-1">3.149</div>
-            <span class="text-[11px] text-slate-400 mt-0.5 block">Klub Aktif</span>
-          </div>
-          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] text-slate-400 uppercase font-mono block">Cakupan Pengcab</span>
-            <div class="font-heading font-black text-2xl text-amber-400 mt-1">19 / 19</div>
-            <span class="text-[11px] text-slate-400 mt-0.5 block">Seluruh Wilayah Sumbar</span>
-          </div>
-          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="text-[10px] text-slate-400 uppercase font-mono block">Atlet Pelatda PON</span>
-            <div class="font-heading font-black text-2xl text-cyan-400 mt-1">180</div>
-            <span class="text-[11px] text-slate-400 mt-0.5 block">Pemusatan Latihan</span>
-          </div>
+        <p class="font-sans text-xs sm:text-sm text-paper/85 leading-relaxed max-w-xl">
+          Eksplorasi profil lengkap atlet pelatda, juara kejuaraan daerah, dan talenta baru yang berstatus <em>Looking for Team (LFT)</em> di 19 kabupaten dan kota se-Sumatera Barat.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <button onclick="openRegistrationModal()" class="cut-corner-btn px-6 py-3 bg-paper text-ink hover:text-crimson-800 font-display text-xs sm:text-sm tracking-wider shadow-lg flex items-center gap-2">
+            <i data-lucide="user-plus" class="w-4 h-4 text-crimson-600"></i>
+            <span>Daftar Jadi Atlet / Pemain LFT</span>
+          </button>
+          <a href="/#peta-wilayah" class="cut-corner-btn px-6 py-3 bg-black/40 hover:bg-black/60 text-paper border border-white/20 font-display text-xs sm:text-sm tracking-wider flex items-center gap-2">
+            <i data-lucide="map" class="w-4 h-4"></i>
+            <span>Lihat Sebaran di Peta</span>
+          </a>
         </div>
+
       </div>
-    </section>
+    </div>
 
-    <!-- MAIN SEARCH & DIRECTORY SECTION -->
-    <section class="py-16 sm:py-20 relative overflow-hidden">
-      <!-- Section Background Image -->
-      <div class="absolute inset-0 z-0">
-        <img 
-          src="/images/arena-stage-lights.jpg" 
-          alt="Tournament Stage Atmosphere" 
-          class="w-full h-full object-cover object-center opacity-20 filter contrast-85 brightness-85"
+
+    <!-- ============================================== -->
+    <!-- 3. TACTICAL SEARCH & SCOUTING FILTER BAR       -->
+    <!-- ============================================== -->
+    <div class="p-4 sm:p-6 rounded-2xl bg-white border border-black/10 shadow-sm space-y-4 mb-8">
+      
+      <!-- Input Search -->
+      <div class="relative">
+        <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-ink/40"></i>
+        <input 
+          type="text" 
+          id="athleteSearchInput" 
+          placeholder="Cari nama atlet, in-game nickname (IGN), klub, atau lisensi PBESI..." 
+          class="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs sm:text-sm text-ink font-medium placeholder:text-ink/40 focus:outline-none focus:border-crimson-600 shadow-sm"
+          oninput="handleAthleteSearch()"
         />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#0a1122]/90 via-[#0d172e]/82 to-[#0a1122]/92"></div>
-        <div class="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-rose-600/20 blur-[150px] pointer-events-none rounded-full"></div>
       </div>
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        
-        <!-- SEARCH CONSOLE & FILTERS BAR -->
-        <div class="mb-10 p-5 sm:p-6 rounded-2xl border border-brand-line bg-brand-surface/90 backdrop-blur-md shadow-2xl">
-          
-          <!-- Search Input Box -->
-          <div class="relative mb-5">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
-              <i data-lucide="search" class="w-5 h-5 text-rose-500"></i>
-            </div>
-            <input 
-              type="text" 
-              id="athleteSearchInput" 
-              oninput="handleAthleteSearch()"
-              placeholder="Cari nickname (IGN), nama lengkap atlet, klub/tim, peran, atau kota asal..." 
-              class="w-full pl-12 pr-12 py-3.5 rounded-xl bg-brand-navy border border-brand-line focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/20 text-white placeholder-slate-500 text-sm transition-all shadow-inner"
-            />
-            <button 
-              id="clearAthleteSearchBtn" 
-              onclick="clearAthleteSearch()" 
-              class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-white hidden transition-colors"
-            >
-              <i data-lucide="x" class="w-4 h-4"></i>
-            </button>
-          </div>
 
-          <!-- Filter Pills Row -->
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pt-4 border-t border-brand-line">
-            
-            <!-- Game Filters -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-              <span class="text-xs text-slate-400 font-mono uppercase mr-1 shrink-0">Game:</span>
-              <button onclick="setAthleteGameFilter('all')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 text-white transition-all shrink-0 shadow-md shadow-rose-600/30" data-game="all">Semua Game</button>
-              <button onclick="setAthleteGameFilter('Mobile Legends')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="Mobile Legends">MLBB</button>
-              <button onclick="setAthleteGameFilter('PUBG Mobile')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="PUBG Mobile">PUBGM</button>
-              <button onclick="setAthleteGameFilter('Free Fire')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="Free Fire">Free Fire</button>
-              <button onclick="setAthleteGameFilter('VALORANT')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="VALORANT">VALORANT</button>
-              <button onclick="setAthleteGameFilter('eFootball (PES)')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="eFootball (PES)">eFootball</button>
-              <button onclick="setAthleteGameFilter('Honor of Kings')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="Honor of Kings">HoK</button>
-            </div>
-
-            <!-- Tier / Kategori Filter -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-              <span class="text-xs text-slate-400 font-mono uppercase mr-1 shrink-0">Kategori:</span>
-              <button onclick="setAthleteCategoryFilter('all')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/20 text-white transition-all shrink-0 shadow-md" data-cat="all">Semua Kategori</button>
-              <button onclick="setAthleteCategoryFilter('Pelatda PON')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-cat="Pelatda PON">Pelatda PON</button>
-              <button onclick="setAthleteCategoryFilter('Kejurda')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-cat="Kejurda">Juara Kejurda</button>
-              <button onclick="setAthleteCategoryFilter('Pelatih')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-cat="Pelatih">Pelatih / Analis</button>
-            </div>
-
-          </div>
-
-          <!-- Results Counter -->
-          <div class="mt-4 pt-3 border-t border-brand-line flex items-center justify-between text-xs text-slate-400">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full">
-  <span id="athleteResultCount" class="font-medium text-slate-300">Menampilkan 12 kartu koleksi atlet berlisensi</span>
-  <div class="flex items-center gap-2 self-start sm:self-auto">
-    <span class="text-[11px] text-slate-400 font-mono">Edisi Kartu:</span>
-    <button id="cardThemeTcgBtn" onclick="setCardTheme('tcg')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-600 text-white shadow-sm flex items-center gap-1 transition-all" title="Desain TCG Koleksi Sesuai Referensi">
-      <span>🎴 Koleksi TCG (Ref)</span>
-    </button>
-    <button id="cardThemeDarkBtn" onclick="setCardTheme('dark')" class="px-2.5 py-1 rounded-lg text-[11px] font-medium text-slate-400 hover:text-white bg-white/5 border border-white/10 flex items-center gap-1 transition-all" title="Edisi Dark Titanium Cyber">
-      <span>⚡ Dark Titanium</span>
-    </button>
-  </div>
-</div>
-            <span class="hidden sm:inline text-[11px] text-slate-500 font-mono">Klik kartu untuk melihat Kartu Lisensi Digital Resmi PBESI</span>
-          </div>
-
-        </div>
-
-        <!-- ATHLETES CARDS GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="athletesGridContainer">
-          <!-- Dynamically populated by JS -->
-        </div>
-
-        <!-- EMPTY STATE (WHEN NO ATHLETE FOUND) -->
-        <div id="athletesEmptyState" class="hidden p-12 text-center rounded-2xl border border-dashed border-white/10 bg-brand-surface/40 my-8">
-          <div class="w-14 h-14 rounded-full bg-rose-600/10 border border-rose-500/20 text-rose-500 flex items-center justify-center mx-auto mb-4">
-            <i data-lucide="user-x" class="w-7 h-7"></i>
-          </div>
-          <h4 class="font-heading font-bold text-lg text-white">Tidak Ditemukan Atlet yang Sesuai</h4>
-          <p class="text-xs text-slate-400 max-w-md mx-auto mt-1 leading-relaxed">
-            Tidak ada atlet atau penggiat dengan kata kunci pencarian tersebut. Coba periksa ejaan nickname (IGN) atau gunakan kata kunci lain.
-          </p>
-          <div class="mt-5 flex items-center justify-center gap-3">
-            <button onclick="resetAthleteFilters()" class="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs font-semibold text-white transition-colors">
-              Reset Semua Filter
-            </button>
-            <a href="https://wa.me/" target="_blank" class="px-4 py-2 rounded-lg border border-brand-line hover:bg-white/10 text-xs font-semibold text-slate-300 transition-colors">
-              Daftarkan Lisensi Atlet PBESI
-            </a>
-          </div>
-        </div>
-
+      <!-- Quick Status Filter Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-xs font-bold">
+        <button onclick="filterStatus('all')" id="status-all" class="status-tab px-4 py-2 rounded-xl bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all">
+          Semua Talenta (8.4K)
+        </button>
+        <button onclick="filterStatus('pelatda')" id="status-pelatda" class="status-tab px-4 py-2 rounded-xl bg-[#F7F7F8] text-ink hover:bg-black/5 border border-black/10 whitespace-nowrap transition-all">
+          Pelatda PON (Verified ESI)
+        </button>
+        <button onclick="filterStatus('lft')" id="status-lft" class="status-tab px-4 py-2 rounded-xl bg-[#F7F7F8] text-ink hover:bg-black/5 border border-black/10 whitespace-nowrap transition-all">
+          Open for Scout / LFT
+        </button>
+        <button onclick="filterStatus('kejurda')" id="status-kejurda" class="status-tab px-4 py-2 rounded-xl bg-[#F7F7F8] text-ink hover:bg-black/5 border border-black/10 whitespace-nowrap transition-all">
+          Juara Kejurda / Porprov
+        </button>
       </div>
-    </section>
 
-    <!-- SECTION: PANDUAN PENDAFTARAN LISENSI ATLET -->
-    <section class="py-16 border-t border-brand-line bg-brand-surface/30">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        
-        <div class="max-w-3xl mb-12">
-          <span class="text-xs font-semibold text-rose-500 uppercase tracking-widest block mb-1">Standarisasi Resmi</span>
-          <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">
-            Bagaimana Cara Mendapatkan Lisensi Atlet ESI Sumbar?
-          </h2>
-          <p class="text-slate-400 text-sm mt-1">
-            Tiga langkah resmi bagi atlet, pelajar, dan klub untuk terdata dalam sistem pembinaan resmi PBESI.
-          </p>
+      <!-- Secondary Filters: Game & Wilayah -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-black/10">
+        <div>
+          <label class="text-[10px] font-mono text-ink/60 uppercase font-bold block mb-1">Pilih Cabang Game:</label>
+          <select id="athleteGameSelect" onchange="handleAthleteSearch()" class="w-full px-3 py-2 rounded-lg bg-[#F7F7F8] border border-black/15 text-xs font-semibold text-ink focus:outline-none">
+            <option value="all">Semua Cabang Game</option>
+            <option value="VALORANT">VALORANT</option>
+            <option value="Mobile Legends">Mobile Legends</option>
+            <option value="PUBG Mobile">PUBG Mobile</option>
+            <option value="Free Fire">Free Fire</option>
+            <option value="E-Football">eFootball</option>
+          </select>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="font-heading font-black text-3xl text-rose-500 block mb-3">01</span>
-            <h4 class="font-heading font-bold text-lg text-white">Verifikasi Klub di Pengcab</h4>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-              Daftarkan squad atau komunitasmu ke Pengurus Cabang (Pengcab) ESI di kabupaten/kota domisilimu dengan minimal 5 anggota aktif.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="font-heading font-black text-3xl text-amber-500 block mb-3">02</span>
-            <h4 class="font-heading font-bold text-lg text-white">Ikuti Turnamen Resmi PBESI</h4>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-              Kumpulkan poin sirkuit dan rekam jejak kompetisi melalui kejuaraan antarnagari, kejurda, dan turnamen kampus yang terafiliasi ESI Sumbar.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
-            <span class="font-heading font-black text-3xl text-emerald-400 block mb-3">03</span>
-            <h4 class="font-heading font-bold text-lg text-white">Penerbitan E-License ID</h4>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
-              Pengprov ESI Sumbar akan menerbitkan Kartu Lisensi Elektronik resmi dengan barcode verifikasi untuk syarat kejuaraan Porprov & Kejurnas.
-            </p>
-          </div>
-
+        <div>
+          <label class="text-[10px] font-mono text-ink/60 uppercase font-bold block mb-1">Domisili 19 Wilayah:</label>
+          <select id="athleteRegionSelect" onchange="handleAthleteSearch()" class="w-full px-3 py-2 rounded-lg bg-[#F7F7F8] border border-black/15 text-xs font-semibold text-ink focus:outline-none">
+            <option value="all">Semua Kabupaten & Kota</option>
+            <option value="Kota Padang">Kota Padang</option>
+            <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+            <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+            <option value="Kota Pariaman">Kota Pariaman</option>
+            <option value="Kota Solok">Kota Solok</option>
+            <option value="Kab. Agam">Kab. Agam</option>
+            <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+            <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+            <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+            <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+          </select>
         </div>
-
       </div>
-    </section>
 
-    <!-- MODAL ID CARD ATLET DIGITAL BERLISENSI PBESI -->
-    <div id="athleteDetailModal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-      <div class="relative w-full max-w-4xl max-h-[88vh] overflow-y-auto rounded-t-[32px] sm:rounded-3xl border-t sm:border border-white/20 bg-gradient-to-b from-slate-900 via-brand-surface to-brand-navy shadow-[0_0_50px_rgba(225,29,72,0.35)] overflow-hidden translate-y-full sm:translate-y-0 transition-transform duration-300" id="athleteModalContent">
-        <!-- Injected dynamically via JS -->
-      </div>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- 4. ATHLETES GRID (CUT-CORNER 3D CARDS)         -->
+    <!-- ============================================== -->
+    <div id="athletesGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Results Counter -->
+    <div class="mt-8 text-center text-xs font-mono text-ink/60">
+      Menampilkan <strong id="athleteResultCount" class="text-crimson-600 font-bold">8</strong> profil atlet berlisensi & talenta terverifikasi.
     </div>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-brand-line py-12 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-brand-line">
-        
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 p-1.5 flex items-center justify-center shrink-0 shadow-lg shadow-rose-950/30">
-            <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(255,27,81,0.4)]" />
-          </div>
-          <div>
-            <span class="font-heading font-bold text-base text-white tracking-tight">ESPORT <span class="text-rose-500">SUMBAR</span></span>
-            <span class="text-[11px] text-slate-400 block -mt-0.5">Pengurus Provinsi ESI Sumatera Barat</span>
-          </div>
-        </div>
 
-        <!-- Quick Page Links -->
-        <div class="flex flex-wrap items-center justify-center gap-6 text-slate-300 font-medium">
-          <a href="/" class="hover:text-rose-400 transition-colors">Beranda</a>
-          <a href="/about" class="hover:text-rose-400 transition-colors">Tentang Kami</a>
-          <a href="/atlet" class="text-white font-semibold transition-colors">Direktori Atlet</a>
-        </div>
+  <!-- ============================================== -->
+  <!-- 5. MODAL ID CARD ATLET DIGITAL                 -->
+  <!-- ============================================== -->
+  <div id="athleteDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div class="cut-corner-card relative w-full max-w-2xl bg-white p-6 sm:p-8 shadow-2xl border border-black/10 overflow-hidden max-h-[90vh] overflow-y-auto" id="athleteModalContent">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
 
+
+  <!-- ============================================== -->
+  <!-- 6. MODAL REGISTRASI MANDIRI                    -->
+  <!-- ============================================== -->
+  <div id="registrationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div class="cut-corner-card relative w-full max-w-xl bg-white p-6 sm:p-8 shadow-2xl border border-black/10 overflow-hidden max-h-[90vh] overflow-y-auto">
+      <button onclick="closeRegistrationModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="mb-5">
+        <span class="text-[10px] font-mono text-crimson-600 font-bold uppercase tracking-wider block mb-1">
+          Formulir Penjaringan Atlet & Talenta
+        </span>
+        <h3 class="font-display text-3xl text-ink uppercase tracking-tight">
+          Daftarkan Dirimu ke Database
+        </h3>
+        <p class="font-sans text-xs text-ink/70 mt-1">
+          Buka peluang untuk dilirik pelatih Pelatda PON atau klub-klub esports yang sedang membuka rekrutmen.
+        </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+      <form onsubmit="handleRegistrationSubmit(event)" class="space-y-4">
         <div>
-          <p class="font-semibold text-slate-300">Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat</p>
-          <p class="text-slate-500 mt-0.5">Sekretariat: Stadion GOR H. Agus Salim, Kota Padang, Sumatera Barat 25111</p>
+          <label class="text-xs font-bold text-ink block mb-1">Nama Lengkap:</label>
+          <input type="text" id="regName" required placeholder="Contoh: Muhammad Farhan" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
         </div>
-        <div class="sm:text-right">
-          <p>© 2026 ESPORT SUMBAR. Hak cipta dilindungi.</p>
-          <p class="text-slate-600 mt-0.5">Bernaung di bawah KONI Sumbar & PBESI</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-ink block mb-1">IGN (In-Game Name):</label>
+            <input type="text" id="regIgn" required placeholder="Contoh: V4ND4L" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-ink block mb-1">Cabang Game:</label>
+            <select id="regGame" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs font-semibold text-ink focus:outline-none">
+              <option value="VALORANT">VALORANT</option>
+              <option value="Mobile Legends">Mobile Legends</option>
+              <option value="PUBG Mobile">PUBG Mobile</option>
+              <option value="Free Fire">Free Fire</option>
+              <option value="E-Football">eFootball</option>
+            </select>
+          </div>
         </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-ink block mb-1">Role / Spesialisasi:</label>
+            <input type="text" id="regRole" required placeholder="Contoh: Duelist / Jungler" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-ink block mb-1">Domisili 19 Wilayah:</label>
+            <select id="regRegion" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs font-semibold text-ink focus:outline-none">
+              <option value="Kota Padang">Kota Padang</option>
+              <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+              <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+              <option value="Kota Pariaman">Kota Pariaman</option>
+              <option value="Kota Solok">Kota Solok</option>
+              <option value="Kab. Agam">Kab. Agam</option>
+              <option value="Wilayah Lainnya">Wilayah Lainnya (19 Kab/Kota)</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-ink block mb-1">Nomor WhatsApp / Kontak:</label>
+          <input type="tel" id="regPhone" required placeholder="08xxxxxxxxxx" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
+        </div>
+        <div class="pt-2">
+          <button type="submit" class="w-full cut-corner-btn py-3.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-sm tracking-wider transition-all shadow-lg flex items-center justify-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Simpan Profil Atlet</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ============================================================== -->
+  <!-- 7. NATIVE MOBILE APP DOCK                                      -->
+  <!-- ============================================================== -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-xl border-t border-black/10 px-4 py-2 flex items-center justify-around shadow-2xl">
+    <a href="/" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <span>Beranda</span>
+    </a>
+    <a href="/#direktori" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="search" class="w-5 h-5"></i>
+      <span>Cari Data</span>
+    </a>
+    <button onclick="openRegistrationModal()" class="flex flex-col items-center gap-1 text-crimson-600 font-bold text-[10px] -mt-5">
+      <div class="w-12 h-12 rounded-full bg-crimson-800 text-paper flex items-center justify-center shadow-lg shadow-crimson-900/40 border-2 border-white">
+        <i data-lucide="plus" class="w-6 h-6"></i>
+      </div>
+      <span>Daftar</span>
+    </button>
+    <a href="/#peta-wilayah" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+      <i data-lucide="map-pin" class="w-5 h-5"></i>
+      <span>Peta 19</span>
+    </a>
+    <a href="/atlet" class="flex flex-col items-center gap-1 text-crimson-600 font-bold text-[10px]">
+      <i data-lucide="users" class="w-5 h-5"></i>
+      <span>Database</span>
+    </a>
+  </nav>
+
+
+  <!-- ============================================== -->
+  <!-- 8. FOOTER                                     -->
+  <!-- ============================================== -->
+  <footer class="bg-ink text-paper py-12 px-4 sm:px-6 lg:px-8 border-t border-crimson-600/30">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-auto flex items-center justify-center">
+          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="h-10 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(224,34,45,0.4)]" />
+        </div>
+        <div>
+          <span class="font-display text-xl text-paper tracking-wider">ESPORT <span class="text-crimson-400">SUMBAR</span></span>
+          <span class="text-[11px] text-paper/60 block font-mono">Platform Provider Esport & Database Ranah Minang</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-paper/70 font-semibold">
+        <a href="/" class="hover:text-crimson-400 transition-colors">Beranda</a>
+        <a href="/#direktori" class="hover:text-crimson-400 transition-colors">Direktori 7 Pilar</a>
+        <a href="/#peta-wilayah" class="hover:text-crimson-400 transition-colors">Peta 19 Wilayah</a>
+        <a href="/about" class="hover:text-crimson-400 transition-colors">Tentang Kami</a>
+        <a href="/atlet" class="hover:text-crimson-400 transition-colors">Database Atlet</a>
+      </div>
+
+      <div class="text-xs text-paper/50 font-mono text-center md:text-right">
+        © 2026 ESPORT SUMBAR. Official Partner ESI Sumatera Barat.
       </div>
     </div>
   </footer>
 
+
+  <!-- ============================================== -->
+  <!-- 9. JAVASCRIPT DATABASE ENGINE                  -->
+  <!-- ============================================== -->
   <script>
-    // ATHLETES ROSTER DATA & REFERENCE-INSPIRED COLLECTIBLE CARDS
-    const ATHLETES_DATA = [
+    const athletesData = [
       {
         id: "ath-1",
+        name: "Muhammad Rayden",
         ign: "V4ND4L",
-        name: "Muhammad Rayhan Pratama",
-        ovr: 96,
-        game: "VALORANT",
         role: "Duelist / Entry Fragger",
-        specialty: "First Blood Specialist & Operator Clutch",
-        region: "Kota Padang",
+        game: "VALORANT",
         club: "Minang Pride Esports",
-        category: "Pelatda PON",
-        statusBadge: "Atlet Pelatda PON Sumbar",
-        licenseId: "SB-VAL-2601",
-        photo: "/images/athlete-v4nd4l.jpg",
-        stats: { winrate: "78,4%", rating: "1.42 VCT", tournaments: "32x Resmi" },
-        bio: "Duelist andalan Sumatera Barat yang memegang predikat Top ACS pada Kualifikasi Pra-PON Sumatra.",
-        color: "#ef4444"
+        region: "Kota Padang",
+        status: "Pelatda PON • Terverifikasi ESI",
+        category: "pelatda",
+        rating: 96,
+        licenseId: "PBESI-SB-2026-VKL-01",
+        featured: true,
+        stats: { winrate: "78.4%", kd: "1.42 VCT", tournaments: "32x Resmi" }
       },
       {
         id: "ath-2",
-        ign: "R4YDEN",
-        name: "Fadhil Al-Ghifari",
-        ovr: 95,
-        game: "Mobile Legends",
-        role: "Jungler / Assassin Hyper",
-        specialty: "Retribution Smite & Objective Lord Control",
-        region: "Kota Bukittinggi",
-        club: "Singkarak Reborn",
-        category: "Kejurda",
-        statusBadge: "Juara Kejurda Sumbar 2025",
-        licenseId: "SB-MLB-2602",
-        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "82,5%", rating: "9.4 KDA", tournaments: "45x Resmi" },
-        bio: "Pemain veteran dengan ketenangan tinggi dalam perebutan Lord dan objektif penting turnamen.",
-        color: "#f59e0b"
+        name: "Ihsan Pratama",
+        ign: "B4R4_AP1",
+        role: "Sniper / Scout",
+        game: "PUBG Mobile",
+        region: "Kota Pariaman",
+        club: "Tabuik Tactical Clan",
+        status: "Pelatda PON • Terverifikasi ESI",
+        category: "pelatda",
+        rating: 94,
+        licenseId: "PBESI-SB-2026-PUB-08",
+        featured: false,
+        stats: { winrate: "68.0%", kd: "4.80 FPP", tournaments: "18x Kejurda" }
       },
       {
         id: "ath-3",
-        ign: "B4R4_AP1",
-        name: "Ahmad Fauzan",
-        ovr: 94,
-        game: "Free Fire",
-        role: "Rusher & Shot-Caller",
-        specialty: "Close Combat Entry & Crossfire Flank",
-        region: "Kota Payakumbuh",
-        club: "Luak Limopuluah Elite",
-        category: "Kejurda",
-        statusBadge: "Top Fragger Sirkuit Pelajar",
-        licenseId: "SB-FF-2603",
-        photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "68,0%", rating: "4.85 K/D", tournaments: "38x Resmi" },
-        bio: "Rusher agresif dengan refleks kilat yang membawa sekolahnya menjuarai turnamen tingkat provinsi.",
-        color: "#f43f5e"
+        name: "Fajri Alamsyah",
+        ign: "F4LCON",
+        role: "Jungler / Hyper",
+        game: "Mobile Legends",
+        region: "Kota Bukittinggi",
+        club: "Free Agent (LFT)",
+        status: "Open for Scout / Scrim",
+        category: "lft",
+        rating: 92,
+        licenseId: "PBESI-SB-2026-MLB-14",
+        featured: false,
+        stats: { winrate: "74.2%", kd: "6.12 KDA", tournaments: "14x Turnamen" }
       },
       {
         id: "ath-4",
-        ign: "CYBER_SNIPER",
-        name: "Rifki Zulkarnain",
-        ovr: 93,
-        game: "PUBG Mobile",
-        role: "Scout / DMR Specialist",
-        specialty: "Long-Range Elimination & Rotation Scout",
-        region: "Kabupaten Agam",
-        club: "Marapi Tactical Force",
-        category: "Pelatda PON",
-        statusBadge: "Atlet Pelatda PON Sumbar",
-        licenseId: "SB-PUB-2604",
-        photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "74,2%", rating: "5.20 K/D", tournaments: "29x Resmi" },
-        bio: "Penembak jitu jarak jauh pemegang rekor eliminasi terjauh (420m) pada kualifikasi Kejurnas PBESI.",
-        color: "#f97316"
+        name: "Rian Hidayat",
+        ign: "SH4DOW",
+        role: "Initiator / Sova Specialist",
+        game: "VALORANT",
+        region: "Kota Payakumbuh",
+        club: "Payakumbuh Cyber Squad",
+        status: "Juara Kejurda 2025",
+        category: "kejurda",
+        rating: 91,
+        licenseId: "PBESI-SB-2026-VKL-22",
+        featured: false,
+        stats: { winrate: "71.0%", kd: "1.28 VCT", tournaments: "22x Daerah" }
       },
       {
         id: "ath-5",
-        ign: "ALIF_ORANGETM",
-        name: "Alif Kurnia Ramadhan",
-        ovr: 95,
-        game: "eFootball (PES)",
-        role: "Virtual Football Solo Striker",
-        specialty: "Possession Game & Tiki-Taka Finishing",
-        region: "Kota Pariaman",
-        club: "Pariaman Cyber FC",
-        category: "Pelatda PON",
-        statusBadge: "Medalis Emas Porprov",
-        licenseId: "SB-EFT-2605",
-        photo: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "84,0%", rating: "Top #1 Sumbar", tournaments: "26x Resmi" },
-        bio: "Atlet spesialis konsol PlayStation dengan penguasaan formasi menyerang yang belum terkalahkan di Kejurda.",
-        color: "#10b981"
+        name: "Dimas Anggara",
+        ign: "BL4ZE",
+        role: "Rusher / Shotcaller",
+        game: "Free Fire",
+        region: "Kab. Agam",
+        club: "Singgalang Pride",
+        status: "Juara Porprov Sumbar",
+        category: "kejurda",
+        rating: 90,
+        licenseId: "PBESI-SB-2026-FF-05",
+        featured: false,
+        stats: { winrate: "65.5%", kd: "3.90 K/D", tournaments: "16x Juara" }
       },
       {
         id: "ath-6",
-        ign: "VALKYRIE",
-        name: "Annisa Putri Maharani",
-        ovr: 92,
+        name: "Alif Setiawan",
+        ign: "V0RTEX",
+        role: "Midlaner / Mage",
         game: "Mobile Legends",
-        role: "Midlaner / Mage Specialist",
-        specialty: "High Ground Defense & Area Burst",
-        region: "Kota Padang",
-        club: "Queen of Minang",
-        category: "Kejurda",
-        statusBadge: "Juara Ladies Cup Sumbar",
-        licenseId: "SB-MLB-2606",
-        photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "79,2%", rating: "8.1 KDA", tournaments: "22x Resmi" },
-        bio: "Kapten tim putri Sumbar yang memiliki positioning luar biasa pada cabang Mobile Legends.",
-        color: "#f59e0b"
+        region: "Kota Solok",
+        club: "Looking for Team (LFT)",
+        status: "Open for Scout / Scrim",
+        category: "lft",
+        rating: 89,
+        licenseId: "PBESI-SB-2026-MLB-45",
+        featured: false,
+        stats: { winrate: "69.0%", kd: "5.40 KDA", tournaments: "9x Turnamen" }
       },
       {
         id: "ath-7",
-        ign: "Z3R0",
-        name: "Bintang Pratama",
-        ovr: 91,
-        game: "VALORANT",
-        role: "Controller / Tactician",
-        specialty: "Viper/Omen Smoke & Site Retake Command",
+        name: "Kevin Sanjaya",
+        ign: "STRIKER",
+        role: "Forward / Tactician",
+        game: "E-Football",
         region: "Kota Padang Panjang",
-        club: "Serambi Cyber Squad",
-        category: "Pelatda PON",
-        statusBadge: "Talenta Binaan PBESI",
-        licenseId: "SB-VAL-2607",
-        photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "72,0%", rating: "1.28 VCT", tournaments: "18x Resmi" },
-        bio: "Otak taktik smoke lineup yang mengantarkan kampusnya menjuarai turnamen antarperguruan tinggi se-Sumatra.",
-        color: "#ef4444"
+        club: "Pelatda PON Sumbar",
+        status: "Pelatda PON • Terverifikasi ESI",
+        category: "pelatda",
+        rating: 95,
+        licenseId: "PBESI-SB-2026-PES-02",
+        featured: false,
+        stats: { winrate: "82.0%", kd: "Divisi 1", tournaments: "28x Nasional" }
       },
       {
         id: "ath-8",
-        ign: "NAGARI_W4RRIOR",
-        name: "Teguh Hendra Wijaya",
-        ovr: 94,
-        game: "PUBG Mobile",
-        role: "In-Game Leader (IGL)",
-        specialty: "Zone Edge Pathing & Ambush Setup",
-        region: "Kabupaten Lima Puluh Kota",
-        club: "Harau Tactical Team",
-        category: "Pelatda PON",
-        statusBadge: "Kapten Pelatda PON Sumbar",
-        licenseId: "SB-PUB-2608",
-        photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "71,5%", rating: "4.60 K/D", tournaments: "34x Resmi" },
-        bio: "Leader taktis dengan rotasi zona cerdas yang menjadi komandan utama tim squad PUBG Mobile PON Sumbar.",
-        color: "#f97316"
-      },
-      {
-        id: "ath-9",
-        ign: "PHOENIX",
-        name: "Dimas Wahyudi",
-        ovr: 90,
-        game: "Free Fire",
-        role: "Flanker / Grenadier",
-        specialty: "Cooked Grenade & Defensive Gloo Wall",
-        region: "Kabupaten Pesisir Selatan",
-        club: "Pesisir Cyber Wave",
-        category: "Kejurda",
-        statusBadge: "Juara Nagari Cup 2025",
-        licenseId: "SB-FF-2609",
-        photo: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "66,0%", rating: "4.10 K/D", tournaments: "25x Resmi" },
-        bio: "Spesialis lemparan granat presisi dengan insting flank yang kerap memecah pertahanan lawan.",
-        color: "#f43f5e"
-      },
-      {
-        id: "ath-10",
-        ign: "SKYWALKER",
-        name: "Irfan Maulana",
-        ovr: 89,
-        game: "Honor of Kings",
-        role: "Clash Lane / Fighter",
-        specialty: "1v1 Duel & Teleport Teamfight Flank",
-        region: "Kota Solok",
-        club: "Solok Cyber Legend",
-        category: "Kejurda",
-        statusBadge: "Top 1 HoK Sumbar Showcase",
-        licenseId: "SB-HOK-2610",
-        photo: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "76,5%", rating: "7.8 KDA", tournaments: "15x Resmi" },
-        bio: "Bintang muda divisi baru Honor of Kings dengan mekanik laning phase yang sangat dominan.",
-        color: "#a855f7"
-      },
-      {
-        id: "ath-11",
-        ign: "COACH_MINANG",
-        name: "Rendra Kusuma, S.Kom",
-        ovr: 97,
-        game: "Mobile Legends",
-        role: "Head Coach & Data Analyst",
-        specialty: "Draft Ban-Pick & Macro Game Scouting",
-        region: "Kota Padang",
-        club: "Kontingen PON Sumbar",
-        category: "Pelatih",
-        statusBadge: "Pelatih Lisensi A PBESI",
-        licenseId: "SB-CCH-2611",
-        photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "4x Trofi", rating: "Lisensi A PBESI", tournaments: "60+ Match" },
-        bio: "Pelatih bersertifikasi resmi PBESI yang merancang strategi draft pick dan statistik makro tim Sumbar.",
-        color: "#f59e0b"
-      },
-      {
-        id: "ath-12",
-        ign: "EL_STRIKER",
-        name: "Bayu Saputra",
-        ovr: 92,
-        game: "eFootball (PES)",
-        role: "Co-Op 2v2 Specialist",
-        specialty: "High Pressing & Through Ball Synergy",
-        region: "Kota Sawahlunto",
-        club: "Heritage Gaming",
-        category: "Pelatda PON",
-        statusBadge: "Juara Kejurda Ganda",
-        licenseId: "SB-EFT-2612",
-        photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=85",
-        stats: { winrate: "81,0%", rating: "Co-op Master", tournaments: "20x Resmi" },
-        bio: "Spesialis duet tiki-taka virtual sepak bola dengan chemistry operan teruji di panggung kompetisi.",
-        color: "#10b981"
+        name: "Fajar Nugraha",
+        ign: "GHOST_RUNNER",
+        role: "Sentinel / Cypher Specialist",
+        game: "VALORANT",
+        region: "Kab. Pesisir Selatan",
+        club: "Mandeh Cyber",
+        status: "Juara Kejurda Sumbar",
+        category: "kejurda",
+        rating: 90,
+        licenseId: "PBESI-SB-2026-VKL-33",
+        featured: false,
+        stats: { winrate: "67.5%", kd: "1.21 VCT", tournaments: "15x Resmi" }
       }
     ];
 
-    let currentCardTheme = 'tcg'; // 'tcg' (sesuai referensi TCG presisi) atau 'dark'
-    let currentAthleteGameFilter = 'all';
-    let currentAthleteCatFilter = 'all';
-    let currentAthleteQuery = '';
+    let currentStatus = "all";
 
-    function setCardTheme(theme) {
-      currentCardTheme = theme;
-      const tcgBtn = document.getElementById('cardThemeTcgBtn');
-      const darkBtn = document.getElementById('cardThemeDarkBtn');
-
-      if (theme === 'tcg') {
-        tcgBtn?.classList.remove('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
-        tcgBtn?.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
-        darkBtn?.classList.remove('bg-rose-600', 'text-white', 'shadow-sm');
-        darkBtn?.classList.add('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
-      } else {
-        darkBtn?.classList.remove('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
-        darkBtn?.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
-        tcgBtn?.classList.remove('bg-rose-600', 'text-white', 'shadow-sm');
-        tcgBtn?.classList.add('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
-      }
-      renderAthletes();
-    }
-
-    function renderAthletes() {
-      const container = document.getElementById('athletesGridContainer');
-      const emptyState = document.getElementById('athletesEmptyState');
-      const countEl = document.getElementById('athleteResultCount');
+    function renderAthletesGrid(items) {
+      const container = document.getElementById("athletesGridContainer");
+      const countEl = document.getElementById("athleteResultCount");
       if (!container) return;
 
-      const filtered = ATHLETES_DATA.filter(ath => {
-        const matchGame = currentAthleteGameFilter === 'all' || ath.game === currentAthleteGameFilter;
-        const matchCat = currentAthleteCatFilter === 'all' || ath.category === currentAthleteCatFilter;
-        
-        const q = currentAthleteQuery.toLowerCase().trim();
-        const matchQuery = !q || 
-          ath.ign.toLowerCase().includes(q) || 
-          ath.name.toLowerCase().includes(q) || 
-          ath.club.toLowerCase().includes(q) || 
-          ath.region.toLowerCase().includes(q) || 
-          ath.role.toLowerCase().includes(q) ||
-          ath.game.toLowerCase().includes(q);
+      countEl.innerText = items.length;
 
-        return matchGame && matchCat && matchQuery;
-      });
-
-      if (filtered.length === 0) {
-        container.innerHTML = '';
-        emptyState?.classList.remove('hidden');
-        if (countEl) countEl.textContent = '0 kartu ditemukan';
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center p-8 rounded-2xl bg-white border border-black/10">
+            <i data-lucide="users" class="w-8 h-8 text-crimson-600 mx-auto mb-2"></i>
+            <h4 class="font-display text-xl text-ink">Tidak Ada Atlet Ditemukan</h4>
+            <p class="font-sans text-xs text-ink/60 mt-1">Coba gunakan kata kunci pencarian atau filter yang berbeda.</p>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
 
-      emptyState?.classList.add('hidden');
-      if (countEl) countEl.textContent = `Menampilkan ${filtered.length} kartu koleksi atlet berlisensi dari 8.420 atlet binaan`;
-
-      // RENDER KARTU DENGAN PROPORSI TCG PRESISI (ASPECT RATIO 5 : 7.2)
-      container.innerHTML = filtered.map(ath => {
-        const gameShort = ath.game.replace('Mobile Legends', 'MLBB').replace('PUBG Mobile', 'PUBGM').replace(' (PES)', '');
-        
-        if (currentCardTheme === 'tcg') {
-          // ==========================================
-          // 🎴 KARTU TCG PRESISI SESUAI REFERENSI ASLI
-          // ==========================================
-          return `
-            <div 
-              onclick="openAthleteModal('${ath.id}')"
-              class="group relative w-full max-w-[310px] mx-auto aspect-[5/7.2] rounded-[22px] border border-[#d2cbbe] bg-[#f4f0e8] flex flex-col justify-between overflow-hidden shadow-[0_12px_28px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-2.5 hover:border-rose-500 hover:shadow-[0_22px_45px_rgba(225,29,72,0.42)] cursor-pointer select-none"
-            >
-              <!-- Holographic Sheen Layer on hover -->
-              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-30"></div>
-
-              <!-- 1. PITA MERAH GANTUNG (Flush ke tepi atas, ujung bawah membulat rapi) -->
-              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-[#d9383a] text-white flex flex-col items-center shadow-md shadow-red-950/40 z-20">
-                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
-                <span class="text-[10px] sm:text-[11px] mt-1 text-red-100 font-mono leading-none">⊚</span>
+      container.innerHTML = items.map((ath, idx) => {
+        const isFeatured = idx === 0 || ath.featured;
+        return `
+          <div class="cut-corner-card bg-white p-5 border transition-all duration-300 flex flex-col justify-between ${
+            isFeatured ? 'border-2 border-crimson-600 shadow-xl scale-[1.01]' : 'border-black/10 shadow-md hover:border-crimson-600'
+          }">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider ${
+                  ath.category === 'pelatda' ? 'bg-crimson-800 text-paper' : ath.category === 'lft' ? 'bg-emerald-600 text-paper' : 'bg-black/5 text-ink'
+                }">
+                  ${ath.category === 'pelatda' ? 'PELATDA PON' : ath.category === 'lft' ? 'LOOKING FOR TEAM' : 'KEJURDA'}
+                </span>
+                <span class="font-mono text-xs font-bold text-crimson-600">${ath.game}</span>
               </div>
 
-              <!-- 2. BAGIAN ATAS (KERTAS PARCHMENT LIGHT ~65% TINGGI KARTU) -->
-              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
-                
-                <!-- Header: Judul IGN Tengah + Subtitle Merah + Badge Game -->
-                <div class="text-center pl-7 pr-2">
-                  <div class="flex items-center justify-center gap-1.5">
-                    <h3 class="font-heading font-black text-lg sm:text-xl text-[#111318] tracking-tight leading-none group-hover:text-[#d9383a] transition-colors">
-                      ${ath.ign}
-                    </h3>
-                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-black/10 text-slate-800 border border-black/10">
-                      ${gameShort}
-                    </span>
-                  </div>
-                  <div class="text-[8.5px] sm:text-[9px] font-mono text-[#d9383a] uppercase tracking-widest font-bold mt-1">
-                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
-                  </div>
+              <!-- Avatar Crest & Identity -->
+              <div class="flex items-center gap-3 my-3">
+                <div class="w-12 h-12 rounded-xl bg-crimson-gradient p-2 flex items-center justify-center text-paper font-display text-lg font-bold shadow-md shrink-0">
+                  ${ath.ign.slice(0, 2)}
                 </div>
-
-                <!-- Artwork Atlet / Karakter Dominan Tengah -->
-                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-gradient-to-b from-[#e3dcce] to-[#d6cdbd]">
-                  <!-- Halftone Card Texture -->
-                  <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 6px 6px;"></div>
-                  
-                  <img 
-                    src="${ath.photo}" 
-                    alt="${ath.ign} - ${ath.name}" 
-                    class="w-full h-full object-cover object-top filter contrast-110 brightness-95 group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                  
-                  <!-- Bottom Fade Ke Arah Divider -->
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#f4f0e8] via-transparent via-35% to-transparent"></div>
+                <div>
+                  <h3 class="font-display text-2xl text-ink tracking-wide font-bold leading-none">
+                    ${ath.ign}
+                  </h3>
+                  <span class="text-xs text-ink/70 font-semibold block mt-0.5">${ath.name}</span>
                 </div>
-
-                <!-- Glyph Stat Divider: ── [ ⊚ ] [ ☽ ] [ • ] ── -->
-                <div class="relative flex items-center justify-center py-1">
-                  <div class="absolute inset-x-0 h-px bg-[#c8c1b3]"></div>
-                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#f4f0e8]">
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
-                      <span>⊚</span> <span>${ath.stats.winrate}</span>
-                    </span>
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
-                      <span>☽</span> <span>${ath.stats.rating}</span>
-                    </span>
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
-                      <span>•</span> <span>${ath.stats.tournaments}</span>
-                    </span>
-                  </div>
-                </div>
-
               </div>
 
-              <!-- 3. BAGIAN BAWAH: KOTAK ATRIBUT HITAM PEKAT MENGISI DASAR KARTU (~35% TINGGI) -->
-              <div class="bg-[#0c0d12] text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-black">
-                
-                <!-- Peran & Spesialisasi -->
-                <div class="leading-tight text-[10px] sm:text-[10.5px]">
-                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9px] sm:text-[9.5px]">PERAN: </span>
-                  <span class="text-white font-medium">${ath.role}</span>
-                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
+              <div class="space-y-1.5 text-xs text-ink/75 pt-2 border-t border-black/10">
+                <div class="flex justify-between">
+                  <span class="text-ink/50">Role:</span>
+                  <span class="font-semibold text-ink">${ath.role}</span>
                 </div>
-
-                <!-- Klub & Wilayah -->
-                <div class="leading-tight text-[10px] sm:text-[10.5px] pt-0.5">
-                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9px] sm:text-[9.5px]">KLUB: </span>
-                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
+                <div class="flex justify-between">
+                  <span class="text-ink/50">Klub:</span>
+                  <span class="font-semibold text-crimson-600">${ath.club}</span>
                 </div>
-
-                <!-- Lisensi Resmi PBESI -->
-                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
-                  <span class="text-emerald-400 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    ${ath.statusBadge}
-                  </span>
-                  <span class="text-slate-400 font-bold">#${ath.licenseId}</span>
+                <div class="flex justify-between">
+                  <span class="text-ink/50">Domisili:</span>
+                  <span class="font-semibold text-ink">${ath.region}</span>
                 </div>
-
               </div>
 
+              <!-- Stat Chips -->
+              <div class="grid grid-cols-3 gap-1.5 mt-3 pt-3 border-t border-black/10 text-center font-mono">
+                <div class="p-1.5 rounded bg-[#F7F7F8]">
+                  <span class="text-[9px] text-ink/50 block">WINRATE</span>
+                  <span class="text-[11px] font-bold text-crimson-600">${ath.stats.winrate}</span>
+                </div>
+                <div class="p-1.5 rounded bg-[#F7F7F8]">
+                  <span class="text-[9px] text-ink/50 block">METRIK</span>
+                  <span class="text-[11px] font-bold text-ink">${ath.stats.kd}</span>
+                </div>
+                <div class="p-1.5 rounded bg-[#F7F7F8]">
+                  <span class="text-[9px] text-ink/50 block">RATING</span>
+                  <span class="text-[11px] font-bold text-emerald-600">${ath.rating}</span>
+                </div>
+              </div>
             </div>
-          `;
-        } else {
-          // ==========================================
-          // ⚡ KARTU DARK TITANIUM CYBER EDITION
-          // ==========================================
-          return `
-            <div 
-              onclick="openAthleteModal('${ath.id}')"
-              class="group relative w-full max-w-[310px] mx-auto aspect-[5/7.2] rounded-[22px] border border-white/10 bg-[#0f1422] flex flex-col justify-between overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-2.5 hover:border-rose-500 hover:shadow-[0_22px_45px_rgba(225,29,72,0.38)] cursor-pointer select-none"
-            >
-              <!-- Holographic Sheen Layer on hover -->
-              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-rose-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-30"></div>
 
-              <!-- 1. PITA MERAH GANTUNG -->
-              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-gradient-to-b from-rose-500 to-rose-600 text-white flex flex-col items-center shadow-lg shadow-rose-600/40 z-20">
-                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
-                <span class="text-[10px] sm:text-[11px] mt-1 text-rose-200 font-mono leading-none">⊚</span>
-              </div>
-
-              <!-- 2. BAGIAN ATAS DARK CANVAS -->
-              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
-                
-                <!-- Header -->
-                <div class="text-center pl-7 pr-2">
-                  <div class="flex items-center justify-center gap-1.5">
-                    <h3 class="font-heading font-black text-lg sm:text-xl text-white tracking-tight leading-none group-hover:text-rose-400 transition-colors">
-                      ${ath.ign}
-                    </h3>
-                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-white/10 border border-white/10 text-white">
-                      ${gameShort}
-                    </span>
-                  </div>
-                  <div class="text-[8.5px] sm:text-[9px] font-mono text-rose-400 uppercase tracking-widest font-bold mt-1">
-                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
-                  </div>
-                </div>
-
-                <!-- Artwork -->
-                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-white/[0.04]">
-                  <div class="absolute inset-0 bg-radial at-center from-rose-500/20 via-transparent to-transparent opacity-30 group-hover:opacity-100 transition-opacity"></div>
-                  <img 
-                    src="${ath.photo}" 
-                    alt="${ath.ign} - ${ath.name}" 
-                    class="w-full h-full object-cover object-top filter brightness-95 contrast-110 group-hover:scale-105 group-hover:brightness-105 transition-all duration-500 ease-out"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#0f1422] via-transparent via-40% to-transparent"></div>
-                </div>
-
-                <!-- Glyph Stat Divider -->
-                <div class="relative flex items-center justify-center py-1">
-                  <div class="absolute inset-x-0 h-px bg-white/10"></div>
-                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#0f1422]">
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-rose-600 flex items-center gap-0.5 shadow-sm">
-                      <span>⊚</span> <span>${ath.stats.winrate}</span>
-                    </span>
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-rose-600 flex items-center gap-0.5 shadow-sm">
-                      <span>☽</span> <span>${ath.stats.rating}</span>
-                    </span>
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-rose-600 flex items-center gap-0.5 shadow-sm">
-                      <span>•</span> <span>${ath.stats.tournaments}</span>
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- 3. BAGIAN BAWAH KOTAK HITAM -->
-              <div class="bg-black/85 text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-white/5">
-                <div class="leading-tight text-[10px] sm:text-[10.5px]">
-                  <span class="font-heading font-black text-rose-500 uppercase tracking-wider text-[9px] sm:text-[9.5px]">PERAN: </span>
-                  <span class="text-white font-medium">${ath.role}</span>
-                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
-                </div>
-
-                <div class="leading-tight text-[10px] sm:text-[10.5px] pt-0.5">
-                  <span class="font-heading font-black text-rose-500 uppercase tracking-wider text-[9px] sm:text-[9.5px]">KLUB: </span>
-                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
-                </div>
-
-                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
-                  <span class="text-emerald-400 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    ${ath.statusBadge}
-                  </span>
-                  <span class="text-slate-500 font-semibold">#${ath.licenseId}</span>
-                </div>
-              </div>
-
+            <div class="pt-4 mt-4 border-t border-black/10 flex items-center justify-between">
+              <span class="font-mono text-[10px] text-ink/50 font-bold">${ath.licenseId}</span>
+              <button onclick="openAthleteDetailModal('${ath.id}')" class="cut-corner-btn px-4 py-2 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs tracking-wider transition-all">
+                Detail Kartu
+              </button>
             </div>
-          `;
-        }
-      }).join('');
+          </div>
+        `;
+      }).join("");
 
       lucide.createIcons();
     }
 
-    // ==========================================
-    // 🎴 UPGRADED COLLECTOR'S MASTER DOSSIER MODAL
-    // ==========================================
-    function openAthleteModal(id) {
-      const ath = ATHLETES_DATA.find(a => a.id === id);
+    function handleAthleteSearch() {
+      const keyword = (document.getElementById("athleteSearchInput")?.value || "").toLowerCase();
+      const game = document.getElementById("athleteGameSelect")?.value || "all";
+      const region = document.getElementById("athleteRegionSelect")?.value || "all";
+
+      const filtered = athletesData.filter(ath => {
+        const matchesStatus = currentStatus === "all" || ath.category === currentStatus;
+        const matchesKeyword = !keyword ||
+          ath.name.toLowerCase().includes(keyword) ||
+          ath.ign.toLowerCase().includes(keyword) ||
+          ath.club.toLowerCase().includes(keyword) ||
+          ath.licenseId.toLowerCase().includes(keyword) ||
+          ath.role.toLowerCase().includes(keyword);
+        const matchesGame = game === "all" || ath.game === game;
+        const matchesRegion = region === "all" || ath.region === region;
+
+        return matchesStatus && matchesKeyword && matchesGame && matchesRegion;
+      });
+
+      renderAthletesGrid(filtered);
+    }
+
+    function filterStatus(status) {
+      currentStatus = status;
+      document.querySelectorAll(".status-tab").forEach(tab => {
+        tab.className = "status-tab px-4 py-2 rounded-xl bg-[#F7F7F8] text-ink hover:bg-black/5 border border-black/10 whitespace-nowrap transition-all";
+      });
+      const activeTab = document.getElementById(`status-${status}`);
+      if (activeTab) {
+        activeTab.className = "status-tab px-4 py-2 rounded-xl bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all";
+      }
+      handleAthleteSearch();
+    }
+
+    function openAthleteDetailModal(id) {
+      const ath = athletesData.find(a => a.id === id);
       if (!ath) return;
 
-      const modal = document.getElementById('athleteDetailModal');
-      const content = document.getElementById('athleteModalContent');
-      const gameShort = ath.game.replace('Mobile Legends', 'MLBB').replace('PUBG Mobile', 'PUBGM').replace(' (PES)', '');
+      const modal = document.getElementById("athleteDetailModal");
+      const content = document.getElementById("athleteModalContent");
 
       content.innerHTML = `
-        <!-- Mobile Bottom Sheet Handle Pill -->
-        <div class="w-12 h-1.5 rounded-full bg-white/20 mx-auto my-3 sm:hidden"></div>
-        <div class="p-6 sm:p-8 relative overflow-hidden bg-gradient-to-b from-[#111726] to-[#0a0d16] text-white">
-          
-          <!-- Top Header PBESI Verification Title -->
-          <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 shadow-lg shrink-0">
-                <img src="/pbesi-logo.png" alt="PBESI" class="w-full h-full object-contain" />
-              </div>
-              <div>
-                <span class="font-heading font-black text-sm text-white tracking-wider uppercase block">Pengprov ESI Sumatera Barat</span>
-                <span class="text-[10px] text-slate-400 block font-mono">Dossier & Sertifikasi Resmi Lisensi Atlet 2026</span>
-              </div>
-            </div>
+        <button onclick="closeAthleteDetailModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
 
-            <button onclick="closeAthleteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
-              ✕
-            </button>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-600 font-bold">
+            LISENSI ELEKTRONIK RESMI ESI SUMATERA BARAT
+          </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-black/10">
+          <div>
+            <h2 class="font-display text-4xl text-ink uppercase tracking-tight">${ath.ign}</h2>
+            <span class="text-sm text-ink/70 font-semibold">${ath.name} • ${ath.role}</span>
           </div>
-
-          <!-- Split Master View (Left: The Collectible Pro Card, Right: Official Verification Dossier) -->
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
-            
-            <!-- Left: Collectible Card Master Preview (Model TCG Presisi Sesuai Referensi) -->
-            <div class="md:col-span-5 w-full max-w-[320px] mx-auto aspect-[5/7.2] rounded-[22px] border border-[#d2cbbe] bg-[#f4f0e8] flex flex-col justify-between overflow-hidden shadow-[0_20px_45px_rgba(0,0,0,0.7)] relative select-none">
-              
-              <!-- 1. PITA MERAH GANTUNG (Flush ke atas) -->
-              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-[#d9383a] text-white flex flex-col items-center shadow-md shadow-red-950/40 z-20">
-                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
-                <span class="text-[10px] sm:text-[11px] mt-1 text-red-100 font-mono leading-none">⊚</span>
-              </div>
-
-              <!-- 2. BAGIAN ATAS (KERTAS PARCHMENT LIGHT) -->
-              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
-                
-                <!-- Header: Judul IGN Tengah + Subtitle Merah + Badge Game -->
-                <div class="text-center pl-7 pr-2">
-                  <div class="flex items-center justify-center gap-1.5">
-                    <h4 class="font-heading font-black text-xl text-[#111318] tracking-tight leading-none">
-                      ${ath.ign}
-                    </h4>
-                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-black/10 text-slate-800 border border-black/10">
-                      ${gameShort}
-                    </span>
-                  </div>
-                  <div class="text-[9px] font-mono text-[#d9383a] uppercase tracking-widest font-bold mt-1">
-                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
-                  </div>
-                </div>
-
-                <!-- Artwork Atlet -->
-                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-gradient-to-b from-[#e3dcce] to-[#d6cdbd]">
-                  <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 6px 6px;"></div>
-                  <img src="${ath.photo}" alt="${ath.ign}" class="w-full h-full object-cover object-top filter contrast-110 brightness-95" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#f4f0e8] via-transparent via-35% to-transparent"></div>
-                </div>
-
-                <!-- Glyph Stat Divider -->
-                <div class="relative flex items-center justify-center py-1">
-                  <div class="absolute inset-x-0 h-px bg-[#c8c1b3]"></div>
-                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#f4f0e8]">
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
-                      <span>⊚</span> <span>${ath.stats.winrate}</span>
-                    </span>
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
-                      <span>☽</span> <span>${ath.stats.rating}</span>
-                    </span>
-                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
-                      <span>•</span> <span>${ath.stats.tournaments}</span>
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-
-              <!-- 3. BAGIAN BAWAH: KOTAK ATRIBUT HITAM PEKAT DASAR KARTU -->
-              <div class="bg-[#0c0d12] text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-black">
-                <div class="leading-tight text-[10.5px]">
-                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9.5px]">PERAN: </span>
-                  <span class="text-white font-medium">${ath.role}</span>
-                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
-                </div>
-                <div class="leading-tight text-[10.5px] pt-0.5">
-                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9.5px]">KLUB: </span>
-                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
-                </div>
-                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
-                  <span class="text-emerald-400 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    ${ath.statusBadge}
-                  </span>
-                  <span class="text-slate-400 font-bold">#${ath.licenseId}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Right: Official PBESI Dossier & Stats -->
-            <div class="md:col-span-7 flex flex-col justify-between space-y-5">
-              
-              <div>
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="inline-block text-[11px] font-mono uppercase tracking-wider text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-500/20">
-                    ● ${ath.statusBadge}
-                  </span>
-                  <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                    Verified PBESI 2026
-                  </span>
-                </div>
-
-                <h3 class="font-heading font-black text-3xl text-white tracking-tight leading-none mb-1">
-                  ${ath.name}
-                </h3>
-                <div class="text-sm text-slate-300 flex items-center gap-2 font-mono">
-                  <span class="text-rose-400 font-bold">${ath.ign}</span> • ${ath.game} • 📍 ${ath.region}
-                </div>
-                
-                <p class="text-xs text-slate-300 mt-3 leading-relaxed bg-brand-surface/40 p-3.5 rounded-xl border border-white/5">
-                  "${ath.bio}"
-                </p>
-              </div>
-
-              <!-- Stat Metrics Grid -->
-              <div class="grid grid-cols-3 gap-3">
-                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
-                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Win Rate</span>
-                  <span class="font-heading font-black text-lg text-white block mt-0.5">${ath.stats.winrate}</span>
-                </div>
-                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
-                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Rating Performa</span>
-                  <span class="font-heading font-black text-lg text-amber-400 block mt-0.5">${ath.stats.rating}</span>
-                </div>
-                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
-                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Turnamen Resmi</span>
-                  <span class="font-heading font-black text-lg text-rose-400 block mt-0.5">${ath.stats.tournaments}</span>
-                </div>
-              </div>
-
-              <!-- Performance Attributes Radar Bars -->
-              <div class="space-y-2 bg-black/40 p-4 rounded-xl border border-white/5">
-                <span class="text-[10px] font-mono uppercase text-slate-400 block tracking-wider mb-2">Evaluasi Performa & Atribut Taktis PBESI</span>
-                
-                <div class="space-y-1.5 text-xs">
-                  <div class="flex justify-between text-[11px]">
-                    <span class="text-slate-300">Penguasaan Mekanik & Refleks</span>
-                    <span class="text-rose-400 font-mono font-bold">96 / 100</span>
-                  </div>
-                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
-                    <div class="h-full rounded-full bg-rose-500" style="width: 96%"></div>
-                  </div>
-                </div>
-
-                <div class="space-y-1.5 text-xs pt-1">
-                  <div class="flex justify-between text-[11px]">
-                    <span class="text-slate-300">Pengambilan Keputusan Makro / Objektif</span>
-                    <span class="text-amber-400 font-mono font-bold">92 / 100</span>
-                  </div>
-                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
-                    <div class="h-full rounded-full bg-amber-500" style="width: 92%"></div>
-                  </div>
-                </div>
-
-                <div class="space-y-1.5 text-xs pt-1">
-                  <div class="flex justify-between text-[11px]">
-                    <span class="text-slate-300">Konsistensi & Mentalitas Turnamen</span>
-                    <span class="text-emerald-400 font-mono font-bold">94 / 100</span>
-                  </div>
-                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
-                    <div class="h-full rounded-full bg-emerald-500" style="width: 94%"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Official Verification Box -->
-              <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20 flex items-center justify-between">
-                <div>
-                  <span class="text-[10px] font-mono text-slate-400 block">Nomor Lisensi Elektronik Nasional:</span>
-                  <span class="font-mono text-xs font-bold text-white tracking-wider">PBESI-SB-2026-${ath.licenseId}</span>
-                </div>
-                <div class="text-right">
-                  <span class="text-[9px] font-mono text-emerald-400 block">STATUS: AKTIF</span>
-                  <span class="text-[9px] text-slate-400 font-mono">Berlaku s/d 31 Des 2026</span>
-                </div>
-              </div>
-
-              <!-- Modal Buttons -->
-              <div class="flex items-center gap-3 pt-2">
-                <button onclick="closeAthleteModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-rose-600/30">
-                  Tutup Kartu
-                </button>
-              </div>
-
-            </div>
-
+          <div class="text-right">
+            <span class="text-xs font-mono text-crimson-600 font-bold block">${ath.game}</span>
+            <span class="text-xs text-ink/60 font-mono">${ath.club}</span>
           </div>
+        </div>
 
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-5">
+          <div class="p-3 rounded-xl bg-[#F7F7F8] border border-black/10 text-center">
+            <span class="text-[10px] font-mono text-ink/50 uppercase block">OVERALL RATING</span>
+            <span class="font-display text-2xl text-crimson-600 font-bold">${ath.rating}</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F7F8] border border-black/10 text-center">
+            <span class="text-[10px] font-mono text-ink/50 uppercase block">WIN RATE</span>
+            <span class="font-display text-2xl text-ink font-bold">${ath.stats.winrate}</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F7F8] border border-black/10 text-center">
+            <span class="text-[10px] font-mono text-ink/50 uppercase block">METRIK UTAMA</span>
+            <span class="font-display text-2xl text-ink font-bold">${ath.stats.kd}</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F7F8] border border-black/10 text-center">
+            <span class="text-[10px] font-mono text-ink/50 uppercase block">PENGALAMAN</span>
+            <span class="font-display text-2xl text-ink font-bold">${ath.stats.tournaments}</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-crimson-gradient text-paper space-y-1 mb-5">
+          <span class="text-[10px] font-mono uppercase tracking-wider text-paper/70 font-bold block">NOMOR LISENSI NASIONAL / ESI:</span>
+          <span class="font-mono text-sm font-bold tracking-wider block">${ath.licenseId}</span>
+          <span class="text-[11px] text-paper/80 block mt-1">Status: Terdaftar dalam Sistem Talent Scouting Esport Sumbar.</span>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <button onclick="alert('Hubungi Manajer / Scrim: WhatsApp Official Esport Sumbar')" class="flex-1 cut-corner-btn py-3 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs tracking-wider transition-all">
+            Hubungi untuk Rekrutmen / Scrim
+          </button>
+          <button onclick="closeAthleteDetailModal()" class="cut-corner-btn px-6 py-3 bg-black/10 hover:bg-black/20 text-ink font-display text-xs tracking-wider transition-all">
+            Tutup
+          </button>
         </div>
       `;
 
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      content.classList.remove('-translate-y-4');
-      content.classList.add('translate-y-0');
+      modal.classList.remove("opacity-0", "pointer-events-none");
       lucide.createIcons();
     }
 
-    function closeAthleteModal() {
-      const modal = document.getElementById('athleteDetailModal');
-      const content = document.getElementById('athleteModalContent');
-
-      modal.classList.add('opacity-0', 'pointer-events-none');
-      content.classList.add('-translate-y-4');
-      content.classList.remove('translate-y-0');
+    function closeAthleteDetailModal() {
+      const modal = document.getElementById("athleteDetailModal");
+      if (modal) modal.classList.add("opacity-0", "pointer-events-none");
     }
 
-    document.getElementById('athleteDetailModal')?.addEventListener('click', (e) => {
-      if (e.target.id === 'athleteDetailModal') closeAthleteModal();
-    });
+    function openRegistrationModal() {
+      const modal = document.getElementById("registrationModal");
+      if (modal) modal.classList.remove("opacity-0", "pointer-events-none");
+    }
+
+    function closeRegistrationModal() {
+      const modal = document.getElementById("registrationModal");
+      if (modal) modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function handleRegistrationSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("regName").value;
+      const ign = document.getElementById("regIgn").value;
+      const game = document.getElementById("regGame").value;
+      const role = document.getElementById("regRole").value;
+      const region = document.getElementById("regRegion").value;
+
+      athletesData.unshift({
+        id: "ath-" + Date.now(),
+        name: name,
+        ign: ign,
+        role: role,
+        game: game,
+        club: "Pendaftar Mandiri",
+        region: region,
+        status: "Open for Scout / Scrim",
+        category: "lft",
+        rating: 88,
+        licenseId: "PBESI-SB-2026-NEW-" + Math.floor(Math.random() * 90 + 10),
+        featured: true,
+        stats: { winrate: "70.0%", kd: "1.25", tournaments: "Baru Terdaftar" }
+      });
+
+      alert(`Profil atlet ${ign} (${name}) berhasil ditambahkan ke database!`);
+      closeRegistrationModal();
+      handleAthleteSearch();
+    }
+
+    function toggleMobileNav() {
+      const menu = document.getElementById("mobileNavMenu");
+      menu.classList.toggle("hidden");
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
-      renderAthletes();
+      renderAthletesGrid(athletesData);
       lucide.createIcons();
     });
-    renderAthletes();
   </script>
 
-  
-
-
-  <!-- ============================================================== -->
-  <!-- NATIVE MOBILE APP DOCK (FIXED 5 TABS - 100% INLINE SVG ICONS) -->
-  <!-- ============================================================== -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-[#070b14]/96 backdrop-blur-2xl border-t border-white/[0.08] px-1 pt-1.5 pb-4 safe-bottom shadow-[0_-8px_32px_rgba(0,0,0,0.85)] select-none w-full">
-    <div class="w-full grid grid-cols-5 items-end justify-items-center">
-      
-          <a href="/" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-slate-400 hover:text-white">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all text-slate-400">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              
-            </div>
-            <span class="text-[9.5px] font-medium text-slate-400 tracking-tight mt-0.5">Beranda</span>
-          </a>
-        
-          <a href="/#peta-wilayah" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-slate-400 hover:text-white">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all text-slate-400">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
-              
-            </div>
-            <span class="text-[9.5px] font-medium text-slate-400 tracking-tight mt-0.5">Peta 19</span>
-          </a>
-        
-            <a href="/#divisi" class="flex flex-col items-center justify-center -mt-5 group app-tap w-full text-center">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-600 via-rose-500 to-amber-500 text-white shadow-lg shadow-rose-600/50 border-2 border-[#070b14] flex items-center justify-center group-active:scale-90 transition-transform">
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="6"/></svg>
-              </div>
-              <span class="text-[9.5px] font-bold text-amber-400 tracking-tight mt-0.5">Divisi</span>
-            </a>
-          
-          <a href="/atlet" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-rose-500">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all bg-rose-500/15 border border-rose-500/30 text-rose-500">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-            </div>
-            <span class="text-[9.5px] font-bold text-rose-400 tracking-tight mt-0.5">Atlet</span>
-          </a>
-        
-          <a href="/about" class="flex flex-col items-center justify-center py-0.5 group app-tap w-full text-center text-slate-400 hover:text-white">
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all text-slate-400">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-              
-            </div>
-            <span class="text-[9.5px] font-medium text-slate-400 tracking-tight mt-0.5">PBESI</span>
-          </a>
-        
-    </div>
-  </nav>
-  
 </body>
 </html>
