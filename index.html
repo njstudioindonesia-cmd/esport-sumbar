@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <title>ESPORT SUMBAR – Platform Provider Esport & Database Ranah Minang</title>
-  <meta name="description" content="Platform Provider Esport Sumatera Barat resmi bermitra dengan ESI. Mesin pencari dan pendataan real-time atlet, penggiat, personal, tim, venue, kampus, dan sekolah di 19 kabupaten/kota." />
+  <meta name="description" content="Platform Provider Esport Sumatera Barat resmi bermitra dengan ESI. Kartu atlet & player interaktif 3D bergaya Pokemon TCG Pocket, mesin pencari dan pendataan 19 kabupaten/kota." />
 
   <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +23,7 @@
             ink: "#0B0B0C",
             crimson: {
               400: "#E0222D",
+              500: "#D61622",
               600: "#B3121B",
               800: "#7A0B12",
               900: "#50060B",
@@ -50,7 +51,7 @@
   <style>
     /* Chamfered (Cut) Corners */
     .cut-corner-hero {
-      clip-path: polygon(24px 0%, 100% 0%, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0% 100%, 0% 24px);
+      clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
     }
     @media (min-width: 768px) {
       .cut-corner-hero {
@@ -58,7 +59,7 @@
       }
     }
     .cut-corner-card {
-      clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px), 0% 12px);
+      clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0% calc(100% - 14px), 0% 14px);
     }
     .cut-corner-btn {
       clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
@@ -73,7 +74,117 @@
         radial-gradient(circle at 20% 80%, rgba(122, 11, 18, 0.5) 0%, transparent 60%);
     }
 
-    /* Ghost title motion-blur */
+    /* ============================================================== */
+    /* POKEMON TCG POCKET 3D CARD ENGINE & HOLOGRAPHIC PRISMATIC SHINE*/
+    /* ============================================================== */
+    .tcg-scene {
+      perspective: 1200px;
+    }
+
+    .tcg-card-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+      will-change: transform;
+    }
+
+    .tcg-card-wrapper.flipping {
+      transition: transform 0.65s cubic-bezier(0.2, 0.85, 0.3, 1.15) !important;
+    }
+
+    .tcg-card-wrapper.flipped {
+      transform: rotateY(180deg) !important;
+    }
+
+    .tcg-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .tcg-face-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Prismatic Rainbow Holographic Foil (Pokemon Pocket Effect) */
+    .tcg-holo-foil {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: 0.15;
+      transition: opacity 0.3s ease;
+      mix-blend-mode: color-dodge;
+      z-index: 25;
+      background: linear-gradient(
+        115deg,
+        transparent 10%,
+        rgba(255, 30, 80, 0.45) 25%,
+        rgba(255, 230, 0, 0.55) 40%,
+        rgba(0, 245, 212, 0.6) 55%,
+        rgba(138, 43, 226, 0.5) 70%,
+        rgba(255, 50, 100, 0.4) 85%,
+        transparent 95%
+      );
+      background-size: 280% 280%;
+      background-position: 50% 50%;
+    }
+
+    .tcg-card-wrapper:hover .tcg-holo-foil,
+    .tcg-card-wrapper.touching .tcg-holo-foil,
+    .tcg-card-wrapper.active-holo .tcg-holo-foil {
+      opacity: 0.85;
+    }
+
+    /* Dynamic Specular Glare (Follows finger/mouse) */
+    .tcg-glare {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      mix-blend-mode: overlay;
+      z-index: 26;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 65%);
+    }
+
+    .tcg-card-wrapper:hover .tcg-glare,
+    .tcg-card-wrapper.touching .tcg-glare {
+      opacity: 0.9;
+    }
+
+    /* Border Glow Accents */
+    .tcg-border-gold {
+      border: 2px solid rgba(251, 191, 36, 0.9);
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.35), 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    .tcg-border-crimson {
+      border: 2px solid rgba(224, 34, 45, 0.85);
+      box-shadow: 0 0 25px rgba(179, 18, 27, 0.4), 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    .tcg-border-holo {
+      border: 2px solid rgba(56, 189, 248, 0.85);
+      box-shadow: 0 0 25px rgba(14, 165, 233, 0.4), 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Tactile button tap feedback */
+    .app-tap:active {
+      transform: scale(0.96);
+      transition: transform 0.1s ease;
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Motion blur ghost title */
     .ghost-title-wrap {
       position: relative;
       display: inline-block;
@@ -88,13 +199,23 @@
       pointer-events: none;
     }
 
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* Card Pack Opening Animation */
+    @keyframes packBurst {
+      0% { transform: scale(0.8) rotate(-4deg); opacity: 0; }
+      50% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .pack-reveal-anim {
+      animation: packBurst 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
 
-    /* Touch active feedback */
-    .app-tap:active {
-      transform: scale(0.96);
-      transition: transform 0.1s ease;
+    @keyframes shineSweep {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+    .holo-ambient-shine {
+      animation: shineSweep 8s ease infinite;
     }
   </style>
 </head>
@@ -102,792 +223,1529 @@
 <body class="bg-[#D9D9DB] text-[#0B0B0C] font-sans antialiased min-h-screen selection:bg-[#B3121B] selection:text-white pb-24 md:pb-12">
 
   <!-- ============================================================== -->
-  <!-- 1. NATIVE MOBILE APP TOP BAR & DESKTOP NAVBAR                  -->
+  <!-- 1. TOP NAVBAR (Unified Header)                                 -->
   <!-- ============================================================== -->
   <header class="sticky top-0 z-50 px-2 sm:px-6 lg:px-12 pt-2 sm:pt-4 transition-all">
     <div class="max-w-7xl mx-auto rounded-2xl bg-white/95 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.06)] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
       
-      <!-- Brand Logo & Clean App Title -->
-      <a href="/" class="flex items-center gap-2.5 group">
-        <div class="h-8 sm:h-9 w-auto flex items-center justify-center shrink-0">
-          <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="h-8 sm:h-9 w-auto object-contain filter drop-shadow-[0_2px_6px_rgba(179,18,27,0.4)]" />
+      <!-- Brand Lockup -->
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-crimson-600 to-crimson-900 flex items-center justify-center p-1.5 shadow-md shadow-crimson-600/20 group-hover:scale-105 transition-transform">
+          <img src="/images/esport-sumbar-logo.png" alt="Logo ESPORT SUMBAR" class="w-full h-full object-contain filter drop-shadow" />
         </div>
-        <div>
-          <span class="font-display text-lg sm:text-2xl tracking-wide text-ink flex items-center gap-1 leading-none">
+        <div class="flex flex-col">
+          <span class="font-display text-lg sm:text-2xl text-ink leading-none tracking-wide group-hover:text-crimson-600 transition-colors uppercase">
             ESPORT <span class="text-crimson-600">SUMBAR</span>
           </span>
-          <span class="text-[8.5px] sm:text-[10px] text-ink/60 block font-mono font-bold uppercase tracking-wider mt-0.5">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>Partner Resmi ESI Sumbar
+          <span class="text-[9px] sm:text-[10px] font-mono tracking-wider text-ink/60 uppercase flex items-center gap-1 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Partner Resmi ESI Sumbar
           </span>
         </div>
       </a>
 
-      <!-- Desktop Nav Pills (Hidden on Mobile) -->
-      <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-black/5 border border-black/5">
-        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-crimson-800 text-paper shadow-sm">
-          <span>Beranda</span>
-        </a>
-        <a href="#direktori" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Direktori 7 Pilar</span>
-        </a>
-        <a href="#peta-wilayah" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Peta 19 Wilayah</span>
-        </a>
-        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Tentang Kami</span>
-        </a>
-        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Database Atlet</span>
-        </a>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Beranda</a>
+        <a href="#direktori" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Kartu TCG Player</a>
+        <a href="#wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Peta 19 Wilayah</a>
+        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Galeri Kartu Atlet</a>
+        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Tentang Kami</a>
       </nav>
 
-      <!-- Right Action Area -->
-      <div class="flex items-center gap-1.5 sm:gap-3">
-        <!-- Desktop Register Button -->
-        <button onclick="openRegistrationModal()" class="hidden sm:flex cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md items-center gap-2">
-          <i data-lucide="user-plus" class="w-4 h-4"></i>
-          <span>Daftarkan Player / Tim</span>
-        </button>
-
-        <!-- Mobile Quick Search Icon Button -->
-        <a href="#direktori" class="md:hidden w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 text-ink flex items-center justify-center app-tap" title="Cari di Database">
-          <i data-lucide="search" class="w-4 h-4"></i>
-        </a>
-
-        <!-- Mobile Drawer Toggle -->
-        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 text-ink flex items-center justify-center app-tap" aria-label="Menu">
-          <i data-lucide="menu" class="w-4 h-4"></i>
+      <!-- CTA Button Desktop -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button onclick="openRegistrationModal()" class="cut-corner-btn px-4 py-2 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-md shadow-crimson-900/25 flex items-center gap-2 app-tap">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+          <span>Buat Kartu TCG Saya</span>
         </button>
       </div>
 
+      <!-- Mobile Hamburger -->
+      <button onclick="toggleMobileNav()" class="lg:hidden w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap" aria-label="Toggle Navigation Menu">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
     </div>
 
-    <!-- Mobile Drawer Menu (Slide-Down Glass Panel) -->
-    <div id="mobileNavMenu" class="md:hidden hidden mx-2 mt-2 rounded-2xl bg-white/98 backdrop-blur-2xl border border-black/10 shadow-2xl p-4 space-y-2">
-      <div class="pb-2 border-b border-black/10 mb-2 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-5 h-5 object-contain" />
-          <span class="font-display text-base text-ink">ESPORT <span class="text-crimson-600">SUMBAR</span></span>
-        </div>
-        <span class="text-[9px] font-mono text-emerald-600 font-bold">● Partner Resmi ESI</span>
-      </div>
-      <a href="/" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-crimson-800 text-paper font-semibold text-xs">
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileNavMenu" class="hidden lg:hidden mt-2 p-3 bg-white/95 backdrop-blur-xl rounded-2xl border border-black/10 shadow-xl flex flex-col gap-1 transition-all">
+      <a href="/" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-crimson-800 text-paper flex items-center justify-between">
         <span>Beranda</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-paper/70"></i>
       </a>
-      <a href="#direktori" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
-        <span>Direktori 7 Pilar Ekosistem</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="#direktori" onclick="toggleMobileNav()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Kartu TCG Player</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
-      <a href="#peta-wilayah" onclick="toggleMobileNav()" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
-        <span>Peta Radar 19 Wilayah</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="#wilayah" onclick="toggleMobileNav()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Peta 19 Wilayah</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
-      <a href="/atlet" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
-        <span>Database Atlet (8.4K Data)</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="/atlet" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Galeri Kartu Atlet</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
-      <a href="/about" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
-        <span>Tentang & Kemitraan ESI</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="/about" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Tentang Platform & Kemitraan ESI</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
+      <div class="pt-2 border-t border-black/5">
+        <button onclick="toggleMobileNav(); openRegistrationModal();" class="w-full cut-corner-btn py-2.5 bg-gradient-to-r from-crimson-600 to-crimson-800 text-paper text-xs font-mono font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+          <span>Buat Kartu Digital TCG</span>
+        </button>
+      </div>
     </div>
   </header>
 
-
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6">
-
-    <!-- ============================================================== -->
-    <!-- 2. MOBILE STORIES REEL (19 WILAYAH & GAME AVATARS)             -->
-    <!-- ============================================================== -->
-    <div class="md:hidden mb-4">
-      <div class="flex items-center gap-3 overflow-x-auto no-scrollbar py-1 px-1">
-        <!-- Story Item: All -->
-        <button onclick="filterCategory('all')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-gradient-to-tr from-crimson-600 to-amber-500 shadow-sm">
-            <div class="w-12 h-12 rounded-full bg-crimson-800 text-paper flex items-center justify-center font-display text-sm font-bold">
-              ALL
-            </div>
+  <!-- ============================================================== -->
+  <!-- 2. MOBILE STORIES AVATAR REEL (19 Kab/Kota)                     -->
+  <!-- ============================================================== -->
+  <div class="px-4 sm:px-6 lg:px-12 pt-3 max-w-7xl mx-auto">
+    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+      <button onclick="filterCategory('all')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-crimson-600 shadow-sm">
+          <div class="w-full h-full rounded-full bg-crimson-800 flex items-center justify-center text-paper font-display text-xs tracking-wider">
+            ALL
           </div>
-          <span class="text-[10px] font-mono text-ink/70 font-bold">Semua</span>
-        </button>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80 group-hover:text-crimson-600">Semua</span>
+      </button>
 
-        <!-- Story Item: Padang -->
-        <button onclick="selectRegion('Kota Padang')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-black/10">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center font-display text-xs text-crimson-600 font-bold shadow-sm">
-              PDG
-            </div>
+      <button onclick="selectRegion('Kota Padang')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            PDG
           </div>
-          <span class="text-[10px] font-sans text-ink/80 font-semibold">Padang</span>
-        </button>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Padang</span>
+      </button>
 
-        <!-- Story Item: Bukittinggi -->
-        <button onclick="selectRegion('Kota Bukittinggi')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-black/10">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center font-display text-xs text-ink font-bold shadow-sm">
-              BKT
-            </div>
+      <button onclick="selectRegion('Kota Bukittinggi')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            BKT
           </div>
-          <span class="text-[10px] font-sans text-ink/80 font-semibold">Bkt Tinggi</span>
-        </button>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Bukittinggi</span>
+      </button>
 
-        <!-- Story Item: Payakumbuh -->
-        <button onclick="selectRegion('Kota Payakumbuh')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-black/10">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center font-display text-xs text-ink font-bold shadow-sm">
-              PYK
-            </div>
+      <button onclick="selectRegion('Kota Payakumbuh')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            PYK
           </div>
-          <span class="text-[10px] font-sans text-ink/80 font-semibold">Pykumbuh</span>
-        </button>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Payakumbuh</span>
+      </button>
 
-        <!-- Story Item: Solok -->
-        <button onclick="selectRegion('Kota Solok')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-black/10">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center font-display text-xs text-ink font-bold shadow-sm">
-              SLK
-            </div>
+      <button onclick="selectRegion('Kota Solok')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            SLK
           </div>
-          <span class="text-[10px] font-sans text-ink/80 font-semibold">Solok</span>
-        </button>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Solok</span>
+      </button>
 
-        <!-- Story Item: Pariaman -->
-        <button onclick="selectRegion('Kota Pariaman')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-black/10">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center font-display text-xs text-ink font-bold shadow-sm">
-              PRM
-            </div>
+      <button onclick="selectRegion('Kota Pariaman')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            PRM
           </div>
-          <span class="text-[10px] font-sans text-ink/80 font-semibold">Pariaman</span>
-        </button>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Pariaman</span>
+      </button>
 
-        <!-- Story Item: Pesisir Selatan -->
-        <button onclick="selectRegion('Kab. Pesisir Selatan')" class="flex flex-col items-center gap-1 shrink-0 app-tap">
-          <div class="w-13 h-13 p-0.5 rounded-full bg-black/10">
-            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center font-display text-xs text-ink font-bold shadow-sm">
-              PSS
-            </div>
+      <button onclick="selectRegion('Kab. Agam')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            AGM
           </div>
-          <span class="text-[10px] font-sans text-ink/80 font-semibold">Pesisir</span>
-        </button>
-      </div>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Agam</span>
+      </button>
+
+      <button onclick="selectRegion('Kab. Tanah Datar')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            TD
+          </div>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Tanah Datar</span>
+      </button>
+
+      <button onclick="selectRegion('Kab. Pesisir Selatan')" class="flex flex-col items-center gap-1 flex-shrink-0 group app-tap">
+        <div class="w-12 h-12 rounded-full p-0.5 bg-black/10 hover:bg-crimson-600/40 transition-colors">
+          <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ink font-display text-xs">
+            PESEL
+          </div>
+        </div>
+        <span class="text-[10px] font-medium text-ink/80">Pessel</span>
+      </button>
     </div>
+  </div>
 
-
-    <!-- ============================================================== -->
-    <!-- 3. MOBILE HERO BANNER (16:9 NATIVE APP HERO CARD)              -->
-    <!-- ============================================================== -->
-    <!-- Mobile-First Hero Viewport Card (<md) -->
-    <div class="md:hidden cut-corner-hero bg-crimson-gradient bg-smoke-overlay p-4 sm:p-6 text-paper shadow-xl border border-crimson-400/40 relative overflow-hidden mb-5">
-      <div class="relative z-10 flex flex-col justify-between h-full space-y-3">
-        
-        <div class="flex items-center justify-between">
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/35 text-[9px] font-mono font-bold tracking-wider">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>PROVIDER RESMI ESI</span>
-          </div>
-          <span class="font-mono text-[9px] text-paper/70">19 WILAYAH</span>
+  <!-- ============================================================== -->
+  <!-- 3. HERO SHOWCASE: POKEMON TCG POCKET 3D CARD SHOWCASE          -->
+  <!-- ============================================================== -->
+  <section class="px-4 sm:px-6 lg:px-12 pt-4 pb-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+      
+      <!-- Left Column: Title & Platform Context -->
+      <div class="lg:col-span-7 flex flex-col justify-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-black/10 shadow-sm mb-3 self-start">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500 animate-spin" style="animation-duration: 6s;"></i>
+          <span class="text-[11px] font-mono font-bold tracking-wider text-ink uppercase">KARTU DIGITAL INTERAKTIF TCG POCKET</span>
         </div>
 
-        <div>
-          <h1 class="font-display text-3xl sm:text-4xl uppercase tracking-tight leading-none">
-            ESPORT <span class="text-white drop-shadow-md">SUMATERA BARAT</span>
-          </h1>
-          <p class="font-sans text-[11px] text-paper/85 mt-1 leading-snug line-clamp-2">
-            Basis data & mesin penjaring 14.852 talenta, 485 squad, dan venue gaming terakreditasi ESI.
-          </p>
-        </div>
+        <h1 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink tracking-tight leading-[0.95] uppercase mb-3 break-words">
+          KARTU PLAYER & <br />
+          <span class="text-crimson-600">TALENTA ESPORT</span> <br />
+          SUMATERA BARAT
+        </h1>
 
-        <div class="flex items-center gap-2 pt-1">
-          <a href="#direktori" class="cut-corner-btn px-4 py-2 bg-paper text-ink font-display text-xs tracking-wider shadow-md flex items-center gap-1.5 app-tap">
-            <i data-lucide="search" class="w-3.5 h-3.5 text-crimson-600"></i>
-            <span>Cari Data</span>
-          </a>
-          <button onclick="openRegistrationModal()" class="cut-corner-btn px-4 py-2 bg-black/40 text-paper border border-white/20 font-display text-xs tracking-wider flex items-center gap-1.5 app-tap">
-            <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-            <span>Daftar</span>
-          </button>
-        </div>
-
-      </div>
-
-      <!-- Background Crest Watermark -->
-      <img src="/images/esport-sumbar-logo.png" alt="Crest" class="w-36 h-auto object-contain opacity-15 absolute -right-4 -bottom-4 pointer-events-none" />
-    </div>
-
-    <!-- Desktop Hero Section (>= md) -->
-    <div class="hidden md:grid grid-cols-12 gap-8 lg:gap-10 items-center mb-12">
-      <div class="col-span-5 flex flex-col justify-center space-y-5 z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-black/10 shadow-sm w-fit">
-          <span class="w-2 h-2 rounded-full bg-crimson-600 animate-pulse"></span>
-          <span class="font-mono text-[11px] font-bold text-ink uppercase tracking-wider">
-            PROVIDER ESPORT SUMBAR • MITRA ESI
-          </span>
-        </div>
-
-        <div class="ghost-title-wrap select-none">
-          <span class="ghost-title-blur font-display text-7xl lg:text-9xl tracking-tight text-crimson-600">
-            ESPORT<br/>SUMBAR
-          </span>
-          <h1 class="relative font-display text-7xl lg:text-9xl tracking-tight leading-[0.88] uppercase transform -skew-x-6 text-ink drop-shadow-sm">
-            ESPORT<br/>
-            <span class="text-crimson-600 flex items-center gap-3">
-              <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-16 h-16 lg:w-20 lg:h-20 inline-block object-contain" />
-              SUMBAR
-            </span>
-          </h1>
-        </div>
-
-        <p class="font-sans text-xs sm:text-sm text-ink/80 max-w-md leading-relaxed font-medium">
-          Platform sentralisasi ekosistem dan basis data esports independen Sumatera Barat yang bekerja sama dengan <strong class="text-crimson-600">Pengprov ESI Sumbar</strong>.
+        <p class="font-sans text-xs sm:text-sm text-ink/75 max-w-xl mb-6 leading-relaxed">
+          Setiap player, atlet, dan penggiat yang terdaftar memiliki <strong class="text-ink font-bold">Kartu Digital Holografik 3D</strong> dengan data real-time: Nama, Nick, Game, Role, Rating & Lisensi PBESI. Sentuh atau gerakkan kursor untuk pantulan foil prisma, dan ketuk tombol putar untuk melihat paspor resmi!
         </p>
 
-        <div class="flex items-center gap-3 pt-1">
-          <a href="#direktori" class="cut-corner-btn px-6 py-3.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-sm tracking-wider transition-all shadow-lg flex items-center gap-2">
-            <i data-lucide="search" class="w-4 h-4"></i>
-            <span>Cari di Database</span>
-          </a>
-          <button onclick="openRegistrationModal()" class="cut-corner-btn px-6 py-3.5 bg-white hover:bg-paper text-ink font-display text-sm tracking-wider border border-black/10 transition-all shadow-md flex items-center gap-2">
-            <i data-lucide="user-plus" class="w-4 h-4 text-crimson-600"></i>
-            <span>Daftarkan Diri</span>
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-3">
+          <button onclick="openRegistrationModal()" class="cut-corner-btn px-6 py-3.5 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-lg shadow-crimson-900/30 flex items-center gap-2.5 app-tap">
+            <i data-lucide="badge-plus" class="w-4 h-4 text-amber-300"></i>
+            <span>Daftar & Terbitkan Kartu Saya</span>
           </button>
+          
+          <a href="#direktori" class="cut-corner-btn px-5 py-3.5 bg-white hover:bg-black/5 text-ink border border-black/15 font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 app-tap">
+            <i data-lucide="layers" class="w-4 h-4 text-crimson-600"></i>
+            <span>Jelajahi Galeri Kartu</span>
+          </a>
+        </div>
+
+        <!-- TCG Pocket Interactive Physics Chips -->
+        <div class="flex items-center gap-4 mt-6 text-[11px] font-mono text-ink/70">
+          <span class="flex items-center gap-1.5 font-semibold text-crimson-600">
+            <i data-lucide="rotate-3d" class="w-4 h-4"></i> 3D Gyroscope Physics
+          </span>
+          <span class="flex items-center gap-1.5 font-semibold text-amber-600">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Holographic Prismatic Foil
+          </span>
+          <span class="hidden sm:flex items-center gap-1.5 font-semibold text-sky-600">
+            <i data-lucide="repeat" class="w-4 h-4"></i> 2-Sided Flipper
+          </span>
         </div>
       </div>
 
-      <div class="col-span-7 relative">
-        <div class="cut-corner-hero relative w-full h-[520px] bg-crimson-gradient bg-smoke-overlay p-6 flex items-center justify-center overflow-hidden border border-crimson-400/40 shadow-2xl">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-            <span class="font-display text-[180px] text-black/20 font-black">SUMBAR</span>
+      <!-- Right Column: Interactive Featured Pokemon-Style TCG 3D Card -->
+      <div class="lg:col-span-5 flex justify-center py-4">
+        <div class="tcg-scene w-full max-w-[320px] sm:max-w-[330px] aspect-[1/1.48] relative select-none">
+          
+          <!-- Outer Floating Badge -->
+          <div class="absolute -top-3 -right-2 z-40 bg-gradient-to-r from-amber-400 to-amber-500 text-ink text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-full shadow-lg border border-white flex items-center gap-1">
+            <i data-lucide="crown" class="w-3 h-3 text-ink"></i>
+            <span>CROWN RARE ★★★</span>
           </div>
 
-          <div class="absolute top-12 left-10 z-20 px-3.5 py-1.5 rounded-xl bg-paper/25 backdrop-blur-md border border-paper/40 text-paper font-display text-sm">
-            14.8K+ PENGGIAT
-          </div>
-          <div class="absolute top-24 right-10 z-20 px-3.5 py-1.5 rounded-xl bg-paper/25 backdrop-blur-md border border-paper/40 text-paper font-display text-sm">
-            8.4K+ ATLET BINAAN
-          </div>
-          <div class="absolute bottom-28 left-10 z-20 px-3.5 py-1.5 rounded-xl bg-paper/25 backdrop-blur-md border border-paper/40 text-paper font-display text-sm">
-            485+ TIM RESMI
-          </div>
-          <div class="absolute bottom-16 right-10 z-20 px-3.5 py-1.5 rounded-xl bg-paper/25 backdrop-blur-md border border-paper/40 text-paper font-display text-sm">
-            19 WILAYAH AKTIF
+          <!-- THE 3D CARD -->
+          <div id="heroCardWrapper" class="tcg-card-wrapper cursor-pointer group">
+            
+            <!-- SISI DEPAN (FRONT FACE) -->
+            <div class="tcg-face bg-gradient-to-b from-[#1E222D] via-[#12151D] to-[#0A0C10] p-4 text-paper tcg-border-gold shadow-2xl flex flex-col justify-between relative">
+              
+              <!-- Rainbow Prismatic Foil Overlay -->
+              <div class="tcg-holo-foil holo-ambient-shine"></div>
+              <div class="tcg-glare"></div>
+
+              <!-- Top Bar -->
+              <div class="flex items-center justify-between z-30">
+                <div class="flex items-center gap-1.5">
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-black tracking-wider uppercase bg-amber-400 text-ink shadow-sm">
+                    ★ PELATDA PON
+                  </span>
+                  <span class="text-[9px] font-mono text-white/60">VAL-DUELIST</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="text-[9px] font-mono text-amber-400 font-bold uppercase">OVR</span>
+                  <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-300 text-ink font-display text-lg font-black flex items-center justify-center shadow-md">
+                    96
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Character Portrait Frame -->
+              <div class="relative flex-1 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-crimson-900/40 via-black/80 to-black/95 border border-amber-400/30 flex items-center justify-center shadow-inner group-hover:border-amber-400 transition-colors">
+                
+                <!-- Background Kanji/Watermark Watermark -->
+                <span class="absolute font-display text-[90px] text-white/[0.04] font-black uppercase tracking-tighter select-none z-10 pointer-events-none">
+                  V4ND4L
+                </span>
+
+                <!-- Athlete Photo / Illustration -->
+                <img 
+                  src="/images/athlete-v4nd4l.jpg" 
+                  alt="Muhammad Rayden - V4ND4L" 
+                  class="w-full h-full object-cover object-top filter contrast-110 saturate-110 z-10 transition-transform duration-500 group-hover:scale-105"
+                  onerror="this.src='/images/athlete-pro-player.jpg'"
+                />
+
+                <!-- Bottom Photo Vignette & Real Name Pill -->
+                <div class="absolute inset-x-0 bottom-0 pt-6 pb-2 px-3 bg-gradient-to-t from-black via-black/80 to-transparent z-20 flex items-center justify-between">
+                  <div>
+                    <div class="text-[9px] font-mono text-amber-400 uppercase tracking-widest font-bold">NAMA LENGKAP</div>
+                    <div class="text-xs font-sans font-bold text-white flex items-center gap-1">
+                      Muhammad Rayden
+                      <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400"></i>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-[9px] font-mono text-white/50 uppercase">KOTA ASAL</div>
+                    <div class="text-[11px] font-mono font-bold text-amber-300">Kota Padang</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lower Ribbon: IGN, Game, Role, Flip Button -->
+              <div class="z-30 pt-1 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase">VALORANT</span>
+                    <span class="text-[9px] font-mono text-white/70 uppercase">Duelist / Entry</span>
+                  </div>
+                  <h3 class="font-display text-2xl text-white tracking-tight leading-none mt-0.5">
+                    V4ND4L
+                  </h3>
+                </div>
+
+                <!-- Flip Trigger Button -->
+                <button onclick="flipHeroCard(event)" class="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-[10px] font-bold tracking-wider uppercase transition-colors border border-white/20 flex items-center gap-1.5 app-tap" title="Balik Kartu untuk lihat Paspor & Statistik">
+                  <i data-lucide="repeat" class="w-3 h-3"></i>
+                  <span>Putar</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- SISI BELAKANG (BACK FACE) -->
+            <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-4 text-paper tcg-border-gold shadow-2xl flex flex-col justify-between relative">
+              
+              <!-- Subtle Sheen -->
+              <div class="tcg-holo-foil"></div>
+              
+              <!-- Back Header with ESI Sumbar Partner Crest -->
+              <div class="flex items-center justify-between border-b border-white/10 pb-2 z-30">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-md bg-crimson-800 p-1 flex items-center justify-center">
+                    <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                  </div>
+                  <div>
+                    <div class="text-[8px] font-mono text-white/50 uppercase tracking-widest leading-none">PASPOR RESMI ATLET</div>
+                    <div class="text-[10px] font-mono font-bold text-amber-400">ESPORT SUMBAR &bull; ESI</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-mono font-bold uppercase border border-emerald-500/30">
+                  TERVERIFIKASI
+                </span>
+              </div>
+
+              <!-- Radar Telemetry & Stats -->
+              <div class="my-2 space-y-2 z-30">
+                <div class="flex items-center justify-between text-[10px] font-mono">
+                  <span class="text-white/60">MICRO MECHANICS (AIM/SKILL)</span>
+                  <span class="font-bold text-amber-400">97 / 100</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-amber-500 to-amber-300 rounded-full" style="width: 97%;"></div>
+                </div>
+
+                <div class="flex items-center justify-between text-[10px] font-mono">
+                  <span class="text-white/60">MACRO STRATEGY & MAP CONTROL</span>
+                  <span class="font-bold text-sky-400">94 / 100</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-sky-500 to-sky-300 rounded-full" style="width: 94%;"></div>
+                </div>
+
+                <div class="flex items-center justify-between text-[10px] font-mono">
+                  <span class="text-white/60">TOURNAMENT MENTALITY & CLUTCH</span>
+                  <span class="font-bold text-crimson-400">98 / 100</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-crimson-600 to-crimson-400 rounded-full" style="width: 98%;"></div>
+                </div>
+
+                <div class="flex items-center justify-between text-[10px] font-mono">
+                  <span class="text-white/60">COMMUNICATION & TEAMPLAY</span>
+                  <span class="font-bold text-emerald-400">92 / 100</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" style="width: 92%;"></div>
+                </div>
+              </div>
+
+              <!-- Track Record Box -->
+              <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 z-30 text-[10px] font-mono space-y-1">
+                <div class="flex justify-between text-white/70">
+                  <span>Klub / Tim Resmi:</span>
+                  <span class="text-white font-bold">Minang Pride Squad</span>
+                </div>
+                <div class="flex justify-between text-white/70">
+                  <span>Prestasi Utama:</span>
+                  <span class="text-amber-300 font-bold">Emas Porprov &bull; Top 4 Pra-PON</span>
+                </div>
+                <div class="flex justify-between text-white/70">
+                  <span>Signature Agent:</span>
+                  <span class="text-white font-bold">Jett / Raze (Vandal Master)</span>
+                </div>
+              </div>
+
+              <!-- Barcode & PBESI ID License Footer -->
+              <div class="z-30 pt-1 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="text-[8px] font-mono text-white/40 uppercase">NO. LISENSI RESMI</div>
+                  <div class="text-[10px] font-mono font-bold tracking-wider text-amber-400">PBESI-SB-2026-VKL-01</div>
+                </div>
+
+                <button onclick="flipHeroCard(event)" class="px-3 py-1 rounded-xl bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-[10px] font-bold tracking-wider uppercase transition-colors border border-white/20 flex items-center gap-1.5 app-tap">
+                  <i data-lucide="repeat" class="w-3 h-3"></i>
+                  <span>Depan</span>
+                </button>
+              </div>
+
+            </div>
+
           </div>
 
-          <div class="relative z-10 w-full h-full flex items-end justify-center">
-            <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-56 h-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]" />
-          </div>
         </div>
       </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 4. QUICK SERVICE PILLARS (7 Pillars Grid)                      -->
+  <!-- ============================================================== -->
+  <section class="px-4 sm:px-6 lg:px-12 py-4 max-w-7xl mx-auto">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="font-mono text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
+        <i data-lucide="grid" class="w-3.5 h-3.5 text-crimson-600"></i>
+        <span>Koleksi 7 Pilar TCG Esport Sumbar</span>
+      </h2>
+      <span class="text-[10px] font-mono text-ink/50 uppercase">Pilih Kategori</span>
     </div>
 
+    <div class="grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-3">
+      <!-- 1. Atlet -->
+      <button onclick="filterCategory('atlet')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 hover:border-crimson-600 hover:shadow-md transition-all flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-crimson-600/10 text-crimson-600 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="medal" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-ink group-hover:text-crimson-600 leading-tight">Atlet</span>
+        <span class="text-[9px] font-mono text-ink/50">8.4K Kartu</span>
+      </button>
 
-    <!-- ============================================================== -->
-    <!-- 4. APP DASHBOARD QUICK-ACTION TILES (MOBILE APP LAUNCHER)      -->
-    <!-- ============================================================== -->
-    <div class="mb-6">
-      <div class="flex items-center justify-between mb-2.5 px-1">
-        <span class="font-mono text-[10px] text-ink/60 uppercase font-bold tracking-wider">Layanan Utama Ekosistem</span>
-        <span class="text-[10px] font-mono text-crimson-600 font-bold">7 PILAR</span>
-      </div>
+      <!-- 2. Player LFT -->
+      <button onclick="filterCategory('lft')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 hover:border-crimson-600 hover:shadow-md transition-all flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="user-search" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-ink group-hover:text-emerald-600 leading-tight">Player LFT</span>
+        <span class="text-[9px] font-mono text-emerald-600 font-semibold">Cari Tim</span>
+      </button>
 
-      <div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3">
-        
-        <!-- Tile 1: Atlet -->
-        <button onclick="filterCategory('atlet')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-crimson-800/10 text-crimson-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="award" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">Atlet</span>
-          <span class="text-[8px] font-mono text-ink/50">8.4K</span>
-        </button>
+      <!-- 3. Squad / Tim -->
+      <button onclick="filterCategory('tim')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 hover:border-crimson-600 hover:shadow-md transition-all flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-sky-600/10 text-sky-600 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="shield" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-ink group-hover:text-sky-600 leading-tight">Squad</span>
+        <span class="text-[9px] font-mono text-ink/50">485 Tim</span>
+      </button>
 
-        <!-- Tile 2: Personal LFT -->
-        <button onclick="filterCategory('personal')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="user-check" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">Cari Tim</span>
-          <span class="text-[8px] font-mono text-emerald-600 font-bold">LFT</span>
-        </button>
+      <!-- 4. iCafe Hub -->
+      <button onclick="filterCategory('venue')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 hover:border-crimson-600 hover:shadow-md transition-all flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-600/10 text-amber-600 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-ink group-hover:text-amber-600 leading-tight">iCafe Hub</span>
+        <span class="text-[9px] font-mono text-ink/50">Venue</span>
+      </button>
 
-        <!-- Tile 3: Tim & Squad -->
-        <button onclick="filterCategory('tim')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="shield" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">Squad</span>
-          <span class="text-[8px] font-mono text-ink/50">485 Tim</span>
-        </button>
+      <!-- 5. Kampus -->
+      <button onclick="filterCategory('kampus')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 hover:border-crimson-600 hover:shadow-md transition-all flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-purple-600/10 text-purple-600 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-ink group-hover:text-purple-600 leading-tight">Kampus</span>
+        <span class="text-[9px] font-mono text-ink/50">UKM</span>
+      </button>
 
-        <!-- Tile 4: Venue -->
-        <button onclick="filterCategory('venue')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="map-pin" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">iCafe</span>
-          <span class="text-[8px] font-mono text-ink/50">Venue</span>
-        </button>
+      <!-- 6. Sekolah -->
+      <button onclick="filterCategory('sekolah')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 hover:border-crimson-600 hover:shadow-md transition-all flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-cyan-600/10 text-cyan-600 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="book-open" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-ink group-hover:text-cyan-600 leading-tight">Sekolah</span>
+        <span class="text-[9px] font-mono text-ink/50">Pelajar</span>
+      </button>
 
-        <!-- Tile 5: Kampus -->
-        <button onclick="filterCategory('kampus')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">Kampus</span>
-          <span class="text-[8px] font-mono text-ink/50">UKM</span>
-        </button>
-
-        <!-- Tile 6: Sekolah -->
-        <button onclick="filterCategory('sekolah')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="book-open" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">Sekolah</span>
-          <span class="text-[8px] font-mono text-ink/50">Pelajar</span>
-        </button>
-
-        <!-- Tile 7: Wasit & EO -->
-        <button onclick="filterCategory('penggiat')" class="p-2 sm:p-3 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-1.5">
-            <i data-lucide="flag" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-ink leading-tight">Wasit</span>
-          <span class="text-[8px] font-mono text-ink/50">Lisensi</span>
-        </button>
-
-        <!-- Tile 8: Daftar (Highlight) -->
-        <button onclick="openRegistrationModal()" class="p-2 sm:p-3 rounded-2xl bg-crimson-800 text-paper shadow-md flex flex-col items-center justify-center text-center app-tap">
-          <div class="w-10 h-10 rounded-xl bg-white/20 text-paper flex items-center justify-center mb-1.5">
-            <i data-lucide="plus" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] sm:text-xs font-bold text-paper leading-tight">Daftar</span>
-          <span class="text-[8px] font-mono text-paper/80">Baru</span>
-        </button>
-
-      </div>
+      <!-- 7. Buat Kartu (Special Action) -->
+      <button onclick="openRegistrationModal()" class="col-span-2 sm:col-span-1 p-2 sm:p-3 rounded-2xl bg-gradient-to-br from-crimson-800 to-crimson-950 text-paper border border-amber-400/40 hover:border-amber-400 shadow-md flex flex-col items-center text-center group app-tap">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center mb-1.5 group-hover:scale-110 transition-transform">
+          <i data-lucide="plus-circle" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] sm:text-xs font-bold text-amber-300 leading-tight">Buat Kartu</span>
+        <span class="text-[9px] font-mono text-white/60">Baru</span>
+      </button>
     </div>
+  </section>
 
+  <!-- ============================================================== -->
+  <!-- 5. DIREKTORI UTAMA KARTU DIGITAL POKEMON TCG POCKET            -->
+  <!-- ============================================================== -->
+  <section id="direktori" class="px-4 sm:px-6 lg:px-12 py-6 max-w-7xl mx-auto scroll-mt-20">
+    
+    <!-- Search & Filter Card Panel -->
+    <div class="rounded-2xl bg-white border border-black/10 p-4 sm:p-5 shadow-sm mb-6">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl text-ink tracking-tight uppercase flex items-center gap-2">
+            <span>KATALOG KARTU TCG ATLET & TALENTA</span>
+            <span id="tcgResultCount" class="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-crimson-800 text-paper">10 KARTU</span>
+          </h2>
+          <p class="font-sans text-xs text-ink/60">Sentuh kartu untuk interaksi 3D Physics tilt & pantulan foil. Ketuk "Putar" untuk melihat paspor resmi PBESI.</p>
+        </div>
 
-    <!-- ============================================================== -->
-    <!-- 5. SEARCH & DIRECTORY FEED (PROPORTIONAL MOBILE APP LIST)      -->
-    <!-- ============================================================== -->
-    <section id="direktori" class="p-4 sm:p-6 rounded-3xl bg-white border border-black/10 shadow-sm mb-6">
-      
-      <!-- Compact App Search Input -->
+        <!-- Audio Shimmer Sound Toggle -->
+        <button onclick="toggleSoundFX()" id="soundToggleBtn" class="self-start sm:self-auto px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold flex items-center gap-1.5 transition-colors app-tap" title="Efek Suara Shimmer & Whoosh">
+          <i data-lucide="volume-2" id="soundIcon" class="w-4 h-4 text-crimson-600"></i>
+          <span id="soundLabel">Audio: ON</span>
+        </button>
+      </div>
+
+      <!-- Search Input -->
       <div class="relative mb-3">
         <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-ink/40"></i>
         <input 
           type="text" 
           id="globalSearchInput" 
-          placeholder="Cari atlet, tim, venue, kampus, sekolah, kota..." 
-          class="w-full pl-10 pr-3.5 py-2.5 sm:py-3 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs sm:text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:border-crimson-600"
-          oninput="handleDirectorySearch()"
+          oninput="handleDirectorySearch()" 
+          placeholder="Cari kartu atlet, nickname, game (Valorant, MLBB, PUBG), role (Duelist, Jungler), atau kota..." 
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs text-ink placeholder:text-ink/40 focus:outline-none focus:border-crimson-600 focus:bg-white transition-all font-sans"
         />
       </div>
 
-      <!-- Horizontal Sliding Segmented Control Pills -->
-      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2 text-xs font-bold">
-        <button onclick="filterCategory('all')" id="tab-all" class="category-tab px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all text-xs">
-          Semua
-        </button>
-        <button onclick="filterCategory('atlet')" id="tab-atlet" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Atlet
-        </button>
-        <button onclick="filterCategory('personal')" id="tab-personal" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Player LFT
-        </button>
-        <button onclick="filterCategory('tim')" id="tab-tim" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Tim / Squad
-        </button>
-        <button onclick="filterCategory('venue')" id="tab-venue" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Venue iCafe
-        </button>
-        <button onclick="filterCategory('kampus')" id="tab-kampus" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Kampus
-        </button>
-        <button onclick="filterCategory('sekolah')" id="tab-sekolah" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Sekolah
-        </button>
-        <button onclick="filterCategory('penggiat')" id="tab-penggiat" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">
-          Wasit & EO
-        </button>
+      <!-- Filters Row -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3 border-t border-black/5">
+        
+        <!-- Category Pill Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
+          <button onclick="filterCategory('all')" id="tab-all" class="category-tab px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all text-xs font-bold">Semua Kartu</button>
+          <button onclick="filterCategory('atlet')" id="tab-atlet" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">Kartu Atlet</button>
+          <button onclick="filterCategory('lft')" id="tab-lft" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">Player LFT</button>
+          <button onclick="filterCategory('tim')" id="tab-tim" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">Tim / Squad</button>
+          <button onclick="filterCategory('venue')" id="tab-venue" class="category-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs">Venue iCafe</button>
+        </div>
+
+        <!-- Dropdowns: Region & Game -->
+        <div class="flex items-center gap-2">
+          <select id="regionFilterSelect" onchange="handleDirectorySearch()" class="px-3 py-1.5 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs text-ink font-sans focus:outline-none focus:border-crimson-600">
+            <option value="all">Semua 19 Wilayah</option>
+            <option value="Kota Padang">Kota Padang</option>
+            <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+            <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+            <option value="Kota Pariaman">Kota Pariaman</option>
+            <option value="Kota Solok">Kota Solok</option>
+            <option value="Kab. Agam">Kab. Agam</option>
+            <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+            <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+          </select>
+
+          <select id="gameFilterSelect" onchange="handleDirectorySearch()" class="px-3 py-1.5 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs text-ink font-sans focus:outline-none focus:border-crimson-600">
+            <option value="all">Semua Game</option>
+            <option value="VALORANT">VALORANT</option>
+            <option value="Mobile Legends">Mobile Legends</option>
+            <option value="PUBG Mobile">PUBG Mobile</option>
+            <option value="Free Fire">Free Fire</option>
+            <option value="eFootball">eFootball</option>
+            <option value="Honor of Kings">Honor of Kings</option>
+          </select>
+        </div>
       </div>
+    </div>
 
-      <!-- Quick Wilayah & Game Selectors -->
-      <div class="grid grid-cols-2 gap-2 pt-2 border-t border-black/10">
-        <select id="regionFilterSelect" onchange="handleDirectorySearch()" class="px-2.5 py-1.5 rounded-lg bg-[#F7F7F8] border border-black/10 text-xs font-semibold text-ink focus:outline-none">
-          <option value="all">Semua 19 Wilayah</option>
-          <option value="Kota Padang">Kota Padang</option>
-          <option value="Kota Bukittinggi">Kota Bukittinggi</option>
-          <option value="Kota Payakumbuh">Kota Payakumbuh</option>
-          <option value="Kota Pariaman">Kota Pariaman</option>
-          <option value="Kota Solok">Kota Solok</option>
-          <option value="Kab. Agam">Kab. Agam</option>
-          <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
-          <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
-        </select>
+    <!-- TCG CARDS RESPONSIVE GRID -->
+    <div id="tcgCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 justify-items-center">
+      <!-- Injected Dynamically via JS -->
+    </div>
+  </section>
 
-        <select id="gameFilterSelect" onchange="handleDirectorySearch()" class="px-2.5 py-1.5 rounded-lg bg-[#F7F7F8] border border-black/10 text-xs font-semibold text-ink focus:outline-none">
-          <option value="all">Semua Game</option>
-          <option value="VALORANT">VALORANT</option>
-          <option value="Mobile Legends">Mobile Legends</option>
-          <option value="PUBG Mobile">PUBG Mobile</option>
-          <option value="Free Fire">Free Fire</option>
-          <option value="E-Football">eFootball</option>
-        </select>
-      </div>
-
-      <!-- Result Count Tag -->
-      <div class="mt-3 flex items-center justify-between text-[11px] font-mono text-ink/60">
-        <span>Hasil Terverifikasi:</span>
-        <strong id="resultCountNumber" class="text-crimson-600 font-bold">12 Data</strong>
-      </div>
-
-      <!-- Live Directory Feed Cards (Thumb-Friendly Native Card Stack) -->
-      <div id="directoryResultsGrid" class="mt-3 space-y-2.5 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
-        <!-- Injected via JavaScript -->
-      </div>
-
-    </section>
-
-
-    <!-- ============================================================== -->
-    <!-- 6. PETA & RADAR 19 WILAYAH (COMPACT MOBILE CARD)               -->
-    <!-- ============================================================== -->
-    <section id="peta-wilayah" class="p-4 sm:p-6 rounded-3xl bg-white border border-black/10 shadow-sm mb-6">
-      <div class="flex items-center justify-between mb-3">
+  <!-- ============================================================== -->
+  <!-- 6. GEOLOKASI 19 KAB/KOTA RADAR SECTION                         -->
+  <!-- ============================================================== -->
+  <section id="wilayah" class="px-4 sm:px-6 lg:px-12 py-6 max-w-7xl mx-auto scroll-mt-20">
+    <div class="rounded-3xl bg-white border border-black/10 p-5 sm:p-7 shadow-sm">
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-black/10">
         <div>
-          <span class="text-[9px] font-mono text-crimson-600 font-bold uppercase tracking-wider block">GEOLOKASI 19 KAB/KOTA</span>
-          <h2 class="font-display text-2xl text-ink uppercase tracking-tight">Radar Wilayah</h2>
+          <span class="text-[10px] font-mono text-crimson-600 font-bold uppercase tracking-wider">GEOLOKASI 19 KAB/KOTA</span>
+          <h2 class="font-display text-3xl sm:text-4xl text-ink tracking-tight uppercase">RADAR WILAYAH SUMATERA BARAT</h2>
         </div>
-        <span class="text-xs font-mono text-ink/60 font-bold">0.95° S, 100.35° E</span>
+        <div class="text-right font-mono text-xs text-ink/60 hidden sm:block">
+          <div>Koordinat Sentral</div>
+          <div class="font-bold text-ink">0.95° S, 100.35° E</div>
+        </div>
       </div>
 
-      <!-- Horizontal Wilayah Selector for Mobile -->
-      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 text-xs font-semibold">
-        <button onclick="selectRegion('Kota Padang')" class="px-3 py-1.5 rounded-lg bg-crimson-800 text-paper shrink-0 app-tap">
-          Kota Padang (4.1K)
-        </button>
-        <button onclick="selectRegion('Kota Bukittinggi')" class="px-3 py-1.5 rounded-lg bg-[#F7F7F8] text-ink shrink-0 app-tap">
-          Bukittinggi (2.1K)
-        </button>
-        <button onclick="selectRegion('Kota Payakumbuh')" class="px-3 py-1.5 rounded-lg bg-[#F7F7F8] text-ink shrink-0 app-tap">
-          Payakumbuh (1.8K)
-        </button>
-        <button onclick="selectRegion('Kota Solok')" class="px-3 py-1.5 rounded-lg bg-[#F7F7F8] text-ink shrink-0 app-tap">
-          Kota Solok (1.4K)
-        </button>
-        <button onclick="selectRegion('Kab. Pesisir Selatan')" class="px-3 py-1.5 rounded-lg bg-[#F7F7F8] text-ink shrink-0 app-tap">
-          Pesisir Selatan (1.6K)
-        </button>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <!-- Selected Region Info Card -->
+        <div class="md:col-span-2 p-5 rounded-2xl bg-[#F7F7F8] border border-black/10">
+          <div class="flex items-center justify-between mb-2">
+            <h3 id="inspectorRegionName" class="font-display text-2xl sm:text-3xl text-ink uppercase tracking-tight">KOTA PADANG</h3>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-600/10 text-emerald-600">Sentra Utama</span>
+          </div>
+          <p id="inspectorRegionDesc" class="font-sans text-xs text-ink/70 mb-4 leading-relaxed">
+            Ibu kota provinsi & pangkalan akademi esports terbesar di GOR H. Agus Salim Padang. Sentra pelatihan atlet Pelatda PON & kualifikasi kejuaraan resmi ESI Sumbar.
+          </p>
 
-      <!-- Wilayah Inspector Card -->
-      <div class="mt-3 p-4 rounded-2xl bg-[#F7F7F8] border border-black/5">
-        <div class="flex items-center justify-between">
-          <h3 id="inspectorRegionName" class="font-display text-xl text-ink uppercase font-bold">Kota Padang</h3>
-          <span class="text-[9px] font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Sentra Utama</span>
-        </div>
-        <p id="inspectorRegionDesc" class="text-xs text-ink/70 mt-1 line-clamp-2">
-          Ibu kota provinsi & akademi esports terbesar di Sumatera Barat di kawasan GOR Agus Salim.
-        </p>
-
-        <div class="grid grid-cols-4 gap-2 mt-3 pt-3 border-t border-black/10 text-center font-mono">
-          <div>
-            <span class="text-[8px] text-ink/50 uppercase block">Penggiat</span>
-            <span id="inspectorStatPenggiat" class="font-display text-base text-ink font-bold">4.120</span>
-          </div>
-          <div>
-            <span class="text-[8px] text-ink/50 uppercase block">Atlet</span>
-            <span id="inspectorStatAtlet" class="font-display text-base text-crimson-600 font-bold">2.450</span>
-          </div>
-          <div>
-            <span class="text-[8px] text-ink/50 uppercase block">Tim</span>
-            <span id="inspectorStatKlub" class="font-display text-base text-ink font-bold">135</span>
-          </div>
-          <div>
-            <span class="text-[8px] text-ink/50 uppercase block">Venue</span>
-            <span id="inspectorStatVenue" class="font-display text-base text-emerald-600 font-bold">28</span>
+          <div class="grid grid-cols-4 gap-2 pt-3 border-t border-black/10 text-center">
+            <div>
+              <div class="text-[9px] font-mono text-ink/50 uppercase">PENGGIAT</div>
+              <div id="inspectorStatPenggiat" class="font-mono text-sm sm:text-base font-black text-ink">4.120</div>
+            </div>
+            <div>
+              <div class="text-[9px] font-mono text-ink/50 uppercase">ATLET</div>
+              <div id="inspectorStatAtlet" class="font-mono text-sm sm:text-base font-black text-crimson-600">2.450</div>
+            </div>
+            <div>
+              <div class="text-[9px] font-mono text-ink/50 uppercase">TIM</div>
+              <div id="inspectorStatKlub" class="font-mono text-sm sm:text-base font-black text-ink">135</div>
+            </div>
+            <div>
+              <div class="text-[9px] font-mono text-ink/50 uppercase">VENUE</div>
+              <div id="inspectorStatVenue" class="font-mono text-sm sm:text-base font-black text-emerald-600">28</div>
+            </div>
           </div>
         </div>
 
-        <button onclick="filterBySelectedRegion()" class="mt-3 w-full py-2 rounded-xl bg-crimson-800 text-paper font-display text-xs tracking-wider app-tap">
-          Filter Data Wilayah Ini
+        <!-- Quick Filter Action -->
+        <div class="flex flex-col gap-2">
+          <button onclick="filterBySelectedRegion()" class="w-full cut-corner-btn py-3 bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-colors shadow-md flex items-center justify-center gap-2 app-tap">
+            <i data-lucide="filter" class="w-4 h-4"></i>
+            <span>Filter Kartu Wilayah Ini</span>
+          </button>
+          <a href="/about" class="w-full cut-corner-btn py-3 bg-white hover:bg-black/5 text-ink border border-black/15 font-mono text-xs font-bold tracking-wider uppercase transition-colors flex items-center justify-center gap-2 app-tap">
+            <i data-lucide="info" class="w-4 h-4 text-crimson-600"></i>
+            <span>Kerjasama Provider & ESI</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 7. FULLSCREEN 3D POCKET INSPECTOR MODAL                        -->
+  <!-- ============================================================== -->
+  <div id="tcgInspectorModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-lg bg-[#12151D] border border-white/20 rounded-3xl p-5 sm:p-7 text-paper shadow-2xl flex flex-col items-center">
+      
+      <!-- Close Button -->
+      <button onclick="closeTcgInspector()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors app-tap">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-3">
+        <span class="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest">3D IMMERSION INSPECTOR &bull; POKEMON TCG POCKET</span>
+        <h3 id="inspectorModalTitle" class="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight">KARTU ATLET DIGITAL</h3>
+      </div>
+
+      <!-- 3D Card Stage -->
+      <div class="tcg-scene w-[280px] sm:w-[310px] aspect-[1/1.48] relative my-2 select-none">
+        <div id="inspectorCardInstance" class="tcg-card-wrapper">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Control Toolbar -->
+      <div class="flex items-center gap-2.5 mt-4">
+        <button onclick="flipInspectorCard()" class="px-4 py-2 rounded-xl bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 border border-white/20 app-tap">
+          <i data-lucide="repeat" class="w-4 h-4"></i>
+          <span>Putar Kartu (180°)</span>
+        </button>
+
+        <button onclick="toggleInspectorHolo()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 border border-white/20 app-tap">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+          <span>Foil Shimmer</span>
         </button>
       </div>
-    </section>
 
-  </main>
-
-
-  <!-- ============================================================== -->
-  <!-- 7. NATIVE MOBILE BOTTOM APP DOCK (FIXED 4 TABS + ELEVATED +)  -->
-  <!-- ============================================================== -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white/96 backdrop-blur-xl border-t border-black/10 px-3 py-1.5 flex items-center justify-around shadow-[0_-4px_25px_rgba(0,0,0,0.1)]">
-    <a href="/" class="flex flex-col items-center gap-0.5 text-crimson-600 font-bold text-[10px] app-tap">
-      <i data-lucide="home" class="w-5 h-5"></i>
-      <span>Beranda</span>
-    </a>
-    <a href="#direktori" class="flex flex-col items-center gap-0.5 text-ink/65 hover:text-crimson-600 text-[10px] app-tap">
-      <i data-lucide="search" class="w-5 h-5"></i>
-      <span>Cari Data</span>
-    </a>
-    <button onclick="openRegistrationModal()" class="flex flex-col items-center gap-0.5 text-crimson-600 font-bold text-[10px] -mt-5 app-tap">
-      <div class="w-12 h-12 rounded-full bg-crimson-800 text-paper flex items-center justify-center shadow-lg shadow-crimson-900/40 border-2 border-white">
-        <i data-lucide="plus" class="w-6 h-6"></i>
-      </div>
-      <span>Daftar</span>
-    </button>
-    <a href="#peta-wilayah" class="flex flex-col items-center gap-0.5 text-ink/65 hover:text-crimson-600 text-[10px] app-tap">
-      <i data-lucide="map-pin" class="w-5 h-5"></i>
-      <span>Peta 19</span>
-    </a>
-    <a href="/atlet" class="flex flex-col items-center gap-0.5 text-ink/65 hover:text-crimson-600 text-[10px] app-tap">
-      <i data-lucide="users" class="w-5 h-5"></i>
-      <span>Database</span>
-    </a>
-  </nav>
-
+      <!-- Footer Info -->
+      <p class="font-mono text-[10px] text-white/50 mt-3 text-center">
+        Geser jari atau mouse untuk efek 3D tilt & kilau foil holografik.
+      </p>
+    </div>
+  </div>
 
   <!-- ============================================================== -->
-  <!-- 8. MODAL REGISTRASI MANDIRI (TALENT SCOUTING ENGINE)           -->
+  <!-- 8. MODAL PENDAFTARAN & UNBOXING REVEAL CEREMONY               -->
   <!-- ============================================================== -->
-  <div id="registrationModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-    <div class="cut-corner-card relative w-full max-w-lg bg-white p-5 sm:p-7 shadow-2xl border border-black/10 overflow-hidden max-h-[92vh] overflow-y-auto">
-      <button onclick="closeRegistrationModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors">
+  <div id="registrationModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 text-ink shadow-2xl max-h-[90vh] overflow-y-auto no-scrollbar">
+      
+      <button onclick="closeRegistrationModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
-      <div class="mb-4">
-        <span class="text-[9px] font-mono text-crimson-600 font-bold uppercase tracking-wider block">
-          Penjaringan Mandiri
-        </span>
-        <h3 class="font-display text-2xl text-ink uppercase tracking-tight">
-          Daftarkan Profil / Tim
-        </h3>
-        <p class="font-sans text-[11px] text-ink/70">
-          Data langsung terbit dan dapat dicari oleh pelatih, tim, atau komunitas di 19 wilayah.
-        </p>
+      <div class="flex items-center gap-2 text-crimson-600 mb-1">
+        <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+        <span class="text-xs font-mono font-bold uppercase tracking-wider">Cetak Kartu TCG Digital Resmi</span>
       </div>
+      <h3 class="font-display text-3xl text-ink uppercase tracking-tight mb-2">DAFTARKAN IDENTITAS ESPORT ANDA</h3>
+      <p class="font-sans text-xs text-ink/70 mb-5">
+        Terdaftar otomatis ke pangkalan data Sumatera Barat dengan kartu digital 3D holografik. Bisa dibagikan dan dicari oleh tim, scout, serta penyelenggara turnamen.
+      </p>
 
-      <form onsubmit="handleRegistrationSubmit(event)" class="space-y-3">
+      <form onsubmit="handleRegistrationSubmit(event)" class="space-y-4">
         <div>
-          <label class="text-[11px] font-bold text-ink block mb-0.5">Kategori Profil:</label>
-          <select id="regCategory" class="w-full px-3 py-2 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs font-semibold text-ink focus:outline-none">
-            <option value="personal">2. Player Personal (Cari Tim / LFT)</option>
-            <option value="atlet">1. Atlet Berprestasi</option>
-            <option value="tim">3. Tim / Squad</option>
-            <option value="venue">4. Gaming Venue / iCafe</option>
-            <option value="kampus">5. UKM Esports Kampus</option>
-            <option value="sekolah">6. Komunitas Sekolah</option>
-            <option value="penggiat">7. Penggiat (Wasit, Caster, EO)</option>
+          <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Kategori Entitas</label>
+          <select id="regCategory" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600">
+            <option value="atlet">Atlet Terbina / Pelatda</option>
+            <option value="lft" selected>Player LFT (Looking For Team)</option>
+            <option value="tim">Tim / Squad Esports</option>
+            <option value="venue">Venue / iCafe Gaming Arena</option>
           </select>
         </div>
 
-        <div>
-          <label class="text-[11px] font-bold text-ink block mb-0.5">Nama Lengkap / Organisasi:</label>
-          <input type="text" id="regName" required placeholder="Contoh: Muhammad Farhan" class="w-full px-3 py-2 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs text-ink focus:outline-none" />
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="text-[11px] font-bold text-ink block mb-0.5">IGN / Role:</label>
-            <input type="text" id="regRole" required placeholder="Contoh: V4ND4L / Duelist" class="w-full px-3 py-2 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs text-ink focus:outline-none" />
+            <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Nama Lengkap</label>
+            <input type="text" id="regName" required placeholder="Contoh: Farhan Rizki" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
           </div>
           <div>
-            <label class="text-[11px] font-bold text-ink block mb-0.5">Cabang Game:</label>
-            <select id="regGame" class="w-full px-3 py-2 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs font-semibold text-ink focus:outline-none">
+            <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Nickname / In-Game Name</label>
+            <input type="text" id="regIGN" required placeholder="Contoh: R1ZK1_GOD" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600 font-mono" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Game Utama</label>
+            <select id="regGame" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600">
               <option value="VALORANT">VALORANT</option>
               <option value="Mobile Legends">Mobile Legends</option>
               <option value="PUBG Mobile">PUBG Mobile</option>
               <option value="Free Fire">Free Fire</option>
-              <option value="E-Football">eFootball</option>
+              <option value="eFootball">eFootball</option>
+              <option value="Honor of Kings">Honor of Kings</option>
             </select>
+          </div>
+          <div>
+            <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Role / Posisi</label>
+            <input type="text" id="regRole" required placeholder="Contoh: Duelist / Jungler" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="text-[11px] font-bold text-ink block mb-0.5">Domisili 19 Wilayah:</label>
-            <select id="regRegion" class="w-full px-3 py-2 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs font-semibold text-ink focus:outline-none">
+            <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Kabupaten / Kota Domisili</label>
+            <select id="regRegion" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600">
               <option value="Kota Padang">Kota Padang</option>
               <option value="Kota Bukittinggi">Kota Bukittinggi</option>
               <option value="Kota Payakumbuh">Kota Payakumbuh</option>
               <option value="Kota Pariaman">Kota Pariaman</option>
               <option value="Kota Solok">Kota Solok</option>
+              <option value="Kota Sawahlunto">Kota Sawahlunto</option>
+              <option value="Kota Padang Panjang">Kota Padang Panjang</option>
               <option value="Kab. Agam">Kab. Agam</option>
-              <option value="Wilayah Lainnya">Wilayah Lainnya</option>
+              <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+              <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+              <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+              <option value="Kab. Solok">Kab. Solok</option>
+              <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
+              <option value="Kab. Pasaman">Kab. Pasaman</option>
+              <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+              <option value="Kab. Sijunjung">Kab. Sijunjung</option>
+              <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
+              <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
+              <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
             </select>
           </div>
           <div>
-            <label class="text-[11px] font-bold text-ink block mb-0.5">WhatsApp / Kontak:</label>
-            <input type="tel" id="regPhone" required placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 rounded-xl bg-[#F7F7F8] border border-black/10 text-xs text-ink focus:outline-none" />
+            <label class="block text-xs font-mono font-bold text-ink uppercase mb-1">Klub / Tim Saat Ini</label>
+            <input type="text" id="regClub" placeholder="Bebas / Mandiri jika LFT" class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F7F8] border border-black/15 text-xs text-ink focus:outline-none focus:border-crimson-600" />
           </div>
         </div>
 
         <div class="pt-2">
-          <button type="submit" class="w-full cut-corner-btn py-3 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs tracking-wider transition-all shadow-md flex items-center justify-center gap-1.5 app-tap">
-            <i data-lucide="check" class="w-4 h-4"></i>
-            <span>Simpan & Terbitkan</span>
+          <button type="submit" class="w-full cut-corner-btn py-3.5 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-lg flex items-center justify-center gap-2 app-tap">
+            <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+            <span>Cetak & Buka Paket Kartu TCG</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- ============================================================== -->
+  <!-- 9. FLOATING MOBILE DOCK BAR (Native App Experience)            -->
+  <!-- ============================================================== -->
+  <div class="md:hidden fixed bottom-3 inset-x-3 z-40 max-w-md mx-auto">
+    <div class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-3 py-2 flex items-center justify-around relative">
+      <a href="/" class="flex flex-col items-center gap-1 text-crimson-600 app-tap">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono font-bold leading-none">Beranda</span>
+      </a>
+
+      <a href="#direktori" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="layers" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono leading-none">Kartu TCG</span>
+      </a>
+
+      <!-- Floating Elevated Add Button -->
+      <button onclick="openRegistrationModal()" class="w-11 h-11 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-500 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white app-tap" aria-label="Buat Kartu Baru">
+        <i data-lucide="plus" class="w-5 h-5"></i>
+      </button>
+
+      <a href="/atlet" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono leading-none">Galeri Atlet</span>
+      </a>
+
+      <a href="/about" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="info" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono leading-none">Tentang</span>
+      </a>
+    </div>
+  </div>
 
   <!-- ============================================================== -->
-  <!-- 9. JAVASCRIPT DATA & APP LOGIC                                 -->
+  <!-- 10. JAVASCRIPT: POKEMON TCG POCKET 3D CARD SYSTEM ENGINE       -->
   <!-- ============================================================== -->
   <script>
-    const directoryData = [
+    // Audio FX Engine via Web Audio API (Zero external audio files required!)
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playSoundFX(type) {
+      if (!soundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!audioCtx) audioCtx = new AudioCtx();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'flip') {
+          // Tactile paper / foil flip sound
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.16);
+          gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.16);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.16);
+        } else if (type === 'shimmer') {
+          // Foil shimmer chime
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(750, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1250, audioCtx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.12);
+        } else if (type === 'unboxing') {
+          // Card reveal fanfare
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.type = 'triangle';
+            o.frequency.value = freq;
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            g.gain.setValueAtTime(0.08, audioCtx.currentTime + i * 0.08);
+            g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.08 + 0.5);
+            o.start(audioCtx.currentTime + i * 0.08);
+            o.stop(audioCtx.currentTime + i * 0.08 + 0.5);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function toggleSoundFX() {
+      soundEnabled = !soundEnabled;
+      const label = document.getElementById("soundLabel");
+      const icon = document.getElementById("soundIcon");
+      if (soundEnabled) {
+        label.innerText = "Audio: ON";
+        icon.className = "w-4 h-4 text-crimson-600";
+        playSoundFX('shimmer');
+      } else {
+        label.innerText = "Audio: OFF";
+        icon.className = "w-4 h-4 text-ink/40";
+      }
+    }
+
+    // Official TCG Database
+    const tcgDatabase = [
       {
-        id: "ath-1",
+        id: "tcg-1",
         category: "atlet",
-        name: "Rayden 'V4ND4L'",
-        role: "Duelist / Pelatda PON",
+        name: "Muhammad Rayden",
+        ign: "V4ND4L",
+        role: "Duelist / Entry Fragger",
         game: "VALORANT",
+        club: "Minang Pride Squad",
         region: "Kota Padang",
-        status: "Pelatda PON • Terverifikasi ESI",
-        rating: "96",
-        featured: true
+        photo: "/images/athlete-v4nd4l.jpg",
+        rarity: "CROWN RARE ★★★",
+        rating: 96,
+        license: "PBESI-SB-2026-VKL-01",
+        tier: "gold",
+        stats: { micro: 97, macro: 94, mental: 98, clutch: 92, winrate: "78.4%", match: "142x Resmi" },
+        highlights: "Medali Emas Porprov &bull; Top 4 Seleksi PON Aceh-Sumut",
+        favHero: "Jett / Raze (Vandal Master)"
       },
       {
-        id: "per-1",
-        category: "personal",
-        name: "Fajri 'F4LCON'",
-        role: "Jungler • LFT (Cari Tim)",
+        id: "tcg-2",
+        category: "atlet",
+        name: "Fajri Alamsyah",
+        ign: "F4LC0N",
+        role: "Jungler / Assassin",
         game: "Mobile Legends",
+        club: "Rang Chaniago Esports",
         region: "Kota Bukittinggi",
-        status: "Open for Scout / Scrim",
-        rating: "92",
-        featured: false
+        photo: "/images/athlete-pro-player.jpg",
+        rarity: "HOLO RARE ★★",
+        rating: 94,
+        license: "PBESI-SB-2026-MLB-14",
+        tier: "holo",
+        stats: { micro: 95, macro: 93, mental: 92, clutch: 94, winrate: "74.2%", match: "118x Resmi" },
+        highlights: "Juara Piala Gubernur Sumbar 2025 &bull; MVP Grand Final",
+        favHero: "Fanny / Ling / Hayabusa"
       },
       {
-        id: "tim-1",
-        category: "tim",
-        name: "Minang Pride Esports",
-        role: "Divisi MLBB & VALORANT",
-        game: "Mobile Legends",
-        region: "Kota Padang",
-        status: "Open Recruitment Roster",
-        rating: "94",
-        featured: false
+        id: "tcg-3",
+        category: "atlet",
+        name: "Ihsan Pratama",
+        ign: "B4R4_AP1",
+        role: "Sniper / Scout Master",
+        game: "PUBG Mobile",
+        club: "Ombak Hunter Pariaman",
+        region: "Kota Pariaman",
+        photo: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
+        rarity: "HOLO RARE ★★",
+        rating: 93,
+        license: "PBESI-SB-2026-PUB-08",
+        tier: "holo",
+        stats: { micro: 94, macro: 92, mental: 93, clutch: 95, winrate: "69.8%", match: "98x Resmi" },
+        highlights: "Terminator PMCO Sumbar &bull; Best Sniper Porprov",
+        favHero: "AWM / M416 Precision"
       },
       {
-        id: "ven-1",
-        category: "venue",
-        name: "Cyber Minang Gaming Arena",
-        role: "iCafe 60 PC RTX 4070",
-        game: "VALORANT",
-        region: "Kota Padang",
-        status: "Official Bootcamp Venue",
-        rating: "98",
-        featured: false
-      },
-      {
-        id: "kam-1",
-        category: "kampus",
-        name: "UKM Esports UNP Padang",
-        role: "Komunitas Mahasiswa",
-        game: "Mobile Legends",
-        region: "Kota Padang",
-        status: "Divisi MLBB & VAL",
-        rating: "91",
-        featured: false
-      },
-      {
-        id: "sek-1",
-        category: "sekolah",
-        name: "SMKN 1 Bukittinggi Esports",
-        role: "Ekskul Esports Pelajar",
+        id: "tcg-4",
+        category: "lft",
+        name: "Alif Ramadhan",
+        ign: "SKYFALL",
+        role: "Rusher / In-Game Leader",
         game: "Free Fire",
-        region: "Kota Bukittinggi",
-        status: "Juara Turnamen Pelajar",
-        rating: "89",
-        featured: false
+        club: "Looking For Team (LFT)",
+        region: "Kota Payakumbuh",
+        photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80",
+        rarity: "SUPER RARE ★",
+        rating: 92,
+        license: "PBESI-SB-2026-FF-21",
+        tier: "crimson",
+        stats: { micro: 93, macro: 90, mental: 91, clutch: 93, winrate: "72.1%", match: "84x Resmi" },
+        highlights: "Top 3 FFML Nusantara Qualifiers 2025",
+        favHero: "Shotgun / MP40 Rusher"
       },
       {
-        id: "pen-1",
-        category: "penggiat",
-        name: "Coach Rinaldi 'R4YD'",
-        role: "Pelatih Lisensi PBESI",
+        id: "tcg-5",
+        category: "atlet",
+        name: "Nabila Putri",
+        ign: "VALKYRIE",
+        role: "Initiator / Recon Specialist",
         game: "VALORANT",
-        region: "Kota Payakumbuh",
-        status: "Sertifikasi Wasit & Coach",
-        rating: "95",
-        featured: false
+        club: "Srikandi Sumbar Squad",
+        region: "Kota Padang",
+        photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+        rarity: "CROWN RARE ★★★",
+        rating: 95,
+        license: "PBESI-SB-2026-VKL-07",
+        tier: "gold",
+        stats: { micro: 93, macro: 97, mental: 96, clutch: 95, winrate: "81.0%", match: "110x Resmi" },
+        highlights: "Juara 1 VCT Game Changers Regional Sumatera 2025",
+        favHero: "Sova / Fade Lineups"
+      },
+      {
+        id: "tcg-6",
+        category: "lft",
+        name: "Rian Hidayat",
+        ign: "SH4D0W",
+        role: "Controller / Viper Main",
+        game: "VALORANT",
+        club: "Looking For Team (LFT)",
+        region: "Kota Solok",
+        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+        rarity: "SUPER RARE ★",
+        rating: 91,
+        license: "PBESI-SB-2026-VKL-22",
+        tier: "crimson",
+        stats: { micro: 89, macro: 94, mental: 92, clutch: 93, winrate: "68.5%", match: "76x Resmi" },
+        highlights: "Finalis Solok Invitational &bull; Smokes Coordinator",
+        favHero: "Omen / Viper Setup"
+      },
+      {
+        id: "tcg-7",
+        category: "atlet",
+        name: "Dicky Pratama",
+        ign: "KANZ",
+        role: "Midlaner / Mage Roamer",
+        game: "Mobile Legends",
+        club: "Maninjau Titans",
+        region: "Kab. Agam",
+        photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+        rarity: "HOLO RARE ★★",
+        rating: 93,
+        license: "PBESI-SB-2026-MLB-33",
+        tier: "holo",
+        stats: { micro: 94, macro: 93, mental: 91, clutch: 92, winrate: "71.5%", match: "92x Resmi" },
+        highlights: "Top Global Pharsa & Midlane MVP Agam Cup",
+        favHero: "Pharsa / Yve / Valentina"
+      },
+      {
+        id: "tcg-8",
+        category: "atlet",
+        name: "Farhan Maulana",
+        ign: "ACE_FUT",
+        role: "Tactical Striker",
+        game: "eFootball",
+        club: "Istano Pagaruyung FC",
+        region: "Kab. Tanah Datar",
+        photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
+        rarity: "SUPER RARE ★",
+        rating: 90,
+        license: "PBESI-SB-2026-EFT-05",
+        tier: "crimson",
+        stats: { micro: 92, macro: 91, mental: 90, clutch: 89, winrate: "75.0%", match: "68x Resmi" },
+        highlights: "Juara 1 eFootball West Sumatra Championship",
+        favHero: "4-3-3 Quick Counter"
+      },
+      {
+        id: "tcg-9",
+        category: "tim",
+        name: "Minang Pride Squad",
+        ign: "MPS_ELITE",
+        role: "Organisasi Esports Terpadu",
+        game: "VALORANT",
+        club: "Divisi MLBB & VALORANT",
+        region: "Kota Padang",
+        photo: "/images/division-vct-arena.jpg",
+        rarity: "CROWN RARE ★★★",
+        rating: 97,
+        license: "PBESI-SB-2026-TIM-01",
+        tier: "gold",
+        stats: { micro: 96, macro: 98, mental: 97, clutch: 96, winrate: "82.5%", match: "210x Resmi" },
+        highlights: "Juara Kejurda Sumbar 2x Berturut-turut",
+        favHero: "5-Man Roster Bersertifikat ESI"
+      },
+      {
+        id: "tcg-10",
+        category: "venue",
+        name: "Cyber Minang Arena",
+        ign: "CMA_ARENA",
+        role: "Dedicated Bootcamp & iCafe",
+        game: "VALORANT",
+        club: "60 PC RTX 4070 &bull; 1Gbps Dedicated",
+        region: "Kota Padang",
+        photo: "/images/arena-stage-lights.jpg",
+        rarity: "CROWN RARE ★★★",
+        rating: 98,
+        license: "PBESI-SB-2026-VEN-01",
+        tier: "gold",
+        stats: { micro: 99, macro: 98, mental: 99, clutch: 99, winrate: "100%", match: "Official Venue ESI" },
+        highlights: "Official Hub Seleksi Atlet Porprov & Pra-PON",
+        favHero: "Fasilitas Bootcamp Standar Nasional"
       }
     ];
 
     let currentCategory = "all";
 
-    function renderDirectoryCards(items) {
-      const grid = document.getElementById("directoryResultsGrid");
-      const countEl = document.getElementById("resultCountNumber");
-      if (!grid) return;
+    // Build Card HTML for Grid
+    function renderTcgCards(items) {
+      const container = document.getElementById("tcgCardsGrid");
+      const countEl = document.getElementById("tcgResultCount");
+      if (!container) return;
 
-      countEl.innerText = items.length + " Data";
+      countEl.innerText = `${items.length} KARTU`;
 
       if (items.length === 0) {
-        grid.innerHTML = `
-          <div class="col-span-full py-8 text-center p-4 rounded-2xl bg-[#F7F7F8] border border-black/10">
-            <i data-lucide="info" class="w-6 h-6 text-crimson-600 mx-auto mb-1"></i>
-            <h4 class="font-display text-base text-ink">Tidak Ada Data Ditemukan</h4>
-            <p class="font-sans text-[11px] text-ink/60">Gunakan kata kunci atau filter lain.</p>
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center p-8 rounded-2xl bg-white border border-black/10 w-full">
+            <i data-lucide="layers" class="w-8 h-8 text-crimson-600 mx-auto mb-2"></i>
+            <h4 class="font-display text-2xl text-ink">Tidak Ada Kartu Ditemukan</h4>
+            <p class="font-sans text-xs text-ink/60 mt-1">Coba gunakan filter game atau kata kunci pencarian yang berbeda.</p>
           </div>
         `;
         lucide.createIcons();
         return;
       }
 
-      grid.innerHTML = items.map(item => {
+      container.innerHTML = items.map(c => {
+        const isGold = c.tier === 'gold' || c.rating >= 95;
+        const isHolo = c.tier === 'holo' || (c.rating >= 93 && !isGold);
+        const borderClass = isGold ? 'tcg-border-gold' : isHolo ? 'tcg-border-holo' : 'tcg-border-crimson';
+        const rarityBadge = isGold ? 'bg-amber-400 text-ink' : isHolo ? 'bg-sky-400 text-ink' : 'bg-crimson-800 text-paper';
+        const ratingBg = isGold ? 'from-amber-500 to-amber-300 text-ink' : isHolo ? 'from-sky-500 to-sky-300 text-ink' : 'from-crimson-700 to-crimson-500 text-white';
+
         return `
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-[#F7F7F8] border border-black/10 flex items-center justify-between gap-3 hover:border-crimson-600 transition-all app-tap">
-            
-            <div class="flex items-center gap-3 overflow-hidden">
-              <div class="w-11 h-11 rounded-xl bg-crimson-gradient text-paper font-display text-base font-bold flex items-center justify-center shrink-0 shadow-sm">
-                ${item.name.slice(0, 2).toUpperCase()}
-              </div>
-              <div class="overflow-hidden">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[9px] font-mono font-bold uppercase text-crimson-600 tracking-wider">${item.category}</span>
-                  <span class="text-[9px] text-ink/40">•</span>
-                  <span class="text-[9px] font-mono font-bold text-ink/60">${item.game}</span>
-                </div>
-                <h4 class="font-display text-lg text-ink truncate leading-tight font-bold">${item.name}</h4>
-                <div class="text-[11px] text-ink/60 flex items-center gap-1 truncate">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-crimson-600 shrink-0"></i>
-                  <span class="truncate">${item.region} • ${item.role}</span>
-                </div>
-              </div>
-            </div>
+          <div class="tcg-scene w-full max-w-[310px] aspect-[1/1.48] relative select-none">
+            <div id="card-${c.id}" class="tcg-card-wrapper cursor-pointer group" onclick="inspectCard('${c.id}')">
+              
+              <!-- SISI DEPAN (FRONT FACE) -->
+              <div class="tcg-face bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between relative">
+                
+                <!-- Prismatic Foil Sheen -->
+                <div class="tcg-holo-foil"></div>
+                <div class="tcg-glare"></div>
 
-            <div class="flex flex-col items-end shrink-0 gap-1">
-              <span class="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">${item.rating}</span>
-              <button onclick="handleDetailClick('${item.name}')" class="text-[10px] font-mono text-crimson-600 font-bold hover:underline flex items-center gap-0.5">
-                <span>Lihat</span>
-                <i data-lucide="chevron-right" class="w-3 h-3"></i>
-              </button>
-            </div>
+                <!-- Card Header -->
+                <div class="flex items-center justify-between z-20">
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-black tracking-wider uppercase ${rarityBadge} shadow-sm">
+                    ${c.rarity}
+                  </span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-[9px] font-mono font-bold text-white/50 uppercase">OVR</span>
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr ${ratingBg} font-display text-lg font-black flex items-center justify-center shadow-md">
+                      ${c.rating}
+                    </div>
+                  </div>
+                </div>
 
+                <!-- Main Character / Photo Frame -->
+                <div class="relative flex-1 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-black/40 via-black/80 to-black/95 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-white/30 transition-colors">
+                  <span class="absolute font-display text-[70px] text-white/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">
+                    ${c.ign}
+                  </span>
+                  
+                  <img 
+                    src="${c.photo}" 
+                    alt="${c.name} - ${c.ign}" 
+                    class="w-full h-full object-cover object-top filter contrast-110 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105"
+                    onerror="this.src='/images/athlete-pro-player.jpg'"
+                  />
+
+                  <!-- Bottom Photo Overlay Real Name & Region -->
+                  <div class="absolute inset-x-0 bottom-0 pt-5 pb-2 px-3 bg-gradient-to-t from-black via-black/85 to-transparent z-20 flex items-center justify-between">
+                    <div>
+                      <div class="text-[8px] font-mono text-white/50 uppercase">NAMA LENGKAP</div>
+                      <div class="text-xs font-sans font-bold text-white flex items-center gap-1 truncate max-w-[130px]">
+                        ${c.name}
+                        <i data-lucide="badge-check" class="w-3 h-3 text-sky-400 flex-shrink-0"></i>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-[8px] font-mono text-white/50 uppercase">WILAYAH</div>
+                      <div class="text-[10px] font-mono font-bold text-amber-300 truncate max-w-[100px]">${c.region}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Lower Ribbon: Game, Role, IGN, Flip Action -->
+                <div class="z-20 pt-1 border-t border-white/10 flex items-center justify-between">
+                  <div>
+                    <div class="flex items-center gap-1">
+                      <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase">${c.game}</span>
+                      <span class="text-[9px] font-mono text-white/70 uppercase truncate max-w-[120px]">${c.role}</span>
+                    </div>
+                    <h3 class="font-display text-2xl text-white tracking-tight leading-none mt-0.5">
+                      ${c.ign}
+                    </h3>
+                  </div>
+
+                  <!-- Quick Flip Button -->
+                  <button onclick="flipGridCard(event, '${c.id}')" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-amber-400 hover:text-ink text-white font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-white/20 flex items-center gap-1 app-tap" title="Balik Kartu">
+                    <i data-lucide="repeat" class="w-3 h-3"></i>
+                    <span>Putar</span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- SISI BELAKANG (BACK FACE) -->
+              <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between relative">
+                
+                <div class="tcg-holo-foil"></div>
+
+                <!-- Back Header -->
+                <div class="flex items-center justify-between border-b border-white/10 pb-2 z-20">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded bg-crimson-800 p-0.5 flex items-center justify-center">
+                      <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <span class="text-[9px] font-mono font-bold text-amber-400 uppercase">ESPORT SUMBAR &bull; ESI</span>
+                  </div>
+                  <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[8px] font-mono font-bold uppercase">
+                    PASPOR RESMI
+                  </span>
+                </div>
+
+                <!-- Attributes Telemetry -->
+                <div class="my-1.5 space-y-1.5 z-20">
+                  <div>
+                    <div class="flex justify-between text-[9px] font-mono">
+                      <span class="text-white/60">MICRO SKILL</span>
+                      <span class="font-bold text-amber-400">${c.stats.micro} / 100</span>
+                    </div>
+                    <div class="w-full h-1 rounded-full bg-white/10 overflow-hidden mt-0.5">
+                      <div class="h-full bg-amber-400 rounded-full" style="width: ${c.stats.micro}%;"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[9px] font-mono">
+                      <span class="text-white/60">MACRO STRATEGY</span>
+                      <span class="font-bold text-sky-400">${c.stats.macro} / 100</span>
+                    </div>
+                    <div class="w-full h-1 rounded-full bg-white/10 overflow-hidden mt-0.5">
+                      <div class="h-full bg-sky-400 rounded-full" style="width: ${c.stats.macro}%;"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[9px] font-mono">
+                      <span class="text-white/60">MENTALITY & CLUTCH</span>
+                      <span class="font-bold text-crimson-400">${c.stats.mental} / 100</span>
+                    </div>
+                    <div class="w-full h-1 rounded-full bg-white/10 overflow-hidden mt-0.5">
+                      <div class="h-full bg-crimson-500 rounded-full" style="width: ${c.stats.mental}%;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Record Details -->
+                <div class="p-2 rounded-xl bg-white/5 border border-white/10 z-20 text-[9px] font-mono space-y-1">
+                  <div class="flex justify-between text-white/70">
+                    <span>Klub / Tim:</span>
+                    <span class="text-white font-bold truncate max-w-[120px]">${c.club}</span>
+                  </div>
+                  <div class="flex justify-between text-white/70">
+                    <span>Winrate:</span>
+                    <span class="text-emerald-400 font-bold">${c.stats.winrate} (${c.stats.match})</span>
+                  </div>
+                  <div class="flex justify-between text-white/70">
+                    <span>Fav Pick:</span>
+                    <span class="text-amber-300 font-bold truncate max-w-[120px]">${c.favHero}</span>
+                  </div>
+                </div>
+
+                <!-- Back Footer -->
+                <div class="z-20 pt-1 border-t border-white/10 flex items-center justify-between">
+                  <div>
+                    <div class="text-[7px] font-mono text-white/40 uppercase">NO. LISENSI</div>
+                    <div class="text-[9px] font-mono font-bold text-amber-400">${c.license}</div>
+                  </div>
+
+                  <button onclick="flipGridCard(event, '${c.id}')" class="px-2 py-1 rounded-lg bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-white/20 flex items-center gap-1 app-tap">
+                    <i data-lucide="repeat" class="w-3 h-3"></i>
+                    <span>Depan</span>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
           </div>
         `;
-      }).join("");
+      }).join('');
 
       lucide.createIcons();
+      attach3DPhysicsToAllCards();
     }
 
+    // Flip Hero Card
+    function flipHeroCard(e) {
+      if (e) e.stopPropagation();
+      const card = document.getElementById("heroCardWrapper");
+      if (!card) return;
+      card.classList.add("flipping");
+      card.classList.toggle("flipped");
+      playSoundFX('flip');
+      setTimeout(() => card.classList.remove("flipping"), 650);
+    }
+
+    // Flip Grid Card
+    function flipGridCard(e, id) {
+      if (e) e.stopPropagation();
+      const card = document.getElementById(`card-${id}`);
+      if (!card) return;
+      card.classList.add("flipping");
+      card.classList.toggle("flipped");
+      playSoundFX('flip');
+      setTimeout(() => card.classList.remove("flipping"), 650);
+    }
+
+    // 3D Physics Engine (Pocket Pokemon Style)
+    function attach3DPhysicsToAllCards() {
+      // Hero Card
+      const hero = document.getElementById("heroCardWrapper");
+      if (hero) setupCard3D(hero);
+
+      // Grid Cards
+      document.querySelectorAll(".tcg-card-wrapper").forEach(card => {
+        setupCard3D(card);
+      });
+    }
+
+    function setupCard3D(card) {
+      const foil = card.querySelector(".tcg-holo-foil");
+      const glare = card.querySelector(".tcg-glare");
+
+      // Desktop Mousemove
+      card.addEventListener("mousemove", (e) => {
+        if (card.classList.contains("flipped")) return;
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const tiltX = (x - 0.5) * 28;
+        const tiltY = (y - 0.5) * -28;
+
+        card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.03, 1.03, 1.03)`;
+
+        if (glare) {
+          glare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.7) 0%, transparent 60%)`;
+        }
+        if (foil) {
+          foil.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        }
+      });
+
+      card.addEventListener("mouseenter", () => {
+        playSoundFX('shimmer');
+      });
+
+      card.addEventListener("mouseleave", () => {
+        if (card.classList.contains("flipped")) return;
+        card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
+        if (foil) foil.style.backgroundPosition = "50% 50%";
+      });
+
+      // Mobile Touch Physics
+      card.addEventListener("touchstart", (e) => {
+        card.classList.add("touching");
+        playSoundFX('shimmer');
+      }, { passive: true });
+
+      card.addEventListener("touchmove", (e) => {
+        if (card.classList.contains("flipped") || e.touches.length === 0) return;
+        const touch = e.touches[0];
+        const rect = card.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
+        const y = Math.max(0, Math.min(1, (touch.clientY - rect.top) / rect.height));
+        const tiltX = (x - 0.5) * 24;
+        const tiltY = (y - 0.5) * -24;
+
+        card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        if (glare) {
+          glare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.7) 0%, transparent 60%)`;
+        }
+        if (foil) {
+          foil.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        }
+      }, { passive: true });
+
+      card.addEventListener("touchend", () => {
+        card.classList.remove("touching");
+        if (card.classList.contains("flipped")) return;
+        card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
+      });
+    }
+
+    // Fullscreen 3D Pocket Inspector
+    let activeInspectorCard = null;
+
+    function inspectCard(id) {
+      const c = tcgDatabase.find(item => item.id === id);
+      if (!c) return;
+
+      activeInspectorCard = c;
+      const modal = document.getElementById("tcgInspectorModal");
+      const title = document.getElementById("inspectorModalTitle");
+      const instance = document.getElementById("inspectorCardInstance");
+
+      title.innerText = `${c.ign} – ${c.name}`;
+
+      const isGold = c.tier === 'gold' || c.rating >= 95;
+      const borderClass = isGold ? 'tcg-border-gold' : 'tcg-border-holo';
+      const rarityBadge = isGold ? 'bg-amber-400 text-ink' : 'bg-sky-400 text-ink';
+
+      instance.className = "tcg-card-wrapper";
+      instance.innerHTML = `
+        <!-- FRONT -->
+        <div class="tcg-face bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between relative">
+          <div class="tcg-holo-foil active-holo"></div>
+          <div class="tcg-glare"></div>
+
+          <div class="flex items-center justify-between z-20">
+            <span class="px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase ${rarityBadge}">
+              ${c.rarity}
+            </span>
+            <div class="w-10 h-10 rounded-xl bg-amber-400 text-ink font-display text-xl font-black flex items-center justify-center shadow-lg">
+              ${c.rating}
+            </div>
+          </div>
+
+          <div class="relative flex-1 rounded-2xl overflow-hidden my-3 bg-gradient-to-b from-black/40 to-black/90 border border-white/10 flex items-center justify-center">
+            <span class="absolute font-display text-[90px] text-white/[0.04] font-black uppercase select-none pointer-events-none z-10">${c.ign}</span>
+            <img src="${c.photo}" alt="${c.ign}" class="w-full h-full object-cover object-top z-10 filter contrast-110 saturate-110" onerror="this.src='/images/athlete-pro-player.jpg'" />
+            
+            <div class="absolute inset-x-0 bottom-0 pt-6 pb-3 px-4 bg-gradient-to-t from-black via-black/85 to-transparent z-20 flex items-center justify-between">
+              <div>
+                <div class="text-[9px] font-mono text-white/50 uppercase">NAMA ATLET</div>
+                <div class="text-sm font-sans font-bold text-white flex items-center gap-1.5">
+                  ${c.name}
+                  <i data-lucide="badge-check" class="w-4 h-4 text-sky-400"></i>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-[9px] font-mono text-white/50 uppercase">DOMISILI</div>
+                <div class="text-xs font-mono font-bold text-amber-300">${c.region}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="z-20 pt-2 border-t border-white/10 flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-crimson-800 text-white uppercase">${c.game}</span>
+                <span class="text-[10px] font-mono text-white/80 uppercase">${c.role}</span>
+              </div>
+              <h3 class="font-display text-3xl text-white tracking-tight mt-0.5">${c.ign}</h3>
+            </div>
+            <div class="text-right">
+              <div class="text-[8px] font-mono text-white/40 uppercase">LISENSI PBESI</div>
+              <div class="text-[10px] font-mono font-bold text-amber-400">${c.license}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between relative">
+          <div class="tcg-holo-foil"></div>
+
+          <div class="flex items-center justify-between border-b border-white/10 pb-2.5 z-20">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded bg-crimson-800 p-1 flex items-center justify-center">
+                <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+              </div>
+              <div>
+                <div class="text-[8px] font-mono text-white/50 uppercase tracking-widest leading-none">PASPOR RESMI ATLET</div>
+                <div class="text-xs font-mono font-bold text-amber-400">ESPORT SUMBAR &bull; ESI</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-mono font-bold uppercase">
+              TERVERIFIKASI
+            </span>
+          </div>
+
+          <div class="my-3 space-y-2.5 z-20">
+            <div>
+              <div class="flex justify-between text-[10px] font-mono">
+                <span class="text-white/60">MICRO MECHANICS (AIM/SKILL)</span>
+                <span class="font-bold text-amber-400">${c.stats.micro} / 100</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
+                <div class="h-full bg-amber-400 rounded-full" style="width: ${c.stats.micro}%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] font-mono">
+                <span class="text-white/60">MACRO STRATEGY & ROTATION</span>
+                <span class="font-bold text-sky-400">${c.stats.macro} / 100</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
+                <div class="h-full bg-sky-400 rounded-full" style="width: ${c.stats.macro}%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] font-mono">
+                <span class="text-white/60">TOURNAMENT MENTALITY & CLUTCH</span>
+                <span class="font-bold text-crimson-400">${c.stats.mental} / 100</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
+                <div class="h-full bg-crimson-500 rounded-full" style="width: ${c.stats.mental}%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-white/5 border border-white/10 z-20 text-[10px] font-mono space-y-1.5">
+            <div class="flex justify-between text-white/70">
+              <span>Klub / Tim Resmi:</span>
+              <span class="text-white font-bold">${c.club}</span>
+            </div>
+            <div class="flex justify-between text-white/70">
+              <span>Prestasi / Track:</span>
+              <span class="text-amber-300 font-bold">${c.highlights}</span>
+            </div>
+            <div class="flex justify-between text-white/70">
+              <span>Winrate & Pertandingan:</span>
+              <span class="text-emerald-400 font-bold">${c.stats.winrate} (${c.stats.match})</span>
+            </div>
+          </div>
+
+          <div class="z-20 pt-2 border-t border-white/10 flex items-center justify-between">
+            <div>
+              <div class="text-[8px] font-mono text-white/40 uppercase">NO. LISENSI RESMI PBESI</div>
+              <div class="text-xs font-mono font-bold tracking-wider text-amber-400">${c.license}</div>
+            </div>
+            <span class="text-[10px] font-mono text-white/60">Scan QR Valid</span>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      lucide.createIcons();
+      setupCard3D(instance);
+      playSoundFX('shimmer');
+    }
+
+    function closeTcgInspector() {
+      const modal = document.getElementById("tcgInspectorModal");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function flipInspectorCard() {
+      const instance = document.getElementById("inspectorCardInstance");
+      if (!instance) return;
+      instance.classList.add("flipping");
+      instance.classList.toggle("flipped");
+      playSoundFX('flip');
+      setTimeout(() => instance.classList.remove("flipping"), 650);
+    }
+
+    function toggleInspectorHolo() {
+      const foil = document.querySelector("#inspectorCardInstance .tcg-holo-foil");
+      if (foil) {
+        foil.classList.toggle("opacity-0");
+        playSoundFX('shimmer');
+      }
+    }
+
+    // Directory Search & Filter Logic
     function handleDirectorySearch() {
-      const keyword = (document.getElementById("globalSearchInput")?.value || "").toLowerCase();
+      const keyword = (document.getElementById("globalSearchInput")?.value || "").toLowerCase().trim();
       const region = document.getElementById("regionFilterSelect")?.value || "all";
       const game = document.getElementById("gameFilterSelect")?.value || "all";
 
-      const filtered = directoryData.filter(item => {
+      const filtered = tcgDatabase.filter(item => {
         const matchesCategory = currentCategory === "all" || item.category === currentCategory;
         const matchesKeyword = !keyword || 
           item.name.toLowerCase().includes(keyword) || 
+          item.ign.toLowerCase().includes(keyword) || 
           item.role.toLowerCase().includes(keyword) || 
           item.region.toLowerCase().includes(keyword) || 
           item.game.toLowerCase().includes(keyword);
@@ -897,7 +1755,7 @@
         return matchesCategory && matchesKeyword && matchesRegion && matchesGame;
       });
 
-      renderDirectoryCards(filtered);
+      renderTcgCards(filtered);
     }
 
     function filterCategory(cat) {
@@ -907,14 +1765,17 @@
       });
       const activeTab = document.getElementById(`tab-${cat}`);
       if (activeTab) {
-        activeTab.className = "category-tab px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all text-xs";
+        activeTab.className = "category-tab px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all text-xs font-bold";
       }
       handleDirectorySearch();
       
       const dirSection = document.getElementById("direktori");
-      if (dirSection) dirSection.scrollIntoView({ behavior: 'smooth' });
+      if (dirSection && cat !== 'all') {
+        dirSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
+    // Modal Registration & Unboxing
     function openRegistrationModal() {
       const modal = document.getElementById("registrationModal");
       if (modal) modal.classList.remove("opacity-0", "pointer-events-none");
@@ -929,41 +1790,54 @@
       e.preventDefault();
       const cat = document.getElementById("regCategory").value;
       const name = document.getElementById("regName").value;
-      const role = document.getElementById("regRole").value;
+      const ign = document.getElementById("regIGN").value;
       const game = document.getElementById("regGame").value;
+      const role = document.getElementById("regRole").value;
       const region = document.getElementById("regRegion").value;
+      const club = document.getElementById("regClub").value || "Pendaftar Mandiri / LFT";
 
-      directoryData.unshift({
-        id: "custom-" + Date.now(),
+      const newId = "tcg-" + Date.now();
+      const newCard = {
+        id: newId,
         category: cat,
         name: name,
+        ign: ign,
         role: role,
         game: game,
+        club: club,
         region: region,
-        status: "Pendaftaran Mandiri • Baru Terdata",
-        rating: "90",
-        featured: true
-      });
+        photo: "/images/athlete-pro-player.jpg",
+        rarity: "RISING STAR ★",
+        rating: 91,
+        license: "PBESI-SB-2026-NEW-" + Math.floor(Math.random() * 900 + 100),
+        tier: "crimson",
+        stats: { micro: 90, macro: 89, mental: 91, clutch: 92, winrate: "Baru Terdaftar", match: "0x Resmi" },
+        highlights: "Baru Terdaftar di Platform Esport Sumbar",
+        favHero: "Main Agent / Signature Role"
+      };
 
-      alert(`Profil ${name} telah berhasil terdaftar ke database Esport Sumbar!`);
+      tcgDatabase.unshift(newCard);
       closeRegistrationModal();
       handleDirectorySearch();
+
+      // Trigger Fanfare Unboxing Reveal!
+      playSoundFX('unboxing');
+      setTimeout(() => {
+        inspectCard(newId);
+      }, 350);
     }
 
-    function handleDetailClick(name) {
-      alert(`Profil Terverifikasi: ${name}\nData tersinkronisasi dalam Database Esport Sumbar (Partner Resmi ESI).`);
-    }
-
+    // Region Selector
     const regionInfoData = {
-      "Kota Padang": { desc: "Sentra utama esports Sumbar & fasilitas Pelatda di GOR Agus Salim.", penggiat: "4.120", atlet: "2.450", klub: "135", venue: "28" },
-      "Kota Bukittinggi": { desc: "Pusat kompetisi dataran tinggi & komunitas pelajar teraktif.", penggiat: "2.180", atlet: "1.240", klub: "68", venue: "16" },
-      "Kota Payakumbuh": { desc: "Sentra pembinaan Tactical Shooter & MOBA dengan iCafe terpadu.", penggiat: "1.890", atlet: "980", klub: "42", venue: "12" },
-      "Kota Solok": { desc: "Penyangga kegiatan kompetisi selatan & liga nagari.", penggiat: "1.450", atlet: "720", klub: "34", venue: "9" },
-      "Kab. Pesisir Selatan": { desc: "Sentra pembinaan pesisir barat dengan komunitas mobile gaming.", penggiat: "1.680", atlet: "810", klub: "38", venue: "8" }
+      "Kota Padang": { desc: "Sentra utama esports Sumbar & fasilitas Pelatda di GOR H. Agus Salim Padang. Pangkalan atlet Pelatda PON & kualifikasi kejuaraan resmi ESI Sumbar.", penggiat: "4.120", atlet: "2.450", klub: "135", venue: "28" },
+      "Kota Bukittinggi": { desc: "Pusat kompetisi dataran tinggi & komunitas pelajar/mahasiswa teraktif di Jam Gadang Arena.", penggiat: "2.180", atlet: "1.240", klub: "68", venue: "16" },
+      "Kota Payakumbuh": { desc: "Sentra pembinaan Tactical Shooter & MOBA dengan jaringan iCafe terpadu di Luak Limopuluah.", penggiat: "1.890", atlet: "980", klub: "42", venue: "12" },
+      "Kota Pariaman": { desc: "Pusat esports pesisir pantai & turnamen battle royale komunitas maritim.", penggiat: "1.520", atlet: "810", klub: "38", venue: "10" },
+      "Kota Solok": { desc: "Penyangga kegiatan kompetisi selatan & liga nagari lintas daerah.", penggiat: "1.450", atlet: "720", klub: "34", venue: "9" }
     };
 
     function selectRegion(name) {
-      const data = regionInfoData[name] || { desc: "Kabupaten/Kota aktif dalam ekosistem Esport Sumbar.", penggiat: "1.100", atlet: "540", klub: "25", venue: "6" };
+      const data = regionInfoData[name] || { desc: "Kabupaten/Kota aktif dalam ekosistem pendataan terpadu Esport Sumbar.", penggiat: "1.100", atlet: "540", klub: "25", venue: "6" };
       document.getElementById("inspectorRegionName").innerText = name;
       document.getElementById("inspectorRegionDesc").innerText = data.desc;
       document.getElementById("inspectorStatPenggiat").innerText = data.penggiat;
@@ -987,11 +1861,32 @@
       menu.classList.toggle("hidden");
     }
 
+    // Init on Load
+    
+    // Mobile Accelerometer & Gyroscope Physics (Pokemon TCG Pocket Feel)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", (e) => {
+        if (e.gamma === null || e.beta === null) return;
+        const tiltX = Math.max(-22, Math.min(22, e.gamma * 0.65));
+        const tiltY = Math.max(-22, Math.min(22, (e.beta - 45) * 0.65));
+
+        const target = document.querySelector("#tcgInspectorModal:not(.opacity-0) #inspectorCardInstance") || document.getElementById("heroCardWrapper");
+        if (target && !target.classList.contains("flipped")) {
+          target.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+          const foil = target.querySelector(".tcg-holo-foil");
+          const glare = target.querySelector(".tcg-glare");
+          const posX = ((tiltX + 22) / 44) * 100;
+          const posY = ((tiltY + 22) / 44) * 100;
+          if (glare) glare.style.background = `radial-gradient(circle at ${posX}% ${posY}%, rgba(255,255,255,0.7) 0%, transparent 60%)`;
+          if (foil) foil.style.backgroundPosition = `${posX}% ${posY}%`;
+        }
+      }, { passive: true });
+    }
+    
     document.addEventListener("DOMContentLoaded", () => {
-      renderDirectoryCards(directoryData);
+      renderTcgCards(tcgDatabase);
       lucide.createIcons();
     });
   </script>
-
 </body>
 </html>

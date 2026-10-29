@@ -102,79 +102,66 @@
   <header class="sticky top-0 z-50 px-2 sm:px-6 lg:px-12 pt-2 sm:pt-4 transition-all">
     <div class="max-w-7xl mx-auto rounded-2xl bg-white/95 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.06)] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
       
-      <!-- Brand Logo -->
-      <a href="/" class="flex items-center gap-3 group">
-        <div class="h-9 w-auto flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-          <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR Logo" class="h-9 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(179,18,27,0.4)]" />
+      <!-- Brand Lockup -->
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-crimson-600 to-crimson-900 flex items-center justify-center p-1.5 shadow-md shadow-crimson-600/20 group-hover:scale-105 transition-transform">
+          <img src="/images/esport-sumbar-logo.png" alt="Logo ESPORT SUMBAR" class="w-full h-full object-contain filter drop-shadow" />
         </div>
-        <div>
-          <span class="font-display text-xl sm:text-2xl tracking-wide text-ink flex items-center gap-1.5 leading-none">
+        <div class="flex flex-col">
+          <span class="font-display text-lg sm:text-2xl text-ink leading-none tracking-wide group-hover:text-crimson-600 transition-colors uppercase">
             ESPORT <span class="text-crimson-600">SUMBAR</span>
           </span>
-          <span class="text-[9px] sm:text-[10px] text-ink/60 block font-mono font-bold uppercase tracking-wider mt-0.5">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>Partner Resmi ESI Sumbar
+          <span class="text-[9px] sm:text-[10px] font-mono tracking-wider text-ink/60 uppercase flex items-center gap-1 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Partner Resmi ESI Sumbar
           </span>
         </div>
       </a>
 
-      <!-- Desktop Nav Pills -->
-      <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-black/5 border border-black/5">
-        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Beranda</span>
-        </a>
-        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Direktori 7 Pilar</span>
-        </a>
-        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-semibold text-ink/70 hover:text-ink hover:bg-black/5 transition-all">
-          <span>Database Atlet</span>
-        </a>
-        <a href="/about" class="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-crimson-800 text-paper shadow-sm">
-          <span>Tentang Kami</span>
-        </a>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Beranda</a>
+        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Kartu TCG Player</a>
+        <a href="/#wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Peta 19 Wilayah</a>
+        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Galeri Kartu Atlet</a>
+        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Tentang Kami</a>
       </nav>
 
-      <!-- Right Action: Open Self-Registration Modal -->
-      <div class="flex items-center gap-1.5 sm:gap-3">
-        <a href="/#direktori" class="hidden sm:flex cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md items-center gap-2">
-          <i data-lucide="search" class="w-4 h-4"></i>
-          <span>Cari di Database</span>
+      <!-- Desktop Action -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="/#direktori" class="cut-corner-btn px-4 py-2 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-md shadow-crimson-900/25 flex items-center gap-2 app-tap">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+          <span>Katalog TCG</span>
         </a>
-
-        <a href="/#direktori" class="md:hidden w-9 h-9 rounded-xl bg-black/5 text-ink flex items-center justify-center app-tap">
-          <i data-lucide="search" class="w-4 h-4"></i>
-        </a>
-
-        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-black/5 text-ink flex items-center justify-center app-tap">
-          <i data-lucide="menu" class="w-4 h-4"></i>
-        </button>
       </div>
 
+      <!-- Mobile Hamburger -->
+      <button onclick="toggleMobileNav()" class="lg:hidden w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap" aria-label="Toggle Navigation Menu">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
     </div>
 
-    <!-- Mobile Drawer Menu -->
-    <div id="mobileNavMenu" class="md:hidden hidden mx-2 mt-2 rounded-2xl bg-white/98 backdrop-blur-2xl border border-black/10 shadow-2xl p-4 space-y-2">
-      <div class="pb-2 border-b border-black/10 mb-2 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="w-6 h-6 object-contain" />
-          <span class="font-display text-lg text-ink">ESPORT <span class="text-crimson-600">SUMBAR</span></span>
-        </div>
-        <span class="text-[10px] font-mono text-emerald-600 font-bold">● Partner Resmi ESI</span>
-      </div>
-      <a href="/" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileNavMenu" class="hidden lg:hidden mt-2 p-3 bg-white/95 backdrop-blur-xl rounded-2xl border border-black/10 shadow-xl flex flex-col gap-1 transition-all">
+      <a href="/" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
         <span>Beranda</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
-      <a href="/#direktori" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
-        <span>Direktori 7 Pilar</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="/#direktori" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Kartu TCG Player</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
-      <a href="/atlet" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-ink hover:bg-black/5 font-semibold text-xs">
-        <span>Database Atlet (8.4K)</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="/#wilayah" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Peta 19 Wilayah</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
-      <a href="/about" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-crimson-800 text-paper font-semibold text-xs">
-        <span>Tentang & Kemitraan ESI</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      <a href="/atlet" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
+        <span>Galeri Kartu Atlet</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
+      </a>
+      <a href="/about" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-crimson-800 text-paper flex items-center justify-between">
+        <span>Tentang Platform</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-paper/70"></i>
       </a>
     </div>
   </header>
@@ -477,5 +464,32 @@
     });
   </script>
 
+<div class="md:hidden fixed bottom-3 inset-x-3 z-40 max-w-md mx-auto">
+    <div class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-3 py-2 flex items-center justify-around relative">
+      <a href="/" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono leading-none">Beranda</span>
+      </a>
+
+      <a href="/#direktori" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="layers" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono leading-none">Kartu TCG</span>
+      </a>
+
+      <a href="/#direktori" class="w-11 h-11 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-500 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white app-tap" aria-label="Katalog TCG">
+        <i data-lucide="sparkles" class="w-5 h-5 text-amber-300"></i>
+      </a>
+
+      <a href="/atlet" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono leading-none">Galeri Atlet</span>
+      </a>
+
+      <a href="/about" class="flex flex-col items-center gap-1 text-crimson-600 app-tap">
+        <i data-lucide="info" class="w-5 h-5"></i>
+        <span class="text-[9px] font-mono font-bold leading-none">Tentang</span>
+      </a>
+    </div>
+  </div>
 </body>
 </html>
