@@ -56,6 +56,33 @@
     /* 3D TCG Pocket Physics */
     .tcg-scene {
       perspective: 1200px;
+      position: relative;
+      user-select: none;
+    }
+
+    /* Fixed rigid card dimension ensuring authentic Pokemon TCG proportions */
+    .tcg-modal-card-size {
+      width: 275px;
+      height: 395px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .tcg-modal-card-size {
+        width: 310px;
+        height: 445px;
+      }
+    }
+
+    .tcg-card-fixed {
+      width: 295px;
+      height: 430px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .tcg-card-fixed {
+        width: 305px;
+        height: 445px;
+      }
     }
 
     .tcg-card-wrapper {
@@ -75,19 +102,24 @@
       transform: rotateY(180deg) !important;
     }
 
+    /* BOTH FACES MUST BE STRICTLY PINNED AT 0,0 TO PREVENT VERTICAL SHIFT ON ROTATION */
     .tcg-face {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
       border-radius: 20px;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     .tcg-face-back {
-      transform: rotateY(180deg);
+      transform: rotateY(180deg) !important;
     }
 
     /* Prismatic Rainbow Foil */
@@ -342,8 +374,8 @@
   <!-- ============================================================== -->
   <!-- 5. FULLSCREEN 3D POCKET INSPECTOR MODAL                        -->
   <!-- ============================================================== -->
-  <div id="tcgInspectorModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="relative w-full max-w-lg bg-[#12151D] border border-white/20 rounded-3xl p-5 sm:p-7 text-paper shadow-2xl flex flex-col items-center">
+  <div id="tcgInspectorModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-md bg-[#12151D] border border-white/20 rounded-3xl p-4 sm:p-6 text-paper shadow-2xl flex flex-col items-center max-h-[92vh] overflow-y-auto no-scrollbar">
       
       <button onclick="closeTcgInspector()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors app-tap">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -355,7 +387,7 @@
       </div>
 
       <!-- 3D Card Stage -->
-      <div class="tcg-scene w-[280px] sm:w-[310px] aspect-[1/1.48] relative my-2 select-none">
+      <div class="tcg-scene tcg-modal-card-size my-1 sm:my-2 select-none">
         <div id="inspectorCardInstance" class="tcg-card-wrapper"></div>
       </div>
 
@@ -670,11 +702,11 @@
         const ratingBg = isGold ? 'from-amber-500 to-amber-300 text-ink' : isHolo ? 'from-sky-500 to-sky-300 text-ink' : 'from-crimson-700 to-crimson-500 text-white';
 
         return `
-          <div class="tcg-scene w-full max-w-[310px] aspect-[1/1.48] relative select-none">
+          <div class="tcg-scene tcg-card-fixed select-none">
             <div id="card-${c.id}" class="tcg-card-wrapper cursor-pointer group" onclick="inspectCard('${c.id}')">
               
               <!-- SISI DEPAN -->
-              <div class="tcg-face bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between relative">
+              <div class="tcg-face bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between">
                 <div class="tcg-holo-foil"></div>
                 <div class="tcg-glare"></div>
 
@@ -690,7 +722,7 @@
                   </div>
                 </div>
 
-                <div class="relative flex-1 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-black/40 via-black/80 to-black/95 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-white/30 transition-colors">
+                <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2 bg-gradient-to-b from-black/40 via-black/80 to-black/95 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-white/30 transition-colors">
                   <span class="absolute font-display text-[70px] text-white/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">${c.ign}</span>
                   <img src="${c.photo}" alt="${c.name}" class="w-full h-full object-cover object-top filter contrast-110 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105" onerror="this.src='/images/athlete-pro-player.jpg'" />
                   
@@ -726,7 +758,7 @@
               </div>
 
               <!-- SISI BELAKANG -->
-              <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between relative">
+              <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between">
                 <div class="tcg-holo-foil"></div>
 
                 <div class="flex items-center justify-between border-b border-white/10 pb-2 z-20">
@@ -901,7 +933,7 @@
       instance.className = "tcg-card-wrapper";
       instance.innerHTML = `
         <!-- FRONT -->
-        <div class="tcg-face bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between relative">
+        <div class="tcg-face bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between">
           <div class="tcg-holo-foil active-holo"></div>
           <div class="tcg-glare"></div>
 
@@ -914,7 +946,7 @@
             </div>
           </div>
 
-          <div class="relative flex-1 rounded-2xl overflow-hidden my-3 bg-gradient-to-b from-black/40 to-black/90 border border-white/10 flex items-center justify-center">
+          <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2 bg-gradient-to-b from-black/40 to-black/90 border border-white/10 flex items-center justify-center">
             <span class="absolute font-display text-[90px] text-white/[0.04] font-black uppercase select-none pointer-events-none z-10">${c.ign}</span>
             <img src="${c.photo}" alt="${c.ign}" class="w-full h-full object-cover object-top z-10 filter contrast-110 saturate-110" onerror="this.src='/images/athlete-pro-player.jpg'" />
             
@@ -949,7 +981,7 @@
         </div>
 
         <!-- BACK -->
-        <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between relative">
+        <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between">
           <div class="tcg-holo-foil"></div>
 
           <div class="flex items-center justify-between border-b border-white/10 pb-2.5 z-20">
