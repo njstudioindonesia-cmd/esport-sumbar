@@ -317,155 +317,182 @@
   </div>
 
   <!-- ============================================================== -->
-  <!-- 3. HERO SHOWCASE: WHITE FRONT & RED BACK 3D CARD               -->
+  <!-- 3. ULTRA-MODERN HERO SHOWCASE (Valorant Cyber-Editorial Style)   -->
   <!-- ============================================================== -->
-  <section class="px-4 sm:px-6 lg:px-12 pt-4 pb-8 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+  <section class="px-3 sm:px-6 lg:px-12 pt-3 pb-8 max-w-7xl mx-auto">
+    <div class="modern-stage-card rounded-3xl p-5 sm:p-8 lg:p-10 relative overflow-hidden">
       
-      <!-- Left Column: Title & Platform Context -->
-      <div class="lg:col-span-7 flex flex-col justify-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 border border-black/10 shadow-sm mb-3 self-start">
-          <span class="w-2 h-2 rounded-full bg-crimson-600 animate-pulse"></span>
-          <span class="text-[11px] font-mono font-bold tracking-wider text-ink uppercase">KARTU IDENTITAS DIGITAL RESMI</span>
-        </div>
+      <!-- Ambient Cyber Glows -->
+      <div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-crimson-600/10 blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/10 blur-3xl pointer-events-none"></div>
 
-        <h1 class="font-display text-3xl sm:text-5xl lg:text-7xl text-ink tracking-tight leading-[0.95] uppercase mb-4">
-          KARTU PLAYER & <br />
-          <span class="text-crimson-600">TALENTA ESPORT</span> <br />
-          SUMATERA BARAT
-        </h1>
-
-        <p class="font-sans text-xs sm:text-sm text-ink/75 max-w-xl mb-3.5 sm:mb-6 leading-relaxed">
-          Pangkalan data resmi atlet & talenta esports 19 kabupaten/kota Sumatera Barat berlisensi ESI. Desain depan putih elegan, belakang merah prestisius. Ketuk kartu untuk memutar!
-        </p>
-
-        <!-- CTA Buttons (Responsive Native Mobile Layout) -->
-        <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-3 mb-3.5">
-          <button onclick="openRegistrationModal()" class="cut-corner-btn px-2 sm:px-6 py-2.5 sm:py-3.5 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-lg shadow-crimson-900/30 flex items-center justify-center gap-1.5 app-tap">
-            <i data-lucide="badge-plus" class="w-4 h-4 text-amber-300 flex-shrink-0"></i>
-            <span>Daftar</span>
-          </button>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        
+        <!-- Left: Punchy High-Tech Hero Typography -->
+        <div class="lg:col-span-7 flex flex-col justify-center">
           
-          <a href="#direktori" class="cut-corner-btn px-2 sm:px-5 py-2.5 sm:py-3.5 bg-white hover:bg-black/5 text-ink border border-black/15 font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center justify-center gap-1.5 app-tap">
-            <i data-lucide="layers" class="w-4 h-4 text-crimson-600 flex-shrink-0"></i>
-            <span>Galeri</span>
-          </a>
-        </div>
+          <!-- Tactical HUD Tag -->
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-crimson-600/10 border border-crimson-600/20 text-crimson-600 text-[10px] font-mono font-bold tracking-widest uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-crimson-600 animate-pulse"></span>
+              PORTAL DATABASE RESMI // 2026
+            </span>
+            <span class="text-[10px] font-mono font-bold text-ink/40 uppercase tracking-wider hidden sm:inline">
+              // MITRA PENGPROV ESI SUMBAR
+            </span>
+          </div>
 
-        <!-- Technical Telemetry Badges (Compact HUD Styling) -->
-        <div class="flex flex-wrap items-center gap-2.5 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-ink/70">
-          <span class="px-2.5 py-1 rounded-lg bg-black/5 border border-black/10 flex items-center gap-1.5 font-semibold text-crimson-600">
-            <i data-lucide="rotate-3d" class="w-3.5 h-3.5"></i> 3D Gyroscope
-          </span>
-          <span class="px-2.5 py-1 rounded-lg bg-black/5 border border-black/10 flex items-center gap-1.5 font-semibold text-amber-600">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Holographic Foil
-          </span>
-          <span class="px-2.5 py-1 rounded-lg bg-black/5 border border-black/10 flex items-center gap-1.5 font-semibold text-sky-600">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Lisensi ESI
-          </span>
-        </div>
-      </div>
+          <!-- Futuristic Headline with Gradient Text -->
+          <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl text-ink tracking-tight uppercase leading-[0.92] mb-3">
+            PASPOR DIGITAL <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-crimson-600 via-crimson-500 to-crimson-800">ATLET & TALENTA</span> <br />
+            SUMATERA BARAT
+          </h1>
 
-      <!-- Right Column: Featured Interactive 3D Card (White Front, Red Back) -->
-      <div class="lg:col-span-5 flex justify-center py-4">
-        <div class="card-scene card-fixed mx-auto select-none">
-          
-          <div id="heroCardWrapper" class="card-wrapper cursor-pointer group" onclick="handleCardClick('heroCardWrapper', event)">
+          <!-- Crisp Subheadline -->
+          <p class="font-sans text-xs sm:text-sm text-ink/70 max-w-xl mb-6 leading-relaxed font-normal">
+            Platform pendataan dan verifikasi resmi atlet, tim, dan penggiat esports di 19 kabupaten/kota. Terintegrasi kartu digital 3D dengan kartu depan putih eksklusif dan cover belakang merah berlisensi ESI.
+          </p>
+
+          <!-- Modern Tactile CTA Buttons -->
+          <div class="grid grid-cols-2 gap-2.5 sm:flex sm:items-center sm:gap-3.5 mb-6">
+            <button onclick="openRegistrationModal()" class="py-3 px-3 sm:px-7 rounded-2xl bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-white font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-[0_8px_20px_-4px_rgba(179,18,27,0.45)] hover:shadow-[0_12px_28px_-4px_rgba(179,18,27,0.6)] flex items-center justify-center gap-1.5 sm:gap-2 app-tap">
+              <i data-lucide="sparkles" class="w-4 h-4 text-amber-300 flex-shrink-0"></i>
+              <span class="truncate">Daftar Kartu</span>
+            </button>
             
-            <!-- SISI DEPAN (WHITE LUXURY DESIGN) -->
-            <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
-              
-              <div class="card-holo-foil"></div>
+            <a href="#direktori" class="py-3 px-3 sm:px-6 rounded-2xl bg-white hover:bg-neutral-50 text-ink border border-black/15 hover:border-black/30 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-sm flex items-center justify-center gap-1.5 sm:gap-2 app-tap">
+              <i data-lucide="layers" class="w-4 h-4 text-crimson-600 flex-shrink-0"></i>
+              <span class="truncate">Katalog</span>
+            </a>
+          </div>
 
-              <!-- Top Bar -->
-              <div class="flex items-center justify-between z-20">
-                <div class="flex items-center gap-1.5">
-                  <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
-                    <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
-                  </div>
-                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold tracking-wider uppercase bg-amber-400 text-ink shadow-sm">
-                    PELATDA PON
-                  </span>
-                </div>
-                <div class="flex items-center gap-1">
-                  <span class="text-[9px] font-mono font-bold text-ink/40 uppercase">OVR</span>
-                  <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-lg font-black flex items-center justify-center shadow-md">
-                    96
-                  </div>
-                </div>
-              </div>
-
-              <!-- Main Character Portrait Frame -->
-              <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center shadow-inner group-hover:border-crimson-600/40 transition-colors">
-                <span class="absolute font-display text-[80px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">V4ND4L</span>
-                
-                <img 
-                  src="/images/athlete-v4nd4l.jpg" 
-                  alt="Muhammad Rayden - V4ND4L" 
-                  class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105"
-                  onerror="this.src='/images/athlete-pro-player.jpg'"
-                />
-
-                <!-- Bottom Photo Overlay -->
-                <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
-                  <div>
-                    <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">NAMA LENGKAP</div>
-                    <div class="text-xs font-sans font-bold text-white flex items-center gap-1 truncate max-w-[130px]">
-                      Muhammad Rayden
-                      <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0"></i>
-                    </div>
-                  </div>
-                  <div class="text-right">
-                    <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">DOMISILI</div>
-                    <div class="text-[11px] font-mono font-bold text-amber-300 truncate max-w-[100px]">Kota Padang</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Lower Ribbon -->
-              <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5">
-                    <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase tracking-wider">VALORANT</span>
-                    <span class="text-[9px] font-mono text-ink/70 font-semibold uppercase truncate max-w-[120px]">Duelist / Entry</span>
-                  </div>
-                  <h3 class="font-display text-2xl text-ink tracking-tight leading-none mt-0.5">
-                    V4ND4L
-                  </h3>
-                </div>
-
-                <!-- Flip Button -->
-                <button type="button" onclick="flipCard('heroCardWrapper', event)" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-black/10 flex items-center gap-1.5 app-tap shadow-sm" title="Putar Kartu">
-                  <i data-lucide="repeat" class="w-3 h-3 text-crimson-600 group-hover:text-white"></i>
-                  <span>Putar</span>
-                </button>
-              </div>
-
+          <!-- Tactical HUD Counter Rail -->
+          <div class="grid grid-cols-3 gap-2 sm:gap-2.5 pt-4 border-t border-black/[0.08]">
+            <div class="hud-badge p-2 sm:p-3 rounded-2xl overflow-hidden">
+              <div class="text-[8px] sm:text-[9px] font-mono font-bold text-ink/50 uppercase tracking-wider truncate">WILAYAH</div>
+              <div class="font-display text-base sm:text-2xl text-ink font-black leading-none mt-1 truncate">19 DAERAH</div>
             </div>
-
-            <!-- SISI BELAKANG (OFFICIAL RED CARD COVER) -->
-            <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
-              <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang Kartu" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
-              <div class="card-holo-foil"></div>
-
-              <!-- Sleek Quick Return Pill -->
-              <div class="absolute bottom-3 right-3 z-30">
-                <button type="button" onclick="flipCard('heroCardWrapper', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap" title="Balik ke Sisi Depan">
-                  <i data-lucide="repeat" class="w-3 h-3"></i>
-                  <span>Depan</span>
-                </button>
-              </div>
+            <div class="hud-badge p-2 sm:p-3 rounded-2xl overflow-hidden">
+              <div class="text-[8px] sm:text-[9px] font-mono font-bold text-ink/50 uppercase tracking-wider truncate">LEGALITAS</div>
+              <div class="font-display text-base sm:text-2xl text-emerald-600 font-black leading-none mt-1 truncate">RESMI ESI</div>
             </div>
-
+            <div class="hud-badge p-2 sm:p-3 rounded-2xl overflow-hidden">
+              <div class="text-[8px] sm:text-[9px] font-mono font-bold text-ink/50 uppercase tracking-wider truncate">INTERAKSI</div>
+              <div class="font-display text-base sm:text-2xl text-crimson-600 font-black leading-none mt-1 truncate">3D DUAL-SIDE</div>
+            </div>
           </div>
 
         </div>
+
+        <!-- Right: 3D Spotlight Stage -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center py-2 sm:py-4 relative">
+          
+          <!-- Ambient Backlight Spotlight -->
+          <div class="absolute inset-0 bg-gradient-to-t from-crimson-600/20 via-crimson-500/10 to-transparent rounded-full filter blur-3xl pointer-events-none scale-90"></div>
+
+          <div class="card-scene card-fixed mx-auto select-none relative z-10">
+            <div id="heroCardWrapper" class="card-wrapper cursor-pointer group" onclick="handleCardClick('heroCardWrapper', event)">
+              
+              <!-- SISI DEPAN (WHITE LUXURY DESIGN) -->
+              <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
+                <div class="card-holo-foil"></div>
+
+                <!-- Top Bar -->
+                <div class="flex items-center justify-between z-20">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                      <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold tracking-wider uppercase bg-amber-400 text-ink shadow-sm">
+                      PELATDA PON
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <span class="text-[9px] font-mono font-bold text-ink/40 uppercase">OVR</span>
+                    <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-lg font-black flex items-center justify-center shadow-md">
+                      96
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Character Portrait Frame -->
+                <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center shadow-inner group-hover:border-crimson-600/40 transition-colors">
+                  <span class="absolute font-display text-[80px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">V4ND4L</span>
+                  
+                  <img 
+                    src="/images/athlete-v4nd4l.jpg" 
+                    alt="Muhammad Rayden - V4ND4L" 
+                    class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105"
+                    onerror="this.src='/images/athlete-pro-player.jpg'"
+                  />
+
+                  <!-- Bottom Photo Overlay -->
+                  <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
+                    <div>
+                      <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">NAMA LENGKAP</div>
+                      <div class="text-xs font-sans font-bold text-white flex items-center gap-1 truncate max-w-[130px]">
+                        Muhammad Rayden
+                        <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0"></i>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">DOMISILI</div>
+                      <div class="text-[11px] font-mono font-bold text-amber-300 truncate max-w-[100px]">Kota Padang</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Lower Ribbon -->
+                <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase tracking-wider">VALORANT</span>
+                      <span class="text-[9px] font-mono text-ink/70 font-semibold uppercase truncate max-w-[120px]">Duelist / Entry</span>
+                    </div>
+                    <h3 class="font-display text-2xl text-ink tracking-tight leading-none mt-0.5">
+                      V4ND4L
+                    </h3>
+                  </div>
+
+                  <!-- Flip Button -->
+                  <button type="button" onclick="flipCard('heroCardWrapper', event)" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-black/10 flex items-center gap-1.5 app-tap shadow-sm" title="Putar Kartu">
+                    <i data-lucide="repeat" class="w-3 h-3 text-crimson-600 group-hover:text-white"></i>
+                    <span>Putar</span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- SISI BELAKANG (OFFICIAL RED CARD COVER) -->
+              <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
+                <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang Kartu" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+                <div class="card-holo-foil"></div>
+
+                <!-- Sleek Quick Return Pill -->
+                <div class="absolute bottom-3 right-3 z-30">
+                  <button type="button" onclick="flipCard('heroCardWrapper', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap" title="Balik ke Sisi Depan">
+                    <i data-lucide="repeat" class="w-3 h-3"></i>
+                    <span>Depan</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Micro Hint below card -->
+          <div class="flex items-center gap-1.5 text-[10px] font-mono text-ink/50 mt-3 font-semibold">
+            <i data-lucide="rotate-3d" class="w-3.5 h-3.5 text-crimson-600"></i>
+            <span>Sentuh atau klik kartu untuk memutar ke sisi belakang</span>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
-  </section>
-
-  <!-- ============================================================== -->
+  </section><!-- ============================================================== -->
   <!-- 4. QUICK SERVICE PILLARS                                       -->
   <!-- ============================================================== -->
   <section class="px-4 sm:px-6 lg:px-12 py-4 max-w-7xl mx-auto">

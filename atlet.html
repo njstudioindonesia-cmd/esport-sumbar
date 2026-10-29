@@ -49,6 +49,32 @@
   <meta property="og:image" content="https://esport-sumbar.vercel.app/images/esport-sumbar-lockup.png" />
 
   <style>
+    
+    /* Ultra-Modern Tactical Atmosphere */
+    body {
+      background-color: #E2E2E5;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(224, 34, 45, 0.09) 0%, transparent 55%),
+        linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    .modern-stage-card {
+      background: linear-gradient(145deg, #FFFFFF 0%, #F5F5F7 100%);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 
+        0 20px 40px -15px rgba(0, 0, 0, 0.07),
+        0 1px 3px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .hud-badge {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
     /* Cut Corners */
     .cut-corner-btn {
       clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
@@ -236,34 +262,39 @@
   </header>
 
   <!-- ============================================================== -->
-  <!-- 2. HERO HEADER SECTION                                         -->
+  <!-- 2. ULTRA-MODERN HERO HEADER SECTION                            -->
   <!-- ============================================================== -->
-  <section class="px-4 sm:px-6 lg:px-12 pt-6 pb-4 max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/10 pb-6">
-      <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-black/10 shadow-sm mb-2">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500 animate-spin" style="animation-duration: 6s;"></i>
-          <span class="text-[11px] font-mono font-bold tracking-wider text-ink uppercase">SHOWCASE KARTU DIGITAL RESMI</span>
+  <section class="px-3 sm:px-6 lg:px-12 pt-3 pb-4 max-w-7xl mx-auto">
+    <div class="modern-stage-card rounded-3xl p-5 sm:p-7 relative overflow-hidden">
+      
+      <!-- Subtle Ambient Glow -->
+      <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-crimson-600/10 blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 relative z-10">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-600/10 border border-crimson-600/20 text-crimson-600 text-[10px] font-mono font-bold tracking-widest uppercase mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-crimson-600 animate-pulse"></span>
+            <span>KATALOG RESMI ATLET // 19 WILAYAH</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight uppercase leading-[0.92]">
+            GALERI KARTU ATLET & <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-crimson-600 via-crimson-500 to-crimson-800">TALENTA SUMBAR</span>
+          </h1>
+          <p class="font-sans text-xs sm:text-sm text-ink/70 max-w-xl mt-2 font-normal">
+            Pangkalan kartu digital interaktif atlet Pelatda, juara kejuaraan daerah, dan talenta muda bebas kontrak (LFT) di 19 kabupaten/kota Sumatera Barat dengan lisensi resmi ESI.
+          </p>
         </div>
-        <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight uppercase leading-none">
-          GALERI KARTU ATLET & <br />
-          <span class="text-crimson-600">TALENTA SUMBAR</span>
-        </h1>
-        <p class="font-sans text-xs sm:text-sm text-ink/75 max-w-xl mt-2">
-          Pangkalan kartu digital interaktif atlet Pelatda, juara kejuaraan daerah, dan talenta muda bebas kontrak (LFT) di 19 kabupaten/kota Sumatera Barat dengan lisensi resmi ESI.
-        </p>
+
+        <div class="flex items-center gap-2 self-start md:self-auto">
+          <button onclick="openRegistrationModal()" class="py-3 px-5 sm:px-6 rounded-2xl bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-white font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-[0_6px_20px_-4px_rgba(179,18,27,0.45)] flex items-center gap-2 app-tap">
+            <i data-lucide="badge-plus" class="w-4 h-4 text-amber-300"></i>
+            <span>Daftar / Buat Kartu</span>
+          </button>
+        </div>
       </div>
 
-      <div class="flex items-center gap-2 self-start md:self-auto">
-        <button onclick="openRegistrationModal()" class="cut-corner-btn px-4 py-2.5 bg-gradient-to-r from-crimson-600 to-crimson-800 text-paper text-xs font-mono font-bold tracking-wider uppercase shadow-md flex items-center gap-2 app-tap">
-          <i data-lucide="badge-plus" class="w-4 h-4 text-amber-300"></i>
-          <span>Daftar / Buat Kartu</span>
-        </button>
-      </div>
     </div>
-  </section>
-
-  <!-- ============================================================== -->
+  </section><!-- ============================================================== -->
   <!-- 3. SEARCH & ADVANCED FILTER PANEL                              -->
   <!-- ============================================================== -->
   <section class="px-4 sm:px-6 lg:px-12 py-3 max-w-7xl mx-auto">
