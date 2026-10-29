@@ -8,7 +8,7 @@
 
   <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
@@ -25,6 +25,7 @@
               400: "#E0222D",
               500: "#D61622",
               600: "#B3121B",
+              700: "#960E18",
               800: "#7A0B12",
               900: "#50060B",
             }
@@ -53,55 +54,50 @@
       clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
     }
 
-    /* 3D TCG Pocket Physics */
-    .tcg-scene {
+    /* 3D CARD ENGINE (WHITE FRONT, RED BACK, NO DRIFT, SPAM-PROOF) */
+    .card-scene {
       perspective: 1200px;
+      -webkit-perspective: 1200px;
       position: relative;
       user-select: none;
     }
 
-    /* Fixed rigid card dimension ensuring authentic Pokemon TCG proportions */
-    .tcg-modal-card-size {
-      width: 275px;
-      height: 395px;
-      max-width: 100%;
-    }
-    @media (min-width: 640px) {
-      .tcg-modal-card-size {
-        width: 310px;
-        height: 445px;
-      }
-    }
-
-    .tcg-card-fixed {
+    .card-fixed {
       width: 295px;
-      height: 430px;
+      height: 435px;
       max-width: 100%;
     }
     @media (min-width: 640px) {
-      .tcg-card-fixed {
+      .card-fixed {
         width: 305px;
         height: 445px;
       }
     }
 
-    .tcg-card-wrapper {
+    .card-modal-size {
+      width: 280px;
+      height: 410px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .card-modal-size {
+        width: 310px;
+        height: 450px;
+      }
+    }
+
+    .card-wrapper {
       position: relative;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+      -webkit-transform-style: preserve-3d;
       will-change: transform;
+      transition: transform 0.15s ease-out;
     }
 
-    .tcg-card-wrapper.flipping {
-      transition: transform 0.65s cubic-bezier(0.2, 0.85, 0.3, 1.15) !important;
-    }
-
-    /* Wrapper stays stable in 3D while faces rotate */
-
-    /* BULLETPROOF DUAL-FACE 3D FLIP ENGINE (100% Mobile & WebKit Compatible) */
-    .tcg-face {
+    /* CARD FACES */
+    .card-face {
       position: absolute !important;
       top: 0 !important;
       left: 0 !important;
@@ -118,8 +114,8 @@
       transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15), opacity 0.25s ease;
     }
 
-    /* FRONT FACE: Faces forward by default */
-    .tcg-face-front {
+    /* FRONT FACE: White Luxury Design */
+    .card-face-front {
       transform: rotateY(0deg) translateZ(1px);
       -webkit-transform: rotateY(0deg) translateZ(1px);
       z-index: 5;
@@ -127,8 +123,8 @@
       pointer-events: auto;
     }
 
-    /* BACK FACE: Rotated -180deg facing back by default */
-    .tcg-face-back {
+    /* BACK FACE: Official Red Design Cover */
+    .card-face-back {
       transform: rotateY(-180deg) translateZ(1px);
       -webkit-transform: rotateY(-180deg) translateZ(1px);
       z-index: 1;
@@ -136,8 +132,8 @@
       pointer-events: none;
     }
 
-    /* WHEN FLIPPED: FRONT ROTATES TO 180 DEG (FADES OUT) */
-    .tcg-card-wrapper.flipped .tcg-face-front {
+    /* WHEN FLIPPED */
+    .card-wrapper.flipped .card-face-front {
       transform: rotateY(180deg) translateZ(1px);
       -webkit-transform: rotateY(180deg) translateZ(1px);
       z-index: 1;
@@ -145,8 +141,7 @@
       pointer-events: none;
     }
 
-    /* WHEN FLIPPED: BACK ROTATES TO 0 DEG (FULLY FACING CAMERA, INTERACTIVE & VISIBLE ON MOBILE) */
-    .tcg-card-wrapper.flipped .tcg-face-back {
+    .card-wrapper.flipped .card-face-back {
       transform: rotateY(0deg) translateZ(1px);
       -webkit-transform: rotateY(0deg) translateZ(1px);
       z-index: 25;
@@ -154,66 +149,30 @@
       pointer-events: auto;
     }
 
-    /* Prismatic Rainbow Foil */
-    .tcg-holo-foil {
+    /* Luxury Holographic Foil Sheen */
+    .card-holo-foil {
       position: absolute;
       inset: 0;
       pointer-events: none;
       border-radius: inherit;
-      opacity: 0.15;
+      opacity: 0.12;
       transition: opacity 0.3s ease;
       mix-blend-mode: color-dodge;
       z-index: 25;
       background: linear-gradient(
         115deg,
-        transparent 10%,
-        rgba(255, 30, 80, 0.45) 25%,
-        rgba(255, 230, 0, 0.55) 40%,
-        rgba(0, 245, 212, 0.6) 55%,
-        rgba(138, 43, 226, 0.5) 70%,
-        rgba(255, 50, 100, 0.4) 85%,
-        transparent 95%
+        transparent 15%,
+        rgba(255, 30, 80, 0.35) 30%,
+        rgba(255, 230, 0, 0.45) 45%,
+        rgba(0, 245, 212, 0.45) 55%,
+        transparent 85%
       );
-      background-size: 280% 280%;
+      background-size: 250% 250%;
       background-position: 50% 50%;
     }
-
-    .tcg-card-wrapper:hover .tcg-holo-foil,
-    .tcg-card-wrapper.touching .tcg-holo-foil,
-    .tcg-card-wrapper.active-holo .tcg-holo-foil {
-      opacity: 0.85;
-    }
-
-    /* Glare Specular */
-    .tcg-glare {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      border-radius: inherit;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      mix-blend-mode: overlay;
-      z-index: 26;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 65%);
-    }
-
-    .tcg-card-wrapper:hover .tcg-glare,
-    .tcg-card-wrapper.touching .tcg-glare {
-      opacity: 0.9;
-    }
-
-    /* Borders */
-    .tcg-border-gold {
-      border: 2px solid rgba(251, 191, 36, 0.9);
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.35), 0 12px 30px rgba(0, 0, 0, 0.4);
-    }
-    .tcg-border-crimson {
-      border: 2px solid rgba(224, 34, 45, 0.85);
-      box-shadow: 0 0 25px rgba(179, 18, 27, 0.4), 0 12px 30px rgba(0, 0, 0, 0.4);
-    }
-    .tcg-border-holo {
-      border: 2px solid rgba(56, 189, 248, 0.85);
-      box-shadow: 0 0 25px rgba(14, 165, 233, 0.4), 0 12px 30px rgba(0, 0, 0, 0.4);
+    .card-wrapper:hover .card-holo-foil,
+    .card-wrapper.touching .card-holo-foil {
+      opacity: 0.75;
     }
 
     .app-tap:active {
@@ -253,7 +212,7 @@
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
         <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Beranda</a>
-        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Kartu TCG Player</a>
+        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Kartu Player</a>
         <a href="/#wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Peta 19 Wilayah</a>
         <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Galeri Kartu Atlet</a>
         <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Tentang Kami</a>
@@ -280,7 +239,7 @@
         <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
       <a href="/#direktori" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
-        <span>Kartu TCG Player</span>
+        <span>Kartu Player</span>
         <i data-lucide="chevron-right" class="w-4 h-4 text-ink/40"></i>
       </a>
       <a href="/#wilayah" class="px-4 py-2.5 rounded-xl text-xs font-medium text-ink hover:bg-black/5 flex items-center justify-between">
@@ -298,7 +257,7 @@
       <div class="pt-2 border-t border-black/5">
         <button onclick="toggleMobileNav(); openRegistrationModal();" class="w-full cut-corner-btn py-2.5 bg-gradient-to-r from-crimson-600 to-crimson-800 text-paper text-xs font-mono font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md">
           <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
-          <span>Buat Kartu Digital TCG</span>
+          <span>Buat Kartu Digital Resmi</span>
         </button>
       </div>
     </div>
@@ -312,9 +271,9 @@
       <div>
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-black/10 shadow-sm mb-2">
           <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500 animate-spin" style="animation-duration: 6s;"></i>
-          <span class="text-[11px] font-mono font-bold tracking-wider text-ink uppercase">TCG POCKET 3D CARD SHOWCASE</span>
+          <span class="text-[11px] font-mono font-bold tracking-wider text-ink uppercase">SHOWCASE KARTU DIGITAL RESMI</span>
         </div>
-        <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight uppercase leading-none break-words">
+        <h1 class="font-display text-4xl sm:text-6xl text-ink tracking-tight uppercase leading-none">
           GALERI KARTU ATLET & <br class="hidden sm:inline" />
           <span class="text-crimson-600">TALENTA SUMBAR</span>
         </h1>
@@ -388,44 +347,44 @@
   </section>
 
   <!-- ============================================================== -->
-  <!-- 4. CARDS GALLERY GRID (3D TCG POCKET STYLE)                    -->
+  <!-- 4. CARDS GALLERY GRID                                          -->
   <!-- ============================================================== -->
   <section class="px-4 sm:px-6 lg:px-12 py-6 max-w-7xl mx-auto">
     <div class="flex items-center justify-between mb-4">
       <span id="athleteResultCount" class="text-xs font-mono font-bold text-ink uppercase">
         MENAMPILKAN 8 KARTU ATLET
       </span>
-      <span class="text-[10px] font-mono text-ink/50">Sentuh / Gerakkan Kursor untuk 3D Tilt</span>
+      <span class="text-[10px] font-mono text-ink/50">Sentuh / Gerakkan Kursor untuk Efek 3D</span>
     </div>
 
-    <div id="athletesGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 justify-items-center">
+    <div id="athletesGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
       <!-- Injected Dynamically via JS -->
     </div>
   </section>
 
   <!-- ============================================================== -->
-  <!-- 5. FULLSCREEN 3D POCKET INSPECTOR MODAL                        -->
+  <!-- 5. FULLSCREEN 3D CARD INSPECTOR MODAL                          -->
   <!-- ============================================================== -->
-  <div id="tcgInspectorModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="relative w-full max-w-md bg-[#12151D] border border-white/20 rounded-3xl p-4 sm:p-6 text-paper shadow-2xl flex flex-col items-center max-h-[92vh] overflow-y-auto no-scrollbar">
+  <div id="cardInspectorModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="relative w-full max-w-lg bg-[#14161F] border border-white/20 rounded-3xl p-5 sm:p-7 text-paper shadow-2xl flex flex-col items-center">
       
-      <button onclick="closeTcgInspector()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors app-tap">
+      <button onclick="closeCardInspector()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors app-tap">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
       <div class="text-center mb-3">
-        <span class="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest">3D IMMERSION INSPECTOR &bull; POKEMON TCG POCKET</span>
+        <span class="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest">INSPEKSI DETAIL KARTU DIGITAL</span>
         <h3 id="inspectorModalTitle" class="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight">KARTU ATLET DIGITAL</h3>
       </div>
 
       <!-- 3D Card Stage -->
-      <div class="tcg-scene tcg-modal-card-size my-1 sm:my-2 select-none">
-        <div id="inspectorCardInstance" class="tcg-card-wrapper cursor-pointer" onclick="flipInspectorCard(event)"></div>
+      <div class="card-scene card-modal-size relative my-2 select-none">
+        <div id="inspectorCardInstance" class="card-wrapper cursor-pointer" onclick="handleCardClick('inspectorCardInstance', event)"></div>
       </div>
 
       <!-- Control Toolbar -->
       <div class="flex items-center gap-2.5 mt-4">
-        <button onclick="flipInspectorCard()" class="px-4 py-2 rounded-xl bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 border border-white/20 app-tap">
+        <button onclick="flipCard('inspectorCardInstance', event)" class="px-4 py-2 rounded-xl bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 border border-white/20 app-tap">
           <i data-lucide="repeat" class="w-4 h-4"></i>
           <span>Putar Kartu (180°)</span>
         </button>
@@ -449,7 +408,7 @@
 
       <div class="flex items-center gap-2 text-crimson-600 mb-1">
         <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
-        <span class="text-xs font-mono font-bold uppercase tracking-wider">Cetak Kartu TCG Digital Resmi</span>
+        <span class="text-xs font-mono font-bold uppercase tracking-wider">Cetak Kartu Digital Resmi</span>
       </div>
       <h3 class="font-display text-3xl text-ink uppercase tracking-tight mb-2">DAFTARKAN IDENTITAS ATLET ANDA</h3>
       <p class="font-sans text-xs text-ink/70 mb-5">
@@ -516,7 +475,7 @@
         <div class="pt-2">
           <button type="submit" class="w-full cut-corner-btn py-3.5 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-lg flex items-center justify-center gap-2 app-tap">
             <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
-            <span>Cetak & Buka Paket Kartu TCG</span>
+            <span>Cetak Kartu Digital Saya</span>
           </button>
         </div>
       </form>
@@ -535,7 +494,7 @@
 
       <a href="/#direktori" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
         <i data-lucide="layers" class="w-5 h-5"></i>
-        <span class="text-[9px] font-mono leading-none">Kartu TCG</span>
+        <span class="text-[9px] font-mono leading-none">Kartu Player</span>
       </a>
 
       <button onclick="openRegistrationModal()" class="w-11 h-11 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-500 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white app-tap">
@@ -555,9 +514,56 @@
   </div>
 
   <!-- ============================================================== -->
-  <!-- 8. JAVASCRIPT ENGINE FOR ATLET PAGE                            -->
+  <!-- 8. JAVASCRIPT ENGINE (NO SOUND, SPAM-PROOF, WHITE/RED CARDS)   -->
   <!-- ============================================================== -->
   <script>
+    // Spam protection lock
+    const flipLock = new Set();
+
+    function flipCard(cardId, e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+
+      // Prevent animation desync if user rapidly taps
+      if (flipLock.has(cardId)) return;
+      flipLock.add(cardId);
+
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.style.transform = "";
+        card.classList.toggle("flipped");
+      }
+
+      // Unlock after transition finishes (550ms)
+      setTimeout(() => {
+        flipLock.delete(cardId);
+      }, 550);
+    }
+
+    function handleCardClick(cardId, e) {
+      if (e.target.closest("button") || e.target.closest("a")) return;
+
+      const card = document.getElementById(cardId);
+      if (!card) return;
+
+      // If already flipped, tapping anywhere on the card flips it back!
+      if (card.classList.contains("flipped")) {
+        flipCard(cardId, e);
+        return;
+      }
+
+      // If on front face in grid: open modal inspector
+      if (cardId.startsWith("card-ath-") || cardId.startsWith("card-item-") || cardId.startsWith("card-card-")) {
+        const pureId = cardId.replace("card-", "");
+        inspectCard(pureId);
+      } else if (cardId === "inspectorCardInstance") {
+        flipCard(cardId, e);
+      }
+    }
+
+    // Athletes Database
     const athletesData = [
       {
         id: "ath-1",
@@ -569,13 +575,9 @@
         club: "Minang Pride Squad",
         region: "Kota Padang",
         photo: "/images/athlete-v4nd4l.jpg",
-        rarity: "CROWN RARE ★★★",
+        rarity: "PELATDA PON",
         rating: 96,
-        license: "PBESI-SB-2026-VKL-01",
-        tier: "gold",
-        stats: { micro: 97, macro: 94, mental: 98, clutch: 92, winrate: "78.4%", match: "142x Resmi" },
-        highlights: "Medali Emas Porprov &bull; Top 4 Seleksi PON",
-        favHero: "Jett / Raze"
+        license: "PBESI-SB-2026-VKL-01"
       },
       {
         id: "ath-2",
@@ -587,13 +589,9 @@
         club: "Rang Chaniago Esports",
         region: "Kota Bukittinggi",
         photo: "/images/athlete-pro-player.jpg",
-        rarity: "HOLO RARE ★★",
+        rarity: "JUARA KEJURDA",
         rating: 94,
-        license: "PBESI-SB-2026-MLB-14",
-        tier: "holo",
-        stats: { micro: 95, macro: 93, mental: 92, clutch: 94, winrate: "74.2%", match: "118x Resmi" },
-        highlights: "Juara Piala Gubernur Sumbar &bull; MVP Final",
-        favHero: "Fanny / Ling"
+        license: "PBESI-SB-2026-MLB-14"
       },
       {
         id: "ath-3",
@@ -605,13 +603,9 @@
         club: "Ombak Hunter Pariaman",
         region: "Kota Pariaman",
         photo: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
-        rarity: "HOLO RARE ★★",
+        rarity: "PELATDA PON",
         rating: 93,
-        license: "PBESI-SB-2026-PUB-08",
-        tier: "holo",
-        stats: { micro: 94, macro: 92, mental: 93, clutch: 95, winrate: "69.8%", match: "98x Resmi" },
-        highlights: "Terminator PMCO Sumbar &bull; Best Sniper",
-        favHero: "AWM / M416"
+        license: "PBESI-SB-2026-PUB-08"
       },
       {
         id: "ath-4",
@@ -623,13 +617,9 @@
         club: "Looking For Team (LFT)",
         region: "Kota Payakumbuh",
         photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80",
-        rarity: "SUPER RARE ★",
+        rarity: "FREE AGENT (LFT)",
         rating: 92,
-        license: "PBESI-SB-2026-FF-21",
-        tier: "crimson",
-        stats: { micro: 93, macro: 90, mental: 91, clutch: 93, winrate: "72.1%", match: "84x Resmi" },
-        highlights: "Top 3 FFML Nusantara Qualifiers",
-        favHero: "Shotgun / MP40"
+        license: "PBESI-SB-2026-FF-21"
       },
       {
         id: "ath-5",
@@ -641,13 +631,9 @@
         club: "Srikandi Sumbar Squad",
         region: "Kota Padang",
         photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-        rarity: "CROWN RARE ★★★",
+        rarity: "PELATDA PON",
         rating: 95,
-        license: "PBESI-SB-2026-VKL-07",
-        tier: "gold",
-        stats: { micro: 93, macro: 97, mental: 96, clutch: 95, winrate: "81.0%", match: "110x Resmi" },
-        highlights: "Juara 1 VCT Game Changers Sumatera",
-        favHero: "Sova / Fade"
+        license: "PBESI-SB-2026-VKL-07"
       },
       {
         id: "ath-6",
@@ -659,13 +645,9 @@
         club: "Looking For Team (LFT)",
         region: "Kota Solok",
         photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-        rarity: "SUPER RARE ★",
+        rarity: "FREE AGENT (LFT)",
         rating: 91,
-        license: "PBESI-SB-2026-VKL-22",
-        tier: "crimson",
-        stats: { micro: 89, macro: 94, mental: 92, clutch: 93, winrate: "68.5%", match: "76x Resmi" },
-        highlights: "Finalis Solok Invitational &bull; Smokes Master",
-        favHero: "Omen / Viper"
+        license: "PBESI-SB-2026-VKL-22"
       },
       {
         id: "ath-7",
@@ -677,13 +659,9 @@
         club: "Maninjau Titans",
         region: "Kab. Agam",
         photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-        rarity: "HOLO RARE ★★",
+        rarity: "JUARA KEJURDA",
         rating: 93,
-        license: "PBESI-SB-2026-MLB-33",
-        tier: "holo",
-        stats: { micro: 94, macro: 93, mental: 91, clutch: 92, winrate: "71.5%", match: "92x Resmi" },
-        highlights: "Top Global Pharsa & Midlane MVP",
-        favHero: "Pharsa / Yve"
+        license: "PBESI-SB-2026-MLB-33"
       },
       {
         id: "ath-8",
@@ -695,13 +673,9 @@
         club: "Istano Pagaruyung FC",
         region: "Kab. Tanah Datar",
         photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
-        rarity: "SUPER RARE ★",
+        rarity: "JUARA KEJURDA",
         rating: 90,
-        license: "PBESI-SB-2026-EFT-05",
-        tier: "crimson",
-        stats: { micro: 92, macro: 91, mental: 90, clutch: 89, winrate: "75.0%", match: "68x Resmi" },
-        highlights: "Juara 1 eFootball West Sumatra Cup",
-        favHero: "4-3-3 Quick Counter"
+        license: "PBESI-SB-2026-EFT-05"
       }
     ];
 
@@ -727,185 +701,215 @@
       }
 
       container.innerHTML = items.map(c => {
-        const isGold = c.tier === 'gold' || c.rating >= 95;
-        const isHolo = c.tier === 'holo' || (c.rating >= 93 && !isGold);
-        const borderClass = isGold ? 'tcg-border-gold' : isHolo ? 'tcg-border-holo' : 'tcg-border-crimson';
-        const rarityBadge = isGold ? 'bg-amber-400 text-ink' : isHolo ? 'bg-sky-400 text-ink' : 'bg-crimson-800 text-paper';
-        const ratingBg = isGold ? 'from-amber-500 to-amber-300 text-ink' : isHolo ? 'from-sky-500 to-sky-300 text-ink' : 'from-crimson-700 to-crimson-500 text-white';
+        const isGold = c.rating >= 95;
+        const rarityBadge = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-paper';
+        const ratingBg = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-white';
 
         return `
-          <div class="tcg-scene tcg-card-fixed select-none">
-            <div id="card-${c.id}" class="tcg-card-wrapper cursor-pointer group" onclick="handleCardWrapperClick(event, '${c.id}')">
+          <div class="card-scene card-fixed select-none">
+            <div id="card-${c.id}" class="card-wrapper cursor-pointer group" onclick="handleCardClick('card-${c.id}', event)">
               
-              <!-- SISI DEPAN -->
-              <div class="tcg-face tcg-face-front bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between">
-                <div class="tcg-holo-foil"></div>
-                <div class="tcg-glare"></div>
+              <!-- SISI DEPAN (WHITE LUXURY DESIGN) -->
+              <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
+                <div class="card-holo-foil"></div>
 
+                <!-- Top Bar -->
                 <div class="flex items-center justify-between z-20">
-                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-black tracking-wider uppercase ${rarityBadge} shadow-sm">
-                    ${c.rarity}
-                  </span>
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                      <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold tracking-wider uppercase ${rarityBadge} shadow-sm">
+                      ${c.rarity}
+                    </span>
+                  </div>
                   <div class="flex items-center gap-1">
-                    <span class="text-[9px] font-mono font-bold text-white/50 uppercase">OVR</span>
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr ${ratingBg} font-display text-lg font-black flex items-center justify-center shadow-md">
+                    <span class="text-[9px] font-mono font-bold text-ink/40 uppercase">OVR</span>
+                    <div class="w-8 h-8 rounded-xl ${ratingBg} font-display text-lg font-black flex items-center justify-center shadow-md">
                       ${c.rating}
                     </div>
                   </div>
                 </div>
 
-                <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2 bg-gradient-to-b from-black/40 via-black/80 to-black/95 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-white/30 transition-colors">
-                  <span class="absolute font-display text-[70px] text-white/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">${c.ign}</span>
-                  <img src="${c.photo}" alt="${c.name}" class="w-full h-full object-cover object-top filter contrast-110 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105" onerror="this.src='/images/athlete-pro-player.jpg'" />
+                <!-- Character Portrait Frame -->
+                <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center shadow-inner group-hover:border-crimson-600/40 transition-colors">
+                  <span class="absolute font-display text-[70px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">${c.ign}</span>
+                  <img src="${c.photo}" alt="${c.name}" class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105" onerror="this.src='/images/athlete-pro-player.jpg'" />
                   
-                  <div class="absolute inset-x-0 bottom-0 pt-5 pb-2 px-3 bg-gradient-to-t from-black via-black/85 to-transparent z-20 flex items-center justify-between">
+                  <!-- Bottom Photo Overlay -->
+                  <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
                     <div>
-                      <div class="text-[8px] font-mono text-white/50 uppercase">NAMA ATLET</div>
+                      <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">NAMA LENGKAP</div>
                       <div class="text-xs font-sans font-bold text-white flex items-center gap-1 truncate max-w-[130px]">
                         ${c.name}
-                        <i data-lucide="badge-check" class="w-3 h-3 text-sky-400"></i>
+                        <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0"></i>
                       </div>
                     </div>
                     <div class="text-right">
-                      <div class="text-[8px] font-mono text-white/50 uppercase">WILAYAH</div>
-                      <div class="text-[10px] font-mono font-bold text-amber-300 truncate max-w-[100px]">${c.region}</div>
+                      <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">DOMISILI</div>
+                      <div class="text-[11px] font-mono font-bold text-amber-300 truncate max-w-[100px]">${c.region}</div>
                     </div>
                   </div>
                 </div>
 
-                <div class="z-20 pt-1 border-t border-white/10 flex items-center justify-between">
+                <!-- Lower Ribbon -->
+                <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
                   <div>
-                    <div class="flex items-center gap-1">
-                      <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase">${c.game}</span>
-                      <span class="text-[9px] font-mono text-white/70 uppercase truncate max-w-[120px]">${c.role}</span>
+                    <div class="flex items-center gap-1.5">
+                      <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase tracking-wider">${c.game}</span>
+                      <span class="text-[9px] font-mono text-ink/70 font-semibold uppercase truncate max-w-[120px]">${c.role}</span>
                     </div>
-                    <h3 class="font-display text-2xl text-white tracking-tight leading-none mt-0.5">${c.ign}</h3>
+                    <h3 class="font-display text-2xl text-ink tracking-tight leading-none mt-0.5">${c.ign}</h3>
                   </div>
 
-                  <button onclick="flipGridCard(event, '${c.id}')" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-amber-400 hover:text-ink text-white font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-white/20 flex items-center gap-1 app-tap">
-                    <i data-lucide="repeat" class="w-3 h-3"></i>
+                  <button type="button" onclick="flipCard('card-${c.id}', event)" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-black/10 flex items-center gap-1.5 app-tap shadow-sm" title="Putar Kartu">
+                    <i data-lucide="repeat" class="w-3 h-3 text-crimson-600 group-hover:text-white"></i>
                     <span>Putar</span>
                   </button>
                 </div>
               </div>
 
-              <!-- SISI BELAKANG -->
-              <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-4 text-paper ${borderClass} shadow-xl flex flex-col justify-between cursor-pointer" onclick="flipGridCard(event, '${c.id}')">
-                <div class="tcg-holo-foil"></div>
+              <!-- SISI BELAKANG (OFFICIAL RED COVER, NO TEXT CLUTTER) -->
+              <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
+                <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang Kartu" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+                <div class="card-holo-foil"></div>
 
-                <div class="flex items-center justify-between border-b border-white/10 pb-2 z-20">
-                  <div class="flex items-center gap-1.5">
-                    <div class="w-5 h-5 rounded bg-crimson-800 p-0.5 flex items-center justify-center">
-                      <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
-                    </div>
-                    <span class="text-[9px] font-mono font-bold text-amber-400 uppercase">ESPORT SUMBAR &bull; ESI</span>
-                  </div>
-                  <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[8px] font-mono font-bold uppercase">
-                    PASPOR RESMI
-                  </span>
-                </div>
-
-                <div class="my-1.5 space-y-1.5 z-20">
-                  <div>
-                    <div class="flex justify-between text-[9px] font-mono">
-                      <span class="text-white/60">MICRO SKILL</span>
-                      <span class="font-bold text-amber-400">${c.stats.micro} / 100</span>
-                    </div>
-                    <div class="w-full h-1 rounded-full bg-white/10 overflow-hidden mt-0.5">
-                      <div class="h-full bg-amber-400 rounded-full" style="width: ${c.stats.micro}%;"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between text-[9px] font-mono">
-                      <span class="text-white/60">MACRO STRATEGY</span>
-                      <span class="font-bold text-sky-400">${c.stats.macro} / 100</span>
-                    </div>
-                    <div class="w-full h-1 rounded-full bg-white/10 overflow-hidden mt-0.5">
-                      <div class="h-full bg-sky-400 rounded-full" style="width: ${c.stats.macro}%;"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between text-[9px] font-mono">
-                      <span class="text-white/60">MENTALITY & CLUTCH</span>
-                      <span class="font-bold text-crimson-400">${c.stats.mental} / 100</span>
-                    </div>
-                    <div class="w-full h-1 rounded-full bg-white/10 overflow-hidden mt-0.5">
-                      <div class="h-full bg-crimson-500 rounded-full" style="width: ${c.stats.mental}%;"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="p-2 rounded-xl bg-white/5 border border-white/10 z-20 text-[9px] font-mono space-y-1">
-                  <div class="flex justify-between text-white/70">
-                    <span>Klub / Tim:</span>
-                    <span class="text-white font-bold truncate max-w-[120px]">${c.club}</span>
-                  </div>
-                  <div class="flex justify-between text-white/70">
-                    <span>Winrate:</span>
-                    <span class="text-emerald-400 font-bold">${c.stats.winrate}</span>
-                  </div>
-                  <div class="flex justify-between text-white/70">
-                    <span>Fav Pick:</span>
-                    <span class="text-amber-300 font-bold truncate max-w-[120px]">${c.favHero}</span>
-                  </div>
-                </div>
-
-                <div class="z-20 pt-1 border-t border-white/10 flex items-center justify-between">
-                  <div>
-                    <div class="text-[7px] font-mono text-white/40 uppercase">NO. LISENSI</div>
-                    <div class="text-[9px] font-mono font-bold text-amber-400">${c.license}</div>
-                  </div>
-
-                  <button type="button" onclick="flipGridCard(event, '${c.id}')" class="px-2.5 py-1.5 rounded-lg bg-amber-400 text-ink font-mono text-[9px] font-bold tracking-wider uppercase shadow-md transition-colors flex items-center gap-1 app-tap" title="Balik ke Sisi Depan">
-      <i data-lucide="repeat" class="w-3 h-3 text-ink"></i>
-      <span>Depan</span>
-    </button>
+                <!-- Sleek Quick Return Pill -->
+                <div class="absolute bottom-3 right-3 z-30">
+                  <button type="button" onclick="flipCard('card-${c.id}', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap" title="Balik ke Sisi Depan">
+                    <i data-lucide="repeat" class="w-3 h-3"></i>
+                    <span>Depan</span>
+                  </button>
                 </div>
               </div>
 
             </div>
           </div>
         `;
-      }).join('');
+      }).join("");
 
       lucide.createIcons();
-      attach3DPhysicsToAllCards();
-    }
 
-    function flipGridCard(e, id) {
-      if (e) e.stopPropagation();
-      const card = document.getElementById(`card-${id}`);
-      if (!card) return;
-      card.classList.add("flipping");
-      card.classList.toggle("flipped");
-      setTimeout(() => card.classList.remove("flipping"), 650);
-    }
-
-    function attach3DPhysicsToAllCards() {
-      document.querySelectorAll(".tcg-card-wrapper").forEach(card => {
-        setupCard3D(card);
+      // Attach 3D physics to each card wrapper
+      document.querySelectorAll(".card-wrapper").forEach(wrapper => {
+        setupCard3D(wrapper);
       });
     }
 
+    // Modal Inspector
+    function inspectCard(id) {
+      const c = athletesData.find(item => item.id === id);
+      if (!c) return;
+
+      const modal = document.getElementById("cardInspectorModal");
+      const title = document.getElementById("inspectorModalTitle");
+      const instance = document.getElementById("inspectorCardInstance");
+
+      title.innerText = `${c.ign} – ${c.name}`;
+
+      const isGold = c.rating >= 95;
+      const rarityBadge = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-paper';
+      const ratingBg = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-white';
+
+      instance.className = "card-wrapper cursor-pointer";
+      instance.innerHTML = `
+        <!-- SISI DEPAN (WHITE) -->
+        <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
+          <div class="card-holo-foil"></div>
+
+          <div class="flex items-center justify-between z-20">
+            <div class="flex items-center gap-1.5">
+              <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase ${rarityBadge}">
+                ${c.rarity}
+              </span>
+            </div>
+            <div class="w-9 h-9 rounded-xl ${ratingBg} font-display text-xl font-black flex items-center justify-center shadow-md">
+              ${c.rating}
+            </div>
+          </div>
+
+          <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center">
+            <span class="absolute font-display text-[90px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">${c.ign}</span>
+            <img src="${c.photo}" alt="${c.ign}" class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10" onerror="this.src='/images/athlete-pro-player.jpg'" />
+            
+            <div class="absolute inset-x-0 bottom-0 pt-6 pb-3 px-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
+              <div>
+                <div class="text-[9px] font-mono text-white/60 uppercase font-semibold">NAMA ATLET</div>
+                <div class="text-sm font-sans font-bold text-white flex items-center gap-1.5">
+                  ${c.name}
+                  <i data-lucide="badge-check" class="w-4 h-4 text-sky-400"></i>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-[9px] font-mono text-white/60 uppercase font-semibold">DOMISILI</div>
+                <div class="text-xs font-mono font-bold text-amber-300">${c.region}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="z-20 pt-2 border-t border-black/10 flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-crimson-800 text-white uppercase">${c.game}</span>
+                <span class="text-[10px] font-mono text-ink/80 font-semibold uppercase">${c.role}</span>
+              </div>
+              <h3 class="font-display text-3xl text-ink tracking-tight mt-0.5">${c.ign}</h3>
+            </div>
+            <div class="text-right">
+              <div class="text-[8px] font-mono text-ink/40 uppercase font-bold">LISENSI PBESI</div>
+              <div class="text-[10px] font-mono font-bold text-crimson-600">${c.license}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SISI BELAKANG (RED COVER, NO TEXT CLUTTER) -->
+        <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
+          <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+          <div class="card-holo-foil"></div>
+
+          <div class="absolute bottom-3 right-3 z-30">
+            <button type="button" onclick="flipCard('inspectorCardInstance', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap" title="Balik ke Sisi Depan">
+              <i data-lucide="repeat" class="w-3 h-3"></i>
+              <span>Depan</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      lucide.createIcons();
+      setupCard3D(instance);
+    }
+
+    function closeCardInspector() {
+      const modal = document.getElementById("cardInspectorModal");
+      modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function toggleInspectorHolo() {
+      const foil = document.querySelector("#inspectorCardInstance .card-holo-foil");
+      if (foil) {
+        foil.classList.toggle("opacity-0");
+      }
+    }
+
+    // 3D Physics & Tilt
     function setupCard3D(card) {
-      const foil = card.querySelector(".tcg-holo-foil");
-      const glare = card.querySelector(".tcg-glare");
+      const foil = card.querySelector(".card-holo-foil");
 
       card.addEventListener("mousemove", (e) => {
         if (card.classList.contains("flipped")) return;
         const rect = card.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
-        const tiltX = (x - 0.5) * 28;
-        const tiltY = (y - 0.5) * -28;
+        const tiltX = (x - 0.5) * 20;
+        const tiltY = (y - 0.5) * -20;
 
-        card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.03, 1.03, 1.03)`;
+        card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
 
-        if (glare) {
-          glare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.7) 0%, transparent 60%)`;
-        }
         if (foil) {
           foil.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
         }
@@ -928,14 +932,11 @@
         const rect = card.getBoundingClientRect();
         const x = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
         const y = Math.max(0, Math.min(1, (touch.clientY - rect.top) / rect.height));
-        const tiltX = (x - 0.5) * 24;
-        const tiltY = (y - 0.5) * -24;
+        const tiltX = (x - 0.5) * 18;
+        const tiltY = (y - 0.5) * -18;
 
         card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
 
-        if (glare) {
-          glare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.7) 0%, transparent 60%)`;
-        }
         if (foil) {
           foil.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
         }
@@ -948,246 +949,71 @@
       });
     }
 
-    
-    function handleCardWrapperClick(e, id) {
-      // If clicked on flip button or any interactive control, do nothing
-      if (e.target.closest("button") || e.target.closest("a")) return;
-
-      const card = document.getElementById(`card-${id}`);
-      if (card && card.classList.contains("flipped")) {
-        // If already flipped, tapping the card flips it back to front!
-        flipGridCard(e, id);
-        return;
-      }
-
-      // Otherwise, open 3D inspector modal
-      inspectCard(id);
-    }
-    
-    function inspectCard(id) {
-      const c = athletesData.find(item => item.id === id);
-      if (!c) return;
-
-      const modal = document.getElementById("tcgInspectorModal");
-      const title = document.getElementById("inspectorModalTitle");
-      const instance = document.getElementById("inspectorCardInstance");
-
-      title.innerText = `${c.ign} – ${c.name}`;
-
-      const isGold = c.tier === 'gold' || c.rating >= 95;
-      const borderClass = isGold ? 'tcg-border-gold' : 'tcg-border-holo';
-      const rarityBadge = isGold ? 'bg-amber-400 text-ink' : 'bg-sky-400 text-ink';
-
-      instance.className = "tcg-card-wrapper";
-      instance.innerHTML = `
-        <!-- FRONT -->
-        <div class="tcg-face tcg-face-front bg-gradient-to-b from-[#1C1F28] via-[#11141B] to-[#0A0C10] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between">
-          <div class="tcg-holo-foil active-holo"></div>
-          <div class="tcg-glare"></div>
-
-          <div class="flex items-center justify-between z-20">
-            <span class="px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase ${rarityBadge}">
-              ${c.rarity}
-            </span>
-            <div class="w-10 h-10 rounded-xl bg-amber-400 text-ink font-display text-xl font-black flex items-center justify-center shadow-lg">
-              ${c.rating}
-            </div>
-          </div>
-
-          <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2 bg-gradient-to-b from-black/40 to-black/90 border border-white/10 flex items-center justify-center">
-            <span class="absolute font-display text-[90px] text-white/[0.04] font-black uppercase select-none pointer-events-none z-10">${c.ign}</span>
-            <img src="${c.photo}" alt="${c.ign}" class="w-full h-full object-cover object-top z-10 filter contrast-110 saturate-110" onerror="this.src='/images/athlete-pro-player.jpg'" />
-            
-            <div class="absolute inset-x-0 bottom-0 pt-6 pb-3 px-4 bg-gradient-to-t from-black via-black/85 to-transparent z-20 flex items-center justify-between">
-              <div>
-                <div class="text-[9px] font-mono text-white/50 uppercase">NAMA ATLET</div>
-                <div class="text-sm font-sans font-bold text-white flex items-center gap-1.5">
-                  ${c.name}
-                  <i data-lucide="badge-check" class="w-4 h-4 text-sky-400"></i>
-                </div>
-              </div>
-              <div class="text-right">
-                <div class="text-[9px] font-mono text-white/50 uppercase">DOMISILI</div>
-                <div class="text-xs font-mono font-bold text-amber-300">${c.region}</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="z-20 pt-2 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-crimson-800 text-white uppercase">${c.game}</span>
-                <span class="text-[10px] font-mono text-white/80 uppercase">${c.role}</span>
-              </div>
-              <h3 class="font-display text-3xl text-white tracking-tight mt-0.5">${c.ign}</h3>
-            </div>
-            <div class="text-right">
-              <div class="text-[8px] font-mono text-white/40 uppercase">LISENSI PBESI</div>
-              <div class="text-[10px] font-mono font-bold text-amber-400">${c.license}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- BACK -->
-        <div class="tcg-face tcg-face-back bg-gradient-to-b from-[#101319] via-[#0B0D12] to-[#050608] p-5 text-paper ${borderClass} shadow-2xl flex flex-col justify-between cursor-pointer" onclick="flipInspectorCard(event)">
-          <div class="tcg-holo-foil"></div>
-
-          <div class="flex items-center justify-between border-b border-white/10 pb-2.5 z-20">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded bg-crimson-800 p-1 flex items-center justify-center">
-                <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
-              </div>
-              <div>
-                <div class="text-[8px] font-mono text-white/50 uppercase tracking-widest leading-none">PASPOR RESMI ATLET</div>
-                <div class="text-xs font-mono font-bold text-amber-400">ESPORT SUMBAR &bull; ESI</div>
-              </div>
-            </div>
-            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-mono font-bold uppercase">
-              TERVERIFIKASI
-            </span>
-          </div>
-
-          <div class="my-3 space-y-2.5 z-20">
-            <div>
-              <div class="flex justify-between text-[10px] font-mono">
-                <span class="text-white/60">MICRO MECHANICS</span>
-                <span class="font-bold text-amber-400">${c.stats.micro} / 100</span>
-              </div>
-              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
-                <div class="h-full bg-amber-400 rounded-full" style="width: ${c.stats.micro}%;"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-[10px] font-mono">
-                <span class="text-white/60">MACRO STRATEGY</span>
-                <span class="font-bold text-sky-400">${c.stats.macro} / 100</span>
-              </div>
-              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
-                <div class="h-full bg-sky-400 rounded-full" style="width: ${c.stats.macro}%;"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-[10px] font-mono">
-                <span class="text-white/60">MENTALITY & CLUTCH</span>
-                <span class="font-bold text-crimson-400">${c.stats.mental} / 100</span>
-              </div>
-              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
-                <div class="h-full bg-crimson-500 rounded-full" style="width: ${c.stats.mental}%;"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-3 rounded-xl bg-white/5 border border-white/10 z-20 text-[10px] font-mono space-y-1.5">
-            <div class="flex justify-between text-white/70">
-              <span>Klub / Tim:</span>
-              <span class="text-white font-bold">${c.club}</span>
-            </div>
-            <div class="flex justify-between text-white/70">
-              <span>Prestasi:</span>
-              <span class="text-amber-300 font-bold">${c.highlights}</span>
-            </div>
-            <div class="flex justify-between text-white/70">
-              <span>Winrate:</span>
-              <span class="text-emerald-400 font-bold">${c.stats.winrate} (${c.stats.match})</span>
-            </div>
-          </div>
-
-          <div class="z-20 pt-2 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="text-[8px] font-mono text-white/40 uppercase">NO. LISENSI RESMI PBESI</div>
-              <div class="text-xs font-mono font-bold tracking-wider text-amber-400">${c.license}</div>
-            </div>
-            <span class="text-[10px] font-mono text-white/60">Scan QR Valid</span>
-          </div>
-        </div>
-      `;
-
-      modal.classList.remove("opacity-0", "pointer-events-none");
-      lucide.createIcons();
-      setupCard3D(instance);
-    }
-
-    function closeTcgInspector() {
-      const modal = document.getElementById("tcgInspectorModal");
-      modal.classList.add("opacity-0", "pointer-events-none");
-    }
-
-    function flipInspectorCard(e) {
-      if (e) { e.stopPropagation(); e.preventDefault(); }
-      const instance = document.getElementById("inspectorCardInstance");
-      if (!instance) return;
-      instance.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
-      instance.classList.toggle("flipped");
-    }
-
-    function toggleInspectorHolo() {
-      const foil = document.querySelector("#inspectorCardInstance .tcg-holo-foil");
-      if (foil) {
-        foil.classList.toggle("opacity-0");
-      }
-    }
-
-    function handleSearch() {
-      const q = (document.getElementById("athleteSearchInput")?.value || "").toLowerCase().trim();
-      const region = document.getElementById("athleteRegionFilter")?.value || "all";
-      const game = document.getElementById("athleteGameFilter")?.value || "all";
-
-      const filtered = athletesData.filter(ath => {
-        const matchesCategory = currentCategory === "all" || ath.category === currentCategory;
-        const matchesKeyword = !q || 
-          ath.name.toLowerCase().includes(q) || 
-          ath.ign.toLowerCase().includes(q) || 
-          ath.role.toLowerCase().includes(q) || 
-          ath.club.toLowerCase().includes(q) || 
-          ath.region.toLowerCase().includes(q) || 
-          ath.game.toLowerCase().includes(q);
-        const matchesRegion = region === "all" || ath.region === region;
-        const matchesGame = game === "all" || ath.game === game;
-
-        return matchesCategory && matchesKeyword && matchesRegion && matchesGame;
-      });
-
-      renderAthletesGrid(filtered);
-    }
-
+    // Filtering & Search
     function filterCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll(".category-btn").forEach(btn => {
         btn.className = "category-btn px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap text-xs transition-all";
       });
-      const activeBtn = document.getElementById(`tab-${cat}`);
+      const activeBtn = document.getElementById("tab-" + cat);
       if (activeBtn) {
         activeBtn.className = "category-btn px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap text-xs font-bold transition-all";
       }
       handleSearch();
     }
 
+    function handleSearch() {
+      const query = (document.getElementById("athleteSearchInput")?.value || "").toLowerCase().trim();
+      const region = document.getElementById("athleteRegionFilter")?.value || "all";
+      const game = document.getElementById("athleteGameFilter")?.value || "all";
+
+      const filtered = athletesData.filter(c => {
+        const matchCat = currentCategory === "all" || c.category === currentCategory;
+        const matchReg = region === "all" || c.region === region;
+        const matchGame = game === "all" || c.game === game;
+        const matchText = !query || 
+          c.name.toLowerCase().includes(query) ||
+          c.ign.toLowerCase().includes(query) ||
+          c.game.toLowerCase().includes(query) ||
+          c.role.toLowerCase().includes(query) ||
+          c.region.toLowerCase().includes(query) ||
+          (c.club && c.club.toLowerCase().includes(query));
+
+        return matchCat && matchReg && matchGame && matchText;
+      });
+
+      renderAthletesGrid(filtered);
+    }
+
+    // Registration Modal
     function openRegistrationModal() {
       const modal = document.getElementById("registrationModal");
-      if (modal) modal.classList.remove("opacity-0", "pointer-events-none");
+      modal.classList.remove("opacity-0", "pointer-events-none");
     }
 
     function closeRegistrationModal() {
       const modal = document.getElementById("registrationModal");
-      if (modal) modal.classList.add("opacity-0", "pointer-events-none");
+      modal.classList.add("opacity-0", "pointer-events-none");
     }
 
     function handleRegistrationSubmit(e) {
       e.preventDefault();
-      const cat = document.getElementById("regCategory").value;
+
       const name = document.getElementById("regName").value;
       const ign = document.getElementById("regIGN").value;
       const game = document.getElementById("regGame").value;
       const role = document.getElementById("regRole").value;
       const region = document.getElementById("regRegion").value;
-      const club = document.getElementById("regClub").value || "Pendaftar Mandiri";
+      const club = document.getElementById("regClub").value || "Looking For Team (LFT)";
+      const category = document.getElementById("regCategory").value;
 
-      const newId = "ath-" + Date.now();
-      const newCard = {
+      const randomRating = Math.floor(Math.random() * 8) + 90;
+      const newId = "ath-" + (athletesData.length + 1);
+      const randomLic = "PBESI-SB-2026-REG-" + Math.floor(Math.random() * 900 + 100);
+
+      const newAthlete = {
         id: newId,
-        category: cat,
+        category: category,
         name: name,
         ign: ign,
         role: role,
@@ -1195,22 +1021,16 @@
         club: club,
         region: region,
         photo: "/images/athlete-pro-player.jpg",
-        rarity: "RISING STAR ★",
-        rating: 91,
-        license: "PBESI-SB-2026-NEW-" + Math.floor(Math.random() * 900 + 100),
-        tier: "crimson",
-        stats: { micro: 90, macro: 89, mental: 91, clutch: 92, winrate: "Baru Terdaftar", match: "0x Resmi" },
-        highlights: "Baru Terdaftar di Platform Esport Sumbar",
-        favHero: "Main Agent / Role"
+        rarity: category === 'pelatda' ? 'PELATDA PON' : category === 'kejurda' ? 'JUARA KEJURDA' : 'FREE AGENT (LFT)',
+        rating: randomRating,
+        license: randomLic
       };
 
-      athletesData.unshift(newCard);
-      closeRegistrationModal();
+      athletesData.unshift(newAthlete);
       handleSearch();
 
-      setTimeout(() => {
-        inspectCard(newId);
-      }, 350);
+      closeRegistrationModal();
+      inspectCard(newId);
     }
 
     function toggleMobileNav() {
@@ -1218,27 +1038,7 @@
       menu.classList.toggle("hidden");
     }
 
-    
-    // Mobile Accelerometer & Gyroscope Physics
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener("deviceorientation", (e) => {
-        if (e.gamma === null || e.beta === null) return;
-        const tiltX = Math.max(-22, Math.min(22, e.gamma * 0.65));
-        const tiltY = Math.max(-22, Math.min(22, (e.beta - 45) * 0.65));
-
-        const target = document.querySelector("#tcgInspectorModal:not(.opacity-0) #inspectorCardInstance");
-        if (target && !target.classList.contains("flipped")) {
-          target.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-          const foil = target.querySelector(".tcg-holo-foil");
-          const glare = target.querySelector(".tcg-glare");
-          const posX = ((tiltX + 22) / 44) * 100;
-          const posY = ((tiltY + 22) / 44) * 100;
-          if (glare) glare.style.background = `radial-gradient(circle at ${posX}% ${posY}%, rgba(255,255,255,0.7) 0%, transparent 60%)`;
-          if (foil) foil.style.backgroundPosition = `${posX}% ${posY}%`;
-        }
-      }, { passive: true });
-    }
-    
+    // Initialize
     document.addEventListener("DOMContentLoaded", () => {
       renderAthletesGrid(athletesData);
       lucide.createIcons();
