@@ -106,8 +106,8 @@
   <!-- ============================================== -->
   <!-- 1. TOP NAVBAR                                  -->
   <!-- ============================================== -->
-  <header class="sticky top-0 z-50 px-3 sm:px-6 lg:px-12 pt-3 sm:pt-4 transition-all">
-    <div class="max-w-7xl mx-auto rounded-2xl bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.06)] px-4 sm:px-6 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 px-2 sm:px-6 lg:px-12 pt-2 sm:pt-4 transition-all">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-white/95 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.06)] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="/" class="flex items-center gap-3 group">
@@ -142,14 +142,18 @@
       </nav>
 
       <!-- Right Action: Open Self-Registration Modal -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <button onclick="openRegistrationModal()" class="cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md flex items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-3">
+        <button onclick="openRegistrationModal()" class="hidden sm:flex cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md items-center gap-2">
           <i data-lucide="user-plus" class="w-4 h-4"></i>
-          <span>Daftar Jadi Atlet / Player</span>
+          <span>Daftar Jadi Atlet</span>
         </button>
 
-        <button onclick="toggleMobileNav()" class="md:hidden w-10 h-10 rounded-xl bg-black/5 hover:bg-black/10 text-ink flex items-center justify-center transition-colors">
-          <i data-lucide="menu" class="w-5 h-5"></i>
+        <a href="#athletesGridContainer" class="md:hidden w-9 h-9 rounded-xl bg-black/5 text-ink flex items-center justify-center app-tap">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </a>
+
+        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-black/5 text-ink flex items-center justify-center app-tap">
+          <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
       </div>
 
@@ -189,7 +193,7 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16">
     
     <!-- Chamfered Crimson Hero Banner -->
-    <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-6 sm:p-10 lg:p-14 border border-crimson-400/40 shadow-2xl overflow-hidden mb-10 text-paper">
+    <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-4 sm:p-8 lg:p-12 border border-crimson-400/40 shadow-xl overflow-hidden mb-6 text-paper">
       
       <!-- Floating Chips inside Banner -->
       <div class="animate-float-1 absolute top-6 right-8 z-20 hidden sm:block px-3.5 py-1.5 rounded-xl bg-paper/20 backdrop-blur-md border border-paper/40 font-display text-sm tracking-wider">
@@ -210,7 +214,7 @@
           <span class="ghost-title-blur font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight text-black/50">
             DATABASE ATLET
           </span>
-          <h1 class="relative font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.88] transform -skew-x-6 text-paper">
+          <h1 class="relative font-display text-4xl sm:text-6xl lg:text-8xl tracking-tight uppercase leading-[0.92] transform -skew-x-6 text-paper">
             DATABASE ATLET & TALENTA
           </h1>
         </div>
@@ -612,8 +616,8 @@
       container.innerHTML = items.map((ath, idx) => {
         const isFeatured = idx === 0 || ath.featured;
         return `
-          <div class="cut-corner-card bg-white p-5 border transition-all duration-300 flex flex-col justify-between ${
-            isFeatured ? 'border-2 border-crimson-600 shadow-xl scale-[1.01]' : 'border-black/10 shadow-md hover:border-crimson-600'
+          <div class="p-3.5 sm:p-5 rounded-2xl bg-white border transition-all duration-300 flex flex-col justify-between shadow-sm hover:border-crimson-600 ${
+            isFeatured ? 'border-2 border-crimson-600 shadow-md' : 'border-black/10'
           }">
             <div>
               <div class="flex items-center justify-between mb-3">

@@ -99,8 +99,8 @@
   <!-- ============================================== -->
   <!-- 1. TOP NAVBAR                                  -->
   <!-- ============================================== -->
-  <header class="sticky top-0 z-50 px-3 sm:px-6 lg:px-12 pt-3 sm:pt-4 transition-all">
-    <div class="max-w-7xl mx-auto rounded-2xl bg-white/90 backdrop-blur-xl border border-black/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.06)] px-4 sm:px-6 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-50 px-2 sm:px-6 lg:px-12 pt-2 sm:pt-4 transition-all">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-white/95 backdrop-blur-xl border border-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.06)] px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="/" class="flex items-center gap-3 group">
@@ -134,14 +134,18 @@
       </nav>
 
       <!-- Right Action: Open Self-Registration Modal -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <a href="/#direktori" class="cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md flex items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-3">
+        <a href="/#direktori" class="hidden sm:flex cut-corner-btn px-4 sm:px-5 py-2.5 bg-crimson-800 hover:bg-crimson-600 text-paper font-display text-xs sm:text-sm tracking-wider transition-all shadow-md items-center gap-2">
           <i data-lucide="search" class="w-4 h-4"></i>
           <span>Cari di Database</span>
         </a>
 
-        <button onclick="toggleMobileNav()" class="md:hidden w-10 h-10 rounded-xl bg-black/5 hover:bg-black/10 text-ink flex items-center justify-center transition-colors">
-          <i data-lucide="menu" class="w-5 h-5"></i>
+        <a href="/#direktori" class="md:hidden w-9 h-9 rounded-xl bg-black/5 text-ink flex items-center justify-center app-tap">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </a>
+
+        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-black/5 text-ink flex items-center justify-center app-tap">
+          <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
       </div>
 
@@ -180,7 +184,7 @@
   <!-- ============================================== -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-16">
     
-    <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-6 sm:p-10 lg:p-16 border border-crimson-400/40 shadow-2xl overflow-hidden mb-12 text-paper">
+    <div class="cut-corner-banner relative w-full bg-crimson-gradient bg-smoke-overlay p-4 sm:p-8 lg:p-14 border border-crimson-400/40 shadow-xl overflow-hidden mb-6 text-paper">
       
       <div class="max-w-3xl relative z-10 space-y-4">
         
@@ -193,7 +197,7 @@
           <span class="ghost-title-blur font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight text-black/50">
             TENTANG KAMI
           </span>
-          <h1 class="relative font-display text-6xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.88] transform -skew-x-6 text-paper">
+          <h1 class="relative font-display text-4xl sm:text-6xl lg:text-8xl tracking-tight uppercase leading-[0.92] transform -skew-x-6 text-paper">
             TENTANG KAMI & MISI KAMI
           </h1>
         </div>
