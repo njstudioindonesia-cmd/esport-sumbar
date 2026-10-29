@@ -1,0 +1,3261 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESPORT SUMBAR — Portal Resmi Ekosistem & Atlet Sumatera Barat</title>
+  <meta name="description" content="Portal resmi ekosistem dan atlet esports Sumatera Barat. Menghubungkan 14.852 penggiat, 8.420 atlet binaan, dan 485 klub di 19 kabupaten dan kota.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#080b12',
+              surface: '#121c30',
+              card: '#18253f',
+              cardHover: '#1f2f4f',
+              line: 'rgba(255, 255, 255, 0.08)',
+              lineHover: 'rgba(255, 255, 255, 0.18)',
+              rose: '#e11d48',
+              amber: '#f59e0b',
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Infinite Running Logo Marquee */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee-infinite {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 100s linear infinite;
+    }
+    .animate-marquee-infinite:hover {
+      animation-play-state: paused;
+    }
+
+    /* Smooth Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080b12; }
+    ::-webkit-scrollbar-thumb { background: #1c2438; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2e3a59; }
+
+    .hero-gradient {
+      background: linear-gradient(
+        to bottom,
+        rgba(8, 11, 18, 0.2) 0%,
+        rgba(8, 11, 18, 0.4) 40%,
+        rgba(8, 11, 18, 0.85) 80%,
+        #080b12 100%
+      );
+    }
+
+    /* Map SVG Pin Animations */
+    .map-pin-btn {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .map-pin-btn:hover circle.pin-dot {
+      r: 8;
+      fill: #f43f5e;
+      filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.8));
+    }
+    .map-pin-btn.active circle.pin-dot {
+      r: 9;
+      fill: #f43f5e;
+      stroke: #ffffff;
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 12px rgba(244, 63, 94, 0.9));
+    }
+    .map-pin-btn.active circle.pin-pulse {
+      animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes ping {
+      75%, 100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white min-h-screen">
+
+    <!-- FLOATING MODERN TOP BAR -->
+  <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6 transition-all">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-[#0b0f19]/85 backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Left: Brand Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-rose-700 flex items-center justify-center font-heading font-black text-white text-sm shadow-lg shadow-rose-600/30 group-hover:scale-105 transition-transform">
+          ES
+        </div>
+        <div>
+          <span class="font-heading font-extrabold text-base sm:text-lg tracking-tight text-white flex items-center gap-1.5">
+            ESPORT <span class="text-rose-500">SUMBAR</span>
+          </span>
+          <span class="text-[10px] text-slate-400 block -mt-1 font-mono uppercase tracking-wider">PBESI Pengprov Sumbar</span>
+        </div>
+      </a>
+
+      <!-- Center: Clean Multi-Page Navigation Segment (ONLY Separate Pages!) -->
+      <nav class="hidden md:flex items-center p-1 rounded-xl bg-black/40 border border-white/5">
+        <a href="/" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-semibold bg-white/[0.1] text-white shadow-sm border border-white/10">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+          <span>Beranda</span>
+        </a>
+        <a href="/about" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
+          
+          <span>Tentang Kami</span>
+        </a>
+        <a href="/atlet" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
+          
+          <span>Direktori Atlet</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold">8.4K</span>
+        </a>
+      </nav>
+
+      <!-- Right: Action & Status -->
+      <div class="flex items-center gap-3">
+        
+        <!-- Live Verified Badge -->
+        <div class="hidden lg:flex items-center gap-2 text-xs text-slate-300 bg-brand-surface border border-brand-line px-3 py-1.5 rounded-xl">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-mono text-[11px] text-slate-300"><strong>14.852</strong> Penggiat</span>
+        </div>
+
+        <!-- Quick Route Button to /atlet or Registration -->
+        
+        <a href="/atlet" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs transition-all shadow-md shadow-rose-600/30 hover:scale-[1.02]">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+          <span>Cari Atlet</span>
+        </a>
+        
+
+        <!-- Mobile Menu Toggle Button -->
+        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileNavMenu" class="md:hidden hidden max-w-7xl mx-auto mt-2 rounded-2xl bg-[#0b0f19]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl p-4 space-y-2">
+      <a href="/" class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/10 text-white font-semibold text-xs">
+        <span class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Beranda
+        </span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="/about" class="flex items-center justify-between px-4 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 font-medium text-xs">
+        <span class="flex items-center gap-2">
+          Tentang Kami (Profil ESI Sumbar)
+        </span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="/atlet" class="flex items-center justify-between px-4 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 font-medium text-xs">
+        <span class="flex items-center gap-2">
+          Direktori & Database Atlet
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">8.4K</span>
+        </span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- FULL-BLEED HERO -->
+    <section id="ikhtisar" class="relative w-full h-[90vh] min-h-[640px] flex items-end pb-16 sm:pb-20 overflow-hidden">
+      
+      <!-- Full-Screen Hero Image Background -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-stage-lights.jpg" 
+          alt="Esports Arena Stage Sumatera Barat" 
+          class="w-full h-full object-cover object-center opacity-35 filter contrast-90 brightness-95"
+        />
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 bg-radial at-center from-transparent via-brand-navy/20 to-brand-navy/60"></div>
+      </div>
+
+      <!-- Hero Minimal Text -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+          
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 mb-3 bg-black/50 px-3 py-1 rounded-full border border-white/10 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span>PORTAL RESMI ESPORTS SUMATERA BARAT 2026</span>
+          </div>
+
+          <h1 class="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] drop-shadow-lg">
+            Satu Wadah untuk <br/>
+            <span class="text-rose-500">14.852 Talenta Esports</span> Ranah Minang
+          </h1>
+
+          <p class="mt-4 text-base sm:text-lg text-slate-200 font-normal max-w-xl drop-shadow leading-relaxed">
+            Menyatukan atlet binaan, klub terverifikasi, pelajar, dan komunitas olahraga elektronik di 19 kabupaten dan kota.
+          </p>
+
+          <div class="mt-7 flex flex-wrap items-center gap-3.5">
+            <a href="#peta-wilayah" class="px-6 py-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg shadow-rose-600/30 flex items-center gap-2">
+              <i data-lucide="map" class="w-4 h-4"></i>
+              <span>Lihat Peta Interaktif 19 Wilayah</span>
+            </a>
+            <a href="#atlet" class="px-6 py-3 rounded-lg bg-black/60 hover:bg-black/80 text-rose-300 border border-rose-500/30 text-sm font-semibold backdrop-blur-md transition-all hover:scale-105 flex items-center gap-2">
+              <i data-lucide="search" class="w-4 h-4 text-rose-400"></i>
+              <span>Cari Profil Atlet</span>
+            </a>
+            <a href="#divisi" class="px-6 py-3 rounded-lg bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 text-sm font-semibold backdrop-blur-md transition-all hover:scale-105 flex items-center gap-2">
+              <i data-lucide="gamepad-2" class="w-4 h-4 text-cyan-400"></i>
+              <span>6 Cabang Game</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 MACRO STATS ROW -->
+    <section class="relative border-b border-white/10 py-12 sm:py-14 overflow-hidden">
+      <!-- Section Background Image (Esports Arena Nuance, Soft Contrast) -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-iem-katowice.jpg" 
+          alt="Esports Arena Tournament Stage" 
+          class="w-full h-full object-cover object-center opacity-25 filter contrast-85 brightness-90"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0a1122]/95 via-[#0e1832]/90 to-[#0a1122]/95"></div>
+      </div>
+      <!-- Vibrant top accent beam -->
+      <div class="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-rose-500 to-transparent"></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 block font-medium">Total Penggiat</span>
+            <div class="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-1">14.852</div>
+            <p class="text-xs text-rose-400 mt-1 font-medium">+1.420 tahun 2026</p>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 block font-medium">Atlet Binaan</span>
+            <div class="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-1">8.420</div>
+            <p class="text-xs text-slate-400 mt-1">180 Atlet Pelatda PON</p>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 block font-medium">Klub & Tim Aktif</span>
+            <div class="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-1">485</div>
+            <p class="text-xs text-slate-400 mt-1">Squad Terverifikasi</p>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 block font-medium">Cakupan Wilayah</span>
+            <div class="font-heading text-3xl sm:text-4xl font-extrabold text-white mt-1">19 / 19</div>
+            <p class="text-xs text-emerald-400 mt-1 font-medium">100% Pengcab Mandiri</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+                <!-- SECTION: RUNNING LOGO PENGCAB ESI 19 DAERAH (OFFICIAL PBESI LOGO EMBLEM) -->
+    <section class="py-6 sm:py-7 relative overflow-hidden border-b border-white/10 backdrop-blur-md">
+      <!-- Section Background Image (Esports Stadium Atmosphere, Soft Contrast) -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-iem-katowice.jpg" 
+          alt="Esports Stadium Arena" 
+          class="w-full h-full object-cover object-center opacity-20 filter contrast-85 brightness-85"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#080d1a]/96 via-[#0c1428]/92 to-[#080d1a]/96"></div>
+      </div>
+      
+      <!-- Centered Header Strip -->
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-4 text-center flex flex-col items-center justify-center relative z-10">
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] shadow-sm mb-2">
+          <div class="w-5 h-5 rounded-full bg-white p-0.5 flex items-center justify-center shrink-0 shadow-sm">
+            <img src="/pbesi-logo.png" alt="PBESI" class="w-full h-full object-contain" />
+          </div>
+          <span class="text-[11px] sm:text-xs font-mono uppercase tracking-[0.2em] font-bold text-slate-200">
+            JARINGAN 19 PENGCAB RESMI PBESI KABUPATEN & KOTA SE-SUMATERA BARAT
+          </span>
+        </div>
+        <div class="flex items-center justify-center gap-3 text-[10px] font-mono text-slate-400">
+          <span class="text-emerald-400 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            100% Terakreditasi PBESI
+          </span>
+          <span class="text-slate-600">•</span>
+          <span>Arahkan kursor untuk menjeda</span>
+        </div>
+      </div>
+
+      <!-- Marquee Track with Smooth Left & Right Gradient Fades -->
+      <div class="relative w-full overflow-hidden">
+        <!-- Left Gradient Mask -->
+        <div class="absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#060911] via-[#060911]/80 to-transparent z-10 pointer-events-none"></div>
+        <!-- Right Gradient Mask -->
+        <div class="absolute inset-y-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-[#060911] via-[#060911]/80 to-transparent z-10 pointer-events-none"></div>
+
+        <!-- Continuous Infinite Marquee Row -->
+        <div class="animate-marquee-infinite items-center gap-4 sm:gap-5 py-1 px-4">
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Padang" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Padang
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Ibu Kota & Sentra Utama
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Bukittinggi" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Bukittinggi
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Basis Taktis PUBGM
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Payakumbuh" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Payakumbuh
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Sentra Free Fire
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Agam" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Agam
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Penyumbang Atlet Pelatda
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Pariaman" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Pariaman
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Kekuatan eFootball
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Tanah Datar" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Tanah Datar
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Luhak Nan Tuo
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Padang Pariaman" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Padang Pariaman
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Komunitas Pesisir
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Lima Puluh Kota" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Lima Puluh Kota
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Basis Perbatasan
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Solok" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Solok
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Klub Pelajar Digital
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Pesisir Selatan" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Pesisir Selatan
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Sentra Pesisir Selatan
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Pasaman Barat" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Pasaman Barat
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Komunitas Sawit Digital
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Solok" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Solok
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Penyangga Singkarak
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Pasaman" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Pasaman
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Garis Khatulistiwa
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Sawahlunto" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Sawahlunto
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Kota Warisan Tambang
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Sijunjung" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Sijunjung
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Geopark Silokek Squad
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Dharmasraya" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Dharmasraya
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Gerbang Selatan Sumbar
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Padang Panjang" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Padang Panjang
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Serambi Mekkah Esports
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Solok Selatan" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Solok Selatan
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Saribu Rumah Gadang
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Kepulauan Mentawai" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Kepulauan Mentawai
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Samudera Hindia
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Padang" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Padang
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Ibu Kota & Sentra Utama
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Bukittinggi" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Bukittinggi
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Basis Taktis PUBGM
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Payakumbuh" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Payakumbuh
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Sentra Free Fire
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Agam" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Agam
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Penyumbang Atlet Pelatda
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Pariaman" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Pariaman
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Kekuatan eFootball
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Tanah Datar" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Tanah Datar
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Luhak Nan Tuo
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Padang Pariaman" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Padang Pariaman
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Komunitas Pesisir
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Lima Puluh Kota" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Lima Puluh Kota
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Basis Perbatasan
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Solok" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Solok
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Klub Pelajar Digital
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Pesisir Selatan" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Pesisir Selatan
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Sentra Pesisir Selatan
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Pasaman Barat" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Pasaman Barat
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Komunitas Sawit Digital
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Solok" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Solok
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Penyangga Singkarak
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Pasaman" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Pasaman
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Garis Khatulistiwa
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Sawahlunto" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Sawahlunto
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Kota Warisan Tambang
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Sijunjung" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Sijunjung
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Geopark Silokek Squad
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Dharmasraya" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Dharmasraya
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Gerbang Selatan Sumbar
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kota Padang Panjang" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kota Padang Panjang
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Serambi Mekkah Esports
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Solok Selatan" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Solok Selatan
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Saribu Rumah Gadang
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-rose-500/50 transition-all select-none group shrink-0 cursor-pointer shadow-md backdrop-blur-md">
+            <!-- Lambang Resmi PBESI (Bulat Putih Tajam & Jelas) -->
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white p-1 flex items-center justify-center shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              <img src="/pbesi-logo.png" alt="Pengcab PBESI Kabupaten Kepulauan Mentawai" class="w-full h-full object-contain" />
+            </div>
+
+            <!-- Identitas Pengcab Daerah -->
+            <div class="whitespace-nowrap pr-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="font-heading font-black text-xs sm:text-sm text-white group-hover:text-rose-400 tracking-wide transition-colors uppercase">
+                  Kabupaten Kepulauan Mentawai
+                </span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </div>
+              <span class="text-[9.5px] font-mono text-slate-400 block tracking-wider uppercase mt-0.5">
+                Pengcab Resmi PBESI • Samudera Hindia
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SECTION: FILOSOFI & PEMBINAAN -->
+        <!-- SECTION: FILOSOFI PEMBINAAN & KEARIFAN SILEK MINANG (BESPOKE EDITORIAL MINIMALIST) -->
+    <section id="filosofi" class="py-20 lg:py-28 border-b border-white/10 relative overflow-hidden">
+      <!-- Section Background Image (Esports Athletes Strategic Focus, Soft Contrast) -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-stage-lights.jpg" 
+          alt="Esports Athletes In Competition Focus" 
+          class="w-full h-full object-cover object-center opacity-22 filter contrast-85 brightness-90"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a1122]/95 via-[#0d172e]/90 to-[#0a1122]/95"></div>
+        <div class="absolute -top-32 right-1/4 w-[500px] h-[500px] bg-rose-600/12 blur-[150px] pointer-events-none rounded-full"></div>
+      </div>
+      
+      <!-- Subtle ambient aura -->
+      <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-rose-600/5 blur-[160px] pointer-events-none rounded-full"></div>
+
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <!-- Editorial Header: Bold, Poetic, Human -->
+        <div class="max-w-3xl mb-12 lg:mb-16">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-rose-500 mb-3 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+            <span>Filosofi & Nilai Pembinaan</span>
+          </div>
+
+          <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+            "Lahir Silek Mancari Kawan, <br class="hidden sm:inline" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-rose-500 to-amber-400">Batin Silek Menjaga Kehormatan.</span>"
+          </h2>
+
+          <p class="text-slate-300 text-base sm:text-lg mt-5 leading-relaxed font-light">
+            Di panggung olahraga elektronik modern, ketangkasan leluhur Minangkabau diwariskan bukan sebagai bela diri fisik, melainkan ketajaman insting membaca pergerakan lawan, ketenangan batin di bawah tekanan turnamen, dan integritas sportivitas tanpa cela.
+          </p>
+        </div>
+
+        <!-- Cinematic Widescreen Visual (Tournament Intensity Stage) -->
+        <div class="w-full h-[360px] sm:h-[460px] rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl group bg-[#090d16]">
+          <img 
+            src="/images/arena-ti-stage.jpg" 
+            alt="Esports Arena Tournament Intensity Sumatera Barat" 
+            class="w-full h-full object-cover object-center filter brightness-90 contrast-105 group-hover:scale-105 transition-transform duration-1000 ease-out"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#060911] via-[#060911]/30 to-transparent"></div>
+          
+          <!-- Bottom Manifesto Overlay -->
+          <div class="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-black/65 border border-white/10 backdrop-blur-md">
+            <div class="max-w-xl">
+              <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-semibold block mb-1">
+                PRINSIP ARENA PBESI SUMATERA BARAT
+              </span>
+              <p class="text-sm sm:text-base text-white font-medium italic leading-snug">
+                "Kemenangan sejati di arena bukan sekadar meruntuhkan markas lawan, melainkan menjaga martabat, kejujuran taktis, dan solidaritas Ranah Minang di setiap kompetisi."
+              </p>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-2 rounded-xl border border-emerald-500/20 shrink-0 self-start sm:self-end">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Pusat Pelatda GOR H. Agus Salim</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Clean Editorial Columns (No boxy repetitive cards - pure minimalist typography) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 pt-12 mt-12 border-t border-white/10">
+          
+          <!-- Column 01 -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs font-bold text-rose-500 uppercase tracking-widest">01 / KETANGKASAN MIKRO</span>
+              <div class="h-px flex-1 bg-white/10"></div>
+            </div>
+            <h3 class="font-heading font-extrabold text-xl text-white tracking-tight">
+              Kilek Taktis & Bakat Dini
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
+              Menjaring dan membina talenta usia muda di 19 kabupaten dan kota melalui kompetisi pelajar terstruktur, melatih refleks milidetik serta intuisi pembacaan tempo pertandingan.
+            </p>
+          </div>
+
+          <!-- Column 02 -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">02 / KETAHANAN BATIN</span>
+              <div class="h-px flex-1 bg-white/10"></div>
+            </div>
+            <h3 class="font-heading font-extrabold text-xl text-white tracking-tight">
+              Integritas Regulasi PBESI
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
+              Penegakan fairplay tanpa kompromi, sistem sertifikasi wasit berlisensi, dan pengawasan anti-cheat ketat guna membentuk atlet dengan kedisiplinan dan ketenangan mental juara.
+            </p>
+          </div>
+
+          <!-- Column 03 -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs font-bold text-cyan-400 uppercase tracking-widest">03 / GELANGGANG PRESTASI</span>
+              <div class="h-px flex-1 bg-white/10"></div>
+            </div>
+            <h3 class="font-heading font-extrabold text-xl text-white tracking-tight">
+              Jalur Prestasi PON & Nasional
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
+              Pemusatan latihan daerah (Pelatda) intensif dengan bimbingan pelatih dan analis taktis bersertifikat untuk mengantarkan kontingen Sumatera Barat merebut medali emas nasional.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- NEW INTERACTIVE GEOGRAPHIC ATLAS (PETA SUMATERA BARAT INTERAKTIF & MODERN) -->
+    <section id="peta-wilayah" class="py-20 lg:py-28 border-b border-white/10 relative overflow-hidden">
+      <!-- Section Background Image (Esports Digital Network Rig, Soft Contrast) -->
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/images/arena-stage-lights.jpg" 
+          alt="Esports Battle Station Network" 
+          class="w-full h-full object-cover object-center opacity-15 filter contrast-85 brightness-85"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a1122]/95 via-[#0d172e]/90 to-[#0a1122]/95"></div>
+        <div class="absolute top-1/3 left-10 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] pointer-events-none rounded-full"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-2 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+              <span>Peta Interaktif Ranah Minang</span>
+            </div>
+            <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Sebaran Geografis 19 Wilayah
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base mt-2 max-w-xl font-light leading-relaxed">
+              Arahkan kursor atau klik pin pada peta Sumatera Barat untuk melihat profil penggiat, atlet binaan, dan klub terdaftar secara langsung.
+            </p>
+          </div>
+
+          <!-- Quick Filter Buttons -->
+          <div class="flex items-center gap-2">
+            <button onclick="filterMap('all')" class="map-filter-btn px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-semibold text-xs transition-all" data-filter="all">Semua Wilayah (19)</button>
+            <button onclick="filterMap('kota')" class="map-filter-btn px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/15 hover:text-white text-slate-300 text-xs transition-all" data-filter="kota">Kota (7)</button>
+            <button onclick="filterMap('kabupaten')" class="map-filter-btn px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/15 hover:text-white text-slate-300 text-xs transition-all" data-filter="kabupaten">Kabupaten (12)</button>
+          </div>
+        </div>
+
+        <!-- MAIN INTERACTIVE ATLAS LAYOUT (MAP ON LEFT, LIVE INSPECTOR CARD ON RIGHT) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- LEFT: INTERACTIVE SVG VECTOR MAP OF WEST SUMATRA -->
+          <div class="lg:col-span-7 rounded-2xl border border-brand-line bg-brand-surface p-4 sm:p-6 shadow-2xl relative">
+            
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono mb-2 pb-3 border-b border-brand-line">
+              <span class="flex items-center gap-2 text-white font-sans font-semibold">
+                <i data-lucide="compass" class="w-4 h-4 text-rose-500"></i> Peta Geografis Sumatera Barat & Mentawai
+              </span>
+              <span class="text-[11px] text-slate-400 hidden sm:inline">Koordinat: 0.95° S, 100.35° E</span>
+            </div>
+
+            <!-- Stylized Minimalist SVG Map Canvas -->
+            <div class="relative w-full aspect-[4/3] max-h-[520px] flex items-center justify-center overflow-hidden">
+              <svg viewBox="0 0 700 520" class="w-full h-full select-none" id="sumbarSvgMap">
+                
+                <!-- Background Subtle Grid Coordinates -->
+                <defs>
+                  <pattern id="grid" width="35" height="35" patternUnits="userSpaceOnUse">
+                    <path d="M 35 0 L 0 0 0 35" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+                  </pattern>
+                </defs>
+                <rect width="700" height="520" fill="url(#grid)" />
+
+                <!-- West Sumatra Mainland Geographic Silhouette Contour -->
+                <path 
+                  d="M 280 60 
+                     C 310 50, 360 40, 420 50 
+                     C 460 60, 490 90, 500 130 
+                     C 520 160, 560 200, 620 250 
+                     C 640 280, 620 330, 550 350 
+                     C 510 360, 490 410, 470 480 
+                     C 450 500, 430 490, 410 430 
+                     C 390 370, 370 290, 360 240 
+                     C 340 210, 310 160, 270 120 
+                     Z" 
+                  fill="#151d2e" 
+                  stroke="rgba(255, 255, 255, 0.12)" 
+                  stroke-width="1.5"
+                  class="transition-colors hover:fill-[#182236]"
+                />
+
+                <!-- Mentawai Archipelago (Siberut, Sipora, Pagai Utara & Selatan) -->
+                <!-- Siberut Island -->
+                <path 
+                  d="M 110 200 C 130 180, 160 190, 165 240 C 170 270, 140 280, 120 270 C 105 250, 100 220, 110 200 Z" 
+                  fill="#151d2e" 
+                  stroke="rgba(255, 255, 255, 0.12)" 
+                  stroke-width="1.5"
+                />
+                <!-- Sipora Island -->
+                <path 
+                  d="M 165 310 C 185 295, 210 310, 205 340 C 190 355, 165 345, 165 310 Z" 
+                  fill="#151d2e" 
+                  stroke="rgba(255, 255, 255, 0.12)" 
+                  stroke-width="1.5"
+                />
+                <!-- Pagai Islands -->
+                <path 
+                  d="M 210 375 C 235 365, 255 380, 250 420 C 235 440, 215 430, 210 395 Z" 
+                  fill="#151d2e" 
+                  stroke="rgba(255, 255, 255, 0.12)" 
+                  stroke-width="1.5"
+                />
+
+                <!-- Waterway Label -->
+                <text x="210" y="270" fill="rgba(255,255,255,0.15)" font-size="11" font-family="monospace" letter-spacing="3" text-anchor="middle" transform="rotate(-35, 210, 270)">
+                  SELAT MENTAWAI
+                </text>
+                <text x="80" y="440" fill="rgba(255,255,255,0.15)" font-size="11" font-family="monospace" letter-spacing="3" text-anchor="middle">
+                  SAMUDRA HINDIA
+                </text>
+
+                <!-- PINS FOR 19 REGIONS (PLACED ACCORDING TO REAL GEOGRAPHY) -->
+                <g id="mapPinsGroup">
+                  <!-- Injected & controlled via JS -->
+                </g>
+
+              </svg>
+
+              <!-- Dynamic Tooltip Hover -->
+              <div id="mapTooltip" class="absolute pointer-events-none opacity-0 transition-opacity bg-black/90 border border-white/20 text-white px-3 py-1.5 rounded-lg text-xs backdrop-blur-md shadow-xl -translate-x-1/2 -translate-y-full mb-3 z-30">
+                <span id="tooltipName" class="font-bold block">Kota Padang</span>
+                <span id="tooltipData" class="text-rose-400 font-mono text-[11px]">4.120 Penggiat</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-brand-line flex items-center justify-between text-[11px] text-slate-400">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Pin Merah: Wilayah Terpilih
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span> Kuning: Kota
+                <span class="w-2 h-2 rounded-full bg-cyan-400 ml-2"></span> Biru: Kabupaten
+              </span>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: LIVE TERRITORY INSPECTOR CARD (MINIMALIST & DEEP DIVE) -->
+          <div class="lg:col-span-5 rounded-2xl border border-brand-line bg-brand-surface p-6 sm:p-8 shadow-2xl relative" id="regionInspector">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+        <!-- SECTION: ENAM CABANG GAME -->
+    <section id="divisi" class="py-20 lg:py-28 border-b border-white/10 relative overflow-hidden">
+      <!-- Section Background Image (Esports Stage Lighting, Soft Contrast) -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-iem-katowice.jpg" 
+          alt="Esports Tournament Stage Lights" 
+          class="w-full h-full object-cover object-center opacity-20 filter contrast-85 brightness-90"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a1122]/95 via-[#0e1933]/90 to-[#0a1122]/95"></div>
+      </div>
+      <!-- Glow ambient backdrop -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-rose-600/5 blur-[120px] pointer-events-none rounded-full"></div>
+
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-2 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
+              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+              <span>Cabang Olahraga Resmi PBESI Sumbar</span>
+            </div>
+            <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              Enam Divisi Game Unggulan
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base mt-3 max-w-2xl font-light">
+              Distribusi 14.852 penggiat dan atlet pada 6 cabang kompetisi resmi yang dibina Pengprov ESI Sumatera Barat menuju Kejurda, Porprov, dan PON.
+            </p>
+          </div>
+
+          <!-- Quick Stat Badge -->
+          <div class="flex items-center gap-4 bg-brand-surface border border-brand-line px-5 py-3 rounded-xl shrink-0">
+            <div>
+              <span class="text-[11px] text-slate-400 font-mono uppercase block">Total Atlet Game</span>
+              <span class="font-heading font-black text-2xl text-white">14.852</span>
+            </div>
+            <div class="h-8 w-px bg-brand-line"></div>
+            <div>
+              <span class="text-[11px] text-slate-400 font-mono uppercase block">Squad Terverifikasi</span>
+              <span class="font-heading font-black text-2xl text-rose-500">3.149</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Proportional Distribution Strip -->
+        <div class="mb-12 p-6 rounded-2xl border border-brand-line bg-brand-surface/70 backdrop-blur-md shadow-2xl">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3.5">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold flex items-center gap-2">
+              <i data-lucide="bar-chart-2" class="w-4 h-4 text-cyan-400"></i>
+              Proporsi Pemain Antardivisi (Klik untuk Filter)
+            </span>
+            <span class="text-[11px] text-slate-400 font-mono">100% Terdaftar di Sistem PBESI</span>
+          </div>
+
+          <!-- Interactive Bar with colored segments -->
+          <div class="h-4 w-full rounded-full bg-brand-navy border border-white/10 overflow-hidden flex p-0.5 gap-0.5">
+            <div onclick="filterGames('mlbb')" style="width: 46%;" class="h-full bg-amber-500 rounded-l-full hover:brightness-125 transition-all cursor-pointer relative group/bar" title="Mobile Legends: 46% (6.830 Atlet)"></div>
+            <div onclick="filterGames('pubgm')" style="width: 24%;" class="h-full bg-orange-500 hover:brightness-125 transition-all cursor-pointer relative group/bar" title="PUBG Mobile: 24% (3.560 Atlet)"></div>
+            <div onclick="filterGames('ff')" style="width: 16%;" class="h-full bg-rose-500 hover:brightness-125 transition-all cursor-pointer relative group/bar" title="Free Fire: 16% (2.380 Atlet)"></div>
+            <div onclick="filterGames('valorant')" style="width: 8%;" class="h-full bg-red-600 hover:brightness-125 transition-all cursor-pointer relative group/bar" title="VALORANT: 8% (1.190 Atlet)"></div>
+            <div onclick="filterGames('efootball')" style="width: 4%;" class="h-full bg-emerald-500 hover:brightness-125 transition-all cursor-pointer relative group/bar" title="eFootball: 4% (590 Atlet)"></div>
+            <div onclick="filterGames('hok')" style="width: 2%;" class="h-full bg-purple-500 rounded-r-full hover:brightness-125 transition-all cursor-pointer relative group/bar" title="Honor of Kings: 2% (302 Atlet)"></div>
+          </div>
+
+          <!-- Interactive Legend Filter Buttons -->
+          <div class="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-brand-line">
+            <button onclick="filterGames('all')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 text-white transition-all shadow-md shadow-rose-600/30" data-game="all">
+              Semua Divisi (6)
+            </button>
+            <button onclick="filterGames('mlbb')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-amber-500/40 bg-brand-navy/60 transition-all flex items-center gap-1.5" data-game="mlbb">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> MLBB (46%)
+            </button>
+            <button onclick="filterGames('pubgm')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-orange-500/40 bg-brand-navy/60 transition-all flex items-center gap-1.5" data-game="pubgm">
+              <span class="w-2 h-2 rounded-full bg-orange-500"></span> PUBGM (24%)
+            </button>
+            <button onclick="filterGames('ff')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-rose-500/40 bg-brand-navy/60 transition-all flex items-center gap-1.5" data-game="ff">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span> Free Fire (16%)
+            </button>
+            <button onclick="filterGames('valorant')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-red-500/40 bg-brand-navy/60 transition-all flex items-center gap-1.5" data-game="valorant">
+              <span class="w-2 h-2 rounded-full bg-red-600"></span> VALORANT (8%)
+            </button>
+            <button onclick="filterGames('efootball')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-emerald-500/40 bg-brand-navy/60 transition-all flex items-center gap-1.5" data-game="efootball">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> eFootball (4%)
+            </button>
+            <button onclick="filterGames('hok')" class="game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-purple-500/40 bg-brand-navy/60 transition-all flex items-center gap-1.5" data-game="hok">
+              <span class="w-2 h-2 rounded-full bg-purple-500"></span> HoK (2%)
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 IMMERSIVE POSTER GAME CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" id="gameCardsContainer">
+          
+          <!-- 1. MOBILE LEGENDS: BANG BANG -->
+          <div class="game-card group relative rounded-2xl overflow-hidden border border-brand-line bg-brand-surface flex flex-col justify-between min-h-[460px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/60 hover:shadow-[0_15px_35px_rgba(245,158,11,0.2)] cursor-pointer" data-id="mlbb" onclick="openGameModal('mlbb')">
+            <div class="absolute inset-0 z-0">
+              <img 
+                src="/images/division-allstar-stage.png" 
+                alt="Mobile Legends Championship Stage" 
+                class="w-full h-full object-cover filter brightness-[0.55] contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 via-50% to-brand-navy/30"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-radial at-bottom from-amber-500/15 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold text-amber-300 bg-black/60 border border-amber-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-400"></i> Mobile • MOBA 5v5
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-bold text-white bg-amber-500/20 border border-amber-500/40 backdrop-blur-md">
+                46,0% Basis
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-auto pt-16">
+              <div class="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-amber-400 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                <span>Nomor Ekshibisi PON & Porprov</span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                Mobile Legends
+              </h3>
+              
+              <p class="text-xs text-slate-300 mt-2 font-normal leading-relaxed drop-shadow">
+                Kompetisi antartim paling merata di 19 kabupaten/kota. Sirkuit liga pelajar, kejuaraan kampus, dan nagari cyber cup berjalan aktif sepanjang tahun.
+              </p>
+
+              <div class="mt-4 w-full h-1.5 bg-black/50 rounded-full overflow-hidden border border-white/10">
+                <div class="h-full bg-amber-500 rounded-full" style="width: 46%;"></div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Penggiat Terdaftar</span>
+                  <span class="font-heading font-extrabold text-xl text-white mt-0.5 block">6.830 <span class="text-xs font-normal text-slate-400">Atlet</span></span>
+                </div>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
+                  <span class="font-heading font-extrabold text-xl text-amber-400 mt-0.5 block">1.366 <span class="text-xs font-normal text-slate-400">Tim</span></span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-300 font-medium group-hover:text-amber-300 transition-colors">
+                <span class="text-[11px] text-slate-400">Sentra: Padang, Bukittinggi, Agam</span>
+                <span class="flex items-center gap-1 font-semibold text-amber-400">
+                  Regulasi & Format <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. PUBG MOBILE -->
+          <div class="game-card group relative rounded-2xl overflow-hidden border border-brand-line bg-brand-surface flex flex-col justify-between min-h-[460px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:border-orange-500/60 hover:shadow-[0_15px_35px_rgba(249,115,22,0.2)] cursor-pointer" data-id="pubgm" onclick="openGameModal('pubgm')">
+            <div class="absolute inset-0 z-0">
+              <img 
+                src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=85" 
+                alt="PUBG Mobile Competitive Esports Squad" 
+                class="w-full h-full object-cover filter brightness-[0.55] contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 via-50% to-brand-navy/30"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-radial at-bottom from-orange-500/15 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold text-orange-300 bg-black/60 border border-orange-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="crosshair" class="w-3.5 h-3.5 text-orange-400"></i> Battle Royale Squad
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-bold text-white bg-orange-500/20 border border-orange-500/40 backdrop-blur-md">
+                24,0% Basis
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-auto pt-16">
+              <div class="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-orange-400 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                <span>Standar Sirkuit PBESI Nasional</span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight drop-shadow-md group-hover:text-orange-300 transition-colors">
+                PUBG Mobile
+              </h3>
+              
+              <p class="text-xs text-slate-300 mt-2 font-normal leading-relaxed drop-shadow">
+                Kompetisi bertahan hidup taktis 4 pemain per squad di Erangel dan Miramar. Menjadi salah satu cabang andalan kontingen Sumbar di ajang Pra-PON.
+              </p>
+
+              <div class="mt-4 w-full h-1.5 bg-black/50 rounded-full overflow-hidden border border-white/10">
+                <div class="h-full bg-orange-500 rounded-full" style="width: 24%;"></div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Penggiat Terdaftar</span>
+                  <span class="font-heading font-extrabold text-xl text-white mt-0.5 block">3.560 <span class="text-xs font-normal text-slate-400">Atlet</span></span>
+                </div>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
+                  <span class="font-heading font-extrabold text-xl text-orange-400 mt-0.5 block">890 <span class="text-xs font-normal text-slate-400">Squad</span></span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-300 font-medium group-hover:text-orange-300 transition-colors">
+                <span class="text-[11px] text-slate-400">Sentra: Bukittinggi, 50 Kota, Padang</span>
+                <span class="flex items-center gap-1 font-semibold text-orange-400">
+                  Regulasi & Format <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. FREE FIRE -->
+          <div class="game-card group relative rounded-2xl overflow-hidden border border-brand-line bg-brand-surface flex flex-col justify-between min-h-[460px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:border-rose-500/60 hover:shadow-[0_15px_35px_rgba(244,63,94,0.2)] cursor-pointer" data-id="ff" onclick="openGameModal('ff')">
+            <div class="absolute inset-0 z-0">
+              <img 
+                src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?auto=format&fit=crop&w=1000&q=85" 
+                alt="Free Fire Intense Action Arena" 
+                class="w-full h-full object-cover filter brightness-[0.55] contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 via-50% to-brand-navy/30"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-radial at-bottom from-rose-500/15 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold text-rose-300 bg-black/60 border border-rose-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="flame" class="w-3.5 h-3.5 text-rose-400"></i> Fast Survival Shooter
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-bold text-white bg-rose-500/20 border border-rose-500/40 backdrop-blur-md">
+                16,0% Basis
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-auto pt-16">
+              <div class="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-rose-400 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                <span>Basis Komunitas Pelajar Terbesar</span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight drop-shadow-md group-hover:text-rose-300 transition-colors">
+                Free Fire
+              </h3>
+              
+              <p class="text-xs text-slate-300 mt-2 font-normal leading-relaxed drop-shadow">
+                Game dengan sebaran penetrasi terkuat di kalangan pelajar SMP-SMA hingga nagari perbatasan. Memiliki ekosistem kompetisi amatir yang sangat militan.
+              </p>
+
+              <div class="mt-4 w-full h-1.5 bg-black/50 rounded-full overflow-hidden border border-white/10">
+                <div class="h-full bg-rose-500 rounded-full" style="width: 16%;"></div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Penggiat Terdaftar</span>
+                  <span class="font-heading font-extrabold text-xl text-white mt-0.5 block">2.380 <span class="text-xs font-normal text-slate-400">Atlet</span></span>
+                </div>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
+                  <span class="font-heading font-extrabold text-xl text-rose-400 mt-0.5 block">595 <span class="text-xs font-normal text-slate-400">Squad</span></span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-300 font-medium group-hover:text-rose-300 transition-colors">
+                <span class="text-[11px] text-slate-400">Sentra: Payakumbuh, Pessel, Dharmasraya</span>
+                <span class="flex items-center gap-1 font-semibold text-rose-400">
+                  Regulasi & Format <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. VALORANT -->
+          <div class="game-card group relative rounded-2xl overflow-hidden border border-brand-line bg-brand-surface flex flex-col justify-between min-h-[460px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:border-red-500/60 hover:shadow-[0_15px_35px_rgba(239,68,68,0.2)] cursor-pointer" data-id="valorant" onclick="openGameModal('valorant')">
+            <div class="absolute inset-0 z-0">
+              <img 
+                src="/images/division-vct-arena.jpg" 
+                alt="VALORANT Tactical FPS Stage" 
+                class="w-full h-full object-cover filter brightness-[0.55] contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 via-50% to-brand-navy/30"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-radial at-bottom from-red-600/15 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold text-red-300 bg-black/60 border border-red-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="monitor" class="w-3.5 h-3.5 text-red-400"></i> PC • Tactical FPS (VCT)
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-bold text-white bg-red-600/20 border border-red-500/40 backdrop-blur-md">
+                8,0% Basis
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-auto pt-16">
+              <div class="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-red-400 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+                <span>Tier-1 PC Competitive Standard</span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight drop-shadow-md group-hover:text-red-300 transition-colors">
+                VALORANT
+              </h3>
+              
+              <p class="text-xs text-slate-300 mt-2 font-normal leading-relaxed drop-shadow">
+                Divisi taktis PC berstandar global Riot Games. Memiliki komunitas solid berpusat di lingkungan kampus terkemuka dan esports café modern Kota Padang.
+              </p>
+
+              <div class="mt-4 w-full h-1.5 bg-black/50 rounded-full overflow-hidden border border-white/10">
+                <div class="h-full bg-red-600 rounded-full" style="width: 8%;"></div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Penggiat Terdaftar</span>
+                  <span class="font-heading font-extrabold text-xl text-white mt-0.5 block">1.190 <span class="text-xs font-normal text-slate-400">Atlet</span></span>
+                </div>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Tim PC Resmi</span>
+                  <span class="font-heading font-extrabold text-xl text-red-400 mt-0.5 block">238 <span class="text-xs font-normal text-slate-400">Tim</span></span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-300 font-medium group-hover:text-red-300 transition-colors">
+                <span class="text-[11px] text-slate-400">Sentra: Padang (UNP, UNAND, UPI)</span>
+                <span class="flex items-center gap-1 font-semibold text-red-400">
+                  Regulasi & Format <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. EFOOTBALL (PES) -->
+          <div class="game-card group relative rounded-2xl overflow-hidden border border-brand-line bg-brand-surface flex flex-col justify-between min-h-[460px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500/60 hover:shadow-[0_15px_35px_rgba(16,185,129,0.2)] cursor-pointer" data-id="efootball" onclick="openGameModal('efootball')">
+            <div class="absolute inset-0 z-0">
+              <img 
+                src="https://images.unsplash.com/photo-1592840496694-26d035b52b48?auto=format&fit=crop&w=1000&q=85" 
+                alt="eFootball Virtual Soccer Stadium Pitch" 
+                class="w-full h-full object-cover filter brightness-[0.55] contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 via-50% to-brand-navy/30"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-radial at-bottom from-emerald-500/15 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold text-emerald-300 bg-black/60 border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-emerald-400"></i> Konsol / Mobile • Sport
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-bold text-white bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md">
+                4,0% Basis
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-auto pt-16">
+              <div class="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-emerald-400 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Nomor Perebutan Medali Resmi PON</span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight drop-shadow-md group-hover:text-emerald-300 transition-colors">
+                eFootball (PES)
+              </h3>
+              
+              <p class="text-xs text-slate-300 mt-2 font-normal leading-relaxed drop-shadow">
+                Simulasi sepak bola virtual dengan tradisi prestasi kuat di ranah Minang. Menghasilkan atlet berprestasi di tingkat Kejurda hingga kualifikasi Pra-PON nasional.
+              </p>
+
+              <div class="mt-4 w-full h-1.5 bg-black/50 rounded-full overflow-hidden border border-white/10">
+                <div class="h-full bg-emerald-500 rounded-full" style="width: 4%;"></div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Penggiat Terdaftar</span>
+                  <span class="font-heading font-extrabold text-xl text-white mt-0.5 block">590 <span class="text-xs font-normal text-slate-400">Pemain</span></span>
+                </div>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Format Tanding</span>
+                  <span class="font-heading font-extrabold text-xl text-emerald-400 mt-0.5 block">1v1 & 2v2 <span class="text-xs font-normal text-slate-400">Co-op</span></span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-300 font-medium group-hover:text-emerald-300 transition-colors">
+                <span class="text-[11px] text-slate-400">Sentra: Pariaman, Padang Pariaman, Sawahlunto</span>
+                <span class="flex items-center gap-1 font-semibold text-emerald-400">
+                  Regulasi & Format <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. HONOR OF KINGS -->
+          <div class="game-card group relative rounded-2xl overflow-hidden border border-brand-line bg-brand-surface flex flex-col justify-between min-h-[460px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:border-purple-500/60 hover:shadow-[0_15px_35px_rgba(168,85,247,0.2)] cursor-pointer" data-id="hok" onclick="openGameModal('hok')">
+            <div class="absolute inset-0 z-0">
+              <img 
+                src="/images/division-evo-fgc.jpg" 
+                alt="Honor of Kings Mythic Celestial Esports Arena" 
+                class="w-full h-full object-cover filter brightness-[0.55] contrast-110 group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/85 via-50% to-brand-navy/30"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-radial at-bottom from-purple-500/15 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold text-purple-300 bg-black/60 border border-purple-500/30 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="crown" class="w-3.5 h-3.5 text-purple-400"></i> Next-Gen Mobile MOBA
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-bold text-white bg-purple-500/20 border border-purple-500/40 backdrop-blur-md">
+                2,0% Basis
+              </span>
+            </div>
+
+            <div class="relative z-10 mt-auto pt-16">
+              <div class="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold text-purple-400 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                <span>Divisi Ekspansi Global Baru 2026</span>
+              </div>
+
+              <h3 class="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight drop-shadow-md group-hover:text-purple-300 transition-colors">
+                Honor of Kings
+              </h3>
+              
+              <p class="text-xs text-slate-300 mt-2 font-normal leading-relaxed drop-shadow">
+                Cabang MOBA internasional berhadiah masif yang baru resmi diperkenalkan ke sirkuit kampus dan turnamen invitasi ESI Sumbar dengan antusiasme yang tumbuh sangat pesat.
+              </p>
+
+              <div class="mt-4 w-full h-1.5 bg-black/50 rounded-full overflow-hidden border border-white/10">
+                <div class="h-full bg-purple-500 rounded-full" style="width: 2%;"></div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3 pt-4 border-t border-white/10">
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Penggiat Terdaftar</span>
+                  <span class="font-heading font-extrabold text-xl text-white mt-0.5 block">302 <span class="text-xs font-normal text-slate-400">Pemain</span></span>
+                </div>
+                <div class="p-3 rounded-xl bg-black/50 border border-white/10 backdrop-blur-sm">
+                  <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
+                  <span class="font-heading font-extrabold text-xl text-purple-400 mt-0.5 block">60 <span class="text-xs font-normal text-slate-400">Tim</span></span>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between text-xs text-slate-300 font-medium group-hover:text-purple-300 transition-colors">
+                <span class="text-[11px] text-slate-400">Sentra: Padang, Bukittinggi, Payakumbuh</span>
+                <span class="flex items-center gap-1 font-semibold text-purple-400">
+                  Regulasi & Format <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+        <!-- SECTION: DIREKTORI ATLET & PENGGIAT ESPORTS -->
+    <section id="atlet" class="py-20 lg:py-24 border-b border-white/10 relative overflow-hidden">
+      <!-- Section Background Image (Esports Championship Arena, Soft Contrast) -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-iem-katowice.jpg" 
+          alt="Esports Championship Stage" 
+          class="w-full h-full object-cover object-center opacity-22 filter contrast-85 brightness-90"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#090f1e]/96 via-[#0d172e]/90 to-[#090f1e]/96"></div>
+      </div>
+      <!-- Glow ambient backdrop -->
+      <div class="absolute -top-40 right-10 w-[500px] h-[500px] bg-rose-600/5 blur-[140px] pointer-events-none rounded-full"></div>
+      <div class="absolute -bottom-40 left-10 w-[500px] h-[500px] bg-amber-500/5 blur-[140px] pointer-events-none rounded-full"></div>
+
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <!-- Section Header: Ringkas & Elegan -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-2 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
+              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+              <span>Pilar Prestasi & Talenta Unggulan</span>
+            </div>
+            <h2 class="font-heading text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              Pilar Atlet & Pelatih Berprestasi
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl font-light">
+              Sorotan figur kunci dan talenta terbaik Ranah Minang yang siap mengharumkan Sumatera Barat di panggung kejuaraan nasional.
+            </p>
+          </div>
+
+          <!-- Direct Link to Full Directory -->
+          <a href="/atlet" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-rose-600/30 shrink-0">
+            <span>Buka Direktori Lengkap (8.420 Atlet)</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- 4 PILAR UTAMA ATLET & PELATIH (TCG PRESISI ASPECT RATIO 5 : 7.2) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="athletesGridContainer">
+          <!-- Populated by JS with 4 key pillar figures -->
+        </div>
+
+        <!-- CALLOUT BANNER UNTUK PENCARIAN PENUH KE HALAMAN ATLET -->
+        <div class="mt-10 p-6 rounded-2xl border border-brand-line bg-gradient-to-r from-brand-surface via-brand-navy to-brand-surface flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-rose-600/10 border border-rose-500/20 text-rose-500 flex items-center justify-center shrink-0">
+              <i data-lucide="users" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h4 class="font-heading font-bold text-white text-base">Ingin Mencari Atlet Berdasarkan Game & Wilayah?</h4>
+              <p class="text-xs text-slate-400 mt-0.5">Jelajahi seluruh 8.420 atlet binaan berlisensi resmi PBESI dengan filter lengkap di 19 kabupaten/kota.</p>
+            </div>
+          </div>
+          <a href="/atlet" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-white font-medium text-xs flex items-center gap-2 transition-all shrink-0">
+            <span>Jelajahi Direktori Atlet</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: EKOSISTEM & DEMOGRAFI ANGGOTA -->
+    <section id="ekosistem" class="py-20 border-b border-white/10 relative overflow-hidden">
+      <!-- Section Background Image -->
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/images/arena-stage-lights.jpg" 
+          alt="Vibrant Stadium Event Crowd" 
+          class="w-full h-full object-cover object-center opacity-15 filter contrast-85 brightness-85"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#091020]/92 via-[#0c162c]/85 to-[#091020]/92"></div>
+        <div class="absolute top-1/2 left-10 w-[500px] h-[500px] bg-rose-600/15 blur-[150px] pointer-events-none rounded-full"></div>
+        <div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] pointer-events-none rounded-full"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-5 space-y-4">
+            <span class="text-xs font-semibold text-rose-500 uppercase tracking-wider block">Sumber Daya Manusia</span>
+            <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white">
+              Siapa Saja Anggota di Balik 14.852 Angka Ini?
+            </h2>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Ekosistem ini mencakup atlet komunitas tingkat akar rumput, pelajar di sekolah menengah, mahasiswa perguruan tinggi, atlet Pelatda, hingga perangkat wasit berstandar PBESI.
+            </p>
+
+            <div class="pt-4 border-t border-brand-line space-y-2 text-xs">
+              <div class="flex justify-between">
+                <span class="text-slate-400">Laki-Laki</span>
+                <span class="font-semibold text-white">84,0% (12.476 orang)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">Perempuan</span>
+                <span class="font-semibold text-rose-400">16,0% (2.376 orang)</span>
+              </div>
+              <div class="text-[11px] text-slate-500 pt-1">
+                Usia dominan: 16 sampai 24 tahun
+              </div>
+            </div>
+          </div>
+
+          <!-- Clean List Items -->
+          <div class="lg:col-span-7 space-y-3">
+            
+            <div class="p-5 rounded-xl border border-brand-line bg-brand-surface flex items-center justify-between">
+              <div>
+                <h4 class="font-semibold text-white text-sm sm:text-base">Atlet Komunitas & Grassroot</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Pemain aktif di komunitas gaming lokal 19 kabupaten/kota</p>
+              </div>
+              <div class="text-right">
+                <span class="font-heading font-bold text-xl text-white">8.240</span>
+                <span class="text-[11px] text-slate-500 block">55,5%</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-xl border border-brand-line bg-brand-surface flex items-center justify-between">
+              <div>
+                <h4 class="font-semibold text-white text-sm sm:text-base">Pelajar & Mahasiswa</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Anggota klub ekstrakurikuler resmi di SMA, SMK, dan Kampus</p>
+              </div>
+              <div class="text-right">
+                <span class="font-heading font-bold text-xl text-white">5.869</span>
+                <span class="text-[11px] text-slate-500 block">39,5%</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-xl border border-brand-line bg-brand-surface flex items-center justify-between">
+              <div>
+                <h4 class="font-semibold text-white text-sm sm:text-base">Atlet Pemusatan Latihan (Pelatda PON)</h4>
+                <p class="text-xs text-slate-400 mt-0.5">Atlet binaan berprestasi untuk kejuaraan nasional</p>
+              </div>
+              <div class="text-right">
+                <span class="font-heading font-bold text-xl text-amber-400">180</span>
+                <span class="text-[11px] text-slate-500 block">1,2%</span>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-xl border border-brand-line bg-brand-surface flex items-center justify-between">
+              <div>
+                <h4 class="font-semibold text-white text-sm sm:text-base">Wasit & Pelatih Berlisensi</h4>
+                <p class="text-xs text-slate-400 mt-0.5">68 wasit terakreditasi PBESI dan 142 pelatih / analis tim</p>
+              </div>
+              <div class="text-right">
+                <span class="font-heading font-bold text-xl text-white">318</span>
+                <span class="text-[11px] text-slate-500 block">Perangkat Resmi</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: KOMUNITAS CTA -->
+    <section class="py-16 relative overflow-hidden border-b border-white/10">
+      <!-- Section Background Image (Esports Tournament Arena, Soft Contrast) -->
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/images/arena-iem-katowice.jpg" 
+          alt="Esports Arena Tournament Focus" 
+          class="w-full h-full object-cover object-center opacity-15 filter contrast-85 brightness-85"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0a1122]/95 via-[#0e1933]/90 to-[#0a1122]/95"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <div class="p-8 sm:p-12 rounded-2xl border border-brand-line bg-brand-surface flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div class="max-w-xl">
+            <span class="text-xs font-semibold text-rose-500 uppercase tracking-wider block mb-1">Terbuka Untuk Umum</span>
+            <h3 class="font-heading text-2xl sm:text-3xl font-bold text-white">
+              Bergabung Bersama Komunitas
+            </h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Masyarakat umum, gamers, dan pengurus tim dapat mencari rekan sparring (scrim), mabar harian, atau mendaftarkan klub melalui kanal resmi kami.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="https://discord.com" target="_blank" class="px-5 py-2.5 rounded-lg border border-brand-line bg-brand-card hover:bg-slate-800 text-xs text-white font-medium transition-colors">
+              Discord Resmi
+            </a>
+            <a href="https://instagram.com" target="_blank" class="px-5 py-2.5 rounded-lg border border-brand-line bg-brand-card hover:bg-slate-800 text-xs text-white font-medium transition-colors">
+              Instagram @esportsumbar
+            </a>
+            <a href="https://wa.me/" target="_blank" class="px-5 py-2.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs text-white font-medium transition-colors">
+              WhatsApp Helpdesk
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+      <!-- MODAL POPUP REGULASI & DETAIL GAME -->
+    <div id="gameDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+      <div class="relative w-full max-w-2xl rounded-2xl border border-brand-line bg-brand-surface shadow-2xl overflow-hidden -translate-y-4 transition-transform duration-300" id="gameModalContent">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+      <!-- MODAL ID CARD ATLET DIGITAL BERLISENSI PBESI -->
+    <div id="athleteDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+      <div class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-white/20 bg-gradient-to-b from-slate-900 via-brand-surface to-brand-navy shadow-[0_0_50px_rgba(225,29,72,0.35)] overflow-hidden -translate-y-4 transition-transform duration-300" id="athleteModalContent">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brand-line py-12 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-brand-line">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-600 flex items-center justify-center font-heading font-black text-white text-xs shadow-md">
+            ES
+          </div>
+          <div>
+            <span class="font-heading font-bold text-base text-white tracking-tight">ESPORT <span class="text-rose-500">SUMBAR</span></span>
+            <span class="text-[11px] text-slate-400 block -mt-0.5">Pengurus Provinsi ESI Sumatera Barat</span>
+          </div>
+        </div>
+
+        <!-- Quick Page Links -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-slate-300 font-medium">
+          <a href="/" class="hover:text-rose-400 transition-colors">Beranda</a>
+          <a href="/about" class="hover:text-rose-400 transition-colors">Tentang Kami</a>
+          <a href="/atlet" class="hover:text-rose-400 transition-colors">Direktori Atlet</a>
+          <a href="#peta-wilayah" class="hover:text-rose-400 transition-colors">Peta 19 Wilayah</a>
+          <a href="#divisi" class="hover:text-rose-400 transition-colors">6 Cabang Game</a>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+        <div>
+          <p class="font-semibold text-slate-300">Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat</p>
+          <p class="text-slate-500 mt-0.5">Sekretariat: Stadion GOR H. Agus Salim, Kota Padang, Sumatera Barat 25111</p>
+        </div>
+        <div class="sm:text-right">
+          <p>© 2026 ESPORT SUMBAR. Hak cipta dilindungi.</p>
+          <p class="text-slate-600 mt-0.5">Bernaung di bawah KONI Sumbar & PBESI</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT UNTUK PETA INTERAKTIF SUMATERA BARAT -->
+  <script>
+    const REGIONS_DATA = [
+      { 
+        id: "padang", 
+        name: "Kota Padang", 
+        type: "kota", 
+        x: 375, 
+        y: 250, 
+        total: 4120, 
+        atlet: 2450, 
+        tim: 135, 
+        wasit: 42, 
+        games: "Mobile Legends, VALORANT, PUBG Mobile",
+        role: "Ibu Kota & Sentra Utama",
+        desc: "Pusat kegiatan kompetitif dan akademi esports terbesar di Sumatera Barat. Menampung basis fasilitas bootcamp dan sarana turnamen utama di kawasan GOR H. Agus Salim.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "bukittinggi", 
+        name: "Kota Bukittinggi", 
+        type: "kota", 
+        x: 395, 
+        y: 155, 
+        total: 1540, 
+        atlet: 920, 
+        tim: 52, 
+        wasit: 24, 
+        games: "PUBG Mobile, Mobile Legends",
+        role: "Basis Taktis PUBG Mobile",
+        desc: "Pusat kekuatan cabang Battle Royale dengan squad-squad taktis yang sering mewakili Sumatera Barat dalam kejuaraan regional Sumatra.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "payakumbuh", 
+        name: "Kota Payakumbuh", 
+        type: "kota", 
+        x: 445, 
+        y: 150, 
+        total: 1180, 
+        atlet: 680, 
+        tim: 38, 
+        wasit: 18, 
+        games: "Free Fire, Mobile Legends",
+        role: "Sentra Free Fire Luak Limopuluah",
+        desc: "Memiliki basis pemain Free Fire teraktif dengan jejaring turnamen komunitas antarkelurahan yang berjalan rutin sepanjang tahun.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "agam", 
+        name: "Kabupaten Agam", 
+        type: "kabupaten", 
+        x: 360, 
+        y: 145, 
+        total: 890, 
+        atlet: 490, 
+        tim: 31, 
+        wasit: 17, 
+        games: "PUBG Mobile, Mobile Legends",
+        role: "Penyumbang Atlet Pelatda",
+        desc: "Wilayah penyangga utama di kawasan Danau Maninjau dan lereng Marapi yang rutin mencetak talenta muda untuk Pra-PON.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "pariaman", 
+        name: "Kota Pariaman", 
+        type: "kota", 
+        x: 345, 
+        y: 200, 
+        total: 760, 
+        atlet: 410, 
+        tim: 26, 
+        wasit: 14, 
+        games: "eFootball, Mobile Legends",
+        role: "Kekuatan Konsol & eFootball",
+        desc: "Kiblat cabang olahraga virtual sepak bola (eFootball/PES) dengan prestasi konsisten di tingkat Kejurda dan turnamen invitasi.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "tanah-datar", 
+        name: "Kabupaten Tanah Datar", 
+        type: "kabupaten", 
+        x: 420, 
+        y: 185, 
+        total: 730, 
+        atlet: 380, 
+        tim: 24, 
+        wasit: 15, 
+        games: "Mobile Legends, Free Fire",
+        role: "Komunitas Luhak Nan Tuo",
+        desc: "Klub-klub esports berbasis pelajar dan pemuda nagari yang aktif mengorganisir turnamen lokal secara mandiri.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "padang-pariaman", 
+        name: "Kabupaten Padang Pariaman", 
+        type: "kabupaten", 
+        x: 355, 
+        y: 220, 
+        total: 680, 
+        atlet: 370, 
+        tim: 23, 
+        wasit: 14, 
+        games: "Mobile Legends, eFootball",
+        role: "Komunitas Pesisir & Bandara",
+        desc: "Menghubungkan komunitas gaming pesisir dengan ekosistem kompetisi ibu kota provinsi.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "limapuluh-kota", 
+        name: "Kabupaten Lima Puluh Kota", 
+        type: "kabupaten", 
+        x: 465, 
+        y: 125, 
+        total: 650, 
+        atlet: 350, 
+        tim: 22, 
+        wasit: 13, 
+        games: "Free Fire, PUBG Mobile",
+        role: "Squad Aktif Perbatasan Riau",
+        desc: "Klub-klub kompetitif yang aktif berpartisipasi dalam sirkuit antardaerah Sumbar-Riau.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "solok-kota", 
+        name: "Kota Solok", 
+        type: "kota", 
+        x: 435, 
+        y: 235, 
+        total: 620, 
+        atlet: 340, 
+        tim: 20, 
+        wasit: 12, 
+        games: "Mobile Legends, PUBG Mobile",
+        role: "Klub Pelajar Digital",
+        desc: "Ekosistem yang bertumpu pada klub ekstrakurikuler sekolah menengah dan komunitas rental gaming.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "pesisir-selatan", 
+        name: "Kabupaten Pesisir Selatan", 
+        type: "kabupaten", 
+        x: 420, 
+        y: 380, 
+        total: 590, 
+        atlet: 310, 
+        tim: 18, 
+        wasit: 12, 
+        games: "Free Fire, Mobile Legends",
+        role: "Pesisir Cyber League",
+        desc: "Wilayah terpanjang dengan jejaring komunitas yang membentang dari Tarusan hingga Silaut.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "solok-kab", 
+        name: "Kabupaten Solok", 
+        type: "kabupaten", 
+        x: 455, 
+        y: 265, 
+        total: 540, 
+        atlet: 290, 
+        tim: 17, 
+        wasit: 11, 
+        games: "PUBG Mobile, Mobile Legends",
+        role: "Talenta Muda Singkarak",
+        desc: "Komunitas pemuda nagari yang aktif membina tim amatir menuju jenjang kompetisi resmi.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "padang-panjang", 
+        name: "Kota Padang Panjang", 
+        type: "kota", 
+        x: 395, 
+        y: 180, 
+        total: 490, 
+        atlet: 260, 
+        tim: 16, 
+        wasit: 10, 
+        games: "Mobile Legends, eFootball",
+        role: "Sentra Edukasi & Santri",
+        desc: "Karakteristik unik dengan partisipasi aktif dari kalangan santri dan pelajar sekolah asrama di kota Serambi Mekkah.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "pasaman-barat", 
+        name: "Kabupaten Pasaman Barat", 
+        type: "kabupaten", 
+        x: 300, 
+        y: 95, 
+        total: 460, 
+        atlet: 240, 
+        tim: 15, 
+        wasit: 10, 
+        games: "Free Fire, Mobile Legends",
+        role: "Sentra Sayap Barat",
+        desc: "Sentra komunitas gaming mandiri di kawasan Simpang Empat dan pesisir perkebunan.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "pasaman", 
+        name: "Kabupaten Pasaman", 
+        type: "kabupaten", 
+        x: 375, 
+        y: 75, 
+        total: 420, 
+        atlet: 220, 
+        tim: 13, 
+        wasit: 9, 
+        games: "Mobile Legends, PUBG Mobile",
+        role: "Poros Utara Minang",
+        desc: "Menghubungkan talenta daerah perbatasan utara menuju seleksi Kejurda provinsi di Lubuk Sikaping.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "sawahlunto", 
+        name: "Kota Sawahlunto", 
+        type: "kota", 
+        x: 485, 
+        y: 225, 
+        total: 410, 
+        atlet: 210, 
+        tim: 14, 
+        wasit: 9, 
+        games: "Free Fire, Mobile Legends",
+        role: "Heritage Cyber Community",
+        desc: "Komunitas pemuda kreatif di kota warisan dunia yang aktif menyelenggarakan turnamen di ruang cagar budaya.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "solok-selatan", 
+        name: "Kabupaten Solok Selatan", 
+        type: "kabupaten", 
+        x: 485, 
+        y: 330, 
+        total: 380, 
+        atlet: 190, 
+        tim: 12, 
+        wasit: 8, 
+        games: "Mobile Legends, Free Fire",
+        role: "Basis Saribu Rumah Gadang",
+        desc: "Klub-klub muda bersemangat yang aktif berpartisipasi dalam sirkuit antarkabupaten.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "dharmasraya", 
+        name: "Kabupaten Dharmasraya", 
+        type: "kabupaten", 
+        x: 580, 
+        y: 290, 
+        total: 380, 
+        atlet: 200, 
+        tim: 12, 
+        wasit: 8, 
+        games: "Free Fire, Mobile Legends",
+        role: "Gerbang Tenggara",
+        desc: "Klub mandiri yang memiliki jejaring sparring aktif dengan daerah tetangga Jambi dan Riau.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "sijunjung", 
+        name: "Kabupaten Sijunjung", 
+        type: "kabupaten", 
+        x: 525, 
+        y: 235, 
+        total: 350, 
+        atlet: 180, 
+        tim: 11, 
+        wasit: 7, 
+        games: "Mobile Legends, eFootball",
+        role: "Lansek Manih Cyber",
+        desc: "Komunitas grassroot yang terus berkembang pesat di Muaro Sijunjung.",
+        status: "Pengcab Aktif • SK PBESI"
+      },
+      { 
+        id: "mentawai", 
+        name: "Kabupaten Kepulauan Mentawai", 
+        type: "kabupaten", 
+        x: 145, 
+        y: 245, 
+        total: 172, 
+        atlet: 90, 
+        tim: 6, 
+        wasit: 5, 
+        games: "Free Fire, Mobile Legends",
+        role: "Garda Kepulauan Samudra",
+        desc: "Komunitas esports kepulauan yang membuktikan antusiasme tinggi talenta muda dari Tuapejat hingga Siberut.",
+        status: "Pengcab Aktif • SK PBESI"
+      }
+    ];
+
+    let currentSelectedId = 'padang';
+    let currentMapFilter = 'all';
+
+    function renderMapPins() {
+      const g = document.getElementById('mapPinsGroup');
+      g.innerHTML = '';
+
+      REGIONS_DATA.forEach(region => {
+        const isSelected = region.id === currentSelectedId;
+        const isVisible = currentMapFilter === 'all' || region.type === currentMapFilter;
+
+        if (!isVisible) return;
+
+        const pinGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        pinGroup.setAttribute("class", `map-pin-btn ${isSelected ? 'active' : ''}`);
+        pinGroup.setAttribute("id", `pin-${region.id}`);
+        pinGroup.setAttribute("transform", `translate(${region.x}, ${region.y})`);
+
+        // Pulse ring for active pin
+        const pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        pulse.setAttribute("class", "pin-pulse");
+        pulse.setAttribute("cx", "0");
+        pulse.setAttribute("cy", "0");
+        pulse.setAttribute("r", isSelected ? "10" : "6");
+        pulse.setAttribute("fill", isSelected ? "rgba(244, 63, 94, 0.4)" : "transparent");
+
+        // Base pin circle
+        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("class", "pin-dot");
+        dot.setAttribute("cx", "0");
+        dot.setAttribute("cy", "0");
+        dot.setAttribute("r", isSelected ? "8" : "5");
+        dot.setAttribute("fill", isSelected ? "#f43f5e" : (region.type === 'kota' ? '#f59e0b' : '#06b6d4'));
+        dot.setAttribute("stroke", "#080b12");
+        dot.setAttribute("stroke-width", "2");
+
+        // Label text on map
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", "9");
+        text.setAttribute("y", "3.5");
+        text.setAttribute("fill", isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.65)");
+        text.setAttribute("font-size", isSelected ? "11" : "9.5");
+        text.setAttribute("font-family", "system-ui, sans-serif");
+        text.setAttribute("font-weight", isSelected ? "700" : "500");
+        text.textContent = region.name.replace("Kabupaten ", "Kab. ");
+
+        pinGroup.appendChild(pulse);
+        pinGroup.appendChild(dot);
+        pinGroup.appendChild(text);
+
+        // Click Event
+        pinGroup.onclick = () => selectRegionOnMap(region.id);
+
+        // Hover Tooltip Events
+        pinGroup.onmouseenter = (e) => {
+          showMapTooltip(region, e);
+        };
+        pinGroup.onmouseleave = () => {
+          hideMapTooltip();
+        };
+
+        g.appendChild(pinGroup);
+      });
+    }
+
+    function showMapTooltip(region, e) {
+      const tooltip = document.getElementById('mapTooltip');
+      const nameEl = document.getElementById('tooltipName');
+      const dataEl = document.getElementById('tooltipData');
+
+      nameEl.textContent = region.name;
+      dataEl.textContent = `${region.total.toLocaleString('id-ID')} Penggiat • ${region.atlet} Atlet`;
+
+      // Position tooltip relative to container
+      const svg = document.getElementById('sumbarSvgMap');
+      const pt = svg.createSVGPoint();
+      pt.x = region.x;
+      pt.y = region.y;
+      const screenPt = pt.matrixTransform(svg.getScreenCTM());
+      const containerRect = svg.parentElement.getBoundingClientRect();
+
+      tooltip.style.left = `${screenPt.x - containerRect.left}px`;
+      tooltip.style.top = `${screenPt.y - containerRect.top}px`;
+      tooltip.classList.remove('opacity-0');
+    }
+
+    function hideMapTooltip() {
+      const tooltip = document.getElementById('mapTooltip');
+      tooltip.classList.add('opacity-0');
+    }
+
+    function selectRegionOnMap(id) {
+      currentSelectedId = id;
+      renderMapPins();
+      renderRegionInspector();
+    }
+
+    function renderRegionInspector() {
+      const data = REGIONS_DATA.find(item => item.id === currentSelectedId) || REGIONS_DATA[0];
+      const container = document.getElementById('regionInspector');
+
+      container.innerHTML = `
+        <div class="flex items-center justify-between pb-4 border-b border-brand-line">
+          <div>
+            <span class="text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded ${
+              data.type === 'kota' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+            }">
+              Wilayah ${data.type === 'kota' ? 'Kota' : 'Kabupaten'}
+            </span>
+            <h3 class="font-heading font-extrabold text-3xl text-white mt-2">${data.name}</h3>
+            <p class="text-xs text-rose-400 font-semibold mt-0.5">${data.role}</p>
+          </div>
+          <span class="px-3 py-1 rounded-lg bg-black/50 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+            ● ${data.status}
+          </span>
+        </div>
+
+        <p class="text-sm text-slate-300 font-normal leading-relaxed my-6">
+          ${data.desc}
+        </p>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-2 gap-3.5 my-6">
+          <div class="p-4 rounded-xl bg-brand-navy border border-brand-line">
+            <span class="text-[10px] text-slate-400 uppercase font-semibold block">Total Penggiat</span>
+            <span class="font-heading font-black text-2xl text-white mt-1 block">${data.total.toLocaleString('id-ID')}</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-brand-navy border border-brand-line">
+            <span class="text-[10px] text-slate-400 uppercase font-semibold block">Atlet Binaan</span>
+            <span class="font-heading font-black text-2xl text-rose-500 mt-1 block">${data.atlet.toLocaleString('id-ID')}</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-brand-navy border border-brand-line">
+            <span class="text-[10px] text-slate-400 uppercase font-semibold block">Klub & Tim Resmi</span>
+            <span class="font-heading font-black text-2xl text-white mt-1 block">${data.tim} Squad</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-brand-navy border border-brand-line">
+            <span class="text-[10px] text-slate-400 uppercase font-semibold block">Wasit & Juri Lisensi</span>
+            <span class="font-heading font-black text-2xl text-amber-400 mt-1 block">${data.wasit} Orang</span>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-brand-line space-y-2">
+          <div class="text-xs text-slate-400 flex items-center justify-between">
+            <span>Cabang Game Dominan:</span>
+            <span class="text-white font-medium">${data.games}</span>
+          </div>
+          <div class="text-[11px] text-slate-500 text-right">
+            Terverifikasi Sistem Database ESI Sumbar 2026
+          </div>
+        </div>
+      `;
+      
+    function toggleMobileNav() {
+      const menu = document.getElementById('mobileNavMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    lucide.createIcons();
+    }
+
+    function filterMap(type) {
+      currentMapFilter = type;
+      const buttons = document.querySelectorAll('.map-filter-btn');
+      buttons.forEach(btn => {
+        if (btn.dataset.filter === type) {
+          btn.className = "map-filter-btn px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-semibold text-xs transition-all";
+        } else {
+          btn.className = "map-filter-btn px-3.5 py-1.5 rounded-lg border border-brand-line hover:text-white text-slate-400 text-xs transition-all";
+        }
+      });
+      renderMapPins();
+    }
+
+    
+    // GAMES DATA & INTERACTION
+    const GAMES_INFO = {
+      mlbb: {
+        title: "Mobile Legends: Bang Bang",
+        platform: "Mobile (iOS & Android Smartphone)",
+        genre: "MOBA 5v5 Tournament Mode",
+        badge: "Nomor Ekshibisi PON & Porprov",
+        colorHex: "#f59e0b",
+        total: "6.830 Atlet",
+        tim: "1.366 Tim",
+        share: "46,0%",
+        rules: "Draft Pick 5v5 (Ban 10 Hero), sistem Best-of-3 babak penyisihan dan Best-of-5 babak grand final. Wajib menggunakan smartphone, tidak diizinkan menggunakan iPad, tablet, atau emulator PC.",
+        tournaments: "Kejurda ESI Sumbar 2026, Liga Pelajar Ranah Minang, Kualifikasi Porprov XVI.",
+        regions: "Kota Padang, Kota Bukittinggi, Kabupaten Agam, Kota Solok."
+      },
+      pubgm: {
+        title: "PUBG Mobile",
+        platform: "Mobile (Smartphone Standar PBESI)",
+        genre: "Tactical Battle Royale TPP 4-Man Squad",
+        badge: "Standar Sirkuit PBESI Nasional",
+        colorHex: "#f97316",
+        total: "3.560 Atlet",
+        tim: "890 Squad",
+        share: "24,0%",
+        rules: "Format TPP Squad 4 pemain dengan scoring sistem poin resmi PBESI & PMGC (Placement + Kill). Map pool: Erangel, Miramar, Sanhok. Dilarang menggunakan trigger fisik atau aksesoris mekanik eksternal.",
+        tournaments: "Sirkuit Seleksi Pra-PON Sumbar, Piala Pengprov ESI, Liga Komunitas Luak Limopuluah.",
+        regions: "Kota Bukittinggi, Kabupaten Lima Puluh Kota, Kota Padang."
+      },
+      ff: {
+        title: "Free Fire",
+        platform: "Mobile (Smartphone Standar Kompetisi)",
+        genre: "Survival Battle Royale Squad",
+        badge: "Basis Komunitas Pelajar Terbesar",
+        colorHex: "#f43f5e",
+        total: "2.380 Atlet",
+        tim: "595 Squad",
+        share: "16,0%",
+        rules: "Squad 4 pemain, Map Bermuda, Purgatory, Kalahari. Perhitungan poin standar FFWS resmi. Diwajibkan perekaman layar (POV record) pada babak playoff untuk transparansi fairplay.",
+        tournaments: "Piala Pelajar ESI Sumbar, Turnamen Antar-Nagari Pesisir Selatan, Sirkuit Dharmasraya Cup.",
+        regions: "Kota Payakumbuh, Kabupaten Pesisir Selatan, Kabupaten Dharmasraya."
+      },
+      valorant: {
+        title: "VALORANT",
+        platform: "Personal Computer (PC 144Hz+ Monitor)",
+        genre: "Tactical FPS 5v5 Plant / Defuse",
+        badge: "Tier-1 PC Competitive Standard",
+        colorHex: "#ef4444",
+        total: "1.190 Atlet",
+        tim: "238 Tim",
+        share: "8,0%",
+        rules: "Format 5v5 Standar VCT (13-round win dengan overtime). Server 128-tick resmi Indonesia/Singapore ping <20ms. Wajib menggunakan Riot Vanguard aktif dan verifikasi akun ID Riot berlisensi PBESI.",
+        tournaments: "Liga Antarmahasiswa Sumbar (UNP, UNAND, UPI), Minang PC Masters, Seleksi Kejurnas PC.",
+        regions: "Kota Padang (Kampus & Net Café) dan Kota Bukittinggi."
+      },
+      efootball: {
+        title: "eFootball (PES)",
+        platform: "PlayStation 5 Console / Mobile",
+        genre: "Simulasi Sepak Bola Virtual",
+        badge: "Nomor Perebutan Medali Resmi PON",
+        colorHex: "#10b981",
+        total: "590 Pemain",
+        tim: "Kategori Tunggal & Ganda Co-op",
+        share: "4,0%",
+        rules: "Durasi pertandingan 10 menit (Regular time + Extra time + PK jika imbang di fase gugur). Kamera Normal Long/Wide, Condition: Excellent/Normal. Kategori Perorangan dan Ganda Co-op 2v2.",
+        tournaments: "Piala Bergilir Pengprov ESI Sumbar, Pariaman Virtual Cup, Kualifikasi PON.",
+        regions: "Kota Pariaman, Kabupaten Padang Pariaman, Kota Sawahlunto."
+      },
+      hok: {
+        title: "Honor of Kings",
+        platform: "Mobile (Smartphone iOS & Android)",
+        genre: "Next-Gen Mobile MOBA 5v5",
+        badge: "Divisi Ekspansi Global Baru 2026",
+        colorHex: "#a855f7",
+        total: "302 Pemain",
+        tim: "60 Tim",
+        share: "2,0%",
+        rules: "Format Tournament Mode 5v5 Draft Pick. Standar internasional KIC / HoK Invitational. Penggunaan device smartphone standar PBESI.",
+        tournaments: "Sumbar HoK Campus Showcase 2026, Turnamen Ekshibisi Pembinaan Atlet Muda ESI.",
+        regions: "Kota Padang, Kota Bukittinggi, Kota Payakumbuh."
+      }
+    };
+
+    function filterGames(gameId) {
+      const cards = document.querySelectorAll('.game-card');
+      const buttons = document.querySelectorAll('.game-filter-btn');
+
+      buttons.forEach(btn => {
+        if (btn.dataset.game === gameId) {
+          btn.className = "game-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 text-white transition-all shadow-md shadow-rose-600/30";
+        } else {
+          btn.className = "game-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line hover:border-white/20 bg-brand-navy/60 transition-all flex items-center gap-1.5";
+        }
+      });
+
+      cards.forEach(card => {
+        if (gameId === 'all' || card.dataset.id === gameId) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openGameModal(id) {
+      const g = GAMES_INFO[id];
+      if (!g) return;
+
+      const modal = document.getElementById('gameDetailModal');
+      const content = document.getElementById('gameModalContent');
+
+      content.innerHTML = `
+        <div class="p-6 sm:p-8">
+          <div class="flex items-start justify-between gap-4 pb-4 border-b border-brand-line">
+            <div>
+              <span class="inline-block text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded mb-1.5" style="color: ${g.colorHex}; background: ${g.colorHex}15; border: 1px solid ${g.colorHex}35;">
+                ● ${g.badge}
+              </span>
+              <h3 class="font-heading font-extrabold text-2xl sm:text-3xl text-white">${g.title}</h3>
+              <p class="text-xs text-slate-400 mt-0.5">${g.genre} • ${g.platform}</p>
+            </div>
+            <button onclick="closeGameModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              ✕
+            </button>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3 my-5">
+            <div class="p-3 rounded-xl bg-brand-navy border border-brand-line">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Total Atlet</span>
+              <span class="font-heading font-black text-lg text-white mt-0.5 block">${g.total}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-brand-navy border border-brand-line">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
+              <span class="font-heading font-black text-lg mt-0.5 block" style="color: ${g.colorHex};">${g.tim}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-brand-navy border border-brand-line">
+              <span class="text-[10px] text-slate-400 uppercase font-mono block">Pangsa Sumbar</span>
+              <span class="font-heading font-black text-lg text-white mt-0.5 block">${g.share}</span>
+            </div>
+          </div>
+
+          <div class="space-y-3.5 text-xs">
+            <div class="p-4 rounded-xl bg-black/40 border border-brand-line">
+              <span class="text-[11px] font-semibold text-white block mb-1">📋 Regulasi & Format Pertandingan Resmi</span>
+              <p class="text-slate-300 leading-relaxed">${g.rules}</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-black/40 border border-brand-line">
+              <span class="text-[11px] font-semibold text-white block mb-1">🏆 Sirkuit & Kejuaraan Daerah</span>
+              <p class="text-slate-300 leading-relaxed">${g.tournaments}</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-black/40 border border-brand-line flex items-center justify-between">
+              <span class="text-[11px] font-semibold text-white">📍 Sentra Atlet Unggulan</span>
+              <span class="text-slate-300 font-medium">${g.regions}</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-brand-line flex items-center justify-between">
+            <span class="text-[11px] text-slate-500">Standar Regulasi PBESI Pengprov Sumbar 2026</span>
+            <button onclick="closeGameModal()" class="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition-colors">
+              Tutup Rincian
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      content.classList.remove('-translate-y-4');
+      content.classList.add('translate-y-0');
+      lucide.createIcons();
+    }
+
+    function closeGameModal() {
+      const modal = document.getElementById('gameDetailModal');
+      const content = document.getElementById('gameModalContent');
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      content.classList.add('-translate-y-4');
+      content.classList.remove('translate-y-0');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeGameModal();
+    });
+    document.getElementById('gameDetailModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'gameDetailModal') closeGameModal();
+    });
+
+    
+    // ATHLETES ROSTER DATA & SEARCH
+    // ATHLETES ROSTER DATA & REFERENCE-INSPIRED COLLECTIBLE CARDS
+    const ATHLETES_DATA = [
+      {
+        id: "ath-1",
+        ign: "V4ND4L",
+        name: "Muhammad Rayhan Pratama",
+        ovr: 96,
+        game: "VALORANT",
+        role: "Duelist / Entry Fragger",
+        specialty: "First Blood Specialist & Operator Clutch",
+        region: "Kota Padang",
+        club: "Minang Pride Esports",
+        category: "Pelatda PON",
+        statusBadge: "Atlet Pelatda PON Sumbar",
+        licenseId: "SB-VAL-2601",
+        photo: "/images/athlete-v4nd4l.jpg",
+        stats: { winrate: "78,4%", rating: "1.42 VCT", tournaments: "32x Resmi" },
+        bio: "Duelist andalan Sumatera Barat yang memegang predikat Top ACS pada Kualifikasi Pra-PON Sumatra.",
+        color: "#ef4444"
+      },
+      {
+        id: "ath-2",
+        ign: "R4YDEN",
+        name: "Fadhil Al-Ghifari",
+        ovr: 95,
+        game: "Mobile Legends",
+        role: "Jungler / Assassin Hyper",
+        specialty: "Retribution Smite & Objective Lord Control",
+        region: "Kota Bukittinggi",
+        club: "Singkarak Reborn",
+        category: "Kejurda",
+        statusBadge: "Juara Kejurda Sumbar 2025",
+        licenseId: "SB-MLB-2602",
+        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "82,5%", rating: "9.4 KDA", tournaments: "45x Resmi" },
+        bio: "Pemain veteran dengan ketenangan tinggi dalam perebutan Lord dan objektif penting turnamen.",
+        color: "#f59e0b"
+      },
+      {
+        id: "ath-3",
+        ign: "B4R4_AP1",
+        name: "Ahmad Fauzan",
+        ovr: 94,
+        game: "Free Fire",
+        role: "Rusher & Shot-Caller",
+        specialty: "Close Combat Entry & Crossfire Flank",
+        region: "Kota Payakumbuh",
+        club: "Luak Limopuluah Elite",
+        category: "Kejurda",
+        statusBadge: "Top Fragger Sirkuit Pelajar",
+        licenseId: "SB-FF-2603",
+        photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "68,0%", rating: "4.85 K/D", tournaments: "38x Resmi" },
+        bio: "Rusher agresif dengan refleks kilat yang membawa sekolahnya menjuarai turnamen tingkat provinsi.",
+        color: "#f43f5e"
+      },
+      {
+        id: "ath-4",
+        ign: "CYBER_SNIPER",
+        name: "Rifki Zulkarnain",
+        ovr: 93,
+        game: "PUBG Mobile",
+        role: "Scout / DMR Specialist",
+        specialty: "Long-Range Elimination & Rotation Scout",
+        region: "Kabupaten Agam",
+        club: "Marapi Tactical Force",
+        category: "Pelatda PON",
+        statusBadge: "Atlet Pelatda PON Sumbar",
+        licenseId: "SB-PUB-2604",
+        photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "74,2%", rating: "5.20 K/D", tournaments: "29x Resmi" },
+        bio: "Penembak jitu jarak jauh pemegang rekor eliminasi terjauh (420m) pada kualifikasi Kejurnas PBESI.",
+        color: "#f97316"
+      },
+      {
+        id: "ath-5",
+        ign: "ALIF_ORANGETM",
+        name: "Alif Kurnia Ramadhan",
+        ovr: 95,
+        game: "eFootball (PES)",
+        role: "Virtual Football Solo Striker",
+        specialty: "Possession Game & Tiki-Taka Finishing",
+        region: "Kota Pariaman",
+        club: "Pariaman Cyber FC",
+        category: "Pelatda PON",
+        statusBadge: "Medalis Emas Porprov",
+        licenseId: "SB-EFT-2605",
+        photo: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "84,0%", rating: "Top #1 Sumbar", tournaments: "26x Resmi" },
+        bio: "Atlet spesialis konsol PlayStation dengan penguasaan formasi menyerang yang belum terkalahkan di Kejurda.",
+        color: "#10b981"
+      },
+      {
+        id: "ath-6",
+        ign: "VALKYRIE",
+        name: "Annisa Putri Maharani",
+        ovr: 92,
+        game: "Mobile Legends",
+        role: "Midlaner / Mage Specialist",
+        specialty: "High Ground Defense & Area Burst",
+        region: "Kota Padang",
+        club: "Queen of Minang",
+        category: "Kejurda",
+        statusBadge: "Juara Ladies Cup Sumbar",
+        licenseId: "SB-MLB-2606",
+        photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "79,2%", rating: "8.1 KDA", tournaments: "22x Resmi" },
+        bio: "Kapten tim putri Sumbar yang memiliki positioning luar biasa pada cabang Mobile Legends.",
+        color: "#f59e0b"
+      },
+      {
+        id: "ath-7",
+        ign: "Z3R0",
+        name: "Bintang Pratama",
+        ovr: 91,
+        game: "VALORANT",
+        role: "Controller / Tactician",
+        specialty: "Viper/Omen Smoke & Site Retake Command",
+        region: "Kota Padang Panjang",
+        club: "Serambi Cyber Squad",
+        category: "Pelatda PON",
+        statusBadge: "Talenta Binaan PBESI",
+        licenseId: "SB-VAL-2607",
+        photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "72,0%", rating: "1.28 VCT", tournaments: "18x Resmi" },
+        bio: "Otak taktik smoke lineup yang mengantarkan kampusnya menjuarai turnamen antarperguruan tinggi se-Sumatra.",
+        color: "#ef4444"
+      },
+      {
+        id: "ath-8",
+        ign: "NAGARI_W4RRIOR",
+        name: "Teguh Hendra Wijaya",
+        ovr: 94,
+        game: "PUBG Mobile",
+        role: "In-Game Leader (IGL)",
+        specialty: "Zone Edge Pathing & Ambush Setup",
+        region: "Kabupaten Lima Puluh Kota",
+        club: "Harau Tactical Team",
+        category: "Pelatda PON",
+        statusBadge: "Kapten Pelatda PON Sumbar",
+        licenseId: "SB-PUB-2608",
+        photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "71,5%", rating: "4.60 K/D", tournaments: "34x Resmi" },
+        bio: "Leader taktis dengan rotasi zona cerdas yang menjadi komandan utama tim squad PUBG Mobile PON Sumbar.",
+        color: "#f97316"
+      },
+      {
+        id: "ath-9",
+        ign: "PHOENIX",
+        name: "Dimas Wahyudi",
+        ovr: 90,
+        game: "Free Fire",
+        role: "Flanker / Grenadier",
+        specialty: "Cooked Grenade & Defensive Gloo Wall",
+        region: "Kabupaten Pesisir Selatan",
+        club: "Pesisir Cyber Wave",
+        category: "Kejurda",
+        statusBadge: "Juara Nagari Cup 2025",
+        licenseId: "SB-FF-2609",
+        photo: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "66,0%", rating: "4.10 K/D", tournaments: "25x Resmi" },
+        bio: "Spesialis lemparan granat presisi dengan insting flank yang kerap memecah pertahanan lawan.",
+        color: "#f43f5e"
+      },
+      {
+        id: "ath-10",
+        ign: "SKYWALKER",
+        name: "Irfan Maulana",
+        ovr: 89,
+        game: "Honor of Kings",
+        role: "Clash Lane / Fighter",
+        specialty: "1v1 Duel & Teleport Teamfight Flank",
+        region: "Kota Solok",
+        club: "Solok Cyber Legend",
+        category: "Kejurda",
+        statusBadge: "Top 1 HoK Sumbar Showcase",
+        licenseId: "SB-HOK-2610",
+        photo: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "76,5%", rating: "7.8 KDA", tournaments: "15x Resmi" },
+        bio: "Bintang muda divisi baru Honor of Kings dengan mekanik laning phase yang sangat dominan.",
+        color: "#a855f7"
+      },
+      {
+        id: "ath-11",
+        ign: "COACH_MINANG",
+        name: "Rendra Kusuma, S.Kom",
+        ovr: 97,
+        game: "Mobile Legends",
+        role: "Head Coach & Data Analyst",
+        specialty: "Draft Ban-Pick & Macro Game Scouting",
+        region: "Kota Padang",
+        club: "Kontingen PON Sumbar",
+        category: "Pelatih",
+        statusBadge: "Pelatih Lisensi A PBESI",
+        licenseId: "SB-CCH-2611",
+        photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "4x Trofi", rating: "Lisensi A PBESI", tournaments: "60+ Match" },
+        bio: "Pelatih bersertifikasi resmi PBESI yang merancang strategi draft pick dan statistik makro tim Sumbar.",
+        color: "#f59e0b"
+      },
+      {
+        id: "ath-12",
+        ign: "EL_STRIKER",
+        name: "Bayu Saputra",
+        ovr: 92,
+        game: "eFootball (PES)",
+        role: "Co-Op 2v2 Specialist",
+        specialty: "High Pressing & Through Ball Synergy",
+        region: "Kota Sawahlunto",
+        club: "Heritage Gaming",
+        category: "Pelatda PON",
+        statusBadge: "Juara Kejurda Ganda",
+        licenseId: "SB-EFT-2612",
+        photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "81,0%", rating: "Co-op Master", tournaments: "20x Resmi" },
+        bio: "Spesialis duet tiki-taka virtual sepak bola dengan chemistry operan teruji di panggung kompetisi.",
+        color: "#10b981"
+      }
+    ];
+
+    let currentCardTheme = 'tcg'; // 'tcg' (sesuai referensi TCG presisi) atau 'dark'
+    let currentAthleteGameFilter = 'all';
+    let currentAthleteCatFilter = 'all';
+    let currentAthleteQuery = '';
+
+    function setCardTheme(theme) {
+      currentCardTheme = theme;
+      const tcgBtn = document.getElementById('cardThemeTcgBtn');
+      const darkBtn = document.getElementById('cardThemeDarkBtn');
+
+      if (theme === 'tcg') {
+        tcgBtn?.classList.remove('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+        tcgBtn?.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
+        darkBtn?.classList.remove('bg-rose-600', 'text-white', 'shadow-sm');
+        darkBtn?.classList.add('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+      } else {
+        darkBtn?.classList.remove('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+        darkBtn?.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
+        tcgBtn?.classList.remove('bg-rose-600', 'text-white', 'shadow-sm');
+        tcgBtn?.classList.add('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+      }
+      renderAthletes();
+    }
+
+    function renderAthletes() {
+      const container = document.getElementById('athletesGridContainer');
+      if (!container) return;
+
+      // HANYA TAMPILKAN 4 PILAR UTAMA (ATLET & PELATIH) PADA HALAMAN UTAMA
+      const featuredPillarIds = ['ath-1', 'ath-2', 'ath-3', 'ath-11'];
+      const pillars = ATHLETES_DATA.filter(a => featuredPillarIds.includes(a.id));
+
+      container.innerHTML = pillars.map(ath => {
+        const gameShort = ath.game.replace('Mobile Legends', 'MLBB').replace('PUBG Mobile', 'PUBGM').replace(' (PES)', '');
+        
+        return `
+          <div 
+            onclick="openAthleteModal('${ath.id}')"
+            class="group relative w-full aspect-[5/7.2] rounded-[22px] border border-[#d2cbbe] bg-[#f4f0e8] flex flex-col justify-between overflow-hidden shadow-[0_12px_28px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-2.5 hover:border-rose-500 hover:shadow-[0_22px_45px_rgba(225,29,72,0.42)] cursor-pointer select-none"
+          >
+            <!-- Holographic Sheen Layer on hover -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-30"></div>
+
+            <!-- 1. PITA MERAH GANTUNG (Flush ke tepi atas) -->
+            <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-[#d9383a] text-white flex flex-col items-center shadow-md shadow-red-950/40 z-20">
+              <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
+              <span class="text-[10px] sm:text-[11px] mt-1 text-red-100 font-mono leading-none">⊚</span>
+            </div>
+
+            <!-- 2. BAGIAN ATAS (KERTAS PARCHMENT LIGHT) -->
+            <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
+              
+              <!-- Header -->
+              <div class="text-center pl-7 pr-2">
+                <div class="flex items-center justify-center gap-1.5">
+                  <h3 class="font-heading font-black text-lg sm:text-xl text-[#111318] tracking-tight leading-none group-hover:text-[#d9383a] transition-colors">
+                    ${ath.ign}
+                  </h3>
+                  <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-black/10 text-slate-800 border border-black/10">
+                    ${gameShort}
+                  </span>
+                </div>
+                <div class="text-[8.5px] sm:text-[9px] font-mono text-[#d9383a] uppercase tracking-widest font-bold mt-1">
+                  ACCURACY: ${ath.stats.winrate} • ${ath.category}
+                </div>
+              </div>
+
+              <!-- Artwork Atlet -->
+              <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-gradient-to-b from-[#e3dcce] to-[#d6cdbd]">
+                <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 6px 6px;"></div>
+                <img 
+                  src="${ath.photo}" 
+                  alt="${ath.ign} - ${ath.name}" 
+                  class="w-full h-full object-cover object-top filter contrast-110 brightness-95 group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#f4f0e8] via-transparent via-35% to-transparent"></div>
+              </div>
+
+              <!-- Glyph Stat Divider -->
+              <div class="relative flex items-center justify-center py-1">
+                <div class="absolute inset-x-0 h-px bg-[#c8c1b3]"></div>
+                <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#f4f0e8]">
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                    <span>⊚</span> <span>${ath.stats.winrate}</span>
+                  </span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                    <span>☽</span> <span>${ath.stats.rating}</span>
+                  </span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                    <span>•</span> <span>${ath.stats.tournaments}</span>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 3. BAGIAN BAWAH KOTAK HITAM PEKAT DASAR KARTU -->
+            <div class="bg-[#0c0d12] text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-black">
+              <div class="leading-tight text-[10px] sm:text-[10.5px]">
+                <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9px] sm:text-[9.5px]">PERAN: </span>
+                <span class="text-white font-medium">${ath.role}</span>
+                <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
+              </div>
+
+              <div class="leading-tight text-[10px] sm:text-[10.5px] pt-0.5">
+                <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9px] sm:text-[9.5px]">KLUB: </span>
+                <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
+              </div>
+
+              <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
+                <span class="text-emerald-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  ${ath.statusBadge}
+                </span>
+                <span class="text-slate-400 font-bold">#${ath.licenseId}</span>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+// ==========================================
+    // 🎴 UPGRADED COLLECTOR'S MASTER DOSSIER MODAL
+    // ==========================================
+    function openAthleteModal(id) {
+      const ath = ATHLETES_DATA.find(a => a.id === id);
+      if (!ath) return;
+
+      const modal = document.getElementById('athleteDetailModal');
+      const content = document.getElementById('athleteModalContent');
+      const gameShort = ath.game.replace('Mobile Legends', 'MLBB').replace('PUBG Mobile', 'PUBGM').replace(' (PES)', '');
+
+      content.innerHTML = `
+        <div class="p-6 sm:p-8 relative overflow-hidden bg-gradient-to-b from-[#111726] to-[#0a0d16] text-white">
+          
+          <!-- Top Header PBESI Verification Title -->
+          <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 shadow-lg shrink-0">
+                <img src="/pbesi-logo.png" alt="PBESI" class="w-full h-full object-contain" />
+              </div>
+              <div>
+                <span class="font-heading font-black text-sm text-white tracking-wider uppercase block">Pengprov ESI Sumatera Barat</span>
+                <span class="text-[10px] text-slate-400 block font-mono">Dossier & Sertifikasi Resmi Lisensi Atlet 2026</span>
+              </div>
+            </div>
+
+            <button onclick="closeAthleteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              ✕
+            </button>
+          </div>
+
+          <!-- Split Master View (Left: The Collectible Pro Card, Right: Official Verification Dossier) -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Left: Collectible Card Master Preview (Model TCG Presisi Sesuai Referensi) -->
+            <div class="md:col-span-5 w-full max-w-[320px] mx-auto aspect-[5/7.2] rounded-[22px] border border-[#d2cbbe] bg-[#f4f0e8] flex flex-col justify-between overflow-hidden shadow-[0_20px_45px_rgba(0,0,0,0.7)] relative select-none">
+              
+              <!-- 1. PITA MERAH GANTUNG (Flush ke atas) -->
+              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-[#d9383a] text-white flex flex-col items-center shadow-md shadow-red-950/40 z-20">
+                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
+                <span class="text-[10px] sm:text-[11px] mt-1 text-red-100 font-mono leading-none">⊚</span>
+              </div>
+
+              <!-- 2. BAGIAN ATAS (KERTAS PARCHMENT LIGHT) -->
+              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
+                
+                <!-- Header: Judul IGN Tengah + Subtitle Merah + Badge Game -->
+                <div class="text-center pl-7 pr-2">
+                  <div class="flex items-center justify-center gap-1.5">
+                    <h4 class="font-heading font-black text-xl text-[#111318] tracking-tight leading-none">
+                      ${ath.ign}
+                    </h4>
+                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-black/10 text-slate-800 border border-black/10">
+                      ${gameShort}
+                    </span>
+                  </div>
+                  <div class="text-[9px] font-mono text-[#d9383a] uppercase tracking-widest font-bold mt-1">
+                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
+                  </div>
+                </div>
+
+                <!-- Artwork Atlet -->
+                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-gradient-to-b from-[#e3dcce] to-[#d6cdbd]">
+                  <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 6px 6px;"></div>
+                  <img src="${ath.photo}" alt="${ath.ign}" class="w-full h-full object-cover object-top filter contrast-110 brightness-95" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#f4f0e8] via-transparent via-35% to-transparent"></div>
+                </div>
+
+                <!-- Glyph Stat Divider -->
+                <div class="relative flex items-center justify-center py-1">
+                  <div class="absolute inset-x-0 h-px bg-[#c8c1b3]"></div>
+                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#f4f0e8]">
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>⊚</span> <span>${ath.stats.winrate}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>☽</span> <span>${ath.stats.rating}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>•</span> <span>${ath.stats.tournaments}</span>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 3. BAGIAN BAWAH: KOTAK ATRIBUT HITAM PEKAT DASAR KARTU -->
+              <div class="bg-[#0c0d12] text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-black">
+                <div class="leading-tight text-[10.5px]">
+                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9.5px]">PERAN: </span>
+                  <span class="text-white font-medium">${ath.role}</span>
+                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
+                </div>
+                <div class="leading-tight text-[10.5px] pt-0.5">
+                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9.5px]">KLUB: </span>
+                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
+                </div>
+                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
+                  <span class="text-emerald-400 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    ${ath.statusBadge}
+                  </span>
+                  <span class="text-slate-400 font-bold">#${ath.licenseId}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Official PBESI Dossier & Stats -->
+            <div class="md:col-span-7 flex flex-col justify-between space-y-5">
+              
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="inline-block text-[11px] font-mono uppercase tracking-wider text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-500/20">
+                    ● ${ath.statusBadge}
+                  </span>
+                  <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    Verified PBESI 2026
+                  </span>
+                </div>
+
+                <h3 class="font-heading font-black text-3xl text-white tracking-tight leading-none mb-1">
+                  ${ath.name}
+                </h3>
+                <div class="text-sm text-slate-300 flex items-center gap-2 font-mono">
+                  <span class="text-rose-400 font-bold">${ath.ign}</span> • ${ath.game} • 📍 ${ath.region}
+                </div>
+                
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed bg-brand-surface/40 p-3.5 rounded-xl border border-white/5">
+                  "${ath.bio}"
+                </p>
+              </div>
+
+              <!-- Stat Metrics Grid -->
+              <div class="grid grid-cols-3 gap-3">
+                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Win Rate</span>
+                  <span class="font-heading font-black text-lg text-white block mt-0.5">${ath.stats.winrate}</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Rating Performa</span>
+                  <span class="font-heading font-black text-lg text-amber-400 block mt-0.5">${ath.stats.rating}</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Turnamen Resmi</span>
+                  <span class="font-heading font-black text-lg text-rose-400 block mt-0.5">${ath.stats.tournaments}</span>
+                </div>
+              </div>
+
+              <!-- Performance Attributes Radar Bars -->
+              <div class="space-y-2 bg-black/40 p-4 rounded-xl border border-white/5">
+                <span class="text-[10px] font-mono uppercase text-slate-400 block tracking-wider mb-2">Evaluasi Performa & Atribut Taktis PBESI</span>
+                
+                <div class="space-y-1.5 text-xs">
+                  <div class="flex justify-between text-[11px]">
+                    <span class="text-slate-300">Penguasaan Mekanik & Refleks</span>
+                    <span class="text-rose-400 font-mono font-bold">96 / 100</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div class="h-full rounded-full bg-rose-500" style="width: 96%"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5 text-xs pt-1">
+                  <div class="flex justify-between text-[11px]">
+                    <span class="text-slate-300">Pengambilan Keputusan Makro / Objektif</span>
+                    <span class="text-amber-400 font-mono font-bold">92 / 100</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div class="h-full rounded-full bg-amber-500" style="width: 92%"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5 text-xs pt-1">
+                  <div class="flex justify-between text-[11px]">
+                    <span class="text-slate-300">Konsistensi & Mentalitas Turnamen</span>
+                    <span class="text-emerald-400 font-mono font-bold">94 / 100</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div class="h-full rounded-full bg-emerald-500" style="width: 94%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Official Verification Box -->
+              <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20 flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] font-mono text-slate-400 block">Nomor Lisensi Elektronik Nasional:</span>
+                  <span class="font-mono text-xs font-bold text-white tracking-wider">PBESI-SB-2026-${ath.licenseId}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-[9px] font-mono text-emerald-400 block">STATUS: AKTIF</span>
+                  <span class="text-[9px] text-slate-400 font-mono">Berlaku s/d 31 Des 2026</span>
+                </div>
+              </div>
+
+              <!-- Modal Buttons -->
+              <div class="flex items-center gap-3 pt-2">
+                <button onclick="closeAthleteModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-rose-600/30">
+                  Tutup Kartu
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      content.classList.remove('-translate-y-4');
+      content.classList.add('translate-y-0');
+      lucide.createIcons();
+    }
+
+    function closeAthleteModal() {
+      const modal = document.getElementById('athleteDetailModal');
+      const content = document.getElementById('athleteModalContent');
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      content.classList.add('-translate-y-4');
+      content.classList.remove('translate-y-0');
+    }
+
+    document.getElementById('athleteDetailModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'athleteDetailModal') closeAthleteModal();
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderMapPins();
+      renderRegionInspector();
+      renderAthletes();
+      lucide.createIcons();
+    });
+    renderMapPins();
+    renderRegionInspector();
+    renderAthletes();
+  </script>
+</body>
+</html>

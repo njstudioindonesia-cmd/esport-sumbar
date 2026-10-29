@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direktori & Database Atlet — ESPORT SUMBAR (Pengprov ESI)</title>
+  <meta name="description" content="Pencarian publik direktori atlet esports resmi Sumatera Barat. Cek lisensi atlet, IGN, squad, prestasi, dan statistik dari 19 kabupaten dan kota.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#080b12',
+              surface: '#121c30',
+              card: '#18253f',
+              cardHover: '#1f2f4f',
+              line: 'rgba(255, 255, 255, 0.08)',
+              lineHover: 'rgba(255, 255, 255, 0.18)',
+              rose: '#e11d48',
+              amber: '#f59e0b',
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080b12; }
+    ::-webkit-scrollbar-thumb { background: #1c2438; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2e3a59; }
+  </style>
+</head>
+<body class="bg-brand-navy text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white min-h-screen">
+
+    <!-- FLOATING MODERN TOP BAR -->
+  <header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6 transition-all">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-[#0b0f19]/85 backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Left: Brand Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-rose-700 flex items-center justify-center font-heading font-black text-white text-sm shadow-lg shadow-rose-600/30 group-hover:scale-105 transition-transform">
+          ES
+        </div>
+        <div>
+          <span class="font-heading font-extrabold text-base sm:text-lg tracking-tight text-white flex items-center gap-1.5">
+            ESPORT <span class="text-rose-500">SUMBAR</span>
+          </span>
+          <span class="text-[10px] text-slate-400 block -mt-1 font-mono uppercase tracking-wider">PBESI Pengprov Sumbar</span>
+        </div>
+      </a>
+
+      <!-- Center: Clean Multi-Page Navigation Segment (ONLY Separate Pages!) -->
+      <nav class="hidden md:flex items-center p-1 rounded-xl bg-black/40 border border-white/5">
+        <a href="/" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
+          
+          <span>Beranda</span>
+        </a>
+        <a href="/about" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-medium text-slate-400 hover:text-white hover:bg-white/[0.04]">
+          
+          <span>Tentang Kami</span>
+        </a>
+        <a href="/atlet" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs transition-all font-semibold bg-white/[0.1] text-white shadow-sm border border-white/10">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+          <span>Direktori Atlet</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold">8.4K</span>
+        </a>
+      </nav>
+
+      <!-- Right: Action & Status -->
+      <div class="flex items-center gap-3">
+        
+        <!-- Live Verified Badge -->
+        <div class="hidden lg:flex items-center gap-2 text-xs text-slate-300 bg-brand-surface border border-brand-line px-3 py-1.5 rounded-xl">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-mono text-[11px] text-slate-300"><strong>14.852</strong> Penggiat</span>
+        </div>
+
+        <!-- Quick Route Button to /atlet or Registration -->
+        
+        <a href="https://wa.me/" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs transition-all shadow-md shadow-rose-600/30 hover:scale-[1.02]">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <span>Daftar Lisensi</span>
+        </a>
+        
+
+        <!-- Mobile Menu Toggle Button -->
+        <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileNavMenu" class="md:hidden hidden max-w-7xl mx-auto mt-2 rounded-2xl bg-[#0b0f19]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl p-4 space-y-2">
+      <a href="/" class="flex items-center justify-between px-4 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 font-medium text-xs">
+        <span class="flex items-center gap-2">
+          Beranda
+        </span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="/about" class="flex items-center justify-between px-4 py-2.5 rounded-xl text-slate-300 hover:bg-white/5 font-medium text-xs">
+        <span class="flex items-center gap-2">
+          Tentang Kami (Profil ESI Sumbar)
+        </span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="/atlet" class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/10 text-white font-semibold text-xs">
+        <span class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Direktori & Database Atlet
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">8.4K</span>
+        </span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    
+    <!-- PAGE HERO: DIREKTORI ATLET -->
+    <section class="py-14 sm:py-20 border-b border-white/10 relative overflow-hidden">
+      <!-- Section Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-iem-katowice.jpg" 
+          alt="Esports Arena Crowd" 
+          class="w-full h-full object-cover object-center opacity-25 filter contrast-85 brightness-90"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0b1328]/92 via-[#0e1933]/85 to-[#0b1328]/92"></div>
+      </div>
+      <div class="absolute -top-40 right-1/4 w-[600px] h-[600px] bg-rose-600/5 blur-[140px] pointer-events-none rounded-full"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-rose-500 uppercase tracking-widest mb-3 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+            <span>Database Resmi ESI Sumatera Barat</span>
+          </div>
+          <h1 class="font-heading text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+            Direktori & Profil Atlet Esports
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-slate-300 font-light leading-relaxed">
+            Temukan profil atlet binaan berlisensi PBESI, talenta Pelatda PON, juara Kejurda, dan squad terverifikasi dari 19 kabupaten dan kota se-Sumatera Barat.
+          </p>
+        </div>
+
+        <!-- 4 Metrics Pods -->
+        <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Atlet Berlisensi</span>
+            <div class="font-heading font-black text-2xl text-white mt-1">8.420</div>
+            <span class="text-[11px] text-emerald-400 mt-0.5 block">100% Terverifikasi</span>
+          </div>
+          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Squad Resmi</span>
+            <div class="font-heading font-black text-2xl text-rose-500 mt-1">3.149</div>
+            <span class="text-[11px] text-slate-400 mt-0.5 block">Klub Aktif</span>
+          </div>
+          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Cakupan Pengcab</span>
+            <div class="font-heading font-black text-2xl text-amber-400 mt-1">19 / 19</div>
+            <span class="text-[11px] text-slate-400 mt-0.5 block">Seluruh Wilayah Sumbar</span>
+          </div>
+          <div class="p-5 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="text-[10px] text-slate-400 uppercase font-mono block">Atlet Pelatda PON</span>
+            <div class="font-heading font-black text-2xl text-cyan-400 mt-1">180</div>
+            <span class="text-[11px] text-slate-400 mt-0.5 block">Pemusatan Latihan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN SEARCH & DIRECTORY SECTION -->
+    <section class="py-16 sm:py-20 relative overflow-hidden">
+      <!-- Section Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/arena-stage-lights.jpg" 
+          alt="Tournament Stage Atmosphere" 
+          class="w-full h-full object-cover object-center opacity-20 filter contrast-85 brightness-85"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a1122]/90 via-[#0d172e]/82 to-[#0a1122]/92"></div>
+        <div class="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-rose-600/20 blur-[150px] pointer-events-none rounded-full"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <!-- SEARCH CONSOLE & FILTERS BAR -->
+        <div class="mb-10 p-5 sm:p-6 rounded-2xl border border-brand-line bg-brand-surface/90 backdrop-blur-md shadow-2xl">
+          
+          <!-- Search Input Box -->
+          <div class="relative mb-5">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+              <i data-lucide="search" class="w-5 h-5 text-rose-500"></i>
+            </div>
+            <input 
+              type="text" 
+              id="athleteSearchInput" 
+              oninput="handleAthleteSearch()"
+              placeholder="Cari nickname (IGN), nama lengkap atlet, klub/tim, peran, atau kota asal..." 
+              class="w-full pl-12 pr-12 py-3.5 rounded-xl bg-brand-navy border border-brand-line focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/20 text-white placeholder-slate-500 text-sm transition-all shadow-inner"
+            />
+            <button 
+              id="clearAthleteSearchBtn" 
+              onclick="clearAthleteSearch()" 
+              class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-white hidden transition-colors"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Filter Pills Row -->
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pt-4 border-t border-brand-line">
+            
+            <!-- Game Filters -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+              <span class="text-xs text-slate-400 font-mono uppercase mr-1 shrink-0">Game:</span>
+              <button onclick="setAthleteGameFilter('all')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 text-white transition-all shrink-0 shadow-md shadow-rose-600/30" data-game="all">Semua Game</button>
+              <button onclick="setAthleteGameFilter('Mobile Legends')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="Mobile Legends">MLBB</button>
+              <button onclick="setAthleteGameFilter('PUBG Mobile')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="PUBG Mobile">PUBGM</button>
+              <button onclick="setAthleteGameFilter('Free Fire')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="Free Fire">Free Fire</button>
+              <button onclick="setAthleteGameFilter('VALORANT')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="VALORANT">VALORANT</button>
+              <button onclick="setAthleteGameFilter('eFootball (PES)')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="eFootball (PES)">eFootball</button>
+              <button onclick="setAthleteGameFilter('Honor of Kings')" class="athlete-game-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-game="Honor of Kings">HoK</button>
+            </div>
+
+            <!-- Tier / Kategori Filter -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+              <span class="text-xs text-slate-400 font-mono uppercase mr-1 shrink-0">Kategori:</span>
+              <button onclick="setAthleteCategoryFilter('all')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/20 text-white transition-all shrink-0 shadow-md" data-cat="all">Semua Kategori</button>
+              <button onclick="setAthleteCategoryFilter('Pelatda PON')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-cat="Pelatda PON">Pelatda PON</button>
+              <button onclick="setAthleteCategoryFilter('Kejurda')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-cat="Kejurda">Juara Kejurda</button>
+              <button onclick="setAthleteCategoryFilter('Pelatih')" class="athlete-cat-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-brand-line bg-brand-navy/60 transition-all shrink-0" data-cat="Pelatih">Pelatih / Analis</button>
+            </div>
+
+          </div>
+
+          <!-- Results Counter -->
+          <div class="mt-4 pt-3 border-t border-brand-line flex items-center justify-between text-xs text-slate-400">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full">
+  <span id="athleteResultCount" class="font-medium text-slate-300">Menampilkan 12 kartu koleksi atlet berlisensi</span>
+  <div class="flex items-center gap-2 self-start sm:self-auto">
+    <span class="text-[11px] text-slate-400 font-mono">Edisi Kartu:</span>
+    <button id="cardThemeTcgBtn" onclick="setCardTheme('tcg')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-rose-600 text-white shadow-sm flex items-center gap-1 transition-all" title="Desain TCG Koleksi Sesuai Referensi">
+      <span>🎴 Koleksi TCG (Ref)</span>
+    </button>
+    <button id="cardThemeDarkBtn" onclick="setCardTheme('dark')" class="px-2.5 py-1 rounded-lg text-[11px] font-medium text-slate-400 hover:text-white bg-white/5 border border-white/10 flex items-center gap-1 transition-all" title="Edisi Dark Titanium Cyber">
+      <span>⚡ Dark Titanium</span>
+    </button>
+  </div>
+</div>
+            <span class="hidden sm:inline text-[11px] text-slate-500 font-mono">Klik kartu untuk melihat Kartu Lisensi Digital Resmi PBESI</span>
+          </div>
+
+        </div>
+
+        <!-- ATHLETES CARDS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="athletesGridContainer">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- EMPTY STATE (WHEN NO ATHLETE FOUND) -->
+        <div id="athletesEmptyState" class="hidden p-12 text-center rounded-2xl border border-dashed border-white/10 bg-brand-surface/40 my-8">
+          <div class="w-14 h-14 rounded-full bg-rose-600/10 border border-rose-500/20 text-rose-500 flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="user-x" class="w-7 h-7"></i>
+          </div>
+          <h4 class="font-heading font-bold text-lg text-white">Tidak Ditemukan Atlet yang Sesuai</h4>
+          <p class="text-xs text-slate-400 max-w-md mx-auto mt-1 leading-relaxed">
+            Tidak ada atlet atau penggiat dengan kata kunci pencarian tersebut. Coba periksa ejaan nickname (IGN) atau gunakan kata kunci lain.
+          </p>
+          <div class="mt-5 flex items-center justify-center gap-3">
+            <button onclick="resetAthleteFilters()" class="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs font-semibold text-white transition-colors">
+              Reset Semua Filter
+            </button>
+            <a href="https://wa.me/" target="_blank" class="px-4 py-2 rounded-lg border border-brand-line hover:bg-white/10 text-xs font-semibold text-slate-300 transition-colors">
+              Daftarkan Lisensi Atlet PBESI
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: PANDUAN PENDAFTARAN LISENSI ATLET -->
+    <section class="py-16 border-t border-brand-line bg-brand-surface/30">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        <div class="max-w-3xl mb-12">
+          <span class="text-xs font-semibold text-rose-500 uppercase tracking-widest block mb-1">Standarisasi Resmi</span>
+          <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">
+            Bagaimana Cara Mendapatkan Lisensi Atlet ESI Sumbar?
+          </h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Tiga langkah resmi bagi atlet, pelajar, dan klub untuk terdata dalam sistem pembinaan resmi PBESI.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="font-heading font-black text-3xl text-rose-500 block mb-3">01</span>
+            <h4 class="font-heading font-bold text-lg text-white">Verifikasi Klub di Pengcab</h4>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Daftarkan squad atau komunitasmu ke Pengurus Cabang (Pengcab) ESI di kabupaten/kota domisilimu dengan minimal 5 anggota aktif.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="font-heading font-black text-3xl text-amber-500 block mb-3">02</span>
+            <h4 class="font-heading font-bold text-lg text-white">Ikuti Turnamen Resmi PBESI</h4>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Kumpulkan poin sirkuit dan rekam jejak kompetisi melalui kejuaraan antarnagari, kejurda, dan turnamen kampus yang terafiliasi ESI Sumbar.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl border border-brand-line bg-brand-surface">
+            <span class="font-heading font-black text-3xl text-emerald-400 block mb-3">03</span>
+            <h4 class="font-heading font-bold text-lg text-white">Penerbitan E-License ID</h4>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Pengprov ESI Sumbar akan menerbitkan Kartu Lisensi Elektronik resmi dengan barcode verifikasi untuk syarat kejuaraan Porprov & Kejurnas.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MODAL ID CARD ATLET DIGITAL BERLISENSI PBESI -->
+    <div id="athleteDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+      <div class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-white/20 bg-gradient-to-b from-slate-900 via-brand-surface to-brand-navy shadow-[0_0_50px_rgba(225,29,72,0.35)] overflow-hidden -translate-y-4 transition-transform duration-300" id="athleteModalContent">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brand-line py-12 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-brand-line">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-600 flex items-center justify-center font-heading font-black text-white text-xs shadow-md">
+            ES
+          </div>
+          <div>
+            <span class="font-heading font-bold text-base text-white tracking-tight">ESPORT <span class="text-rose-500">SUMBAR</span></span>
+            <span class="text-[11px] text-slate-400 block -mt-0.5">Pengurus Provinsi ESI Sumatera Barat</span>
+          </div>
+        </div>
+
+        <!-- Quick Page Links -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-slate-300 font-medium">
+          <a href="/" class="hover:text-rose-400 transition-colors">Beranda</a>
+          <a href="/about" class="hover:text-rose-400 transition-colors">Tentang Kami</a>
+          <a href="/atlet" class="text-white font-semibold transition-colors">Direktori Atlet</a>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+        <div>
+          <p class="font-semibold text-slate-300">Pengurus Provinsi Esports Indonesia (ESI) Sumatera Barat</p>
+          <p class="text-slate-500 mt-0.5">Sekretariat: Stadion GOR H. Agus Salim, Kota Padang, Sumatera Barat 25111</p>
+        </div>
+        <div class="sm:text-right">
+          <p>© 2026 ESPORT SUMBAR. Hak cipta dilindungi.</p>
+          <p class="text-slate-600 mt-0.5">Bernaung di bawah KONI Sumbar & PBESI</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ATHLETES ROSTER DATA & REFERENCE-INSPIRED COLLECTIBLE CARDS
+    const ATHLETES_DATA = [
+      {
+        id: "ath-1",
+        ign: "V4ND4L",
+        name: "Muhammad Rayhan Pratama",
+        ovr: 96,
+        game: "VALORANT",
+        role: "Duelist / Entry Fragger",
+        specialty: "First Blood Specialist & Operator Clutch",
+        region: "Kota Padang",
+        club: "Minang Pride Esports",
+        category: "Pelatda PON",
+        statusBadge: "Atlet Pelatda PON Sumbar",
+        licenseId: "SB-VAL-2601",
+        photo: "/images/athlete-v4nd4l.jpg",
+        stats: { winrate: "78,4%", rating: "1.42 VCT", tournaments: "32x Resmi" },
+        bio: "Duelist andalan Sumatera Barat yang memegang predikat Top ACS pada Kualifikasi Pra-PON Sumatra.",
+        color: "#ef4444"
+      },
+      {
+        id: "ath-2",
+        ign: "R4YDEN",
+        name: "Fadhil Al-Ghifari",
+        ovr: 95,
+        game: "Mobile Legends",
+        role: "Jungler / Assassin Hyper",
+        specialty: "Retribution Smite & Objective Lord Control",
+        region: "Kota Bukittinggi",
+        club: "Singkarak Reborn",
+        category: "Kejurda",
+        statusBadge: "Juara Kejurda Sumbar 2025",
+        licenseId: "SB-MLB-2602",
+        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "82,5%", rating: "9.4 KDA", tournaments: "45x Resmi" },
+        bio: "Pemain veteran dengan ketenangan tinggi dalam perebutan Lord dan objektif penting turnamen.",
+        color: "#f59e0b"
+      },
+      {
+        id: "ath-3",
+        ign: "B4R4_AP1",
+        name: "Ahmad Fauzan",
+        ovr: 94,
+        game: "Free Fire",
+        role: "Rusher & Shot-Caller",
+        specialty: "Close Combat Entry & Crossfire Flank",
+        region: "Kota Payakumbuh",
+        club: "Luak Limopuluah Elite",
+        category: "Kejurda",
+        statusBadge: "Top Fragger Sirkuit Pelajar",
+        licenseId: "SB-FF-2603",
+        photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "68,0%", rating: "4.85 K/D", tournaments: "38x Resmi" },
+        bio: "Rusher agresif dengan refleks kilat yang membawa sekolahnya menjuarai turnamen tingkat provinsi.",
+        color: "#f43f5e"
+      },
+      {
+        id: "ath-4",
+        ign: "CYBER_SNIPER",
+        name: "Rifki Zulkarnain",
+        ovr: 93,
+        game: "PUBG Mobile",
+        role: "Scout / DMR Specialist",
+        specialty: "Long-Range Elimination & Rotation Scout",
+        region: "Kabupaten Agam",
+        club: "Marapi Tactical Force",
+        category: "Pelatda PON",
+        statusBadge: "Atlet Pelatda PON Sumbar",
+        licenseId: "SB-PUB-2604",
+        photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "74,2%", rating: "5.20 K/D", tournaments: "29x Resmi" },
+        bio: "Penembak jitu jarak jauh pemegang rekor eliminasi terjauh (420m) pada kualifikasi Kejurnas PBESI.",
+        color: "#f97316"
+      },
+      {
+        id: "ath-5",
+        ign: "ALIF_ORANGETM",
+        name: "Alif Kurnia Ramadhan",
+        ovr: 95,
+        game: "eFootball (PES)",
+        role: "Virtual Football Solo Striker",
+        specialty: "Possession Game & Tiki-Taka Finishing",
+        region: "Kota Pariaman",
+        club: "Pariaman Cyber FC",
+        category: "Pelatda PON",
+        statusBadge: "Medalis Emas Porprov",
+        licenseId: "SB-EFT-2605",
+        photo: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "84,0%", rating: "Top #1 Sumbar", tournaments: "26x Resmi" },
+        bio: "Atlet spesialis konsol PlayStation dengan penguasaan formasi menyerang yang belum terkalahkan di Kejurda.",
+        color: "#10b981"
+      },
+      {
+        id: "ath-6",
+        ign: "VALKYRIE",
+        name: "Annisa Putri Maharani",
+        ovr: 92,
+        game: "Mobile Legends",
+        role: "Midlaner / Mage Specialist",
+        specialty: "High Ground Defense & Area Burst",
+        region: "Kota Padang",
+        club: "Queen of Minang",
+        category: "Kejurda",
+        statusBadge: "Juara Ladies Cup Sumbar",
+        licenseId: "SB-MLB-2606",
+        photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "79,2%", rating: "8.1 KDA", tournaments: "22x Resmi" },
+        bio: "Kapten tim putri Sumbar yang memiliki positioning luar biasa pada cabang Mobile Legends.",
+        color: "#f59e0b"
+      },
+      {
+        id: "ath-7",
+        ign: "Z3R0",
+        name: "Bintang Pratama",
+        ovr: 91,
+        game: "VALORANT",
+        role: "Controller / Tactician",
+        specialty: "Viper/Omen Smoke & Site Retake Command",
+        region: "Kota Padang Panjang",
+        club: "Serambi Cyber Squad",
+        category: "Pelatda PON",
+        statusBadge: "Talenta Binaan PBESI",
+        licenseId: "SB-VAL-2607",
+        photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "72,0%", rating: "1.28 VCT", tournaments: "18x Resmi" },
+        bio: "Otak taktik smoke lineup yang mengantarkan kampusnya menjuarai turnamen antarperguruan tinggi se-Sumatra.",
+        color: "#ef4444"
+      },
+      {
+        id: "ath-8",
+        ign: "NAGARI_W4RRIOR",
+        name: "Teguh Hendra Wijaya",
+        ovr: 94,
+        game: "PUBG Mobile",
+        role: "In-Game Leader (IGL)",
+        specialty: "Zone Edge Pathing & Ambush Setup",
+        region: "Kabupaten Lima Puluh Kota",
+        club: "Harau Tactical Team",
+        category: "Pelatda PON",
+        statusBadge: "Kapten Pelatda PON Sumbar",
+        licenseId: "SB-PUB-2608",
+        photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "71,5%", rating: "4.60 K/D", tournaments: "34x Resmi" },
+        bio: "Leader taktis dengan rotasi zona cerdas yang menjadi komandan utama tim squad PUBG Mobile PON Sumbar.",
+        color: "#f97316"
+      },
+      {
+        id: "ath-9",
+        ign: "PHOENIX",
+        name: "Dimas Wahyudi",
+        ovr: 90,
+        game: "Free Fire",
+        role: "Flanker / Grenadier",
+        specialty: "Cooked Grenade & Defensive Gloo Wall",
+        region: "Kabupaten Pesisir Selatan",
+        club: "Pesisir Cyber Wave",
+        category: "Kejurda",
+        statusBadge: "Juara Nagari Cup 2025",
+        licenseId: "SB-FF-2609",
+        photo: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "66,0%", rating: "4.10 K/D", tournaments: "25x Resmi" },
+        bio: "Spesialis lemparan granat presisi dengan insting flank yang kerap memecah pertahanan lawan.",
+        color: "#f43f5e"
+      },
+      {
+        id: "ath-10",
+        ign: "SKYWALKER",
+        name: "Irfan Maulana",
+        ovr: 89,
+        game: "Honor of Kings",
+        role: "Clash Lane / Fighter",
+        specialty: "1v1 Duel & Teleport Teamfight Flank",
+        region: "Kota Solok",
+        club: "Solok Cyber Legend",
+        category: "Kejurda",
+        statusBadge: "Top 1 HoK Sumbar Showcase",
+        licenseId: "SB-HOK-2610",
+        photo: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "76,5%", rating: "7.8 KDA", tournaments: "15x Resmi" },
+        bio: "Bintang muda divisi baru Honor of Kings dengan mekanik laning phase yang sangat dominan.",
+        color: "#a855f7"
+      },
+      {
+        id: "ath-11",
+        ign: "COACH_MINANG",
+        name: "Rendra Kusuma, S.Kom",
+        ovr: 97,
+        game: "Mobile Legends",
+        role: "Head Coach & Data Analyst",
+        specialty: "Draft Ban-Pick & Macro Game Scouting",
+        region: "Kota Padang",
+        club: "Kontingen PON Sumbar",
+        category: "Pelatih",
+        statusBadge: "Pelatih Lisensi A PBESI",
+        licenseId: "SB-CCH-2611",
+        photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "4x Trofi", rating: "Lisensi A PBESI", tournaments: "60+ Match" },
+        bio: "Pelatih bersertifikasi resmi PBESI yang merancang strategi draft pick dan statistik makro tim Sumbar.",
+        color: "#f59e0b"
+      },
+      {
+        id: "ath-12",
+        ign: "EL_STRIKER",
+        name: "Bayu Saputra",
+        ovr: 92,
+        game: "eFootball (PES)",
+        role: "Co-Op 2v2 Specialist",
+        specialty: "High Pressing & Through Ball Synergy",
+        region: "Kota Sawahlunto",
+        club: "Heritage Gaming",
+        category: "Pelatda PON",
+        statusBadge: "Juara Kejurda Ganda",
+        licenseId: "SB-EFT-2612",
+        photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=85",
+        stats: { winrate: "81,0%", rating: "Co-op Master", tournaments: "20x Resmi" },
+        bio: "Spesialis duet tiki-taka virtual sepak bola dengan chemistry operan teruji di panggung kompetisi.",
+        color: "#10b981"
+      }
+    ];
+
+    let currentCardTheme = 'tcg'; // 'tcg' (sesuai referensi TCG presisi) atau 'dark'
+    let currentAthleteGameFilter = 'all';
+    let currentAthleteCatFilter = 'all';
+    let currentAthleteQuery = '';
+
+    function setCardTheme(theme) {
+      currentCardTheme = theme;
+      const tcgBtn = document.getElementById('cardThemeTcgBtn');
+      const darkBtn = document.getElementById('cardThemeDarkBtn');
+
+      if (theme === 'tcg') {
+        tcgBtn?.classList.remove('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+        tcgBtn?.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
+        darkBtn?.classList.remove('bg-rose-600', 'text-white', 'shadow-sm');
+        darkBtn?.classList.add('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+      } else {
+        darkBtn?.classList.remove('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+        darkBtn?.classList.add('bg-rose-600', 'text-white', 'shadow-sm');
+        tcgBtn?.classList.remove('bg-rose-600', 'text-white', 'shadow-sm');
+        tcgBtn?.classList.add('bg-white/5', 'text-slate-400', 'border', 'border-white/10');
+      }
+      renderAthletes();
+    }
+
+    function renderAthletes() {
+      const container = document.getElementById('athletesGridContainer');
+      const emptyState = document.getElementById('athletesEmptyState');
+      const countEl = document.getElementById('athleteResultCount');
+      if (!container) return;
+
+      const filtered = ATHLETES_DATA.filter(ath => {
+        const matchGame = currentAthleteGameFilter === 'all' || ath.game === currentAthleteGameFilter;
+        const matchCat = currentAthleteCatFilter === 'all' || ath.category === currentAthleteCatFilter;
+        
+        const q = currentAthleteQuery.toLowerCase().trim();
+        const matchQuery = !q || 
+          ath.ign.toLowerCase().includes(q) || 
+          ath.name.toLowerCase().includes(q) || 
+          ath.club.toLowerCase().includes(q) || 
+          ath.region.toLowerCase().includes(q) || 
+          ath.role.toLowerCase().includes(q) ||
+          ath.game.toLowerCase().includes(q);
+
+        return matchGame && matchCat && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState?.classList.remove('hidden');
+        if (countEl) countEl.textContent = '0 kartu ditemukan';
+        return;
+      }
+
+      emptyState?.classList.add('hidden');
+      if (countEl) countEl.textContent = `Menampilkan ${filtered.length} kartu koleksi atlet berlisensi dari 8.420 atlet binaan`;
+
+      // RENDER KARTU DENGAN PROPORSI TCG PRESISI (ASPECT RATIO 5 : 7.2)
+      container.innerHTML = filtered.map(ath => {
+        const gameShort = ath.game.replace('Mobile Legends', 'MLBB').replace('PUBG Mobile', 'PUBGM').replace(' (PES)', '');
+        
+        if (currentCardTheme === 'tcg') {
+          // ==========================================
+          // 🎴 KARTU TCG PRESISI SESUAI REFERENSI ASLI
+          // ==========================================
+          return `
+            <div 
+              onclick="openAthleteModal('${ath.id}')"
+              class="group relative w-full max-w-[310px] mx-auto aspect-[5/7.2] rounded-[22px] border border-[#d2cbbe] bg-[#f4f0e8] flex flex-col justify-between overflow-hidden shadow-[0_12px_28px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-2.5 hover:border-rose-500 hover:shadow-[0_22px_45px_rgba(225,29,72,0.42)] cursor-pointer select-none"
+            >
+              <!-- Holographic Sheen Layer on hover -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-30"></div>
+
+              <!-- 1. PITA MERAH GANTUNG (Flush ke tepi atas, ujung bawah membulat rapi) -->
+              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-[#d9383a] text-white flex flex-col items-center shadow-md shadow-red-950/40 z-20">
+                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
+                <span class="text-[10px] sm:text-[11px] mt-1 text-red-100 font-mono leading-none">⊚</span>
+              </div>
+
+              <!-- 2. BAGIAN ATAS (KERTAS PARCHMENT LIGHT ~65% TINGGI KARTU) -->
+              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
+                
+                <!-- Header: Judul IGN Tengah + Subtitle Merah + Badge Game -->
+                <div class="text-center pl-7 pr-2">
+                  <div class="flex items-center justify-center gap-1.5">
+                    <h3 class="font-heading font-black text-lg sm:text-xl text-[#111318] tracking-tight leading-none group-hover:text-[#d9383a] transition-colors">
+                      ${ath.ign}
+                    </h3>
+                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-black/10 text-slate-800 border border-black/10">
+                      ${gameShort}
+                    </span>
+                  </div>
+                  <div class="text-[8.5px] sm:text-[9px] font-mono text-[#d9383a] uppercase tracking-widest font-bold mt-1">
+                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
+                  </div>
+                </div>
+
+                <!-- Artwork Atlet / Karakter Dominan Tengah -->
+                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-gradient-to-b from-[#e3dcce] to-[#d6cdbd]">
+                  <!-- Halftone Card Texture -->
+                  <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 6px 6px;"></div>
+                  
+                  <img 
+                    src="${ath.photo}" 
+                    alt="${ath.ign} - ${ath.name}" 
+                    class="w-full h-full object-cover object-top filter contrast-110 brightness-95 group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  
+                  <!-- Bottom Fade Ke Arah Divider -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#f4f0e8] via-transparent via-35% to-transparent"></div>
+                </div>
+
+                <!-- Glyph Stat Divider: ── [ ⊚ ] [ ☽ ] [ • ] ── -->
+                <div class="relative flex items-center justify-center py-1">
+                  <div class="absolute inset-x-0 h-px bg-[#c8c1b3]"></div>
+                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#f4f0e8]">
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>⊚</span> <span>${ath.stats.winrate}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>☽</span> <span>${ath.stats.rating}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>•</span> <span>${ath.stats.tournaments}</span>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 3. BAGIAN BAWAH: KOTAK ATRIBUT HITAM PEKAT MENGISI DASAR KARTU (~35% TINGGI) -->
+              <div class="bg-[#0c0d12] text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-black">
+                
+                <!-- Peran & Spesialisasi -->
+                <div class="leading-tight text-[10px] sm:text-[10.5px]">
+                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9px] sm:text-[9.5px]">PERAN: </span>
+                  <span class="text-white font-medium">${ath.role}</span>
+                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
+                </div>
+
+                <!-- Klub & Wilayah -->
+                <div class="leading-tight text-[10px] sm:text-[10.5px] pt-0.5">
+                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9px] sm:text-[9.5px]">KLUB: </span>
+                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
+                </div>
+
+                <!-- Lisensi Resmi PBESI -->
+                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
+                  <span class="text-emerald-400 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    ${ath.statusBadge}
+                  </span>
+                  <span class="text-slate-400 font-bold">#${ath.licenseId}</span>
+                </div>
+
+              </div>
+
+            </div>
+          `;
+        } else {
+          // ==========================================
+          // ⚡ KARTU DARK TITANIUM CYBER EDITION
+          // ==========================================
+          return `
+            <div 
+              onclick="openAthleteModal('${ath.id}')"
+              class="group relative w-full max-w-[310px] mx-auto aspect-[5/7.2] rounded-[22px] border border-white/10 bg-[#0f1422] flex flex-col justify-between overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-2.5 hover:border-rose-500 hover:shadow-[0_22px_45px_rgba(225,29,72,0.38)] cursor-pointer select-none"
+            >
+              <!-- Holographic Sheen Layer on hover -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-rose-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-30"></div>
+
+              <!-- 1. PITA MERAH GANTUNG -->
+              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-gradient-to-b from-rose-500 to-rose-600 text-white flex flex-col items-center shadow-lg shadow-rose-600/40 z-20">
+                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
+                <span class="text-[10px] sm:text-[11px] mt-1 text-rose-200 font-mono leading-none">⊚</span>
+              </div>
+
+              <!-- 2. BAGIAN ATAS DARK CANVAS -->
+              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
+                
+                <!-- Header -->
+                <div class="text-center pl-7 pr-2">
+                  <div class="flex items-center justify-center gap-1.5">
+                    <h3 class="font-heading font-black text-lg sm:text-xl text-white tracking-tight leading-none group-hover:text-rose-400 transition-colors">
+                      ${ath.ign}
+                    </h3>
+                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-white/10 border border-white/10 text-white">
+                      ${gameShort}
+                    </span>
+                  </div>
+                  <div class="text-[8.5px] sm:text-[9px] font-mono text-rose-400 uppercase tracking-widest font-bold mt-1">
+                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
+                  </div>
+                </div>
+
+                <!-- Artwork -->
+                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-white/[0.04]">
+                  <div class="absolute inset-0 bg-radial at-center from-rose-500/20 via-transparent to-transparent opacity-30 group-hover:opacity-100 transition-opacity"></div>
+                  <img 
+                    src="${ath.photo}" 
+                    alt="${ath.ign} - ${ath.name}" 
+                    class="w-full h-full object-cover object-top filter brightness-95 contrast-110 group-hover:scale-105 group-hover:brightness-105 transition-all duration-500 ease-out"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#0f1422] via-transparent via-40% to-transparent"></div>
+                </div>
+
+                <!-- Glyph Stat Divider -->
+                <div class="relative flex items-center justify-center py-1">
+                  <div class="absolute inset-x-0 h-px bg-white/10"></div>
+                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#0f1422]">
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-rose-600 flex items-center gap-0.5 shadow-sm">
+                      <span>⊚</span> <span>${ath.stats.winrate}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-rose-600 flex items-center gap-0.5 shadow-sm">
+                      <span>☽</span> <span>${ath.stats.rating}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-rose-600 flex items-center gap-0.5 shadow-sm">
+                      <span>•</span> <span>${ath.stats.tournaments}</span>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 3. BAGIAN BAWAH KOTAK HITAM -->
+              <div class="bg-black/85 text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-white/5">
+                <div class="leading-tight text-[10px] sm:text-[10.5px]">
+                  <span class="font-heading font-black text-rose-500 uppercase tracking-wider text-[9px] sm:text-[9.5px]">PERAN: </span>
+                  <span class="text-white font-medium">${ath.role}</span>
+                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
+                </div>
+
+                <div class="leading-tight text-[10px] sm:text-[10.5px] pt-0.5">
+                  <span class="font-heading font-black text-rose-500 uppercase tracking-wider text-[9px] sm:text-[9.5px]">KLUB: </span>
+                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
+                </div>
+
+                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
+                  <span class="text-emerald-400 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    ${ath.statusBadge}
+                  </span>
+                  <span class="text-slate-500 font-semibold">#${ath.licenseId}</span>
+                </div>
+              </div>
+
+            </div>
+          `;
+        }
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // ==========================================
+    // 🎴 UPGRADED COLLECTOR'S MASTER DOSSIER MODAL
+    // ==========================================
+    function openAthleteModal(id) {
+      const ath = ATHLETES_DATA.find(a => a.id === id);
+      if (!ath) return;
+
+      const modal = document.getElementById('athleteDetailModal');
+      const content = document.getElementById('athleteModalContent');
+      const gameShort = ath.game.replace('Mobile Legends', 'MLBB').replace('PUBG Mobile', 'PUBGM').replace(' (PES)', '');
+
+      content.innerHTML = `
+        <div class="p-6 sm:p-8 relative overflow-hidden bg-gradient-to-b from-[#111726] to-[#0a0d16] text-white">
+          
+          <!-- Top Header PBESI Verification Title -->
+          <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 shadow-lg shrink-0">
+                <img src="/pbesi-logo.png" alt="PBESI" class="w-full h-full object-contain" />
+              </div>
+              <div>
+                <span class="font-heading font-black text-sm text-white tracking-wider uppercase block">Pengprov ESI Sumatera Barat</span>
+                <span class="text-[10px] text-slate-400 block font-mono">Dossier & Sertifikasi Resmi Lisensi Atlet 2026</span>
+              </div>
+            </div>
+
+            <button onclick="closeAthleteModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              ✕
+            </button>
+          </div>
+
+          <!-- Split Master View (Left: The Collectible Pro Card, Right: Official Verification Dossier) -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Left: Collectible Card Master Preview (Model TCG Presisi Sesuai Referensi) -->
+            <div class="md:col-span-5 w-full max-w-[320px] mx-auto aspect-[5/7.2] rounded-[22px] border border-[#d2cbbe] bg-[#f4f0e8] flex flex-col justify-between overflow-hidden shadow-[0_20px_45px_rgba(0,0,0,0.7)] relative select-none">
+              
+              <!-- 1. PITA MERAH GANTUNG (Flush ke atas) -->
+              <div class="absolute top-0 left-4 w-7 sm:w-8 pt-2 pb-2.5 rounded-b-lg bg-[#d9383a] text-white flex flex-col items-center shadow-md shadow-red-950/40 z-20">
+                <span class="font-heading font-black text-xs sm:text-sm leading-none tracking-tight">${ath.ovr}</span>
+                <span class="text-[10px] sm:text-[11px] mt-1 text-red-100 font-mono leading-none">⊚</span>
+              </div>
+
+              <!-- 2. BAGIAN ATAS (KERTAS PARCHMENT LIGHT) -->
+              <div class="relative flex-1 flex flex-col px-3.5 pt-2 pb-0">
+                
+                <!-- Header: Judul IGN Tengah + Subtitle Merah + Badge Game -->
+                <div class="text-center pl-7 pr-2">
+                  <div class="flex items-center justify-center gap-1.5">
+                    <h4 class="font-heading font-black text-xl text-[#111318] tracking-tight leading-none">
+                      ${ath.ign}
+                    </h4>
+                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-black/10 text-slate-800 border border-black/10">
+                      ${gameShort}
+                    </span>
+                  </div>
+                  <div class="text-[9px] font-mono text-[#d9383a] uppercase tracking-widest font-bold mt-1">
+                    ACCURACY: ${ath.stats.winrate} • ${ath.category}
+                  </div>
+                </div>
+
+                <!-- Artwork Atlet -->
+                <div class="relative flex-1 w-full my-1.5 overflow-hidden flex items-center justify-center rounded-lg bg-gradient-to-b from-[#e3dcce] to-[#d6cdbd]">
+                  <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 6px 6px;"></div>
+                  <img src="${ath.photo}" alt="${ath.ign}" class="w-full h-full object-cover object-top filter contrast-110 brightness-95" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#f4f0e8] via-transparent via-35% to-transparent"></div>
+                </div>
+
+                <!-- Glyph Stat Divider -->
+                <div class="relative flex items-center justify-center py-1">
+                  <div class="absolute inset-x-0 h-px bg-[#c8c1b3]"></div>
+                  <div class="relative z-10 flex items-center gap-1 px-1.5 bg-[#f4f0e8]">
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>⊚</span> <span>${ath.stats.winrate}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>☽</span> <span>${ath.stats.rating}</span>
+                    </span>
+                    <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold text-white bg-[#d9383a] flex items-center gap-0.5 shadow-sm">
+                      <span>•</span> <span>${ath.stats.tournaments}</span>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 3. BAGIAN BAWAH: KOTAK ATRIBUT HITAM PEKAT DASAR KARTU -->
+              <div class="bg-[#0c0d12] text-white p-3 sm:p-3.5 space-y-1 text-left rounded-b-[21px] border-t border-black">
+                <div class="leading-tight text-[10.5px]">
+                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9.5px]">PERAN: </span>
+                  <span class="text-white font-medium">${ath.role}</span>
+                  <span class="text-slate-400 text-[9px] block font-light truncate mt-0.5">${ath.specialty}</span>
+                </div>
+                <div class="leading-tight text-[10.5px] pt-0.5">
+                  <span class="font-heading font-black text-[#ef4444] uppercase tracking-wider text-[9.5px]">KLUB: </span>
+                  <span class="text-slate-300 font-normal">${ath.club} (${ath.region})</span>
+                </div>
+                <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[9px] font-mono">
+                  <span class="text-emerald-400 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    ${ath.statusBadge}
+                  </span>
+                  <span class="text-slate-400 font-bold">#${ath.licenseId}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Official PBESI Dossier & Stats -->
+            <div class="md:col-span-7 flex flex-col justify-between space-y-5">
+              
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="inline-block text-[11px] font-mono uppercase tracking-wider text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-500/20">
+                    ● ${ath.statusBadge}
+                  </span>
+                  <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    Verified PBESI 2026
+                  </span>
+                </div>
+
+                <h3 class="font-heading font-black text-3xl text-white tracking-tight leading-none mb-1">
+                  ${ath.name}
+                </h3>
+                <div class="text-sm text-slate-300 flex items-center gap-2 font-mono">
+                  <span class="text-rose-400 font-bold">${ath.ign}</span> • ${ath.game} • 📍 ${ath.region}
+                </div>
+                
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed bg-brand-surface/40 p-3.5 rounded-xl border border-white/5">
+                  "${ath.bio}"
+                </p>
+              </div>
+
+              <!-- Stat Metrics Grid -->
+              <div class="grid grid-cols-3 gap-3">
+                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Win Rate</span>
+                  <span class="font-heading font-black text-lg text-white block mt-0.5">${ath.stats.winrate}</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Rating Performa</span>
+                  <span class="font-heading font-black text-lg text-amber-400 block mt-0.5">${ath.stats.rating}</span>
+                </div>
+                <div class="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                  <span class="text-[10px] font-mono uppercase text-slate-400 block">Turnamen Resmi</span>
+                  <span class="font-heading font-black text-lg text-rose-400 block mt-0.5">${ath.stats.tournaments}</span>
+                </div>
+              </div>
+
+              <!-- Performance Attributes Radar Bars -->
+              <div class="space-y-2 bg-black/40 p-4 rounded-xl border border-white/5">
+                <span class="text-[10px] font-mono uppercase text-slate-400 block tracking-wider mb-2">Evaluasi Performa & Atribut Taktis PBESI</span>
+                
+                <div class="space-y-1.5 text-xs">
+                  <div class="flex justify-between text-[11px]">
+                    <span class="text-slate-300">Penguasaan Mekanik & Refleks</span>
+                    <span class="text-rose-400 font-mono font-bold">96 / 100</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div class="h-full rounded-full bg-rose-500" style="width: 96%"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5 text-xs pt-1">
+                  <div class="flex justify-between text-[11px]">
+                    <span class="text-slate-300">Pengambilan Keputusan Makro / Objektif</span>
+                    <span class="text-amber-400 font-mono font-bold">92 / 100</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div class="h-full rounded-full bg-amber-500" style="width: 92%"></div>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5 text-xs pt-1">
+                  <div class="flex justify-between text-[11px]">
+                    <span class="text-slate-300">Konsistensi & Mentalitas Turnamen</span>
+                    <span class="text-emerald-400 font-mono font-bold">94 / 100</span>
+                  </div>
+                  <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <div class="h-full rounded-full bg-emerald-500" style="width: 94%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Official Verification Box -->
+              <div class="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/20 flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] font-mono text-slate-400 block">Nomor Lisensi Elektronik Nasional:</span>
+                  <span class="font-mono text-xs font-bold text-white tracking-wider">PBESI-SB-2026-${ath.licenseId}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-[9px] font-mono text-emerald-400 block">STATUS: AKTIF</span>
+                  <span class="text-[9px] text-slate-400 font-mono">Berlaku s/d 31 Des 2026</span>
+                </div>
+              </div>
+
+              <!-- Modal Buttons -->
+              <div class="flex items-center gap-3 pt-2">
+                <button onclick="closeAthleteModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-rose-600/30">
+                  Tutup Kartu
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      content.classList.remove('-translate-y-4');
+      content.classList.add('translate-y-0');
+      lucide.createIcons();
+    }
+
+    function closeAthleteModal() {
+      const modal = document.getElementById('athleteDetailModal');
+      const content = document.getElementById('athleteModalContent');
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      content.classList.add('-translate-y-4');
+      content.classList.remove('translate-y-0');
+    }
+
+    document.getElementById('athleteDetailModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'athleteDetailModal') closeAthleteModal();
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderAthletes();
+      lucide.createIcons();
+    });
+    renderAthletes();
+  </script>
+</body>
+</html>

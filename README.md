@@ -1,114 +1,48 @@
-# ESPORT SUMBAR — Portal Esport Sumatera Barat
+# 🏆 ESPORT SUMBAR — Portal Resmi Ekosistem & Atlet Sumatera Barat
 
-Platform esport Sumatera Barat: **Berita AI**, **Komunitas per game**, dan **Event & Tools Event Organizer** (form builder pendaftaran, event storage, bracket & leaderboard custom).
-
----
-
-## Arsitektur Monorepo
-
-```
-esport-sumbar/
-├─ apps/
-│  └─ web/                      # Next.js App Router frontend (Phase 2)
-├─ services/
-│  ├─ gateway/                  # API Gateway (Phase 1)
-│  ├─ identity-service/         # Auth, RBAC, Profil, Verifikasi EO (Phase 1)
-│  ├─ news-service/             # Artikel, Kategori, Sumber (Phase 3)
-│  ├─ news-ingestor/            # Worker fetch RSS & dedupe (Phase 3)
-│  ├─ community-service/        # Forum, Post, Komentar, Report (Phase 4)
-│  ├─ event-service/            # Event, Form Builder, Pendaftar (Phase 5)
-│  ├─ bracket-service/          # Format Bracket, Leaderboard SSE (Phase 6)
-│  ├─ media-service/            # S3/MinIO Storage & Signed URLs (Phase 5)
-│  ├─ notification-service/     # Email, In-app, Pengumuman (Phase 7)
-│  ├─ ai-service/               # LLM Provider Gateway & Prompts (Phase 3)
-│  └─ _template-service/        # Template service NestJS production-grade
-├─ packages/
-│  ├─ contracts/                # Zod schemas, Event Bus payload, DTOs
-│  ├─ ui/                       # Design tokens (Merah, Dark surface, Chamfer), Tailwind preset
-│  ├─ config/                   # ESLint, Prettier, tsconfig bersama
-│  └─ utils/                    # Structured logger, correlation-id, safe result
-├─ infra/
-│  └─ docker/                   # Postgres init scripts & compose configs
-├─ docker-compose.yml           # Postgres (pgvector), Redis, NATS (JetStream), MinIO
-├─ .env.example                 # Template variabel lingkungan
-├─ PROJECT_SPEC.md              # Spesifikasi lengkap proyek
-└─ README.md
-```
+Official Web Portal PBESI (Pengurus Besar Esports Indonesia) Pengprov Sumatera Barat. Menghubungkan dan menaungi 14.852 penggiat, 8.420 atlet binaan, dan 485 klub di 19 kabupaten dan kota se-Sumatera Barat.
 
 ---
 
-## Prasyarat Lingkungan
+## 🚀 Fitur Unggulan
 
-- **Node.js**: v20.x atau v22+ (`node -v`)
-- **pnpm**: v9+ / v12+ (`pnpm -v`)
-- **Docker & Docker Compose**: untuk menjalankan database, broker, cache, dan storage lokal.
-
----
-
-## Panduan Menjalankan (Local Development)
-
-### 1. Salin Konfigurasi Environment
-```bash
-cp .env.example .env
-```
-
-### 2. Jalankan Infrastruktur Lokal (Docker Compose)
-Pastikan Docker Desktop sudah aktif, lalu jalankan:
-```bash
-docker compose up -d
-```
-Service yang akan berjalan:
-- **PostgreSQL 16 (pgvector)**: `localhost:5432` (database terisolasi per microservice otomatis dibuat)
-- **Redis 7**: `localhost:6379` (cache & sessions)
-- **NATS JetStream**: `localhost:4222` (monitoring UI di `localhost:8222`)
-- **MinIO S3**: API di `localhost:9000`, Web Console di `http://localhost:9001` (user: `admin`, pass: `supersecret123`)
-
-Periksa status container:
-```bash
-docker compose ps
-```
-
-### 3. Install Dependensi Workspace
-```bash
-pnpm install
-```
-
-### 4. Build Paket Bersama (Contracts, Utils, UI)
-```bash
-pnpm run build
-```
-
-### 5. Menjalankan Template Service (Tes Health Check & Swagger)
-```bash
-cd services/_template-service
-pnpm run dev
-```
-Buka browser:
-- **Swagger OpenAPI**: [http://localhost:4000/docs](http://localhost:4000/docs)
-- **Health Check**: [http://localhost:4000/health](http://localhost:4000/health)
+- **Marquee Running Logo 19 Pengcab PBESI**: Ticker logo resmi PBESI untuk 19 kabupaten/kota se-Sumatera Barat berkecepatan terkalibrasi halus (slow & smooth 100s).
+- **Peta Interaktif Sebaran 19 Wilayah**: Peta vektor SVG interaktif Ranah Minang dengan live territory inspector card dan filter dinamis (Semua, Kota, Kabupaten).
+- **Direktori Atlet & Pelatih Berprestasi**: Sistem kartu bergaya TCG (aspect ratio 5:7.2) lengkap dengan statistik, OVR, peran taktis, lisensi resmi, dan modal inspeksi profil.
+- **6 Divisi Cabang Game Resmi**:
+  - *VALORANT* (Tactical Shooter)
+  - *Mobile Legends: Bang Bang* (MOBA 5v5)
+  - *PUBG Mobile* (Battle Royale Tactical)
+  - *Free Fire* (Fast-Paced Survival)
+  - *eFootball* (Virtual Football Simulation)
+  - *Honor of Kings / Fighting Games* (FGC & MOBA)
+- **Filosofi Silek Minang**: Nilai sportivitas leluhur Minangkabau di panggung olahraga modern (*"Lahir Silek Mancari Kawan, Batin Silek Menjaga Kehormatan"*).
+- **Multi-Halaman Terintegrasi**:
+  - `/` (Beranda)
+  - `/about` (Tentang PBESI Sumbar, Visi & Misi)
+  - `/atlet` (Direktori Lengkap Atlet Binaan)
 
 ---
 
-## Design System Tokens (Anti "Tampilan AI")
+## 🛠️ Menjalankan Secara Lokal
 
-Sesuai spesifikasi Bagian 7:
-- **Primary Brand Red**: `#E10600` (Hover: `#B80500`, Bright: `#FF3B30`)
-- **Dark Neutral Surfaces**: `#0B0B0D` (bg utama), `#131316` (surface), `#1C1C21` (card), Border: `#2A2A31`
-- **Typography**: Display *Rajdhani / Barlow Condensed*, Body *Inter / Manrope*, Tabular numbers untuk bracket.
-- **Chamfer & Cutouts**: Sudut tegas (4–8px) dan potongan chamfer diagonal gaming-pro.
+```bash
+# Clone repositori
+git clone https://github.com/njstudioindonesia-cmd/esport-sumbar.git
+cd esport-sumbar
 
-Tersedia di `@esport-sumbar/ui` dan `@esport-sumbar/ui/styles/theme.css`.
+# Jalankan server lokal
+node server.js
+```
+
+Kunjungi `http://localhost:3000` di peramban Anda.
 
 ---
 
-## Status Fase Pengembangan
+## 🌐 Deployment (Vercel)
 
-- [x] **Phase 0 — Fondasi**: Monorepo Turborepo, pnpm workspaces, packages (contracts, ui, config, utils), docker-compose (PG, Redis, NATS, MinIO), NestJS template service, GitHub Actions CI.
-- [ ] **Phase 1 — Identity & Gateway**: `identity-service`, `gateway`, auth JWT + refresh rotation, RBAC, profil & verifikasi EO.
-- [ ] **Phase 2 — Frontend Shell & Design System**: Layout global, komponen inti chamfer, Beranda & `/styleguide`.
-- [ ] **Phase 3 — Berita + AI Curator**: `news-service`, `news-ingestor`, `ai-service`, review queue.
-- [ ] **Phase 4 — Komunitas**: `community-service`, diskusikan, join/leave, AI moderation.
-- [ ] **Phase 5 — Event & Tools EO**: `event-service`, form builder, pendaftaran tim/individu, storage terisolasi.
-- [ ] **Phase 6 — Bracket & Leaderboard**: `bracket-service`, Single/Double elim, Swiss, Leaderboard, live SSE.
-- [ ] **Phase 7 — AI Tambahan, Search & Notifikasi**: EO assistant, semantic search, email/in-app notification.
-- [ ] **Phase 8 — Hardening & Deploy**: Audit keamanan, OpenTelemetry, test E2E Playwright, manifest deploy.
+Proyek ini telah dikonfigurasi siap pakai untuk Vercel melalui [`vercel.json`](vercel.json) dengan dukungan *Clean URLs* tanpa konfigurasi tambahan.
+
+---
+
+© 2026 Pengurus Provinsi ESI Sumatera Barat. Hak Cipta Dilindungi Undang-Undang.
