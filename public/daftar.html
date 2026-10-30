@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-  <title>Portal Pendaftaran & Verifikasi Ekosistem – ESPORT SUMBAR</title>
+  <title>Pilih Bidang Pendaftaran – ESPORT SUMBAR</title>
   <meta name="description" content="Pilih jalur pendaftaran resmi ekosistem esports Sumatera Barat: Player, Pelatih, Team, Komunitas, dan Venue berlisensi Pengprov ESI Sumbar." />
 
   <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
@@ -43,6 +43,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Microsystem Client SDK -->
+  <script src="/js/microsystem-client.js"></script>
+
   <!-- Favicon & Brand Icons -->
   <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
   <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
@@ -73,6 +76,27 @@
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Modern Card Glowing Pulsar */
+    .bidang-card-active {
+      border-color: #B3121B !important;
+      background: linear-gradient(135deg, #1C0307 0%, #2A040B 50%, #150205 100%) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 16px 36px -8px rgba(179, 18, 27, 0.45), 0 0 0 2px #E0222D !important;
+      transform: translateY(-3px) scale(1.01);
+    }
+
+    .bidang-card-inactive {
+      background: #FFFFFF;
+      border-color: rgba(0,0,0,0.1);
+      color: #0B0B0C;
+    }
+
+    .bidang-card-inactive:hover {
+      border-color: rgba(179, 18, 27, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+    }
   </style>
 </head>
 <body class="text-ink antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen">
@@ -80,7 +104,7 @@
   <!-- ============================================================== -->
   <!-- 1. STICKY TOP APP BAR                                          -->
   <!-- ============================================================== -->
-  <header class="sticky top-0 z-40 bg-[#E2E2E5]/90 backdrop-blur-md border-b border-black/10">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between">
         
@@ -94,7 +118,7 @@
               ESPORT <span class="text-crimson-600">SUMBAR</span>
             </span>
             <span class="text-[9px] font-mono tracking-tight text-ink/60 font-semibold uppercase flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-crimson-600"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               PORTAL PENDAFTARAN RESMI
             </span>
           </div>
@@ -110,234 +134,386 @@
           <a href="/profile" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Profile</a>
         </nav>
 
-        <!-- Header Action -->
-        <a href="/cari" class="w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap">
-          <i data-lucide="search" class="w-4 h-4"></i>
-        </a>
+        <!-- Header Actions -->
+        <div class="flex items-center gap-2">
+          <a href="/login" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-semibold flex items-center gap-1.5 transition-all app-tap">
+            <i data-lucide="log-in" class="w-3.5 h-3.5 text-crimson-700"></i>
+            <span class="hidden sm:inline">Masuk</span>
+          </a>
+          <a href="/cari" class="w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </a>
+        </div>
 
       </div>
     </div>
   </header>
 
   <!-- ============================================================== -->
-  <!-- 2. QUICK REGISTRATION TRACK TABS (MOBILE FIRST)                -->
+  <!-- 2. REGISTRATION STEP TIMELINE (MODERN BREADCRUMB)               -->
   <!-- ============================================================== -->
-  <div class="bg-white/70 backdrop-blur-md border-b border-black/10 py-2.5 px-4 sticky top-[53px] z-30">
-    <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar">
-      <span class="text-[9px] font-mono uppercase font-bold text-ink/50 shrink-0 flex items-center gap-1">
-        <i data-lucide="layers" class="w-3 h-3 text-crimson-600"></i>
-        <span>Pilih Bidang:</span>
-      </span>
-      <div class="flex items-center gap-1.5 shrink-0">
-        <a href="/daftar-player" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 app-tap">
-          <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i>
-          <span>Player</span>
-        </a>
-        <a href="/daftar-pelatih" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 app-tap">
-          <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
-          <span>Pelatih</span>
-        </a>
-        <a href="/daftar-team" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 app-tap">
-          <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-          <span>Team</span>
-        </a>
-        <a href="/daftar-komunitas" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 app-tap">
-          <i data-lucide="users" class="w-3.5 h-3.5"></i>
-          <span>Komunitas</span>
-        </a>
-        <a href="/daftar-venue" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 app-tap">
-          <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
-          <span>Venue</span>
-        </a>
+  <div class="bg-white/80 backdrop-blur-md border-b border-black/10 py-2.5 px-4 sticky top-[53px] z-30">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs font-mono">
+      
+      <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto no-scrollbar">
+        <!-- Step 1 (Active) -->
+        <div class="flex items-center gap-1.5 shrink-0 px-3 py-1 rounded-full bg-crimson-800 text-white font-bold shadow-sm">
+          <span class="w-4 h-4 rounded-full bg-amber-400 text-ink text-[10px] flex items-center justify-center font-black">1</span>
+          <span class="uppercase tracking-wider text-[11px]">PILIH BIDANG</span>
+        </div>
+        
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/30 shrink-0"></i>
+
+        <!-- Step 2 -->
+        <div class="flex items-center gap-1.5 shrink-0 px-2 py-1 text-ink/50 font-semibold">
+          <span class="w-4 h-4 rounded-full bg-black/10 text-ink/60 text-[10px] flex items-center justify-center font-bold">2</span>
+          <span class="uppercase tracking-wider text-[11px]">ISI FORMULIR</span>
+        </div>
+
+        <i data-lucide="chevron-right" class="w-4 h-4 text-ink/30 shrink-0"></i>
+
+        <!-- Step 3 -->
+        <div class="flex items-center gap-1.5 shrink-0 px-2 py-1 text-ink/50 font-semibold hidden sm:flex">
+          <span class="w-4 h-4 rounded-full bg-black/10 text-ink/60 text-[10px] flex items-center justify-center font-bold">3</span>
+          <span class="uppercase tracking-wider text-[11px]">PENERBITAN PASPOR</span>
+        </div>
       </div>
+
+      <div class="text-[10px] font-mono text-ink/60 uppercase font-bold shrink-0 hidden md:block">
+        VERIFIKASI PENGPROV ESI SUMBAR
+      </div>
+
     </div>
   </div>
 
   <!-- ============================================================== -->
-  <!-- 3. HERO SECTION                                                -->
+  <!-- 3. MAIN CONTAINER: SECTOR SELECTION PORTAL                     -->
   <!-- ============================================================== -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5">
 
-    <!-- Hero Card -->
-    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#450409] via-[#750A11] to-[#260205] text-white p-5 sm:p-7 shadow-xl shadow-crimson-900/15 border border-white/10 mb-6">
-      <div class="absolute -right-10 -bottom-10 w-52 h-52 rounded-full bg-crimson-500/20 blur-3xl pointer-events-none"></div>
+    <!-- Hero Announcement Card -->
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#3D0307] via-[#660910] to-[#200204] text-white p-5 sm:p-8 shadow-xl shadow-crimson-900/15 border border-white/10 mb-6">
+      <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-crimson-500/25 blur-3xl pointer-events-none"></div>
+      <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-amber-500/15 blur-3xl pointer-events-none"></div>
 
-      <div class="relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/30 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold tracking-wide text-amber-300 uppercase mb-2.5">
+      <div class="relative z-10 max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold tracking-wide text-amber-300 uppercase mb-3">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>PORTAL VERIFIKASI RESMI // PENGPROV ESI SUMATERA BARAT</span>
+          <span>LANGKAH 1: PILIH BIDANG SEBELUM MENGISI FORMULIR</span>
         </div>
 
         <h1 class="font-display text-3xl sm:text-5xl tracking-tight leading-none uppercase mb-2">
-          PENDAFTARAN & <span class="text-amber-300">AKREDITASI RESMI</span>
+          PILIH BIDANG <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400">EKOSISTEM ANDA</span>
         </h1>
-        <p class="font-sans text-xs sm:text-sm text-white/85 max-w-xl leading-relaxed mb-4">
-          Pilih bidang pendaftaran Anda di bawah ini untuk menerbitkan Paspor Digital dan terdaftar dalam pangkalan data resmi ekosistem esports 19 kabupaten/kota Sumatera Barat.
+        <p class="font-sans text-xs sm:text-sm text-paper/85 leading-relaxed mb-4">
+          Tentukan peran atau entitas Anda di bawah ini. Setiap bidang memiliki formulir khusus, dokumen prasyarat, serta sertifikat/lisensi digital resmi yang akan diterbitkan.
         </p>
 
-        <!-- 5 Category Pills Indicator -->
-        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-white/15 text-[11px] font-mono">
-          <span class="text-white/60">5 Bidang Resmi:</span>
-          <span class="text-amber-300 font-bold">1. Player</span> •
-          <span class="text-amber-300 font-bold">2. Pelatih</span> •
-          <span class="text-amber-300 font-bold">3. Team</span> •
-          <span class="text-amber-300 font-bold">4. Komunitas</span> •
-          <span class="text-amber-300 font-bold">5. Venue</span>
+        <div class="flex items-center gap-3 text-xs font-mono text-white/70 pt-2 border-t border-white/15">
+          <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-3.5 h-3.5 text-amber-300"></i> Terintegrasi 19 Kab/Kota</span>
+          <span>•</span>
+          <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Lisensi PBESI Sumbar</span>
+          <span>•</span>
+          <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-sky-300"></i> Verifikasi 1x24 Jam</span>
         </div>
       </div>
     </div>
 
     <!-- ============================================================== -->
-    <!-- 4. 5 DEDICATED TRACK SELECTION CARDS                           -->
+    <!-- 4. INTERACTIVE 5 SECTOR SELECTION CARDS                        -->
     <!-- ============================================================== -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <div class="mb-4 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-mono uppercase font-bold text-crimson-600 tracking-widest block">PILIHAN BIDANG TERSEDIA</span>
+        <h2 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">PILIH SALAH SATU BIDANG DI BAWAH INI</h2>
+      </div>
+      <span class="text-xs font-mono text-ink/60 hidden sm:inline">Ketuk kartu untuk memilih</span>
+    </div>
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 mb-6" id="sectorCardsGrid">
+      
       <!-- 1. BIDANG PLAYER -->
-      <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+      <div id="card-player" onclick="selectBidang('player')" class="bidang-card-active rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-800 to-crimson-600 text-white flex items-center justify-center shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-700 to-crimson-900 text-white flex items-center justify-center shadow-md ring-1 ring-white/20">
               <i data-lucide="gamepad-2" class="w-6 h-6 text-amber-300"></i>
             </div>
-            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 text-[9px] font-mono font-bold uppercase">
-              Paspor Digital 3D
-            </span>
+            <div id="badge-check-player" class="w-6 h-6 rounded-full bg-amber-400 text-ink flex items-center justify-center shadow-md">
+              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
           </div>
-          <h3 class="font-display text-2xl text-ink uppercase group-hover:text-crimson-600 transition-colors">
-            Pendaftaran Player / Atlet
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-mono font-bold uppercase inline-block mb-1.5 border border-emerald-500/30">
+            PASPOR 3D
+          </span>
+          <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-1">
+            PLAYER / ATLET
           </h3>
-          <p class="text-xs font-sans text-ink/70 leading-relaxed mt-1 mb-4">
-            Khusus atlet profesional, talenta semi-pro, dan player LFT yang ingin memiliki kartu identitas digital berlisensi ESI, terdata di scouting bursa transfer, dan siap seleksi kejurda/Porprov.
+          <p class="text-xs font-sans opacity-80 leading-relaxed mb-3">
+            Atlet cabor, talenta semi-pro, dan player bebas transfer (LFT).
           </p>
-          <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[11px] font-mono space-y-1 mb-4">
-            <div class="text-ink/60">Output: <strong class="text-ink">Kartu Paspor 3D & Nomor Lisensi</strong></div>
-            <div class="text-ink/60">Target: <span class="text-crimson-800 font-bold">Atlet, Player LFT, Roster Tim</span></div>
-          </div>
         </div>
-        <a href="/daftar-player" class="w-full py-2.5 px-4 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-sm app-tap">
-          <span>Buka Form Player</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
-        </a>
+        <div class="pt-2 border-t border-white/10 text-[10px] font-mono flex items-center justify-between">
+          <span class="opacity-70">Output:</span>
+          <span class="font-bold text-amber-300">Paspor Digital 3D</span>
+        </div>
       </div>
 
       <!-- 2. BIDANG PELATIH -->
-      <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+      <div id="card-pelatih" onclick="selectBidang('pelatih')" class="bidang-card-inactive rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-500 text-white flex items-center justify-center shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 text-white flex items-center justify-center shadow-md">
               <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
             </div>
-            <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-700 border border-amber-500/20 text-[9px] font-mono font-bold uppercase">
-              Sertifikasi PBESI
-            </span>
+            <div id="badge-check-pelatih" class="w-6 h-6 rounded-full bg-black/10 text-ink/40 flex items-center justify-center hidden">
+              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
           </div>
-          <h3 class="font-display text-2xl text-ink uppercase group-hover:text-crimson-600 transition-colors">
-            Pendaftaran Pelatih / Coach
+          <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-700 text-[9px] font-mono font-bold uppercase inline-block mb-1.5 border border-amber-500/20">
+            SERTIFIKASI
+          </span>
+          <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-1">
+            PELATIH / COACH
           </h3>
-          <p class="text-xs font-sans text-ink/70 leading-relaxed mt-1 mb-4">
-            Pendaftaran pelatih kepala (*Head Coach*), asisten pelatih, dan staf analis taktik untuk standarisasi kepelatihan resmi esports Sumatera Barat.
+          <p class="text-xs font-sans opacity-80 leading-relaxed mb-3">
+            Head coach, asisten pelatih, dan analis taktik draft/VOD.
           </p>
-          <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[11px] font-mono space-y-1 mb-4">
-            <div class="text-ink/60">Output: <strong class="text-ink">ID Lisensi Pelatih ESI Sumbar</strong></div>
-            <div class="text-ink/60">Target: <span class="text-amber-700 font-bold">Coach, Analis VOD, Taktisi</span></div>
-          </div>
         </div>
-        <a href="/daftar-pelatih" class="w-full py-2.5 px-4 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-sm app-tap">
-          <span>Buka Form Pelatih</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
-        </a>
+        <div class="pt-2 border-t border-black/10 text-[10px] font-mono flex items-center justify-between">
+          <span class="opacity-70">Output:</span>
+          <span class="font-bold text-amber-600">Lisensi Pelatih</span>
+        </div>
       </div>
 
       <!-- 3. BIDANG TEAM -->
-      <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+      <div id="card-team" onclick="selectBidang('team')" class="bidang-card-inactive rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-900 to-crimson-700 text-white flex items-center justify-center shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-900 to-crimson-800 text-white flex items-center justify-center shadow-md">
               <i data-lucide="shield" class="w-6 h-6 text-amber-300"></i>
             </div>
-            <span class="px-2.5 py-0.5 rounded-full bg-crimson-800/10 text-crimson-800 border border-crimson-800/20 text-[9px] font-mono font-bold uppercase">
-              Akreditasi Klub
-            </span>
+            <div id="badge-check-team" class="w-6 h-6 rounded-full bg-black/10 text-ink/40 flex items-center justify-center hidden">
+              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
           </div>
-          <h3 class="font-display text-2xl text-ink uppercase group-hover:text-crimson-600 transition-colors">
-            Pendaftaran Team / Klub
+          <span class="px-2.5 py-0.5 rounded-full bg-crimson-800/10 text-crimson-800 text-[9px] font-mono font-bold uppercase inline-block mb-1.5 border border-crimson-800/20">
+            AKREDITASI
+          </span>
+          <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-1">
+            TEAM & KLUB
           </h3>
-          <p class="text-xs font-sans text-ink/70 leading-relaxed mt-1 mb-4">
-            Pendaftaran organisasi esports, klub resmi daerah, dan tim kompetitif untuk mendapatkan legalitas, verifikasi susunan roster inti, dan akses turnamen resmi.
+          <p class="text-xs font-sans opacity-80 leading-relaxed mb-3">
+            Organisasi esports daerah, manajemen klub, dan roster tim.
           </p>
-          <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[11px] font-mono space-y-1 mb-4">
-            <div class="text-ink/60">Output: <strong class="text-ink">Profil Klub & Registrasi Roster</strong></div>
-            <div class="text-ink/60">Target: <span class="text-crimson-800 font-bold">Klub Pelatda, Divisi Utama</span></div>
-          </div>
         </div>
-        <a href="/daftar-team" class="w-full py-2.5 px-4 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-sm app-tap">
-          <span>Buka Form Team</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
-        </a>
+        <div class="pt-2 border-t border-black/10 text-[10px] font-mono flex items-center justify-between">
+          <span class="opacity-70">Output:</span>
+          <span class="font-bold text-crimson-700">Akreditasi Klub</span>
+        </div>
       </div>
 
       <!-- 4. BIDANG KOMUNITAS -->
-      <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+      <div id="card-komunitas" onclick="selectBidang('komunitas')" class="bidang-card-inactive rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative">
         <div>
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-700 to-sky-600 text-white flex items-center justify-center shadow-md">
               <i data-lucide="users" class="w-6 h-6 text-white"></i>
             </div>
-            <span class="px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-700 border border-sky-500/20 text-[9px] font-mono font-bold uppercase">
-              Jejaring Komunitas
-            </span>
+            <div id="badge-check-komunitas" class="w-6 h-6 rounded-full bg-black/10 text-ink/40 flex items-center justify-center hidden">
+              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
           </div>
-          <h3 class="font-display text-2xl text-ink uppercase group-hover:text-crimson-600 transition-colors">
-            Pendaftaran Komunitas
+          <span class="px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-700 text-[9px] font-mono font-bold uppercase inline-block mb-1.5 border border-sky-500/20">
+            JEJARING
+          </span>
+          <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-1">
+            KOMUNITAS
           </h3>
-          <p class="text-xs font-sans text-ink/70 leading-relaxed mt-1 mb-4">
-            Wadah bagi perkumpulan penggiat game, guild, clan, fanbase esports, dan komunitas kampus/sekolah di 19 kabupaten/kota untuk bersinergi dengan ESI Sumbar.
+          <p class="text-xs font-sans opacity-80 leading-relaxed mb-3">
+            Clan, guild, komunitas kampus/sekolah, dan fanbase game.
           </p>
-          <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[11px] font-mono space-y-1 mb-4">
-            <div class="text-ink/60">Output: <strong class="text-ink">Akreditasi Mitra Komunitas</strong></div>
-            <div class="text-ink/60">Target: <span class="text-sky-700 font-bold">Clan, Guild, Fanbase Daerah</span></div>
-          </div>
         </div>
-        <a href="/daftar-komunitas" class="w-full py-2.5 px-4 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-sm app-tap">
-          <span>Buka Form Komunitas</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
-        </a>
+        <div class="pt-2 border-t border-black/10 text-[10px] font-mono flex items-center justify-between">
+          <span class="opacity-70">Output:</span>
+          <span class="font-bold text-sky-700">SK Mitra Resmi</span>
+        </div>
       </div>
 
       <!-- 5. BIDANG VENUE -->
-      <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+      <div id="card-venue" onclick="selectBidang('venue')" class="bidang-card-inactive rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-800 to-emerald-600 text-white flex items-center justify-center shadow-md">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-800 to-emerald-700 text-white flex items-center justify-center shadow-md">
               <i data-lucide="monitor" class="w-6 h-6 text-amber-300"></i>
             </div>
-            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 text-[9px] font-mono font-bold uppercase">
-              Venue Terakreditasi
-            </span>
+            <div id="badge-check-venue" class="w-6 h-6 rounded-full bg-black/10 text-ink/40 flex items-center justify-center hidden">
+              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </div>
           </div>
-          <h3 class="font-display text-2xl text-ink uppercase group-hover:text-crimson-600 transition-colors">
-            Pendaftaran Venue & Arena
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase inline-block mb-1.5 border border-emerald-500/20">
+            STANDARISASI
+          </span>
+          <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-1">
+            VENUE & ARENA
           </h3>
-          <p class="text-xs font-sans text-ink/70 leading-relaxed mt-1 mb-4">
-            Registrasi sentra gaming arena, iCafe, gaming house, dan bootcamp center di Sumatera Barat untuk diverifikasi sebagai arena latihan & turnamen resmi ESI.
+          <p class="text-xs font-sans opacity-80 leading-relaxed mb-3">
+            Gaming arena, iCafe, esports center, dan bootcamp house.
           </p>
-          <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[11px] font-mono space-y-1 mb-4">
-            <div class="text-ink/60">Output: <strong class="text-ink">Sertifikasi Standar Arena ESI</strong></div>
-            <div class="text-ink/60">Target: <span class="text-emerald-800 font-bold">Gaming Arena, iCafe, Bootcamp</span></div>
-          </div>
         </div>
-        <a href="/daftar-venue" class="w-full py-2.5 px-4 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-sm app-tap">
-          <span>Buka Form Venue</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
-        </a>
+        <div class="pt-2 border-t border-black/10 text-[10px] font-mono flex items-center justify-between">
+          <span class="opacity-70">Output:</span>
+          <span class="font-bold text-emerald-700">Sertifikasi Arena</span>
+        </div>
       </div>
 
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 5. DYNAMIC SELECTION HUD BRIEFING & ACTION DOCK                -->
+    <!-- ============================================================== -->
+    <div id="selectionHudCard" class="bg-white rounded-3xl p-5 sm:p-7 border border-black/10 shadow-lg mb-8 relative overflow-hidden transition-all">
+      
+      <!-- Top Decorative Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-black/10 gap-2">
+        <div class="flex items-center gap-3">
+          <div id="hudIconContainer" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-800 to-crimson-600 text-white flex items-center justify-center shadow-md">
+            <i id="hudIcon" data-lucide="gamepad-2" class="w-6 h-6 text-amber-300"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="hudBadge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 text-[9.5px] font-mono font-bold uppercase">
+                PASPOR DIGITAL 3D
+              </span>
+              <span class="text-[10px] font-mono text-ink/50 uppercase font-bold flex items-center gap-1">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-500"></i>
+                Bidang Siap Didaftarkan
+              </span>
+            </div>
+            <h3 id="hudTitle" class="font-display text-2xl sm:text-3xl text-ink uppercase tracking-tight leading-none mt-0.5">
+              PLAYER & ATLET ESPORT
+            </h3>
+          </div>
+        </div>
+
+        <div class="text-right hidden sm:block">
+          <span class="text-[9px] font-mono text-ink/40 uppercase">STATUS ALUR</span>
+          <div class="text-xs font-mono font-bold text-crimson-700 flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            SIAP MENGISI FORMULIR
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail Grid: Ringkasan & Dokumen Prasyarat -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        
+        <!-- Left: Description & Output (7 cols) -->
+        <div class="md:col-span-7 space-y-3.5">
+          <p id="hudDesc" class="text-xs sm:text-sm font-sans text-ink/80 leading-relaxed">
+            Untuk atlet profesional, semi-pro, dan player LFT yang membutuhkan Paspor Digital 3D berlisensi ESI Sumbar dan terdaftar di bursa transfer.
+          </p>
+
+          <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5 space-y-2 text-xs font-mono">
+            <div class="flex items-start gap-2">
+              <i data-lucide="award" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="text-ink/60">Output Resmi:</span>
+                <strong id="hudOutput" class="text-ink ml-1">Paspor Digital 3D Dua Sisi + Nomor Lisensi PBESI Resmi</strong>
+              </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="users" class="w-4 h-4 text-crimson-600 shrink-0 mt-0.5"></i>
+              <div>
+                <span class="text-ink/60">Target Entitas:</span>
+                <span id="hudTarget" class="text-crimson-800 font-bold ml-1">Atlet Cabor, Player LFT, Calon Kontingen PON/Porprov</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Document checklist -->
+          <div>
+            <span class="text-[10px] font-mono uppercase font-bold text-ink/60 block mb-1.5">DATA & BERKAS YANG PERLU DISIAPKAN:</span>
+            <div id="hudSyaratList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-ink/80">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Identitas resmi (KTP / KIA / Kartu Pelajar)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>In-Game Nickname (IGN) & ID Game utama</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <span>Nomor WhatsApp & Email aktif</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Primary Action Call-to-Action (5 cols) -->
+        <div class="md:col-span-5 flex flex-col justify-center items-center p-4 rounded-2xl bg-gradient-to-br from-[#1A0306] via-[#2A050B] to-[#120205] text-white border border-crimson-700/50 text-center shadow-inner relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-crimson-600/30 blur-2xl pointer-events-none"></div>
+
+          <span class="text-[10px] font-mono text-amber-300 uppercase tracking-widest font-bold mb-1">
+            LANGKAH 2 DARI 3
+          </span>
+          <h4 class="font-display text-xl uppercase mb-3">
+            MASUK KE FORMULIR RESMI
+          </h4>
+          <p class="text-[11px] font-sans text-paper/70 mb-4 max-w-xs">
+            Formulir akan terbuka dengan konfigurasi data khusus bidang yang Anda pilih.
+          </p>
+
+          <a id="btnProceedForm" href="/daftar-player" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-crimson-600 via-crimson-700 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-crimson-900/50 transition-all app-tap">
+            <span id="btnProceedText">Lanjutkan ke Formulir Player & Atlet</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
+          </a>
+
+          <div class="text-[9.5px] font-mono text-paper/50 mt-2.5 flex items-center gap-1.5">
+            <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
+            <span>Enkripsi Data Aman & Tersertifikasi ESI Sumbar</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 6. FAQ & GUIDANCE (BINGUNG MEMILIH BIDANG?)                     -->
+    <!-- ============================================================== -->
+    <div class="bg-white rounded-3xl p-5 sm:p-7 border border-black/10 shadow-sm mb-12">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-700 flex items-center justify-center">
+          <i data-lucide="help-circle" class="w-4 h-4 text-amber-600"></i>
+        </div>
+        <div>
+          <h3 class="font-display text-xl text-ink uppercase leading-none">Panduan Singkat Pemilihan Bidang</h3>
+          <span class="text-[10px] font-mono text-ink/50 uppercase">TANYA JAWAB REGISTRASI EKOSISTEM</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-sans text-ink/75 pt-2">
+        <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5">
+          <strong class="font-mono text-ink block mb-1">Saya player tanpa tim (Solo/LFT)?</strong>
+          <p>Pilih bidang <strong>Player</strong>. Anda dapat memilih status <em>Bebas Transfer (Looking For Team)</em> agar kartu 3D Anda tampil di bursa transfer bursa atlet.</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5">
+          <strong class="font-mono text-ink block mb-1">Saya ingin mendaftarkan seluruh tim?</strong>
+          <p>Pilih bidang <strong>Team</strong>. Anda dapat mendaftarkan nama tim, logo, manajer, serta nama-nama pemain roster inti secara kolektif.</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5">
+          <strong class="font-mono text-ink block mb-1">Saya pemilik rental / gaming arena?</strong>
+          <p>Pilih bidang <strong>Venue</strong>. Fasilitas Anda akan diverifikasi untuk menjadi arena resmi kualifikasi turnamen daerah berlisensi ESI.</p>
+        </div>
+      </div>
     </div>
 
   </main>
 
   <!-- ============================================================== -->
-  <!-- 5. MOBILE BOTTOM FLOATING DOCK (5-SERIES)                      -->
+  <!-- 7. MOBILE BOTTOM FLOATING DOCK (5-SERIES)                      -->
   <!-- ============================================================== -->
   <div class="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none pb-2 pt-1 px-3">
     <div class="max-w-md mx-auto pointer-events-auto">
@@ -379,9 +555,170 @@
     </div>
   </div>
 
+  <!-- ============================================================== -->
+  <!-- 8. JAVASCRIPT SECTOR INTERACTION ENGINE                        -->
+  <!-- ============================================================== -->
   <script>
+    const BIDANG_DATA = {
+      player: {
+        id: 'player',
+        name: 'Player & Atlet Esport',
+        url: '/daftar-player',
+        tag: 'PASPOR DIGITAL 3D',
+        tagColor: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20',
+        icon: 'gamepad-2',
+        iconBg: 'from-crimson-700 to-crimson-900',
+        iconColor: 'text-amber-300',
+        desc: 'Untuk atlet profesional, semi-pro, dan player LFT yang membutuhkan Paspor Digital 3D berlisensi ESI Sumbar dan terdaftar di pangkalan data resmi serta bursa transfer.',
+        target: 'Atlet Cabor, Player LFT, Calon Kontingen PON/Porprov',
+        output: 'Paspor Digital 3D Dua Sisi + Nomor Lisensi PBESI Resmi',
+        syarat: [
+          'Identitas resmi (KTP / KIA / Kartu Pelajar)',
+          'In-Game Nickname (IGN) & ID Game utama',
+          'Nomor WhatsApp & Email aktif'
+        ],
+        buttonText: 'Lanjutkan ke Formulir Player & Atlet'
+      },
+      pelatih: {
+        id: 'pelatih',
+        name: 'Pelatih & Analis Taktik',
+        url: '/daftar-pelatih',
+        tag: 'LISENSI KEPELATIHAN',
+        tagColor: 'bg-amber-500/10 text-amber-700 border-amber-500/20',
+        icon: 'graduation-cap',
+        iconBg: 'from-amber-600 to-amber-700',
+        iconColor: 'text-white',
+        desc: 'Standarisasi kepelatihan esports resmi Pengprov ESI Sumbar. Terbuka bagi Head Coach, Tactical Analyst, dan staf performa klub esports.',
+        target: 'Head Coach, Analis VOD, Taktisi Draft, Mental Coach',
+        output: 'ID Sertifikasi Resmi Lisensi Pelatih ESI Sumbar',
+        syarat: [
+          'Identitas resmi & Portofolio/Riwayat melatih',
+          'Spesialisasi cabang game (VALORANT/MLBB/PUBGM/dll)',
+          'Klub binaan atau status open for coaching'
+        ],
+        buttonText: 'Lanjutkan ke Formulir Pelatih & Coach'
+      },
+      team: {
+        id: 'team',
+        name: 'Team & Klub Esports',
+        url: '/daftar-team',
+        tag: 'AKREDITASI KLUB',
+        tagColor: 'bg-crimson-800/10 text-crimson-800 border-crimson-800/20',
+        icon: 'shield',
+        iconBg: 'from-crimson-900 to-crimson-800',
+        iconColor: 'text-amber-300',
+        desc: 'Akreditasi dan legalitas organisasi esports daerah. Verifikasi susunan roster pemain inti, hak partisipasi divisi utama, dan transfer resmi.',
+        target: 'Organisasi Esports, Klub Daerah, Roster Tim Multi-Game',
+        output: 'Sertifikat Akreditasi Klub (Grade A/B/C) & Profil Roster',
+        syarat: [
+          'Nama tim, logo resmi (PNG), & data manajer/PIC',
+          'Daftar susunan roster pemain inti & cadangan',
+          'Surat domisili sekretariat tim di 19 Kab/Kota'
+        ],
+        buttonText: 'Lanjutkan ke Formulir Team & Klub'
+      },
+      komunitas: {
+        id: 'komunitas',
+        name: 'Komunitas & Guild Game',
+        url: '/daftar-komunitas',
+        tag: 'JEJARING RESMI',
+        tagColor: 'bg-sky-500/10 text-sky-700 border-sky-500/20',
+        icon: 'users',
+        iconBg: 'from-sky-700 to-sky-600',
+        iconColor: 'text-white',
+        desc: 'Wadah resmi perkumpulan clan, guild, fanbase game, dan esports kampus/sekolah untuk mendapatkan rekomendasi turnamen & kalender kegiatan.',
+        target: 'Clan, Guild, Komunitas Kampus/Sekolah, Fanbase',
+        output: 'Surat Keputusan (SK) Mitra Komunitas Resmi ESI Sumbar',
+        syarat: [
+          'Nama komunitas, game fokus, & domisili wilayah',
+          'Jumlah anggota aktif komunitas',
+          'Data kontak Ketua / Penanggung Jawab Komunitas'
+        ],
+        buttonText: 'Lanjutkan ke Formulir Komunitas'
+      },
+      venue: {
+        id: 'venue',
+        name: 'Venue & Gaming Arena',
+        url: '/daftar-venue',
+        tag: 'ARENA TERAKREDITASI',
+        tagColor: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20',
+        icon: 'monitor',
+        iconBg: 'from-emerald-800 to-emerald-700',
+        iconColor: 'text-amber-300',
+        desc: 'Registrasi sentra gaming arena, iCafe, dan bootcamp center untuk diakreditasi sebagai venue resmi kualifikasi turnamen ESI Sumbar.',
+        target: 'Gaming Arena, iCafe, Esports Lounge, Bootcamp Center',
+        output: 'Sertifikasi Standar Arena Turnamen Resmi ESI Sumbar',
+        syarat: [
+          'Nama venue, alamat lengkap di 19 Kab/Kota',
+          'Spesifikasi PC / Console / Jaringan Internet & Kapasitas',
+          'Kontak pengelola / pemilik arena'
+        ],
+        buttonText: 'Lanjutkan ke Formulir Venue & Arena'
+      }
+    };
+
+    let activeBidang = 'player';
+
+    function selectBidang(bidangKey) {
+      if (!BIDANG_DATA[bidangKey]) return;
+      activeBidang = bidangKey;
+      const data = BIDANG_DATA[bidangKey];
+
+      // Update Cards Visual State
+      const allKeys = Object.keys(BIDANG_DATA);
+      allKeys.forEach(key => {
+        const card = document.getElementById(`card-${key}`);
+        const checkBadge = document.getElementById(`badge-check-${key}`);
+
+        if (key === bidangKey) {
+          card.className = "bidang-card-active rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative";
+          if (checkBadge) {
+            checkBadge.className = "w-6 h-6 rounded-full bg-amber-400 text-ink flex items-center justify-center shadow-md";
+            checkBadge.classList.remove('hidden');
+          }
+        } else {
+          card.className = "bidang-card-inactive rounded-3xl p-5 border cursor-pointer transition-all flex flex-col justify-between app-tap relative";
+          if (checkBadge) {
+            checkBadge.classList.add('hidden');
+          }
+        }
+      });
+
+      // Update Briefing HUD Panel
+      const hudIconContainer = document.getElementById('hudIconContainer');
+      hudIconContainer.className = `w-12 h-12 rounded-2xl bg-gradient-to-br ${data.iconBg} text-white flex items-center justify-center shadow-md`;
+      hudIconContainer.innerHTML = `<i data-lucide="${data.icon}" class="w-6 h-6 ${data.iconColor}"></i>`;
+
+      const hudBadge = document.getElementById('hudBadge');
+      hudBadge.className = `px-2.5 py-0.5 rounded-full ${data.tagColor} text-[9.5px] font-mono font-bold uppercase`;
+      hudBadge.textContent = data.tag;
+
+      document.getElementById('hudTitle').textContent = data.name.toUpperCase();
+      document.getElementById('hudDesc').textContent = data.desc;
+      document.getElementById('hudOutput').textContent = data.output;
+      document.getElementById('hudTarget').textContent = data.target;
+
+      // Update Syarat List
+      const syaratContainer = document.getElementById('hudSyaratList');
+      syaratContainer.innerHTML = data.syarat.map(s => `
+        <div class="flex items-center gap-2">
+          <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>${s}</span>
+        </div>
+      `).join('');
+
+      // Update Button
+      const btn = document.getElementById('btnProceedForm');
+      btn.href = data.url;
+      document.getElementById('btnProceedText').textContent = data.buttonText;
+
+      lucide.createIcons();
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      // Preselect player
+      selectBidang('player');
     });
   </script>
 </body>
