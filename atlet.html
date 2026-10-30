@@ -294,6 +294,84 @@
       </div>
 
     </div>
+  
+  <!-- ============================================================== -->
+  <!-- ARENA HEAD-TO-HEAD 1V1 // SIMULATOR BANDINGKAN DUA ATLET       -->
+  <!-- ============================================================== -->
+  <section class="px-3 sm:px-6 lg:px-12 py-3 max-w-7xl mx-auto">
+    <div class="rounded-3xl bg-gradient-to-br from-[#161720] via-[#101218] to-[#0A0B0E] border border-white/15 p-4 sm:p-7 text-paper shadow-2xl relative overflow-hidden">
+      
+      <!-- Ambient Glows -->
+      <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-crimson-600/25 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -right-12 w-64 h-64 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
+
+      <!-- Header Row -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6 relative z-10">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-crimson-800/60 border border-crimson-600/40 text-amber-300 text-[10px] font-mono font-bold tracking-widest uppercase">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            ⚔️ FITUR BARU // ARENA SIMULATOR 1V1
+          </div>
+          <h2 class="font-display text-2xl sm:text-4xl text-white uppercase tracking-tight mt-1.5 leading-none">
+            BANDINGKAN DUA ATLET <span class="text-amber-300">SUMATERA BARAT</span>
+          </h2>
+          <p class="text-xs text-paper/75 font-sans mt-1 max-w-xl leading-relaxed">
+            Pilih dua atlet dari database untuk menganalisis perbandingan OVR, mekanik mikro (aim), strategi makro, clutch mentality, dan statistik turnamen secara head-to-head.
+          </p>
+        </div>
+
+        <!-- Randomize CTA -->
+        <button onclick="randomizeComparison()" class="self-start sm:self-auto px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 border border-white/20 transition-all app-tap shadow-sm">
+          <i data-lucide="shuffle" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span>Acak Komparasi</span>
+        </button>
+      </div>
+
+      <!-- Selectors Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5 relative z-10">
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-amber-300 uppercase tracking-wider mb-1.5">PILIH ATLET 1 (SISI KIRI)</label>
+          <select id="compareAthlete1Select" onchange="updateComparison()" class="w-full px-3.5 py-2.5 rounded-2xl bg-white/10 border border-white/20 text-xs text-white font-sans focus:outline-none focus:border-amber-400">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-sky-400 uppercase tracking-wider mb-1.5">PILIH ATLET 2 (SISI KANAN)</label>
+          <select id="compareAthlete2Select" onchange="updateComparison()" class="w-full px-3.5 py-2.5 rounded-2xl bg-white/10 border border-white/20 text-xs text-white font-sans focus:outline-none focus:border-sky-400">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Live Head-to-Head Comparison Card HUD -->
+      <div id="comparisonHudContainer" class="relative z-10">
+        <!-- Rendered via JavaScript updateComparison() -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- LEADERBOARD TOP 5 ATLET & HALL OF FAME SUMBAR                  -->
+  <!-- ============================================================== -->
+  <section class="px-3 sm:px-6 lg:px-12 py-3 max-w-7xl mx-auto">
+    <div class="rounded-3xl bg-white border border-black/10 p-4 sm:p-6 shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <span class="text-[10px] font-mono font-bold text-crimson-600 uppercase tracking-widest">PERINGKAT PRESTASI RESMI</span>
+          <h2 class="font-display text-2xl sm:text-3xl text-ink uppercase tracking-tight leading-none mt-0.5">
+            🏆 TOP 5 LEADERBOARD ATLET SUMBAR
+          </h2>
+        </div>
+        <span class="text-xs font-mono text-ink/50 hidden sm:inline">Berdasarkan Akumulasi OVR & Prestasi Porprov / PON</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" id="topLeaderboardContainer">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </div>
+  </section>
+
   </section><!-- ============================================================== -->
   <!-- 3. SEARCH & ADVANCED FILTER PANEL                              -->
   <!-- ============================================================== -->
@@ -548,7 +626,429 @@
   <!-- 8. JAVASCRIPT ENGINE (NO SOUND, SPAM-PROOF, WHITE/RED CARDS)   -->
   <!-- ============================================================== -->
   <script>
-    
+    // -------------------------------------------------------------
+    // DATABASE ATLET RESMI ESPORT SUMBAR (DENGAN STATISTIK KOMPARASI)
+    // -------------------------------------------------------------
+    const athletesData = [
+      {
+        id: "ath-1",
+        category: "pelatda",
+        name: "Muhammad Rayden",
+        ign: "V4ND4L",
+        role: "Duelist / Entry Fragger",
+        game: "VALORANT",
+        club: "Minang Pride Squad",
+        region: "Kota Padang",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rarity: "PELATDA PON",
+        rating: 96,
+        license: "PBESI-SB-2026-VKL-01",
+        stats: {
+          micro: 97, // Micro Mechanics (Aim/Skill)
+          macro: 94, // Macro Strategy & Map Control
+          clutch: 98, // Tournament Mentality & Clutch
+          teamplay: 92, // Communication & Teamplay
+          winrate: "78%",
+          medals: "Medali Emas Porprov 2024"
+        }
+      },
+      {
+        id: "ath-2",
+        category: "kejurda",
+        name: "Fajri Alamsyah",
+        ign: "F4LC0N",
+        role: "Jungler / Assassin",
+        game: "Mobile Legends",
+        club: "Rang Chaniago Esports",
+        region: "Kota Bukittinggi",
+        photo: "/images/athlete-pro-player.jpg",
+        rarity: "JUARA KEJURDA",
+        rating: 95,
+        license: "PBESI-SB-2026-MLB-14",
+        stats: {
+          micro: 96,
+          macro: 96,
+          clutch: 94,
+          teamplay: 95,
+          winrate: "76%",
+          medals: "MVP Piala Gubernur 2025"
+        }
+      },
+      {
+        id: "ath-3",
+        category: "pelatda",
+        name: "Rendy Prasetya",
+        ign: "SHADOW",
+        role: "Controller / IGL",
+        game: "VALORANT",
+        club: "Minang Pride Squad",
+        region: "Kota Padang",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rarity: "PELATDA PON",
+        rating: 94,
+        license: "PBESI-SB-2026-VKL-02",
+        stats: {
+          micro: 93,
+          macro: 97,
+          clutch: 95,
+          teamplay: 96,
+          winrate: "74%",
+          medals: "Medali Emas Porprov 2024"
+        }
+      },
+      {
+        id: "ath-4",
+        category: "pelatda",
+        name: "Alif Ramadhan",
+        ign: "SKYFALL",
+        role: "Rusher / IGL",
+        game: "Free Fire",
+        club: "Ranah Minang Gaming",
+        region: "Kota Payakumbuh",
+        photo: "/images/athlete-pro-player.jpg",
+        rarity: "SUPER RARE",
+        rating: 93,
+        license: "PBESI-SB-2026-FF-21",
+        stats: {
+          micro: 95,
+          macro: 92,
+          clutch: 94,
+          teamplay: 93,
+          winrate: "72%",
+          medals: "Top 4 Pra-PON 2024"
+        }
+      },
+      {
+        id: "ath-5",
+        category: "kejurda",
+        name: "Zikri Pratama",
+        ign: "BLITZ",
+        role: "Flanker / Rusher",
+        game: "PUBG Mobile",
+        club: "Gadih Minang Esports",
+        region: "Kota Solok",
+        photo: "/images/athlete-pro-player.jpg",
+        rarity: "JUARA KEJURDA",
+        rating: 92,
+        license: "PBESI-SB-2026-PUBG-09",
+        stats: {
+          micro: 94,
+          macro: 91,
+          clutch: 92,
+          teamplay: 91,
+          winrate: "70%",
+          medals: "Juara 1 Kejurda Solok"
+        }
+      },
+      {
+        id: "ath-6",
+        category: "pelatda",
+        name: "Dion Saputra",
+        ign: "PHANTOM",
+        role: "Goldlaner / Marksman",
+        game: "Mobile Legends",
+        club: "Singgalang Esports Club",
+        region: "Kota Bukittinggi",
+        photo: "/images/athlete-pro-player.jpg",
+        rarity: "PELATDA PON",
+        rating: 92,
+        license: "PBESI-SB-2026-MLB-08",
+        stats: {
+          micro: 94,
+          macro: 92,
+          clutch: 91,
+          teamplay: 92,
+          winrate: "71%",
+          medals: "Juara Piala Gubernur"
+        }
+      },
+      {
+        id: "ath-7",
+        category: "komunitas",
+        name: "Farhan Maulana",
+        ign: "SNIPER",
+        role: "Fighting Specialist",
+        game: "Tekken 8",
+        club: "Padang Cyber Knights",
+        region: "Kota Padang",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rarity: "FGC ELITE",
+        rating: 91,
+        license: "PBESI-SB-2026-TK8-03",
+        stats: {
+          micro: 96,
+          macro: 90,
+          clutch: 94,
+          teamplay: 84,
+          winrate: "73%",
+          medals: "Top 8 IESF Qualifier"
+        }
+      },
+      {
+        id: "ath-8",
+        category: "komunitas",
+        name: "Gilang Pratama",
+        ign: "TITAN",
+        role: "Sentinel / Anchor",
+        game: "VALORANT",
+        club: "Minang Pride Squad",
+        region: "Kota Padang",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rarity: "PRO TIER",
+        rating: 90,
+        license: "PBESI-SB-2026-VKL-05",
+        stats: {
+          micro: 90,
+          macro: 93,
+          clutch: 92,
+          teamplay: 94,
+          winrate: "69%",
+          medals: "Medali Emas Porprov 2024"
+        }
+      }
+    ];
+
+    // -------------------------------------------------------------
+    // FITUR 1: SIMULATOR HEAD-TO-HEAD 1V1
+    // -------------------------------------------------------------
+    function initComparisonSelectors() {
+      const sel1 = document.getElementById('compareAthlete1Select');
+      const sel2 = document.getElementById('compareAthlete2Select');
+      if (!sel1 || !sel2) return;
+
+      const opts1 = athletesData.map(a => `<option value="${a.id}">${a.name} (${a.ign}) • OVR ${a.rating} • ${a.game}</option>`).join('');
+      const opts2 = athletesData.map(a => `<option value="${a.id}">${a.name} (${a.ign}) • OVR ${a.rating} • ${a.game}</option>`).join('');
+
+      sel1.innerHTML = opts1;
+      sel2.innerHTML = opts2;
+
+      // Default selection: Rayden vs Rendy
+      sel1.value = 'ath-1';
+      sel2.value = 'ath-3';
+
+      updateComparison();
+    }
+
+    function randomizeComparison() {
+      const sel1 = document.getElementById('compareAthlete1Select');
+      const sel2 = document.getElementById('compareAthlete2Select');
+      if (!sel1 || !sel2) return;
+
+      const idx1 = Math.floor(Math.random() * athletesData.length);
+      let idx2 = Math.floor(Math.random() * athletesData.length);
+      if (idx2 === idx1) idx2 = (idx1 + 1) % athletesData.length;
+
+      sel1.value = athletesData[idx1].id;
+      sel2.value = athletesData[idx2].id;
+      updateComparison();
+    }
+
+    function updateComparison() {
+      const sel1 = document.getElementById('compareAthlete1Select');
+      const sel2 = document.getElementById('compareAthlete2Select');
+      const container = document.getElementById('comparisonHudContainer');
+      if (!sel1 || !sel2 || !container) return;
+
+      const a1 = athletesData.find(a => a.id === sel1.value) || athletesData[0];
+      const a2 = athletesData.find(a => a.id === sel2.value) || athletesData[1];
+
+      const diff = a1.rating - a2.rating;
+      let diffBadge = '';
+      if (diff > 0) {
+        diffBadge = `<span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-mono text-[10px] font-bold">${a1.ign} +${diff} OVR ADVANTAGE</span>`;
+      } else if (diff < 0) {
+        diffBadge = `<span class="px-2.5 py-1 rounded-full bg-sky-500/20 text-sky-400 border border-sky-500/40 font-mono text-[10px] font-bold">${a2.ign} +${Math.abs(diff)} OVR ADVANTAGE</span>`;
+      } else {
+        diffBadge = `<span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono text-[10px] font-bold">PERFECT MATCH (BALANCED)</span>`;
+      }
+
+      container.innerHTML = `
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-4 sm:p-6 backdrop-blur-md">
+          
+          <!-- Fighters Face-off Header -->
+          <div class="flex items-center justify-between gap-2 pb-4 border-b border-white/10">
+            
+            <!-- Left Fighter (A1) -->
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-amber-400 shrink-0 shadow-lg">
+                <img src="${a1.photo}" alt="${a1.name}" class="w-full h-full object-cover object-top" />
+                <div class="absolute top-0 right-0 px-1 py-0.2 rounded-bl bg-amber-400 text-ink text-[7px] font-mono font-black">${a1.rating}</div>
+              </div>
+              <div>
+                <h3 class="font-display text-xl sm:text-3xl text-white uppercase leading-none">${a1.ign}</h3>
+                <div class="text-[11px] font-sans font-bold text-paper/80 truncate max-w-[120px] sm:max-w-[200px]">${a1.name}</div>
+                <div class="text-[9px] font-mono text-amber-300 font-semibold">${a1.game} • ${a1.role}</div>
+              </div>
+            </div>
+
+            <!-- Center VS Indicator -->
+            <div class="flex flex-col items-center justify-center shrink-0">
+              <span class="font-display text-2xl sm:text-3xl text-crimson-500 font-black tracking-wider animate-pulse">VS</span>
+              ${diffBadge}
+            </div>
+
+            <!-- Right Fighter (A2) -->
+            <div class="flex items-center justify-end gap-3 text-right">
+              <div>
+                <h3 class="font-display text-xl sm:text-3xl text-white uppercase leading-none">${a2.ign}</h3>
+                <div class="text-[11px] font-sans font-bold text-paper/80 truncate max-w-[120px] sm:max-w-[200px]">${a2.name}</div>
+                <div class="text-[9px] font-mono text-sky-400 font-semibold">${a2.game} • ${a2.role}</div>
+              </div>
+              <div class="relative w-12 h-12 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-sky-400 shrink-0 shadow-lg">
+                <img src="${a2.photo}" alt="${a2.name}" class="w-full h-full object-cover object-top" />
+                <div class="absolute top-0 right-0 px-1 py-0.2 rounded-bl bg-sky-400 text-ink text-[7px] font-mono font-black">${a2.rating}</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Comparative Stat Bars -->
+          <div class="space-y-3.5 mt-4 text-xs font-mono">
+            
+            <!-- Micro Mechanics -->
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-bold ${a1.stats.micro >= a2.stats.micro ? 'text-amber-300' : 'text-paper/70'}">${a1.stats.micro} / 100</span>
+                <span class="text-paper/60 uppercase font-semibold">MICRO MECHANICS (AIM & REFLEX)</span>
+                <span class="font-bold ${a2.stats.micro >= a1.stats.micro ? 'text-sky-400' : 'text-paper/70'}">${a2.stats.micro} / 100</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 h-2.5 rounded-full bg-white/10 overflow-hidden p-0.5">
+                <div class="flex justify-end">
+                  <div class="h-full bg-gradient-to-l from-amber-400 to-amber-600 rounded-l-full transition-all duration-500" style="width: ${a1.stats.micro}%"></div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="h-full bg-gradient-to-r from-sky-400 to-sky-600 rounded-r-full transition-all duration-500" style="width: ${a2.stats.micro}%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Macro Strategy -->
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-bold ${a1.stats.macro >= a2.stats.macro ? 'text-amber-300' : 'text-paper/70'}">${a1.stats.macro} / 100</span>
+                <span class="text-paper/60 uppercase font-semibold">MACRO STRATEGY & MAP CONTROL</span>
+                <span class="font-bold ${a2.stats.macro >= a1.stats.macro ? 'text-sky-400' : 'text-paper/70'}">${a2.stats.macro} / 100</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 h-2.5 rounded-full bg-white/10 overflow-hidden p-0.5">
+                <div class="flex justify-end">
+                  <div class="h-full bg-gradient-to-l from-amber-400 to-amber-600 rounded-l-full transition-all duration-500" style="width: ${a1.stats.macro}%"></div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="h-full bg-gradient-to-r from-sky-400 to-sky-600 rounded-r-full transition-all duration-500" style="width: ${a2.stats.macro}%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tournament Mentality & Clutch -->
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-bold ${a1.stats.clutch >= a2.stats.clutch ? 'text-amber-300' : 'text-paper/70'}">${a1.stats.clutch} / 100</span>
+                <span class="text-paper/60 uppercase font-semibold">TOURNAMENT MENTALITY & CLUTCH</span>
+                <span class="font-bold ${a2.stats.clutch >= a1.stats.clutch ? 'text-sky-400' : 'text-paper/70'}">${a2.stats.clutch} / 100</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 h-2.5 rounded-full bg-white/10 overflow-hidden p-0.5">
+                <div class="flex justify-end">
+                  <div class="h-full bg-gradient-to-l from-amber-400 to-amber-600 rounded-l-full transition-all duration-500" style="width: ${a1.stats.clutch}%"></div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="h-full bg-gradient-to-r from-sky-400 to-sky-600 rounded-r-full transition-all duration-500" style="width: ${a2.stats.clutch}%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Communication & Teamplay -->
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-bold ${a1.stats.teamplay >= a2.stats.teamplay ? 'text-amber-300' : 'text-paper/70'}">${a1.stats.teamplay} / 100</span>
+                <span class="text-paper/60 uppercase font-semibold">COMMUNICATION & TEAMPLAY</span>
+                <span class="font-bold ${a2.stats.teamplay >= a1.stats.teamplay ? 'text-sky-400' : 'text-paper/70'}">${a2.stats.teamplay} / 100</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 h-2.5 rounded-full bg-white/10 overflow-hidden p-0.5">
+                <div class="flex justify-end">
+                  <div class="h-full bg-gradient-to-l from-amber-400 to-amber-600 rounded-l-full transition-all duration-500" style="width: ${a1.stats.teamplay}%"></div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="h-full bg-gradient-to-r from-sky-400 to-sky-600 rounded-r-full transition-all duration-500" style="width: ${a2.stats.teamplay}%"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Footer Details in HUD -->
+          <div class="grid grid-cols-2 gap-3 pt-3 mt-4 border-t border-white/10 text-xs font-mono">
+            <div>
+              <div class="text-[9px] text-paper/50 uppercase">Klub & Prestasi Utama</div>
+              <div class="font-bold text-white text-[11px] truncate">${a1.club}</div>
+              <div class="text-amber-300 text-[10px] truncate">${a1.stats.medals}</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[9px] text-paper/50 uppercase">Klub & Prestasi Utama</div>
+              <div class="font-bold text-white text-[11px] truncate">${a2.club}</div>
+              <div class="text-sky-400 text-[10px] truncate">${a2.stats.medals}</div>
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    // -------------------------------------------------------------
+    // FITUR 2: LEADERBOARD TOP 5 ATLET SUMBAR (HALL OF FAME)
+    // -------------------------------------------------------------
+    function renderTopLeaderboard() {
+      const container = document.getElementById('topLeaderboardContainer');
+      if (!container) return;
+
+      const top5 = [...athletesData].sort((a, b) => b.rating - a.rating).slice(0, 5);
+
+      const medals = [
+        { badge: 'bg-amber-400 text-ink', icon: 'crown', label: 'RANK #1 (GOLD)' },
+        { badge: 'bg-slate-300 text-ink', icon: 'medal', label: 'RANK #2 (SILVER)' },
+        { badge: 'bg-amber-700 text-white', icon: 'award', label: 'RANK #3 (BRONZE)' },
+        { badge: 'bg-black/10 text-ink', icon: 'shield', label: 'RANK #4' },
+        { badge: 'bg-black/10 text-ink', icon: 'shield', label: 'RANK #5' }
+      ];
+
+      container.innerHTML = top5.map((a, i) => `
+        <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5 hover:border-crimson-600/30 transition-all shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded-full ${medals[i].badge} font-mono text-[9px] font-black uppercase">
+                ${medals[i].label}
+              </span>
+              <span class="text-xs font-mono font-bold text-crimson-700">OVR ${a.rating}</span>
+            </div>
+
+            <div class="flex items-center gap-2.5 mb-2.5">
+              <img src="${a.photo}" alt="${a.name}" class="w-10 h-10 rounded-xl object-cover object-top border border-black/10 shrink-0" />
+              <div class="min-w-0">
+                <h4 class="font-display text-xl text-ink uppercase leading-none truncate">${a.ign}</h4>
+                <div class="text-[10px] font-sans font-bold text-ink/70 truncate">${a.name}</div>
+              </div>
+            </div>
+
+            <div class="text-[10px] font-mono text-ink/60 space-y-0.5">
+              <div class="truncate"><span class="font-bold text-ink/80">${a.game}:</span> ${a.role}</div>
+              <div class="text-amber-600 font-semibold truncate">${a.stats.medals}</div>
+            </div>
+          </div>
+
+          <button onclick="inspectCard('${a.id}')" class="mt-3 w-full py-1.5 rounded-lg bg-black/5 hover:bg-crimson-800 hover:text-white text-ink text-[10px] font-mono font-bold uppercase transition-colors flex items-center justify-center gap-1 app-tap">
+            <i data-lucide="maximize-2" class="w-3 h-3"></i>
+            <span>Inspeksi Kartu</span>
+          </button>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // -------------------------------------------------------------
+    // FITUR 3: 3D CARD ROSTER & CAROUSEL ENGINE
+    // -------------------------------------------------------------
     function scrollCardSlider(containerId, dir) {
       const container = document.getElementById(containerId);
       if (!container) return;
@@ -569,7 +1069,6 @@
       }, { passive: true });
     }
 
-    // Spam protection lock
     const flipLock = new Set();
 
     function flipCard(cardId, e) {
@@ -578,7 +1077,6 @@
         e.preventDefault();
       }
 
-      // Prevent animation desync if user rapidly taps
       if (flipLock.has(cardId)) return;
       flipLock.add(cardId);
 
@@ -588,7 +1086,6 @@
         card.classList.toggle("flipped");
       }
 
-      // Unlock after transition finishes (550ms)
       setTimeout(() => {
         flipLock.delete(cardId);
       }, 550);
@@ -600,157 +1097,77 @@
       const card = document.getElementById(cardId);
       if (!card) return;
 
-      // If already flipped, tapping anywhere on the card flips it back!
       if (card.classList.contains("flipped")) {
         flipCard(cardId, e);
         return;
       }
 
-      // If on front face in grid: open modal inspector
-      if (cardId.startsWith("card-ath-") || cardId.startsWith("card-item-") || cardId.startsWith("card-card-")) {
-        const pureId = cardId.replace("card-", "");
-        inspectCard(pureId);
-      } else if (cardId === "inspectorCardInstance") {
+      const athleteId = cardId.replace("card-", "");
+      if (cardId === "inspectorCardInstance") {
         flipCard(cardId, e);
+      } else {
+        inspectCard(athleteId);
       }
     }
 
-    // Athletes Database
-    const athletesData = [
-      {
-        id: "ath-1",
-        category: "pelatda",
-        name: "Muhammad Rayden",
-        ign: "V4ND4L",
-        role: "Duelist / Entry Fragger",
-        game: "VALORANT",
-        club: "Minang Pride Squad",
-        region: "Kota Padang",
-        photo: "/images/athlete-v4nd4l.jpg",
-        rarity: "PELATDA PON",
-        rating: 96,
-        license: "PBESI-SB-2026-VKL-01"
-      },
-      {
-        id: "ath-2",
-        category: "kejurda",
-        name: "Fajri Alamsyah",
-        ign: "F4LC0N",
-        role: "Jungler / Assassin",
-        game: "Mobile Legends",
-        club: "Rang Chaniago Esports",
-        region: "Kota Bukittinggi",
-        photo: "/images/athlete-pro-player.jpg",
-        rarity: "JUARA KEJURDA",
-        rating: 94,
-        license: "PBESI-SB-2026-MLB-14"
-      },
-      {
-        id: "ath-3",
-        category: "pelatda",
-        name: "Ihsan Pratama",
-        ign: "B4R4_AP1",
-        role: "Sniper / Scout Master",
-        game: "PUBG Mobile",
-        club: "Ombak Hunter Pariaman",
-        region: "Kota Pariaman",
-        photo: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
-        rarity: "PELATDA PON",
-        rating: 93,
-        license: "PBESI-SB-2026-PUB-08"
-      },
-      {
-        id: "ath-4",
-        category: "lft",
-        name: "Alif Ramadhan",
-        ign: "SKYFALL",
-        role: "Rusher / In-Game Leader",
-        game: "Free Fire",
-        club: "Looking For Team (LFT)",
-        region: "Kota Payakumbuh",
-        photo: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80",
-        rarity: "FREE AGENT (LFT)",
-        rating: 92,
-        license: "PBESI-SB-2026-FF-21"
-      },
-      {
-        id: "ath-5",
-        category: "pelatda",
-        name: "Nabila Putri",
-        ign: "VALKYRIE",
-        role: "Initiator / Recon Specialist",
-        game: "VALORANT",
-        club: "Srikandi Sumbar Squad",
-        region: "Kota Padang",
-        photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-        rarity: "PELATDA PON",
-        rating: 95,
-        license: "PBESI-SB-2026-VKL-07"
-      },
-      {
-        id: "ath-6",
-        category: "lft",
-        name: "Rian Hidayat",
-        ign: "SH4D0W",
-        role: "Controller / Viper Main",
-        game: "VALORANT",
-        club: "Looking For Team (LFT)",
-        region: "Kota Solok",
-        photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-        rarity: "FREE AGENT (LFT)",
-        rating: 91,
-        license: "PBESI-SB-2026-VKL-22"
-      },
-      {
-        id: "ath-7",
-        category: "kejurda",
-        name: "Dicky Pratama",
-        ign: "KANZ",
-        role: "Midlaner / Mage Roamer",
-        game: "Mobile Legends",
-        club: "Maninjau Titans",
-        region: "Kab. Agam",
-        photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-        rarity: "JUARA KEJURDA",
-        rating: 93,
-        license: "PBESI-SB-2026-MLB-33"
-      },
-      {
-        id: "ath-8",
-        category: "kejurda",
-        name: "Farhan Maulana",
-        ign: "ACE_FUT",
-        role: "Tactical Striker",
-        game: "eFootball",
-        club: "Istano Pagaruyung FC",
-        region: "Kab. Tanah Datar",
-        photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
-        rarity: "JUARA KEJURDA",
-        rating: 90,
-        license: "PBESI-SB-2026-EFT-05"
+    let activeFilter = 'all';
+
+    function setFilter(cat) {
+      activeFilter = cat;
+      document.querySelectorAll('.filter-tab').forEach(b => {
+        b.className = 'filter-tab px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap transition-all text-xs font-semibold app-tap';
+      });
+      const activeBtn = document.getElementById('tab-' + cat);
+      if (activeBtn) {
+        activeBtn.className = 'filter-tab px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap transition-all text-xs font-bold app-tap';
       }
-    ];
+      handleSearch();
+    }
 
-    let currentCategory = "all";
+    function handleSearch() {
+      const q = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+      const region = document.getElementById('regionFilter')?.value || 'all';
+      const game = document.getElementById('gameFilter')?.value || 'all';
 
-    function renderAthletesGrid(items) {
-      const container = document.getElementById("athletesGridContainer");
-      const countEl = document.getElementById("athleteResultCount");
-      if (!container) return;
+      const filtered = athletesData.filter(item => {
+        if (activeFilter !== 'all' && item.category !== activeFilter) return false;
+        if (region !== 'all' && item.region !== region) return false;
+        if (game !== 'all' && item.game !== game) return false;
+        if (q) {
+          const matchName = item.name.toLowerCase().includes(q);
+          const matchIgn = item.ign.toLowerCase().includes(q);
+          const matchRole = item.role.toLowerCase().includes(q);
+          const matchClub = item.club.toLowerCase().includes(q);
+          return matchName || matchIgn || matchRole || matchClub;
+        }
+        return true;
+      });
 
-      countEl.innerText = `MENAMPILKAN ${items.length} KARTU ATLET`;
+      renderAthletes(filtered);
+    }
 
-      if (items.length === 0) {
+    function renderAthletes(items) {
+      const container = document.getElementById('athletesGridContainer');
+      const countBadge = document.getElementById('athleteCountBadge');
+      const totalIndicator = document.getElementById('sliderTotalIndicator');
+
+      if (countBadge) countBadge.innerText = `${items.length} ATLET`;
+      if (totalIndicator) totalIndicator.innerText = items.length;
+
+      if (!items || items.length === 0) {
+        container.className = "w-full py-12 flex flex-col items-center justify-center text-center";
         container.innerHTML = `
-          <div class="col-span-full py-12 text-center p-8 rounded-2xl bg-white border border-black/10 w-full">
-            <i data-lucide="users" class="w-8 h-8 text-crimson-600 mx-auto mb-2"></i>
-            <h4 class="font-display text-2xl text-ink">Tidak Ada Atlet Ditemukan</h4>
-            <p class="font-sans text-xs text-ink/60 mt-1">Coba gunakan kata kunci pencarian atau filter yang berbeda.</p>
+          <div class="w-16 h-16 rounded-full bg-black/5 flex items-center justify-center text-ink/40 mb-3">
+            <i data-lucide="user-x" class="w-8 h-8"></i>
           </div>
+          <h4 class="font-display text-2xl text-ink">Tidak Ada Atlet Ditemukan</h4>
+          <p class="text-xs text-ink/60 max-w-sm mt-1">Coba sesuaikan kata kunci pencarian, pilih pilar kategori lain, atau atur filter wilayah.</p>
         `;
         lucide.createIcons();
         return;
       }
+
+      container.className = "flex overflow-x-auto snap-x snap-mandatory pb-4 gap-4 no-scrollbar sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:overflow-visible sm:pb-0";
 
       container.innerHTML = items.map(c => {
         const isGold = c.rating >= 95;
@@ -821,12 +1238,11 @@
                 </div>
               </div>
 
-              <!-- SISI BELAKANG (OFFICIAL RED COVER, NO TEXT CLUTTER) -->
+              <!-- SISI BELAKANG (OFFICIAL RED COVER) -->
               <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
                 <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang Kartu" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
                 <div class="card-holo-foil"></div>
 
-                <!-- Sleek Quick Return Pill -->
                 <div class="absolute bottom-3 right-3 z-30">
                   <button type="button" onclick="flipCard('card-${c.id}', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap" title="Balik ke Sisi Depan">
                     <i data-lucide="repeat" class="w-3 h-3"></i>
@@ -838,11 +1254,9 @@
             </div>
           </div>
         `;
-      }).join("");
+      }).join('');
 
       lucide.createIcons();
-
-      // Attach 3D physics to each card wrapper
       document.querySelectorAll(".card-wrapper").forEach(wrapper => {
         setupCard3D(wrapper);
       });
@@ -865,7 +1279,7 @@
 
       instance.className = "card-wrapper cursor-pointer";
       instance.innerHTML = `
-        <!-- SISI DEPAN (WHITE) -->
+        <!-- SISI DEPAN -->
         <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
           <div class="card-holo-foil"></div>
 
@@ -889,7 +1303,7 @@
             
             <div class="absolute inset-x-0 bottom-0 pt-6 pb-3 px-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
               <div>
-                <div class="text-[9px] font-mono text-white/60 uppercase font-semibold">NAMA ATLET</div>
+                <div class="text-[9px] font-mono text-white/60 uppercase font-semibold">NAMA LENGKAP</div>
                 <div class="text-sm font-sans font-bold text-white flex items-center gap-1.5">
                   ${c.name}
                   <i data-lucide="badge-check" class="w-4 h-4 text-sky-400"></i>
@@ -917,7 +1331,7 @@
           </div>
         </div>
 
-        <!-- SISI BELAKANG (RED COVER, NO TEXT CLUTTER) -->
+        <!-- SISI BELAKANG -->
         <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
           <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
           <div class="card-holo-foil"></div>
@@ -936,167 +1350,65 @@
       setupCard3D(instance);
     }
 
-    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCardInspector(); });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCardInspector();
+    });
 
     function closeCardInspector() {
       const modal = document.getElementById("cardInspectorModal");
-      modal.classList.add("opacity-0", "pointer-events-none");
+      if (modal) modal.classList.add("opacity-0", "pointer-events-none");
     }
 
     function toggleInspectorHolo() {
       const foil = document.querySelector("#inspectorCardInstance .card-holo-foil");
-      if (foil) {
-        foil.classList.toggle("opacity-0");
-      }
+      if (!foil) return;
+      foil.style.opacity = foil.style.opacity === "0.5" ? "0.15" : "0.5";
     }
 
-    // 3D Physics & Tilt
-    function setupCard3D(card) {
-      const foil = card.querySelector(".card-holo-foil");
+    function setupCard3D(wrapper) {
+      if (!wrapper) return;
+      const holo = wrapper.querySelector(".card-holo-foil");
 
-      card.addEventListener("mousemove", (e) => {
-        if (card.classList.contains("flipped")) return;
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        const tiltX = (x - 0.5) * 20;
-        const tiltY = (y - 0.5) * -20;
+      function updateCardTransform(x, y) {
+        if (wrapper.classList.contains("flipped")) return;
+        const rect = wrapper.getBoundingClientRect();
+        const px = (x - rect.left) / rect.width;
+        const py = (y - rect.top) / rect.height;
 
-        card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+        const tiltX = (py - 0.5) * -16;
+        const tiltY = (px - 0.5) * 16;
 
-        if (foil) {
-          foil.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        wrapper.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateZ(12px)`;
+
+        if (holo) {
+          holo.style.backgroundPosition = `${px * 100}% ${py * 100}%`;
+          holo.style.opacity = "0.25";
         }
-      });
+      }
 
-      card.addEventListener("mouseleave", () => {
-        if (card.classList.contains("flipped")) return;
-        card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
-        if (foil) foil.style.backgroundPosition = "50% 50%";
-      });
+      function resetCardTransform() {
+        if (wrapper.classList.contains("flipped")) return;
+        wrapper.style.transform = "rotateX(0deg) rotateY(0deg) translateZ(0px)";
+        if (holo) holo.style.opacity = "0.12";
+      }
 
-      // Mobile Touch Physics
-      card.addEventListener("touchstart", () => {
-        card.classList.add("touching");
-      }, { passive: true });
+      wrapper.addEventListener("mousemove", (e) => updateCardTransform(e.clientX, e.clientY));
+      wrapper.addEventListener("mouseleave", resetCardTransform);
 
-      card.addEventListener("touchmove", (e) => {
-        if (card.classList.contains("flipped") || e.touches.length === 0) return;
-        const touch = e.touches[0];
-        const rect = card.getBoundingClientRect();
-        const x = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
-        const y = Math.max(0, Math.min(1, (touch.clientY - rect.top) / rect.height));
-        const tiltX = (x - 0.5) * 18;
-        const tiltY = (y - 0.5) * -18;
-
-        card.style.transform = `perspective(1000px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-
-        if (foil) {
-          foil.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+      wrapper.addEventListener("touchmove", (e) => {
+        if (e.touches.length > 0) {
+          updateCardTransform(e.touches[0].clientX, e.touches[0].clientY);
         }
       }, { passive: true });
-
-      card.addEventListener("touchend", () => {
-        card.classList.remove("touching");
-        if (card.classList.contains("flipped")) return;
-        card.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
-      });
+      wrapper.addEventListener("touchend", resetCardTransform);
     }
 
-    // Filtering & Search
-    function filterCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll(".category-btn").forEach(btn => {
-        btn.className = "category-btn px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap text-xs transition-all";
-      });
-      const activeBtn = document.getElementById("tab-" + cat);
-      if (activeBtn) {
-        activeBtn.className = "category-btn px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap text-xs font-bold transition-all";
-      }
-      handleSearch();
-    }
-
-    function handleSearch() {
-      const query = (document.getElementById("athleteSearchInput")?.value || "").toLowerCase().trim();
-      const region = document.getElementById("athleteRegionFilter")?.value || "all";
-      const game = document.getElementById("athleteGameFilter")?.value || "all";
-
-      const filtered = athletesData.filter(c => {
-        const matchCat = currentCategory === "all" || c.category === currentCategory;
-        const matchReg = region === "all" || c.region === region;
-        const matchGame = game === "all" || c.game === game;
-        const matchText = !query || 
-          c.name.toLowerCase().includes(query) ||
-          c.ign.toLowerCase().includes(query) ||
-          c.game.toLowerCase().includes(query) ||
-          c.role.toLowerCase().includes(query) ||
-          c.region.toLowerCase().includes(query) ||
-          (c.club && c.club.toLowerCase().includes(query));
-
-        return matchCat && matchReg && matchGame && matchText;
-      });
-
-      renderAthletesGrid(filtered);
-    }
-
-    // Registration Modal
-    function openRegistrationModal() {
-      const modal = document.getElementById("registrationModal");
-      modal.classList.remove("opacity-0", "pointer-events-none");
-    }
-
-    function closeRegistrationModal() {
-      const modal = document.getElementById("registrationModal");
-      modal.classList.add("opacity-0", "pointer-events-none");
-    }
-
-    function handleRegistrationSubmit(e) {
-      e.preventDefault();
-
-      const name = document.getElementById("regName").value;
-      const ign = document.getElementById("regIGN").value;
-      const game = document.getElementById("regGame").value;
-      const role = document.getElementById("regRole").value;
-      const region = document.getElementById("regRegion").value;
-      const club = document.getElementById("regClub").value || "Looking For Team (LFT)";
-      const category = document.getElementById("regCategory").value;
-
-      const randomRating = Math.floor(Math.random() * 8) + 90;
-      const newId = "ath-" + (athletesData.length + 1);
-      const randomLic = "PBESI-SB-2026-REG-" + Math.floor(Math.random() * 900 + 100);
-
-      const newAthlete = {
-        id: newId,
-        category: category,
-        name: name,
-        ign: ign,
-        role: role,
-        game: game,
-        club: club,
-        region: region,
-        photo: "/images/athlete-pro-player.jpg",
-        rarity: category === 'pelatda' ? 'PELATDA PON' : category === 'kejurda' ? 'JUARA KEJURDA' : 'FREE AGENT (LFT)',
-        rating: randomRating,
-        license: randomLic
-      };
-
-      athletesData.unshift(newAthlete);
-      handleSearch();
-
-      closeRegistrationModal();
-      inspectCard(newId);
-    }
-
-    function toggleMobileNav() {
-      const menu = document.getElementById("mobileNavMenu");
-      menu.classList.toggle("hidden");
-    }
-
-    // Initialize
-    document.addEventListener("DOMContentLoaded", () => {
-      renderAthletesGrid(athletesData);
+    document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      initComparisonSelectors();
+      renderTopLeaderboard();
+      handleSearch();
+      initSliderObserver();
     });
   </script>
-</body>
-</html>
+</body></html>

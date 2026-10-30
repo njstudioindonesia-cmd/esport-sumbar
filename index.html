@@ -256,55 +256,69 @@
   </header>
 
   <!-- ============================================================== -->
-  <!-- 2. MOBILE MAIN BANNER (BANNER UTAMA RESMI PADA TAMPILAN MOBILE)-->
+  <!-- 2. MOBILE MAIN BANNER (VIVID ESPORTS ARENA STAGE) -->
   <!-- ============================================================== -->
   <section class="block md:hidden px-3.5 pt-3 pb-2">
-    <div class="bg-gradient-to-br from-crimson-950 via-crimson-900 to-crimson-800 rounded-3xl p-5 text-paper relative overflow-hidden shadow-xl border border-crimson-700/50">
+    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-crimson-600/50 bg-[#160205]">
       
-      <!-- Top Badges Row -->
-      <div class="flex items-center justify-between mb-3.5 relative z-10">
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[9.5px] font-mono text-amber-300 font-bold uppercase tracking-wide">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          OFFICIAL REGIONAL HUB // ESI 2026
+      <!-- REAL ESPORT ARENA STAGE IMAGE BACKGROUND (VIBRANT & VISIBLE) -->
+      <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <img src="/images/arena-stage-lights.jpg" alt="Esports Arena Stage" class="w-full h-full object-cover object-right filter brightness-90 contrast-125 scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#200206] via-[#200206]/85 to-[#200206]/35"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#200206] via-transparent to-black/40"></div>
+        <div class="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-crimson-600/30 blur-2xl"></div>
+      </div>
+
+      <!-- BANNER CONTENT CONTAINER -->
+      <div class="relative z-10 p-5 text-paper">
+        
+        <!-- Top Status Row -->
+        <div class="flex items-center justify-between mb-3">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[9px] font-mono text-amber-300 font-bold uppercase tracking-wide shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            PORTAL RESMI // ESI SUMBAR 2026
+          </div>
+          <div class="flex items-center gap-2">
+            <img src="/pbesi-logo.png" alt="PBESI" class="h-6 w-auto object-contain filter drop-shadow brightness-110" />
+            <img src="/images/esport-sumbar-logo.png" alt="Esport Sumbar" class="h-6 w-auto object-contain filter drop-shadow brightness-110" />
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <img src="/pbesi-logo.png" alt="PBESI" class="h-6 w-auto object-contain filter drop-shadow brightness-110" />
+
+        <!-- Headline Area -->
+        <div class="space-y-1.5 my-1 max-w-[280px]">
+          <div class="text-[9.5px] font-mono text-amber-300 font-bold uppercase tracking-widest flex items-center gap-1.5">
+            <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
+            PELATDA PON & DATABASE RESMI
+          </div>
+          <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-white uppercase leading-none drop-shadow-md">
+            PASPOR RESMI ATLET & TALENTA <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400 font-black">ESPORT SUMATERA BARAT</span>
+          </h2>
+          <p class="text-[11.5px] text-paper/90 font-sans leading-relaxed pt-1">
+            Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.
+          </p>
         </div>
-      </div>
 
-      <!-- Banner Main Headline -->
-      <div class="relative z-10 space-y-1.5">
-        <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-white uppercase leading-none drop-shadow-sm">
-          PASPOR RESMI ATLET & TALENTA <br />
-          <span class="text-amber-300">ESPORT SUMATERA BARAT</span>
-        </h2>
-        <p class="text-[11.5px] text-paper/85 font-sans leading-relaxed">
-          Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.
-        </p>
-      </div>
+        <!-- Action Buttons inside Mobile Banner -->
+        <div class="grid grid-cols-2 gap-2.5 mt-4">
+          <a href="/daftar" class="py-2.5 px-3 rounded-xl bg-white hover:bg-paper text-crimson-900 font-mono text-xs font-black uppercase tracking-wider text-center shadow-lg flex items-center justify-center gap-1.5 transition-all app-tap">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-crimson-700"></i>
+            <span>Daftar Kartu</span>
+          </a>
+          <a href="/katalog" class="py-2.5 px-3 rounded-xl bg-black/60 hover:bg-black/80 text-white font-mono text-xs font-bold uppercase tracking-wider text-center border border-white/30 backdrop-blur-md flex items-center justify-center gap-1.5 transition-all app-tap">
+            <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-amber-300"></i>
+            <span>Katalog</span>
+          </a>
+        </div>
 
-      <!-- Action Buttons inside Mobile Banner -->
-      <div class="mt-4 flex items-center gap-2.5 relative z-10">
-        <a href="/daftar" class="flex-1 py-2.5 px-3 rounded-xl bg-white hover:bg-paper text-crimson-900 font-mono text-xs font-black uppercase tracking-wider text-center shadow-lg flex items-center justify-center gap-1.5 app-tap">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-crimson-700"></i>
-          <span>Buat Kartu</span>
-        </a>
-        <a href="/katalog" class="flex-1 py-2.5 px-3 rounded-xl bg-black/40 hover:bg-black/50 text-white font-mono text-xs font-bold uppercase tracking-wider text-center border border-white/25 flex items-center justify-center gap-1.5 app-tap">
-          <i data-lucide="grid" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span>Katalog</span>
-        </a>
-      </div>
+        <!-- Live metrics pill inside banner -->
+        <div class="mt-3.5 pt-3 border-t border-white/15 flex items-center justify-between text-[9.5px] font-mono text-paper/85">
+          <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-amber-300"></i> 19 Kab/Kota</span>
+          <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3 text-emerald-400"></i> Resmi ESI</span>
+          <span class="flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3 text-amber-300"></i> Kartu 3D</span>
+        </div>
 
-      <!-- Live metrics pill inside banner -->
-      <div class="mt-3.5 pt-3 border-t border-white/15 flex items-center justify-between text-[9px] font-mono text-paper/80 relative z-10">
-        <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-amber-300"></i> 19 Kab/Kota</span>
-        <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3 text-emerald-400"></i> Resmi ESI</span>
-        <span class="flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3 text-amber-300"></i> Kartu 3D</span>
       </div>
-
-      <!-- Background Ambient Glow & Cyber Grid -->
-      <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-crimson-500/25 blur-3xl pointer-events-none"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none opacity-40"></div>
     </div>
   </section>
 
@@ -749,7 +763,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="mt-16 border-t border-black/[0.08] py-8 text-center text-xs text-ink/60 font-mono">
+  <footer class="hidden md:block mt-16 border-t border-black/[0.08] py-8 text-center text-xs text-ink/60 font-mono">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>© 2026 Platform Provider Esport Sumatera Barat • Mitra Resmi ESI Sumbar</div>
       <div class="flex items-center gap-4 text-[11px]">
