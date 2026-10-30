@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "routes": [
     {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/masuk",
+      "dest": "/login.html"
+    },
+    {
       "src": "/admin-super",
       "dest": "/admin-super.html"
     },
