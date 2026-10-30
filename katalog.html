@@ -74,12 +74,13 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* 3D Card Engine */
+    /* 3D CARD ENGINE (SYNCHRONIZED WITH INDEX & ATLET) */
     .card-scene {
       perspective: 1200px;
       -webkit-perspective: 1200px;
       position: relative;
       user-select: none;
+      touch-action: pan-y;
     }
 
     .card-size-portrait {
@@ -89,73 +90,139 @@
     }
 
     .card-wrapper {
+      position: relative;
       width: 100%;
       height: 100%;
-      position: relative;
       transform-style: preserve-3d;
       -webkit-transform-style: preserve-3d;
-      transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform;
+      transition: transform 0.15s ease-out;
       border-radius: 20px;
     }
 
+    /* CARD FACES WITH FLAWLESS ROTATION TIMING */
     .card-face {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
       border-radius: 20px;
       overflow: hidden;
+      box-sizing: border-box;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      will-change: transform, opacity;
+      transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15), opacity 0.25s ease;
+      box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-wrapper:hover .card-face {
+      box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.3), 0 0 25px rgba(224, 34, 45, 0.22);
     }
 
     .card-face-front {
       transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
       z-index: 5;
       opacity: 1;
+      pointer-events: auto;
     }
 
     .card-face-back {
       transform: rotateY(-180deg) translateZ(1px);
+      -webkit-transform: rotateY(-180deg) translateZ(1px);
       z-index: 1;
       opacity: 0;
+      pointer-events: none;
     }
 
     .card-wrapper.flipped .card-face-front {
       transform: rotateY(180deg) translateZ(1px);
+      -webkit-transform: rotateY(180deg) translateZ(1px);
       z-index: 1;
       opacity: 0;
+      pointer-events: none;
     }
 
     .card-wrapper.flipped .card-face-back {
       transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
       z-index: 25;
       opacity: 1;
+      pointer-events: auto;
     }
 
-    /* Holographic Prismatic Sheen */
+    /* Living Holographic Prismatic Sheen (Vivid, Visible, Living) */
     .card-holo-foil {
       position: absolute;
       inset: 0;
       pointer-events: none;
       border-radius: inherit;
-      opacity: 0.14;
-      transition: opacity 0.3s ease;
-      mix-blend-mode: color-dodge;
+      z-index: 12;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
       background: linear-gradient(
-        115deg,
+        125deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.45) 30%,
-        rgba(255, 0, 50, 0.55) 45%,
-        rgba(0, 200, 255, 0.55) 55%,
-        rgba(255, 215, 0, 0.65) 70%,
+        rgba(255, 255, 255, 0.45) 15%,
+        rgba(255, 45, 85, 0.5) 28%,
+        rgba(255, 215, 0, 0.55) 42%,
+        rgba(0, 230, 255, 0.55) 58%,
+        rgba(168, 85, 247, 0.5) 72%,
+        rgba(255, 255, 255, 0.45) 86%,
         transparent 100%
       );
-      background-size: 250% 250%;
+      background-size: 260% 260%;
       background-position: 50% 50%;
+      animation: holoPrismSweep 6s ease-in-out infinite alternate;
+      transition: opacity 0.3s ease, background-position 0.15s ease-out;
     }
+
+    @keyframes holoPrismSweep {
+      0% {
+        background-position: 0% 10%;
+        opacity: 0.28;
+      }
+      50% {
+        background-position: 100% 90%;
+        opacity: 0.48;
+      }
+      100% {
+        background-position: 25% 75%;
+        opacity: 0.32;
+      }
+    }
+
     .card-wrapper:hover .card-holo-foil {
-      opacity: 0.28;
+      opacity: 0.65;
+    }
+
+    /* Specular diagonal gleam */
+    .card-face-front::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 14;
+      background: linear-gradient(
+        110deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.35) 45%,
+        rgba(255, 255, 255, 0.75) 50%,
+        rgba(255, 255, 255, 0.35) 55%,
+        transparent 65%
+      );
+      background-size: 250% 250%;
+      background-position: -120% -120%;
+      transition: background-position 0.75s ease;
+    }
+
+    .card-wrapper:hover .card-face-front::after {
+      background-position: 180% 180%;
     }
   </style>
 </head>
@@ -981,6 +1048,7 @@
       }).join('');
 
       lucide.createIcons();
+      initAllCardTilts();
     }
 
     // -------------------------------------------------------------
@@ -1250,10 +1318,68 @@
       if (card) {
         card.style.transform = "";
         card.classList.toggle("flipped");
+
+        const holo = card.querySelector(".card-holo-foil");
+        if (holo) {
+          holo.style.opacity = "0.7";
+          setTimeout(() => { holo.style.opacity = "0.38"; }, 650);
+        }
       }
       setTimeout(() => {
         flipLock.delete(cardId);
-      }, 550);
+      }, 500);
+    }
+
+    // Interactive 3D Tilt and Touch Responsiveness
+    function initCardTilt(sceneEl) {
+      const wrapper = sceneEl.querySelector(".card-wrapper");
+      if (!wrapper) return;
+      const holo = wrapper.querySelector(".card-holo-foil");
+
+      function updateTilt(clientX, clientY) {
+        const rect = wrapper.getBoundingClientRect();
+        const px = (clientX - rect.left) / rect.width;
+        const py = (clientY - rect.top) / rect.height;
+        if (px < -0.1 || px > 1.1 || py < -0.1 || py > 1.1) return;
+
+        const tiltX = (py - 0.5) * -14;
+        const tiltY = (px - 0.5) * 14;
+
+        if (wrapper.classList.contains("flipped")) {
+          wrapper.style.transform = "rotateY(180deg) rotateX(" + tiltX.toFixed(2) + "deg) rotateY(" + (-tiltY).toFixed(2) + "deg) translateZ(8px)";
+        } else {
+          wrapper.style.transform = "rotateX(" + tiltX.toFixed(2) + "deg) rotateY(" + tiltY.toFixed(2) + "deg) translateZ(8px)";
+        }
+
+        if (holo) {
+          holo.style.backgroundPosition = (px * 100) + "% " + (py * 100) + "%";
+          holo.style.opacity = "0.58";
+        }
+      }
+
+      function resetTilt() {
+        if (wrapper.classList.contains("flipped")) {
+          wrapper.style.transform = "";
+        } else {
+          wrapper.style.transform = "";
+        }
+        if (holo) holo.style.opacity = "0.38";
+      }
+
+      sceneEl.onmousemove = (e) => updateTilt(e.clientX, e.clientY);
+      sceneEl.onmouseleave = resetTilt;
+
+      sceneEl.ontouchmove = (e) => {
+        if (e.touches && e.touches.length > 0) {
+          updateTilt(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      };
+      sceneEl.ontouchend = resetTilt;
+      sceneEl.ontouchcancel = resetTilt;
+    }
+
+    function initAllCardTilts() {
+      document.querySelectorAll(".card-scene").forEach(initCardTilt);
     }
 
     function handleCardClick(cardId, e) {
