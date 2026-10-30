@@ -114,3 +114,42 @@ Seluruh domain sistem dijalankan dengan pola arsitektur **Modular Microsystem** 
    * Tampilan dioptimalkan untuk perangkat seluler dengan navigasi bawah mengambang (*floating dock*), serta tampilan luas pada tablet dan layar desktop.
 5. **Palet Warna Luxury Executive**:
    * Crimson Red (`#B3121B`), Off-Black (`#0B0E14`), Clean Paper White (`#F4F1EE`), dan Aksen Emas Prestasi (`#F59E0B`).
+
+---
+
+## 🔐 ALUR PENGGUNA NYATA (END-TO-END FLOW & AUTH GUARD)
+
+Sistem telah dilengkapi dengan alur autentikasi dan pendaftaran nyata (*real lifecycle*):
+
+```mermaid
+flowchart TD
+    A[Pengunjung Baru / Atlet] --> B{Akses Halaman?}
+    B -->|Buka /profile Langsung| C[Auth Gate: Akses Terkunci]
+    C -->|Pilih Masuk| D[/login]
+    C -->|Pilih Daftar| E[/daftar-player]
+    C -->|Pilih 1-Klik Demo| F[Login Atlet Demo: V4ND4L]
+    
+    E --> G[Isi Formulir Lengkap & Kredensial Akun]
+    G --> H[Submit ke /api/registrasi/player]
+    H --> I[Backend Generate No. Paspor Resmi: PBESI-SB-2026-...]
+    I --> J[Simpan Sesi & Token ke LocalStorage]
+    J --> K[Modal Berhasil: Buka Paspor Digital Saya]
+    
+    K --> L[Halaman /profile Terbuka Dinamis]
+    F --> L
+    D -->|Autentikasi Berhasil| L
+    
+    L --> M[Tampilan Paspor 3D Interaktif & Telemetri OVR]
+    L --> N[Aksi: Keluar / Logout]
+    N --> O[Hapus Sesi & Relock Profile ke Auth Gate]
+```
+
+1. **Pendaftaran Mandiri Atlet (`/daftar-player`)**:
+   * Atlet mengisi data identitas, game utama, role, wilayah 19 Kab/Kota, kontak, dan kredensial akun login (Email & Kata Sandi).
+   * Saat dikirim (*Submit*), backend microservices memproses pendaftaran, menerbitkan **Nomor Paspor Digital Resmi** secara otomatis (contoh: `PBESI-SB-2026-VAL-699`), dan mencatat akun ke pangkalan data ekosistem.
+   * Sesi login langsung diaktifkan secara otomatis, dan modal sukses menampilkan tombol langsung **"Buka Paspor Digital Saya Sekarang"** menuju `/profile`.
+
+2. **Auth Gate pada Halaman Profil (`/profile`)**:
+   * **Kondisi Belum Login**: Menampilkan layar gerbang keamanan (*Security Lock Gate*) dengan badge berkedip `AKSES PASPOR DIGITAL TERKUNCI // AUTENTIKASI DIBUTUHKAN`. Dilengkapi opsi **Masuk ke Akun**, **Daftar Paspor Baru**, serta opsi **1-Klik Uji Coba Demo Atlet (Muhammad Rayden - V4ND4L)**.
+   * **Kondisi Sudah Login**: Secara dinamis menampilkan data otentik atlet (Foto, Nama Lengkap, In-Game Name, Game & Role, Wilayah Domisili, Lisensi PBESI, OVR Rating, serta kartu 3D dua sisi dengan verifikasi QR code).
+   * **Aksi Keluar (Logout)**: Tombol *Keluar* di navbar dan kartu profil menghapus token sesi secara aman dan mengunci kembali tampilan ke Auth Gate.
