@@ -35,7 +35,17 @@ export async function dispatchApiRequest(req, res) {
 
   // 3. Parse URL & Query string
   const fullUrl = new URL(req.url, `http://${req.headers?.host || 'localhost'}`);
-  const pathname = fullUrl.pathname.replace(/\/+$/, '') || '/api';
+  let pathname = fullUrl.pathname.replace(/\/+$/, '') || '/api';
+
+  // Support Vercel Catch-All [...path] query array
+  if (req.query && Array.isArray(req.query.path)) {
+    pathname = '/api/' + req.query.path.join('/');
+  } else if (req.query && typeof req.query.path === 'string') {
+    pathname = '/api/' + req.query.path;
+  } else if (!pathname.startsWith('/api')) {
+    pathname = '/api' + (pathname.startsWith('/') ? pathname : '/' + pathname);
+  }
+
   const query = Object.assign({}, Object.fromEntries(fullUrl.searchParams.entries()), req.query || {});
 
   // 4. Parse Body (supports pre-parsed Vercel req.body and raw node stream)
