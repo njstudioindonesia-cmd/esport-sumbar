@@ -350,16 +350,34 @@
   <!-- ============================================================== -->
   <!-- 4. CARDS GALLERY CONTAINER                                     -->
   <!-- ============================================================== -->
-  <section class="px-3 sm:px-6 lg:px-12 py-6 max-w-7xl mx-auto">
-    <div class="flex items-center justify-between mb-4">
+  <section class="px-3 sm:px-6 lg:px-12 py-6 max-w-7xl mx-auto overflow-hidden">
+    <div class="flex items-center justify-between mb-3">
       <div class="flex items-center gap-2">
         <span id="directoryCountBadge" class="px-2.5 py-1 rounded-full bg-crimson-800 text-paper font-mono text-[10px] font-bold">10 ENTITAS</span>
-        <span class="text-xs font-mono font-bold text-ink uppercase">TERDATA DI DATABASE SUMBAR</span>
+        <span class="text-xs font-mono font-bold text-ink uppercase">DATABASE SUMBAR</span>
       </div>
       <span class="text-[10px] font-mono text-ink/50 hidden sm:inline">Sentuh kartu untuk memutar ke sisi belakang</span>
     </div>
 
-    <div id="cardsGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
+    <!-- Mobile Slide Controller Bar -->
+    <div class="flex sm:hidden items-center justify-between py-2 px-3 mb-3 bg-white/80 backdrop-blur-md rounded-2xl border border-black/10 shadow-sm">
+      <div class="flex items-center gap-1.5">
+        <i data-lucide="move-horizontal" class="w-4 h-4 text-crimson-600 animate-pulse"></i>
+        <span class="text-[10.5px] font-mono font-bold text-ink">Geser Kartu (Swipe ⟷)</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <button type="button" onclick="scrollCardSlider('cardsGridContainer', -1)" class="w-7 h-7 rounded-lg bg-black/5 active:bg-black/15 flex items-center justify-center text-ink app-tap" aria-label="Sebelumnya">
+          <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        </button>
+        <span id="sliderCardIndex" class="text-[11px] font-mono font-bold px-1 text-crimson-700 min-w-[40px] text-center">1 / 10</span>
+        <button type="button" onclick="scrollCardSlider('cardsGridContainer', 1)" class="w-7 h-7 rounded-lg bg-black/5 active:bg-black/15 flex items-center justify-center text-ink app-tap" aria-label="Selanjutnya">
+          <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Responsive Container: Mobile Horizontal Snap Slider / Desktop Multi-Column Grid -->
+    <div id="cardsGridContainer" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-1 px-4 mx-0 no-scrollbar sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 justify-items-center scroll-smooth">
       <!-- Injected Dynamically via JS -->
     </div>
   </section>
@@ -444,6 +462,27 @@
   <!-- 7. JAVASCRIPT DIRECTORY ENGINE                                 -->
   <!-- ============================================================== -->
   <script>
+    
+    function scrollCardSlider(containerId, dir) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const step = 300;
+      container.scrollBy({ left: dir * step, behavior: 'smooth' });
+    }
+
+    function initSliderObserver() {
+      const container = document.getElementById('cardsGridContainer');
+      const indexEl = document.getElementById('sliderCardIndex');
+      if (!container || !indexEl) return;
+
+      container.addEventListener('scroll', () => {
+        const step = 300;
+        const total = container.children.length;
+        const current = Math.min(Math.max(1, Math.round(container.scrollLeft / step) + 1), total || 1);
+        indexEl.innerText = current + ' / ' + (total || 1);
+      }, { passive: true });
+    }
+
     const flipLock = new Set();
 
     function flipCard(cardId, e) {
@@ -655,7 +694,7 @@
         const ratingBg = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-white';
 
         return `
-          <div class="card-scene card-fixed select-none">
+          <div class="card-scene card-fixed select-none snap-center shrink-0">
             <div id="card-${c.id}" class="card-wrapper cursor-pointer group" onclick="handleCardClick('card-${c.id}', event)">
               
               <!-- SISI DEPAN -->
