@@ -208,6 +208,7 @@
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    html, body { max-width: 100vw; overflow-x: hidden; }
   </style>
 </head>
 
@@ -237,11 +238,11 @@
 
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
-        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Beranda</a>
-        <a href="/katalog" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Katalog Direktori</a>
-        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Galeri Atlet</a>
-        <a href="/wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">19 Wilayah</a>
-        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Tentang ESI</a>
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Home</a>
+        <a href="/katalog" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Katalog</a>
+        <a href="/cari" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Pencarian</a>
+        <a href="/wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Wilayah</a>
+        <a href="/profile" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Profile</a>
       </nav>
 
       <!-- Desktop Action -->
@@ -394,7 +395,7 @@
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pt-3 border-t border-black/5">
         
         <!-- Category Filter Tabs -->
-        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0 w-full min-w-0 max-w-full">
           <button onclick="filterCategory('all')" id="tab-all" class="category-btn px-3.5 py-1.5 rounded-full bg-crimson-800 text-paper shadow-sm whitespace-nowrap text-xs font-bold transition-all">Semua Atlet</button>
           <button onclick="filterCategory('pelatda')" id="tab-pelatda" class="category-btn px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap text-xs transition-all">★ Pelatda PON</button>
           <button onclick="filterCategory('lft')" id="tab-lft" class="category-btn px-3.5 py-1.5 rounded-full bg-[#F7F7F8] text-ink hover:bg-black/5 whitespace-nowrap text-xs transition-all">Free Agent (LFT)</button>
@@ -456,7 +457,7 @@
     </div>
 
     <!-- Responsive Container: Mobile Horizontal Snap Slider / Desktop Multi-Column Grid -->
-    <div id="athletesGridContainer" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-1 px-4 mx-0 no-scrollbar sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 justify-items-center scroll-smooth">
+    <div id="athletesGridContainer" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-1 px-4 mx-0 no-scrollbar sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 justify-items-center scroll-smooth w-full min-w-0 max-w-full">
       <!-- Injected Dynamically via JS -->
     </div>
   </section>
@@ -585,42 +586,47 @@
   <!-- 7. FLOATING MOBILE DOCK BAR                                    -->
   <!-- ============================================================== -->
   <!-- Mobile Bottom Dock (5 Unique Destinations) -->
-  <div class="md:hidden fixed bottom-0 inset-x-0 z-50 p-2 pointer-events-none">
-    <div class="max-w-[360px] mx-auto bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] px-2 py-1.5 flex items-center justify-between pointer-events-auto">
+  <!-- ============================================================== -->
+  <!-- MOBILE BOTTOM DOCK (5 SERIES BUTTONS)                          -->
+  <!-- ============================================================== -->
+  <div id="mobile-bottom-dock" class="md:hidden fixed bottom-2 inset-x-2 z-50 flex justify-center pointer-events-none select-none">
+    <div class="w-full max-w-[350px] bg-white/95 backdrop-blur-xl border border-black/10 rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.18)] px-1.5 py-1.5 flex items-center justify-between pointer-events-auto">
       
-      <!-- 1. Beranda -->
-      <a href="/" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
-        <i data-lucide="home" class="w-4 h-4"></i>
-        <span class="text-[9px] font-mono  leading-none mt-1">Beranda</span>
+      <!-- 1. Home -->
+      <a href="/" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
+        <i data-lucide="home" class="w-5 h-5 "></i>
+        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Home</span>
       </a>
 
       <!-- 2. Katalog -->
-      <a href="/katalog" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
-        <i data-lucide="grid" class="w-4 h-4"></i>
-        <span class="text-[9px] font-mono  leading-none mt-1">Katalog</span>
+      <a href="/katalog" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
+        <i data-lucide="layout-grid" class="w-5 h-5 "></i>
+        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Katalog</span>
       </a>
 
-      <!-- 3. Center FAB (Daftar) -->
-      <div class="flex items-center justify-center w-12">
-        <a href="/daftar" class="w-10 h-10 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-600 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white shrink-0  app-tap" aria-label="Daftar & Terbitkan Kartu">
-          <i data-lucide="plus" class="w-4 h-4 text-amber-300"></i>
-        </a>
-      </div>
-
-      <!-- 4. Galeri Atlet -->
-      <a href="/atlet" class="flex flex-col items-center justify-center w-14 py-1 text-crimson-700 app-tap">
-        <i data-lucide="layers" class="w-4 h-4"></i>
-        <span class="text-[9px] font-mono font-bold leading-none mt-1">Atlet</span>
+      <!-- 3. Pencarian (Center Elevated Glowing FAB) -->
+      <a href="/cari" class="relative -top-3.5 flex flex-col items-center justify-center shrink-0 app-tap group px-0.5">
+        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-crimson-900 via-crimson-700 to-crimson-500 text-white shadow-[0_8px_20px_-2px_rgba(179,18,27,0.55)] border-[3px] border-white flex items-center justify-center transform group-active:scale-95 transition-transform ">
+          <i data-lucide="search" class="w-5 h-5 text-white stroke-[2.5]"></i>
+        </div>
+        <span class="text-[8.5px] font-mono font-bold text-ink/80 -mt-0.5 tracking-tight">Pencarian</span>
       </a>
 
-      <!-- 5. 19 Wilayah -->
-      <a href="/wilayah" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
-        <i data-lucide="map-pin" class="w-4 h-4"></i>
-        <span class="text-[9px] font-mono  leading-none mt-1">Wilayah</span>
+      <!-- 4. Wilayah -->
+      <a href="/wilayah" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
+        <i data-lucide="map-pin" class="w-5 h-5 "></i>
+        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Wilayah</span>
+      </a>
+
+      <!-- 5. Profile -->
+      <a href="/profile" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
+        <i data-lucide="user" class="w-5 h-5 "></i>
+        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Profile</span>
       </a>
 
     </div>
   </div>
+  <!-- /MOBILE BOTTOM DOCK -->
 
   <!-- ============================================================== -->
   <!-- 8. JAVASCRIPT ENGINE (NO SOUND, SPAM-PROOF, WHITE/RED CARDS)   -->

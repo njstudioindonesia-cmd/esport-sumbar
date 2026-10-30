@@ -4,6 +4,22 @@
   "trailingSlash": false,
   "routes": [
     {
+      "src": "/cari",
+      "dest": "/cari.html"
+    },
+    {
+      "src": "/search",
+      "dest": "/cari.html"
+    },
+    {
+      "src": "/profile",
+      "dest": "/profile.html"
+    },
+    {
+      "src": "/profil",
+      "dest": "/profile.html"
+    },
+    {
       "src": "/katalog",
       "dest": "/katalog.html"
     },
@@ -12,12 +28,12 @@
       "dest": "/wilayah.html"
     },
     {
-      "src": "/daftar",
-      "dest": "/daftar.html"
-    },
-    {
       "src": "/atlet",
       "dest": "/atlet.html"
+    },
+    {
+      "src": "/daftar",
+      "dest": "/daftar.html"
     },
     {
       "src": "/about",
