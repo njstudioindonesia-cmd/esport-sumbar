@@ -12,6 +12,7 @@ import { MicroStats } from './microsystems/stats.js';
  * UNIFIED MICROSYSTEM DISPATCHER & GATEWAY
  * Menghubungkan seluruh request /api/* ke modul microsystem terkait
  * dengan isolasi kesalahan (fault tolerance) & circuit breaker.
+ * Kompatibel 100% dengan Node.js lokal dan Vercel Serverless Runtime.
  */
 export async function dispatchApiRequest(req, res) {
   // 1. Set Security & CORS Headers
@@ -23,17 +24,21 @@ export async function dispatchApiRequest(req, res) {
 
   // 2. Preflight OPTIONS handling
   if (req.method === 'OPTIONS') {
-    res.writeHead(204);
-    res.end();
+    if (typeof res.status === 'function') {
+      res.status(204).end();
+    } else {
+      res.writeHead(204);
+      res.end();
+    }
     return;
   }
 
   // 3. Parse URL & Query string
-  const fullUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  const pathname = fullUrl.pathname.replace(/\/+$/, ''); // strip trailing slash
-  const query = Object.fromEntries(fullUrl.searchParams.entries());
+  const fullUrl = new URL(req.url, `http://${req.headers?.host || 'localhost'}`);
+  const pathname = fullUrl.pathname.replace(/\/+$/, '') || '/api';
+  const query = Object.assign({}, Object.fromEntries(fullUrl.searchParams.entries()), req.query || {});
 
-  // 4. Parse JSON Body for POST / PUT / PATCH
+  // 4. Parse Body (supports pre-parsed Vercel req.body and raw node stream)
   let body = {};
   if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
     try {
@@ -51,7 +56,7 @@ export async function dispatchApiRequest(req, res) {
   // 5. Router Matcher with Circuit Breaker
   try {
     // HEALTH & STATS
-    if (pathname === '/api/health') {
+    if (pathname === '/api/health' || pathname === '/api') {
       const result = await MicroStats.healthCheck();
       sendJson(res, 200, result);
       return;
@@ -77,14 +82,12 @@ export async function dispatchApiRequest(req, res) {
     }
 
     // REGISTRASI
-    // GET /api/registrasi/antrean
     if (pathname === '/api/registrasi/antrean' && req.method === 'GET') {
       const result = await MicroRegistrasi.getQueue(query);
       sendJson(res, result.statusCode || 200, result);
       return;
     }
 
-    // POST /api/registrasi/:bidang (player, pelatih, team, komunitas, venue)
     const matchRegSubmit = pathname.match(/^\/api\/registrasi\/([a-zA-Z0-9_-]+)$/);
     if (matchRegSubmit && req.method === 'POST') {
       const bidang = matchRegSubmit[1];
@@ -93,7 +96,6 @@ export async function dispatchApiRequest(req, res) {
       return;
     }
 
-    // PUT or POST /api/registrasi/:id/status
     const matchRegStatus = pathname.match(/^\/api\/registrasi\/([a-zA-Z0-9_-]+)\/status$/);
     if (matchRegStatus && ['PUT', 'POST'].includes(req.method)) {
       const id = matchRegStatus[1];
@@ -215,13 +217,37 @@ export async function dispatchApiRequest(req, res) {
   }
 }
 
-// Helpers
+// Universal Send JSON Helper (Works with both native http and Vercel Serverless)
 function sendJson(res, statusCode, data) {
+  if (typeof res.status === 'function' && typeof res.json === 'function') {
+    res.status(statusCode).json(data);
+    return;
+  }
   res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(data));
 }
 
+// Universal Request Body Parser
 function parseRequestBody(req) {
+  // 1. If Vercel already parsed the body into an object
+  if (req.body && typeof req.body === 'object') {
+    return Promise.resolve(req.body);
+  }
+  // 2. If Vercel passed body as string
+  if (req.body && typeof req.body === 'string') {
+    try {
+      return Promise.resolve(JSON.parse(req.body));
+    } catch {
+      try {
+        const p = new URLSearchParams(req.body);
+        return Promise.resolve(Object.fromEntries(p.entries()));
+      } catch {
+        return Promise.resolve({});
+      }
+    }
+  }
+
+  // 3. Fallback to streaming read for standard Node.js http
   return new Promise((resolve, reject) => {
     let raw = '';
     req.on('data', chunk => {
@@ -238,11 +264,9 @@ function parseRequestBody(req) {
       try {
         resolve(JSON.parse(raw));
       } catch (e) {
-        // Fallback urlencoded
         try {
           const params = new URLSearchParams(raw);
-          const obj = Object.fromEntries(params.entries());
-          resolve(obj);
+          resolve(Object.fromEntries(params.entries()));
         } catch {
           reject(e);
         }

@@ -2,162 +2,158 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
+      "source": "/api/:match*",
+      "destination": "/api/index.js"
     },
     {
-      "src": "/api",
-      "dest": "/api/index.js"
+      "source": "/api",
+      "destination": "/api/index.js"
     },
     {
-      "src": "/login",
-      "dest": "/login.html"
+      "source": "/login",
+      "destination": "/login.html"
     },
     {
-      "src": "/masuk",
-      "dest": "/login.html"
+      "source": "/masuk",
+      "destination": "/login.html"
     },
     {
-      "src": "/admin-super",
-      "dest": "/admin-super.html"
+      "source": "/admin-super",
+      "destination": "/admin-super.html"
     },
     {
-      "src": "/admin/super",
-      "dest": "/admin-super.html"
+      "source": "/admin/super",
+      "destination": "/admin-super.html"
     },
     {
-      "src": "/admin-pengprov",
-      "dest": "/admin-pengprov.html"
+      "source": "/admin-pengprov",
+      "destination": "/admin-pengprov.html"
     },
     {
-      "src": "/admin/esi-sumbar",
-      "dest": "/admin-pengprov.html"
+      "source": "/admin/esi-sumbar",
+      "destination": "/admin-pengprov.html"
     },
     {
-      "src": "/admin/pengprov",
-      "dest": "/admin-pengprov.html"
+      "source": "/admin/pengprov",
+      "destination": "/admin-pengprov.html"
     },
     {
-      "src": "/admin-pengcab",
-      "dest": "/admin-pengcab.html"
+      "source": "/admin-pengcab",
+      "destination": "/admin-pengcab.html"
     },
     {
-      "src": "/admin/esi-kabkota",
-      "dest": "/admin-pengcab.html"
+      "source": "/admin/esi-kabkota",
+      "destination": "/admin-pengcab.html"
     },
     {
-      "src": "/admin/pengcab",
-      "dest": "/admin-pengcab.html"
+      "source": "/admin/pengcab",
+      "destination": "/admin-pengcab.html"
     },
     {
-      "src": "/admin",
-      "dest": "/admin-super.html"
+      "source": "/admin",
+      "destination": "/admin-super.html"
     },
     {
-      "src": "/daftar-player",
-      "dest": "/daftar-player.html"
+      "source": "/daftar-player",
+      "destination": "/daftar-player.html"
     },
     {
-      "src": "/daftar/player",
-      "dest": "/daftar-player.html"
+      "source": "/daftar/player",
+      "destination": "/daftar-player.html"
     },
     {
-      "src": "/daftar-pelatih",
-      "dest": "/daftar-pelatih.html"
+      "source": "/daftar-pelatih",
+      "destination": "/daftar-pelatih.html"
     },
     {
-      "src": "/daftar/pelatih",
-      "dest": "/daftar-pelatih.html"
+      "source": "/daftar/pelatih",
+      "destination": "/daftar-pelatih.html"
     },
     {
-      "src": "/daftar-team",
-      "dest": "/daftar-team.html"
+      "source": "/daftar-team",
+      "destination": "/daftar-team.html"
     },
     {
-      "src": "/daftar/team",
-      "dest": "/daftar-team.html"
+      "source": "/daftar/team",
+      "destination": "/daftar-team.html"
     },
     {
-      "src": "/daftar-komunitas",
-      "dest": "/daftar-komunitas.html"
+      "source": "/daftar-komunitas",
+      "destination": "/daftar-komunitas.html"
     },
     {
-      "src": "/daftar/komunitas",
-      "dest": "/daftar-komunitas.html"
+      "source": "/daftar/komunitas",
+      "destination": "/daftar-komunitas.html"
     },
     {
-      "src": "/daftar-venue",
-      "dest": "/daftar-venue.html"
+      "source": "/daftar-venue",
+      "destination": "/daftar-venue.html"
     },
     {
-      "src": "/daftar/venue",
-      "dest": "/daftar-venue.html"
+      "source": "/daftar/venue",
+      "destination": "/daftar-venue.html"
     },
     {
-      "src": "/daftar",
-      "dest": "/daftar.html"
+      "source": "/daftar",
+      "destination": "/daftar.html"
     },
     {
-      "src": "/bursa",
-      "dest": "/bursa.html"
+      "source": "/bursa",
+      "destination": "/bursa.html"
     },
     {
-      "src": "/lft",
-      "dest": "/bursa.html"
+      "source": "/lft",
+      "destination": "/bursa.html"
     },
     {
-      "src": "/scouting",
-      "dest": "/bursa.html"
+      "source": "/scouting",
+      "destination": "/bursa.html"
     },
     {
-      "src": "/tim",
-      "dest": "/tim.html"
+      "source": "/tim",
+      "destination": "/tim.html"
     },
     {
-      "src": "/roster",
-      "dest": "/tim.html"
+      "source": "/roster",
+      "destination": "/tim.html"
     },
     {
-      "src": "/teams",
-      "dest": "/tim.html"
+      "source": "/teams",
+      "destination": "/tim.html"
     },
     {
-      "src": "/cari",
-      "dest": "/cari.html"
+      "source": "/cari",
+      "destination": "/cari.html"
     },
     {
-      "src": "/search",
-      "dest": "/cari.html"
+      "source": "/search",
+      "destination": "/cari.html"
     },
     {
-      "src": "/profile",
-      "dest": "/profile.html"
+      "source": "/profile",
+      "destination": "/profile.html"
     },
     {
-      "src": "/profil",
-      "dest": "/profile.html"
+      "source": "/profil",
+      "destination": "/profile.html"
     },
     {
-      "src": "/katalog",
-      "dest": "/katalog.html"
+      "source": "/katalog",
+      "destination": "/katalog.html"
     },
     {
-      "src": "/wilayah",
-      "dest": "/wilayah.html"
+      "source": "/wilayah",
+      "destination": "/wilayah.html"
     },
     {
-      "src": "/atlet",
-      "dest": "/atlet.html"
+      "source": "/atlet",
+      "destination": "/atlet.html"
     },
     {
-      "src": "/about",
-      "dest": "/about.html"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/about",
+      "destination": "/about.html"
     }
   ]
 }
