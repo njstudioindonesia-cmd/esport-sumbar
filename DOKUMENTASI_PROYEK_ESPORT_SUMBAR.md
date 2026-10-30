@@ -71,7 +71,25 @@ Gerbang masuk Single Sign-On (SSO) untuk membedakan jalur akses administrator da
 
 ---
 
-### 6. File Konfigurasi, Routing & Server Backend
+### 6. Arsitektur Backend Microsystems & API Gateway
+
+Seluruh domain sistem dijalankan dengan pola arsitektur **Modular Microsystem** yang terisolasi (*circuit-breaker pattern*), ringan, aman, dan tanpa ketergantungan database eksternal yang rentan:
+
+| No | Modul Microsystem | Endpoint Rute | Metode | Deskripsi & Fungsi |
+|:---|:---|:---|:---:|:---|
+| 20 | **Micro Auth & SSO** | `/api/auth/login` | POST | Autentikasi berjenjang (Super Admin, Pengprov, Pengcab 19 Wilayah, Atlet) dan penerbitan token sesi. |
+| 21 | **Micro Registrasi** | `/api/registrasi/:bidang` | POST/GET | Pendaftaran mandiri 5 bidang ekosistem dan penyaluran ke antrean moderasi Super Admin. |
+| 22 | **Micro Paspor 3D** | `/api/paspor/:id` | GET | Validasi paspor digital resmi PBESI dengan *hash signature* dan QR code verification. |
+| 23 | **Micro Katalog** | `/api/katalog` | GET | Penyedia data kartu katalog dengan pemfilteran kategori, game, dan domisili 19 wilayah. |
+| 24 | **Micro Search** | `/api/search` | GET | Mesin telusur instan multi-entitas (atlet, IGN, tim, arena, dan pengcab). |
+| 25 | **Micro Bursa & LFT** | `/api/bursa/lft` | GET/POST | Papan bursa atlet bebas transfer (*Looking For Team*) dan pengiriman proposal scouting. |
+| 26 | **Micro Pengprov** | `/api/pengprov/summary` | GET/POST | Dashboard monitoring 19 Pengcab ESI daerah, pemantauan Pelatda PON, dan agenda Kejurda. |
+| 27 | **Micro Pengcab** | `/api/pengcab/data` | GET/POST | Pengendali data lokal 19 Kab/Kota, verifikasi KTP/KIA domisili Porprov, dan generator surat rekomendasi turnamen. |
+| 28 | **Micro Telemetry** | `/api/stats` & `/api/health` | GET | Pengawas kesehatan sistem (*health check*), uptime, dan metrik pangkalan data ekosistem. |
+
+---
+
+### 7. File Konfigurasi, Routing & Server Backend
 
 | No | Nama File | Ukuran | Deskripsi & Fungsi |
 |:---|:---|:---:|:---|
