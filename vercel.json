@@ -4,14 +4,6 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/api/:match*",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/api",
-      "destination": "/api/index.js"
-    },
-    {
       "source": "/login",
       "destination": "/login.html"
     },
