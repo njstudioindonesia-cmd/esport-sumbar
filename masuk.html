@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Portal Login Terpadu – ESPORT SUMBAR</title>
+  <meta name="description" content="Portal login terpadu ekosistem Esport Sumatera Barat. Akses masuk Super Admin, Pengprov ESI Sumbar, Pengcab 19 Kab/Kota, dan Paspor Digital Atlet." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #0B0E14;
+      color: #F4F1EE;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(179, 18, 27, 0.25) 0%, transparent 65%),
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-crimson-800 selection:text-white pb-16 min-h-screen flex flex-col justify-between">
+
+  <!-- ============================================================== -->
+  <!-- 1. TOP NAVBAR / BRAND HEADER                                   -->
+  <!-- ============================================================== -->
+  <header class="w-full border-b border-white/10 bg-black/60 backdrop-blur-md sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo Brand -->
+      <a href="/" class="flex items-center gap-2.5 app-tap">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson-800 to-crimson-950 flex items-center justify-center p-1.5 ring-1 ring-white/20 shadow-md">
+          <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+        </div>
+        <div>
+          <span class="font-display text-lg text-white tracking-wider uppercase leading-none block">ESPORT <span class="text-crimson-500">SUMBAR</span></span>
+          <span class="text-[9px] font-mono text-white/60 uppercase tracking-widest block">Portal Autentikasi Resmi</span>
+        </div>
+      </a>
+
+      <!-- Quick Links -->
+      <div class="flex items-center gap-2">
+        <a href="/" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white font-mono text-xs flex items-center gap-1.5 border border-white/10 transition-all app-tap">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Beranda</span>
+        </a>
+        <a href="/daftar" class="px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase flex items-center gap-1.5 shadow-sm transition-all app-tap">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span class="hidden sm:inline">Daftar Akun</span>
+          <span class="sm:hidden">Daftar</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. MAIN LOGIN CONTAINER                                        -->
+  <!-- ============================================================== -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10 flex flex-col items-center justify-center">
+    
+    <!-- Portal Header Pill -->
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-crimson-950/80 border border-crimson-700/60 text-crimson-300 text-xs font-mono font-bold uppercase tracking-wider mb-3 shadow-lg">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span>SISTEM SINGLE SIGN-ON (SSO) // ESI SUMATERA BARAT</span>
+    </div>
+
+    <h1 class="font-display text-3xl sm:text-5xl text-white uppercase text-center tracking-wide leading-none mb-2">
+      PORTAL LOGIN <span class="text-transparent bg-clip-text bg-gradient-to-r from-crimson-500 via-amber-300 to-crimson-400">EKOSISTEM ESPORT</span>
+    </h1>
+    <p class="text-xs sm:text-sm font-sans text-white/70 text-center max-w-lg mb-8">
+      Masuk ke akun terverifikasi Anda untuk mengakses panel administrasi pengurus atau mengelola Paspor Digital Atlet & Tim.
+    </p>
+
+    <!-- Main Login Card & Quick Demo Grid -->
+    <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- LEFT / TOP: LOGIN FORM (7 COLS) -->
+      <div class="lg:col-span-7 bg-[#141013] border border-crimson-900/50 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden backdrop-blur-xl">
+        
+        <!-- Ambient Red Radial -->
+        <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-crimson-600/20 blur-3xl pointer-events-none"></div>
+
+        <!-- 2 Mode Tabs: Pengurus vs Atlet -->
+        <div class="grid grid-cols-2 p-1.5 bg-black/50 rounded-2xl border border-white/10 mb-6">
+          <button type="button" id="tabBtnAdmin" onclick="switchLoginMode('admin')" class="py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-md app-tap">
+            <i data-lucide="shield" class="w-4 h-4 text-amber-300"></i>
+            <span>Pengurus & Admin</span>
+          </button>
+          <button type="button" id="tabBtnMember" onclick="switchLoginMode('member')" class="py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap">
+            <i data-lucide="gamepad-2" class="w-4 h-4 text-cyan-400"></i>
+            <span>Atlet & Talenta</span>
+          </button>
+        </div>
+
+        <!-- FORM CONTENT -->
+        <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+          
+          <!-- Role Selector for Admin Mode (Hidden when member mode) -->
+          <div id="adminRoleSection" class="space-y-1.5">
+            <label class="block text-xs font-mono uppercase text-white/70 font-bold">Pilih Tingkat Kepengurusan:</label>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="flex flex-col items-center text-center p-2 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-amber-400/50 transition-all has-[:checked]:border-amber-400 has-[:checked]:bg-amber-950/30">
+                <input type="radio" name="adminRole" value="super" checked onchange="onRoleChange('super')" class="sr-only" />
+                <i data-lucide="crown" class="w-4 h-4 text-amber-400 mb-1"></i>
+                <span class="text-[10px] font-mono font-bold text-white uppercase">Super Admin</span>
+                <span class="text-[8px] font-mono text-white/50">Provider</span>
+              </label>
+
+              <label class="flex flex-col items-center text-center p-2 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-crimson-500/50 transition-all has-[:checked]:border-crimson-500 has-[:checked]:bg-crimson-950/30">
+                <input type="radio" name="adminRole" value="pengprov" onchange="onRoleChange('pengprov')" class="sr-only" />
+                <i data-lucide="landmark" class="w-4 h-4 text-crimson-400 mb-1"></i>
+                <span class="text-[10px] font-mono font-bold text-white uppercase">ESI Sumbar</span>
+                <span class="text-[8px] font-mono text-white/50">Pengprov</span>
+              </label>
+
+              <label class="flex flex-col items-center text-center p-2 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-cyan-400/50 transition-all has-[:checked]:border-cyan-400 has-[:checked]:bg-cyan-950/30">
+                <input type="radio" name="adminRole" value="pengcab" onchange="onRoleChange('pengcab')" class="sr-only" />
+                <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400 mb-1"></i>
+                <span class="text-[10px] font-mono font-bold text-white uppercase">ESI Kab/Kota</span>
+                <span class="text-[8px] font-mono text-white/50">Pengcab</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Region Dropdown for Pengcab Role (Conditionally displayed) -->
+          <div id="pengcabRegionSelect" class="hidden space-y-1.5 pt-1">
+            <label class="block text-xs font-mono uppercase text-cyan-300 font-bold">Wilayah Pengcab (19 Kab/Kota):</label>
+            <select id="loginRegion" class="w-full bg-[#1A1822] border border-cyan-800/60 rounded-xl px-3 py-2.5 text-xs font-mono text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
+              <option value="Kota Padang" selected>Kota Padang</option>
+              <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+              <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+              <option value="Kota Solok">Kota Solok</option>
+              <option value="Kota Sawahlunto">Kota Sawahlunto</option>
+              <option value="Kota Padang Panjang">Kota Padang Panjang</option>
+              <option value="Kota Pariaman">Kota Pariaman</option>
+              <option value="Kab. Agam">Kab. Agam</option>
+              <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+              <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+              <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
+              <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+              <option value="Kab. Solok">Kab. Solok</option>
+              <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
+              <option value="Kab. Sijunjung">Kab. Sijunjung</option>
+              <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
+              <option value="Kab. Pasaman">Kab. Pasaman</option>
+              <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+              <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
+            </select>
+          </div>
+
+          <!-- Identifier Input (Email / NIP or No. Paspor) -->
+          <div class="space-y-1.5">
+            <label id="labelIdentifier" for="identifierInput" class="block text-xs font-mono uppercase text-white/70 font-bold">
+              Email Resmi / NIP Pengurus:
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-white/40">
+                <i id="iconIdentifier" data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <input 
+                type="text" 
+                id="identifierInput" 
+                required 
+                placeholder="nama@esportsumbar.id" 
+                class="w-full bg-black/40 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-crimson-500" 
+              />
+            </div>
+          </div>
+
+          <!-- Password / PIN Input -->
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label id="labelPassword" for="passwordInput" class="block text-xs font-mono uppercase text-white/70 font-bold">
+                Kata Sandi / Password:
+              </label>
+              <button type="button" onclick="showForgotPasswordModal()" class="text-[11px] font-mono text-crimson-400 hover:text-crimson-300 transition-colors">
+                Lupa Sandi?
+              </button>
+            </div>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-white/40">
+                <i data-lucide="lock" class="w-4 h-4"></i>
+              </div>
+              <input 
+                type="password" 
+                id="passwordInput" 
+                required 
+                placeholder="••••••••••••" 
+                class="w-full bg-black/40 border border-white/10 rounded-xl pl-9 pr-10 py-2.5 text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-crimson-500" 
+              />
+              <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-white/40 hover:text-white transition-colors" title="Lihat Kata Sandi">
+                <i id="eyeIcon" data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember Me Checkbox -->
+          <div class="flex items-center justify-between text-xs font-mono text-white/70 pt-1">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" id="rememberMe" checked class="rounded bg-black/40 border-white/20 text-crimson-700 focus:ring-crimson-500" />
+              <span>Simpan sesi masuk di perangkat ini</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btnSubmit" class="w-full py-3 rounded-xl bg-gradient-to-r from-crimson-800 to-crimson-700 hover:from-crimson-700 hover:to-crimson-600 text-white font-mono text-xs font-bold uppercase tracking-wider shadow-lg shadow-crimson-950/40 flex items-center justify-center gap-2 transition-all app-tap mt-2">
+            <span id="btnSubmitText">Masuk ke Portal Ekosistem</span>
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+          </button>
+
+        </form>
+
+        <!-- Form Footer Link -->
+        <div class="mt-6 pt-5 border-t border-white/10 text-center">
+          <p class="text-xs text-white/60">
+            Belum terdaftar di ekosistem Esport Sumbar?
+            <a href="/daftar" class="text-amber-400 font-bold hover:underline ml-1">Daftar Sekarang (5 Bidang)</a>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT / BOTTOM: DEMO INSTANT ACCESS & REGISTRATION INFO (5 COLS) -->
+      <div class="lg:col-span-5 space-y-4">
+        
+        <!-- Quick 1-Click Demo Testing Card -->
+        <div class="bg-[#181316] border border-amber-500/30 rounded-3xl p-5 shadow-xl">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
+            <div class="flex items-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+              <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
+                Akses Cepat Pengujian (1-Klik):
+              </h2>
+            </div>
+            <span class="text-[9px] font-mono text-white/50">Mode Uji Coba</span>
+          </div>
+          <p class="text-[11px] text-white/70 mb-3 leading-relaxed">
+            Pilih salah satu peran di bawah untuk mengisikan kredensial otomatis dan masuk langsung ke dashboard:
+          </p>
+
+          <div class="space-y-2">
+            <!-- 1. Super Admin Autofill -->
+            <button type="button" onclick="autofillDemo('super')" class="w-full text-left p-2.5 rounded-xl bg-black/40 hover:bg-amber-950/40 border border-white/5 hover:border-amber-400/40 transition-all flex items-center justify-between app-tap">
+              <div class="flex items-center gap-2.5">
+                <div class="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">
+                  <i data-lucide="crown" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white leading-tight">Super Admin Platform</div>
+                  <div class="text-[10px] font-mono text-white/50">admin@esportsumbar.id</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-amber-400 font-bold flex items-center gap-1">
+                Pilih <i data-lucide="chevron-right" class="w-3 h-3"></i>
+              </span>
+            </button>
+
+            <!-- 2. Pengprov ESI Sumbar Autofill -->
+            <button type="button" onclick="autofillDemo('pengprov')" class="w-full text-left p-2.5 rounded-xl bg-black/40 hover:bg-crimson-950/40 border border-white/5 hover:border-crimson-500/40 transition-all flex items-center justify-between app-tap">
+              <div class="flex items-center gap-2.5">
+                <div class="p-1.5 rounded-lg bg-crimson-500/10 text-crimson-400">
+                  <i data-lucide="landmark" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white leading-tight">Pengprov ESI Sumbar</div>
+                  <div class="text-[10px] font-mono text-white/50">pengprov@esi-sumbar.or.id</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-crimson-400 font-bold flex items-center gap-1">
+                Pilih <i data-lucide="chevron-right" class="w-3 h-3"></i>
+              </span>
+            </button>
+
+            <!-- 3. Pengcab ESI Kab/Kota Autofill -->
+            <button type="button" onclick="autofillDemo('pengcab')" class="w-full text-left p-2.5 rounded-xl bg-black/40 hover:bg-cyan-950/40 border border-white/5 hover:border-cyan-400/40 transition-all flex items-center justify-between app-tap">
+              <div class="flex items-center gap-2.5">
+                <div class="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white leading-tight">Pengcab ESI Kota Padang</div>
+                  <div class="text-[10px] font-mono text-white/50">pengcab.padang@esi-sumbar.or.id</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400 font-bold flex items-center gap-1">
+                Pilih <i data-lucide="chevron-right" class="w-3 h-3"></i>
+              </span>
+            </button>
+
+            <!-- 4. Member / Atlet Paspor Autofill -->
+            <button type="button" onclick="autofillDemo('member')" class="w-full text-left p-2.5 rounded-xl bg-black/40 hover:bg-emerald-950/40 border border-white/5 hover:border-emerald-400/40 transition-all flex items-center justify-between app-tap">
+              <div class="flex items-center gap-2.5">
+                <div class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
+                  <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white leading-tight">Muhammad Rayden (V4ND4L)</div>
+                  <div class="text-[10px] font-mono text-white/50">PBESI-SB-2026-VAL-96</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-emerald-400 font-bold flex items-center gap-1">
+                Pilih <i data-lucide="chevron-right" class="w-3 h-3"></i>
+              </span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Security & Legal Notice Card -->
+        <div class="bg-[#12161F] border border-white/10 rounded-3xl p-5 text-white/70 text-xs font-mono space-y-2">
+          <div class="flex items-center gap-2 text-cyan-400 font-bold">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span>Sertifikasi & Keamanan Data</span>
+          </div>
+          <p class="text-[11px] leading-relaxed text-white/60">
+            Seluruh data identitas kependudukan atlet, nomor induk organisasi klub, dan lisensi resmi dilindungi standar enkripsi ESI Sumbar.
+          </p>
+          <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-white/40">
+            <span>Protokol TLS 1.3 / HTTPS</span>
+            <span>Versi Portal: v2.4</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: LUPA KATA SANDI / PEMULIHAN PASPOR                      -->
+  <!-- ============================================================== -->
+  <div id="modalForgot" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#181316] border border-crimson-800/60 rounded-3xl p-6 max-w-md w-full shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+        <h3 class="font-display text-xl text-white uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="key" class="w-5 h-5 text-amber-400"></i>
+          <span>Pemulihan Akun & Lisensi</span>
+        </h3>
+        <button type="button" onclick="closeForgotPasswordModal()" class="text-white/60 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleForgotSubmit(event)" class="space-y-3 font-mono text-xs">
+        <p class="text-white/70 leading-relaxed text-[11px]">
+          Masukkan NIK KTP atau Email yang terdaftar saat pembuatan akun/Paspor Digital. Tautan verifikasi pemulihan akan dikirimkan ke email atau kontak pengurus Anda.
+        </p>
+
+        <div>
+          <label class="block text-white/70 mb-1 text-[11px]">Email Terdaftar / NIK KTP:</label>
+          <input type="text" required placeholder="Contoh: rayden@v4nd4l.id atau 137104********21" class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2.5 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-crimson-500" />
+        </div>
+
+        <div class="flex items-center gap-2 pt-3">
+          <button type="submit" class="flex-1 py-2.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all app-tap">
+            Kirim Tautan Pemulihan
+          </button>
+          <button type="button" onclick="closeForgotPasswordModal()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs transition-all app-tap">
+            Tutup
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- TOAST NOTIFICATION CONTAINER                                   -->
+  <!-- ============================================================== -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div id="toastBox" class="bg-crimson-950 border border-crimson-500/50 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3">
+      <i id="toastIcon" data-lucide="check-circle-2" class="w-5 h-5 text-amber-400"></i>
+      <span id="toastMsg" class="font-mono text-xs font-bold">Autentikasi Berhasil</span>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 3. FOOTER                                                      -->
+  <!-- ============================================================== -->
+  <footer class="w-full border-t border-white/10 bg-black/40 px-4 py-4 text-center text-xs font-mono text-white/50">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>
+        © 2026 Platform Provider Esport Sumatera Barat • Mitra Resmi Pengprov ESI Sumbar
+      </div>
+      <div class="flex items-center gap-4 text-white/70">
+        <a href="/about" class="hover:text-white transition-colors">Tentang ESI</a>
+        <a href="/wilayah" class="hover:text-white transition-colors">19 Pengcab</a>
+        <a href="/daftar" class="hover:text-white transition-colors">Pendaftaran</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT LOGIC                                               -->
+  <!-- ============================================================== -->
+  <script>
+    let currentLoginMode = 'admin'; // 'admin' or 'member'
+    let currentAdminRole = 'super'; // 'super', 'pengprov', 'pengcab'
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // Check URL query parameters for preselection
+      const urlParams = new URLSearchParams(window.location.search);
+      const roleParam = urlParams.get('role');
+      if (roleParam === 'member' || roleParam === 'atlet') {
+        switchLoginMode('member');
+      } else if (roleParam === 'pengprov') {
+        switchLoginMode('admin');
+        onRoleChange('pengprov');
+        const radio = document.querySelector('input[name="adminRole"][value="pengprov"]');
+        if (radio) radio.checked = true;
+      } else if (roleParam === 'pengcab') {
+        switchLoginMode('admin');
+        onRoleChange('pengcab');
+        const radio = document.querySelector('input[name="adminRole"][value="pengcab"]');
+        if (radio) radio.checked = true;
+      }
+    });
+
+    function switchLoginMode(mode) {
+      currentLoginMode = mode;
+      const tabAdmin = document.getElementById('tabBtnAdmin');
+      const tabMember = document.getElementById('tabBtnMember');
+      const adminRoleSec = document.getElementById('adminRoleSection');
+      const pengcabRegSec = document.getElementById('pengcabRegionSelect');
+      const labelIdentifier = document.getElementById('labelIdentifier');
+      const identifierInput = document.getElementById('identifierInput');
+      const labelPassword = document.getElementById('labelPassword');
+      const passwordInput = document.getElementById('passwordInput');
+      const btnSubmitText = document.getElementById('btnSubmitText');
+
+      if (mode === 'admin') {
+        tabAdmin.className = "py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-md app-tap";
+        tabMember.className = "py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap";
+        adminRoleSec.classList.remove('hidden');
+        if (currentAdminRole === 'pengcab') {
+          pengcabRegSec.classList.remove('hidden');
+        } else {
+          pengcabRegSec.classList.add('hidden');
+        }
+        labelIdentifier.innerText = "Email Resmi / NIP Pengurus:";
+        identifierInput.placeholder = "admin@esportsumbar.id";
+        labelPassword.innerText = "Kata Sandi / Password Pengurus:";
+        btnSubmitText.innerText = "Masuk ke Dashboard Pengurus";
+      } else {
+        tabMember.className = "py-2.5 px-3 rounded-xl bg-cyan-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-md app-tap";
+        tabAdmin.className = "py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap";
+        adminRoleSec.classList.add('hidden');
+        pengcabRegSec.classList.add('hidden');
+        labelIdentifier.innerText = "No. Paspor PBESI / NIK / Email:";
+        identifierInput.placeholder = "PBESI-SB-2026-VAL-96";
+        labelPassword.innerText = "PIN Keamanan / Kata Sandi:";
+        btnSubmitText.innerText = "Buka Paspor Digital Atlet";
+      }
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function onRoleChange(role) {
+      currentAdminRole = role;
+      const pengcabRegSec = document.getElementById('pengcabRegionSelect');
+      const identifierInput = document.getElementById('identifierInput');
+
+      if (role === 'pengcab') {
+        pengcabRegSec.classList.remove('hidden');
+        identifierInput.placeholder = "pengcab.padang@esi-sumbar.or.id";
+      } else if (role === 'pengprov') {
+        pengcabRegSec.classList.add('hidden');
+        identifierInput.placeholder = "pengprov@esi-sumbar.or.id";
+      } else {
+        pengcabRegSec.classList.add('hidden');
+        identifierInput.placeholder = "admin@esportsumbar.id";
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const pass = document.getElementById('passwordInput');
+      const icon = document.getElementById('eyeIcon');
+      if (pass.type === 'password') {
+        pass.type = 'text';
+        icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        pass.type = 'password';
+        icon.setAttribute('data-lucide', 'eye');
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // 1-Click Demo Testing
+    function autofillDemo(type) {
+      const idInput = document.getElementById('identifierInput');
+      const passInput = document.getElementById('passwordInput');
+
+      if (type === 'super') {
+        switchLoginMode('admin');
+        onRoleChange('super');
+        const radio = document.querySelector('input[name="adminRole"][value="super"]');
+        if (radio) radio.checked = true;
+        idInput.value = "admin@esportsumbar.id";
+        passInput.value = "SumbarSuper2026!";
+        showToast("Kredensial Super Admin berhasil dimuat. Mengalihkan...", true);
+        setTimeout(() => {
+          window.location.href = "/admin-super";
+        }, 800);
+      } else if (type === 'pengprov') {
+        switchLoginMode('admin');
+        onRoleChange('pengprov');
+        const radio = document.querySelector('input[name="adminRole"][value="pengprov"]');
+        if (radio) radio.checked = true;
+        idInput.value = "pengprov@esi-sumbar.or.id";
+        passInput.value = "PengprovESI2026!";
+        showToast("Kredensial Pengprov ESI Sumbar dimuat. Mengalihkan...", true);
+        setTimeout(() => {
+          window.location.href = "/admin-pengprov";
+        }, 800);
+      } else if (type === 'pengcab') {
+        switchLoginMode('admin');
+        onRoleChange('pengcab');
+        const radio = document.querySelector('input[name="adminRole"][value="pengcab"]');
+        if (radio) radio.checked = true;
+        idInput.value = "pengcab.padang@esi-sumbar.or.id";
+        passInput.value = "PengcabPadang2026!";
+        showToast("Kredensial Pengcab Kota Padang dimuat. Mengalihkan...", true);
+        setTimeout(() => {
+          window.location.href = "/admin-pengcab?region=Kota%20Padang";
+        }, 800);
+      } else if (type === 'member') {
+        switchLoginMode('member');
+        idInput.value = "PBESI-SB-2026-VAL-96";
+        passInput.value = "RaydenV4nd4l2026";
+        showToast("Paspor Digital Atlet dimuat. Membuka profil...", true);
+        setTimeout(() => {
+          window.location.href = "/profile";
+        }, 800);
+      }
+    }
+
+    // Handle Form Submit
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const idVal = document.getElementById('identifierInput').value.trim();
+      const passVal = document.getElementById('passwordInput').value.trim();
+
+      if (!idVal || !passVal) {
+        showToast("Silakan lengkapi Email/ID dan kata sandi Anda.", false);
+        return;
+      }
+
+      // Show processing feedback
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      btn.classList.add('opacity-80');
+      document.getElementById('btnSubmitText').innerText = "Memverifikasi Kredensial...";
+
+      setTimeout(() => {
+        if (currentLoginMode === 'admin') {
+          if (currentAdminRole === 'super') {
+            showToast("Verifikasi Super Admin Sah! Menuju Dashboard...", true);
+            setTimeout(() => { window.location.href = "/admin-super"; }, 700);
+          } else if (currentAdminRole === 'pengprov') {
+            showToast("Verifikasi Pengprov ESI Sumbar Sah! Menuju Dashboard...", true);
+            setTimeout(() => { window.location.href = "/admin-pengprov"; }, 700);
+          } else {
+            const reg = document.getElementById('loginRegion').value;
+            showToast(`Verifikasi Pengcab ${reg} Sah! Menuju Dashboard...`, true);
+            setTimeout(() => { window.location.href = `/admin-pengcab?region=${encodeURIComponent(reg)}`; }, 700);
+          }
+        } else {
+          showToast("Paspor Digital Ditemukan! Membuka Halaman Profil...", true);
+          setTimeout(() => { window.location.href = "/profile"; }, 700);
+        }
+      }, 600);
+    }
+
+    // Forgot Password Modal
+    function showForgotPasswordModal() {
+      const modal = document.getElementById('modalForgot');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeForgotPasswordModal() {
+      const modal = document.getElementById('modalForgot');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleForgotSubmit(e) {
+      e.preventDefault();
+      closeForgotPasswordModal();
+      showToast("Tautan verifikasi pemulihan telah dikirim!", true);
+    }
+
+    // Toast
+    function showToast(msg, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastBox = document.getElementById('toastBox');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+
+      if (isSuccess) {
+        toastBox.className = "bg-emerald-950 border border-emerald-500/60 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3";
+      } else {
+        toastBox.className = "bg-rose-950 border border-rose-500/60 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3";
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
