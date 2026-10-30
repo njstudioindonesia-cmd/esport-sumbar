@@ -4,6 +4,30 @@
   "trailingSlash": false,
   "routes": [
     {
+      "src": "/bursa",
+      "dest": "/bursa.html"
+    },
+    {
+      "src": "/lft",
+      "dest": "/bursa.html"
+    },
+    {
+      "src": "/scouting",
+      "dest": "/bursa.html"
+    },
+    {
+      "src": "/tim",
+      "dest": "/tim.html"
+    },
+    {
+      "src": "/roster",
+      "dest": "/tim.html"
+    },
+    {
+      "src": "/teams",
+      "dest": "/tim.html"
+    },
+    {
       "src": "/cari",
       "dest": "/cari.html"
     },
