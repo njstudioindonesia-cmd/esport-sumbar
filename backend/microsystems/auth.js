@@ -24,6 +24,7 @@ export const MicroAuth = {
     if (user) {
       // Create session token
       const token = `esi-token-${user.id}-${Date.now().toString(36)}`;
+      const athleteData = user.pasporId ? db.getAthleteByIdOrPaspor(user.pasporId) : null;
       return {
         success: true,
         statusCode: 200,
@@ -34,8 +35,15 @@ export const MicroAuth = {
           nama: user.nama,
           role: user.role,
           email: user.email,
-          wilayah: user.wilayah || region || null,
+          ign: user.ign || athleteData?.ign || null,
+          wilayah: user.wilayah || athleteData?.wilayah || region || null,
           pasporId: user.pasporId || null,
+          game: athleteData?.game || "Multi-Platform",
+          roleTitle: athleteData?.role || "Player",
+          ovr: athleteData?.ovr || 90,
+          lisensiStatus: athleteData?.lisensiStatus || "TERVERIFIKASI PBESI",
+          statusPelatda: athleteData?.statusPelatda || "POTENSI DAERAH",
+          foto: athleteData?.foto || "/images/athlete-v4nd4l.jpg",
           permissions: user.permissions
         },
         redirectUrl: getRedirectUrl(user.role, user.wilayah || region)
@@ -84,7 +92,20 @@ export const MicroAuth = {
         statusCode: 200,
         message: "Paspor Digital Atlet ditemukan.",
         token: `esi-atlet-${Date.now().toString(36)}`,
-        user: { id: "atl-01", role: "atlet", nama: "Muhammad Rayden", ign: "V4ND4L", pasporId: "PBESI-SB-2026-VAL-96" },
+        user: {
+          id: "atl-01",
+          role: "atlet",
+          nama: "Muhammad Rayden",
+          ign: "V4ND4L",
+          pasporId: "PBESI-SB-2026-VAL-96",
+          game: "VALORANT",
+          roleTitle: "Duelist / Entry Fragger",
+          wilayah: "Kota Padang",
+          ovr: 96,
+          statusPelatda: "PELATDA PON • OVR 96",
+          lisensiStatus: "LISENSI TERVERIFIKASI PBESI",
+          foto: "/images/athlete-v4nd4l.jpg"
+        },
         redirectUrl: "/profile"
       };
     }

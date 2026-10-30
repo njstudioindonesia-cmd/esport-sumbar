@@ -560,10 +560,19 @@
         if (radio) radio.checked = true;
         idInput.value = "admin@esportsumbar.id";
         passInput.value = "SumbarSuper2026!";
+        const demoUser = {
+          id: "usr-super",
+          role: "super",
+          nama: "Super Admin Platform",
+          email: "admin@esportsumbar.id",
+          permissions: ["*"]
+        };
+        localStorage.setItem('esi_auth_token', 'esi-token-super');
+        localStorage.setItem('esi_auth_user', JSON.stringify(demoUser));
         showToast("Kredensial Super Admin berhasil dimuat. Mengalihkan...", true);
         setTimeout(() => {
           window.location.href = "/admin-super";
-        }, 800);
+        }, 600);
       } else if (type === 'pengprov') {
         switchLoginMode('admin');
         onRoleChange('pengprov');
@@ -571,10 +580,19 @@
         if (radio) radio.checked = true;
         idInput.value = "pengprov@esi-sumbar.or.id";
         passInput.value = "PengprovESI2026!";
+        const demoUser = {
+          id: "usr-pengprov",
+          role: "pengprov",
+          nama: "Sekretariat Pengprov ESI Sumbar",
+          email: "pengprov@esi-sumbar.or.id",
+          permissions: ["pengprov:*"]
+        };
+        localStorage.setItem('esi_auth_token', 'esi-token-pengprov');
+        localStorage.setItem('esi_auth_user', JSON.stringify(demoUser));
         showToast("Kredensial Pengprov ESI Sumbar dimuat. Mengalihkan...", true);
         setTimeout(() => {
           window.location.href = "/admin-pengprov";
-        }, 800);
+        }, 600);
       } else if (type === 'pengcab') {
         switchLoginMode('admin');
         onRoleChange('pengcab');
@@ -582,18 +600,44 @@
         if (radio) radio.checked = true;
         idInput.value = "pengcab.padang@esi-sumbar.or.id";
         passInput.value = "PengcabPadang2026!";
+        const demoUser = {
+          id: "usr-pengcab-pdg",
+          role: "pengcab",
+          nama: "Pengcab ESI Kota Padang",
+          wilayah: "Kota Padang",
+          email: "pengcab.padang@esi-sumbar.or.id",
+          permissions: ["pengcab:padang:*"]
+        };
+        localStorage.setItem('esi_auth_token', 'esi-token-pengcab');
+        localStorage.setItem('esi_auth_user', JSON.stringify(demoUser));
         showToast("Kredensial Pengcab Kota Padang dimuat. Mengalihkan...", true);
         setTimeout(() => {
           window.location.href = "/admin-pengcab?region=Kota%20Padang";
-        }, 800);
+        }, 600);
       } else if (type === 'member') {
         switchLoginMode('member');
         idInput.value = "PBESI-SB-2026-VAL-96";
         passInput.value = "RaydenV4nd4l2026";
+        const demoUser = {
+          id: "usr-atlet-v4nd4l",
+          role: "atlet",
+          nama: "Muhammad Rayden",
+          ign: "V4ND4L",
+          game: "VALORANT",
+          roleTitle: "Duelist / Entry Fragger",
+          wilayah: "Kota Padang",
+          pasporId: "PBESI-SB-2026-VAL-96",
+          ovr: 96,
+          statusPelatda: "PELATDA PON • OVR 96",
+          lisensiStatus: "LISENSI TERVERIFIKASI PBESI",
+          foto: "/images/athlete-v4nd4l.jpg"
+        };
+        localStorage.setItem('esi_auth_token', 'esi-token-atlet-v4nd4l');
+        localStorage.setItem('esi_auth_user', JSON.stringify(demoUser));
         showToast("Paspor Digital Atlet dimuat. Membuka profil...", true);
         setTimeout(() => {
           window.location.href = "/profile";
-        }, 800);
+        }, 600);
       }
     }
 

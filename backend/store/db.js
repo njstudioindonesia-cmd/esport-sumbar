@@ -54,8 +54,9 @@ class EcosystemDatabase {
     return this.memory.users.find(u => {
       const matchEmail = u.email && u.email.toLowerCase() === cleanId;
       const matchPaspor = u.pasporId && u.pasporId.toLowerCase() === cleanId;
+      const matchIgn = u.ign && u.ign.toLowerCase() === cleanId;
       const matchPass = u.passwordHash === password;
-      return (matchEmail || matchPaspor) && matchPass;
+      return (matchEmail || matchPaspor || matchIgn) && matchPass;
     });
   }
 
@@ -114,10 +115,57 @@ class EcosystemDatabase {
 
   addRegistration(bidang, payload) {
     const newId = `reg-${bidang.substring(0, 3)}-${Date.now().toString().slice(-5)}`;
+    let generatedPasporId = null;
+    let athleteRecord = null;
+
+    if (bidang === 'player') {
+      const gameCode = (payload.game || "ESP").substring(0, 3).toUpperCase();
+      const rand = Math.floor(100 + Math.random() * 900);
+      generatedPasporId = `PBESI-SB-2026-${gameCode}-${rand}`;
+
+      athleteRecord = {
+        id: `atl-${Date.now().toString().slice(-4)}`,
+        pasporId: generatedPasporId,
+        nama: payload.nama,
+        ign: payload.ign || "PLAYER",
+        game: payload.game || "Multi-Platform",
+        role: payload.role || "Flex / All-Role",
+        wilayah: payload.wilayah || "Kota Padang",
+        nik: payload.nik || "-",
+        email: payload.email || "",
+        ovr: Math.floor(86 + Math.random() * 10),
+        statusPelatda: payload.statusPelatda || "POTENSI DAERAH",
+        lisensiStatus: "MENUNGGU VERIFIKASI PENGCAB",
+        foto: payload.foto || "/images/athlete-v4nd4l.jpg",
+        statusLFT: payload.playerStatus?.includes("LFT") ?? true,
+        prestasi: ["Pendaftar Paspor Digital Baru 2026"]
+      };
+
+      // Add to athlete registry so they can be looked up immediately
+      this.memory.atlet.unshift(athleteRecord);
+
+      // Create user auth record if email provided
+      if (payload.email) {
+        this.memory.users.push({
+          id: `usr-${athleteRecord.id}`,
+          role: "atlet",
+          email: payload.email,
+          passwordHash: payload.password || "AtletSumbar2026!",
+          nama: payload.nama,
+          ign: payload.ign || "PLAYER",
+          pasporId: generatedPasporId,
+          wilayah: payload.wilayah || "Kota Padang",
+          permissions: ["atlet:self"]
+        });
+      }
+    }
+
     const record = {
       id: newId,
       bidang,
       ...payload,
+      generatedPasporId,
+      athlete: athleteRecord,
       status: "pending",
       submittedAt: new Date().toISOString()
     };

@@ -76,10 +76,12 @@
           return null;
         }
       },
-      logout() {
+      logout(redirectUrl = null) {
         localStorage.removeItem('esi_auth_token');
         localStorage.removeItem('esi_auth_user');
-        window.location.href = '/login';
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
       },
       async forgotPassword(identifier) {
         return request('/auth/forgot-password', {

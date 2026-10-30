@@ -43,6 +43,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Microsystem Client SDK -->
+  <script src="/js/microsystem-client.js"></script>
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
 
@@ -141,7 +144,7 @@
       inset: 0;
       pointer-events: none;
       border-radius: inherit;
-      opacity: 0.12;
+      opacity: 0.18;
       transition: opacity 0.3s ease;
       mix-blend-mode: color-dodge;
       background: linear-gradient(
@@ -160,6 +163,18 @@
   </style>
 </head>
 <body class="text-ink font-sans antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen overflow-x-hidden w-full">
+
+  <!-- ============================================================== -->
+  <!-- TOAST NOTIFICATION CONTAINER                                   -->
+  <!-- ============================================================== -->
+  <div id="profileToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 -translate-y-4 max-w-sm w-full px-4">
+    <div class="p-3.5 rounded-2xl bg-black/90 text-white border border-white/20 shadow-2xl backdrop-blur-md flex items-center gap-3">
+      <div id="toastIconBox" class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+      </div>
+      <p id="toastMessage" class="text-xs font-mono font-medium leading-tight">Pemberitahuan sistem.</p>
+    </div>
+  </div>
 
   <!-- ============================================================== -->
   <!-- 1. TOP NAVBAR                                                  -->
@@ -191,308 +206,415 @@
         <a href="/profile" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Profile</a>
       </nav>
 
-      <!-- Action Button / Header Right -->
-      <div class="flex items-center gap-2 shrink-0">
-        <a href="/login" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-semibold transition-all app-tap" title="Ganti Akun / Masuk Portal">
-          <i data-lucide="log-in" class="w-3.5 h-3.5 text-crimson-700"></i>
-          <span class="hidden sm:inline">Masuk</span>
-        </a>
-        <a href="/daftar" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-xs font-bold uppercase tracking-wider shadow-sm transition-all app-tap">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span class="hidden sm:inline">Perbarui Data</span>
-          <span class="sm:hidden">Edit</span>
-        </a>
+      <!-- Action Button / Header Right (Dynamic auth state) -->
+      <div id="headerAuthNav" class="flex items-center gap-2 shrink-0">
+        <!-- Rendered dynamically by checkAuthState() -->
       </div>
     </div>
   </header>
 
   <!-- ============================================================== -->
-  <!-- 2. USER PROFILE PASSPORT HERO                                  -->
+  <!-- 2. AUTH GATE (TAMPILAN JIKA BELUM LOGIN)                       -->
   <!-- ============================================================== -->
-  <section class="px-3 sm:px-6 lg:px-12 pt-4 pb-4 max-w-7xl mx-auto">
-    <div class="rounded-3xl bg-gradient-to-br from-[#160205] via-[#2E040C] to-[#120104] border border-crimson-600/40 p-5 sm:p-8 text-paper shadow-2xl relative overflow-hidden">
+  <section id="unauthenticatedGate" class="px-3 sm:px-6 lg:px-12 py-8 max-w-5xl mx-auto hidden">
+    
+    <!-- Lock Hero Card -->
+    <div class="rounded-3xl bg-gradient-to-br from-[#160205] via-[#24030A] to-[#0E0103] border border-crimson-700/50 p-6 sm:p-12 text-white shadow-2xl relative overflow-hidden text-center">
       
       <!-- Ambient Glows -->
-      <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-crimson-600/30 blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-12 -right-12 w-64 h-64 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
+      <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-crimson-600/30 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
 
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+      <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
         
-        <!-- Left: User Avatar & Credential Details -->
-        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-2 border-amber-400 p-1 bg-black shadow-2xl shrink-0">
-            <img src="/images/athlete-v4nd4l.jpg" alt="Muhammad Rayden" class="w-full h-full object-cover object-top rounded-2xl filter contrast-110" />
-            <div class="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-black flex items-center justify-center text-white" title="Status: Terverifikasi Aktif">
-              <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex flex-wrap items-center gap-2 mb-2">
-              <span class="px-3 py-1 rounded-full bg-amber-400 text-ink text-[10px] font-mono font-black uppercase tracking-wider shadow-sm">
-                PELATDA PON • OVR 96
-              </span>
-              <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9.5px] font-mono font-bold uppercase flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                LISENSI TERVERIFIKASI PBESI
-              </span>
-            </div>
-
-            <h1 class="font-display text-3xl sm:text-5xl text-white uppercase tracking-tight leading-none">
-              MUHAMMAD RAYDEN <span class="text-amber-300">(V4ND4L)</span>
-            </h1>
-            
-            <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-paper/80 mt-2">
-              <span class="flex items-center gap-1"><i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-crimson-400"></i> VALORANT (Duelist / Entry)</span>
-              <span>•</span>
-              <span class="flex items-center gap-1"><i data-lucide="shield" class="w-3.5 h-3.5 text-amber-300"></i> Minang Pride Squad</span>
-              <span>•</span>
-              <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> Kota Padang</span>
-            </div>
-
-            <div class="text-[11px] font-mono text-paper/60 mt-1">
-              No. Lisensi Resmi: <span class="text-white font-bold tracking-wider">PBESI-SB-2026-VKL-01</span>
-            </div>
-          </div>
+        <!-- Lock Icon Badge -->
+        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-crimson-950/80 border-2 border-crimson-600/60 p-4 flex items-center justify-center text-amber-300 shadow-2xl mb-5 shadow-crimson-900/40">
+          <i data-lucide="lock" class="w-10 h-10 sm:w-12 sm:h-12 stroke-[2]"></i>
         </div>
 
-        <!-- Right: Action Buttons & QR Code Chip -->
-        <div class="flex items-center gap-3 self-start md:self-auto">
-          <div class="hidden sm:flex flex-col items-center p-3 rounded-2xl bg-white/10 border border-white/20 text-center">
-            <div class="w-14 h-14 bg-white p-1 rounded-xl flex items-center justify-center shadow-md">
-              <img src="/images/esport-sumbar-logo.png" alt="QR ESI" class="w-full h-full object-contain" />
-            </div>
-            <span class="text-[8px] font-mono text-amber-300 mt-1 uppercase font-bold tracking-wider">ID CHECK-IN</span>
-          </div>
+        <!-- Pill Status -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-crimson-900/50 border border-crimson-600/60 text-crimson-300 text-xs font-mono font-bold uppercase tracking-wider mb-3">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+          <span>AKSES PASPOR DIGITAL TERKUNCI // AUTENTIKASI DIBUTUHKAN</span>
+        </div>
 
-          <a href="/daftar" class="py-3 px-5 rounded-2xl bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-lg flex items-center gap-2 app-tap">
-            <i data-lucide="edit-3" class="w-4 h-4 text-amber-300"></i>
-            <span>Ubah Profil</span>
+        <h1 class="font-display text-3xl sm:text-5xl text-white uppercase tracking-tight leading-none mb-3">
+          MASUK ATAU DAFTARKAN DIRI ANDA
+        </h1>
+
+        <p class="font-sans text-xs sm:text-sm text-paper/80 leading-relaxed mb-8 max-w-lg">
+          Halaman profil ini memuat Paspor Digital Atlet resmi PBESI Sumatera Barat, kartu identitas 3D, telemetry skill, dan verifikasi QR code lisensi resmi. Silakan masuk dengan akun terdaftar Anda atau buat pendaftaran baru.
+        </p>
+
+        <!-- Main Action Buttons -->
+        <div class="w-full max-w-md flex flex-col sm:flex-row items-center gap-3 mb-6">
+          <a href="/login?return=/profile" class="w-full sm:w-1/2 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-crimson-700 to-crimson-800 hover:from-crimson-600 hover:to-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-crimson-900/40 transition-all app-tap">
+            <i data-lucide="log-in" class="w-4 h-4 text-amber-300"></i>
+            <span>Masuk ke Akun</span>
+          </a>
+          <a href="/daftar-player" class="w-full sm:w-1/2 py-3.5 px-5 rounded-2xl bg-white hover:bg-paper text-ink font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all app-tap">
+            <i data-lucide="sparkles" class="w-4 h-4 text-crimson-700"></i>
+            <span>Daftar Paspor Baru</span>
           </a>
         </div>
 
+        <!-- 1-Click Demo Tester -->
+        <div class="w-full max-w-md pt-5 border-t border-white/10">
+          <div class="text-[10px] font-mono text-white/60 uppercase font-semibold mb-2 text-center">
+            PENGUJIAN SISTEM CEPAT (1-KLIK)
+          </div>
+          <button type="button" onclick="loginDemoAthlete()" class="w-full py-3 px-4 rounded-2xl bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 hover:text-white font-mono text-xs font-bold flex items-center justify-center gap-2 transition-all app-tap">
+            <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+            <span>Coba Akun Demo Atlet (Muhammad Rayden - V4ND4L)</span>
+          </button>
+        </div>
+
       </div>
 
     </div>
+
+    <!-- Feature Pillars -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+      
+      <div class="p-5 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center text-center">
+        <div class="w-10 h-10 rounded-xl bg-crimson-800/10 text-crimson-700 flex items-center justify-center mb-2.5">
+          <i data-lucide="credit-card" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-display text-lg text-ink uppercase leading-tight">KARTU 3D INTERAKTIF</h4>
+        <p class="text-[11px] font-sans text-ink/60 mt-1">
+          Identitas digital atlet dua sisi dengan lapisan foil holografis dan QR verifikasi resmi.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center text-center">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center mb-2.5">
+          <i data-lucide="activity" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-display text-lg text-ink uppercase leading-tight">TELEMETRI SKILL & OVR</h4>
+        <p class="text-[11px] font-sans text-ink/60 mt-1">
+          Analisis mekanik mikro, strategi makro, mentalitas clutch, dan rekam jejak turnamen resmi.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-white border border-black/10 shadow-sm flex flex-col items-center text-center">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center mb-2.5">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-display text-lg text-ink uppercase leading-tight">LISENSI PBESI SUMBAR</h4>
+        <p class="text-[11px] font-sans text-ink/60 mt-1">
+          Status akreditasi resmi untuk pendaftaran Porprov, Pra-PON, serta bursa transfer klub esports.
+        </p>
+      </div>
+
+    </div>
+
   </section>
 
   <!-- ============================================================== -->
-  <!-- 3. MAIN PASSPORT DETAILS: 3D CARD & PERFORMANCE RADAR         -->
+  <!-- 3. AUTHENTICATED PROFILE (TAMPILAN JIKA SUDAH LOGIN/TERDAFTAR)  -->
   <!-- ============================================================== -->
-  <section class="px-3 sm:px-6 lg:px-12 py-3 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      
-      <!-- LEFT COL: OFFICIAL 3D DIGITAL PASSPORT CARD -->
-      <div class="lg:col-span-5 flex flex-col items-center">
-        <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm w-full flex flex-col items-center">
+  <div id="authenticatedProfile" class="hidden">
+    
+    <!-- USER PROFILE PASSPORT HERO -->
+    <section class="px-3 sm:px-6 lg:px-12 pt-4 pb-4 max-w-7xl mx-auto">
+      <div class="rounded-3xl bg-gradient-to-br from-[#160205] via-[#2E040C] to-[#120104] border border-crimson-600/40 p-5 sm:p-8 text-paper shadow-2xl relative overflow-hidden">
+        
+        <!-- Ambient Glows -->
+        <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-crimson-600/30 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-64 h-64 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           
-          <div class="text-center mb-3">
-            <span class="text-[10px] font-mono font-bold text-crimson-600 uppercase tracking-widest">KARTU PASPOR DIGITAL 3D</span>
-            <h3 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">SISI DEPAN & BELAKANG</h3>
-            <p class="text-[11px] font-sans text-ink/60 mt-1">Ketuk atau klik tombol putar untuk melihat nomor seri & verifikasi resmi</p>
+          <!-- Left: User Avatar & Credential Details -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-2 border-amber-400 p-1 bg-black shadow-2xl shrink-0">
+              <img id="profileHeroAvatar" src="/images/athlete-v4nd4l.jpg" alt="Foto Atlet" class="w-full h-full object-cover object-top rounded-2xl filter contrast-110" />
+              <div class="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-black flex items-center justify-center text-white" title="Status: Terverifikasi Aktif">
+                <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span id="profileHeroPelatdaBadge" class="px-3 py-1 rounded-full bg-amber-400 text-ink text-[10px] font-mono font-black uppercase tracking-wider shadow-sm">
+                  PELATDA PON • OVR 96
+                </span>
+                <span id="profileHeroLisensiBadge" class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9.5px] font-mono font-bold uppercase flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  LISENSI TERVERIFIKASI PBESI
+                </span>
+              </div>
+
+              <h1 id="profileHeroName" class="font-display text-3xl sm:text-5xl text-white uppercase tracking-tight leading-none">
+                MUHAMMAD RAYDEN <span id="profileHeroIgn" class="text-amber-300">(V4ND4L)</span>
+              </h1>
+              
+              <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-paper/80 mt-2">
+                <span id="profileHeroGameRole" class="flex items-center gap-1"><i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-crimson-400"></i> VALORANT (Duelist / Entry)</span>
+                <span>•</span>
+                <span id="profileHeroClub" class="flex items-center gap-1"><i data-lucide="shield" class="w-3.5 h-3.5 text-amber-300"></i> Minang Pride Squad</span>
+                <span>•</span>
+                <span id="profileHeroRegion" class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> Kota Padang</span>
+              </div>
+
+              <div class="text-[11px] font-mono text-paper/60 mt-1">
+                No. Lisensi Resmi: <span id="profileHeroLisensiNo" class="text-white font-bold tracking-wider">PBESI-SB-2026-VAL-96</span>
+              </div>
+            </div>
           </div>
 
-          <!-- 3D Card Scene -->
-          <div class="card-scene card-fixed select-none mx-auto my-2">
-            <div id="card-profile" class="card-wrapper cursor-pointer" onclick="flipCard('card-profile', event)">
-              
-              <!-- SISI DEPAN -->
-              <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
-                <div class="card-holo-foil"></div>
+          <!-- Right: Action Buttons & QR Code Chip -->
+          <div class="flex flex-wrap items-center gap-2.5 self-start md:self-auto">
+            <div class="hidden sm:flex flex-col items-center p-3 rounded-2xl bg-white/10 border border-white/20 text-center">
+              <div class="w-14 h-14 bg-white p-1 rounded-xl flex items-center justify-center shadow-md">
+                <img src="/images/esport-sumbar-logo.png" alt="QR ESI" class="w-full h-full object-contain" />
+              </div>
+              <span class="text-[8px] font-mono text-amber-300 mt-1 uppercase font-bold tracking-wider">ID CHECK-IN</span>
+            </div>
 
-                <div class="flex items-center justify-between z-20">
-                  <div class="flex items-center gap-1.5">
-                    <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
-                      <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+            <div class="flex flex-col gap-2">
+              <a href="/daftar-player" class="py-2.5 px-4 rounded-xl bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-1.5 app-tap">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Perbarui Data</span>
+              </a>
+              <button type="button" onclick="handleLogout()" class="py-2 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-semibold uppercase tracking-wider transition-all border border-white/20 flex items-center justify-center gap-1.5 app-tap">
+                <i data-lucide="log-out" class="w-3.5 h-3.5 text-rose-400"></i>
+                <span>Keluar (Logout)</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MAIN PASSPORT DETAILS: 3D CARD & PERFORMANCE RADAR -->
+    <section class="px-3 sm:px-6 lg:px-12 py-3 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- LEFT COL: OFFICIAL 3D DIGITAL PASSPORT CARD -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm w-full flex flex-col items-center">
+            
+            <div class="text-center mb-3">
+              <span class="text-[10px] font-mono font-bold text-crimson-600 uppercase tracking-widest">KARTU PASPOR DIGITAL 3D</span>
+              <h3 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">SISI DEPAN & BELAKANG</h3>
+              <p class="text-[11px] font-sans text-ink/60 mt-1">Ketuk atau klik tombol putar untuk melihat nomor seri & verifikasi resmi</p>
+            </div>
+
+            <!-- 3D Card Scene -->
+            <div class="card-scene card-fixed select-none mx-auto my-2">
+              <div id="card-profile" class="card-wrapper cursor-pointer" onclick="flipCard('card-profile', event)">
+                
+                <!-- SISI DEPAN -->
+                <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
+                  <div class="card-holo-foil"></div>
+
+                  <div class="flex items-center justify-between z-20">
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                        <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                      </div>
+                      <span id="cardFrontStatusBadge" class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-amber-400 text-ink shadow-sm">
+                        PELATDA PON
+                      </span>
                     </div>
-                    <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-amber-400 text-ink shadow-sm">
-                      PELATDA PON
-                    </span>
+                    <div id="cardFrontOvr" class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-lg font-black flex items-center justify-center shadow-md">
+                      96
+                    </div>
                   </div>
-                  <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-lg font-black flex items-center justify-center shadow-md">
-                    96
-                  </div>
-                </div>
 
-                <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center">
-                  <span class="absolute font-display text-[70px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">V4ND4L</span>
-                  <img src="/images/athlete-v4nd4l.jpg" alt="Muhammad Rayden" class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10" />
-                  
-                  <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
-                    <div>
-                      <div class="text-[8px] font-mono text-white/60 uppercase font-semibold">NAMA LENGKAP</div>
-                      <div class="text-xs font-sans font-bold text-white flex items-center gap-1">
-                        Muhammad Rayden
-                        <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400"></i>
+                  <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center">
+                    <span id="cardFrontWatermark" class="absolute font-display text-[70px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">V4ND4L</span>
+                    <img id="cardFrontPhoto" src="/images/athlete-v4nd4l.jpg" alt="Foto Atlet" class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10" />
+                    
+                    <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
+                      <div>
+                        <div class="text-[8px] font-mono text-white/60 uppercase font-semibold">NAMA LENGKAP</div>
+                        <div id="cardFrontName" class="text-xs font-sans font-bold text-white flex items-center gap-1">
+                          Muhammad Rayden
+                          <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400"></i>
+                        </div>
+                      </div>
+                      <div class="text-right">
+                        <div class="text-[8px] font-mono text-white/60 uppercase font-semibold">DOMISILI</div>
+                        <div id="cardFrontRegion" class="text-[11px] font-mono font-bold text-amber-300">Kota Padang</div>
                       </div>
                     </div>
-                    <div class="text-right">
-                      <div class="text-[8px] font-mono text-white/60 uppercase font-semibold">DOMISILI</div>
-                      <div class="text-[11px] font-mono font-bold text-amber-300">Kota Padang</div>
+                  </div>
+
+                  <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span id="cardFrontGame" class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase">VALORANT</span>
+                        <span id="cardFrontRole" class="text-[9px] font-mono text-ink/70 font-semibold uppercase">Duelist</span>
+                      </div>
+                      <h3 id="cardFrontIgn" class="font-display text-2xl text-ink tracking-tight leading-none mt-0.5">V4ND4L</h3>
                     </div>
+
+                    <button type="button" onclick="flipCard('card-profile', event)" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-[9px] font-bold uppercase transition-colors border border-black/10 flex items-center gap-1.5 app-tap">
+                      <i data-lucide="repeat" class="w-3 h-3 text-crimson-600"></i>
+                      <span>Putar</span>
+                    </button>
                   </div>
                 </div>
 
-                <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
-                  <div>
-                    <div class="flex items-center gap-1.5">
-                      <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase">VALORANT</span>
-                      <span class="text-[9px] font-mono text-ink/70 font-semibold uppercase">Duelist</span>
-                    </div>
-                    <h3 class="font-display text-2xl text-ink tracking-tight leading-none mt-0.5">V4ND4L</h3>
+                <!-- SISI BELAKANG -->
+                <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
+                  <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+                  <div class="card-holo-foil"></div>
+                  
+                  <!-- Barcode & Serial Overlay -->
+                  <div class="absolute inset-x-4 top-6 z-20 flex flex-col items-center text-center">
+                    <span class="text-[8px] font-mono font-bold text-amber-300 uppercase tracking-widest">PENGURUS PROVINSI ESI SUMBAR</span>
+                    <span id="cardBackSerial" class="text-[11px] font-mono font-bold text-white tracking-widest mt-0.5">PBESI-SB-2026-VAL-96</span>
                   </div>
 
-                  <button type="button" onclick="flipCard('card-profile', event)" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-[9px] font-bold uppercase transition-colors border border-black/10 flex items-center gap-1.5 app-tap">
-                    <i data-lucide="repeat" class="w-3 h-3 text-crimson-600"></i>
-                    <span>Putar</span>
-                  </button>
+                  <div class="absolute bottom-3 right-3 z-30">
+                    <button type="button" onclick="flipCard('card-profile', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap">
+                      <i data-lucide="repeat" class="w-3 h-3"></i>
+                      <span>Depan</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="flex items-center justify-center gap-2.5 mt-4 text-xs font-mono">
+              <button onclick="flipCard('card-profile')" class="px-3.5 py-1.5 rounded-xl bg-crimson-800/10 hover:bg-crimson-800 hover:text-white text-crimson-700 font-bold transition-all flex items-center gap-1.5 app-tap">
+                <i data-lucide="repeat" class="w-3.5 h-3.5"></i>
+                <span>Putar Kartu 180°</span>
+              </button>
+              <button type="button" onclick="copyPassportLink()" class="px-3.5 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-semibold transition-all flex items-center gap-1.5 app-tap">
+                <i data-lucide="share-2" class="w-3.5 h-3.5 text-ink/70"></i>
+                <span>Bagikan Paspor</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT COL: PERFORMANCE HUD & CAREER HISTORY -->
+        <div class="lg:col-span-7 space-y-5">
+          
+          <!-- Performance Attributes Card -->
+          <div class="rounded-3xl bg-white border border-black/10 p-5 sm:p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-black/5">
+              <div>
+                <span class="text-[10px] font-mono font-bold text-crimson-600 uppercase tracking-widest">METRIK SKILL ATLET</span>
+                <h3 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">PERFORMANCE TELEMETRY</h3>
+              </div>
+              <div class="text-right">
+                <span class="text-[9px] font-mono text-ink/40 uppercase">OVERALL RATING</span>
+                <div class="font-display text-3xl font-black text-amber-500 leading-none">
+                  <span id="telemetryOvr">96</span> <span class="text-xs text-ink/40 font-mono">/ 100</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-xs font-mono">
+              <!-- Micro Mechanics -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-ink font-bold">MICRO MECHANICS (AIM & REFLEX)</span>
+                  <span class="text-crimson-700 font-bold">97 / 100</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 97%"></div>
                 </div>
               </div>
 
-              <!-- SISI BELAKANG -->
-              <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
-                <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
-                <div class="card-holo-foil"></div>
-                <div class="absolute bottom-3 right-3 z-30">
-                  <button type="button" onclick="flipCard('card-profile', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap">
-                    <i data-lucide="repeat" class="w-3 h-3"></i>
-                    <span>Depan</span>
-                  </button>
+              <!-- Macro Strategy -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-ink font-bold">MACRO STRATEGY & MAP CONTROL</span>
+                  <span class="text-crimson-700 font-bold">94 / 100</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 94%"></div>
                 </div>
               </div>
 
+              <!-- Tournament Mentality -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-ink font-bold">TOURNAMENT MENTALITY & CLUTCH</span>
+                  <span class="text-crimson-700 font-bold">98 / 100</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 98%"></div>
+                </div>
+              </div>
+
+              <!-- Teamplay -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-ink font-bold">COMMUNICATION & TEAMPLAY</span>
+                  <span class="text-crimson-700 font-bold">92 / 100</span>
+                </div>
+                <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="flex items-center justify-center gap-3 mt-4 text-xs font-mono">
-            <button onclick="flipCard('card-profile')" class="px-3.5 py-1.5 rounded-xl bg-crimson-800/10 hover:bg-crimson-800 hover:text-white text-crimson-700 font-bold transition-all flex items-center gap-1.5 app-tap">
-              <i data-lucide="repeat" class="w-3.5 h-3.5"></i>
-              <span>Putar Kartu 180°</span>
-            </button>
-            <a href="/cari" class="px-3.5 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-semibold transition-all flex items-center gap-1.5 app-tap">
-              <i data-lucide="search" class="w-3.5 h-3.5"></i>
-              <span>Cari di Database</span>
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- RIGHT COL: PERFORMANCE HUD & CAREER HISTORY -->
-      <div class="lg:col-span-7 space-y-5">
-        
-        <!-- Performance Attributes Card -->
-        <div class="rounded-3xl bg-white border border-black/10 p-5 sm:p-6 shadow-sm">
-          <div class="flex items-center justify-between mb-4 pb-3 border-b border-black/5">
-            <div>
-              <span class="text-[10px] font-mono font-bold text-crimson-600 uppercase tracking-widest">METRIK SKILL ATLET</span>
-              <h3 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">PERFORMANCE TELEMETRY</h3>
-            </div>
-            <div class="text-right">
-              <span class="text-[9px] font-mono text-ink/40 uppercase">OVERALL RATING</span>
-              <div class="font-display text-3xl font-black text-amber-500 leading-none">96 <span class="text-xs text-ink/40 font-mono">/ 100</span></div>
-            </div>
-          </div>
-
-          <div class="space-y-4 text-xs font-mono">
-            <!-- Micro Mechanics -->
-            <div>
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-ink font-bold">MICRO MECHANICS (AIM & REFLEX)</span>
-                <span class="text-crimson-700 font-bold">97 / 100</span>
+          <!-- Career & Tournament Achievements -->
+          <div class="rounded-3xl bg-white border border-black/10 p-5 sm:p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="text-[10px] font-mono font-bold text-amber-600 uppercase tracking-widest">RIWAYAT TURNAMEN RESMI</span>
+                <h3 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">PRESTASI & SERTIFIKASI</h3>
               </div>
-              <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 97%"></div>
-              </div>
+              <span class="px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-800 text-[10px] font-mono font-bold">
+                REKORD RESMI PBESI
+              </span>
             </div>
 
-            <!-- Macro Strategy -->
-            <div>
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-ink font-bold">MACRO STRATEGY & MAP CONTROL</span>
-                <span class="text-crimson-700 font-bold">94 / 100</span>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F7F8] border border-black/5">
+                <div class="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="trophy" class="w-5 h-5 text-amber-500"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-display text-lg text-ink uppercase leading-tight truncate">Medali Emas Porprov Sumbar 2024</div>
+                  <div class="text-[10px] font-mono text-ink/60">Divisi Utama • Kontingen Sumatera Barat</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase">TERVERIFIKASI</span>
               </div>
-              <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 94%"></div>
-              </div>
-            </div>
 
-            <!-- Tournament Mentality -->
-            <div>
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-ink font-bold">TOURNAMENT MENTALITY & CLUTCH</span>
-                <span class="text-crimson-700 font-bold">98 / 100</span>
+              <div class="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F7F8] border border-black/5">
+                <div class="w-10 h-10 rounded-xl bg-sky-400/20 text-sky-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="award" class="w-5 h-5 text-sky-600"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-display text-lg text-ink uppercase leading-tight truncate">Top 4 Pra-PON Aceh-Sumut 2024</div>
+                  <div class="text-[10px] font-mono text-ink/60">Kualifikasi Regional Sumatera Bagian Tengah</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase">TERVERIFIKASI</span>
               </div>
-              <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 98%"></div>
-              </div>
-            </div>
 
-            <!-- Teamplay -->
-            <div>
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-ink font-bold">COMMUNICATION & TEAMPLAY</span>
-                <span class="text-crimson-700 font-bold">92 / 100</span>
-              </div>
-              <div class="w-full h-2.5 rounded-full bg-black/5 overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-crimson-600 to-amber-400 rounded-full" style="width: 92%"></div>
+              <div class="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F7F8] border border-black/5">
+                <div class="w-10 h-10 rounded-xl bg-crimson-600/20 text-crimson-700 flex items-center justify-center shrink-0">
+                  <i data-lucide="medal" class="w-5 h-5 text-crimson-600"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-display text-lg text-ink uppercase leading-tight truncate">Pendaftar Terverifikasi Platform 2026</div>
+                  <div class="text-[10px] font-mono text-ink/60">Status Lisensi: Terdata di Database Resmi</div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase">TERCATAT</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Career & Tournament Achievements -->
-        <div class="rounded-3xl bg-white border border-black/10 p-5 sm:p-6 shadow-sm">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <span class="text-[10px] font-mono font-bold text-amber-600 uppercase tracking-widest">RIWAYAT TURNAMEN RESMI</span>
-              <h3 class="font-display text-2xl text-ink uppercase leading-none mt-0.5">PRESTASI & SERTIFIKASI</h3>
-            </div>
-            <span class="px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-800 text-[10px] font-mono font-bold">
-              3 GELAR RESMI
-            </span>
-          </div>
-
-          <div class="space-y-3">
-            <div class="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F7F8] border border-black/5">
-              <div class="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-700 flex items-center justify-center shrink-0">
-                <i data-lucide="trophy" class="w-5 h-5 text-amber-500"></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="font-display text-lg text-ink uppercase leading-tight truncate">Medali Emas Porprov Sumbar 2024</div>
-                <div class="text-[10px] font-mono text-ink/60">Divisi VALORANT • Kontingen Kota Padang</div>
-              </div>
-              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase">TERVERIFIKASI</span>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F7F8] border border-black/5">
-              <div class="w-10 h-10 rounded-xl bg-sky-400/20 text-sky-700 flex items-center justify-center shrink-0">
-                <i data-lucide="award" class="w-5 h-5 text-sky-600"></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="font-display text-lg text-ink uppercase leading-tight truncate">Top 4 Pra-PON Aceh-Sumut 2024</div>
-                <div class="text-[10px] font-mono text-ink/60">Kualifikasi Regional Sumatera Bagian Tengah</div>
-              </div>
-              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase">TERVERIFIKASI</span>
-            </div>
-
-            <div class="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F7F8] border border-black/5">
-              <div class="w-10 h-10 rounded-xl bg-crimson-600/20 text-crimson-700 flex items-center justify-center shrink-0">
-                <i data-lucide="medal" class="w-5 h-5 text-crimson-600"></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="font-display text-lg text-ink uppercase leading-tight truncate">Juara 1 Piala Gubernur Sumbar 2025</div>
-                <div class="text-[10px] font-mono text-ink/60">Klub: Minang Pride Squad • Duelist MVP</div>
-              </div>
-              <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[9px] font-mono font-bold uppercase">TERVERIFIKASI</span>
-            </div>
-          </div>
         </div>
 
       </div>
+    </section>
 
-    </div>
-  </section>
+  </div>
 
   <!-- ============================================================== -->
   <!-- 4. DESKTOP ONLY FOOTER (HIDDEN ON MOBILE)                      -->
@@ -542,7 +664,7 @@
         <span class="text-[8.5px] font-mono mt-0.5 leading-none">Wilayah</span>
       </a>
 
-      <!-- 5. Profile -->
+      <!-- 5. Profile (Active) -->
       <a href="/profile" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-crimson-700 font-bold transition-colors app-tap">
         <i data-lucide="user" class="w-5 h-5 stroke-[2.5]"></i>
         <span class="text-[8.5px] font-mono mt-0.5 leading-none">Profile</span>
@@ -553,7 +675,7 @@
   <!-- /MOBILE BOTTOM DOCK -->
 
   <!-- ============================================================== -->
-  <!-- 6. JAVASCRIPT PROFILE ENGINE                                   -->
+  <!-- 6. JAVASCRIPT PROFILE & AUTH ENGINE                            -->
   <!-- ============================================================== -->
   <script>
     const flipLock = new Set();
@@ -569,8 +691,183 @@
       setTimeout(() => { flipLock.delete(cardId); }, 550);
     }
 
+    function showToast(msg, isSuccess = true) {
+      const toast = document.getElementById('profileToast');
+      const toastMsg = document.getElementById('toastMessage');
+      const iconBox = document.getElementById('toastIconBox');
+      
+      toastMsg.textContent = msg;
+      if (isSuccess) {
+        iconBox.className = "w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0";
+        iconBox.innerHTML = '<i data-lucide="check-circle-2" class="w-4 h-4"></i>';
+      } else {
+        iconBox.className = "w-8 h-8 rounded-xl bg-crimson-500/20 text-crimson-400 flex items-center justify-center shrink-0";
+        iconBox.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4"></i>';
+      }
+      lucide.createIcons();
+
+      toast.classList.remove('opacity-0', '-translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-4');
+      }, 2500);
+    }
+
+    function copyPassportLink() {
+      const user = getCurrentUser();
+      const pasporId = user ? (user.pasporId || 'PBESI-SB-2026-VAL-96') : 'PBESI-SB-2026-VAL-96';
+      const url = `${window.location.origin}/profile?verify=${encodeURIComponent(pasporId)}`;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast("Tautan verifikasi resmi paspor disalin ke clipboard!");
+      }).catch(() => {
+        showToast("Tautan: " + url);
+      });
+    }
+
+    function getCurrentUser() {
+      try {
+        const raw = localStorage.getItem('esi_auth_user');
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function renderAuthenticatedView(user) {
+      document.getElementById('unauthenticatedGate').classList.add('hidden');
+      document.getElementById('authenticatedProfile').classList.remove('hidden');
+
+      // Update Header Bar
+      const headerAuthNav = document.getElementById('headerAuthNav');
+      headerAuthNav.innerHTML = `
+        <div class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-black/5 border border-black/10">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold text-ink">${user.ign || 'ATLET'}</span>
+          <span class="text-[10px] font-mono text-ink/50">• ${user.ovr || 96}</span>
+        </div>
+        <button onclick="handleLogout()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-crimson-800/10 hover:bg-crimson-800 hover:text-white text-crimson-700 font-mono text-xs font-bold transition-all app-tap" title="Keluar dari akun">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Keluar</span>
+        </button>
+      `;
+
+      // Update Hero Details
+      const avatarEl = document.getElementById('profileHeroAvatar');
+      if (user.foto) avatarEl.src = user.foto;
+
+      document.getElementById('profileHeroPelatdaBadge').textContent = user.statusPelatda || `ATLET ${user.wilayah?.toUpperCase() || 'SUMBAR'}`;
+      document.getElementById('profileHeroLisensiBadge').innerHTML = `
+        <span class="w-1.5 h-1.5 rounded-full ${user.lisensiStatus?.includes('MENUNGGU') ? 'bg-amber-400' : 'bg-emerald-400'} animate-pulse"></span>
+        ${user.lisensiStatus || 'LISENSI TERVERIFIKASI PBESI'}
+      `;
+
+      document.getElementById('profileHeroName').innerHTML = `
+        ${user.nama || 'ATLET SUMATERA BARAT'} <span id="profileHeroIgn" class="text-amber-300">(${user.ign || 'PLAYER'})</span>
+      `;
+
+      const game = user.game || 'VALORANT';
+      const role = user.roleTitle || user.role || 'Duelist / Entry';
+      document.getElementById('profileHeroGameRole').innerHTML = `<i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-crimson-400"></i> ${game} (${role})`;
+      document.getElementById('profileHeroClub').innerHTML = `<i data-lucide="shield" class="w-3.5 h-3.5 text-amber-300"></i> ${user.klub || 'Minang Pride Squad'}`;
+      document.getElementById('profileHeroRegion').innerHTML = `<i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> ${user.wilayah || 'Kota Padang'}`;
+      document.getElementById('profileHeroLisensiNo').textContent = user.pasporId || 'PBESI-SB-2026-VAL-96';
+
+      // Update 3D Card Front
+      document.getElementById('cardFrontOvr').textContent = user.ovr || 96;
+      document.getElementById('cardFrontStatusBadge').textContent = (user.statusPelatda || 'ATLET RESMI').substring(0, 15);
+      document.getElementById('cardFrontWatermark').textContent = user.ign || 'PLAYER';
+      document.getElementById('cardFrontName').innerHTML = `${user.nama || 'Nama Atlet'} <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400"></i>`;
+      document.getElementById('cardFrontRegion').textContent = user.wilayah || 'Kota Padang';
+      document.getElementById('cardFrontGame').textContent = (user.game || 'VALORANT').toUpperCase();
+      document.getElementById('cardFrontRole').textContent = role.split('/')[0].trim().toUpperCase();
+      document.getElementById('cardFrontIgn').textContent = user.ign || 'PLAYER';
+
+      // Update 3D Card Back
+      document.getElementById('cardBackSerial').textContent = user.pasporId || 'PBESI-SB-2026-VAL-96';
+
+      // Update Telemetry
+      const telemOvr = document.getElementById('telemetryOvr');
+      if (telemOvr) telemOvr.textContent = user.ovr || 96;
+
+      lucide.createIcons();
+    }
+
+    function renderUnauthenticatedView() {
+      document.getElementById('authenticatedProfile').classList.add('hidden');
+      document.getElementById('unauthenticatedGate').classList.remove('hidden');
+
+      // Update Header Bar
+      const headerAuthNav = document.getElementById('headerAuthNav');
+      headerAuthNav.innerHTML = `
+        <a href="/login?return=/profile" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-semibold transition-all app-tap" title="Masuk ke Akun">
+          <i data-lucide="log-in" class="w-3.5 h-3.5 text-crimson-700"></i>
+          <span class="hidden sm:inline">Masuk</span>
+        </a>
+        <a href="/daftar-player" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-xs font-bold uppercase tracking-wider shadow-sm transition-all app-tap">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span class="hidden sm:inline">Daftar Paspor</span>
+          <span class="sm:hidden">Daftar</span>
+        </a>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function checkAuthState() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('demo') === '1' || urlParams.get('demo') === 'atlet') {
+        loginDemoAthlete();
+        return;
+      }
+
+      const user = getCurrentUser();
+      if (user) {
+        renderAuthenticatedView(user);
+      } else {
+        renderUnauthenticatedView();
+      }
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('esi_auth_token');
+      localStorage.removeItem('esi_auth_user');
+      showToast("Sesi berhasil ditutup. Mengunci akses profil...");
+      setTimeout(() => {
+        renderUnauthenticatedView();
+      }, 400);
+    }
+
+    function loginDemoAthlete() {
+      const demoAthlete = {
+        id: "usr-atlet-v4nd4l",
+        role: "atlet",
+        nama: "Muhammad Rayden",
+        ign: "V4ND4L",
+        game: "VALORANT",
+        roleTitle: "Duelist / Entry Fragger",
+        wilayah: "Kota Padang",
+        klub: "Minang Pride Squad",
+        pasporId: "PBESI-SB-2026-VAL-96",
+        ovr: 96,
+        statusPelatda: "PELATDA PON • OVR 96",
+        lisensiStatus: "LISENSI TERVERIFIKASI PBESI",
+        foto: "/images/athlete-v4nd4l.jpg"
+      };
+
+      localStorage.setItem('esi_auth_token', 'esi-token-demo-rayden-' + Date.now().toString(36));
+      localStorage.setItem('esi_auth_user', JSON.stringify(demoAthlete));
+
+      showToast("Autentikasi Atlet Sah! Membuka Paspor Digital...", true);
+      setTimeout(() => {
+        renderAuthenticatedView(demoAthlete);
+      }, 500);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      checkAuthState();
     });
   </script>
 </body>
