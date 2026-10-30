@@ -4,6 +4,50 @@
   "trailingSlash": false,
   "routes": [
     {
+      "src": "/daftar-player",
+      "dest": "/daftar-player.html"
+    },
+    {
+      "src": "/daftar/player",
+      "dest": "/daftar-player.html"
+    },
+    {
+      "src": "/daftar-pelatih",
+      "dest": "/daftar-pelatih.html"
+    },
+    {
+      "src": "/daftar/pelatih",
+      "dest": "/daftar-pelatih.html"
+    },
+    {
+      "src": "/daftar-team",
+      "dest": "/daftar-team.html"
+    },
+    {
+      "src": "/daftar/team",
+      "dest": "/daftar-team.html"
+    },
+    {
+      "src": "/daftar-komunitas",
+      "dest": "/daftar-komunitas.html"
+    },
+    {
+      "src": "/daftar/komunitas",
+      "dest": "/daftar-komunitas.html"
+    },
+    {
+      "src": "/daftar-venue",
+      "dest": "/daftar-venue.html"
+    },
+    {
+      "src": "/daftar/venue",
+      "dest": "/daftar-venue.html"
+    },
+    {
+      "src": "/daftar",
+      "dest": "/daftar.html"
+    },
+    {
       "src": "/bursa",
       "dest": "/bursa.html"
     },
@@ -54,10 +98,6 @@
     {
       "src": "/atlet",
       "dest": "/atlet.html"
-    },
-    {
-      "src": "/daftar",
-      "dest": "/daftar.html"
     },
     {
       "src": "/about",

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Pendaftaran Team & Klub Esport – ESPORT SUMBAR</title>
+  <meta name="description" content="Formulir resmi akreditasi dan pendaftaran tim/klub esports 19 kabupaten/kota Sumatera Barat berlisensi Pengprov ESI Sumbar." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #E2E2E5;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(224, 34, 45, 0.08) 0%, transparent 60%),
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="text-ink antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen">
+
+  <!-- ============================================================== -->
+  <!-- 1. HEADER                                                      -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-[#E2E2E5]/90 backdrop-blur-md border-b border-black/10">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5 group app-tap">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson-800 to-crimson-900 flex items-center justify-center p-1.5 shadow-md shadow-crimson-950/20 ring-1 ring-white/20">
+          <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display text-lg tracking-wider text-ink leading-tight flex items-center gap-1">
+            ESPORT <span class="text-crimson-600">SUMBAR</span>
+          </span>
+          <span class="text-[9px] font-mono tracking-tight text-ink/60 font-semibold uppercase flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-crimson-600"></span>
+            FORMULIR AKREDITASI TIM / KLUB
+          </span>
+        </div>
+      </a>
+
+      <a href="/daftar" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+        <span>Semua Bidang</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. TRACK SWITCHER STRIP                                        -->
+  <!-- ============================================================== -->
+  <div class="bg-white/70 backdrop-blur-md border-b border-black/10 py-2.5 px-4 sticky top-[53px] z-30">
+    <div class="max-w-7xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+      <span class="text-[9px] font-mono uppercase font-bold text-ink/50 shrink-0 mr-1">Bidang:</span>
+      <a href="/daftar-player" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i>
+        <span>Player</span>
+      </a>
+      <a href="/daftar-pelatih" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+        <span>Pelatih</span>
+      </a>
+      <a href="/daftar-team" class="px-3 py-1.5 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shadow-sm shrink-0 app-tap">
+        <i data-lucide="shield" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>Team (Aktif)</span>
+      </a>
+      <a href="/daftar-komunitas" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="users" class="w-3.5 h-3.5"></i>
+        <span>Komunitas</span>
+      </a>
+      <a href="/daftar-venue" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
+        <span>Venue</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 3. MAIN FORM & PREVIEW                                         -->
+  <!-- ============================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+
+    <!-- Header Banner -->
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#450409] via-[#65080E] to-[#200204] text-white p-5 sm:p-6 shadow-xl shadow-crimson-950/20 border border-white/10 mb-6">
+      <div class="relative z-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/30 text-amber-300 font-mono text-[10px] font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="shield-check" class="w-3 h-3"></i>
+          Jalur Akreditasi: Organisasi & Klub Esport
+        </span>
+        <h1 class="font-display text-3xl sm:text-4xl text-white tracking-tight uppercase leading-none mb-1">
+          REGISTRASI & AKREDITASI <span class="text-amber-300">KLUB ESPORT</span>
+        </h1>
+        <p class="font-sans text-xs sm:text-sm text-white/80 max-w-xl">
+          Daftarkan organisasi tim, susunan roster pemain resmi, dan legalitas klub untuk berpartisipasi dalam liga dan kejuaraan resmi ESI Sumbar.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- FORM COLUMN (7 cols) -->
+      <div class="lg:col-span-7 bg-white rounded-3xl p-5 sm:p-7 border border-black/10 shadow-sm space-y-5">
+        
+        <form id="teamForm" onsubmit="handleTeamSubmit(event)" class="space-y-4">
+
+          <!-- Section 1: Tier Klub -->
+          <div>
+            <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1.5">Kategori / Tier Kompetisi</label>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-black/10 bg-[#F7F7F8] cursor-pointer has-[:checked]:border-crimson-800 has-[:checked]:bg-crimson-50 text-center transition-all">
+                <input type="radio" name="teamTier" value="DIVISI UTAMA" checked class="accent-crimson-800 sr-only" onchange="updateTeamCardPreview()" />
+                <span class="text-[10px] font-mono font-bold text-ink uppercase">Divisi Utama</span>
+                <span class="text-[9px] font-sans text-ink/50 mt-0.5">Klub Kompetitif Pro</span>
+              </label>
+              <label class="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-black/10 bg-[#F7F7F8] cursor-pointer has-[:checked]:border-crimson-800 has-[:checked]:bg-crimson-50 text-center transition-all">
+                <input type="radio" name="teamTier" value="PELATDA TIER 1" class="accent-crimson-800 sr-only" onchange="updateTeamCardPreview()" />
+                <span class="text-[10px] font-mono font-bold text-ink uppercase">Pelatda Tier 1</span>
+                <span class="text-[9px] font-sans text-ink/50 mt-0.5">Binaan KONI / Pengprov</span>
+              </label>
+              <label class="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-black/10 bg-[#F7F7F8] cursor-pointer has-[:checked]:border-crimson-800 has-[:checked]:bg-crimson-50 text-center transition-all">
+                <input type="radio" name="teamTier" value="KOMUNITAS PRO" class="accent-crimson-800 sr-only" onchange="updateTeamCardPreview()" />
+                <span class="text-[10px] font-mono font-bold text-ink uppercase">Komunitas Pro</span>
+                <span class="text-[9px] font-sans text-ink/50 mt-0.5">Tim Turnamen Terbuka</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Section 2: Identitas Klub -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Nama Resmi Tim / Organisasi</label>
+              <input type="text" id="tName" required value="Sago Peak Esports" placeholder="cth: Sago Peak Esports" oninput="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-crimson-700" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Singkatan / Tag Tim (In-Game Tag)</label>
+              <input type="text" id="tTag" required value="SAGO" placeholder="cth: SAGO / MPE" oninput="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono font-bold uppercase text-crimson-700 focus:outline-none focus:border-crimson-700" />
+            </div>
+          </div>
+
+          <!-- Section 3: Game & Wilayah -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Divisi Game Utama</label>
+              <select id="tGame" onchange="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-crimson-700">
+                <option value="Mobile Legends" selected>Mobile Legends: Bang Bang</option>
+                <option value="VALORANT">VALORANT</option>
+                <option value="PUBG Mobile">PUBG Mobile</option>
+                <option value="Free Fire">Free Fire</option>
+                <option value="Multi-Divisi">Multi-Divisi (Valorant + MLBB)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Kabupaten / Kota Markas</label>
+              <select id="tRegion" onchange="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-crimson-700">
+                <option value="Kota Payakumbuh" selected>Kota Payakumbuh</option>
+                <option value="Kota Padang">Kota Padang</option>
+                <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+                <option value="Kota Pariaman">Kota Pariaman</option>
+                <option value="Kota Solok">Kota Solok</option>
+                <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+                <option value="Kab. Agam">Kab. Agam</option>
+                <option value="Kab. 50 Kota">Kab. 50 Kota</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Section 4: Kapten & Roster Tags -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Nama & IGN Kapten / IGL</label>
+              <input type="text" id="tCaptain" required value="Rizky Pratama (SAGO-CHIEF)" placeholder="cth: Nama (IGN)" oninput="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-crimson-700" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Daftar Tag Roster Inti (Pisahkan Koma)</label>
+              <input type="text" id="tRosterTags" value="CHIEF, BLAZE, FROST, STORM, NEXUS" placeholder="IGN1, IGN2, IGN3, IGN4, IGN5" oninput="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-crimson-700" />
+            </div>
+          </div>
+
+          <!-- Section 5: Kontak & Prestasi -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Nama Manajer / Kontak WhatsApp</label>
+              <input type="text" id="tManager" required value="Fauzan Haris (081233445566)" placeholder="Nama Manajer (No WA)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-crimson-700" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Prestasi Terbaik Tim</label>
+              <input type="text" id="tAchieve" value="Juara 1 Piala ESI Payakumbuh 2024" placeholder="cth: Juara 1 Kejurda" oninput="updateTeamCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-crimson-700" />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-3 border-t border-black/10">
+            <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 app-tap">
+              <i data-lucide="shield-check" class="w-4 h-4 text-amber-300"></i>
+              <span>Daftarkan & Akreditasi Klub Resmi</span>
+            </button>
+            <p class="text-[10px] font-sans text-center text-ink/50 mt-2">
+              Klub akan mendapatkan Nomor Registrasi PBESI Sumbar dan diverifikasi untuk mengikuti kalender turnamen resmi.
+            </p>
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- PREVIEW COLUMN (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <div class="sticky top-28 w-full flex flex-col items-center">
+          
+          <div class="mb-2 text-center">
+            <span class="text-[10px] font-mono text-ink/60 uppercase font-bold flex items-center justify-center gap-1">
+              <i data-lucide="shield" class="w-3.5 h-3.5 text-crimson-700"></i>
+              <span>Live Preview Kartu Akreditasi Tim</span>
+            </span>
+          </div>
+
+          <!-- Team Card Preview -->
+          <div class="w-full max-w-[320px] rounded-3xl bg-white border border-black/10 p-5 shadow-xl text-ink select-none flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span id="previewTeamTier" class="px-2.5 py-0.5 rounded-full bg-amber-400 text-ink text-[9px] font-mono font-black uppercase tracking-wider shadow-sm">
+                  DIVISI UTAMA
+                </span>
+                <span id="previewTeamRegion" class="text-[10px] font-mono text-ink/50 flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-crimson-600"></i>
+                  Kota Payakumbuh
+                </span>
+              </div>
+
+              <!-- Logo & Team Name -->
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-crimson-900 to-crimson-700 p-2 flex items-center justify-center shadow-md shrink-0">
+                  <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+                </div>
+                <div>
+                  <h3 id="previewTeamName" class="font-display text-2xl text-ink leading-tight uppercase">
+                    SAGO PEAK ESPORTS
+                  </h3>
+                  <div id="previewTeamGame" class="text-[10px] font-mono text-ink/60 font-semibold">Mobile Legends</div>
+                </div>
+              </div>
+
+              <!-- Captain & Roster Strip -->
+              <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 mb-3 space-y-1.5 text-[11px] font-mono">
+                <div class="flex justify-between items-center">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">Kapten:</span>
+                  <span id="previewTeamCaptain" class="font-bold text-ink truncate ml-2">Rizky Pratama (SAGO-CHIEF)</span>
+                </div>
+                <div>
+                  <div class="text-[9px] font-mono text-ink/50 uppercase font-bold mb-1">Roster Terdaftar:</div>
+                  <div id="previewTeamChips" class="flex flex-wrap gap-1">
+                    <span class="px-2 py-0.5 rounded-lg bg-black/5 text-[9px] font-mono font-bold text-ink">CHIEF</span>
+                    <span class="px-2 py-0.5 rounded-lg bg-black/5 text-[9px] font-mono font-bold text-ink">BLAZE</span>
+                    <span class="px-2 py-0.5 rounded-lg bg-black/5 text-[9px] font-mono font-bold text-ink">FROST</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trophy -->
+              <div class="p-2.5 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[10.5px] font-mono flex items-center gap-2 mb-3">
+                <i data-lucide="trophy" class="w-4 h-4 text-amber-500 shrink-0"></i>
+                <span id="previewTeamAchieve" class="font-bold text-ink truncate">Juara 1 Piala ESI Payakumbuh</span>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-black/10 flex items-center justify-between text-[9px] font-mono text-ink/50">
+              <span>STATUS: AKREDITASI ESI SUMBAR</span>
+              <span class="text-emerald-700 font-bold flex items-center gap-1">
+                <i data-lucide="check" class="w-3 h-3"></i>
+                RESMI
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- 4. SUCCESS MODAL                                               -->
+  <!-- ============================================================== -->
+  <div id="successTeamModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-black/10 relative text-center">
+      <div class="w-16 h-16 rounded-3xl bg-crimson-100 text-crimson-800 flex items-center justify-center mx-auto mb-4 shadow-inner">
+        <i data-lucide="shield-check" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-display text-3xl text-ink uppercase mb-1">AKREDITASI KLUB BERHASIL!</h3>
+      <p class="text-xs font-sans text-ink/70 leading-relaxed mb-4">
+        Berkas tim <strong id="successTeamName" class="text-ink">Nama Tim</strong> telah berhasil tercatat dalam Sistem Registrasi Klub ESI Sumatera Barat.
+      </p>
+
+      <div class="space-y-2">
+        <a href="/tim" class="w-full py-3 px-4 rounded-2xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-md app-tap">
+          <span>Lihat Profil Tim & Roster</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
+        </a>
+        <button type="button" onclick="document.getElementById('successTeamModal').classList.add('hidden')" class="w-full py-2.5 px-4 rounded-2xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-colors app-tap">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 5. MOBILE BOTTOM FLOATING DOCK (5-SERIES)                      -->
+  <!-- ============================================================== -->
+  <div class="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none pb-2 pt-1 px-3">
+    <div class="max-w-md mx-auto pointer-events-auto">
+      <nav class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-full shadow-2xl px-2 py-1.5 flex items-center justify-around">
+        <a href="/" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Home</span>
+        </a>
+        <a href="/katalog" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="layout-grid" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Katalog</span>
+        </a>
+        <div class="relative -top-3 flex flex-col items-center">
+          <a href="/cari" class="w-13 h-13 w-[52px] h-[52px] rounded-full bg-gradient-to-tr from-crimson-900 via-crimson-700 to-crimson-600 text-white flex items-center justify-center shadow-lg shadow-crimson-800/40 border-2 border-white ring-4 ring-black/5 hover:scale-105 active:scale-95 transition-all app-tap" title="Pencarian Ekosistem">
+            <i data-lucide="search" class="w-6 h-6"></i>
+          </a>
+          <span class="text-[9px] font-mono font-bold text-crimson-800 mt-0.5">Pencarian</span>
+        </div>
+        <a href="/wilayah" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Wilayah</span>
+        </a>
+        <a href="/profile" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Profile</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    function updateTeamCardPreview() {
+      const name = document.getElementById('tName').value.trim() || 'Nama Tim';
+      const game = document.getElementById('tGame').value;
+      const region = document.getElementById('tRegion').value;
+      const captain = document.getElementById('tCaptain').value.trim() || 'Kapten Tim';
+      const achieve = document.getElementById('tAchieve').value.trim() || 'Prestasi Tim';
+      const tagsRaw = document.getElementById('tRosterTags').value.trim() || 'ROSTER1, ROSTER2';
+      const tierInput = document.querySelector('input[name="teamTier"]:checked');
+      const tier = tierInput ? tierInput.value : 'DIVISI UTAMA';
+
+      document.getElementById('previewTeamName').textContent = name.toUpperCase();
+      document.getElementById('previewTeamGame').textContent = game;
+      document.getElementById('previewTeamRegion').innerHTML = `<i data-lucide="map-pin" class="w-3 h-3 text-crimson-600"></i> ${region}`;
+      document.getElementById('previewTeamCaptain').textContent = captain;
+      document.getElementById('previewTeamAchieve').textContent = achieve;
+      document.getElementById('previewTeamTier').textContent = tier;
+
+      const chips = tagsRaw.split(',').map(tag => tag.trim()).filter(Boolean);
+      document.getElementById('previewTeamChips').innerHTML = chips.map(c => `
+        <span class="px-2 py-0.5 rounded-lg bg-black/5 text-[9px] font-mono font-bold text-ink">${c}</span>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function handleTeamSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('tName').value.trim();
+      document.getElementById('successTeamName').textContent = name;
+      const modal = document.getElementById('successTeamModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      updateTeamCardPreview();
+    });
+  </script>
+</body>
+</html>

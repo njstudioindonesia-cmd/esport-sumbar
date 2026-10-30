@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Pendaftaran Venue & Gaming Arena – ESPORT SUMBAR</title>
+  <meta name="description" content="Formulir resmi akreditasi dan sertifikasi venue esports, iCafe, dan bootcamp center 19 kabupaten/kota Sumatera Barat berlisensi Pengprov ESI Sumbar." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #E2E2E5;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(224, 34, 45, 0.08) 0%, transparent 60%),
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="text-ink antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen">
+
+  <!-- ============================================================== -->
+  <!-- 1. HEADER                                                      -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-[#E2E2E5]/90 backdrop-blur-md border-b border-black/10">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5 group app-tap">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-700 to-emerald-900 flex items-center justify-center p-1.5 shadow-md shadow-emerald-950/20 ring-1 ring-white/20">
+          <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display text-lg tracking-wider text-ink leading-tight flex items-center gap-1">
+            ESPORT <span class="text-crimson-600">SUMBAR</span>
+          </span>
+          <span class="text-[9px] font-mono tracking-tight text-ink/60 font-semibold uppercase flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            FORMULIR SERTIFIKASI VENUE
+          </span>
+        </div>
+      </a>
+
+      <a href="/daftar" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+        <span>Semua Bidang</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. TRACK SWITCHER STRIP                                        -->
+  <!-- ============================================================== -->
+  <div class="bg-white/70 backdrop-blur-md border-b border-black/10 py-2.5 px-4 sticky top-[53px] z-30">
+    <div class="max-w-7xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+      <span class="text-[9px] font-mono uppercase font-bold text-ink/50 shrink-0 mr-1">Bidang:</span>
+      <a href="/daftar-player" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i>
+        <span>Player</span>
+      </a>
+      <a href="/daftar-pelatih" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+        <span>Pelatih</span>
+      </a>
+      <a href="/daftar-team" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+        <span>Team</span>
+      </a>
+      <a href="/daftar-komunitas" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shrink-0 app-tap">
+        <i data-lucide="users" class="w-3.5 h-3.5"></i>
+        <span>Komunitas</span>
+      </a>
+      <a href="/daftar-venue" class="px-3 py-1.5 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 shadow-sm shrink-0 app-tap">
+        <i data-lucide="monitor" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>Venue (Aktif)</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 3. MAIN FORM & PREVIEW                                         -->
+  <!-- ============================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+
+    <!-- Header Banner -->
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#052914] via-[#0D4D27] to-[#041F0F] text-white p-5 sm:p-6 shadow-xl shadow-emerald-950/20 border border-white/10 mb-6">
+      <div class="relative z-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/30 text-amber-300 font-mono text-[10px] font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="monitor" class="w-3 h-3"></i>
+          Jalur Sertifikasi: Venue, iCafe & Gaming Arena
+        </span>
+        <h1 class="font-display text-3xl sm:text-4xl text-white tracking-tight uppercase leading-none mb-1">
+          AKREDITASI & SERTIFIKASI <span class="text-amber-300">GAMING VENUE</span>
+        </h1>
+        <p class="font-sans text-xs sm:text-sm text-white/80 max-w-xl">
+          Standarisasi sentra iCafe, Gaming Arena, dan Bootcamp Center di Sumatera Barat untuk diverifikasi sebagai arena latihan & venue turnamen resmi ESI Sumbar.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- FORM COLUMN (7 cols) -->
+      <div class="lg:col-span-7 bg-white rounded-3xl p-5 sm:p-7 border border-black/10 shadow-sm space-y-5">
+        
+        <form id="venueForm" onsubmit="handleVenueSubmit(event)" class="space-y-4">
+
+          <!-- Section 1: Kategori Fasilitas -->
+          <div>
+            <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1.5">Tipe Fasilitas Venue</label>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-black/10 bg-[#F7F7F8] cursor-pointer has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50 text-center transition-all">
+                <input type="radio" name="venueCategory" value="GAMING ARENA RESMI" checked class="accent-emerald-700 sr-only" onchange="updateVenueCardPreview()" />
+                <span class="text-[10px] font-mono font-bold text-ink uppercase">Gaming Arena</span>
+                <span class="text-[9px] font-sans text-ink/50 mt-0.5">Stage & Spectator</span>
+              </label>
+              <label class="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-black/10 bg-[#F7F7F8] cursor-pointer has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50 text-center transition-all">
+                <input type="radio" name="venueCategory" value="PREMIUM ICAFE" class="accent-emerald-700 sr-only" onchange="updateVenueCardPreview()" />
+                <span class="text-[10px] font-mono font-bold text-ink uppercase">Premium iCafe</span>
+                <span class="text-[9px] font-sans text-ink/50 mt-0.5">Warnet PC Pro</span>
+              </label>
+              <label class="flex flex-col items-center justify-center p-2.5 rounded-2xl border border-black/10 bg-[#F7F7F8] cursor-pointer has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-50 text-center transition-all">
+                <input type="radio" name="venueCategory" value="PRIVATE BOOTCAMP GH" class="accent-emerald-700 sr-only" onchange="updateVenueCardPreview()" />
+                <span class="text-[10px] font-mono font-bold text-ink uppercase">Bootcamp GH</span>
+                <span class="text-[9px] font-sans text-ink/50 mt-0.5">Gaming House Atlet</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Section 2: Identitas & Alamat Venue -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Nama Resmi Venue / Arena</label>
+              <input type="text" id="vName" required value="Cyberia Esports Arena Padang" placeholder="cth: Cyberia Esports Arena" oninput="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-emerald-700" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Kabupaten / Kota</label>
+              <select id="vRegion" onchange="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-emerald-700">
+                <option value="Kota Padang" selected>Kota Padang</option>
+                <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+                <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+                <option value="Kota Pariaman">Kota Pariaman</option>
+                <option value="Kota Solok">Kota Solok</option>
+                <option value="Kab. Agam">Kab. Agam</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Section 3: Alamat Lengkap -->
+          <div>
+            <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Alamat Lengkap Venue</label>
+            <input type="text" id="vAddress" required value="Jl. Belakang Olo No. 15, Kampung Pondok, Kota Padang" placeholder="Alamat jalan, nomor, kelurahan, kecamatan" oninput="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-emerald-700" />
+          </div>
+
+          <!-- Section 4: Rig PC & Koneksi Internet -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Jumlah PC Gaming & Rig</label>
+              <select id="vPcCount" onchange="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-emerald-700">
+                <option value="40 Rig PC (RTX 4070 / 240Hz)" selected>30 - 50 Rig PC Gaming</option>
+                <option value="20 Rig PC (RTX 4060 / 165Hz)">15 - 25 Rig PC Gaming</option>
+                <option value="60+ Rig PC (Tournament Stage)">60+ Rig PC (Turnamen Stage)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Koneksi Internet & Ping</label>
+              <input type="text" id="vInternet" value="1 Gbps Dedicated Fiber (Ping 8ms)" placeholder="cth: 1 Gbps Fiber / Ping < 10ms" oninput="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-emerald-700" />
+            </div>
+          </div>
+
+          <!-- Section 5: Pemilik & No. WhatsApp -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Nama Pengelola / Owner</label>
+              <input type="text" id="vOwner" required value="Budi Hermawan" placeholder="cth: Budi Hermawan" oninput="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-emerald-700" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">WhatsApp Resmi Venue</label>
+              <input type="tel" id="vPhone" required value="081299887766" placeholder="08xxxxxxxxxx" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-emerald-700" />
+            </div>
+          </div>
+
+          <!-- Section 6: Fasilitas Pendukung -->
+          <div>
+            <label class="block text-[11px] font-mono uppercase font-bold text-ink/60 mb-1">Fasilitas Tambahan</label>
+            <input type="text" id="vFacilities" value="VIP Room Scrim, Live Streaming Studio, Cafe, Musholla, AC Dingin" placeholder="VIP Scrim, Kafe, Parkir Luas" oninput="updateVenueCardPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-emerald-700" />
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-3 border-t border-black/10">
+            <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-emerald-700 hover:bg-emerald-600 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 app-tap">
+              <i data-lucide="monitor" class="w-4 h-4 text-amber-300"></i>
+              <span>Daftarkan & Ajukan Sertifikasi Venue ESI</span>
+            </button>
+            <p class="text-[10px] font-sans text-center text-ink/50 mt-2">
+              Tim verifikasi teknis ESI Sumbar akan melakukan uji kelayakan jaringan dan spesifikasi sebelum stiker sertifikasi resmi diterbitkan.
+            </p>
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- PREVIEW COLUMN (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <div class="sticky top-28 w-full flex flex-col items-center">
+          
+          <div class="mb-2 text-center">
+            <span class="text-[10px] font-mono text-ink/60 uppercase font-bold flex items-center justify-center gap-1">
+              <i data-lucide="monitor" class="w-3.5 h-3.5 text-emerald-700"></i>
+              <span>Live Preview Sertifikasi Venue</span>
+            </span>
+          </div>
+
+          <!-- Venue Card Preview -->
+          <div class="w-full max-w-[320px] rounded-3xl bg-white border border-black/10 p-5 shadow-xl text-ink select-none flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span id="previewVenueBadge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-800 border border-emerald-500/20 text-[9px] font-mono font-bold uppercase tracking-wider">
+                  GAMING ARENA RESMI
+                </span>
+                <span id="previewVenueRegion" class="text-[10px] font-mono text-ink/50 flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-crimson-600"></i>
+                  Kota Padang
+                </span>
+              </div>
+
+              <!-- Logo & Name -->
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-800 to-emerald-600 p-2 flex items-center justify-center shadow-md text-white shrink-0">
+                  <i data-lucide="monitor" class="w-6 h-6 text-amber-300"></i>
+                </div>
+                <div>
+                  <h3 id="previewVenueName" class="font-display text-2xl text-ink leading-tight uppercase">
+                    CYBERIA ESPORTS ARENA
+                  </h3>
+                  <div class="text-[10px] font-mono text-emerald-700 font-semibold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    VERIFIKASI STANDAR ESI
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address & Specs -->
+              <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 mb-3 space-y-1.5 text-[11px] font-mono">
+                <div>
+                  <div class="text-ink/50 text-[10px] uppercase font-bold">Alamat:</div>
+                  <div id="previewVenueAddress" class="text-xs font-sans font-bold text-ink line-clamp-2">Jl. Belakang Olo No. 15, Kampung Pondok, Padang</div>
+                </div>
+                <div class="flex justify-between items-center pt-1 border-t border-black/5">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">Rig PC:</span>
+                  <span id="previewVenuePc" class="font-bold text-ink">40 Rig PC (RTX 4070)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">Koneksi:</span>
+                  <span id="previewVenueNet" class="font-bold text-emerald-700">1 Gbps (Ping 8ms)</span>
+                </div>
+              </div>
+
+              <!-- Facilities -->
+              <div class="p-2.5 rounded-2xl bg-[#F7F7F8] border border-black/5 text-[10.5px] font-mono flex items-center gap-2 mb-3">
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span id="previewVenueFacilities" class="font-bold text-ink truncate">VIP Scrim Room, Cafe, Studio</span>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-black/10 flex items-center justify-between text-[9px] font-mono text-ink/50">
+              <span>STANDAR: GRADE A VENUE</span>
+              <span class="text-emerald-700 font-bold flex items-center gap-1">
+                <i data-lucide="award" class="w-3 h-3 text-amber-500"></i>
+                RESMI
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- 4. SUCCESS MODAL                                               -->
+  <!-- ============================================================== -->
+  <div id="successVenueModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-black/10 relative text-center">
+      <div class="w-16 h-16 rounded-3xl bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto mb-4 shadow-inner">
+        <i data-lucide="check-circle" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-display text-3xl text-ink uppercase mb-1">REGISTRASI VENUE BERHASIL!</h3>
+      <p class="text-xs font-sans text-ink/70 leading-relaxed mb-4">
+        Venue <strong id="successVenueName" class="text-ink">Nama Venue</strong> telah berhasil didaftarkan untuk verifikasi kelayakan arena kompetisi resmi ESI Sumatera Barat.
+      </p>
+
+      <div class="space-y-2">
+        <a href="/katalog" class="w-full py-3 px-4 rounded-2xl bg-emerald-700 hover:bg-emerald-600 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-md app-tap">
+          <span>Lihat Direktori Venue</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
+        </a>
+        <button type="button" onclick="document.getElementById('successVenueModal').classList.add('hidden')" class="w-full py-2.5 px-4 rounded-2xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-colors app-tap">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 5. MOBILE BOTTOM FLOATING DOCK (5-SERIES)                      -->
+  <!-- ============================================================== -->
+  <div class="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none pb-2 pt-1 px-3">
+    <div class="max-w-md mx-auto pointer-events-auto">
+      <nav class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-full shadow-2xl px-2 py-1.5 flex items-center justify-around">
+        <a href="/" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Home</span>
+        </a>
+        <a href="/katalog" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="layout-grid" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Katalog</span>
+        </a>
+        <div class="relative -top-3 flex flex-col items-center">
+          <a href="/cari" class="w-13 h-13 w-[52px] h-[52px] rounded-full bg-gradient-to-tr from-crimson-900 via-crimson-700 to-crimson-600 text-white flex items-center justify-center shadow-lg shadow-crimson-800/40 border-2 border-white ring-4 ring-black/5 hover:scale-105 active:scale-95 transition-all app-tap" title="Pencarian Ekosistem">
+            <i data-lucide="search" class="w-6 h-6"></i>
+          </a>
+          <span class="text-[9px] font-mono font-bold text-crimson-800 mt-0.5">Pencarian</span>
+        </div>
+        <a href="/wilayah" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Wilayah</span>
+        </a>
+        <a href="/profile" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Profile</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    function updateVenueCardPreview() {
+      const name = document.getElementById('vName').value.trim() || 'Nama Venue';
+      const region = document.getElementById('vRegion').value;
+      const addr = document.getElementById('vAddress').value.trim() || 'Alamat Venue';
+      const pc = document.getElementById('vPcCount').value;
+      const net = document.getElementById('vInternet').value.trim() || '1 Gbps Fiber';
+      const fac = document.getElementById('vFacilities').value.trim() || 'Fasilitas Venue';
+      const catInput = document.querySelector('input[name="venueCategory"]:checked');
+      const cat = catInput ? catInput.value : 'GAMING ARENA RESMI';
+
+      document.getElementById('previewVenueName').textContent = name.toUpperCase();
+      document.getElementById('previewVenueRegion').innerHTML = `<i data-lucide="map-pin" class="w-3 h-3 text-crimson-600"></i> ${region}`;
+      document.getElementById('previewVenueAddress').textContent = addr;
+      document.getElementById('previewVenuePc').textContent = pc;
+      document.getElementById('previewVenueNet').textContent = net;
+      document.getElementById('previewVenueFacilities').textContent = fac;
+      document.getElementById('previewVenueBadge').textContent = cat;
+
+      lucide.createIcons();
+    }
+
+    function handleVenueSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('vName').value.trim();
+      document.getElementById('successVenueName').textContent = name;
+      const modal = document.getElementById('successVenueModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      updateVenueCardPreview();
+    });
+  </script>
+</body>
+</html>
