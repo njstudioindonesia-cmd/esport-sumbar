@@ -60,6 +60,124 @@
       transform: rotateY(180deg);
     }
 
+    
+    /* 3D CARD ENGINE (EXACT MATCH WITH KATALOG & ATLET) */
+    .card-scene {
+      perspective: 1200px;
+      -webkit-perspective: 1200px;
+      position: relative;
+      user-select: none;
+    }
+
+    .card-fixed {
+      width: 295px;
+      height: 435px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .card-fixed {
+        width: 305px;
+        height: 445px;
+      }
+    }
+
+    .card-modal-size {
+      width: 280px;
+      height: 410px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .card-modal-size {
+        width: 310px;
+        height: 450px;
+      }
+    }
+
+    .card-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+    }
+
+    /* CARD FACES */
+    .card-face {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 20px;
+      overflow: hidden;
+      box-sizing: border-box;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      will-change: transform, opacity;
+      transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15), opacity 0.25s ease;
+    }
+
+    .card-face-front {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 5;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card-face-back {
+      transform: rotateY(-180deg) translateZ(1px);
+      -webkit-transform: rotateY(-180deg) translateZ(1px);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-wrapper.flipped .card-face-front {
+      transform: rotateY(180deg) translateZ(1px);
+      -webkit-transform: rotateY(180deg) translateZ(1px);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card-wrapper.flipped .card-face-back {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 25;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card-holo-foil {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      opacity: 0.12;
+      transition: opacity 0.3s ease;
+      mix-blend-mode: color-dodge;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 0, 50, 0.5) 45%,
+        rgba(0, 200, 255, 0.5) 55%,
+        rgba(255, 215, 0, 0.6) 70%,
+        transparent 100%
+      );
+      background-size: 250% 250%;
+      background-position: 50% 50%;
+    }
+
+    .card-wrapper:hover .card-holo-foil {
+      opacity: 0.28;
+    }
+
     /* App touch feedback */
     .app-tap {
       -webkit-tap-highlight-color: transparent;
@@ -308,88 +426,92 @@
 
         </div>
 
-        <!-- RIGHT: INTERACTIVE 3D SPOTLIGHT CARD (WHITE FRONT / RED BACK) -->
+        <!-- RIGHT: INTERACTIVE 3D SPOTLIGHT CARD (EXACT MATCH WITH KATALOG) -->
         <div class="lg:col-span-5 flex flex-col items-center w-full">
-          <div class="relative w-full max-w-[280px] sm:max-w-[300px]">
+          <div class="relative w-full max-w-[310px]">
             
             <!-- Floating interactive hint badge -->
-            <div class="text-center mb-2">
+            <div class="text-center mb-2.5">
               <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-black/10 text-[10px] font-mono text-ink/70 shadow-sm">
-                <i data-lucide="rotate-cw" class="w-3 h-3 text-crimson-700"></i>
-                Ketuk kartu untuk membalik sisi
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-crimson-600"></i>
+                Klik kartu untuk detail • Ketuk Putar untuk sisi belakang
               </span>
             </div>
 
-            <!-- 3D Card Stage -->
-            <div class="perspective-1000 w-[260px] sm:w-[290px] h-[460px] sm:h-[510px] mx-auto cursor-pointer" onclick="flipSpotlightCard()">
-              <div id="spotlightCardInner" class="w-full h-full relative transform-style-3d transition-transform duration-700 shadow-2xl rounded-3xl">
+            <!-- 3D Card Stage (Identical Component with Katalog & Atlet) -->
+            <div class="card-scene card-fixed select-none mx-auto">
+              <div id="card-spotlight" class="card-wrapper cursor-pointer group" onclick="handleCardClick('card-spotlight', event)">
                 
-                <!-- CARD FRONT (LUXURY WHITE STANDARD) -->
-                <div class="absolute inset-0 w-full h-full rounded-3xl backface-hidden overflow-hidden border-2 border-white/90 shadow-xl bg-white flex flex-col justify-between p-3.5">
-                  <!-- Art frame background overlay -->
-                  <div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply bg-center bg-cover" style="background-image: url('/images/card-front-white.png');"></div>
+                <!-- SISI DEPAN (WHITE LUXURY DESIGN) -->
+                <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
+                  <div class="card-holo-foil"></div>
 
-                  <!-- Header -->
-                  <div class="relative z-10 flex items-center justify-between">
-                    <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-crimson-800 text-paper text-[10px] font-mono font-bold tracking-wider uppercase shadow-sm">
-                      <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                      <span>PELATDA PON</span>
+                  <!-- Top Bar -->
+                  <div class="flex items-center justify-between z-20">
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                        <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                      </div>
+                      <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold tracking-wider uppercase bg-amber-400 text-ink shadow-sm">
+                        PELATDA PON
+                      </span>
                     </div>
-                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 text-ink font-mono font-black text-sm flex items-center justify-center shadow-md">
-                      96
-                    </div>
-                  </div>
-
-                  <!-- Photo -->
-                  <div class="relative z-10 my-2 flex-1 rounded-2xl overflow-hidden border border-black/10 bg-canvas/30 shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=800&auto=format&fit=crop" alt="Flash" class="w-full h-full object-cover object-top" />
-                    
-                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2.5 text-paper">
-                      <div class="text-[9px] font-mono text-paper/70 uppercase tracking-wider">Nama Lengkap</div>
-                      <div class="font-sans font-bold text-sm tracking-tight text-white line-clamp-1">Fadhil 'Flash' Pratama</div>
-                      <div class="text-[10px] font-mono text-amber-300 flex items-center gap-1 mt-0.5">
-                        <i data-lucide="map-pin" class="w-3 h-3"></i> <span>Kota Bukittinggi</span>
+                    <div class="flex items-center gap-1">
+                      <span class="text-[9px] font-mono font-bold text-ink/40 uppercase">OVR</span>
+                      <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-lg font-black flex items-center justify-center shadow-md">
+                        96
                       </div>
                     </div>
                   </div>
 
-                  <!-- Footer -->
-                  <div class="relative z-10 bg-paper/90 backdrop-blur-sm rounded-xl p-2.5 border border-black/[0.08]">
-                    <div class="flex items-center justify-between">
+                  <!-- Character Portrait Frame -->
+                  <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center shadow-inner group-hover:border-crimson-600/40 transition-colors">
+                    <span class="absolute font-display text-[70px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">V4ND4L</span>
+                    <img src="/images/athlete-v4nd4l.jpg" alt="Muhammad Rayden" class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10 transition-transform duration-500 group-hover:scale-105" onerror="this.src='/images/athlete-pro-player.jpg'" />
+                    
+                    <!-- Bottom Photo Overlay -->
+                    <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
                       <div>
-                        <div class="text-[10px] font-mono font-black text-crimson-700 tracking-wider">VALORANT</div>
-                        <div class="text-[11px] font-sans font-extrabold text-ink leading-tight">Duelist / Initiator</div>
+                        <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">NAMA LENGKAP</div>
+                        <div class="text-xs font-sans font-bold text-white flex items-center gap-1 truncate max-w-[130px]">
+                          Muhammad Rayden
+                          <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0"></i>
+                        </div>
                       </div>
                       <div class="text-right">
-                        <div class="font-display text-lg tracking-wider text-ink uppercase leading-none">FLASH</div>
-                        <div class="text-[8px] font-mono text-ink/60 mt-0.5">TERVERIFIKASI</div>
+                        <div class="text-[8px] font-mono text-white/60 uppercase tracking-wider font-semibold">DOMISILI</div>
+                        <div class="text-[11px] font-mono font-bold text-amber-300 truncate max-w-[100px]">Kota Padang</div>
                       </div>
                     </div>
-                    <div class="mt-2 pt-1.5 border-t border-black/[0.06] flex items-center justify-between text-[8px] font-mono text-ink/50">
-                      <span>PBESI-SB-2026-VAL-96</span>
-                      <span class="text-crimson-700 font-bold">ESPORT SUMBAR</span>
+                  </div>
+
+                  <!-- Lower Ribbon -->
+                  <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase tracking-wider">VALORANT</span>
+                        <span class="text-[9px] font-mono text-ink/70 font-semibold uppercase truncate max-w-[120px]">Duelist / Entry Fragger</span>
+                      </div>
+                      <h3 class="font-display text-2xl text-ink tracking-tight leading-none mt-0.5">V4ND4L</h3>
                     </div>
+
+                    <button type="button" onclick="flipCard('card-spotlight', event)" class="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-[9px] font-bold tracking-wider uppercase transition-colors border border-black/10 flex items-center gap-1.5 app-tap shadow-sm" title="Putar Kartu">
+                      <i data-lucide="repeat" class="w-3 h-3 text-crimson-600 group-hover:text-white"></i>
+                      <span>Putar</span>
+                    </button>
                   </div>
                 </div>
 
-                <!-- CARD BACK (OFFICIAL LUXURY RED COVER) -->
-                <div class="absolute inset-0 w-full h-full rounded-3xl backface-hidden rotate-y-180 overflow-hidden border-2 border-crimson-600/40 shadow-2xl bg-crimson-950 flex flex-col justify-between p-4">
-                  <div class="absolute inset-0 pointer-events-none bg-center bg-cover" style="background-image: url('/images/card-frame-back-red.jpg');"></div>
-                  
-                  <div class="relative z-10 text-center py-2">
-                    <div class="text-[9px] font-mono tracking-widest text-paper/60 uppercase">PENGURUS BESAR ESPORTS INDONESIA</div>
-                  </div>
-                  
-                  <div class="relative z-10 flex flex-col items-center justify-center flex-1">
-                    <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center p-2 mb-2">
-                      <img src="/esport-sumbar-logo.png" alt="Logo" class="w-full h-auto object-contain" />
-                    </div>
-                    <div class="font-display text-2xl text-paper tracking-wider">ESPORT SUMBAR</div>
-                    <div class="text-[10px] font-mono text-amber-300 mt-1 uppercase tracking-widest">OFFICIAL ATHLETE PASSPORT</div>
-                  </div>
+                <!-- SISI BELAKANG (OFFICIAL RED COVER) -->
+                <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
+                  <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang Kartu" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+                  <div class="card-holo-foil"></div>
 
-                  <div class="relative z-10 text-center py-2 border-t border-white/10">
-                    <div class="text-[8px] font-mono text-paper/70">KARTU IDENTITAS DIGITAL RESMI • 2026</div>
+                  <div class="absolute bottom-3 right-3 z-30">
+                    <button type="button" onclick="flipCard('card-spotlight', event)" class="px-3 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap" title="Balik ke Sisi Depan">
+                      <i data-lucide="repeat" class="w-3 h-3"></i>
+                      <span>Depan</span>
+                    </button>
                   </div>
                 </div>
 
@@ -397,9 +519,14 @@
             </div>
 
             <!-- Sub CTA below Spotlight Card -->
-            <div class="mt-3.5 text-center">
-              <a href="/atlet" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-crimson-700 hover:text-crimson-800 transition-colors app-tap">
-                <span>Jelajahi Galeri Kartu Atlet Selengkapnya</span>
+            <div class="mt-3.5 text-center flex items-center justify-center gap-4 text-xs font-mono">
+              <button type="button" onclick="inspectCard('spotlight')" class="inline-flex items-center gap-1 text-crimson-700 hover:text-crimson-800 font-bold app-tap">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                <span>Lihat Detail Kartu</span>
+              </button>
+              <span class="text-black/20">•</span>
+              <a href="/atlet" class="inline-flex items-center gap-1 text-ink/70 hover:text-crimson-700 font-medium app-tap">
+                <span>Galeri Roster</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </a>
             </div>
@@ -545,6 +672,42 @@
     </div>
   </section>
 
+  
+  <!-- ============================================================== -->
+  <!-- FULLSCREEN 3D CARD INSPECTOR MODAL                             -->
+  <!-- ============================================================== -->
+  <div id="cardInspectorModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-4 opacity-0 pointer-events-none transition-opacity duration-300" onclick="if(event.target === this) closeCardInspector()">
+    <div class="relative w-full max-w-lg bg-[#14161F] border border-white/20 rounded-3xl p-5 sm:p-7 text-paper shadow-2xl flex flex-col items-center">
+      
+      <button onclick="closeCardInspector()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors app-tap">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-3">
+        <span class="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest">INSPEKSI IDENTITAS DIGITAL RESMI</span>
+        <h3 id="inspectorModalTitle" class="font-display text-2xl sm:text-3xl text-white uppercase tracking-tight">KARTU ATLET DIGITAL</h3>
+      </div>
+
+      <!-- 3D Card Stage -->
+      <div class="card-scene card-modal-size relative my-2 select-none">
+        <div id="inspectorCardInstance" class="card-wrapper cursor-pointer" onclick="handleCardClick('inspectorCardInstance', event)"></div>
+      </div>
+
+      <!-- Control Toolbar -->
+      <div class="flex items-center gap-2.5 mt-4">
+        <button onclick="flipCard('inspectorCardInstance', event)" class="px-4 py-2 rounded-xl bg-white/15 hover:bg-amber-400 hover:text-ink text-white font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 border border-white/20 app-tap">
+          <i data-lucide="repeat" class="w-4 h-4"></i>
+          <span>Putar Kartu (180°)</span>
+        </button>
+
+        <button onclick="toggleInspectorHolo()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold tracking-wider uppercase transition-all flex items-center gap-2 border border-white/20 app-tap">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+          <span>Foil Shimmer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================================================== -->
   <!-- 8. MOBILE BOTTOM DOCK (5 UNIQUE DESTINATIONS)                  -->
   <!-- ============================================================== -->
@@ -602,22 +765,195 @@
 
   <!-- SCRIPT -->
   <script>
-    let spotlightFlipped = false;
-    let flipDebounce = false;
+    const flipLock = new Set();
 
-    function flipSpotlightCard() {
-      if (flipDebounce) return;
-      flipDebounce = true;
-      setTimeout(() => { flipDebounce = false; }, 600);
+    function flipCard(cardId, e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
 
-      const inner = document.getElementById('spotlightCardInner');
-      spotlightFlipped = !spotlightFlipped;
-      inner.style.transform = spotlightFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+      if (flipLock.has(cardId)) return;
+      flipLock.add(cardId);
+
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.style.transform = "";
+        card.classList.toggle("flipped");
+      }
+
+      setTimeout(() => {
+        flipLock.delete(cardId);
+      }, 550);
+    }
+
+    function handleCardClick(cardId, e) {
+      if (e.target.closest("button") || e.target.closest("a")) return;
+
+      const card = document.getElementById(cardId);
+      if (!card) return;
+
+      if (card.classList.contains("flipped")) {
+        flipCard(cardId, e);
+        return;
+      }
+
+      if (cardId === "card-spotlight") {
+        inspectCard("spotlight");
+      } else if (cardId === "inspectorCardInstance") {
+        flipCard(cardId, e);
+      }
+    }
+
+    const spotlightData = {
+      id: "spotlight",
+      name: "Muhammad Rayden",
+      ign: "V4ND4L",
+      role: "Duelist / Entry Fragger",
+      game: "VALORANT",
+      club: "Minang Pride Squad",
+      region: "Kota Padang",
+      photo: "/images/athlete-v4nd4l.jpg",
+      rarity: "PELATDA PON",
+      rating: 96,
+      license: "PBESI-SB-2026-VKL-01"
+    };
+
+    function inspectCard(id) {
+      const c = spotlightData;
+      const modal = document.getElementById("cardInspectorModal");
+      const title = document.getElementById("inspectorModalTitle");
+      const instance = document.getElementById("inspectorCardInstance");
+
+      title.innerText = `${c.ign} – ${c.name}`;
+
+      instance.className = "card-wrapper cursor-pointer";
+      instance.innerHTML = `
+        <!-- SISI DEPAN -->
+        <div class="card-face card-face-front bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none">
+          <div class="card-holo-foil"></div>
+
+          <div class="flex items-center justify-between z-20">
+            <div class="flex items-center gap-1.5">
+              <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-amber-400 text-ink shadow-sm">
+                ${c.rarity}
+              </span>
+            </div>
+            <div class="w-9 h-9 rounded-xl bg-amber-400 text-ink font-display text-xl font-black flex items-center justify-center shadow-md">
+              ${c.rating}
+            </div>
+          </div>
+
+          <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center">
+            <span class="absolute font-display text-[90px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">${c.ign}</span>
+            <img src="${c.photo}" alt="${c.ign}" class="w-full h-full object-cover object-top filter contrast-105 saturate-105 z-10" onerror="this.src='/images/athlete-pro-player.jpg'" />
+            
+            <div class="absolute inset-x-0 bottom-0 pt-6 pb-3 px-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
+              <div>
+                <div class="text-[9px] font-mono text-white/60 uppercase font-semibold">NAMA LENGKAP</div>
+                <div class="text-sm font-sans font-bold text-white flex items-center gap-1.5">
+                  ${c.name}
+                  <i data-lucide="badge-check" class="w-4 h-4 text-sky-400"></i>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-[9px] font-mono text-white/60 uppercase font-semibold">DOMISILI</div>
+                <div class="text-xs font-mono font-bold text-amber-300">${c.region}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="z-20 pt-2 border-t border-black/10 flex items-center justify-between">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-crimson-800 text-white uppercase">${c.game}</span>
+                <span class="text-[10px] font-mono text-ink/80 font-semibold uppercase">${c.role}</span>
+              </div>
+              <h3 class="font-display text-3xl text-ink tracking-tight mt-0.5">${c.ign}</h3>
+            </div>
+            <div class="text-right">
+              <div class="text-[8px] font-mono text-ink/40 uppercase font-bold">LISENSI PBESI</div>
+              <div class="text-[10px] font-mono font-bold text-crimson-600">${c.license}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SISI BELAKANG -->
+        <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none">
+          <img src="/images/card-frame-back-red.jpg" alt="Sisi Belakang Kartu" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+          <div class="card-holo-foil"></div>
+
+          <div class="absolute bottom-3 right-3 z-30">
+            <button type="button" onclick="flipCard('inspectorCardInstance', event)" class="px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md border border-white/30 text-[10px] font-mono font-bold uppercase transition-all flex items-center gap-1.5 shadow-lg app-tap">
+              <i data-lucide="repeat" class="w-3.5 h-3.5"></i>
+              <span>Depan</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      setupCard3D(instance);
+      lucide.createIcons();
+    }
+
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCardInspector(); });
+
+    function closeCardInspector() {
+      const modal = document.getElementById("cardInspectorModal");
+      if (modal) modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    function toggleInspectorHolo() {
+      const foil = document.querySelector("#inspectorCardInstance .card-holo-foil");
+      if (!foil) return;
+      foil.style.opacity = foil.style.opacity === "0.5" ? "0.15" : "0.5";
+    }
+
+    function setupCard3D(wrapper) {
+      if (!wrapper) return;
+      const holo = wrapper.querySelector(".card-holo-foil");
+
+      function updateCardTransform(x, y) {
+        if (wrapper.classList.contains("flipped")) return;
+        const rect = wrapper.getBoundingClientRect();
+        const px = (x - rect.left) / rect.width;
+        const py = (y - rect.top) / rect.height;
+
+        const tiltX = (py - 0.5) * -16;
+        const tiltY = (px - 0.5) * 16;
+
+        wrapper.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateZ(12px)`;
+
+        if (holo) {
+          holo.style.backgroundPosition = `${px * 100}% ${py * 100}%`;
+          holo.style.opacity = "0.25";
+        }
+      }
+
+      function resetCardTransform() {
+        if (wrapper.classList.contains("flipped")) return;
+        wrapper.style.transform = "rotateX(0deg) rotateY(0deg) translateZ(0px)";
+        if (holo) holo.style.opacity = "0.12";
+      }
+
+      wrapper.addEventListener("mousemove", (e) => updateCardTransform(e.clientX, e.clientY));
+      wrapper.addEventListener("mouseleave", resetCardTransform);
+
+      wrapper.addEventListener("touchmove", (e) => {
+        if (e.touches.length > 0) {
+          updateCardTransform(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+      wrapper.addEventListener("touchend", resetCardTransform);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      setupCard3D(document.getElementById('card-spotlight'));
     });
   </script>
-</body>
-</html>
+</body></html>

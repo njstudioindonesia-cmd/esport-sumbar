@@ -936,6 +936,8 @@
       setupCard3D(instance);
     }
 
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCardInspector(); });
+
     function closeCardInspector() {
       const modal = document.getElementById("cardInspectorModal");
       modal.classList.add("opacity-0", "pointer-events-none");
