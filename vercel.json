@@ -4,6 +4,42 @@
   "trailingSlash": false,
   "routes": [
     {
+      "src": "/admin-super",
+      "dest": "/admin-super.html"
+    },
+    {
+      "src": "/admin/super",
+      "dest": "/admin-super.html"
+    },
+    {
+      "src": "/admin-pengprov",
+      "dest": "/admin-pengprov.html"
+    },
+    {
+      "src": "/admin/esi-sumbar",
+      "dest": "/admin-pengprov.html"
+    },
+    {
+      "src": "/admin/pengprov",
+      "dest": "/admin-pengprov.html"
+    },
+    {
+      "src": "/admin-pengcab",
+      "dest": "/admin-pengcab.html"
+    },
+    {
+      "src": "/admin/esi-kabkota",
+      "dest": "/admin-pengcab.html"
+    },
+    {
+      "src": "/admin/pengcab",
+      "dest": "/admin-pengcab.html"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin-super.html"
+    },
+    {
       "src": "/daftar-player",
       "dest": "/daftar-player.html"
     },

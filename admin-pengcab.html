@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Dashboard ESI Kota / Kabupaten (Pengcab) – ESPORT SUMBAR</title>
+  <meta name="description" content="Dashboard Eksekutif Pengurus Cabang (Pengcab) ESI Kabupaten dan Kota se-Sumatera Barat. Verifikasi domisili atlet lokal, seleksi kontingen Porprov, dan rekomendasi turnamen daerah." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #0B0E14;
+      color: #F4F1EE;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(14, 116, 144, 0.15) 0%, transparent 60%),
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-cyan-800 selection:text-white pb-24 min-h-screen">
+
+  <!-- ============================================================== -->
+  <!-- 1. TOP EXECUTIVE LEVEL SWITCHER                                -->
+  <!-- ============================================================== -->
+  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/90 border-b border-white/10 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span class="text-[10px] font-mono uppercase font-bold tracking-wider text-cyan-300">
+          PORTAL ADMINISTRASI EKOSISTEM:
+        </span>
+      </div>
+
+      <!-- 3 Level Admin Selector Chips -->
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <!-- 1. Super Admin -->
+        <a href="/admin-super" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+          <i data-lucide="crown" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>1. Super Admin</span>
+        </a>
+
+        <!-- 2. ESI Sumbar (Pengprov) -->
+        <a href="/admin-pengprov" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+          <i data-lucide="landmark" class="w-3.5 h-3.5 text-crimson-400"></i>
+          <span>2. ESI Sumbar</span>
+        </a>
+
+        <!-- 3. ESI Kota / Kab (Active) -->
+        <a href="/admin-pengcab" class="px-3 py-1 rounded-xl bg-cyan-800 text-white font-mono text-[11px] font-black uppercase flex items-center gap-1.5 shadow-sm app-tap">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-cyan-300"></i>
+          <span>3. ESI Kota / Kab (Aktif)</span>
+        </a>
+
+        <!-- Link to Live Website -->
+        <a href="/" target="_blank" class="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ml-2 app-tap">
+          <i data-lucide="external-link" class="w-3 h-3"></i>
+          <span class="hidden sm:inline">Web Publik</span>
+        </a>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ============================================================== -->
+  <!-- 2. REGION SELECTOR BAR                                         -->
+  <!-- ============================================================== -->
+  <section class="bg-[#121824] border-b border-cyan-900/30 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
+      
+      <div class="flex items-center gap-2">
+        <div class="p-1.5 rounded-lg bg-cyan-950/80 border border-cyan-800/50 text-cyan-400">
+          <i data-lucide="map" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <span class="text-[10px] font-mono uppercase font-bold text-cyan-400">PILIH CABANG DAERAH (19 KAB/KOTA):</span>
+          <p class="text-xs text-white/70">Kelola database atlet, rekomendasi turnamen & kontingen Porprov</p>
+        </div>
+      </div>
+
+      <!-- Dropdown Wilayah 19 Kab/Kota -->
+      <div class="flex items-center gap-2">
+        <select id="regionSelector" onchange="onRegionChange(this.value)" class="bg-[#192231] border border-cyan-700/50 text-white font-mono text-xs font-bold rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+          <option value="Kota Padang" selected>Kota Padang</option>
+          <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+          <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+          <option value="Kota Solok">Kota Solok</option>
+          <option value="Kota Sawahlunto">Kota Sawahlunto</option>
+          <option value="Kota Padang Panjang">Kota Padang Panjang</option>
+          <option value="Kota Pariaman">Kota Pariaman</option>
+          <option value="Kab. Agam">Kab. Agam</option>
+          <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+          <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+          <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
+          <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+          <option value="Kab. Solok">Kab. Solok</option>
+          <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
+          <option value="Kab. Sijunjung">Kab. Sijunjung</option>
+          <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
+          <option value="Kab. Pasaman">Kab. Pasaman</option>
+          <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+          <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
+        </select>
+
+        <a href="/wilayah" target="_blank" class="px-2.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 text-xs font-mono flex items-center gap-1 border border-white/10 app-tap" title="Lihat Peta Wilayah">
+          <i data-lucide="compass" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span class="hidden sm:inline">Peta</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 3. PENGCAB HEADER                                              -->
+  <!-- ============================================================== -->
+  <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-3">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-900 to-slate-900 flex items-center justify-center p-2.5 shadow-lg shadow-cyan-950/40 ring-1 ring-cyan-500/30 shrink-0">
+          <i data-lucide="map-pin" class="w-6 h-6 text-cyan-300"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase leading-none">
+              PENGCAB ESI <span id="headerRegionName" class="text-cyan-400">KOTA PADANG</span>
+            </h1>
+            <span class="px-2 py-0.5 rounded-md bg-cyan-950 text-cyan-300 border border-cyan-700/50 text-[9px] font-mono font-bold uppercase">
+              REGULATOR TINGKAT II
+            </span>
+          </div>
+          <p id="headerRegionSub" class="text-xs font-mono text-white/60 mt-1 flex items-center gap-1.5">
+            <span>SK PBESI: 042/PENGCAB-PDG/2024 • Sekretariat: GOR H. Agus Salim, Padang</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Actions for Pengcab -->
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="showRekomendasiModal()" class="px-3.5 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
+          <i data-lucide="file-check-2" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span>Terbitkan Rekomendasi</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 4. REGIONAL METRIC COUNTERS                                    -->
+  <!-- ============================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+    
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+      
+      <!-- Card 1: Atlet Lokal Terverifikasi -->
+      <div class="rounded-3xl bg-[#141B26] border border-cyan-800/40 p-4 shadow-lg shadow-cyan-950/20 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-white/60 mb-2">
+          <span class="text-[10px] font-mono uppercase font-bold text-cyan-400">Atlet Domisili</span>
+          <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+        </div>
+        <div>
+          <div id="statAtlet" class="font-display text-3xl sm:text-4xl text-cyan-300 leading-none">142 ATLET</div>
+          <div class="text-[10px] font-mono text-white/60 mt-1">
+            KTP / KIA Terverifikasi
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Roster Kontingen Porprov -->
+      <div class="rounded-3xl bg-[#141B26] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-white/60 mb-2">
+          <span class="text-[10px] font-mono uppercase font-bold">Kontingen Porprov</span>
+          <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i>
+        </div>
+        <div>
+          <div id="statPorprov" class="font-display text-3xl sm:text-4xl text-amber-400 leading-none">18 ROSTER</div>
+          <div class="text-[10px] font-mono text-white/60 mt-1">
+            4 Divisi Siap Tanding
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Tim & Komunitas Daerah -->
+      <div class="rounded-3xl bg-[#141B26] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-white/60 mb-2">
+          <span class="text-[10px] font-mono uppercase font-bold">Tim & Komunitas</span>
+          <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i>
+        </div>
+        <div>
+          <div id="statTim" class="font-display text-3xl sm:text-4xl text-white leading-none">24 TIM</div>
+          <div class="text-[10px] font-mono text-emerald-400 mt-1">
+            Terdaftar di Wilayah
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Surat Rekomendasi Resmi -->
+      <div class="rounded-3xl bg-[#141B26] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-white/60 mb-2">
+          <span class="text-[10px] font-mono uppercase font-bold">Surat Rekomendasi</span>
+          <i data-lucide="file-text" class="w-4 h-4 text-purple-400"></i>
+        </div>
+        <div>
+          <div id="statSurat" class="font-display text-3xl sm:text-4xl text-white leading-none">9 DITERBITKAN</div>
+          <div class="text-[10px] font-mono text-white/60 mt-1">
+            Turnamen Lokal Berizin ESI
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 5. PENGCAB FUNCTIONAL TABS                                     -->
+    <!-- ============================================================== -->
+    <div class="bg-[#141B26] rounded-2xl p-1.5 border border-white/10 shadow-sm flex items-center gap-1 mb-5 overflow-x-auto no-scrollbar">
+      <button type="button" id="tabBtnDomisili" onclick="switchPengcabTab('domisili')" class="flex-1 py-2.5 px-3 rounded-xl bg-cyan-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap">
+        <i data-lucide="id-card" class="w-4 h-4 text-cyan-300"></i>
+        <span>Verifikasi Domisili (KTP/KIA)</span>
+      </button>
+      <button type="button" id="tabBtnKontingen" onclick="switchPengcabTab('kontingen')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="trophy" class="w-4 h-4 text-amber-400"></i>
+        <span>Kontingen Porprov Daerah</span>
+      </button>
+      <button type="button" id="tabBtnRekomendasi" onclick="switchPengcabTab('rekomendasi')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="file-check-2" class="w-4 h-4 text-emerald-400"></i>
+        <span>Rekomendasi Turnamen</span>
+      </button>
+      <button type="button" id="tabBtnVenue" onclick="switchPengcabTab('venue')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="store" class="w-4 h-4 text-purple-400"></i>
+        <span>Arena & Venue Wilayah</span>
+      </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 6. TAB 1: VERIFIKASI DOMISILI (KTP / KIA)                      -->
+    <!-- ============================================================== -->
+    <div id="sectionDomisili" class="space-y-4">
+      
+      <!-- Filter & Alert Box -->
+      <div class="rounded-2xl bg-cyan-950/40 border border-cyan-800/40 p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div class="flex items-start gap-3">
+          <div class="p-2 rounded-xl bg-cyan-900/40 text-cyan-400 shrink-0 mt-0.5">
+            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wide">Validasi Dokumen Domisili Pengcab</h2>
+            <p class="text-xs text-white/70 mt-0.5">
+              Setiap atlet yang bertanding membawa nama daerah wajib diverifikasi keabsahan NIK/KTP atau KIA agar sah di Kejurda & Porprov Sumbar 2026.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono text-cyan-300 bg-cyan-900/60 px-2.5 py-1 rounded-lg border border-cyan-700/50">
+            3 Berkas Perlu Validasi
+          </span>
+        </div>
+      </div>
+
+      <!-- List Antrean Domisili -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        
+        <!-- Domisili Card 1 -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4 flex flex-col justify-between hover:border-cyan-500/40 transition-all">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-sm text-cyan-300 ring-2 ring-cyan-500/40">
+                  MR
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-white leading-tight">Muhammad Rayden</h3>
+                  <p class="text-[11px] font-mono text-white/60">IGN: V4ND4L • Valorant</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 text-[9px] font-mono font-bold">
+                VALID DOMISILI
+              </span>
+            </div>
+
+            <div class="bg-black/30 rounded-xl p-2.5 text-xs font-mono space-y-1 border border-white/5 mb-3">
+              <div class="flex justify-between text-white/70">
+                <span>NIK:</span>
+                <span class="text-white font-bold">137104********21</span>
+              </div>
+              <div class="flex justify-between text-white/70">
+                <span>Kecamatan:</span>
+                <span class="text-white">Koto Tangah</span>
+              </div>
+              <div class="flex justify-between text-white/70">
+                <span>Status KTP:</span>
+                <span class="text-emerald-400">KTP Padang Asli</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+            <button type="button" onclick="inspectDomisili('Muhammad Rayden', 'Kota Padang', '137104********21', 'KTP Padang Asli')" class="flex-1 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold transition-all app-tap">
+              Periksa KTP
+            </button>
+            <button type="button" onclick="showToast('Domisili Muhammad Rayden telah dikonfirmasi sah!')" class="px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-mono font-bold transition-all app-tap">
+              Sah
+            </button>
+          </div>
+        </div>
+
+        <!-- Domisili Card 2 -->
+        <div class="rounded-2xl bg-[#141B26] border border-amber-800/40 p-4 flex flex-col justify-between hover:border-amber-500/40 transition-all">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-sm text-amber-300 ring-2 ring-amber-500/40">
+                  AR
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-white leading-tight">Aditya 'Skyline' Ramadhan</h3>
+                  <p class="text-[11px] font-mono text-white/60">IGN: SKYL1NE • MLBB</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700/50 text-[9px] font-mono font-bold animate-pulse">
+                BUTUH VALIDASI
+              </span>
+            </div>
+
+            <div class="bg-black/30 rounded-xl p-2.5 text-xs font-mono space-y-1 border border-white/5 mb-3">
+              <div class="flex justify-between text-white/70">
+                <span>NIK:</span>
+                <span class="text-white font-bold">137102********09</span>
+              </div>
+              <div class="flex justify-between text-white/70">
+                <span>Kecamatan:</span>
+                <span class="text-white">Padang Barat</span>
+              </div>
+              <div class="flex justify-between text-white/70">
+                <span>Status Dokumen:</span>
+                <span class="text-amber-400">Surat Keterangan Domisili</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+            <button type="button" onclick="inspectDomisili('Aditya Ramadhan', 'Kota Padang', '137102********09', 'Suket Domisili Kelurahan')" class="flex-1 py-1.5 rounded-lg bg-cyan-800 hover:bg-cyan-700 text-white text-xs font-mono font-bold transition-all app-tap">
+              Verifikasi
+            </button>
+            <button type="button" onclick="showToast('Dokumen Aditya Ramadhan disetujui.')" class="px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-mono font-bold transition-all app-tap">
+              Setujui
+            </button>
+          </div>
+        </div>
+
+        <!-- Domisili Card 3 -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4 flex flex-col justify-between hover:border-cyan-500/40 transition-all">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-sm text-cyan-300 ring-2 ring-cyan-500/40">
+                  RR
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-white leading-tight">Rizky 'Shadow' Ramadhan</h3>
+                  <p class="text-[11px] font-mono text-white/60">IGN: SHADOW • PUBG Mobile</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 text-[9px] font-mono font-bold">
+                VALID KIA (U-17)
+              </span>
+            </div>
+
+            <div class="bg-black/30 rounded-xl p-2.5 text-xs font-mono space-y-1 border border-white/5 mb-3">
+              <div class="flex justify-between text-white/70">
+                <span>KIA No:</span>
+                <span class="text-white font-bold">137101********88</span>
+              </div>
+              <div class="flex justify-between text-white/70">
+                <span>Kecamatan:</span>
+                <span class="text-white">Padang Timur</span>
+              </div>
+              <div class="flex justify-between text-white/70">
+                <span>Kategori:</span>
+                <span class="text-cyan-400">Kartu Identitas Anak (16 Th)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+            <button type="button" onclick="inspectDomisili('Rizky Ramadhan', 'Kota Padang', '137101********88', 'Kartu Identitas Anak (KIA)')" class="flex-1 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold transition-all app-tap">
+              Periksa KIA
+            </button>
+            <button type="button" onclick="showToast('KIA Rizky Ramadhan telah divalidasi.')" class="px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-mono font-bold transition-all app-tap">
+              Sah
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 7. TAB 2: KONTINGEN PORPROV DAERAH                             -->
+    <!-- ============================================================== -->
+    <div id="sectionKontingen" class="hidden space-y-4">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#141B26] p-4 rounded-2xl border border-white/10">
+        <div>
+          <h2 class="text-base font-bold text-white uppercase tracking-wide flex items-center gap-2">
+            <span>Roster Kontingen Porprov Sumbar 2026</span>
+            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 text-xs font-mono">18 Atlet Terpilih</span>
+          </h2>
+          <p class="text-xs text-white/70 mt-0.5">Daftar perwakilan resmi atlet Pengcab yang telah lolos seleksi daerah</p>
+        </div>
+        <button type="button" onclick="showToast('Form pendaftaran atlet kontingen Porprov dibuka.')" class="px-3.5 py-2 rounded-xl bg-amber-700 hover:bg-amber-600 text-white text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 self-start sm:self-auto app-tap">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+          <span>Tambah Atlet Kontingen</span>
+        </button>
+      </div>
+
+      <!-- Roster Porprov Per Divisi -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Divisi Valorant -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-crimson-500"></span>
+              <h3 class="font-bold text-sm text-white uppercase">Divisi Valorant (5 Atlet)</h3>
+            </div>
+            <span class="text-xs font-mono text-emerald-400 font-bold">Roster Inti Tetap</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Muhammad Rayden (V4ND4L)</span>
+              <span class="text-white/60">Duelist • OVR 96</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Fajar 'Phantom' Siddiq</span>
+              <span class="text-white/60">Initiator • OVR 92</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Iqbal 'Recon' Maulana</span>
+              <span class="text-white/60">Controller • OVR 90</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Deni 'Ares' Saputra</span>
+              <span class="text-white/60">Sentinel • OVR 89</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Taufik 'Viper' Rahman</span>
+              <span class="text-white/60">Flex / Smoker • OVR 88</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divisi Mobile Legends -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <h3 class="font-bold text-sm text-white uppercase">Divisi MLBB (5 Atlet + 1 Cadangan)</h3>
+            </div>
+            <span class="text-xs font-mono text-emerald-400 font-bold">Roster Terpilih</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Aditya 'Skyline' Ramadhan</span>
+              <span class="text-white/60">Jungler • OVR 94</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Farhan 'Chronos' Anugrah</span>
+              <span class="text-white/60">Roamer • OVR 91</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Kevin 'Snipe' Pratama</span>
+              <span class="text-white/60">Goldlaner • OVR 93</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Wahyu 'Titan' Hidayat</span>
+              <span class="text-white/60">EXP Laner • OVR 89</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 text-xs font-mono">
+              <span class="text-white font-bold">Ilham 'Mage' Fahri</span>
+              <span class="text-white/60">Midlaner • OVR 90</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 8. TAB 3: REKOMENDASI TURNAMEN LOKAL                           -->
+    <!-- ============================================================== -->
+    <div id="sectionRekomendasi" class="hidden space-y-4">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#141B26] p-4 rounded-2xl border border-white/10">
+        <div>
+          <h2 class="text-base font-bold text-white uppercase tracking-wide flex items-center gap-2">
+            <span>Surat Rekomendasi Turnamen Daerah</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 text-xs font-mono">Peraturan ESI No. 04/2023</span>
+          </h2>
+          <p class="text-xs text-white/70 mt-0.5">Turnamen komunitas dan swasta di wilayah wajib mengantongi izin rekomendasi Pengcab</p>
+        </div>
+        <button type="button" onclick="showRekomendasiModal()" class="px-3.5 py-2 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 self-start sm:self-auto app-tap">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+          <span>Buat Surat Rekomendasi</span>
+        </button>
+      </div>
+
+      <!-- Tabel Surat Rekomendasi -->
+      <div class="rounded-2xl bg-[#141B26] border border-white/10 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-black/40 text-white/60 border-b border-white/10 text-[10px] uppercase">
+              <tr>
+                <th class="p-3">No. Registrasi Surat</th>
+                <th class="p-3">Nama Turnamen</th>
+                <th class="p-3">Penyelenggara</th>
+                <th class="p-3">Tanggal Event</th>
+                <th class="p-3">Status Izin</th>
+                <th class="p-3 text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5 text-white/90">
+              <tr class="hover:bg-white/5">
+                <td class="p-3 text-cyan-300 font-bold">042/REK-PENGCAB-PDG/X/2026</td>
+                <td class="p-3 font-sans font-bold text-white">Padang Youth Esports Cup 2026</td>
+                <td class="p-3">KNPI Kota Padang</td>
+                <td class="p-3 text-white/70">12 - 14 Nov 2026</td>
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 text-[9px] font-bold">
+                    RESMI DITERBITKAN
+                  </span>
+                </td>
+                <td class="p-3 text-right">
+                  <button type="button" onclick="cetakSurat('042/REK-PENGCAB-PDG/X/2026')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white text-[10px] app-tap">
+                    Unduh PDF
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-white/5">
+                <td class="p-3 text-cyan-300 font-bold">041/REK-PENGCAB-PDG/X/2026</td>
+                <td class="p-3 font-sans font-bold text-white">Khatib Sulaiman Valorant League</td>
+                <td class="p-3">Minang Cyber Lounge</td>
+                <td class="p-3 text-white/70">20 - 22 Okt 2026</td>
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 text-[9px] font-bold">
+                    SELESAI
+                  </span>
+                </td>
+                <td class="p-3 text-right">
+                  <button type="button" onclick="cetakSurat('041/REK-PENGCAB-PDG/X/2026')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white text-[10px] app-tap">
+                    Arsip
+                  </button>
+                </td>
+              </tr>
+              <tr class="hover:bg-white/5">
+                <td class="p-3 text-amber-300 font-bold">043/REQ-PENGCAB-PDG/XI/2026</td>
+                <td class="p-3 font-sans font-bold text-white">Piala Pelajar SMKN 1 Padang</td>
+                <td class="p-3">OSIS SMKN 1 Padang</td>
+                <td class="p-3 text-white/70">28 Nov 2026</td>
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700/50 text-[9px] font-bold animate-pulse">
+                    MENUNGGU REVIEW
+                  </span>
+                </td>
+                <td class="p-3 text-right">
+                  <button type="button" onclick="showToast('Surat izin rekomendasi untuk Piala Pelajar SMKN 1 Padang telah diterbitkan!')" class="px-2.5 py-1 rounded bg-cyan-700 hover:bg-cyan-600 text-white text-[10px] font-bold app-tap">
+                    Setujui & Terbitkan
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 9. TAB 4: ARENA & VENUE WILAYAH                                -->
+    <!-- ============================================================== -->
+    <div id="sectionVenue" class="hidden space-y-4">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#141B26] p-4 rounded-2xl border border-white/10">
+        <div>
+          <h2 class="text-base font-bold text-white uppercase tracking-wide flex items-center gap-2">
+            <span>Arena & Gaming Center Terdaftar di Wilayah</span>
+            <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-xs font-mono">6 Venue Aktif</span>
+          </h2>
+          <p class="text-xs text-white/70 mt-0.5">Pusat latihan atlet dan lokasi terselenggaranya turnamen esport resmi daerah</p>
+        </div>
+        <a href="/daftar-venue" class="px-3.5 py-2 rounded-xl bg-purple-800 hover:bg-purple-700 text-white text-xs font-mono font-bold uppercase transition-all flex items-center gap-1.5 self-start sm:self-auto app-tap">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          <span>Daftarkan Venue Baru</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <!-- Venue 1 -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[9px] font-mono font-bold">
+                STANDAR KOMPETISI
+              </span>
+              <span class="text-xs font-mono text-white/60">30 Rig PC</span>
+            </div>
+            <h3 class="font-bold text-sm text-white">Minang Cyber Lounge Padang</h3>
+            <p class="text-xs text-white/60 mt-1">Jl. Khatib Sulaiman No. 42, Padang Barat</p>
+            <div class="mt-2 text-[10px] font-mono text-cyan-400">
+              Spek: RTX 4070 • 240Hz Monitor • FO 500 Mbps
+            </div>
+          </div>
+          <div class="pt-3 mt-3 border-t border-white/10 flex justify-between items-center text-xs">
+            <span class="text-emerald-400 font-mono">Akreditasi Pengcab: Grade A</span>
+            <button type="button" onclick="showToast('Venue terakreditasi untuk Kejurda.')" class="text-white/60 hover:text-white font-mono text-[10px]">Detail</button>
+          </div>
+        </div>
+
+        <!-- Venue 2 -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[9px] font-mono font-bold">
+                STANDAR KOMPETISI
+              </span>
+              <span class="text-xs font-mono text-white/60">40 Rig PC</span>
+            </div>
+            <h3 class="font-bold text-sm text-white">Nexus Esports Arena Ulak Karang</h3>
+            <p class="text-xs text-white/60 mt-1">Jl. Ulak Karang Selatan, Padang Utara</p>
+            <div class="mt-2 text-[10px] font-mono text-cyan-400">
+              Spek: RTX 3060 • 165Hz Monitor • Mobile Hub
+            </div>
+          </div>
+          <div class="pt-3 mt-3 border-t border-white/10 flex justify-between items-center text-xs">
+            <span class="text-emerald-400 font-mono">Akreditasi Pengcab: Grade A</span>
+            <button type="button" onclick="showToast('Venue terakreditasi untuk Kejurda.')" class="text-white/60 hover:text-white font-mono text-[10px]">Detail</button>
+          </div>
+        </div>
+
+        <!-- Venue 3 -->
+        <div class="rounded-2xl bg-[#141B26] border border-white/10 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 text-[9px] font-mono font-bold">
+                COMMUNITY HUB
+              </span>
+              <span class="text-xs font-mono text-white/60">Mobile Arena</span>
+            </div>
+            <h3 class="font-bold text-sm text-white">Arena Kopi & Gaming Space</h3>
+            <p class="text-xs text-white/60 mt-1">Jl. Belakang Olo No. 12, Padang</p>
+            <div class="mt-2 text-[10px] font-mono text-cyan-400">
+              Spek: Dedicated Low-Latency WiFi • Booth Stream
+            </div>
+          </div>
+          <div class="pt-3 mt-3 border-t border-white/10 flex justify-between items-center text-xs">
+            <span class="text-cyan-400 font-mono">Akreditasi Pengcab: Grade B</span>
+            <button type="button" onclick="showToast('Venue terakreditasi untuk Kejurda.')" class="text-white/60 hover:text-white font-mono text-[10px]">Detail</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: PERIKSA KTP / DOMISILI                                  -->
+  <!-- ============================================================== -->
+  <div id="modalDomisili" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#141B26] border border-cyan-800/60 rounded-3xl p-6 max-w-md w-full shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+        <h3 class="font-display text-xl text-white uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="id-card" class="w-5 h-5 text-cyan-400"></i>
+          <span>Validasi Domisili Atlet</span>
+        </h3>
+        <button type="button" onclick="closeModalDomisili()" class="text-white/60 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 font-mono text-xs">
+        <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1.5">
+          <div class="flex justify-between text-white/70">
+            <span>Nama Lengkap:</span>
+            <span id="modalDomisiliNama" class="text-white font-bold">Muhammad Rayden</span>
+          </div>
+          <div class="flex justify-between text-white/70">
+            <span>Wilayah Pengcab:</span>
+            <span id="modalDomisiliWilayah" class="text-cyan-400 font-bold">Kota Padang</span>
+          </div>
+          <div class="flex justify-between text-white/70">
+            <span>Nomor Dokumen:</span>
+            <span id="modalDomisiliNik" class="text-white">137104********21</span>
+          </div>
+          <div class="flex justify-between text-white/70">
+            <span>Jenis Bukti:</span>
+            <span id="modalDomisiliJenis" class="text-emerald-400">KTP Padang Asli</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-dashed border-cyan-500/30 p-6 text-center bg-cyan-950/20">
+          <i data-lucide="file-check" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
+          <p class="text-xs text-white/80 font-bold">Dokumen Identitas Kependudukan</p>
+          <p class="text-[10px] text-white/50 mt-1">Terverifikasi sesuai database Dinas Kependudukan & Catatan Sipil Sumatera Barat</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 mt-5">
+        <button type="button" onclick="showToast('Status domisili dikonfirmasi SAH.'); closeModalDomisili();" class="flex-1 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-mono text-xs font-bold uppercase transition-all app-tap">
+          Konfirmasi Sah
+        </button>
+        <button type="button" onclick="showToast('Permintaan klarifikasi domisili dikirim ke atlet.'); closeModalDomisili();" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs transition-all app-tap">
+          Minta Klarifikasi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: TERBITKAN SURAT REKOMENDASI TURNAMEN                    -->
+  <!-- ============================================================== -->
+  <div id="modalRekomendasi" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#141B26] border border-cyan-800/60 rounded-3xl p-6 max-w-lg w-full shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+        <h3 class="font-display text-xl text-white uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="file-check-2" class="w-5 h-5 text-cyan-400"></i>
+          <span>Terbitkan Rekomendasi Turnamen</span>
+        </h3>
+        <button type="button" onclick="closeModalRekomendasi()" class="text-white/60 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleTerbitRekomendasi(event)" class="space-y-3 font-mono text-xs">
+        <div>
+          <label class="block text-white/70 mb-1 text-[11px]">Nama Kejuaraan / Turnamen</label>
+          <input type="text" required placeholder="Contoh: Padang Youth Esports Cup 2026" class="w-full bg-[#192231] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-white/70 mb-1 text-[11px]">Penyelenggara / Panitia</label>
+            <input type="text" required placeholder="Contoh: KNPI Kota Padang" class="w-full bg-[#192231] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+          </div>
+          <div>
+            <label class="block text-white/70 mb-1 text-[11px]">Nomor Kontak PIC</label>
+            <input type="tel" required placeholder="0812-XXXX-XXXX" class="w-full bg-[#192231] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-white/70 mb-1 text-[11px]">Divisi Game</label>
+            <select class="w-full bg-[#192231] border border-white/10 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
+              <option>Mobile Legends: Bang Bang</option>
+              <option>Valorant</option>
+              <option>PUBG Mobile</option>
+              <option>Free Fire</option>
+              <option>E-Football</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-white/70 mb-1 text-[11px]">Lokasi / Venue Acara</label>
+            <input type="text" required placeholder="Contoh: Minang Cyber Lounge Padang" class="w-full bg-[#192231] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-white/70 mb-1 text-[11px]">Format & Jadwal Pelaksanaan</label>
+          <input type="text" required placeholder="Contoh: 12 - 14 November 2026 (Offline LAN)" class="w-full bg-[#192231] border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+        </div>
+
+        <div class="p-3 bg-cyan-950/30 rounded-xl border border-cyan-800/40 text-[10px] text-cyan-200">
+          Surat rekomendasi ini akan diterbitkan dengan cap digital dan barcode verifikasi Pengcab ESI daerah yang sah.
+        </div>
+
+        <div class="flex items-center gap-2 pt-2">
+          <button type="submit" class="flex-1 py-2.5 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white font-mono text-xs font-bold uppercase transition-all app-tap">
+            Terbitkan Surat Resmi
+          </button>
+          <button type="button" onclick="closeModalRekomendasi()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs transition-all app-tap">
+            Batal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- TOAST NOTIFICATION CONTAINER                                   -->
+  <!-- ============================================================== -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-cyan-950 border border-cyan-500/50 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3">
+      <i data-lucide="check-circle-2" class="w-5 h-5 text-cyan-400"></i>
+      <span id="toastMsg" class="font-mono text-xs font-bold">Aksi berhasil dilakukan</span>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT LOGIC                                               -->
+  <!-- ============================================================== -->
+  <script>
+    // Initialize Lucide Icons
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // Check if region parameter in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const reg = urlParams.get('region');
+      if (reg) {
+        const sel = document.getElementById('regionSelector');
+        if (sel) {
+          sel.value = reg;
+          onRegionChange(reg, false);
+        }
+      }
+    });
+
+    // Region Change Handler
+    const regionData = {
+      "Kota Padang": {
+        sk: "SK PBESI: 042/PENGCAB-PDG/2024 • Sekretariat: GOR H. Agus Salim, Padang",
+        atlet: "142 ATLET",
+        porprov: "18 ROSTER",
+        tim: "24 TIM",
+        surat: "9 DITERBITKAN"
+      },
+      "Kota Bukittinggi": {
+        sk: "SK PBESI: 043/PENGCAB-BKT/2024 • Sekretariat: Jam Gadang Sport Hub, Bukittinggi",
+        atlet: "86 ATLET",
+        porprov: "12 ROSTER",
+        tim: "14 TIM",
+        surat: "6 DITERBITKAN"
+      },
+      "Kota Payakumbuh": {
+        sk: "SK PBESI: 044/PENGCAB-PYK/2024 • Sekretariat: GOR M. Yamin, Payakumbuh",
+        atlet: "74 ATLET",
+        porprov: "10 ROSTER",
+        tim: "11 TIM",
+        surat: "5 DITERBITKAN"
+      },
+      "Kota Solok": {
+        sk: "SK PBESI: 045/PENGCAB-SLK/2024 • Sekretariat: Lapangan Merdeka, Solok",
+        atlet: "58 ATLET",
+        porprov: "8 ROSTER",
+        tim: "9 TIM",
+        surat: "4 DITERBITKAN"
+      },
+      "Kota Sawahlunto": {
+        sk: "SK PBESI: 046/PENGCAB-SWL/2024 • Sekretariat: Ombilin Heritage Hall, Sawahlunto",
+        atlet: "46 ATLET",
+        porprov: "7 ROSTER",
+        tim: "7 TIM",
+        surat: "3 DITERBITKAN"
+      },
+      "Kota Padang Panjang": {
+        sk: "SK PBESI: 047/PENGCAB-PP/2024 • Sekretariat: GOR Chatib Sulaiman, Padang Panjang",
+        atlet: "52 ATLET",
+        porprov: "8 ROSTER",
+        tim: "8 TIM",
+        surat: "4 DITERBITKAN"
+      },
+      "Kota Pariaman": {
+        sk: "SK PBESI: 048/PENGCAB-PRM/2024 • Sekretariat: Pantai Gandoriah Youth Center, Pariaman",
+        atlet: "64 ATLET",
+        porprov: "9 ROSTER",
+        tim: "10 TIM",
+        surat: "5 DITERBITKAN"
+      },
+      "Kab. Agam": {
+        sk: "SK PBESI: 049/PENGCAB-AGM/2024 • Sekretariat: Lubuk Basung Sport Arena, Agam",
+        atlet: "95 ATLET",
+        porprov: "14 ROSTER",
+        tim: "15 TIM",
+        surat: "6 DITERBITKAN"
+      },
+      "Kab. Tanah Datar": {
+        sk: "SK PBESI: 050/PENGCAB-TD/2024 • Sekretariat: Pagaruyung Youth Center, Batusangkar",
+        atlet: "82 ATLET",
+        porprov: "11 ROSTER",
+        tim: "12 TIM",
+        surat: "5 DITERBITKAN"
+      },
+      "Kab. Lima Puluh Kota": {
+        sk: "SK PBESI: 051/PENGCAB-LPK/2024 • Sekretariat: Kompleks Kantor Bupati, Sarilamak",
+        atlet: "78 ATLET",
+        porprov: "10 ROSTER",
+        tim: "12 TIM",
+        surat: "4 DITERBITKAN"
+      },
+      "Kab. Padang Pariaman": {
+        sk: "SK PBESI: 052/PENGCAB-PDP/2024 • Sekretariat: IKK Parit Malintang, Padang Pariaman",
+        atlet: "88 ATLET",
+        porprov: "12 ROSTER",
+        tim: "13 TIM",
+        surat: "5 DITERBITKAN"
+      },
+      "Kab. Pesisir Selatan": {
+        sk: "SK PBESI: 053/PENGCAB-PSS/2024 • Sekretariat: GOR Ilyas Yakoub, Painan",
+        atlet: "92 ATLET",
+        porprov: "13 ROSTER",
+        tim: "14 TIM",
+        surat: "6 DITERBITKAN"
+      },
+      "Kab. Solok": {
+        sk: "SK PBESI: 054/PENGCAB-KSL/2024 • Sekretariat: Kompleks Perkantoran Arosuka, Solok",
+        atlet: "72 ATLET",
+        porprov: "9 ROSTER",
+        tim: "10 TIM",
+        surat: "4 DITERBITKAN"
+      },
+      "Kab. Solok Selatan": {
+        sk: "SK PBESI: 055/PENGCAB-SS/2024 • Sekretariat: Padang Aro Youth Center, Solok Selatan",
+        atlet: "48 ATLET",
+        porprov: "7 ROSTER",
+        tim: "7 TIM",
+        surat: "3 DITERBITKAN"
+      },
+      "Kab. Sijunjung": {
+        sk: "SK PBESI: 056/PENGCAB-SJJ/2024 • Sekretariat: Muaro Sijunjung Sport Hub, Sijunjung",
+        atlet: "54 ATLET",
+        porprov: "8 ROSTER",
+        tim: "8 TIM",
+        surat: "3 DITERBITKAN"
+      },
+      "Kab. Dharmasraya": {
+        sk: "SK PBESI: 057/PENGCAB-DHR/2024 • Sekretariat: Sport Center Koto Padang, Dharmasraya",
+        atlet: "62 ATLET",
+        porprov: "9 ROSTER",
+        tim: "9 TIM",
+        surat: "4 DITERBITKAN"
+      },
+      "Kab. Pasaman": {
+        sk: "SK PBESI: 058/PENGCAB-PAS/2024 • Sekretariat: GOR Tuanku Rao, Lubuk Sikaping",
+        atlet: "50 ATLET",
+        porprov: "7 ROSTER",
+        tim: "8 TIM",
+        surat: "3 DITERBITKAN"
+      },
+      "Kab. Pasaman Barat": {
+        sk: "SK PBESI: 059/PENGCAB-PSB/2024 • Sekretariat: Simpang Empat Esports Hub, Pasaman Barat",
+        atlet: "68 ATLET",
+        porprov: "9 ROSTER",
+        tim: "10 TIM",
+        surat: "4 DITERBITKAN"
+      },
+      "Kab. Kepulauan Mentawai": {
+        sk: "SK PBESI: 060/PENGCAB-KMT/2024 • Sekretariat: Tuapejat Hub, Sipora Mentawai",
+        atlet: "34 ATLET",
+        porprov: "5 ROSTER",
+        tim: "5 TIM",
+        surat: "2 DITERBITKAN"
+      }
+    };
+
+    function onRegionChange(regName, updateHistory = true) {
+      const data = regionData[regName] || regionData["Kota Padang"];
+      document.getElementById('headerRegionName').innerText = regName.toUpperCase();
+      document.getElementById('headerRegionSub').innerHTML = `<span>${data.sk}</span>`;
+      document.getElementById('statAtlet').innerText = data.atlet;
+      document.getElementById('statPorprov').innerText = data.porprov;
+      document.getElementById('statTim').innerText = data.tim;
+      document.getElementById('statSurat').innerText = data.surat;
+
+      if (updateHistory) {
+        const url = new URL(window.location);
+        url.searchParams.set('region', regName);
+        window.history.pushState({}, '', url);
+      }
+      showToast(`Beralih ke Pengcab ${regName}`);
+    }
+
+    // Switch Tabs
+    function switchPengcabTab(tab) {
+      const tabs = ['domisili', 'kontingen', 'rekomendasi', 'venue'];
+      tabs.forEach(t => {
+        const sec = document.getElementById('section' + capitalize(t));
+        const btn = document.getElementById('tabBtn' + capitalize(t));
+        if (sec && btn) {
+          if (t === tab) {
+            sec.classList.remove('hidden');
+            btn.classList.add('bg-cyan-800', 'text-white');
+            btn.classList.remove('bg-transparent', 'text-white/70');
+          } else {
+            sec.classList.add('hidden');
+            btn.classList.remove('bg-cyan-800', 'text-white');
+            btn.classList.add('bg-transparent', 'text-white/70');
+          }
+        }
+      });
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function capitalize(s) {
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+
+    // Domisili Modal
+    function inspectDomisili(nama, wilayah, nik, jenis) {
+      document.getElementById('modalDomisiliNama').innerText = nama;
+      document.getElementById('modalDomisiliWilayah').innerText = wilayah;
+      document.getElementById('modalDomisiliNik').innerText = nik;
+      document.getElementById('modalDomisiliJenis').innerText = jenis;
+      const modal = document.getElementById('modalDomisili');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModalDomisili() {
+      const modal = document.getElementById('modalDomisili');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Rekomendasi Modal
+    function showRekomendasiModal() {
+      const modal = document.getElementById('modalRekomendasi');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModalRekomendasi() {
+      const modal = document.getElementById('modalRekomendasi');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleTerbitRekomendasi(e) {
+      e.preventDefault();
+      closeModalRekomendasi();
+      showToast('Surat Rekomendasi Resmi Berhasil Diterbitkan!');
+    }
+
+    function cetakSurat(noSurat) {
+      showToast(`Mengunduh berkas SK Rekomendasi ${noSurat}...`);
+    }
+
+    // Toast notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
