@@ -1,0 +1,1 @@
+import { MicroRegistrasi } from '../../backend/microsystems/registrasi.js'; export default async (req, res) => res.json(await MicroRegistrasi.getQueue(req.query));

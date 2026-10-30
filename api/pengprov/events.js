@@ -1,0 +1,1 @@
+import { MicroPengprov } from '../../backend/microsystems/pengprov.js'; export default async (req, res) => { if (req.method === 'POST') { const r = await MicroPengprov.createEvent(req.body); res.status(r.statusCode || 201).json(r); } else { res.json(await MicroPengprov.getEvents()); } };

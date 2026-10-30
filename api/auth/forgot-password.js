@@ -1,0 +1,1 @@
+import { MicroAuth } from '../../backend/microsystems/auth.js'; export default async (req, res) => { const r = await MicroAuth.forgotPassword(req.body); res.status(r.statusCode || 200).json(r); };

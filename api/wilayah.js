@@ -1,0 +1,1 @@
+import { db } from '../backend/store/db.js'; export default async (req, res) => res.json({ success: true, total: db.getWilayahList().length, data: db.getWilayahList() });

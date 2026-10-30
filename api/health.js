@@ -1,0 +1,1 @@
+import { MicroStats } from '../backend/microsystems/stats.js'; export default async (req, res) => res.json(await MicroStats.healthCheck());

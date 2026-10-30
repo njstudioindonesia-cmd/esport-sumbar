@@ -1,0 +1,1 @@
+import { MicroPengcab } from '../../backend/microsystems/pengcab.js'; export default async (req, res) => { const r = await MicroPengcab.verifyDomisili(req.body); res.status(r.statusCode || 200).json(r); };
