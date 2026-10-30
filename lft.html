@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Bursa Talenta & Scouting Player LFT – ESPORT SUMBAR</title>
+  <meta name="description" content="Pusat bursa transfer atlet esports, scouting talenta LFT (Looking For Team), dan lowongan open trial klub resmi 19 kabupaten/kota Sumatera Barat. Mitra resmi Pengprov ESI Sumbar." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #E2E2E5;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(224, 34, 45, 0.08) 0%, transparent 60%),
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* LIVING HOLOGRAPHIC FOIL SHIMMER */
+    .card-holo-foil {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 12;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+      background: linear-gradient(
+        125deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.45) 15%,
+        rgba(255, 45, 85, 0.5) 28%,
+        rgba(255, 215, 0, 0.55) 42%,
+        rgba(0, 230, 255, 0.55) 58%,
+        rgba(168, 85, 247, 0.5) 75%,
+        transparent 100%
+      );
+      background-size: 250% 250%;
+      background-position: 0% 0%;
+      animation: holoPrismSweep 6s ease-in-out infinite alternate;
+      transition: opacity 0.3s ease, background-position 0.15s ease-out;
+    }
+
+    @keyframes holoPrismSweep {
+      0% { background-position: 0% 20%; opacity: 0.3; }
+      50% { background-position: 100% 80%; opacity: 0.55; }
+      100% { background-position: 20% 100%; opacity: 0.38; }
+    }
+
+    /* 3D Engine for Modal Inspection */
+    .card-scene {
+      perspective: 1200px;
+      -webkit-perspective: 1200px;
+      position: relative;
+      user-select: none;
+    }
+    .card-modal-size {
+      width: 290px;
+      height: 425px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .card-modal-size {
+        width: 310px;
+        height: 450px;
+      }
+    }
+    .card-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+    }
+    .card-face {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 20px;
+      overflow: hidden;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      will-change: transform, opacity;
+      transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15), opacity 0.25s ease;
+    }
+    .card-face-front {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 20;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .card-face-back {
+      transform: rotateY(-180deg) translateZ(1px);
+      -webkit-transform: rotateY(-180deg) translateZ(1px);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .card-wrapper.flipped .card-face-front {
+      transform: rotateY(180deg) translateZ(1px);
+      -webkit-transform: rotateY(180deg) translateZ(1px);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .card-wrapper.flipped .card-face-back {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 25;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="text-ink antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen">
+
+  <!-- ============================================================== -->
+  <!-- 1. STICKY TOP APP BAR (MOBILE FIRST HEADER)                    -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-[#E2E2E5]/90 backdrop-blur-md border-b border-black/10">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo & Branding -->
+        <a href="/" class="flex items-center gap-2.5 group app-tap">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson-700 to-crimson-900 flex items-center justify-center p-1.5 shadow-md shadow-crimson-900/20 ring-1 ring-white/20">
+            <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display text-lg tracking-wider text-ink leading-tight flex items-center gap-1">
+              ESPORT <span class="text-crimson-600">SUMBAR</span>
+            </span>
+            <span class="text-[9px] font-mono tracking-tight text-ink/60 font-semibold uppercase flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              BURSA TALENTA & SCOUTING
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Quick Nav -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="/" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Home</a>
+          <a href="/katalog" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Katalog</a>
+          <a href="/bursa" class="font-mono text-xs uppercase font-bold text-crimson-600 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-crimson-600"></span>
+            Bursa LFT
+          </a>
+          <a href="/tim" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Roster Tim</a>
+          <a href="/cari" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Pencarian</a>
+          <a href="/wilayah" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">19 Wilayah</a>
+          <a href="/profile" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Profile</a>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="flex items-center gap-2">
+          <a href="/daftar" class="px-3 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-[11px] font-bold uppercase transition-all shadow-sm flex items-center gap-1.5 app-tap">
+            <i data-lucide="user-plus" class="w-3.5 h-3.5 text-amber-300"></i>
+            <span class="hidden xs:inline">Daftar</span> LFT
+          </a>
+          <a href="/cari" class="w-9 h-9 rounded-xl bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink transition-colors app-tap">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. MOBILE-FIRST HERO BANNER (BURSA & SCOUTING)                 -->
+  <!-- ============================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#4A050A] via-[#7A0B12] to-[#250305] text-white p-5 sm:p-7 shadow-xl shadow-crimson-900/15 border border-white/10 mb-4">
+      <div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-crimson-500/20 blur-3xl pointer-events-none"></div>
+      <div class="absolute right-3 bottom-3 opacity-10 pointer-events-none">
+        <i data-lucide="users" class="w-28 h-28 text-white"></i>
+      </div>
+
+      <div class="relative z-10">
+        <!-- Top Pill -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/30 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold tracking-wide text-amber-300 uppercase mb-2.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>SCOUTING HUB // LISENSI ESI SUMBAR 2026</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-5xl tracking-tight leading-none uppercase mb-2">
+          BURSA TALENTA & <span class="text-amber-300">SCOUTING LFT</span>
+        </h1>
+        <p class="font-sans text-xs sm:text-sm text-white/85 max-w-xl leading-relaxed mb-4">
+          Pusat transfer atlet terbuka di 19 kabupaten/kota. Pantau talenta berstatus <strong class="text-amber-300 font-semibold">Looking For Team (LFT)</strong>, ajukan uji coba (*trial*), dan temukan roster kompetitif masa depan.
+        </p>
+
+        <!-- Quick Metrics Counter (Mobile 3-Col Grid) -->
+        <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/15">
+          <div class="bg-black/25 rounded-2xl p-2.5 backdrop-blur-sm border border-white/10 text-center">
+            <div class="font-display text-2xl text-amber-300 leading-none">8</div>
+            <div class="text-[9px] font-mono text-white/70 uppercase mt-0.5 font-bold">Talenta LFT</div>
+          </div>
+          <div class="bg-black/25 rounded-2xl p-2.5 backdrop-blur-sm border border-white/10 text-center">
+            <div class="font-display text-2xl text-white leading-none">5</div>
+            <div class="text-[9px] font-mono text-white/70 uppercase mt-0.5 font-bold">Open Trial Klub</div>
+          </div>
+          <div class="bg-black/25 rounded-2xl p-2.5 backdrop-blur-sm border border-white/10 text-center">
+            <div class="font-display text-2xl text-emerald-400 leading-none">19</div>
+            <div class="text-[9px] font-mono text-white/70 uppercase mt-0.5 font-bold">Wilayah Terdata</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 3. MOBILE INTERACTIVE TAB SWITCHER (LFT vs OPEN TRIAL)         -->
+    <!-- ============================================================== -->
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl p-1.5 border border-black/10 shadow-sm flex items-center gap-1 mb-4">
+      <button type="button" id="tabBtnLft" onclick="switchBursaTab('lft')" class="flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm app-tap">
+        <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>Talenta LFT (8)</span>
+      </button>
+      <button type="button" id="tabBtnTrial" onclick="switchBursaTab('trial')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap">
+        <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-crimson-600"></i>
+        <span>Open Trial Klub (5)</span>
+      </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 4. SEARCH & FILTER CONTROLS BAR                                -->
+    <!-- ============================================================== -->
+    <div class="bg-white rounded-3xl p-3.5 sm:p-4 border border-black/10 shadow-sm mb-5 space-y-3">
+      
+      <!-- Instant Search Input -->
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-ink/40 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="bursaSearchInput" 
+          oninput="handleBursaSearch()"
+          placeholder="Cari IGN, role (Duelist, Roamer), game, wilayah..." 
+          class="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-black/[0.03] border border-black/10 font-sans text-xs sm:text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-crimson-700/30 focus:border-crimson-700 transition-all"
+        />
+        <button type="button" id="clearBursaSearchBtn" onclick="clearBursaSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Quick Game Filter Chips -->
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+        <button type="button" onclick="setGameFilter('all')" id="gameChip-all" class="shrink-0 px-3 py-1.5 rounded-xl bg-crimson-800 text-white font-mono text-[10px] font-bold uppercase transition-all shadow-sm app-tap">
+          Semua Game
+        </button>
+        <button type="button" onclick="setGameFilter('VALORANT')" id="gameChip-VALORANT" class="shrink-0 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-[10px] font-bold uppercase transition-all app-tap">
+          VALORANT
+        </button>
+        <button type="button" onclick="setGameFilter('Mobile Legends')" id="gameChip-Mobile Legends" class="shrink-0 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-[10px] font-bold uppercase transition-all app-tap">
+          MLBB
+        </button>
+        <button type="button" onclick="setGameFilter('PUBG Mobile')" id="gameChip-PUBG Mobile" class="shrink-0 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-[10px] font-bold uppercase transition-all app-tap">
+          PUBG Mobile
+        </button>
+        <button type="button" onclick="setGameFilter('Free Fire')" id="gameChip-Free Fire" class="shrink-0 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-[10px] font-bold uppercase transition-all app-tap">
+          Free Fire
+        </button>
+      </div>
+
+      <!-- Secondary Filters: Wilayah & Role -->
+      <div class="grid grid-cols-2 gap-2 pt-1 border-t border-black/5">
+        <div>
+          <label class="block text-[9px] font-mono uppercase font-bold text-ink/50 mb-1">Wilayah Domisili</label>
+          <select id="wilayahSelect" onchange="applyBursaFilters()" class="w-full py-1.5 px-2.5 rounded-xl bg-black/[0.03] border border-black/10 font-mono text-[11px] text-ink focus:outline-none focus:border-crimson-700">
+            <option value="all">Semua 19 Wilayah</option>
+            <option value="Kota Padang">Kota Padang</option>
+            <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+            <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+            <option value="Kota Pariaman">Kota Pariaman</option>
+            <option value="Kota Solok">Kota Solok</option>
+            <option value="Kab. Agam">Kab. Agam</option>
+            <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+            <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+            <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[9px] font-mono uppercase font-bold text-ink/50 mb-1">Spesialisasi Role</label>
+          <select id="roleSelect" onchange="applyBursaFilters()" class="w-full py-1.5 px-2.5 rounded-xl bg-black/[0.03] border border-black/10 font-mono text-[11px] text-ink focus:outline-none focus:border-crimson-700">
+            <option value="all">Semua Role</option>
+            <option value="Duelist">Duelist / Assassin</option>
+            <option value="Controller">Controller / Midlane</option>
+            <option value="Initiator">Initiator / Support</option>
+            <option value="Sentinel">Sentinel / Roamer</option>
+            <option value="Sniper">Sniper / Fragger</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Result Counter & Sort Pill -->
+    <div class="flex items-center justify-between px-1 mb-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-crimson-600"></span>
+        <span id="bursaCounterLabel" class="text-xs font-mono font-bold uppercase text-ink">
+          Menampilkan 8 Talenta LFT
+        </span>
+      </div>
+      <a href="/tim" class="text-[11px] font-mono text-crimson-700 hover:text-crimson-900 font-bold uppercase flex items-center gap-1 app-tap">
+        <span>Lihat Roster Tim</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 5. MAIN BURSA CONTENT CONTAINER (DYNAMIC RENDERING)            -->
+    <!-- ============================================================== -->
+    
+    <!-- SECTION A: TALENTA LFT GRID -->
+    <div id="lftGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- SECTION B: OPEN TRIAL KLUB CONTAINER (HIDDEN INITIALLY) -->
+    <div id="trialGridContainer" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="bursaEmptyState" class="hidden text-center py-12 px-4 bg-white rounded-3xl border border-black/10 shadow-sm mt-3">
+      <div class="w-14 h-14 rounded-2xl bg-crimson-50 text-crimson-700 flex items-center justify-center mx-auto mb-3 shadow-inner">
+        <i data-lucide="search-x" class="w-7 h-7"></i>
+      </div>
+      <h3 class="font-display text-2xl text-ink uppercase mb-1">Data Tidak Ditemukan</h3>
+      <p class="font-sans text-xs text-ink/60 max-w-xs mx-auto mb-4">
+        Tidak ada data yang cocok dengan kriteria filter saat ini. Silakan atur ulang kata kunci atau filter.
+      </p>
+      <button type="button" onclick="resetBursaFilters()" class="px-4 py-2 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase shadow-sm app-tap">
+        Reset Semua Filter
+      </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 6. FLOATING CTA FOR NEW LFT APPLICANTS                         -->
+    <!-- ============================================================== -->
+    <div class="mt-8 rounded-3xl bg-white border border-black/10 p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5 text-center sm:text-left">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-ink flex items-center justify-center shrink-0 shadow-md">
+          <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h4 class="font-display text-xl text-ink uppercase leading-tight">Kamu Atlet Bebas Transfer (LFT)?</h4>
+          <p class="font-sans text-xs text-ink/60">Terbitkan kartu profil digitalmu dan dapatkan pantauan dari scout & manajer tim se-Sumbar.</p>
+        </div>
+      </div>
+      <a href="/daftar" class="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center justify-center gap-1.5 app-tap">
+        <i data-lucide="file-plus" class="w-4 h-4 text-amber-300"></i>
+        <span>Daftarkan Profil LFT</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- 7. RECRUITMENT SCOUT MODAL (DIRECT CONTACT INQUIRY)           -->
+  <!-- ============================================================== -->
+  <div id="scoutModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-black/10 relative transform transition-all">
+      <button type="button" onclick="closeScoutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink app-tap">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-2xl bg-crimson-800 text-white flex items-center justify-center font-display text-xl font-bold shadow-md" id="scoutModalOvr">
+          92
+        </div>
+        <div>
+          <div class="text-[10px] font-mono text-crimson-700 uppercase font-bold" id="scoutModalStatus">STATUS: LFT AKTIF</div>
+          <h3 class="font-display text-2xl text-ink leading-tight uppercase" id="scoutModalIgn">IGN ATLET</h3>
+          <p class="text-xs font-sans text-ink/60" id="scoutModalName">Nama Resmi</p>
+        </div>
+      </div>
+
+      <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5 mb-4 text-xs font-mono space-y-1.5">
+        <div class="flex justify-between">
+          <span class="text-ink/60">Game:</span>
+          <span class="font-bold text-ink" id="scoutModalGame">VALORANT</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink/60">Role Utama:</span>
+          <span class="font-bold text-ink" id="scoutModalRole">Flex Controller</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink/60">In-Game Rank:</span>
+          <span class="font-bold text-amber-600" id="scoutModalRank">Radiant #180</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-ink/60">Domisili:</span>
+          <span class="font-bold text-ink" id="scoutModalRegion">Kota Padang</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <a id="scoutWaLink" href="#" target="_blank" class="w-full py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-md app-tap">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Hubungi via WhatsApp Resmi</span>
+        </a>
+        <button type="button" onclick="closeScoutModal()" class="w-full py-2.5 px-4 rounded-2xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-colors app-tap">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 8. 3D CARD INSPECTOR MODAL                                     -->
+  <!-- ============================================================== -->
+  <div id="bursaCardInspectorModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="relative flex flex-col items-center max-w-sm w-full">
+      
+      <!-- Close Button -->
+      <button type="button" onclick="closeBursaInspector()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-ink flex items-center justify-center backdrop-blur-md transition-colors app-tap">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Flip Instruction Pill -->
+      <div class="mb-3 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-mono text-amber-300 font-bold uppercase tracking-wider flex items-center gap-1.5">
+        <i data-lucide="repeat" class="w-3 h-3"></i>
+        <span>Ketuk kartu untuk membalik sisi</span>
+      </div>
+
+      <!-- 3D Card Slot -->
+      <div id="bursaCardSlot" class="w-full flex justify-center">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 9. MOBILE BOTTOM FLOATING DOCK (5-SERIES)                      -->
+  <!-- ============================================================== -->
+  <div class="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none pb-2 pt-1 px-3">
+    <div class="max-w-md mx-auto pointer-events-auto">
+      <nav class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-full shadow-2xl px-2 py-1.5 flex items-center justify-around">
+        
+        <!-- 1. Home -->
+        <a href="/" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Home</span>
+        </a>
+
+        <!-- 2. Katalog -->
+        <a href="/katalog" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="layout-grid" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Katalog</span>
+        </a>
+
+        <!-- 3. FAB Pencarian (Paling Tengah) -->
+        <div class="relative -top-3 flex flex-col items-center">
+          <a href="/cari" class="w-13 h-13 w-[52px] h-[52px] rounded-full bg-gradient-to-tr from-crimson-900 via-crimson-700 to-crimson-600 text-white flex items-center justify-center shadow-lg shadow-crimson-800/40 border-2 border-white ring-4 ring-black/5 hover:scale-105 active:scale-95 transition-all app-tap" title="Pencarian Ekosistem">
+            <i data-lucide="search" class="w-6 h-6"></i>
+          </a>
+          <span class="text-[9px] font-mono font-bold text-crimson-800 mt-0.5">Pencarian</span>
+        </div>
+
+        <!-- 4. Wilayah -->
+        <a href="/wilayah" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Wilayah</span>
+        </a>
+
+        <!-- 5. Profile -->
+        <a href="/profile" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Profile</span>
+        </a>
+
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 10. JAVASCRIPT BURSA ENGINE & MASTER DATASET                   -->
+  <!-- ============================================================== -->
+  <script>
+    // DATASET 1: TALENTA ATLET LFT (8 ENTITAS TERVERIFIKASI)
+    const TALENTA_LFT = [
+      {
+        id: "lft-1",
+        name: "Bagas Pratama",
+        ign: "BREEZE",
+        role: "Flex Controller / Sentinel",
+        game: "VALORANT",
+        rank: "Radiant #180 (Peak)",
+        region: "Kota Padang",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rating: 92,
+        status: "BEBAS TRANSFER (LFT)",
+        agents: ["Omen", "Viper", "Cypher"],
+        stats: "1.24 K/D • 62% Winrate",
+        exp: "Mantan Roster Pelatda Pra-PON Sumbar",
+        phone: "6281234567890",
+        license: "PBESI-SB-2026-VAL-92"
+      },
+      {
+        id: "lft-2",
+        name: "Deni Saputra",
+        ign: "RYUJIN",
+        role: "Exp Laner / Fighter",
+        game: "Mobile Legends",
+        rank: "Mythical Immortal 112★",
+        region: "Kota Bukittinggi",
+        photo: "/images/athlete-pro-player.jpg",
+        rating: 91,
+        status: "OPEN TRIAL (LFT)",
+        agents: ["Arlott", "Yu Zhong", "Terizla"],
+        stats: "82% Kill Participation",
+        exp: "Juara 2 Kejurda MLBB Sumbar 2024",
+        phone: "6281234567891",
+        license: "PBESI-SB-2026-MLB-91"
+      },
+      {
+        id: "lft-3",
+        name: "Fikri Maulana",
+        ign: "ALPHA",
+        role: "Sniper / Support Fragger",
+        game: "PUBG Mobile",
+        rank: "Conqueror S22",
+        region: "Kota Payakumbuh",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rating: 89,
+        status: "SIAP SELEKSI PON",
+        agents: ["M416 Specialist", "AWM", "DMR"],
+        stats: "4.82 K/D Ratio • 680 Avg Dmg",
+        exp: "Top 8 PMNC Regional Sumatera",
+        phone: "6281234567892",
+        license: "PBESI-SB-2026-PUB-89"
+      },
+      {
+        id: "lft-4",
+        name: "Wahyu Ilham",
+        ign: "KURO",
+        role: "Duelist / Initiator",
+        game: "VALORANT",
+        rank: "Immortal 3 (380 RR)",
+        region: "Kota Pariaman",
+        photo: "/images/athlete-pro-player.jpg",
+        rating: 88,
+        status: "BEBAS TRANSFER (LFT)",
+        agents: ["Jett", "Raze", "Fade"],
+        stats: "245 ACS • 1.18 K/D",
+        exp: "Semi-finalis Walikota Cup Padang",
+        phone: "6281234567893",
+        license: "PBESI-SB-2026-VAL-88"
+      },
+      {
+        id: "lft-5",
+        name: "Gilang Ramadhan",
+        ign: "V0RTEX",
+        role: "Roamer / Tanker",
+        game: "Mobile Legends",
+        rank: "Mythical Immortal 98★",
+        region: "Kota Solok",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rating: 88,
+        status: "OPEN TRIAL (LFT)",
+        agents: ["Chou", "Tigreal", "Minotaur"],
+        stats: "78% Assists Participation",
+        exp: "Kapten Tim Porprov Kota Solok",
+        phone: "6281234567894",
+        license: "PBESI-SB-2026-MLB-88"
+      },
+      {
+        id: "lft-6",
+        name: "Rizky Alamsyah",
+        ign: "PHANTOM",
+        role: "Rusher / Entry Fragger",
+        game: "Free Fire",
+        rank: "Master Elite 45",
+        region: "Kab. Tanah Datar",
+        photo: "/images/athlete-pro-player.jpg",
+        rating: 87,
+        status: "BEBAS TRANSFER (LFT)",
+        agents: ["Shotgun Specialist", "Tatsuya", "Homer"],
+        stats: "3.90 K/D • 82 Headshot%",
+        exp: "Juara Piala ESI Tanah Datar",
+        phone: "6281234567895",
+        license: "PBESI-SB-2026-FF-87"
+      },
+      {
+        id: "lft-7",
+        name: "Aditya Kurnia",
+        ign: "ZEPHYR",
+        role: "Gold Laner / Marksman",
+        game: "Mobile Legends",
+        rank: "Mythical Glory 75★",
+        region: "Kota Padang",
+        photo: "/images/athlete-v4nd4l.jpg",
+        rating: 87,
+        status: "OPEN TRIAL (LFT)",
+        agents: ["Claude", "Harith", "Bruno"],
+        stats: "720 GPM • 1.25 DPM",
+        exp: "Roster Liga Mahasiswa Sumbar",
+        phone: "6281234567896",
+        license: "PBESI-SB-2026-MLB-87"
+      },
+      {
+        id: "lft-8",
+        name: "Ilham Akbar",
+        ign: "SPECTRE",
+        role: "Initiator / Info Gatherer",
+        game: "VALORANT",
+        rank: "Immortal 2",
+        region: "Kota Bukittinggi",
+        photo: "/images/athlete-pro-player.jpg",
+        rating: 86,
+        status: "SIAP SELEKSI PON",
+        agents: ["Sova", "Gekko", "Breach"],
+        stats: "74% KAST • 210 ACS",
+        exp: "Finalis Bukittinggi Esports Open",
+        phone: "6281234567897",
+        license: "PBESI-SB-2026-VAL-86"
+      }
+    ];
+
+    // DATASET 2: OPEN TRIAL KLUB (5 LOWONGAN RESMI)
+    const OPEN_TRIALS = [
+      {
+        id: "trial-1",
+        teamId: "tim-1",
+        teamName: "Minang Pride Esports",
+        tier: "PELATDA TIER 1",
+        logo: "/images/esport-sumbar-logo.png",
+        game: "VALORANT",
+        region: "Kota Padang",
+        roleNeeded: "Controller / Smoke Specialist",
+        minRank: "Immortal 2 ke atas",
+        quota: "1 Roster Cadangan + Rotasi Inti",
+        schedule: "Trial Online: 15-20 Nov 2026",
+        requirements: "Domisili Sumbar, usia 16-24 tahun, siap bootcamp di GH Padang",
+        contactWa: "6281298765431"
+      },
+      {
+        id: "trial-2",
+        teamId: "tim-2",
+        teamName: "Singgalang Esports Club",
+        tier: "DIVISI UTAMA",
+        logo: "/images/esport-sumbar-logo.png",
+        game: "Mobile Legends",
+        region: "Kota Bukittinggi",
+        roleNeeded: "Roamer / Tanker & Gold Laner",
+        minRank: "Mythical Immortal 90★+",
+        quota: "2 Roster Baru",
+        schedule: "Trial Scrim: Setiap Sabtu Malam",
+        requirements: "Hero pool luas, komunikasi mikro/makro lancar, siap latihan malam",
+        contactWa: "6281298765432"
+      },
+      {
+        id: "trial-3",
+        teamId: "tim-3",
+        teamName: "Ranah Chaniago Esports",
+        tier: "DIVISI UTAMA",
+        logo: "/images/esport-sumbar-logo.png",
+        game: "Free Fire",
+        region: "Kota Payakumbuh",
+        roleNeeded: "Rusher & Support Grenadier",
+        minRank: "Master Elite",
+        quota: "1 Slot Pemain",
+        schedule: "Fast Tournament Trial",
+        requirements: "Pengalaman turnamen luring, device kompatibel kompetisi",
+        contactWa: "6281298765433"
+      },
+      {
+        id: "trial-4",
+        teamId: "tim-4",
+        teamName: "Bukittinggi Knights",
+        tier: "KOMUNITAS PRO",
+        logo: "/images/esport-sumbar-logo.png",
+        game: "PUBG Mobile",
+        region: "Kota Bukittinggi",
+        roleNeeded: "IGL / In-Game Leader",
+        minRank: "Ace Master / Conqueror",
+        quota: "1 Slot Kapten Tim",
+        schedule: "Seleksi Scrim T1",
+        requirements: "Mampu membaca rotasi zona, mental stabil di situasi clutch",
+        contactWa: "6281298765434"
+      },
+      {
+        id: "trial-5",
+        teamId: "tim-5",
+        teamName: "Padang Pride Gaming",
+        tier: "DIVISI LIGA",
+        logo: "/images/esport-sumbar-logo.png",
+        game: "VALORANT",
+        region: "Kota Padang",
+        roleNeeded: "Sentinel / Anchor Site",
+        minRank: "Immortal 1+",
+        quota: "1 Roster",
+        schedule: "Trial Mingguan",
+        requirements: "Fokus pertahanan site, disiplin utilitas, anti-tilt",
+        contactWa: "6281298765435"
+      }
+    ];
+
+    let currentBursaTab = 'lft'; // 'lft' or 'trial'
+    let selectedGame = 'all';
+
+    function switchBursaTab(tab) {
+      currentBursaTab = tab;
+      const tabLft = document.getElementById('tabBtnLft');
+      const tabTrial = document.getElementById('tabBtnTrial');
+      const lftGrid = document.getElementById('lftGridContainer');
+      const trialGrid = document.getElementById('trialGridContainer');
+
+      if (tab === 'lft') {
+        tabLft.className = "flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm app-tap";
+        tabTrial.className = "flex-1 py-2.5 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap";
+        lftGrid.classList.remove('hidden');
+        trialGrid.classList.add('hidden');
+      } else {
+        tabTrial.className = "flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm app-tap";
+        tabLft.className = "flex-1 py-2.5 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap";
+        trialGrid.classList.remove('hidden');
+        lftGrid.classList.add('hidden');
+      }
+      applyBursaFilters();
+    }
+
+    function setGameFilter(game) {
+      selectedGame = game;
+      const games = ['all', 'VALORANT', 'Mobile Legends', 'PUBG Mobile', 'Free Fire'];
+      games.forEach(g => {
+        const chip = document.getElementById('gameChip-' + g);
+        if (chip) {
+          if (g === game) {
+            chip.className = "shrink-0 px-3 py-1.5 rounded-xl bg-crimson-800 text-white font-mono text-[10px] font-bold uppercase transition-all shadow-sm app-tap";
+          } else {
+            chip.className = "shrink-0 px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/80 font-mono text-[10px] font-bold uppercase transition-all app-tap";
+          }
+        }
+      });
+      applyBursaFilters();
+    }
+
+    function handleBursaSearch() {
+      const val = document.getElementById('bursaSearchInput').value.trim();
+      const clearBtn = document.getElementById('clearBursaSearchBtn');
+      if (val) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      applyBursaFilters();
+    }
+
+    function clearBursaSearch() {
+      document.getElementById('bursaSearchInput').value = '';
+      document.getElementById('clearBursaSearchBtn').classList.add('hidden');
+      applyBursaFilters();
+    }
+
+    function resetBursaFilters() {
+      document.getElementById('bursaSearchInput').value = '';
+      document.getElementById('clearBursaSearchBtn').classList.add('hidden');
+      document.getElementById('wilayahSelect').value = 'all';
+      document.getElementById('roleSelect').value = 'all';
+      setGameFilter('all');
+    }
+
+    function applyBursaFilters() {
+      const q = (document.getElementById('bursaSearchInput').value || '').toLowerCase().trim();
+      const region = document.getElementById('wilayahSelect').value;
+      const role = document.getElementById('roleSelect').value;
+      const counterLabel = document.getElementById('bursaCounterLabel');
+      const emptyState = document.getElementById('bursaEmptyState');
+
+      if (currentBursaTab === 'lft') {
+        const filtered = TALENTA_LFT.filter(item => {
+          if (selectedGame !== 'all' && item.game !== selectedGame) return false;
+          if (region !== 'all' && item.region !== region) return false;
+          if (role !== 'all' && !item.role.toLowerCase().includes(role.toLowerCase())) return false;
+          if (q) {
+            const searchHaystack = `${item.name} ${item.ign} ${item.role} ${item.game} ${item.rank} ${item.region}`.toLowerCase();
+            if (!searchHaystack.includes(q)) return false;
+          }
+          return true;
+        });
+
+        renderLftCards(filtered);
+        counterLabel.textContent = `Menampilkan ${filtered.length} Talenta LFT`;
+        if (filtered.length === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+
+      } else {
+        const filtered = OPEN_TRIALS.filter(item => {
+          if (selectedGame !== 'all' && item.game !== selectedGame) return false;
+          if (region !== 'all' && item.region !== region) return false;
+          if (role !== 'all' && !item.roleNeeded.toLowerCase().includes(role.toLowerCase())) return false;
+          if (q) {
+            const searchHaystack = `${item.teamName} ${item.roleNeeded} ${item.game} ${item.region} ${item.minRank}`.toLowerCase();
+            if (!searchHaystack.includes(q)) return false;
+          }
+          return true;
+        });
+
+        renderTrialCards(filtered);
+        counterLabel.textContent = `Menampilkan ${filtered.length} Lowongan Trial Klub`;
+        if (filtered.length === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      }
+    }
+
+    function renderLftCards(items) {
+      const container = document.getElementById('lftGridContainer');
+      container.innerHTML = items.map((p, idx) => {
+        const isHighRating = p.rating >= 90;
+        const ratingBg = isHighRating ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-white';
+        const agentChips = p.agents.map(a => `
+          <span class="px-2 py-0.5 rounded-lg bg-black/5 text-[9px] font-mono font-bold text-ink/80">${a}</span>
+        `).join('');
+
+        return `
+          <div class="rounded-3xl bg-white border border-black/10 p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- Header Top: Badge & Rating -->
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 text-[9px] font-mono font-bold uppercase tracking-wider flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  ${p.status}
+                </span>
+                <div class="w-8 h-8 rounded-xl ${ratingBg} font-display text-base font-black flex items-center justify-center shadow-sm">
+                  ${p.rating}
+                </div>
+              </div>
+
+              <!-- Player Avatar & Identity -->
+              <div class="flex items-center gap-3 mb-3">
+                <div class="relative w-14 h-14 rounded-2xl overflow-hidden bg-canvas border border-black/10 shrink-0 shadow-sm">
+                  <img src="${p.photo}" alt="${p.ign}" class="w-full h-full object-cover object-top filter contrast-105" onerror="this.src='/images/athlete-pro-player.jpg'" />
+                  <div class="absolute bottom-0 inset-x-0 bg-black/70 text-[8px] font-mono text-center text-white py-0.5 font-bold">
+                    ${p.game}
+                  </div>
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-display text-2xl text-ink leading-tight uppercase truncate group-hover:text-crimson-600 transition-colors">
+                    ${p.ign}
+                  </h3>
+                  <div class="text-xs font-sans font-bold text-ink/80 flex items-center gap-1 truncate">
+                    ${p.name}
+                    <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-500 shrink-0"></i>
+                  </div>
+                  <div class="text-[10px] font-mono text-ink/50 flex items-center gap-1 mt-0.5">
+                    <i data-lucide="map-pin" class="w-3 h-3 text-crimson-600 shrink-0"></i>
+                    ${p.region}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Credentials Box -->
+              <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 mb-3 space-y-1.5 text-[11px] font-mono">
+                <div class="flex justify-between items-center">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">Role:</span>
+                  <span class="font-bold text-ink">${p.role}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">In-Game Rank:</span>
+                  <span class="font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 text-[10px]">${p.rank}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">K/D & Winrate:</span>
+                  <span class="font-bold text-emerald-700">${p.stats}</span>
+                </div>
+              </div>
+
+              <!-- Main Hero / Agents -->
+              <div class="mb-3.5">
+                <div class="text-[9px] font-mono text-ink/50 uppercase font-bold mb-1 flex items-center gap-1">
+                  <i data-lucide="shield" class="w-3 h-3 text-crimson-600"></i>
+                  <span>Hero Pool / Spesialisasi</span>
+                </div>
+                <div class="flex flex-wrap gap-1">
+                  ${agentChips}
+                </div>
+              </div>
+
+              <!-- Experience / Milestone Note -->
+              <div class="text-[10px] font-sans text-ink/70 italic bg-black/[0.02] p-2 rounded-xl border border-black/5 mb-3 flex items-start gap-1.5">
+                <i data-lucide="award" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i>
+                <span class="line-clamp-2">${p.exp}</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons Bar -->
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-black/10">
+              <button type="button" onclick="inspectBursaCard('${p.id}')" class="py-2 px-2.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-[10px] font-bold uppercase transition-colors flex items-center justify-center gap-1 app-tap">
+                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                <span>Kartu 3D</span>
+              </button>
+              <button type="button" onclick="openScoutModal('${p.id}')" class="py-2 px-2.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-[10px] font-bold uppercase transition-colors flex items-center justify-center gap-1 shadow-sm app-tap">
+                <i data-lucide="message-circle" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Hubungi</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderTrialCards(items) {
+      const container = document.getElementById('trialGridContainer');
+      container.innerHTML = items.map(t => {
+        return `
+          <div class="rounded-3xl bg-white border border-black/10 p-5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-0.5 rounded-full bg-crimson-800 text-white text-[9px] font-mono font-bold uppercase tracking-wider">
+                  ${t.tier}
+                </span>
+                <span class="text-[10px] font-mono text-ink/50 flex items-center gap-1">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-crimson-600"></i>
+                  ${t.region}
+                </span>
+              </div>
+
+              <!-- Team Header -->
+              <div class="flex items-center gap-3 mb-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-crimson-900 to-crimson-700 p-2 flex items-center justify-center shadow-md shrink-0">
+                  <img src="${t.logo}" alt="${t.teamName}" class="w-full h-full object-contain filter brightness-110" />
+                </div>
+                <div>
+                  <h3 class="font-display text-2xl text-ink leading-tight uppercase group-hover:text-crimson-600 transition-colors">
+                    ${t.teamName}
+                  </h3>
+                  <div class="text-[10px] font-mono text-ink/60 font-semibold">${t.game}</div>
+                </div>
+              </div>
+
+              <!-- Vacancy Highlight -->
+              <div class="p-3.5 rounded-2xl bg-gradient-to-r from-crimson-900/5 to-amber-500/5 border border-crimson-800/10 mb-3 space-y-1.5">
+                <div class="text-[10px] font-mono uppercase font-bold text-crimson-800 flex items-center gap-1">
+                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                  <span>Role Yang Dibutuhkan:</span>
+                </div>
+                <div class="font-display text-xl text-ink leading-tight">${t.roleNeeded}</div>
+                <div class="text-[11px] font-mono text-amber-700 font-semibold">Syarat Rank: ${t.minRank}</div>
+              </div>
+
+              <!-- Info Rows -->
+              <div class="text-xs font-sans text-ink/75 space-y-1 mb-4">
+                <div class="flex items-start gap-1.5">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-crimson-600 shrink-0 mt-0.5"></i>
+                  <span class="font-mono text-[11px]">${t.schedule}</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span class="text-[11px]">${t.requirements}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Link -->
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-black/10">
+              <a href="/tim?id=${t.teamId}" class="py-2.5 px-3 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-colors flex items-center justify-center gap-1.5 app-tap">
+                <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                <span>Lihat Roster</span>
+              </a>
+              <a href="https://wa.me/${t.contactWa}?text=Halo%20Admin%20${encodeURIComponent(t.teamName)},%20saya%20ingin%20mendaftar%20Open%20Trial%20untuk%20role%20${encodeURIComponent(t.roleNeeded)}" target="_blank" class="py-2.5 px-3 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-colors flex items-center justify-center gap-1.5 shadow-sm app-tap">
+                <i data-lucide="send" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Lamar Trial</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // SCOUT MODAL LOGIC
+    function openScoutModal(id) {
+      const p = TALENTA_LFT.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById('scoutModalOvr').textContent = p.rating;
+      document.getElementById('scoutModalStatus').textContent = p.status;
+      document.getElementById('scoutModalIgn').textContent = p.ign;
+      document.getElementById('scoutModalName').textContent = p.name;
+      document.getElementById('scoutModalGame').textContent = p.game;
+      document.getElementById('scoutModalRole').textContent = p.role;
+      document.getElementById('scoutModalRank').textContent = p.rank;
+      document.getElementById('scoutModalRegion').textContent = p.region;
+
+      const waMsg = encodeURIComponent(`Halo ${p.ign} (${p.name}), kami dari tim/manajemen esports di Sumatera Barat tertarik dengan profil LFT Anda di Platform ESPORT SUMBAR. Bisakah kita berdiskusi mengenai jadwal trial/scrim?`);
+      document.getElementById('scoutWaLink').href = `https://wa.me/${p.phone}?text=${waMsg}`;
+
+      const modal = document.getElementById('scoutModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeScoutModal() {
+      const modal = document.getElementById('scoutModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // 3D CARD INSPECTOR LOGIC
+    function inspectBursaCard(id) {
+      const p = TALENTA_LFT.find(item => item.id === id);
+      if (!p) return;
+
+      const slot = document.getElementById('bursaCardSlot');
+      const isGold = p.rating >= 90;
+      const rarityBadge = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-paper';
+      const ratingBg = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-white';
+
+      slot.innerHTML = `
+        <div class="card-scene card-modal-size">
+          <div id="modal-card-${p.id}" class="card-wrapper cursor-pointer" onclick="flipModalCard('modal-card-${p.id}', event)">
+            
+            <!-- SISI DEPAN -->
+            <div class="card-face card-face-front bg-white border border-black/15 p-3.5 flex flex-col justify-between shadow-2xl relative select-none">
+              <div class="card-holo-foil"></div>
+
+              <div class="flex items-center justify-between z-20">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                    <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain" />
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase ${rarityBadge}">
+                    ${p.status}
+                  </span>
+                </div>
+                <div class="w-9 h-9 rounded-xl ${ratingBg} font-display text-xl font-black flex items-center justify-center shadow-md">
+                  ${p.rating}
+                </div>
+              </div>
+
+              <div class="relative flex-1 min-h-0 rounded-2xl overflow-hidden my-2.5 bg-gradient-to-b from-[#F2F2F4] to-[#E5E5E8] border border-black/10 flex items-center justify-center">
+                <span class="absolute font-display text-[80px] text-black/[0.04] font-black uppercase tracking-tight select-none pointer-events-none z-10">${p.ign}</span>
+                <img src="${p.photo}" alt="${p.ign}" class="w-full h-full object-cover object-top filter contrast-105 z-10" onerror="this.src='/images/athlete-pro-player.jpg'" />
+                
+                <div class="absolute inset-x-0 bottom-0 pt-6 pb-2.5 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-20 flex items-center justify-between">
+                  <div>
+                    <div class="text-[8px] font-mono text-white/60 uppercase font-semibold">NAMA RESMI</div>
+                    <div class="text-xs font-sans font-bold text-white flex items-center gap-1">
+                      ${p.name}
+                      <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-400"></i>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-[8px] font-mono text-white/60 uppercase font-semibold">DOMISILI</div>
+                    <div class="text-[10px] font-mono font-bold text-amber-300">${p.region}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="z-20 pt-1.5 border-t border-black/10 flex items-center justify-between">
+                <div>
+                  <div class="flex items-center gap-1">
+                    <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold bg-crimson-800 text-white uppercase">${p.game}</span>
+                    <span class="text-[9px] font-mono text-ink/70 font-semibold uppercase">${p.role}</span>
+                  </div>
+                  <h3 class="font-display text-2xl text-ink tracking-tight mt-0.5 leading-none">${p.ign}</h3>
+                </div>
+
+                <button type="button" class="px-2.5 py-1.5 rounded-xl bg-crimson-800 text-white text-[9px] font-mono font-bold uppercase flex items-center gap-1 shadow-sm">
+                  <i data-lucide="repeat" class="w-3 h-3 text-amber-300"></i>
+                  <span>Putar</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- SISI BELAKANG -->
+            <div class="card-face card-face-back rounded-[20px] overflow-hidden shadow-2xl relative select-none bg-[#7A0006]">
+              <img src="/images/card-frame-back-red.jpg" alt="Cover Belakang" class="w-full h-full object-cover scale-[1.04] rounded-[20px]" />
+              <div class="card-holo-foil"></div>
+              <div class="absolute bottom-3 right-3 z-30">
+                <button type="button" class="px-3 py-1.5 rounded-full bg-white/20 text-white backdrop-blur-md border border-white/30 text-[9px] font-mono font-bold uppercase flex items-center gap-1.5 shadow-lg">
+                  <i data-lucide="repeat" class="w-3 h-3"></i>
+                  <span>Depan</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      lucide.createIcons();
+      const modal = document.getElementById('bursaCardInspectorModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function flipModalCard(cardId, e) {
+      if (e) e.stopPropagation();
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.classList.toggle('flipped');
+      }
+    }
+
+    function closeBursaInspector() {
+      const modal = document.getElementById('bursaCardInspectorModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // INITIAL RENDER ON PAGE LOAD
+    document.addEventListener('DOMContentLoaded', () => {
+      applyBursaFilters();
+      lucide.createIcons();
+    });
+  </script>
+
+</body>
+</html>

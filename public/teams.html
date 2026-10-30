@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Detail Roster & Profil Tim Esport – ESPORT SUMBAR</title>
+  <meta name="description" content="Profil resmi tim esports, susunan roster pemain inti, cadangan, staf pelatih, dan lemari prestasi berlisensi Pengprov ESI Sumatera Barat." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+            sans: ['"Manrope"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #E2E2E5;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(224, 34, 45, 0.08) 0%, transparent 60%),
+        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px, 28px 28px;
+    }
+
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* LIVING HOLOGRAPHIC FOIL SHIMMER */
+    .card-holo-foil {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 12;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+      background: linear-gradient(
+        125deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.45) 15%,
+        rgba(255, 45, 85, 0.5) 28%,
+        rgba(255, 215, 0, 0.55) 42%,
+        rgba(0, 230, 255, 0.55) 58%,
+        rgba(168, 85, 247, 0.5) 75%,
+        transparent 100%
+      );
+      background-size: 250% 250%;
+      background-position: 0% 0%;
+      animation: holoPrismSweep 6s ease-in-out infinite alternate;
+      transition: opacity 0.3s ease, background-position 0.15s ease-out;
+    }
+
+    @keyframes holoPrismSweep {
+      0% { background-position: 0% 20%; opacity: 0.3; }
+      50% { background-position: 100% 80%; opacity: 0.55; }
+      100% { background-position: 20% 100%; opacity: 0.38; }
+    }
+
+    /* 3D Engine for Modal Inspection */
+    .card-scene {
+      perspective: 1200px;
+      -webkit-perspective: 1200px;
+      position: relative;
+      user-select: none;
+    }
+    .card-modal-size {
+      width: 290px;
+      height: 425px;
+      max-width: 100%;
+    }
+    @media (min-width: 640px) {
+      .card-modal-size {
+        width: 310px;
+        height: 450px;
+      }
+    }
+    .card-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+    }
+    .card-face {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 20px;
+      overflow: hidden;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      will-change: transform, opacity;
+      transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15), opacity 0.25s ease;
+    }
+    .card-face-front {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 20;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .card-face-back {
+      transform: rotateY(-180deg) translateZ(1px);
+      -webkit-transform: rotateY(-180deg) translateZ(1px);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .card-wrapper.flipped .card-face-front {
+      transform: rotateY(180deg) translateZ(1px);
+      -webkit-transform: rotateY(180deg) translateZ(1px);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .card-wrapper.flipped .card-face-back {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 25;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="text-ink antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen">
+
+  <!-- ============================================================== -->
+  <!-- 1. STICKY TOP APP BAR (MOBILE FIRST)                           -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-[#E2E2E5]/90 backdrop-blur-md border-b border-black/10">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo & Branding -->
+        <a href="/" class="flex items-center gap-2.5 group app-tap">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson-700 to-crimson-900 flex items-center justify-center p-1.5 shadow-md shadow-crimson-900/20 ring-1 ring-white/20">
+            <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display text-lg tracking-wider text-ink leading-tight flex items-center gap-1">
+              ESPORT <span class="text-crimson-600">SUMBAR</span>
+            </span>
+            <span class="text-[9px] font-mono tracking-tight text-ink/60 font-semibold uppercase flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-crimson-600"></span>
+              DETAIL ROSTER TIM
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Quick Nav -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="/" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Home</a>
+          <a href="/katalog" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Katalog</a>
+          <a href="/tim" class="font-mono text-xs uppercase font-bold text-crimson-600 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-crimson-600"></span>
+            Roster Tim
+          </a>
+          <a href="/bursa" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Bursa LFT</a>
+          <a href="/cari" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Pencarian</a>
+          <a href="/wilayah" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">19 Wilayah</a>
+          <a href="/profile" class="font-mono text-xs uppercase font-semibold text-ink/70 hover:text-crimson-600 transition-colors">Profile</a>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="openScrimModal()" class="px-3 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-[11px] font-bold uppercase transition-all shadow-sm flex items-center gap-1.5 app-tap">
+            <i data-lucide="swords" class="w-3.5 h-3.5 text-amber-300"></i>
+            <span>Tantang Scrim</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. QUICK TEAM SELECTOR (HORIZONTAL CHIP SLIDER)                -->
+  <!-- ============================================================== -->
+  <div class="bg-white/70 backdrop-blur-md border-b border-black/10 py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto no-scrollbar">
+      <span class="text-[9px] font-mono uppercase font-bold text-ink/50 shrink-0 flex items-center gap-1">
+        <i data-lucide="shield" class="w-3 h-3 text-crimson-600"></i>
+        <span>Pilih Klub:</span>
+      </span>
+      <div id="teamSwitcherBar" class="flex items-center gap-1.5 shrink-0">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 3. TEAM HERO BANNER & HEADER                                   -->
+  <!-- ============================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+
+    <!-- Team Cover Banner Card -->
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#3D0307] via-[#65080E] to-[#1F0204] text-white p-5 sm:p-7 shadow-xl shadow-crimson-900/15 border border-white/10 mb-4">
+      <div class="absolute -right-10 -bottom-10 w-52 h-52 rounded-full bg-crimson-500/20 blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        
+        <!-- Team Branding Lockup -->
+        <div class="flex items-start gap-4">
+          <!-- Team Logo Shield -->
+          <div class="relative w-18 h-18 sm:w-22 sm:h-22 w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] rounded-3xl bg-gradient-to-tr from-crimson-950 to-crimson-800 p-3.5 flex items-center justify-center shadow-2xl ring-2 ring-white/20 shrink-0">
+            <img id="teamLogoHero" src="/images/esport-sumbar-logo.png" alt="Logo Tim" class="w-full h-full object-contain filter brightness-110 drop-shadow-md" />
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-2 ring-crimson-900 shadow">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+
+          <!-- Titles & Metadata -->
+          <div>
+            <div class="flex flex-wrap items-center gap-1.5 mb-1.5">
+              <span id="teamTierHero" class="px-2.5 py-0.5 rounded-full bg-amber-400 text-ink text-[9px] font-mono font-black uppercase tracking-wider shadow-sm">
+                PELATDA TIER 1
+              </span>
+              <span class="px-2 py-0.5 rounded-full bg-white/15 text-white text-[9px] font-mono font-semibold uppercase backdrop-blur-sm">
+                TERVERIFIKASI ESI
+              </span>
+            </div>
+            
+            <h1 id="teamNameHero" class="font-display text-3xl sm:text-5xl text-white tracking-tight uppercase leading-none mb-1">
+              MINANG PRIDE ESPORTS
+            </h1>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-white/70">
+              <span class="flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-crimson-400"></i>
+                <span id="teamRegionHero">Kota Padang, Sumbar</span>
+              </span>
+              <span>•</span>
+              <span class="flex items-center gap-1">
+                <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span id="teamGameHero">VALORANT & MLBB</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rating & Quick Action CTAs -->
+        <div class="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 pt-3 sm:pt-0 border-t sm:border-t-0 border-white/10">
+          <div class="flex items-center gap-2">
+            <div class="text-right">
+              <div class="text-[9px] font-mono text-white/60 uppercase font-bold">TEAM OVR</div>
+              <div class="text-[10px] font-mono text-amber-300 font-bold">PERINGKAT #1</div>
+            </div>
+            <div id="teamRatingHero" class="w-12 h-12 rounded-2xl bg-amber-400 text-ink font-display text-3xl font-black flex items-center justify-center shadow-lg">
+              96
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="openScrimModal()" class="px-3.5 py-2 rounded-xl bg-white text-ink hover:bg-paper font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
+              <i data-lucide="swords" class="w-3.5 h-3.5 text-crimson-700"></i>
+              <span>Scrim</span>
+            </button>
+            <button type="button" onclick="openContactManagementModal()" class="px-3.5 py-2 rounded-xl bg-crimson-800/80 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all border border-white/20 shadow-md flex items-center gap-1.5 app-tap">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-amber-300"></i>
+              <span>Kontak</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tagline Strip -->
+      <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-sans text-white/80">
+        <div class="italic flex items-center gap-2 truncate">
+          <i data-lucide="quote" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i>
+          <span id="teamMottoHero" class="truncate">"Kebanggaan Ranah Minang di Panggung Kompetitif Nasional."</span>
+        </div>
+        <span class="hidden sm:inline font-mono text-[10px] text-white/50 shrink-0 ml-2">LISENSI NO: ESI-SB-KLUB-001</span>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 4. TEAM METRICS QUICK STRIP (MOBILE 4-COL GRID)                -->
+    <!-- ============================================================== -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
+      <div class="bg-white rounded-2xl p-3 border border-black/10 shadow-sm text-center">
+        <div class="text-[9px] font-mono text-ink/50 uppercase font-bold">Total Prestasi</div>
+        <div id="statTrophyCount" class="font-display text-2xl text-crimson-700 leading-none mt-1">6 TROFI</div>
+        <div class="text-[9px] font-mono text-ink/70">Emas Porprov & Pra-PON</div>
+      </div>
+      <div class="bg-white rounded-2xl p-3 border border-black/10 shadow-sm text-center">
+        <div class="text-[9px] font-mono text-ink/50 uppercase font-bold">Roster Line-up</div>
+        <div id="statRosterCount" class="font-display text-2xl text-ink leading-none mt-1">5 INTI + 1 CAD</div>
+        <div class="text-[9px] font-mono text-ink/70">Terdaftar Resmi PBESI</div>
+      </div>
+      <div class="bg-white rounded-2xl p-3 border border-black/10 shadow-sm text-center">
+        <div class="text-[9px] font-mono text-ink/50 uppercase font-bold">Winrate Scrim</div>
+        <div id="statWinrate" class="font-display text-2xl text-emerald-600 leading-none mt-1">78.4%</div>
+        <div class="text-[9px] font-mono text-ink/70">32 Scrim Terakhir</div>
+      </div>
+      <div class="bg-white rounded-2xl p-3 border border-black/10 shadow-sm text-center">
+        <div class="text-[9px] font-mono text-ink/50 uppercase font-bold">Status Lisensi</div>
+        <div class="font-display text-2xl text-amber-500 leading-none mt-1">GRADE A</div>
+        <div class="text-[9px] font-mono text-ink/70">Klub Prestasi Sumbar</div>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 5. INTERACTIVE SECTION TABS (ROSTER / STAFF / TROFI)           -->
+    <!-- ============================================================== -->
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl p-1.5 border border-black/10 shadow-sm flex items-center gap-1 mb-4 overflow-x-auto no-scrollbar">
+      <button type="button" id="tabBtnRoster" onclick="switchTeamSection('roster')" class="flex-1 py-2 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap">
+        <i data-lucide="users" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>Roster Inti (5)</span>
+      </button>
+      <button type="button" id="tabBtnStaff" onclick="switchTeamSection('staff')" class="flex-1 py-2 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="briefcase" class="w-3.5 h-3.5 text-crimson-600"></i>
+        <span>Manajemen & Coach</span>
+      </button>
+      <button type="button" id="tabBtnTrofi" onclick="switchTeamSection('trofi')" class="flex-1 py-2 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-500"></i>
+        <span>Lemari Prestasi</span>
+      </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 6. SECTION A: ROSTER SHOWCASE (MOBILE FIRST CARDS)             -->
+    <!-- ============================================================== -->
+    <div id="sectionRosterContainer" class="space-y-4">
+      
+      <!-- Section Header -->
+      <div class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-crimson-600 animate-ping"></span>
+          <span class="text-xs font-mono font-bold uppercase text-ink">
+            Susunan Roster Utama // Musim 2026
+          </span>
+        </div>
+        <span class="text-[10px] font-mono text-ink/50">Klik kartu untuk inspeksi</span>
+      </div>
+
+      <!-- Roster Grid -->
+      <div id="rosterCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 7. SECTION B: STAFF & MANAJEMEN CONTAINER                      -->
+    <!-- ============================================================== -->
+    <div id="sectionStaffContainer" class="hidden space-y-4">
+      <div class="bg-white rounded-3xl p-5 border border-black/10 shadow-sm space-y-4">
+        
+        <div class="flex items-center gap-2 pb-3 border-b border-black/10">
+          <i data-lucide="user-check" class="w-5 h-5 text-crimson-700"></i>
+          <h3 class="font-display text-2xl text-ink uppercase">Struktur Kepelatihan & Manajemen</h3>
+        </div>
+
+        <div id="staffListGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <!-- Rendered by JavaScript -->
+        </div>
+
+        <!-- Basecamp Box -->
+        <div class="p-4 rounded-2xl bg-[#F7F7F8] border border-black/5 flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-crimson-800 text-white flex items-center justify-center shrink-0">
+            <i data-lucide="home" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono text-crimson-700 font-bold uppercase">Basecamp & Gaming House Resmi</div>
+            <div class="font-sans font-bold text-ink text-sm" id="teamAddressText">Jl. Khatib Sulaiman No. 42, Kota Padang, Sumatera Barat</div>
+            <div class="text-xs text-ink/60 mt-0.5">Fasilitas latihan 1 Gbps Fiber Optic, Bootcamp Arena, & Ruang Evaluasi Taktik.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 8. SECTION C: LEMARI TROFI & PRESTASI CONTAINER                -->
+    <!-- ============================================================== -->
+    <div id="sectionTrofiContainer" class="hidden space-y-4">
+      <div class="bg-white rounded-3xl p-5 border border-black/10 shadow-sm space-y-4">
+        
+        <div class="flex items-center gap-2 pb-3 border-b border-black/10">
+          <i data-lucide="trophy" class="w-5 h-5 text-amber-500"></i>
+          <h3 class="font-display text-2xl text-ink uppercase">Catatan Prestasi & Rekam Turnamen</h3>
+        </div>
+
+        <div id="trophyListGrid" class="space-y-2.5">
+          <!-- Rendered by JavaScript -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Cross Link to Bursa LFT & Katalog -->
+    <div class="mt-8 rounded-3xl bg-white border border-black/10 p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-800 to-crimson-900 text-white flex items-center justify-center shrink-0 shadow-md">
+          <i data-lucide="user-search" class="w-6 h-6 text-amber-300"></i>
+        </div>
+        <div>
+          <h4 class="font-display text-xl text-ink uppercase leading-tight">Mencari Tambahan Atlet untuk Tim?</h4>
+          <p class="font-sans text-xs text-ink/60">Buka bursa transfer resmi untuk merekrut talenta LFT terverifikasi se-Sumbar.</p>
+        </div>
+      </div>
+      <a href="/bursa" class="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center justify-center gap-1.5 app-tap">
+        <span>Buka Bursa LFT</span>
+        <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- 9. TANTANG SCRIM MODAL                                         -->
+  <!-- ============================================================== -->
+  <div id="scrimModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-black/10 relative transform transition-all">
+      <button type="button" onclick="closeScrimModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink app-tap">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-2xl bg-crimson-800 text-white flex items-center justify-center font-display text-xl font-bold shadow-md">
+          <i data-lucide="swords" class="w-6 h-6 text-amber-300"></i>
+        </div>
+        <div>
+          <div class="text-[10px] font-mono text-crimson-700 uppercase font-bold">SPARRING / SCRIM REQUEST</div>
+          <h3 class="font-display text-2xl text-ink leading-tight uppercase" id="scrimModalTeamName">TANTANG TIM</h3>
+          <p class="text-xs font-sans text-ink/60">Ajukan jadwal sparring kompetitif antarklub Sumbar</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 mb-5">
+        <div>
+          <label class="block text-[10px] font-mono uppercase font-bold text-ink/60 mb-1">Nama Tim Penantang</label>
+          <input type="text" id="scrimOpponentName" placeholder="Contoh: Singgalang Esports / Garuda Muda" class="w-full px-3 py-2 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-crimson-700" />
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono uppercase font-bold text-ink/60 mb-1">Divisi Game</label>
+          <select id="scrimGameSelect" class="w-full px-3 py-2 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-mono focus:outline-none focus:border-crimson-700">
+            <option value="VALORANT">VALORANT (BO3 Custom)</option>
+            <option value="Mobile Legends">Mobile Legends (BO3 Draft)</option>
+            <option value="PUBG Mobile">PUBG Mobile (Room Scrim)</option>
+            <option value="Free Fire">Free Fire (Fast Tournament)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono uppercase font-bold text-ink/60 mb-1">Usulan Jadwal Scrim</label>
+          <input type="text" id="scrimScheduleInput" placeholder="Contoh: Sabtu Malam, Pukul 20:00 WIB" class="w-full px-3 py-2 rounded-xl bg-black/[0.03] border border-black/10 text-xs font-sans focus:outline-none focus:border-crimson-700" />
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <button type="button" onclick="submitScrimInvitation()" class="w-full py-3 px-4 rounded-2xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-md app-tap">
+          <i data-lucide="send" class="w-4 h-4 text-amber-300"></i>
+          <span>Kirim Tantangan via WhatsApp</span>
+        </button>
+        <button type="button" onclick="closeScrimModal()" class="w-full py-2.5 px-4 rounded-2xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-colors app-tap">
+          Batal
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 10. MODAL HUBUNGI MANAJEMEN                                    -->
+  <!-- ============================================================== -->
+  <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-black/10 relative transform transition-all">
+      <button type="button" onclick="closeContactModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-ink app-tap">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-2xl bg-crimson-800 text-white flex items-center justify-center font-display text-xl font-bold shadow-md">
+          <i data-lucide="phone-call" class="w-6 h-6 text-amber-300"></i>
+        </div>
+        <div>
+          <div class="text-[10px] font-mono text-crimson-700 uppercase font-bold">OFFICIAL CONTACT</div>
+          <h3 class="font-display text-2xl text-ink leading-tight uppercase" id="contactModalTeamName">MANAJEMEN TIM</h3>
+          <p class="text-xs font-sans text-ink/60">Saluran resmi sponsorship, kemitraan & media</p>
+        </div>
+      </div>
+
+      <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5 mb-4 text-xs font-mono space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-ink/60">Manager:</span>
+          <span class="font-bold text-ink" id="contactModalManager">Aulia Rahman, S.Kom</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-ink/60">WhatsApp Resmi:</span>
+          <span class="font-bold text-emerald-700" id="contactModalPhone">+62 812-9876-5431</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-ink/60">Email Klub:</span>
+          <span class="font-bold text-ink" id="contactModalEmail">management@minangpride.esport.id</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <a id="contactModalWaLink" href="#" target="_blank" class="w-full py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 shadow-md app-tap">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Chat WhatsApp Manajemen</span>
+        </a>
+        <button type="button" onclick="closeContactModal()" class="w-full py-2.5 px-4 rounded-2xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs font-bold uppercase transition-colors app-tap">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 11. MOBILE BOTTOM FLOATING DOCK (5-SERIES)                     -->
+  <!-- ============================================================== -->
+  <div class="fixed bottom-0 inset-x-0 z-40 md:hidden pointer-events-none pb-2 pt-1 px-3">
+    <div class="max-w-md mx-auto pointer-events-auto">
+      <nav class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-full shadow-2xl px-2 py-1.5 flex items-center justify-around">
+        
+        <!-- 1. Home -->
+        <a href="/" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Home</span>
+        </a>
+
+        <!-- 2. Katalog -->
+        <a href="/katalog" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="layout-grid" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Katalog</span>
+        </a>
+
+        <!-- 3. FAB Pencarian (Paling Tengah) -->
+        <div class="relative -top-3 flex flex-col items-center">
+          <a href="/cari" class="w-13 h-13 w-[52px] h-[52px] rounded-full bg-gradient-to-tr from-crimson-900 via-crimson-700 to-crimson-600 text-white flex items-center justify-center shadow-lg shadow-crimson-800/40 border-2 border-white ring-4 ring-black/5 hover:scale-105 active:scale-95 transition-all app-tap" title="Pencarian Ekosistem">
+            <i data-lucide="search" class="w-6 h-6"></i>
+          </a>
+          <span class="text-[9px] font-mono font-bold text-crimson-800 mt-0.5">Pencarian</span>
+        </div>
+
+        <!-- 4. Wilayah -->
+        <a href="/wilayah" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Wilayah</span>
+        </a>
+
+        <!-- 5. Profile -->
+        <a href="/profile" class="flex flex-col items-center justify-center w-12 py-1 text-ink/60 hover:text-crimson-600 transition-colors app-tap">
+          <i data-lucide="user" class="w-5 h-5"></i>
+          <span class="text-[9px] font-mono font-medium mt-0.5">Profile</span>
+        </a>
+
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 12. JAVASCRIPT MASTER ROSTER ENGINE                            -->
+  <!-- ============================================================== -->
+  <script>
+    // COMPLETE DATABASE OF TEAMS WITH FULL ROSTERS, COACHES & TROPHIES
+    const TEAMS_DATABASE = {
+      "tim-1": {
+        id: "tim-1",
+        name: "Minang Pride Esports",
+        tier: "PELATDA TIER 1",
+        region: "Kota Padang, Sumbar",
+        game: "VALORANT & Mobile Legends",
+        rating: 96,
+        logo: "/images/esport-sumbar-logo.png",
+        motto: "Kebanggaan Ranah Minang di Panggung Kompetitif Nasional.",
+        address: "Jl. Khatib Sulaiman No. 42, Kota Padang, Sumatera Barat",
+        manager: "Aulia Rahman, S.Kom",
+        phone: "6281298765431",
+        email: "management@minangpride.esport.id",
+        trophiesCount: "6 Trofi",
+        rostersCountText: "5 Inti + 1 Cadangan",
+        winrate: "78.4%",
+        rosters: [
+          {
+            id: "ath-1",
+            ign: "V4ND4L",
+            name: "Muhammad Rayden",
+            role: "Kapten / Duelist",
+            roleBadge: "bg-crimson-800 text-white",
+            ovr: 96,
+            rank: "Radiant #85",
+            mainAgents: "Jett / Raze",
+            stats: "284 ACS • 1.34 K/D",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-3",
+            ign: "SHADOW",
+            name: "Rendy Prasetya",
+            role: "Co-IGL / Controller",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 94,
+            rank: "Radiant #140",
+            mainAgents: "Omen / Astra",
+            stats: "1.18 K/D • 76% KAST",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-5",
+            ign: "TITAN",
+            name: "Rizky Saputra",
+            role: "Sentinel / Anchor",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 92,
+            rank: "Immortal 3 (410 RR)",
+            mainAgents: "Cypher / Killjoy",
+            stats: "1.12 K/D • 88% Retake Win",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-6",
+            ign: "FLASH",
+            name: "Fadhil Pratama",
+            role: "Initiator / Recon",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 92,
+            rank: "Immortal 3 (380 RR)",
+            mainAgents: "Sova / Fade",
+            stats: "79% Assists Ratio",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-7",
+            ign: "VIPER",
+            name: "Bagas Hendra",
+            role: "Flex Duelist / Lurker",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 91,
+            rank: "Immortal 2",
+            mainAgents: "Viper / Reyna",
+            stats: "215 ACS • 1.10 K/D",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          }
+        ],
+        staff: [
+          {
+            name: "Coach Hendra 'Tactician' Wijaya",
+            role: "Head Coach (Lisensi Pelatih PBESI)",
+            spec: "Analisis VOD & Makro Strategi"
+          },
+          {
+            name: "Aulia Rahman, S.Kom",
+            role: "General Manager",
+            spec: "Operasional & Registrasi Turnamen"
+          },
+          {
+            name: "dr. Fauzan Alamsyah",
+            role: "Team Physical & Performance Trainer",
+            spec: "Kebugaran & Ergonomis Atlet"
+          }
+        ],
+        trophies: [
+          {
+            title: "Medali Emas Porprov Sumbar 2023",
+            event: "Divisi VALORANT",
+            rank: "Juara 1",
+            year: "2023"
+          },
+          {
+            title: "Top 4 Pra-PON XXI Aceh-Sumut 2024",
+            event: "Mewakili Kontingen Sumatera Barat",
+            rank: "Top 4 Nasional",
+            year: "2024"
+          },
+          {
+            title: "Juara 1 Kejurda ESI Sumbar 2024",
+            event: "Divisi Utama Beregu",
+            rank: "Champions",
+            year: "2024"
+          },
+          {
+            title: "Piala Walikota Padang Esports Open",
+            event: "Open Tournament",
+            rank: "Juara 1",
+            year: "2024"
+          }
+        ]
+      },
+
+      "tim-2": {
+        id: "tim-2",
+        name: "Singgalang Esports Club",
+        tier: "DIVISI UTAMA",
+        region: "Kota Bukittinggi, Sumbar",
+        game: "Mobile Legends: Bang Bang",
+        rating: 95,
+        logo: "/images/esport-sumbar-logo.png",
+        motto: "Kokoh Seperti Gunung Singgalang, Pantang Menyerah.",
+        address: "Jl. Panorama No. 18, Kota Bukittinggi, Sumatera Barat",
+        manager: "Rahmat Hidayat",
+        phone: "6281298765432",
+        email: "singgalangesports@gmail.com",
+        trophiesCount: "4 Trofi",
+        rostersCountText: "5 Roster Inti",
+        winrate: "74.1%",
+        rosters: [
+          {
+            id: "ath-2",
+            ign: "F4LC0N",
+            name: "Fajri Alamsyah",
+            role: "Kapten / Jungler",
+            roleBadge: "bg-crimson-800 text-white",
+            ovr: 95,
+            rank: "Mythical Immortal 125★",
+            mainAgents: "Ling / Hayabusa / Nolan",
+            stats: "85% Retribution Winrate",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-8",
+            ign: "PHANTOM",
+            name: "Dimas Saputra",
+            role: "Mid Laner / Mage",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 93,
+            rank: "Mythical Immortal 104★",
+            mainAgents: "Valentina / Yve / Pharsa",
+            stats: "32% Team Damage Output",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-9",
+            ign: "ROAMER",
+            name: "Budi Santoso",
+            role: "Roamer / Tank",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 92,
+            rank: "Mythical Immortal 95★",
+            mainAgents: "Tigreal / Khufra / Arlott",
+            stats: "76% Kill Participation",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-10",
+            ign: "GOLDEN",
+            name: "Arif Kurnia",
+            role: "Gold Laner / Marksman",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 91,
+            rank: "Mythical Glory 88★",
+            mainAgents: "Claude / Harith / Bruno",
+            stats: "750 Gold Per Minute",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-11",
+            ign: "EXP-LORD",
+            name: "Wahyu Pratama",
+            role: "EXP Laner / Fighter",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 90,
+            rank: "Mythical Glory 82★",
+            mainAgents: "Terizla / Yu Zhong / Lapu",
+            stats: "82% Lane Pressure Win",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          }
+        ],
+        staff: [
+          {
+            name: "Coach Aldo 'Draftmaster'",
+            role: "Head Coach MLBB",
+            spec: "Drafting Meta & Makro Rotasi"
+          },
+          {
+            name: "Rahmat Hidayat",
+            role: "Manager Klub",
+            spec: "Administrasi & Sponsorship"
+          }
+        ],
+        trophies: [
+          {
+            title: "Juara 1 Piala Gubernur Sumbar 2024",
+            event: "Divisi MLBB Open",
+            rank: "Juara 1",
+            year: "2024"
+          },
+          {
+            title: "Medali Emas Porprov Divisi MLBB",
+            event: "Porprov Sumbar",
+            rank: "Medali Emas",
+            year: "2023"
+          }
+        ]
+      },
+
+      "tim-3": {
+        id: "tim-3",
+        name: "Ranah Chaniago Esports",
+        tier: "DIVISI UTAMA",
+        region: "Kota Payakumbuh, Sumbar",
+        game: "Free Fire & Battle Royale",
+        rating: 93,
+        logo: "/images/esport-sumbar-logo.png",
+        motto: "Cepat, Tepat, Menembus Pertahanan Lawan.",
+        address: "Jl. Sudirman No. 12, Kota Payakumbuh, Sumatera Barat",
+        manager: "Alif Chaniago",
+        phone: "6281298765433",
+        email: "ranahchaniago.ff@gmail.com",
+        trophiesCount: "3 Trofi",
+        rostersCountText: "4 Roster Inti",
+        winrate: "71.2%",
+        rosters: [
+          {
+            id: "ath-4",
+            ign: "SKYFALL",
+            name: "Alif Ramadhan",
+            role: "Kapten / Rusher",
+            roleBadge: "bg-crimson-800 text-white",
+            ovr: 93,
+            rank: "Grandmaster III",
+            mainAgents: "Tatsuya / Homer / Shotgun",
+            stats: "4.20 K/D • 84% HS",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-12",
+            ign: "BLAST",
+            name: "Bayu Saputra",
+            role: "Grenadier / Support",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 91,
+            rank: "Master Elite",
+            mainAgents: "Alvaro / Chrono",
+            stats: "380 Avg Explosive Damage",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-13",
+            ign: "RAZOR",
+            name: "Ilham Fikri",
+            role: "Second Rusher",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 90,
+            rank: "Master Elite",
+            mainAgents: "Kelly / Hayato",
+            stats: "3.80 K/D Ratio",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-14",
+            ign: "GHOST",
+            name: "Reza Maulana",
+            role: "Sniper / Long Range",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 89,
+            rank: "Master 42",
+            mainAgents: "M82B Specialist",
+            stats: "2.1 Down Per Match",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          }
+        ],
+        staff: [
+          {
+            name: "Coach Dani Pratama",
+            role: "Coach Taktik Battle Royale",
+            spec: "Zona Rotasi & Drop Point"
+          }
+        ],
+        trophies: [
+          {
+            title: "Juara Kejurda Free Fire Sumbar 2024",
+            event: "Kejurda ESI",
+            rank: "Juara 1",
+            year: "2024"
+          }
+        ]
+      },
+
+      "tim-4": {
+        id: "tim-4",
+        name: "Bukittinggi Knights",
+        tier: "KOMUNITAS PRO",
+        region: "Kota Bukittinggi, Sumbar",
+        game: "PUBG Mobile",
+        rating: 91,
+        logo: "/images/esport-sumbar-logo.png",
+        motto: "Ksatria Jam Gadang Siap Bertempur.",
+        address: "Jl. Jam Gadang No. 04, Kota Bukittinggi",
+        manager: "Zikri Haris",
+        phone: "6281298765434",
+        email: "bukittinggiknights@gmail.com",
+        trophiesCount: "2 Trofi",
+        rostersCountText: "4 Roster Inti",
+        winrate: "68.5%",
+        rosters: [
+          {
+            id: "ath-15",
+            ign: "BLITZ",
+            name: "Zikri Pratama",
+            role: "Kapten / IGL",
+            roleBadge: "bg-crimson-800 text-white",
+            ovr: 91,
+            rank: "Conqueror S21",
+            mainAgents: "M416 / DMR Scout",
+            stats: "4.5 K/D • 650 Avg Dmg",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-16",
+            ign: "HAWK",
+            name: "Tegar Ramadhan",
+            role: "Sniper Assigner",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 90,
+            rank: "Ace Dominator",
+            mainAgents: "AWM / Kar98k",
+            stats: "280m Longest Kill",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-17",
+            ign: "EAGLE",
+            name: "Iqbal Maulana",
+            role: "Rusher / Entry",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 89,
+            rank: "Ace Master",
+            mainAgents: "UZI / DBS CQC",
+            stats: "1.4 Close Combat Win",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-18",
+            ign: "HUNTER",
+            name: "Rian Hidayat",
+            role: "Support / Utility",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 88,
+            rank: "Ace Master",
+            mainAgents: "Smoke / Grenade Expert",
+            stats: "4.2 Revive Per Match",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          }
+        ],
+        staff: [
+          {
+            name: "Zikri Haris",
+            role: "Manajer & Analis",
+            spec: "Tracking Posisi Musuh"
+          }
+        ],
+        trophies: [
+          {
+            title: "Medali Perak Kejurda PUBG Mobile 2024",
+            event: "Kejurda ESI",
+            rank: "Medali Perak",
+            year: "2024"
+          }
+        ]
+      },
+
+      "tim-5": {
+        id: "tim-5",
+        name: "Padang Pride Gaming",
+        tier: "DIVISI LIGA",
+        region: "Kota Padang, Sumbar",
+        game: "Tekken 8 & Fighting Games",
+        rating: 90,
+        logo: "/images/esport-sumbar-logo.png",
+        motto: "Ketangguhan Petarung Ranah Bingkuang.",
+        address: "Jl. Veteran No. 10, Kota Padang",
+        manager: "Farhan Maulana",
+        phone: "6281298765435",
+        email: "padangpridefgc@gmail.com",
+        trophiesCount: "2 Trofi",
+        rostersCountText: "3 Atlet FGC",
+        winrate: "70.0%",
+        rosters: [
+          {
+            id: "ath-19",
+            ign: "SNIPER",
+            name: "Farhan Maulana",
+            role: "Kapten / Tekken 8",
+            roleBadge: "bg-crimson-800 text-white",
+            ovr: 90,
+            rank: "Tekken God",
+            mainAgents: "Jin Kazama / Kazuya",
+            stats: "78% Whiff Punish Rate",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-20",
+            ign: "DRAGON",
+            name: "Ridho Ilahi",
+            role: "Tekken 8 Player",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 88,
+            rank: "Bushin",
+            mainAgents: "Reina / Dragunov",
+            stats: "72% Frame Trap Win",
+            photo: "/images/athlete-pro-player.jpg",
+            profileLink: "/profile.html"
+          },
+          {
+            id: "ath-21",
+            ign: "KAZUMA",
+            name: "Arya Saputra",
+            role: "Street Fighter 6",
+            roleBadge: "bg-black/10 text-ink",
+            ovr: 87,
+            rank: "Master League",
+            mainAgents: "Ken / Luke",
+            stats: "65% Anti-Air Success",
+            photo: "/images/athlete-v4nd4l.jpg",
+            profileLink: "/profile.html"
+          }
+        ],
+        staff: [
+          {
+            name: "Farhan Maulana",
+            role: "Kapten & Manager Divisi FGC",
+            spec: "Turnamen Komunitas Fighting Games"
+          }
+        ],
+        trophies: [
+          {
+            title: "Top 8 IESF Seleksi Nasional 2024",
+            event: "Divisi Tekken",
+            rank: "Top 8",
+            year: "2024"
+          }
+        ]
+      }
+    };
+
+    let currentTeamId = "tim-1";
+    let currentSection = "roster";
+
+    function getTeamIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (id && TEAMS_DATABASE[id]) {
+        return id;
+      }
+      return "tim-1";
+    }
+
+    function initTeamSwitcher() {
+      const container = document.getElementById('teamSwitcherBar');
+      const teams = Object.values(TEAMS_DATABASE);
+      container.innerHTML = teams.map(t => {
+        const isActive = t.id === currentTeamId;
+        const btnClass = isActive 
+          ? "px-3 py-1.5 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all shadow-sm flex items-center gap-1.5 app-tap"
+          : "px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink/75 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap";
+
+        return `
+          <button type="button" onclick="selectTeam('${t.id}')" class="${btnClass}">
+            <span class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-amber-300' : 'bg-crimson-600'}"></span>
+            <span>${t.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectTeam(teamId) {
+      currentTeamId = teamId;
+      window.history.replaceState(null, '', `?id=${teamId}`);
+      initTeamSwitcher();
+      renderTeamProfile();
+    }
+
+    function switchTeamSection(section) {
+      currentSection = section;
+      const btnRoster = document.getElementById('tabBtnRoster');
+      const btnStaff = document.getElementById('tabBtnStaff');
+      const btnTrofi = document.getElementById('tabBtnTrofi');
+
+      const secRoster = document.getElementById('sectionRosterContainer');
+      const secStaff = document.getElementById('sectionStaffContainer');
+      const secTrofi = document.getElementById('sectionTrofiContainer');
+
+      const activeClass = "flex-1 py-2 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap";
+      const inactiveClass = "flex-1 py-2 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap";
+
+      btnRoster.className = inactiveClass;
+      btnStaff.className = inactiveClass;
+      btnTrofi.className = inactiveClass;
+
+      secRoster.classList.add('hidden');
+      secStaff.classList.add('hidden');
+      secTrofi.classList.add('hidden');
+
+      if (section === 'roster') {
+        btnRoster.className = activeClass;
+        secRoster.classList.remove('hidden');
+      } else if (section === 'staff') {
+        btnStaff.className = activeClass;
+        secStaff.classList.remove('hidden');
+      } else if (section === 'trofi') {
+        btnTrofi.className = activeClass;
+        secTrofi.classList.remove('hidden');
+      }
+    }
+
+    function renderTeamProfile() {
+      const t = TEAMS_DATABASE[currentTeamId] || TEAMS_DATABASE["tim-1"];
+      
+      // Update Hero Elements
+      document.getElementById('teamNameHero').textContent = t.name;
+      document.getElementById('teamTierHero').textContent = t.tier;
+      document.getElementById('teamRegionHero').textContent = t.region;
+      document.getElementById('teamGameHero').textContent = t.game;
+      document.getElementById('teamRatingHero').textContent = t.rating;
+      document.getElementById('teamMottoHero').textContent = `"${t.motto}"`;
+      document.getElementById('teamAddressText').textContent = t.address;
+
+      // Update Quick Stats
+      document.getElementById('statTrophyCount').textContent = t.trophiesCount.toUpperCase();
+      document.getElementById('statRosterCount').textContent = t.rostersCountText.toUpperCase();
+      document.getElementById('statWinrate').textContent = t.winrate;
+
+      // Update Tab Labels
+      document.getElementById('tabBtnRoster').innerHTML = `
+        <i data-lucide="users" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>Roster Inti (${t.rosters.length})</span>
+      `;
+
+      // Render Roster Cards
+      const rosterContainer = document.getElementById('rosterCardsGrid');
+      rosterContainer.innerHTML = t.rosters.map((p, idx) => {
+        const isGold = p.ovr >= 95;
+        const ratingBg = isGold ? 'bg-amber-400 text-ink' : 'bg-crimson-800 text-white';
+
+        return `
+          <div class="rounded-3xl bg-white border border-black/10 p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- Header Top -->
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-0.5 rounded-full ${p.roleBadge} text-[9px] font-mono font-bold uppercase tracking-wider">
+                  ${p.role}
+                </span>
+                <div class="w-8 h-8 rounded-xl ${ratingBg} font-display text-base font-black flex items-center justify-center shadow-sm">
+                  ${p.ovr}
+                </div>
+              </div>
+
+              <!-- Player Avatar & ID -->
+              <div class="flex items-center gap-3 mb-3">
+                <div class="relative w-14 h-14 rounded-2xl overflow-hidden bg-canvas border border-black/10 shrink-0 shadow-sm">
+                  <img src="${p.photo}" alt="${p.ign}" class="w-full h-full object-cover object-top filter contrast-105" onerror="this.src='/images/athlete-pro-player.jpg'" />
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-display text-2xl text-ink leading-tight uppercase truncate group-hover:text-crimson-600 transition-colors">
+                    ${p.ign}
+                  </h3>
+                  <div class="text-xs font-sans font-bold text-ink/80 flex items-center gap-1 truncate">
+                    ${p.name}
+                    <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-500 shrink-0"></i>
+                  </div>
+                  <div class="text-[10px] font-mono text-amber-600 font-bold mt-0.5">
+                    ${p.rank}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stats Matrix -->
+              <div class="p-3 rounded-2xl bg-[#F7F7F8] border border-black/5 mb-3 text-[11px] font-mono space-y-1">
+                <div class="flex justify-between">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">Hero / Agent:</span>
+                  <span class="font-bold text-ink truncate">${p.mainAgents}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-ink/50 text-[10px] uppercase font-bold">Performa:</span>
+                  <span class="font-bold text-emerald-700">${p.stats}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="pt-2 border-t border-black/10">
+              <a href="/profile" class="w-full py-2.5 px-3 rounded-xl bg-black/5 hover:bg-crimson-800 hover:text-white text-ink font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap">
+                <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+                <span>Lihat Paspor Digital</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render Staff
+      const staffContainer = document.getElementById('staffListGrid');
+      staffContainer.innerHTML = t.staff.map(s => {
+        return `
+          <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5 flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-ink shrink-0">
+              <i data-lucide="user" class="w-5 h-5 text-crimson-700"></i>
+            </div>
+            <div>
+              <div class="font-sans font-bold text-ink text-sm leading-tight">${s.name}</div>
+              <div class="text-[11px] font-mono text-crimson-800 font-bold uppercase mt-0.5">${s.role}</div>
+              <div class="text-[10px] font-mono text-ink/60 mt-0.5">${s.spec}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render Trophies
+      const trophyContainer = document.getElementById('trophyListGrid');
+      trophyContainer.innerHTML = t.trophies.map(tr => {
+        return `
+          <div class="p-3.5 rounded-2xl bg-[#F7F7F8] border border-black/5 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-400/20 text-amber-600 flex items-center justify-center shrink-0">
+                <i data-lucide="award" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-sans font-bold text-ink text-sm leading-tight">${tr.title}</h4>
+                <div class="text-[11px] font-mono text-ink/60">${tr.event} • ${tr.year}</div>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-xl bg-amber-400 text-ink font-mono text-[10px] font-black uppercase shrink-0">
+              ${tr.rank}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // SCRIM MODAL HANDLERS
+    function openScrimModal() {
+      const t = TEAMS_DATABASE[currentTeamId];
+      document.getElementById('scrimModalTeamName').textContent = `TANTANG ${t.name}`;
+      const modal = document.getElementById('scrimModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeScrimModal() {
+      const modal = document.getElementById('scrimModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function submitScrimInvitation() {
+      const t = TEAMS_DATABASE[currentTeamId];
+      const opponent = document.getElementById('scrimOpponentName').value.trim() || 'Tim Esports';
+      const game = document.getElementById('scrimGameSelect').value;
+      const schedule = document.getElementById('scrimScheduleInput').value.trim() || 'Weekend ini';
+
+      const msg = encodeURIComponent(`Halo Admin ${t.name}, kami dari tim ${opponent} ingin mengajukan tantangan Scrim/Sparring untuk game ${game} pada jadwal: ${schedule}. Mohon konfirmasi ketersediaan room/server.`);
+      window.open(`https://wa.me/${t.phone}?text=${msg}`, '_blank');
+      closeScrimModal();
+    }
+
+    // CONTACT MANAGEMENT MODAL HANDLERS
+    function openContactManagementModal() {
+      const t = TEAMS_DATABASE[currentTeamId];
+      document.getElementById('contactModalTeamName').textContent = t.name;
+      document.getElementById('contactModalManager').textContent = t.manager;
+      document.getElementById('contactModalPhone').textContent = '+' + t.phone;
+      document.getElementById('contactModalEmail').textContent = t.email;
+
+      const msg = encodeURIComponent(`Halo Manajemen ${t.name}, saya ingin berdiskusi mengenai kemitraan/sponsorship/informasi tim.`);
+      document.getElementById('contactModalWaLink').href = `https://wa.me/${t.phone}?text=${msg}`;
+
+      const modal = document.getElementById('contactModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeContactModal() {
+      const modal = document.getElementById('contactModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // INITIALIZATION
+    document.addEventListener('DOMContentLoaded', () => {
+      currentTeamId = getTeamIdFromUrl();
+      initTeamSwitcher();
+      renderTeamProfile();
+      lucide.createIcons();
+    });
+  </script>
+
+</body>
+</html>
