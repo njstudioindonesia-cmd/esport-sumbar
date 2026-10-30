@@ -1,1 +1,0 @@
-import { MicroPengprov } from '../../backend/microsystems/pengprov.js'; export default async (req, res) => res.json(await MicroPengprov.getPengcabSummary());

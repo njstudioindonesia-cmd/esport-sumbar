@@ -1,1 +1,0 @@
-import { MicroKatalog } from '../backend/microsystems/katalog.js'; export default async (req, res) => res.json(await MicroKatalog.getList(req.query));

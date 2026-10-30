@@ -1,1 +1,0 @@
-import { MicroPengcab } from '../../backend/microsystems/pengcab.js'; export default async (req, res) => res.json(await MicroPengcab.getRegionalData(req.query));

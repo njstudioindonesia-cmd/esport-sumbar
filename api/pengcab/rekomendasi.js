@@ -1,1 +1,0 @@
-import { MicroPengcab } from '../../backend/microsystems/pengcab.js'; export default async (req, res) => { const r = await MicroPengcab.issueRekomendasi(req.body); res.status(r.statusCode || 201).json(r); };

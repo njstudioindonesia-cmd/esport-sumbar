@@ -1,1 +1,0 @@
-import { MicroRegistrasi } from '../../backend/microsystems/registrasi.js'; export default async (req, res) => { const r = await MicroRegistrasi.submit('team', req.body); res.status(r.statusCode || 201).json(r); };

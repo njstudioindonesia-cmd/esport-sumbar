@@ -1,1 +1,0 @@
-import { MicroBursa } from '../../backend/microsystems/bursa.js'; export default async (req, res) => { const r = await MicroBursa.submitScoutProposal(req.body); res.status(r.statusCode || 200).json(r); };

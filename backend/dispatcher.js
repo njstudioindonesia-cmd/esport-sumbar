@@ -12,7 +12,7 @@ import { MicroStats } from './microsystems/stats.js';
  * UNIFIED MICROSYSTEM DISPATCHER & GATEWAY
  * Menghubungkan seluruh request /api/* ke modul microsystem terkait
  * dengan isolasi kesalahan (fault tolerance) & circuit breaker.
- * Kompatibel 100% dengan Node.js lokal dan Vercel Serverless Runtime.
+ * 100% Kompatibel dengan Node.js lokal dan Vercel Serverless Runtime (1 Function limit safe).
  */
 export async function dispatchApiRequest(req, res) {
   // 1. Set Security & CORS Headers
@@ -35,18 +35,17 @@ export async function dispatchApiRequest(req, res) {
 
   // 3. Parse URL & Query string
   const fullUrl = new URL(req.url, `http://${req.headers?.host || 'localhost'}`);
+  const query = Object.assign({}, Object.fromEntries(fullUrl.searchParams.entries()), req.query || {});
+  
   let pathname = fullUrl.pathname.replace(/\/+$/, '') || '/api';
 
-  // Support Vercel Catch-All [...path] query array
-  if (req.query && Array.isArray(req.query.path)) {
-    pathname = '/api/' + req.query.path.join('/');
-  } else if (req.query && typeof req.query.path === 'string') {
-    pathname = '/api/' + req.query.path;
+  // Support Vercel Rewrite ?route=...
+  if (query.route) {
+    pathname = '/api/' + String(query.route).replace(/^\/+/, '');
   } else if (!pathname.startsWith('/api')) {
     pathname = '/api' + (pathname.startsWith('/') ? pathname : '/' + pathname);
   }
-
-  const query = Object.assign({}, Object.fromEntries(fullUrl.searchParams.entries()), req.query || {});
+  pathname = pathname.split('?')[0].replace(/\/+$/, '') || '/api';
 
   // 4. Parse Body (supports pre-parsed Vercel req.body and raw node stream)
   let body = {};

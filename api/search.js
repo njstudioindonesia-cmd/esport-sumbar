@@ -1,1 +1,0 @@
-import { MicroSearch } from '../backend/microsystems/search.js'; export default async (req, res) => res.json(await MicroSearch.query(req.query));

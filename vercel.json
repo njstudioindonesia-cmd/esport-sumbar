@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api?route=$1"
+    },
+    {
+      "source": "/api",
+      "destination": "/api"
+    },
+    {
       "source": "/login",
       "destination": "/login.html"
     },

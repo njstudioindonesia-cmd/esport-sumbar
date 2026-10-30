@@ -1,1 +1,0 @@
-import { MicroBursa } from '../../backend/microsystems/bursa.js'; export default async (req, res) => res.json(await MicroBursa.getLFT(req.query));
