@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
@@ -94,7 +94,7 @@
   </style>
 </head>
 
-<body class="bg-[#D9D9DB] text-[#0B0B0C] font-sans antialiased min-h-screen selection:bg-[#B3121B] selection:text-white pb-24 md:pb-0">
+<body class="bg-[#D9D9DB] text-[#0B0B0C] font-sans antialiased min-h-screen selection:bg-[#B3121B] selection:text-white pb-24 md:pb-0 overflow-x-hidden w-full">
 
   <!-- ============================================== -->
   <!-- 1. TOP NAVBAR                                  -->
@@ -121,15 +121,15 @@
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
         <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Beranda</a>
-        <a href="/#direktori" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Kartu Player</a>
-        <a href="/#wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Peta 19 Wilayah</a>
-        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Galeri Kartu Atlet</a>
-        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Tentang Kami</a>
+        <a href="/katalog" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Katalog Direktori</a>
+        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Galeri Atlet</a>
+        <a href="/wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">19 Wilayah</a>
+        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">Tentang ESI</a>
       </nav>
 
       <!-- Desktop Action -->
       <div class="hidden sm:flex items-center gap-3">
-        <a href="/#direktori" class="cut-corner-btn px-4 py-2 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-md shadow-crimson-900/25 flex items-center gap-2 app-tap">
+        <a href="/katalog" class="cut-corner-btn px-4 py-2 bg-gradient-to-r from-crimson-600 to-crimson-800 hover:from-crimson-500 hover:to-crimson-700 text-paper text-xs font-mono font-bold tracking-wider uppercase transition-all shadow-md shadow-crimson-900/25 flex items-center gap-2 app-tap">
           <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
           <span>Katalog Kartu</span>
         </a>
@@ -385,7 +385,7 @@
       <i data-lucide="home" class="w-5 h-5"></i>
       <span>Beranda</span>
     </a>
-    <a href="/#direktori" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+    <a href="/katalog" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
       <i data-lucide="search" class="w-5 h-5"></i>
       <span>Cari Data</span>
     </a>
@@ -393,7 +393,7 @@
       <i data-lucide="users" class="w-5 h-5"></i>
       <span>Database</span>
     </a>
-    <a href="/#peta-wilayah" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
+    <a href="/wilayah" class="flex flex-col items-center gap-1 text-ink/70 hover:text-crimson-600 text-[10px]">
       <i data-lucide="map-pin" class="w-5 h-5"></i>
       <span>Peta 19</span>
     </a>
@@ -421,8 +421,8 @@
 
       <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-paper/70 font-semibold">
         <a href="/" class="hover:text-crimson-400 transition-colors">Beranda</a>
-        <a href="/#direktori" class="hover:text-crimson-400 transition-colors">Direktori 7 Pilar</a>
-        <a href="/#peta-wilayah" class="hover:text-crimson-400 transition-colors">Peta 19 Wilayah</a>
+        <a href="/katalog" class="hover:text-crimson-400 transition-colors">Direktori 7 Pilar</a>
+        <a href="/wilayah" class="hover:text-crimson-400 transition-colors">Peta 19 Wilayah</a>
         <a href="/about" class="hover:text-crimson-400 transition-colors">Tentang Kami</a>
         <a href="/atlet" class="hover:text-crimson-400 transition-colors">Database Atlet</a>
       </div>
@@ -443,31 +443,41 @@
     });
   </script>
 
-<div class="md:hidden fixed bottom-3 inset-x-3 z-40 max-w-md mx-auto">
-    <div class="bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-3 py-2 flex items-center justify-around relative">
-      <a href="/" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
-        <i data-lucide="home" class="w-5 h-5"></i>
-        <span class="text-[9px] font-mono leading-none">Beranda</span>
+<!-- Mobile Bottom Dock (5 Unique Destinations) -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-50 p-2 pointer-events-none">
+    <div class="max-w-[360px] mx-auto bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] px-2 py-1.5 flex items-center justify-between pointer-events-auto">
+      
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Beranda</span>
       </a>
 
-      <a href="/#direktori" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
-        <i data-lucide="layers" class="w-5 h-5"></i>
-        <span class="text-[9px] font-mono leading-none">Kartu Atlet</span>
+      <!-- 2. Katalog -->
+      <a href="/katalog" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="grid" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Katalog</span>
       </a>
 
-      <a href="/#direktori" class="w-11 h-11 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-500 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white app-tap" aria-label="Katalog Kartu">
-        <i data-lucide="sparkles" class="w-5 h-5 text-amber-300"></i>
+      <!-- 3. Center FAB (Daftar) -->
+      <div class="flex items-center justify-center w-12">
+        <a href="/daftar" class="w-10 h-10 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-600 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white shrink-0  app-tap" aria-label="Daftar & Terbitkan Kartu">
+          <i data-lucide="plus" class="w-4 h-4 text-amber-300"></i>
+        </a>
+      </div>
+
+      <!-- 4. Galeri Atlet -->
+      <a href="/atlet" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Atlet</span>
       </a>
 
-      <a href="/atlet" class="flex flex-col items-center gap-1 text-ink/60 hover:text-crimson-600 app-tap">
-        <i data-lucide="users" class="w-5 h-5"></i>
-        <span class="text-[9px] font-mono leading-none">Galeri Atlet</span>
+      <!-- 5. 19 Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="map-pin" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Wilayah</span>
       </a>
 
-      <a href="/about" class="flex flex-col items-center gap-1 text-crimson-600 app-tap">
-        <i data-lucide="info" class="w-5 h-5"></i>
-        <span class="text-[9px] font-mono font-bold leading-none">Tentang</span>
-      </a>
     </div>
   </div>
 </body>

@@ -4,12 +4,24 @@
   "trailingSlash": false,
   "routes": [
     {
-      "src": "/about",
-      "dest": "/about.html"
+      "src": "/katalog",
+      "dest": "/katalog.html"
+    },
+    {
+      "src": "/wilayah",
+      "dest": "/wilayah.html"
+    },
+    {
+      "src": "/daftar",
+      "dest": "/daftar.html"
     },
     {
       "src": "/atlet",
       "dest": "/atlet.html"
+    },
+    {
+      "src": "/about",
+      "dest": "/about.html"
     },
     {
       "src": "/",

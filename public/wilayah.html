@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Peta 19 Wilayah & Pengcab ESI – ESPORT SUMBAR</title>
+  <meta name="description" content="Pangkalan data resmi sebaran atlet, tim, venue, dan sentra pembinaan Pengurus Cabang (Pengcab) ESI di 19 kabupaten/kota Sumatera Barat. Mitra resmi Pengprov ESI Sumbar." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ["'Bebas Neue'", "sans-serif"],
+            sans: ["'Manrope'", "sans-serif"],
+            mono: ["'Space Grotesk'", "monospace"],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Base touch enhancements */
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 50% 20%, rgba(214, 22, 34, 0.08) 0%, rgba(244, 241, 238, 0) 70%);
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased min-h-screen selection:bg-crimson-800 selection:text-paper pb-24 md:pb-12 overflow-x-hidden w-full">
+
+  <!-- ============================================================== -->
+  <!-- 1. TOP HEADER / BRANDING NAVBAR                                -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-black/[0.06] transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo Lockup -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/esport-sumbar-logo.png" alt="Esport Sumbar" class="h-10 w-auto object-contain transform group-hover:scale-105 transition-transform" />
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-display text-xl tracking-wider text-ink">ESPORT</span>
+            <span class="font-display text-xl tracking-wider text-crimson-600">SUMBAR</span>
+          </div>
+          <span class="text-[9px] font-mono tracking-widest text-ink/60 uppercase -mt-1 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+            Partner Resmi ESI Sumbar
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links (Each leads to its own dedicated page) -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Beranda</a>
+        <a href="/katalog" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Katalog Direktori</a>
+        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Galeri Atlet</a>
+        <a href="/wilayah" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-crimson-800 text-paper shadow-sm">19 Wilayah</a>
+        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Tentang ESI</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-2">
+        <a href="/about" class="p-2 rounded-xl text-ink/70 hover:text-crimson-600 hover:bg-black/5 transition-colors" title="Tentang Platform & ESI Sumbar">
+          <i data-lucide="info" class="w-5 h-5"></i>
+        </a>
+        <a href="/daftar" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-xs font-bold uppercase tracking-wider shadow-sm transition-all app-tap">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span>Daftar</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. HERO SECTION                                                -->
+  <!-- ============================================================== -->
+  <section class="relative pt-8 pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto hero-glow">
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-crimson-800/10 border border-crimson-800/20 text-crimson-700 text-xs font-mono font-semibold uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-crimson-600 animate-pulse"></span>
+        Radar 19 Kabupaten & Kota Sumatera Barat
+      </div>
+
+      <h1 class="font-display text-3xl sm:text-6xl tracking-tight text-ink uppercase leading-none">
+        PETA SEBARAN & PENGCAB<br /><span class="text-crimson-600">ESI SUMATERA BARAT</span>
+      </h1>
+
+      <p class="text-sm sm:text-base text-ink/75 leading-relaxed font-sans">
+        Pangkalan data terpadu pembinaan esports 19 kabupaten/kota di Sumatera Barat. Temukan data atlet resmi, Pengcab ESI kabupaten/kota, venue terverifikasi, dan agenda kualifikasi daerah.
+      </p>
+
+      <!-- Search Region Filter -->
+      <div class="pt-4 max-w-md mx-auto">
+        <div class="relative">
+          <i data-lucide="search" class="w-5 h-5 text-ink/40 absolute left-4 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="regionSearchInput" 
+            placeholder="Cari Kota / Kabupaten (cth: Padang, Bukittinggi)..." 
+            class="w-full pl-11 pr-4 py-3 bg-white/90 border border-black/10 rounded-2xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20 shadow-sm"
+            onkeyup="filterRegions()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Stats Metric Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-8 max-w-4xl mx-auto">
+      <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-crimson-700">19</div>
+        <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Pengcab ESI Aktif</div>
+      </div>
+      <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-ink">1,420+</div>
+        <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Atlet Terdaftar</div>
+      </div>
+      <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-ink">84+</div>
+        <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Klub & Tim Resmi</div>
+      </div>
+      <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-emerald-600">32+</div>
+        <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Arena Terverifikasi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 3. 19 REGIONS DIRECTORY GRID                                   -->
+  <!-- ============================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="flex items-center justify-between mb-6 border-b border-black/[0.06] pb-3">
+      <div>
+        <h2 class="font-display text-2xl tracking-wide text-ink uppercase">Daftar Wilayah & Sentra Pembinaan</h2>
+        <p class="text-xs text-ink/60">Klik salah satu wilayah untuk melihat data roster atlet dan klub setempat</p>
+      </div>
+      <span id="regionCountBadge" class="text-xs font-mono px-3 py-1 bg-black/5 rounded-full text-ink/70">19 Wilayah</span>
+    </div>
+
+    <div id="regionsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <!-- Generated dynamically by script below -->
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 4. OFFICIAL CALL TO ACTION                                     -->
+  <!-- ============================================================== -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 my-10">
+    <div class="bg-gradient-to-r from-crimson-900 to-crimson-800 rounded-3xl p-6 sm:p-8 text-paper shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 border border-crimson-700/50">
+      <div class="space-y-2 text-center sm:text-left">
+        <span class="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded bg-black/30 text-amber-300">Pengcab ESI Verification</span>
+        <h3 class="font-display text-2xl sm:text-3xl tracking-wide uppercase">Belum Terdaftar di Wilayah Anda?</h3>
+        <p class="text-xs sm:text-sm text-paper/80 max-w-md">Daftarkan diri Anda atau klub esports daerah Anda ke sistem database resmi Pengprov ESI Sumatera Barat.</p>
+      </div>
+      <a href="/daftar" class="px-6 py-3 rounded-2xl bg-paper text-crimson-800 font-mono text-xs font-bold uppercase tracking-wider shadow-lg hover:bg-white transition-all whitespace-nowrap app-tap">
+        Daftar Sekarang &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 5. MOBILE BOTTOM DOCK (5 UNIQUE DESTINATIONS)                  -->
+  <!-- ============================================================== -->
+  <!-- Mobile Bottom Dock (5 Unique Destinations) -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-50 p-2 pointer-events-none">
+    <div class="max-w-[360px] mx-auto bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] px-2 py-1.5 flex items-center justify-between pointer-events-auto">
+      
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Beranda</span>
+      </a>
+
+      <!-- 2. Katalog -->
+      <a href="/katalog" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="grid" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Katalog</span>
+      </a>
+
+      <!-- 3. Center FAB (Daftar) -->
+      <div class="flex items-center justify-center w-12">
+        <a href="/daftar" class="w-10 h-10 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-600 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white shrink-0  app-tap" aria-label="Daftar & Terbitkan Kartu">
+          <i data-lucide="plus" class="w-4 h-4 text-amber-300"></i>
+        </a>
+      </div>
+
+      <!-- 4. Galeri Atlet -->
+      <a href="/atlet" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Atlet</span>
+      </a>
+
+      <!-- 5. 19 Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center justify-center w-14 py-1 text-crimson-700 app-tap">
+        <i data-lucide="map-pin" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono font-bold leading-none mt-1">Wilayah</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-black/[0.08] py-8 text-center text-xs text-ink/60 font-mono">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 Platform Provider Esport Sumatera Barat • Mitra Resmi ESI Sumbar</div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <a href="/" class="hover:text-crimson-600">Beranda</a>
+        <a href="/katalog" class="hover:text-crimson-600">Katalog</a>
+        <a href="/atlet" class="hover:text-crimson-600">Galeri Atlet</a>
+        <a href="/wilayah" class="hover:text-crimson-600 text-crimson-700 font-bold">19 Wilayah</a>
+        <a href="/daftar" class="hover:text-crimson-600">Daftar</a>
+        <a href="/about" class="hover:text-crimson-600">Tentang</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- SCRIPT REGIONAL DATA ENGINE                                    -->
+  <!-- ============================================================== -->
+  <script>
+    const REGIONS_DATA = [
+      { name: "Kota Padang", code: "PDG", status: "Ibukota & Sentra Utama", atlet: 480, tim: 28, venue: 12, pengcab: "Pengcab ESI Kota Padang", contact: "Jl. Rimbo Kaluang, GOR H. Agus Salim" },
+      { name: "Kota Bukittinggi", code: "BKT", status: "Sentra Kompetisi Wisata", atlet: 165, tim: 14, venue: 5, pengcab: "Pengcab ESI Kota Bukittinggi", contact: "Kawasan Jam Gadang & Sport Center" },
+      { name: "Kota Payakumbuh", code: "PYK", status: "Sentra Luak Limopuluah", atlet: 142, tim: 11, venue: 4, pengcab: "Pengcab ESI Kota Payakumbuh", contact: "Pusat Sentra Kreatif & Esports Payakumbuh" },
+      { name: "Kota Solok", code: "SLK", status: "Sentra Solok Raya", atlet: 88, tim: 6, venue: 3, pengcab: "Pengcab ESI Kota Solok", contact: "Kompleks Olahraga GOR Marah Adin" },
+      { name: "Kota Pariaman", code: "PRM", status: "Sentra Pesisir Pantai", atlet: 76, tim: 5, venue: 2, pengcab: "Pengcab ESI Kota Pariaman", contact: "Pariaman Youth Creative Hub" },
+      { name: "Kota Padang Panjang", code: "PPG", status: "Sentra Akademisi & Pelajar", atlet: 64, tim: 4, venue: 2, pengcab: "Pengcab ESI Padang Panjang", contact: "Gedung M. Syafei Padang Panjang" },
+      { name: "Kota Sawahlunto", code: "SWL", status: "Sentra Wisata Tambang", atlet: 52, tim: 3, venue: 2, pengcab: "Pengcab ESI Kota Sawahlunto", contact: "Ombilin Heritage Center" },
+      { name: "Kab. Agam", code: "AGM", status: "Luak Agam & Maninjau", atlet: 95, tim: 7, venue: 3, pengcab: "Pengcab ESI Kab. Agam", contact: "Kompleks Olahraga Rang Agam, Lubuk Basung" },
+      { name: "Kab. Tanah Datar", code: "TND", status: "Luhak Nan Tuo Batusangkar", atlet: 86, tim: 6, venue: 2, pengcab: "Pengcab ESI Tanah Datar", contact: "Kawasan Cagar Budaya Pagaruyung" },
+      { name: "Kab. Lima Puluh Kota", code: "LPK", status: "Sentra Lembah Harau", atlet: 78, tim: 5, venue: 2, pengcab: "Pengcab ESI 50 Kota", contact: "Pusat Pemerintahan Sarilamak" },
+      { name: "Kab. Pasaman", code: "PSM", status: "Sentra Wilayah Khatulistiwa", atlet: 60, tim: 4, venue: 1, pengcab: "Pengcab ESI Pasaman", contact: "Pusat Olahraga Gelora Tuanku Imam Bonjol" },
+      { name: "Kab. Pasaman Barat", code: "PSB", status: "Sentra Pesisir Barat", atlet: 72, tim: 5, venue: 2, pengcab: "Pengcab ESI Pasaman Barat", contact: "Simpang Ampek Sport Hall" },
+      { name: "Kab. Pesisir Selatan", code: "PSS", status: "Sentra Painan & Mandeh", atlet: 85, tim: 6, venue: 2, pengcab: "Pengcab ESI Pesisir Selatan", contact: "GOR H. Ilyas Yakoub Painan" },
+      { name: "Kab. Sijunjung", code: "SJJ", status: "Sentra Ranah Lansek Manih", atlet: 54, tim: 4, venue: 1, pengcab: "Pengcab ESI Sijunjung", contact: "Pusat Pemuda Muaro Sijunjung" },
+      { name: "Kab. Dharmasraya", code: "DHM", status: "Ranah Cati Nan Tigo", atlet: 68, tim: 5, venue: 2, pengcab: "Pengcab ESI Dharmasraya", contact: "Sport Center Pulau Punjung" },
+      { name: "Kab. Solok", code: "KSL", status: "Sentra Arosuka & Danau", atlet: 70, tim: 5, venue: 2, pengcab: "Pengcab ESI Kab. Solok", contact: "GOR Batu Batupang, Arosuka" },
+      { name: "Kab. Solok Selatan", code: "SLS", status: "Nagari Saribu Rumah Gadang", atlet: 45, tim: 3, venue: 1, pengcab: "Pengcab ESI Solok Selatan", contact: "Padang Aro Youth Center" },
+      { name: "Kab. Padang Pariaman", code: "PDP", status: "Piaman Laweh & Anai", atlet: 92, tim: 7, venue: 3, pengcab: "Pengcab ESI Padang Pariaman", contact: "Kawasan Sport Center Parit Malintang" },
+      { name: "Kab. Kepulauan Mentawai", code: "MTW", status: "Sentra Bahari & Tuapejat", atlet: 38, tim: 2, venue: 1, pengcab: "Pengcab ESI Mentawai", contact: "Siberut & Tuapejat Community Center" }
+    ];
+
+    function renderRegions(regions) {
+      const container = document.getElementById('regionsContainer');
+      const badge = document.getElementById('regionCountBadge');
+      badge.textContent = regions.length + ' Wilayah';
+
+      if (regions.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-ink/50 font-mono text-sm">
+            Tidak ditemukan wilayah yang sesuai kata kunci pencarian.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = regions.map(r => `
+        <div class="bg-white/90 border border-black/[0.08] rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-md bg-crimson-800/10 text-crimson-700 font-mono text-[10px] font-bold tracking-wider uppercase">${r.code}</span>
+              <span class="text-[10px] font-mono text-emerald-600 flex items-center gap-1 font-semibold">
+                <i data-lucide="check-circle" class="w-3 h-3"></i> Terverifikasi ESI
+              </span>
+            </div>
+            
+            <h3 class="font-display text-xl tracking-wide text-ink uppercase">${r.name}</h3>
+            <p class="text-xs text-ink/60 font-sans mt-0.5">${r.status}</p>
+
+            <div class="grid grid-cols-3 gap-2 mt-4 py-2.5 px-3 bg-canvas/30 rounded-xl border border-black/[0.04] text-center">
+              <div>
+                <div class="font-mono text-base font-bold text-ink">${r.atlet}</div>
+                <div class="text-[9px] font-mono uppercase text-ink/50">Atlet</div>
+              </div>
+              <div>
+                <div class="font-mono text-base font-bold text-ink">${r.tim}</div>
+                <div class="text-[9px] font-mono uppercase text-ink/50">Tim</div>
+              </div>
+              <div>
+                <div class="font-mono text-base font-bold text-ink">${r.venue}</div>
+                <div class="text-[9px] font-mono uppercase text-ink/50">Venue</div>
+              </div>
+            </div>
+
+            <div class="mt-3 text-[11px] font-sans text-ink/70 flex items-start gap-1.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-crimson-600 shrink-0 mt-0.5"></i>
+              <span class="line-clamp-2">${r.contact}</span>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-black/[0.06] flex items-center gap-2">
+            <a href="/katalog?wilayah=${encodeURIComponent(r.name)}" class="flex-1 py-2 px-3 text-center bg-paper hover:bg-canvas text-ink font-mono text-[11px] font-semibold rounded-xl border border-black/10 transition-colors app-tap">
+              Lihat Roster
+            </a>
+            <a href="/atlet" class="py-2 px-3 text-center bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-[11px] font-semibold rounded-xl transition-colors app-tap">
+              Kartu Atlet &rarr;
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterRegions() {
+      const q = document.getElementById('regionSearchInput').value.toLowerCase().trim();
+      const filtered = REGIONS_DATA.filter(r => 
+        r.name.toLowerCase().includes(q) || 
+        r.code.toLowerCase().includes(q) ||
+        r.status.toLowerCase().includes(q)
+      );
+      renderRegions(filtered);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRegions(REGIONS_DATA);
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

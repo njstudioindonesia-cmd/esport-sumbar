@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Pendaftaran & Terbitkan Kartu Digital – ESPORT SUMBAR</title>
+  <meta name="description" content="Portal pendaftaran dan penerbitan Paspor Digital resmi atlet & pegiat esport Sumatera Barat berlisensi PBESI. Terintegrasi kartu digital 3D dual-side interaktif." />
+
+  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#D9D9DB",
+            paper: "#F4F1EE",
+            ink: "#0B0B0C",
+            crimson: {
+              400: "#E0222D",
+              500: "#D61622",
+              600: "#B3121B",
+              700: "#960E18",
+              800: "#7A0B12",
+              900: "#50060B",
+            }
+          },
+          fontFamily: {
+            display: ["'Bebas Neue'", "sans-serif"],
+            sans: ["'Manrope'", "sans-serif"],
+            mono: ["'Space Grotesk'", "monospace"],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .app-tap {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .app-tap:active {
+      transform: scale(0.97);
+    }
+    
+    /* 3D Card Architecture */
+    .perspective-1000 {
+      perspective: 1200px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    
+    .holo-glow {
+      background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(214,22,34,0.1) 50%, rgba(255,255,255,0.3) 100%);
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased min-h-screen selection:bg-crimson-800 selection:text-paper pb-24 md:pb-12 overflow-x-hidden w-full">
+
+  <!-- ============================================================== -->
+  <!-- 1. TOP HEADER / BRANDING NAVBAR                                -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-black/[0.06] transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo Lockup -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/esport-sumbar-logo.png" alt="Esport Sumbar" class="h-10 w-auto object-contain transform group-hover:scale-105 transition-transform" />
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-display text-xl tracking-wider text-ink">ESPORT</span>
+            <span class="font-display text-xl tracking-wider text-crimson-600">SUMBAR</span>
+          </div>
+          <span class="text-[9px] font-mono tracking-widest text-ink/60 uppercase -mt-1 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+            Partner Resmi ESI Sumbar
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links (Each leads to its own dedicated page) -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#D9D9DB]/60 p-1.5 rounded-full border border-black/[0.06]">
+        <a href="/" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Beranda</a>
+        <a href="/katalog" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Katalog Direktori</a>
+        <a href="/atlet" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Galeri Atlet</a>
+        <a href="/wilayah" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">19 Wilayah</a>
+        <a href="/about" class="px-4 py-1.5 rounded-full text-xs font-medium text-ink hover:text-crimson-600 transition-colors">Tentang ESI</a>
+      </nav>
+
+      <!-- Action Button (Active page indicator) -->
+      <div class="flex items-center gap-2">
+        <a href="/about" class="p-2 rounded-xl text-ink/70 hover:text-crimson-600 hover:bg-black/5 transition-colors" title="Tentang Platform & ESI Sumbar">
+          <i data-lucide="info" class="w-5 h-5"></i>
+        </a>
+        <a href="/daftar" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-xs font-bold uppercase tracking-wider shadow-sm transition-all app-tap">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span>Daftar</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- 2. HERO / REGISTRATION HEADER                                  -->
+  <!-- ============================================================== -->
+  <section class="pt-8 pb-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-crimson-800/10 border border-crimson-800/20 text-crimson-700 text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+      <span class="w-2 h-2 rounded-full bg-crimson-600 animate-pulse"></span>
+      Portal Database Resmi // Lisensi ESI Sumbar 2026
+    </div>
+    <h1 class="font-display text-3xl sm:text-6xl tracking-tight text-ink uppercase leading-none">
+      DAFTAR & TERBITKAN<br /><span class="text-crimson-600">KARTU DIGITAL</span>
+    </h1>
+    <p class="mt-2 text-xs sm:text-sm text-ink/75 max-w-xl mx-auto">
+      Daftarkan diri Anda sebagai Atlet, Player LFT, Pelatih, atau Tim Esports Sumatera Barat. Preview kartu 3D terupdate secara langsung saat Anda mengetik!
+    </p>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 3. INTERACTIVE BUILDER + LIVE 3D CARD PREVIEW                  -->
+  <!-- ============================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- FORM COLUMN (7 Cols) -->
+      <div class="lg:col-span-7 bg-white/90 border border-black/[0.08] rounded-3xl p-6 sm:p-8 shadow-sm">
+        <h2 class="font-display text-2xl tracking-wide text-ink uppercase flex items-center gap-2 border-b border-black/[0.06] pb-3 mb-6">
+          <i data-lucide="id-card" class="w-5 h-5 text-crimson-700"></i>
+          Formulir Data Diri Atlet & Player
+        </h2>
+
+        <form id="regForm" onsubmit="handleRegistration(event)" class="space-y-4">
+          <!-- Kategori -->
+          <div>
+            <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1.5">Kategori Pendaftaran</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-black/10 bg-paper cursor-pointer has-[:checked]:border-crimson-700 has-[:checked]:bg-crimson-50 text-xs font-sans">
+                <input type="radio" name="kategori" value="ATLET RESMI" checked class="accent-crimson-700" onchange="updateLivePreview()" />
+                <span>Atlet ESI</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-black/10 bg-paper cursor-pointer has-[:checked]:border-crimson-700 has-[:checked]:bg-crimson-50 text-xs font-sans">
+                <input type="radio" name="kategori" value="PLAYER LFT" class="accent-crimson-700" onchange="updateLivePreview()" />
+                <span>Player LFT</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-black/10 bg-paper cursor-pointer has-[:checked]:border-crimson-700 has-[:checked]:bg-crimson-50 text-xs font-sans">
+                <input type="radio" name="kategori" value="TIM RESMI" class="accent-crimson-700" onchange="updateLivePreview()" />
+                <span>Klub / Tim</span>
+              </label>
+              <label class="flex items-center gap-2 p-2.5 rounded-xl border border-black/10 bg-paper cursor-pointer has-[:checked]:border-crimson-700 has-[:checked]:bg-crimson-50 text-xs font-sans">
+                <input type="radio" name="kategori" value="COACH / TALENT" class="accent-crimson-700" onchange="updateLivePreview()" />
+                <span>Coach</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Nama Lengkap & In-Game Nickname -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">Nama Lengkap</label>
+              <input 
+                type="text" 
+                id="formFullName" 
+                required 
+                value="Muhammad Rayhan"
+                placeholder="cth: Muhammad Rayhan" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                oninput="updateLivePreview()"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">In-Game Nickname (IGN)</label>
+              <input 
+                type="text" 
+                id="formIgn" 
+                required 
+                value="SKYFALL"
+                placeholder="cth: SKYFALL" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-crimson-800/20 text-crimson-700"
+                oninput="updateLivePreview()"
+              />
+            </div>
+          </div>
+
+          <!-- Game & Role -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">Cabang Game Utama</label>
+              <select 
+                id="formGame" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                onchange="updateLivePreview()"
+              >
+                <option value="VALORANT">Valorant</option>
+                <option value="MOBILE LEGENDS" selected>Mobile Legends: Bang Bang</option>
+                <option value="FREE FIRE">Free Fire</option>
+                <option value="PUBG MOBILE">PUBG Mobile</option>
+                <option value="TEKKEN 8">Tekken 8</option>
+                <option value="EFOOTBALL">eFootball 2026</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">Role Utama</label>
+              <input 
+                type="text" 
+                id="formRole" 
+                value="Midlaner / Shotcaller"
+                placeholder="cth: Duelist, Rusher, Midlaner" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                oninput="updateLivePreview()"
+              />
+            </div>
+          </div>
+
+          <!-- Domisili 19 Kab/Kota & Klub -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">Domisili (19 Kab/Kota)</label>
+              <select 
+                id="formRegion" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                onchange="updateLivePreview()"
+              >
+                <option value="Kota Padang" selected>Kota Padang</option>
+                <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+                <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+                <option value="Kota Solok">Kota Solok</option>
+                <option value="Kota Pariaman">Kota Pariaman</option>
+                <option value="Kota Padang Panjang">Kota Padang Panjang</option>
+                <option value="Kota Sawahlunto">Kota Sawahlunto</option>
+                <option value="Kab. Agam">Kab. Agam</option>
+                <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+                <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+                <option value="Kab. Pasaman">Kab. Pasaman</option>
+                <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+                <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+                <option value="Kab. Sijunjung">Kab. Sijunjung</option>
+                <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
+                <option value="Kab. Solok">Kab. Solok</option>
+                <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
+                <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
+                <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">Klub / Tim Esports (Opsional)</label>
+              <input 
+                type="text" 
+                id="formClub" 
+                value="Minang Pride Squad"
+                placeholder="cth: Minang Pride Squad" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                oninput="updateLivePreview()"
+              />
+            </div>
+          </div>
+
+          <!-- OVR Rating Target & Foto Preset -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">OVR Rating Awal</label>
+              <input 
+                type="number" 
+                id="formOvr" 
+                value="94" 
+                min="70" 
+                max="99" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                oninput="updateLivePreview()"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-mono font-bold text-ink/70 uppercase mb-1">Pilih Avatar Foto</label>
+              <select 
+                id="formPhoto" 
+                class="w-full px-4 py-2.5 bg-paper border border-black/10 rounded-xl text-xs sm:text-sm font-sans focus:outline-none focus:ring-2 focus:ring-crimson-800/20"
+                onchange="updateLivePreview()"
+              >
+                <option value="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=800&auto=format&fit=crop">Atlet Muda 1 (Unsplash)</option>
+                <option value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop">Atlet Muda 2 (Unsplash)</option>
+                <option value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop">Atlet Muda 3 (Unsplash)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button 
+              type="submit" 
+              class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-crimson-900 to-crimson-700 hover:from-crimson-800 hover:to-crimson-600 text-paper font-mono text-sm font-bold uppercase tracking-wider shadow-lg shadow-crimson-900/30 flex items-center justify-center gap-2 app-tap transition-all"
+            >
+              <i data-lucide="award" class="w-5 h-5 text-amber-300"></i>
+              <span>Terbitkan Kartu Digital Resmi &rarr;</span>
+            </button>
+            <p class="text-[10px] text-ink/50 text-center font-mono mt-2">Data akan diverifikasi oleh Pengcab ESI daerah masing-masing dalam 1x24 jam.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- PREVIEW COLUMN (5 Cols) -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <div class="sticky top-20 text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 text-ink/70 text-[11px] font-mono mb-3">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-crimson-700"></i>
+            Live 3D Preview (Ketuk untuk memutar kartu)
+          </div>
+
+          <!-- 3D CARD WRAPPER -->
+          <div class="perspective-1000 w-[270px] sm:w-[290px] h-[480px] sm:h-[510px] mx-auto cursor-pointer" onclick="flipPreviewCard()">
+            <div id="previewCardInner" class="w-full h-full relative transform-style-3d transition-transform duration-700 shadow-2xl rounded-3xl">
+              
+              <!-- CARD FRONT (WHITE LUXURY) -->
+              <div class="absolute inset-0 w-full h-full rounded-3xl backface-hidden overflow-hidden border-2 border-white/90 shadow-xl bg-white flex flex-col justify-between p-3.5">
+                <!-- Frame Art Background -->
+                <div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply bg-center bg-cover" style="background-image: url('/images/card-front-white.png');"></div>
+
+                <!-- Card Header -->
+                <div class="relative z-10 flex items-center justify-between">
+                  <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-crimson-800 text-paper text-[10px] font-mono font-bold tracking-wider uppercase shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span id="cardBadgeCategory">ATLET RESMI</span>
+                  </div>
+                  <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 text-ink font-mono font-black text-sm flex items-center justify-center shadow-md">
+                    <span id="cardOvrValue">94</span>
+                  </div>
+                </div>
+
+                <!-- Athlete Photo -->
+                <div class="relative z-10 my-2 flex-1 rounded-2xl overflow-hidden border border-black/10 bg-canvas/30 shadow-inner">
+                  <img id="cardPhotoImg" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=800&auto=format&fit=crop" alt="Foto Atlet" class="w-full h-full object-cover object-top" />
+                  
+                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-2.5 text-paper">
+                    <div class="text-[9px] font-mono text-paper/70 uppercase tracking-wider">Nama Lengkap</div>
+                    <div id="cardFullName" class="font-sans font-bold text-sm tracking-tight text-white line-clamp-1">Muhammad Rayhan</div>
+                    <div id="cardRegion" class="text-[10px] font-mono text-amber-300 flex items-center gap-1 mt-0.5">
+                      <i data-lucide="map-pin" class="w-3 h-3"></i> <span>Kota Padang</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card Footer Info -->
+                <div class="relative z-10 bg-paper/90 backdrop-blur-sm rounded-xl p-2.5 border border-black/[0.08]">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div id="cardGame" class="text-[10px] font-mono font-black text-crimson-700 tracking-wider">MOBILE LEGENDS</div>
+                      <div id="cardRole" class="text-[11px] font-sans font-extrabold text-ink leading-tight">Midlaner / Shotcaller</div>
+                    </div>
+                    <div class="text-right">
+                      <div id="cardIgn" class="font-display text-lg tracking-wider text-ink uppercase leading-none">SKYFALL</div>
+                      <div class="text-[8px] font-mono text-ink/60 mt-0.5">TERVERIFIKASI</div>
+                    </div>
+                  </div>
+                  <div class="mt-2 pt-1.5 border-t border-black/[0.06] flex items-center justify-between text-[8px] font-mono text-ink/50">
+                    <span id="cardLicenseNo">PBESI-SB-2026-REG-94</span>
+                    <span class="text-crimson-700 font-bold">ESPORT SUMBAR</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD BACK (PRESTIGIOUS RED) -->
+              <div class="absolute inset-0 w-full h-full rounded-3xl backface-hidden rotate-y-180 overflow-hidden border-2 border-crimson-600/40 shadow-2xl bg-crimson-950 flex flex-col justify-between p-4">
+                <div class="absolute inset-0 pointer-events-none bg-center bg-cover" style="background-image: url('/images/card-frame-back-red.jpg');"></div>
+                <div class="relative z-10 text-center py-2">
+                  <div class="text-[9px] font-mono tracking-widest text-paper/60 uppercase">PENGURUS BESAR ESPORTS INDONESIA</div>
+                </div>
+                <div class="relative z-10 flex flex-col items-center justify-center flex-1">
+                  <!-- Centered Branding -->
+                  <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center p-2 mb-2">
+                    <img src="/esport-sumbar-logo.png" alt="Logo" class="w-full h-auto object-contain" />
+                  </div>
+                  <div class="font-display text-xl text-paper tracking-wider">ESPORT SUMBAR</div>
+                  <div class="text-[9px] font-mono text-amber-300 mt-1">OFFICIAL ATHLETE PASSPORT</div>
+                </div>
+                <div class="relative z-10 text-center py-2 border-t border-white/10">
+                  <div class="text-[8px] font-mono text-paper/70">KARTU IDENTITAS DIGITAL RESMI • 2026</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="mt-3 flex items-center justify-center gap-3 text-xs font-mono text-ink/60">
+            <button type="button" onclick="flipPreviewCard()" class="px-3 py-1.5 rounded-lg bg-black/5 hover:bg-black/10 flex items-center gap-1.5 app-tap">
+              <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Putar Kartu
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 4. MODAL SUCCESS                                               -->
+  <!-- ============================================================== -->
+  <div id="successModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border border-black/10">
+      <div class="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+        <i data-lucide="check" class="w-8 h-8"></i>
+      </div>
+      <h3 class="font-display text-2xl tracking-wide uppercase text-ink">Pendaftaran Berhasil!</h3>
+      <p class="text-xs text-ink/70 mt-2 font-sans">
+        Kartu Digital Paspor Anda telah berhasil diterbitkan ke antrean verifikasi Pengcab ESI daerah Anda.
+      </p>
+      <div class="mt-4 p-3 bg-paper rounded-xl font-mono text-xs text-crimson-800 font-bold border border-black/10">
+        No. Lisensi: <span id="modalLicenseNo">PBESI-SB-2026-REG-94</span>
+      </div>
+      <div class="mt-6 flex flex-col gap-2">
+        <a href="/katalog" class="w-full py-2.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-paper font-mono text-xs font-bold uppercase transition-all app-tap">
+          Buka Katalog Ekosistem &rarr;
+        </a>
+        <button type="button" onclick="closeSuccessModal()" class="w-full py-2.5 rounded-xl bg-black/5 hover:bg-black/10 text-ink font-mono text-xs transition-all app-tap">
+          Tutup & Ubah Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 5. MOBILE BOTTOM DOCK (5 UNIQUE DESTINATIONS)                  -->
+  <!-- ============================================================== -->
+  <!-- Mobile Bottom Dock (5 Unique Destinations) -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-50 p-2 pointer-events-none">
+    <div class="max-w-[360px] mx-auto bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] px-2 py-1.5 flex items-center justify-between pointer-events-auto">
+      
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Beranda</span>
+      </a>
+
+      <!-- 2. Katalog -->
+      <a href="/katalog" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="grid" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Katalog</span>
+      </a>
+
+      <!-- 3. Center FAB (Daftar) -->
+      <div class="flex items-center justify-center w-12">
+        <a href="/daftar" class="w-10 h-10 -mt-5 rounded-full bg-gradient-to-tr from-crimson-800 to-crimson-600 text-paper shadow-lg shadow-crimson-900/40 flex items-center justify-center border-2 border-white shrink-0 ring-2 ring-amber-400 scale-105 app-tap" aria-label="Daftar & Terbitkan Kartu">
+          <i data-lucide="plus" class="w-4 h-4 text-amber-300"></i>
+        </a>
+      </div>
+
+      <!-- 4. Galeri Atlet -->
+      <a href="/atlet" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Atlet</span>
+      </a>
+
+      <!-- 5. 19 Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center justify-center w-14 py-1 text-ink/60 hover:text-crimson-600 app-tap">
+        <i data-lucide="map-pin" class="w-4 h-4"></i>
+        <span class="text-[9px] font-mono  leading-none mt-1">Wilayah</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t border-black/[0.08] py-8 text-center text-xs text-ink/60 font-mono">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 Platform Provider Esport Sumatera Barat • Mitra Resmi ESI Sumbar</div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <a href="/" class="hover:text-crimson-600">Beranda</a>
+        <a href="/katalog" class="hover:text-crimson-600">Katalog</a>
+        <a href="/atlet" class="hover:text-crimson-600">Galeri Atlet</a>
+        <a href="/wilayah" class="hover:text-crimson-600">19 Wilayah</a>
+        <a href="/daftar" class="hover:text-crimson-600 text-crimson-700 font-bold">Daftar</a>
+        <a href="/about" class="hover:text-crimson-600">Tentang</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    let isFlipped = false;
+
+    function flipPreviewCard() {
+      const inner = document.getElementById('previewCardInner');
+      isFlipped = !isFlipped;
+      inner.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    }
+
+    function updateLivePreview() {
+      const kat = document.querySelector('input[name="kategori"]:checked')?.value || 'ATLET RESMI';
+      const name = document.getElementById('formFullName').value.trim() || 'Nama Atlet';
+      const ign = document.getElementById('formIgn').value.trim() || 'NICKNAME';
+      const game = document.getElementById('formGame').value;
+      const role = document.getElementById('formRole').value.trim() || 'Role Player';
+      const region = document.getElementById('formRegion').value;
+      const ovr = document.getElementById('formOvr').value || '90';
+      const photo = document.getElementById('formPhoto').value;
+
+      document.getElementById('cardBadgeCategory').textContent = kat;
+      document.getElementById('cardFullName').textContent = name;
+      document.getElementById('cardIgn').textContent = ign;
+      document.getElementById('cardGame').textContent = game;
+      document.getElementById('cardRole').textContent = role;
+      document.getElementById('cardRegion').innerHTML = '<i data-lucide="map-pin" class="w-3 h-3"></i> <span>' + region + '</span>';
+      document.getElementById('cardOvrValue').textContent = ovr;
+      document.getElementById('cardPhotoImg').src = photo;
+
+      const code = game.substring(0, 3).toUpperCase();
+      document.getElementById('cardLicenseNo').textContent = 'PBESI-SB-2026-' + code + '-' + ovr;
+
+      lucide.createIcons();
+    }
+
+    function handleRegistration(e) {
+      e.preventDefault();
+      const lic = document.getElementById('cardLicenseNo').textContent;
+      document.getElementById('modalLicenseNo').textContent = lic;
+      const modal = document.getElementById('successModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSuccessModal() {
+      const modal = document.getElementById('successModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      updateLivePreview();
+    });
+  </script>
+</body>
+</html>
