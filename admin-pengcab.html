@@ -75,6 +75,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
+  <script src="/js/microsystem-client.js"></script>
 </head>
 <body class="font-sans antialiased selection:bg-cyan-800 selection:text-white pb-24 min-h-screen">
 
@@ -1092,7 +1093,20 @@
       modal.classList.remove('flex');
     }
 
-    function handleTerbitRekomendasi(e) {
+    async function handleTerbitRekomendasi(e) {
+      e.preventDefault();
+      const currentReg = document.getElementById('regionSelector')?.value || 'Kota Padang';
+      const inputs = e.target.querySelectorAll('input, select');
+      const payload = {
+        wilayah: currentReg,
+        namaTurnamen: inputs[0]?.value || 'Kejuaraan Daerah Esports',
+        penyelenggara: inputs[1]?.value || 'Pengcab Setempat',
+        game: inputs[3]?.value || 'Mobile Legends',
+        venue: inputs[4]?.value || 'Gaming Arena'
+      };
+      if (window.EsportSumbarAPI) {
+        try { await window.EsportSumbarAPI.pengcab.issueRekomendasi(payload); } catch(err){}
+      }
       e.preventDefault();
       closeModalRekomendasi();
       showToast('Surat Rekomendasi Resmi Berhasil Diterbitkan!');

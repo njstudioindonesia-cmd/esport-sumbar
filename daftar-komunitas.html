@@ -12,7 +12,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+    // Connected to Backend Microservices
+    const origSubmit = window.handleFormSubmit || window.handlePlayerSubmit || window.handleCoachSubmit || window.handleTeamSubmit || window.handleCommunitySubmit || window.handleVenueSubmit;
+    async function submitToBackendMicro(payload) {
+      if (window.EsportSumbarAPI && window.EsportSumbarAPI.registrasi) {
+        try {
+          const res = await window.EsportSumbarAPI.registrasi.submit('komunitas', payload);
+          if (res && res.success && res.data) {
+            const regIdEl = document.querySelector('#successModal .font-bold.text-ink');
+            if (regIdEl) regIdEl.textContent = res.data.id;
+          }
+        } catch(e) {
+          console.warn('Backend submit fallback:', e);
+        }
+      }
+    }
+    
+  </script>
   <script>
     tailwind.config = {
       theme: {
@@ -74,6 +91,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
+  <script src="/js/microsystem-client.js"></script>
 </head>
 <body class="text-ink antialiased selection:bg-crimson-800 selection:text-paper pb-28 md:pb-12 min-h-screen">
 

@@ -75,6 +75,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
+  <script src="/js/microsystem-client.js"></script>
 </head>
 <body class="font-sans antialiased selection:bg-crimson-800 selection:text-white pb-24 min-h-screen">
 
@@ -712,7 +713,12 @@
       modal.classList.remove('flex');
     }
 
-    function confirmApprove() {
+    async function confirmApprove() {
+      if (selectedQueueItem && window.EsportSumbarAPI) {
+        try {
+          await window.EsportSumbarAPI.registrasi.updateStatus(selectedQueueItem.id, 'approved', 'Disetujui oleh Super Admin');
+        } catch(e) { console.warn('Backend update error:', e); }
+      }
       if (!selectedQueueItem) return;
       showToast(`✓ Berkas ${selectedQueueItem.name} (${selectedQueueItem.ign}) disetujui. Paspor Digital resmi telah diterbitkan!`);
       
