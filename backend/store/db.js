@@ -44,15 +44,28 @@ class EcosystemDatabase {
     if (!this.memory.users) this.memory.users = [];
     const regions = this.memory.wilayah || [];
     regions.forEach(r => {
-      const slug = r.nama.toLowerCase().replace(/kota |kab\. /g, '').replace(/\s+/g, '');
-      const existing = this.memory.users.find(u => u.wilayah === r.nama || u.email === `pengcab.${slug}@esi-sumbar.or.id`);
+      let slug = '';
+      let emailPrefix = '';
+      let passSuffix = '';
+      if (r.nama.startsWith('Kab. ')) {
+        const raw = r.nama.replace('Kab. ', '').toLowerCase().replace(/\s+/g, '');
+        slug = 'kab-' + raw;
+        emailPrefix = raw === 'solok' ? 'kabsolok' : raw;
+        passSuffix = 'Kab' + raw.charAt(0).toUpperCase() + raw.slice(1);
+      } else {
+        const raw = r.nama.replace('Kota ', '').toLowerCase().replace(/\s+/g, '');
+        slug = 'kota-' + raw;
+        emailPrefix = raw === 'solok' ? 'kotasolok' : raw;
+        passSuffix = raw.charAt(0).toUpperCase() + raw.slice(1);
+      }
+
+      const existing = this.memory.users.find(u => u.role === 'pengcab' && (u.wilayah === r.nama || u.email === `pengcab.${emailPrefix}@esi-sumbar.or.id`));
       if (!existing) {
-        const capital = slug.charAt(0).toUpperCase() + slug.slice(1);
         this.memory.users.push({
           id: `usr-pengcab-${slug}`,
           role: "pengcab",
-          email: `pengcab.${slug}@esi-sumbar.or.id`,
-          passwordHash: `Pengcab${capital}2026!`,
+          email: `pengcab.${emailPrefix}@esi-sumbar.or.id`,
+          passwordHash: `Pengcab${passSuffix}2026!`,
           nama: `Pengcab ESI ${r.nama}`,
           instansi: `Pengurus Cabang ESI ${r.nama}`,
           wilayah: r.nama,
@@ -76,6 +89,19 @@ class EcosystemDatabase {
   findUser(emailOrId, password) {
     const cleanId = String(emailOrId || '').trim().toLowerCase();
     return this.memory.users.find(u => {
+      const matchEmail = u.email && u.email.toLowerCase() === cleanId;
+      const matchPaspor = u.pasporId && u.pasporId.toLowerCase() === cleanId;
+      const matchIgn = u.ign && u.ign.toLowerCase() === cleanId;
+      const matchPass = u.passwordHash === password;
+      return (matchEmail || matchPaspor || matchIgn) && matchPass;
+    });
+  }
+
+  findUserByRole(emailOrId, password, requiredRole, requiredWilayah) {
+    const cleanId = String(emailOrId || '').trim().toLowerCase();
+    return this.memory.users.find(u => {
+      if (requiredRole && u.role !== requiredRole) return false;
+      if (requiredWilayah && u.role === 'pengcab' && u.wilayah !== requiredWilayah) return false;
       const matchEmail = u.email && u.email.toLowerCase() === cleanId;
       const matchPaspor = u.pasporId && u.pasporId.toLowerCase() === cleanId;
       const matchIgn = u.ign && u.ign.toLowerCase() === cleanId;

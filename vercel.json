@@ -53,7 +53,7 @@
     },
     {
       "source": "/admin",
-      "destination": "/admin-super.html"
+      "destination": "/admin.html"
     },
     {
       "source": "/daftar-player",

@@ -90,46 +90,80 @@
   <!-- ============================================================== -->
   <!-- 1. TOP EXECUTIVE LEVEL SWITCHER (NAVIGASI 3 TINGKAT ADMIN)     -->
   <!-- ============================================================== -->
-  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/95 border-b border-amber-500/20 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      
-      <!-- Label Mode -->
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-        <span class="text-[10px] font-mono uppercase font-bold tracking-wider text-amber-300">
-          PORTAL ADMINISTRASI:
-        </span>
+    <!-- ============================================================== -->
+  <!-- 1. DEDICATED SUPER ADMIN LOGIN SECTION (SHOWN IF NOT AUTH)     -->
+  <!-- ============================================================== -->
+  <div id="superLoginSection" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-crimson-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-md w-full bg-[#14161C] border border-amber-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10 backdrop-blur-xl">
+      <div class="flex items-center gap-3 pb-5 mb-5 border-b border-white/10">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center p-2.5 shadow-lg shadow-amber-900/40 shrink-0">
+          <i data-lucide="crown" class="w-6 h-6 text-ink"></i>
+        </div>
+        <div>
+          <span class="text-[9px] font-mono uppercase font-bold tracking-widest text-amber-400 block">Restricted • Master Control</span>
+          <h1 class="text-xl font-display uppercase tracking-wider text-white">SUPER ADMIN ACCESS</h1>
+        </div>
       </div>
 
-      <!-- 3 Level Distinct Admin URL Chips -->
-      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-        <!-- 1. Super Admin (Active) -->
-        <a href="/admin-super" class="px-3 py-1 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-ink font-mono text-[11px] font-black uppercase flex items-center gap-1.5 shadow-sm app-tap">
-          <i data-lucide="crown" class="w-3.5 h-3.5"></i>
-          <span>1. Super Admin</span>
-        </a>
-
-        <!-- 2. ESI Sumbar (Pengprov) -->
-        <a href="/admin-pengprov" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
-          <i data-lucide="landmark" class="w-3.5 h-3.5 text-crimson-400"></i>
-          <span>2. ESI Sumbar (Legalitas)</span>
-        </a>
-
-        <!-- 3. ESI Kota / Kab (Pengcab) -->
-        <a href="/admin-pengcab" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-sky-400"></i>
-          <span>3. ESI 19 Kab/Kota</span>
-        </a>
-
-        <!-- Link to Live Website -->
-        <a href="/" target="_blank" class="px-2.5 py-1 rounded-xl bg-crimson-800/80 hover:bg-crimson-700 text-white font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ml-2 app-tap">
-          <i data-lucide="external-link" class="w-3 h-3"></i>
-          <span class="hidden sm:inline">Web Publik</span>
-        </a>
+      <div class="mb-5 p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs font-mono flex items-start gap-2">
+        <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+        <span>Pintu masuk khusus Administrator Platform Ekosistem. Akses terenkripsi dan diaudit secara sistemik.</span>
       </div>
 
+      <div id="superLoginAlert" class="hidden mb-4 p-3 rounded-xl font-mono text-xs border"></div>
+
+      <form id="superLoginForm" onsubmit="handleSuperLogin(event)" class="space-y-4">
+        <div class="space-y-1.5">
+          <label class="block text-xs font-mono uppercase text-white/80 font-bold">Email Administrator:</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </div>
+            <input 
+              type="email" 
+              id="superEmailInput" 
+              required
+              placeholder="admin@esportsumbar.id" 
+              class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded-xl text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-mono uppercase text-white/80 font-bold">Kata Sandi Master:</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+              <i data-lucide="key" class="w-4 h-4"></i>
+            </div>
+            <input 
+              type="password" 
+              id="superPasswordInput" 
+              required
+              placeholder="••••••••••••" 
+              class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded-xl text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+            />
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          id="btnSuperLogin"
+          class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-ink font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-amber-900/50 transition-all app-tap mt-2"
+        >
+          <i data-lucide="lock" class="w-4 h-4"></i>
+          <span>OTORISASI & MASUK SISTEM</span>
+        </button>
+      </form>
     </div>
-  </aside>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 2. SUPER ADMIN DASHBOARD CONTAINER (SHOWN WHEN AUTHENTICATED)  -->
+  <!-- ============================================================== -->
+  <div id="superDashboardSection" class="hidden">
 
   <!-- ============================================================== -->
   <!-- 2. SUPER ADMIN HEADER BAR                                      -->
@@ -166,6 +200,10 @@
         <button type="button" onclick="openNewAdminModal()" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-ink font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
           <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
           <span>Tambah Pengurus</span>
+        </button>
+        <button type="button" onclick="logoutSuperAdmin()" class="px-3.5 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 border border-rose-500/40 text-rose-300 hover:text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span>Kunci / Logout</span>
         </button>
       </div>
 
@@ -582,6 +620,8 @@
   <!-- ============================================================== -->
   <!-- MODAL: TAMBAH AKUN PENGURUS BARU                               -->
   <!-- ============================================================== -->
+    </div><!-- /#superDashboardSection -->
+
   <div id="newAdminModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
     <div class="w-full max-w-md bg-[#16181F] border border-white/15 rounded-3xl p-6 text-paper shadow-2xl relative">
       <button onclick="closeNewAdminModal()" class="absolute top-4 right-4 text-white/60 hover:text-white p-1">
@@ -928,9 +968,76 @@
       loadAllSuperAdminData();
     }
 
+    
+    function checkSuperAuth() {
+      const session = EsportSumbarAPI.auth.getSuperSession();
+      const loginSec = document.getElementById('superLoginSection');
+      const dashSec = document.getElementById('superDashboardSection');
+      if (session && session.role === 'super') {
+        loginSec.classList.add('hidden');
+        dashSec.classList.remove('hidden');
+        lucide.createIcons();
+        loadAllSuperAdminData();
+      } else {
+        loginSec.classList.remove('hidden');
+        dashSec.classList.add('hidden');
+        lucide.createIcons();
+      }
+    }
+
+    async function handleSuperLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('superEmailInput').value.trim();
+      const password = document.getElementById('superPasswordInput').value;
+      const alertBox = document.getElementById('superLoginAlert');
+      const submitBtn = document.getElementById('btnSuperLogin');
+
+      alertBox.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> <span>MEMVERIFIKASI AKSES MASTER...</span>';
+      lucide.createIcons();
+
+      try {
+        const res = await EsportSumbarAPI.auth.login({
+          portal: 'super',
+          identifier: email,
+          password: password
+        });
+
+        if (res.success && res.user && res.user.role === 'super') {
+          alertBox.className = "mb-4 p-3 rounded-xl font-mono text-xs border bg-emerald-950/60 border-emerald-500/60 text-emerald-300 flex items-center gap-2";
+          alertBox.innerHTML = '<i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> <span>Akses Diberikan. Membuka Master Control...</span>';
+          alertBox.classList.remove('hidden');
+          lucide.createIcons();
+          setTimeout(() => {
+            checkSuperAuth();
+          }, 400);
+        } else {
+          alertBox.className = "mb-4 p-3 rounded-xl font-mono text-xs border bg-rose-950/60 border-rose-500/60 text-rose-300 flex items-center gap-2";
+          alertBox.innerHTML = `<i data-lucide="shield-x" class="w-4 h-4 text-rose-400"></i> <span>${res.message || 'Kredensial Super Admin tidak sah.'}</span>`;
+          alertBox.classList.remove('hidden');
+          lucide.createIcons();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i data-lucide="lock" class="w-4 h-4"></i> <span>OTORISASI & MASUK SISTEM</span>';
+        }
+      } catch (err) {
+        alertBox.className = "mb-4 p-3 rounded-xl font-mono text-xs border bg-rose-950/60 border-rose-500/60 text-rose-300 flex items-center gap-2";
+        alertBox.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400"></i> <span>Gagal menghubungkan ke gateway otoritas.</span>';
+        alertBox.classList.remove('hidden');
+        lucide.createIcons();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i data-lucide="lock" class="w-4 h-4"></i> <span>OTORISASI & MASUK SISTEM</span>';
+      }
+    }
+
+    function logoutSuperAdmin() {
+      EsportSumbarAPI.auth.logoutSuper();
+      checkSuperAuth();
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      loadAllSuperAdminData();
+      checkSuperAuth();
     });
   </script>
 </body>

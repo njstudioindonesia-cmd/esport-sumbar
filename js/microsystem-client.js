@@ -63,10 +63,51 @@
           body: JSON.stringify(credentials)
         });
         if (res.success && res.token) {
-          localStorage.setItem('esi_auth_token', res.token);
-          localStorage.setItem('esi_auth_user', JSON.stringify(res.user));
+          if (credentials.portal === 'super') {
+            sessionStorage.setItem('esport_super_session', JSON.stringify(res.user));
+            sessionStorage.setItem('esport_super_token', res.token);
+          } else if (credentials.portal === 'pengprov') {
+            sessionStorage.setItem('esport_pengprov_session', JSON.stringify(res.user));
+            sessionStorage.setItem('esport_pengprov_token', res.token);
+          } else if (credentials.portal === 'pengcab') {
+            sessionStorage.setItem('esport_pengcab_session', JSON.stringify(res.user));
+            sessionStorage.setItem('esport_pengcab_token', res.token);
+          } else {
+            localStorage.setItem('esi_auth_token', res.token);
+            localStorage.setItem('esi_auth_user', JSON.stringify(res.user));
+          }
         }
         return res;
+      },
+      getSuperSession() {
+        try {
+          const raw = sessionStorage.getItem('esport_super_session');
+          return raw ? JSON.parse(raw) : null;
+        } catch { return null; }
+      },
+      getPengprovSession() {
+        try {
+          const raw = sessionStorage.getItem('esport_pengprov_session');
+          return raw ? JSON.parse(raw) : null;
+        } catch { return null; }
+      },
+      getPengcabSession() {
+        try {
+          const raw = sessionStorage.getItem('esport_pengcab_session');
+          return raw ? JSON.parse(raw) : null;
+        } catch { return null; }
+      },
+      logoutSuper() {
+        sessionStorage.removeItem('esport_super_session');
+        sessionStorage.removeItem('esport_super_token');
+      },
+      logoutPengprov() {
+        sessionStorage.removeItem('esport_pengprov_session');
+        sessionStorage.removeItem('esport_pengprov_token');
+      },
+      logoutPengcab() {
+        sessionStorage.removeItem('esport_pengcab_session');
+        sessionStorage.removeItem('esport_pengcab_token');
       },
       getUser() {
         try {

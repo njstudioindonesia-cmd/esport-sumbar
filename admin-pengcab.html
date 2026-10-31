@@ -79,88 +79,144 @@
   <!-- ============================================================== -->
   <!-- 1. TOP EXECUTIVE LEVEL SWITCHER (NAVIGASI 3 TINGKAT ADMIN)     -->
   <!-- ============================================================== -->
-  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/95 border-b border-cyan-800/30 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-        <span class="text-[10px] font-mono uppercase font-bold tracking-wider text-cyan-300">
-          PORTAL ADMINISTRASI:
-        </span>
+    <!-- ============================================================== -->
+  <!-- 1. DEDICATED PENGCAB 19 DAERAH LOGIN (SHOWN IF NOT AUTH)       -->
+  <!-- ============================================================== -->
+  <div id="pengcabLoginSection" class="min-h-screen flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-cyan-800/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-900/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-md w-full bg-[#0D1525] border border-cyan-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative z-10 backdrop-blur-xl">
+      <div class="flex items-center gap-3.5 pb-5 mb-5 border-b border-white/10">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-800 to-cyan-950 flex items-center justify-center p-2.5 shadow-lg shadow-cyan-950/50 shrink-0">
+          <i data-lucide="map-pin" class="w-6 h-6 text-cyan-300"></i>
+        </div>
+        <div>
+          <span class="text-[9px] font-mono uppercase font-bold tracking-widest text-cyan-400 block">Otoritas Tingkat 3 // 19 Kab/Kota</span>
+          <h1 class="text-xl font-display uppercase tracking-wider text-white">ESI KOTA & KABUPATEN</h1>
+        </div>
       </div>
 
-      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-        <!-- 1. Super Admin -->
-        <a href="/admin-super" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
-          <i data-lucide="crown" class="w-3.5 h-3.5 text-amber-400"></i>
-          <span>1. Super Admin</span>
-        </a>
-
-        <!-- 2. ESI Sumbar -->
-        <a href="/admin-pengprov" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
-          <i data-lucide="landmark" class="w-3.5 h-3.5 text-crimson-400"></i>
-          <span>2. ESI Sumbar</span>
-        </a>
-
-        <!-- 3. ESI Kota / Kab (Active) -->
-        <a href="/admin-pengcab" class="px-3 py-1 rounded-xl bg-gradient-to-r from-cyan-800 to-cyan-700 text-white font-mono text-[11px] font-black uppercase flex items-center gap-1.5 shadow-sm app-tap">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-cyan-300"></i>
-          <span>3. ESI 19 Kab/Kota (Aktif)</span>
-        </a>
-
-        <!-- Link to Live Website -->
-        <a href="/" target="_blank" class="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ml-2 app-tap">
-          <i data-lucide="external-link" class="w-3 h-3"></i>
-          <span class="hidden sm:inline">Web Publik</span>
-        </a>
+      <div class="mb-5 p-3 rounded-xl bg-cyan-950/60 border border-cyan-700/50 text-cyan-200 text-xs font-mono flex items-start gap-2">
+        <i data-lucide="shield-alert" class="w-4 h-4 text-cyan-300 shrink-0 mt-0.5"></i>
+        <span>Pintu masuk khusus Pengcab ESI Daerah. Bertanggung jawab atas pemeriksaan data KTP domisili & penyaringan akun palsu tahap 1.</span>
       </div>
 
+      <div id="pengcabLoginAlert" class="hidden mb-4 p-3 rounded-xl font-mono text-xs border"></div>
+
+      <form id="pengcabLoginForm" onsubmit="handlePengcabLogin(event)" class="space-y-4">
+        
+        <!-- Region Selector -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-mono uppercase text-white/80 font-bold">Pilih Wilayah Cabang ESI:</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-cyan-400">
+              <i data-lucide="building" class="w-4 h-4"></i>
+            </div>
+            <select 
+              id="pengcabRegionInput" 
+              required
+              class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-cyan-800/60 rounded-xl text-xs font-mono text-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
+            >
+              <option value="Kota Padang">Kota Padang</option>
+              <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+              <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+              <option value="Kota Solok">Kota Solok</option>
+              <option value="Kota Sawahlunto">Kota Sawahlunto</option>
+              <option value="Kota Padang Panjang">Kota Padang Panjang</option>
+              <option value="Kota Pariaman">Kota Pariaman</option>
+              <option value="Kab. Agam">Kab. Agam</option>
+              <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+              <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+              <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
+              <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+              <option value="Kab. Solok">Kab. Solok</option>
+              <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
+              <option value="Kab. Sijunjung">Kab. Sijunjung</option>
+              <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
+              <option value="Kab. Pasaman">Kab. Pasaman</option>
+              <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+              <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-mono uppercase text-white/80 font-bold">Email / ID Pengcab Daerah:</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </div>
+            <input 
+              type="text" 
+              id="pengcabEmailInput" 
+              required
+              placeholder="pengcab.padang@esi-sumbar.or.id" 
+              class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded-xl text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-mono uppercase text-white/80 font-bold">Kata Sandi / PIN Wilayah:</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-white/40">
+              <i data-lucide="key" class="w-4 h-4"></i>
+            </div>
+            <input 
+              type="password" 
+              id="pengcabPasswordInput" 
+              required
+              placeholder="••••••••••••" 
+              class="w-full pl-10 pr-4 py-2.5 bg-black/60 border border-white/10 rounded-xl text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
+            />
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          id="btnPengcabLogin"
+          class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-800 via-cyan-700 to-cyan-800 hover:from-cyan-700 hover:to-cyan-600 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-950/80 transition-all app-tap mt-2"
+        >
+          <i data-lucide="shield-check" class="w-4 h-4 text-cyan-300"></i>
+          <span>MASUK KEPENGURUSAN DAERAH</span>
+        </button>
+      </form>
     </div>
-  </aside>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- 2. PENGCAB DASHBOARD CONTAINER (SHOWN WHEN AUTHENTICATED)      -->
+  <!-- ============================================================== -->
+  <div id="pengcabDashboardSection" class="hidden">
 
   <!-- ============================================================== -->
   <!-- 2. 19 REGIONS SELECTOR BAR (DISTINCT REGIONAL PORTAL)          -->
   <!-- ============================================================== -->
-  <section class="bg-[#0D1424] border-b border-cyan-900/40 px-4 py-3">
+  <section class="bg-[#0B111F] border-b border-cyan-900/50 px-4 py-3 sticky top-0 z-40 backdrop-blur-md">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
       
       <div class="flex items-center gap-2.5">
-        <div class="p-2 rounded-xl bg-cyan-950 border border-cyan-800 text-cyan-400 shrink-0">
-          <i data-lucide="map" class="w-4 h-4"></i>
+        <div class="p-2 rounded-xl bg-cyan-950 border border-cyan-700 text-cyan-400 shrink-0">
+          <i data-lucide="map-pin" class="w-4 h-4"></i>
         </div>
         <div>
-          <span class="text-[10px] font-mono uppercase font-bold text-cyan-400 tracking-wider">PILIH CABANG DAERAH (19 KAB/KOTA):</span>
-          <p class="text-xs text-white/70">Masing-masing Pengcab memiliki database dan filter anti-akun palsu sendiri</p>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-mono uppercase font-bold text-cyan-400 tracking-wider">KANTOR CABANG TEROTORISASI:</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[9px] font-mono font-bold">SESI DAERAH AKTIF</span>
+          </div>
+          <p id="authRegionDisplay" class="text-sm font-bold text-white font-mono uppercase tracking-wide">KOTA PADANG</p>
         </div>
       </div>
 
-      <!-- Region Switcher Dropdown -->
       <div class="flex items-center gap-2">
-        <select id="regionSelector" onchange="changeSelectedRegion(this.value)" class="px-3 py-2 bg-black/60 border border-cyan-700/60 rounded-xl text-xs font-mono font-bold text-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-400">
-          <option value="Kota Padang">Kota Padang</option>
-          <option value="Kota Bukittinggi">Kota Bukittinggi</option>
-          <option value="Kota Payakumbuh">Kota Payakumbuh</option>
-          <option value="Kota Solok">Kota Solok</option>
-          <option value="Kota Sawahlunto">Kota Sawahlunto</option>
-          <option value="Kota Padang Panjang">Kota Padang Panjang</option>
-          <option value="Kota Pariaman">Kota Pariaman</option>
-          <option value="Kab. Agam">Kab. Agam</option>
-          <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
-          <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
-          <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
-          <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
-          <option value="Kab. Solok">Kab. Solok</option>
-          <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
-          <option value="Kab. Sijunjung">Kab. Sijunjung</option>
-          <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
-          <option value="Kab. Pasaman">Kab. Pasaman</option>
-          <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
-          <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
-        </select>
-
-        <button onclick="loadRegionalData()" class="px-3 py-2 rounded-xl bg-cyan-900/60 hover:bg-cyan-800 text-cyan-300 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1 app-tap">
+        <button onclick="loadRegionalData()" class="px-3 py-1.5 rounded-xl bg-cyan-900/60 hover:bg-cyan-800 text-cyan-300 font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
           <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-          <span>Muat Wilayah</span>
+          <span>Sinkronkan Daerah</span>
+        </button>
+        <button onclick="logoutPengcab()" class="px-3.5 py-1.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 border border-rose-500/40 text-rose-300 hover:text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          <span>Ganti Wilayah / Logout</span>
         </button>
       </div>
 
@@ -402,6 +458,8 @@
   </main>
 
   <!-- MODAL: BUAT SURAT REKOMENDASI BARU -->
+    </div><!-- /#pengcabDashboardSection -->
+
   <div id="newRekomendasiModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
     <div class="w-full max-w-md bg-[#12192A] border border-cyan-800/40 rounded-3xl p-6 text-paper shadow-2xl relative">
       <button onclick="closeNewRekomendasiModal()" class="absolute top-4 right-4 text-white/60 hover:text-white p-1">
@@ -684,9 +742,83 @@
       loadRegionalData();
     }
 
+    
+    function checkPengcabAuth() {
+      const session = EsportSumbarAPI.auth.getPengcabSession();
+      const loginSec = document.getElementById('pengcabLoginSection');
+      const dashSec = document.getElementById('pengcabDashboardSection');
+      
+      if (session && session.role === 'pengcab' && session.wilayah) {
+        currentSelectedRegion = session.wilayah;
+        const display = document.getElementById('authRegionDisplay');
+        if (display) display.textContent = session.wilayah;
+        
+        loginSec.classList.add('hidden');
+        dashSec.classList.remove('hidden');
+        lucide.createIcons();
+        loadRegionalData();
+      } else {
+        loginSec.classList.remove('hidden');
+        dashSec.classList.add('hidden');
+        lucide.createIcons();
+      }
+    }
+
+    async function handlePengcabLogin(e) {
+      e.preventDefault();
+      const region = document.getElementById('pengcabRegionInput').value;
+      const email = document.getElementById('pengcabEmailInput').value.trim();
+      const password = document.getElementById('pengcabPasswordInput').value;
+      const alertBox = document.getElementById('pengcabLoginAlert');
+      const submitBtn = document.getElementById('btnPengcabLogin');
+
+      alertBox.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> <span>MEMVERIFIKASI WILAYAH...</span>';
+      lucide.createIcons();
+
+      try {
+        const res = await EsportSumbarAPI.auth.login({
+          portal: 'pengcab',
+          region: region,
+          identifier: email,
+          password: password
+        });
+
+        if (res.success && res.user && res.user.role === 'pengcab') {
+          alertBox.className = "mb-4 p-3 rounded-xl font-mono text-xs border bg-emerald-950/60 border-emerald-500/60 text-emerald-300 flex items-center gap-2";
+          alertBox.innerHTML = `<i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> <span>Akses Pengcab ${res.user.wilayah || region} Diberikan. Membuka Portal...</span>`;
+          alertBox.classList.remove('hidden');
+          lucide.createIcons();
+          setTimeout(() => {
+            checkPengcabAuth();
+          }, 400);
+        } else {
+          alertBox.className = "mb-4 p-3 rounded-xl font-mono text-xs border bg-rose-950/60 border-rose-500/60 text-rose-300 flex items-center gap-2";
+          alertBox.innerHTML = `<i data-lucide="shield-x" class="w-4 h-4 text-rose-400"></i> <span>${res.message || 'Kredensial Pengcab tidak valid.'}</span>`;
+          alertBox.classList.remove('hidden');
+          lucide.createIcons();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i data-lucide="shield-check" class="w-4 h-4 text-cyan-300"></i> <span>MASUK KEPENGURUSAN DAERAH</span>';
+        }
+      } catch (err) {
+        alertBox.className = "mb-4 p-3 rounded-xl font-mono text-xs border bg-rose-950/60 border-rose-500/60 text-rose-300 flex items-center gap-2";
+        alertBox.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400"></i> <span>Gagal menghubungkan ke server verifikasi.</span>';
+        alertBox.classList.remove('hidden');
+        lucide.createIcons();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i data-lucide="shield-check" class="w-4 h-4 text-cyan-300"></i> <span>MASUK KEPENGURUSAN DAERAH</span>';
+      }
+    }
+
+    function logoutPengcab() {
+      EsportSumbarAPI.auth.logoutPengcab();
+      checkPengcabAuth();
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      loadRegionalData();
+      checkPengcabAuth();
     });
   </script>
 </body>
