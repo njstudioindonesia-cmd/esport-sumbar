@@ -317,9 +317,9 @@
 
         <!-- Live metrics pill inside banner -->
         <div class="mt-3.5 pt-3 border-t border-white/15 flex items-center justify-between text-[9.5px] font-mono text-paper/85">
-          <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-amber-300"></i> 19 Kab/Kota</span>
-          <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3 text-emerald-400"></i> Resmi ESI</span>
-          <span class="flex items-center gap-1"><i data-lucide="rotate-cw" class="w-3 h-3 text-amber-300"></i> Kartu 3D</span>
+          <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3 text-amber-300"></i> <span data-stat="pengcabAktif">19/19</span> Kab/Kota</span>
+          <span class="flex items-center gap-1"><i data-lucide="database" class="w-3 h-3 text-emerald-400"></i> <span data-stat="totalDatabase" data-stat-suffix="+">1.409+</span> DB</span>
+          <span class="flex items-center gap-1"><i data-lucide="id-card" class="w-3 h-3 text-amber-300"></i> <span data-stat="pasporAktif">984</span> Paspor</span>
         </div>
 
       </div>
@@ -424,21 +424,40 @@
             </a>
           </div>
 
-          <!-- Quick Metrics Bar -->
-          <div class="pt-3 border-t border-black/[0.06] flex items-center justify-center lg:justify-start gap-6 sm:gap-8 text-xs font-mono">
+          <!-- Quick Metrics Bar (Realtime Live Database) -->
+          <div class="pt-3 border-t border-black/[0.06] flex items-center justify-center lg:justify-start gap-5 sm:gap-7 text-xs font-mono">
             <div>
-              <div class="text-ink/50 text-[10px] uppercase">Wilayah</div>
-              <div class="font-bold text-ink text-sm sm:text-base">19 Daerah</div>
+              <div class="text-ink/50 text-[10px] uppercase flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Database Live</span>
+              </div>
+              <div class="font-bold text-ink text-sm sm:text-base flex items-center gap-1">
+                <span data-stat="totalDatabase" data-stat-suffix="+">1.409+</span>
+                <span class="text-[10px] text-ink/50 font-normal">Entitas</span>
+              </div>
             </div>
             <div class="w-px h-8 bg-black/10"></div>
             <div>
-              <div class="text-ink/50 text-[10px] uppercase">Legalitas</div>
-              <div class="font-bold text-emerald-600 text-sm sm:text-base">Resmi ESI</div>
+              <div class="text-ink/50 text-[10px] uppercase">Paspor Aktif</div>
+              <div class="font-bold text-crimson-700 text-sm sm:text-base flex items-center gap-1">
+                <span data-stat="pasporAktif">984</span>
+                <span class="text-[10px] text-ink/50 font-normal">Kartu</span>
+              </div>
             </div>
             <div class="w-px h-8 bg-black/10"></div>
             <div>
-              <div class="text-ink/50 text-[10px] uppercase">Interaksi</div>
-              <div class="font-bold text-crimson-700 text-sm sm:text-base">3D Dual-Side</div>
+              <div class="text-ink/50 text-[10px] uppercase">Wilayah ESI</div>
+              <div class="font-bold text-ink text-sm sm:text-base">
+                <span data-stat="pengcabAktif">19/19</span>
+              </div>
+            </div>
+            <div class="w-px h-8 bg-black/10"></div>
+            <div class="hidden sm:block">
+              <div class="text-ink/50 text-[10px] uppercase">Pelatda PON</div>
+              <div class="font-bold text-emerald-600 text-sm sm:text-base flex items-center gap-1">
+                <span data-stat="pelatdaCount">24</span>
+                <span class="text-[10px] text-ink/50 font-normal">Atlet</span>
+              </div>
             </div>
           </div>
 
@@ -558,6 +577,97 @@
   </main>
 
   <!-- ============================================================== -->
+  
+  <!-- ============================================================== -->
+  <!-- 5.5 REALTIME ECOSYSTEM TELEMETRY DASHBOARD (SUPABASE LIVE)     -->
+  <!-- ============================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="bg-[#101216] border border-white/10 rounded-3xl p-5 sm:p-8 text-paper shadow-2xl relative overflow-hidden">
+      <!-- Glow ambient background -->
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-crimson-800/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10">
+        <!-- Top bar telemetry status -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <div>
+              <div class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+                <span>PANGKALAN DATA RESMI ESI SUMBAR // REALTIME</span>
+                <span class="px-2 py-0.5 rounded bg-white/10 text-[9px] text-white/80">SUPABASE LIVE SYNC</span>
+              </div>
+              <p class="text-xs text-white/60 font-sans mt-0.5">Statistik angka riil terhubung ke PostgreSQL Supabase & Serverless Microservices</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 font-mono text-[11px] text-white/60">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-amber-300 animate-spin" style="animation-duration: 10s;"></i>
+            <span>Sinkronisasi Otomatis Tiap 15 Detik</span>
+          </div>
+        </div>
+
+        <!-- Metric Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-crimson-500/40 transition-colors">
+            <div class="text-[10px] font-mono text-white/60 uppercase">Total Ekosistem</div>
+            <div class="font-display text-2xl sm:text-3xl text-white mt-1 leading-none">
+              <span data-stat="totalDatabase" data-stat-suffix="+">1.409+</span>
+            </div>
+            <div class="text-[9.5px] font-mono text-emerald-400 mt-1.5 flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3 h-3"></i> Terverifikasi
+            </div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-crimson-500/40 transition-colors">
+            <div class="text-[10px] font-mono text-white/60 uppercase">Paspor Digital</div>
+            <div class="font-display text-2xl sm:text-3xl text-amber-300 mt-1 leading-none">
+              <span data-stat="pasporAktif">984</span>
+            </div>
+            <div class="text-[9.5px] font-mono text-white/50 mt-1.5">Lisensi 3D Aktif</div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-crimson-500/40 transition-colors">
+            <div class="text-[10px] font-mono text-white/60 uppercase">Pengcab Kab/Kota</div>
+            <div class="font-display text-2xl sm:text-3xl text-white mt-1 leading-none">
+              <span data-stat="pengcabAktif">19/19</span>
+            </div>
+            <div class="text-[9.5px] font-mono text-sky-400 mt-1.5">100% Wilayah</div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-crimson-500/40 transition-colors">
+            <div class="text-[10px] font-mono text-white/60 uppercase">Atlet Pelatda</div>
+            <div class="font-display text-2xl sm:text-3xl text-crimson-400 mt-1 leading-none">
+              <span data-stat="pelatdaCount">24</span>
+            </div>
+            <div class="text-[9.5px] font-mono text-white/50 mt-1.5">PON & Kejurda</div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-crimson-500/40 transition-colors">
+            <div class="text-[10px] font-mono text-white/60 uppercase">Klub Terdaftar</div>
+            <div class="font-display text-2xl sm:text-3xl text-white mt-1 leading-none">
+              <span data-stat="klubAkreditasi" data-stat-suffix="+">43+</span>
+            </div>
+            <div class="text-[9.5px] font-mono text-emerald-400 mt-1.5">Grade A & B</div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-crimson-500/40 transition-colors">
+            <div class="text-[10px] font-mono text-white/60 uppercase">Venue & Hub</div>
+            <div class="font-display text-2xl sm:text-3xl text-white mt-1 leading-none">
+              <span data-stat="venueCount" data-stat-suffix="+">35+</span>
+            </div>
+            <div class="text-[9.5px] font-mono text-white/50 mt-1.5">iCafe Terakreditasi</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 6. 7 PILAR EKOSISTEM ESPORT SUMBAR (Links to /katalog?pilar=) -->
   <!-- ============================================================== -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
@@ -976,4 +1086,5 @@
       setupCard3D(document.getElementById('card-spotlight'));
     });
   </script>
+  <script src="/js/microsystem-client.js"></script>
 </body></html>

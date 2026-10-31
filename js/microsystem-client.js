@@ -189,17 +189,134 @@
       }
     },
 
-    // 9. TELEMETRY & STATS
+    // 9. TELEMETRY & REALTIME DATABASE STATS
     stats: {
+      cachedMetrics: null,
+      pollTimer: null,
+
       async get() {
-        return request('/stats');
+        const res = await request('/stats');
+        if (res && res.metrics) {
+          this.cachedMetrics = res.metrics;
+        }
+        return res;
       },
+
       async health() {
         return request('/health');
+      },
+
+      /**
+       * Animasi transisi angka halus bergaya cyber esports (Ease-Out Cubic)
+       */
+      animateCount(element, targetVal, prefix = '', suffix = '', duration = 1200) {
+        if (!element) return;
+        const target = typeof targetVal === 'string' ? parseFloat(targetVal.replace(/[^0-9.-]+/g, '')) || 0 : Number(targetVal) || 0;
+        const currentText = element.getAttribute('data-current-val') || element.textContent || '0';
+        const start = parseFloat(currentText.replace(/[^0-9.-]+/g, '')) || 0;
+
+        if (start === target && element.getAttribute('data-current-val')) {
+          return; // Nilai sudah sama
+        }
+
+        element.setAttribute('data-current-val', target);
+        const startTime = performance.now();
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic: 1 - pow(1 - x, 3)
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(start + (target - start) * easeOut);
+
+          const formatted = target >= 1000 ? current.toLocaleString('id-ID') : current;
+          element.textContent = `${prefix}${formatted}${suffix}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            const finalFormatted = target >= 1000 ? target.toLocaleString('id-ID') : target;
+            element.textContent = `${prefix}${finalFormatted}${suffix}`;
+          }
+        }
+
+        requestAnimationFrame(update);
+      },
+
+      /**
+       * Mengupdate seluruh elemen HTML dengan atribut data-stat
+       */
+      updateDOMWithMetrics(metrics) {
+        if (!metrics) return;
+        const elements = document.querySelectorAll('[data-stat]');
+        elements.forEach(el => {
+          const key = el.getAttribute('data-stat');
+          const prefix = el.getAttribute('data-stat-prefix') || '';
+          const suffix = el.getAttribute('data-stat-suffix') || '';
+
+          if (key === 'pengcabAktif' && typeof metrics[key] === 'string') {
+            el.textContent = `${prefix}${metrics[key]}${suffix}`;
+            return;
+          }
+
+          if (metrics[key] !== undefined && metrics[key] !== null) {
+            this.animateCount(el, metrics[key], prefix, suffix);
+          }
+        });
+
+        // Trigger custom global event untuk komponen reaktif lainnya
+        try {
+          window.dispatchEvent(new CustomEvent('esport_sumbar_stats_updated', { detail: metrics }));
+        } catch {}
+      },
+
+      /**
+       * Inisialisasi realtime counter polling & initial load
+       */
+      async initLiveCounters(pollIntervalMs = 15000) {
+        const fetchAndUpdate = async () => {
+          try {
+            const res = await this.get();
+            if (res && res.metrics) {
+              this.updateDOMWithMetrics(res.metrics);
+              // Update live database status indicators
+              const liveIndicators = document.querySelectorAll('.live-db-indicator');
+              liveIndicators.forEach(ind => {
+                ind.classList.remove('opacity-0');
+                ind.classList.add('opacity-100');
+              });
+            }
+          } catch (err) {
+            console.warn('[Realtime Counter Sync Notice]:', err.message);
+          }
+        };
+
+        // Initial fetch
+        await fetchAndUpdate();
+
+        // Setup real-time interval polling
+        if (!this.pollTimer && pollIntervalMs > 0) {
+          this.pollTimer = setInterval(fetchAndUpdate, pollIntervalMs);
+        }
       }
     }
   };
 
   window.EsportSumbarAPI = EsportSumbarAPI;
+
+  // Auto-init on page ready if data-stat elements exist
+  if (typeof document !== 'undefined') {
+    const startAutoLiveCounters = () => {
+      if (document.querySelector('[data-stat]')) {
+        EsportSumbarAPI.stats.initLiveCounters();
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', startAutoLiveCounters);
+    } else {
+      setTimeout(startAutoLiveCounters, 50);
+    }
+  }
 
 })(window);

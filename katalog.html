@@ -340,37 +340,37 @@
         <!-- 1. Player / Atlet (DEFAULT ACTIVE) -->
         <button onclick="setCategoryFilter('atlet')" id="catBtn-atlet" class="px-3.5 py-2 rounded-2xl font-bold uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5 bg-crimson-800 text-white shadow-sm app-tap">
           <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span>Kartu Player (8)</span>
+          <span>Kartu Player (<span data-stat="playerCount">8</span>)</span>
         </button>
 
         <!-- 2. Tim & Klub -->
         <button onclick="setCategoryFilter('tim')" id="catBtn-tim" class="px-3.5 py-2 rounded-2xl font-bold uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5 bg-black/5 hover:bg-black/10 text-ink/70 app-tap">
           <i data-lucide="shield" class="w-3.5 h-3.5 text-crimson-600"></i>
-          <span>Tim & Klub (5)</span>
+          <span>Tim & Klub (<span data-stat="timCount">5</span>)</span>
         </button>
 
         <!-- 3. Player LFT -->
         <button onclick="setCategoryFilter('lft')" id="catBtn-lft" class="px-3.5 py-2 rounded-2xl font-bold uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5 bg-black/5 hover:bg-black/10 text-ink/70 app-tap">
           <i data-lucide="user-plus" class="w-3.5 h-3.5 text-emerald-600"></i>
-          <span>Player LFT (4)</span>
+          <span>Player LFT (<span data-stat="lftCount">4</span>)</span>
         </button>
 
         <!-- 4. Venue & iCafe -->
         <button onclick="setCategoryFilter('venue')" id="catBtn-venue" class="px-3.5 py-2 rounded-2xl font-bold uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5 bg-black/5 hover:bg-black/10 text-ink/70 app-tap">
           <i data-lucide="monitor" class="w-3.5 h-3.5 text-sky-600"></i>
-          <span>Venue & Arena (4)</span>
+          <span>Venue & Arena (<span data-stat="venueCount">4</span>)</span>
         </button>
 
         <!-- 5. Kampus & Sekolah -->
         <button onclick="setCategoryFilter('kampus')" id="catBtn-kampus" class="px-3.5 py-2 rounded-2xl font-bold uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5 bg-black/5 hover:bg-black/10 text-ink/70 app-tap">
           <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-purple-600"></i>
-          <span>Kampus & Sekolah (5)</span>
+          <span>Kampus & Sekolah (<span data-stat="klubAkreditasi">5</span>)</span>
         </button>
 
         <!-- 6. Semua Terdaftar -->
         <button onclick="setCategoryFilter('semua')" id="catBtn-semua" class="px-3.5 py-2 rounded-2xl font-bold uppercase tracking-wider shrink-0 transition-all flex items-center gap-1.5 bg-black/5 hover:bg-black/10 text-ink/70 app-tap">
           <i data-lucide="layers" class="w-3.5 h-3.5"></i>
-          <span>Semua Terdaftar (26)</span>
+          <span>Semua Terdaftar (<span data-stat="totalDatabase">26</span>)</span>
         </button>
       </div>
 
@@ -1530,5 +1530,6 @@
       applyFilters();
     });
   </script>
+  <script src="/js/microsystem-client.js"></script>
 </body>
 </html>

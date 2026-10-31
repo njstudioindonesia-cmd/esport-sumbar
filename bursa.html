@@ -277,11 +277,11 @@
     <div class="bg-white/80 backdrop-blur-md rounded-2xl p-1.5 border border-black/10 shadow-sm flex items-center gap-1 mb-4">
       <button type="button" id="tabBtnLft" onclick="switchBursaTab('lft')" class="flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm app-tap">
         <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-300"></i>
-        <span>Talenta LFT (8)</span>
+        <span>Talenta LFT (<span data-stat="lftCount">8</span>)</span>
       </button>
       <button type="button" id="tabBtnTrial" onclick="switchBursaTab('trial')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-ink/70 hover:text-ink hover:bg-black/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 app-tap">
         <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-crimson-600"></i>
-        <span>Open Trial Klub (5)</span>
+        <span>Open Trial Klub (<span data-stat="timCount">5</span>)</span>
       </button>
     </div>
 
@@ -1181,5 +1181,6 @@
     });
   </script>
 
+  <script src="/js/microsystem-client.js"></script>
 </body>
 </html>

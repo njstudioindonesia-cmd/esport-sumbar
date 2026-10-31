@@ -8,15 +8,16 @@ export const MicroStats = {
   name: "stats",
 
   async getPlatformTelemetry() {
-    const stats = db.getPlatformStats();
+    const stats = await db.getPlatformStatsAsync();
     return {
       success: true,
       statusCode: 200,
       system: "ESPORT SUMBAR Platform Backend",
-      architecture: "Modular Microsystem v2.4",
+      architecture: "Modular Microsystem v2.5 (Supabase Hybrid)",
       status: "OPERATIONAL",
       uptime: process.uptime(),
       timestamp: new Date().toISOString(),
+      databaseMode: stats.source || "hybrid-store",
       metrics: stats,
       activeMicrosystems: [
         "micro_auth",

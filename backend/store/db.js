@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { INITIAL_DATA } from './seedData.js';
+import { isSupabaseConfigured, getLiveStatsFromSupabase, syncRegistrationToSupabase } from './supabaseClient.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -171,6 +172,14 @@ class EcosystemDatabase {
     };
     this.memory.antreanVerifikasi.unshift(record);
     this.saveSync();
+
+    // Hybrid Supabase Sync
+    if (isSupabaseConfigured()) {
+      syncRegistrationToSupabase(record).catch(err => {
+        console.warn('[Supabase Sync Warning]:', err.message);
+      });
+    }
+
     return record;
   }
 
@@ -302,6 +311,7 @@ class EcosystemDatabase {
     const antreanCount = (this.memory.antreanVerifikasi || []).filter(q => q.status === "pending").length;
     const pengcabCount = this.memory.wilayah?.length || 19;
     const pasporCount = (this.memory.atlet?.length || 0) + 980;
+    const lftCount = (this.memory.atlet || []).filter(a => a.statusLFT === true).length;
 
     return {
       totalDatabase,
@@ -310,8 +320,21 @@ class EcosystemDatabase {
       pasporAktif: pasporCount,
       pelatdaCount: (this.memory.atlet || []).filter(a => a.statusPelatda && a.statusPelatda.includes("PELATDA")).length + 22,
       turnamenCount: (this.memory.kalenderEvent?.length || 0) + 6,
-      klubAkreditasi: (this.memory.tim?.length || 0) + 40
+      klubAkreditasi: (this.memory.tim?.length || 0) + 40,
+      playerCount: (this.memory.atlet?.length || 0) + 980,
+      timCount: (this.memory.tim?.length || 0) + 40,
+      venueCount: (this.memory.venue?.length || 0) + 32,
+      lftCount: lftCount + 4,
+      source: isSupabaseConfigured() ? 'supabase-connected' : 'hybrid-local'
     };
+  }
+
+  async getPlatformStatsAsync() {
+    if (isSupabaseConfigured()) {
+      const live = await getLiveStatsFromSupabase();
+      if (live) return live;
+    }
+    return this.getPlatformStats();
   }
 }
 

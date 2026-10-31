@@ -140,19 +140,19 @@
     <!-- Quick Stats Metric Cards -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-8 max-w-4xl mx-auto">
       <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
-        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-crimson-700">19</div>
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-crimson-700" data-stat="pengcabAktif">19/19</div>
         <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Pengcab ESI Aktif</div>
       </div>
       <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
-        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-ink">1,420+</div>
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-ink" data-stat="pasporAktif" data-stat-suffix="+">984+</div>
         <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Atlet Terdaftar</div>
       </div>
       <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
-        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-ink">84+</div>
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-ink" data-stat="timCount" data-stat-suffix="+">43+</div>
         <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Klub & Tim Resmi</div>
       </div>
       <div class="bg-white/80 border border-black/[0.08] rounded-2xl p-4 text-center shadow-sm">
-        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-emerald-600">32+</div>
+        <div class="font-mono text-2xl sm:text-3xl font-extrabold text-emerald-600" data-stat="venueCount" data-stat-suffix="+">35+</div>
         <div class="text-[10px] sm:text-xs font-mono uppercase text-ink/60 mt-1">Arena Terverifikasi</div>
       </div>
     </div>
@@ -352,5 +352,6 @@
       lucide.createIcons();
     });
   </script>
+  <script src="/js/microsystem-client.js"></script>
 </body>
 </html>
