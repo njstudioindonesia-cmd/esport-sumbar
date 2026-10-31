@@ -1,6 +1,6 @@
 {
   "version": "2.4.0",
-  "lastUpdated": "2026-10-31T11:33:09.189Z",
+  "lastUpdated": "2026-10-31T12:32:03.197Z",
   "users": [
     {
       "id": "usr-super",
@@ -268,6 +268,55 @@
       "permissions": [
         "atlet:self"
       ]
+    },
+    {
+      "id": "usr-pengcab-kota-bukittinggi",
+      "role": "pengcab",
+      "email": "pengcab.bukittinggi@esi-sumbar.or.id",
+      "passwordHash": "PengcabBukittinggi2026!",
+      "nama": "Pengcab ESI Kota Bukittinggi",
+      "instansi": "Pengurus Cabang ESI Kota Bukittinggi",
+      "wilayah": "Kota Bukittinggi",
+      "permissions": [
+        "pengcab:kota-bukittinggi:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-kota-payakumbuh",
+      "role": "pengcab",
+      "email": "pengcab.payakumbuh@esi-sumbar.or.id",
+      "passwordHash": "PengcabPayakumbuh2026!",
+      "nama": "Pengcab ESI Kota Payakumbuh",
+      "instansi": "Pengurus Cabang ESI Kota Payakumbuh",
+      "wilayah": "Kota Payakumbuh",
+      "permissions": [
+        "pengcab:kota-payakumbuh:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-kab-solok",
+      "role": "pengcab",
+      "email": "pengcab.kabsolok@esi-sumbar.or.id",
+      "passwordHash": "PengcabKabSolok2026!",
+      "nama": "Pengcab ESI Kab. Solok",
+      "instansi": "Pengurus Cabang ESI Kab. Solok",
+      "wilayah": "Kab. Solok",
+      "permissions": [
+        "pengcab:kab-solok:*"
+      ]
+    },
+    {
+      "id": "usr-atl-3197",
+      "role": "atlet",
+      "email": "fauzan.test@esportsumbar.id",
+      "passwordHash": "Password123!",
+      "nama": "Fauzan Mobile Tester",
+      "ign": "Z4NN",
+      "pasporId": "PBESI-SB-2026-MOB-161",
+      "wilayah": "Kota Bukittinggi",
+      "permissions": [
+        "atlet:self"
+      ]
     }
   ],
   "wilayah": [
@@ -482,6 +531,25 @@
     }
   ],
   "atlet": [
+    {
+      "id": "atl-3197",
+      "pasporId": "PBESI-SB-2026-MOB-161",
+      "nama": "Fauzan Mobile Tester",
+      "ign": "Z4NN",
+      "game": "Mobile Legends",
+      "role": "Jungler / Retri God",
+      "wilayah": "Kota Bukittinggi",
+      "nik": "-",
+      "email": "fauzan.test@esportsumbar.id",
+      "ovr": 94,
+      "statusPelatda": "POTENSI DAERAH",
+      "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+      "foto": "/images/athlete-v4nd4l.jpg",
+      "statusLFT": true,
+      "prestasi": [
+        "Pendaftar Paspor Digital Baru 2026"
+      ]
+    },
     {
       "id": "atl-9180",
       "pasporId": "PBESI-SB-2026-PUB-170",
@@ -765,6 +833,42 @@
     }
   ],
   "antreanVerifikasi": [
+    {
+      "id": "reg-pla-23197",
+      "bidang": "player",
+      "nama": "Fauzan Mobile Tester",
+      "wilayah": "Kota Bukittinggi",
+      "telepon": "081299887766",
+      "email": "fauzan.test@esportsumbar.id",
+      "password": "Password123!",
+      "ign": "Z4NN",
+      "game": "Mobile Legends",
+      "role": "Jungler / Retri God",
+      "playerStatus": "LFT",
+      "source": "mobile-app",
+      "generatedPasporId": "PBESI-SB-2026-MOB-161",
+      "athlete": {
+        "id": "atl-3197",
+        "pasporId": "PBESI-SB-2026-MOB-161",
+        "nama": "Fauzan Mobile Tester",
+        "ign": "Z4NN",
+        "game": "Mobile Legends",
+        "role": "Jungler / Retri God",
+        "wilayah": "Kota Bukittinggi",
+        "nik": "-",
+        "email": "fauzan.test@esportsumbar.id",
+        "ovr": 94,
+        "statusPelatda": "POTENSI DAERAH",
+        "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+        "foto": "/images/athlete-v4nd4l.jpg",
+        "statusLFT": true,
+        "prestasi": [
+          "Pendaftar Paspor Digital Baru 2026"
+        ]
+      },
+      "status": "pending",
+      "submittedAt": "2026-10-31T12:32:03.197Z"
+    },
     {
       "id": "reg-pla-89180",
       "bidang": "player",
