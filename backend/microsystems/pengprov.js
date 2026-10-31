@@ -41,6 +41,65 @@ export const MicroPengprov = {
     };
   },
 
+  // Antrean Pengesahan Lisensi Resmi (Tahap 2: ESI Sumbar Legalitas)
+  async getVerificationQueue() {
+    const queue = db.getPengprovQueue();
+    return {
+      success: true,
+      statusCode: 200,
+      regulator: "Pengprov ESI Sumatera Barat",
+      totalAntrean: queue.length,
+      data: queue
+    };
+  },
+
+  // Sahkan & Terbitkan Lisensi Resmi PBESI (Terhubung ke Kartu & Web Utama)
+  async approveLicense(body) {
+    const { id, notes, statusPelatda } = body || {};
+    if (!id) {
+      return {
+        success: false,
+        statusCode: 400,
+        message: "ID pendaftar wajib disertakan."
+      };
+    }
+
+    const updated = db.approveRegistrationByPengprov(id, notes || 'Disahkan oleh Sekretariat Pengprov ESI Sumbar', {
+      statusPelatda: statusPelatda || null
+    });
+
+    if (!updated) {
+      return {
+        success: false,
+        statusCode: 404,
+        message: `Pendaftar dengan ID ${id} tidak ditemukan.`
+      };
+    }
+
+    return {
+      success: true,
+      statusCode: 200,
+      message: `Lisensi Resmi PBESI berhasil diterbitkan untuk ${updated.nama}! Nomor Paspor: ${updated.generatedPasporId || 'PBESI-SB-2026'}. Badge resmi telah aktif di web publik.`,
+      data: updated
+    };
+  },
+
+  // Seluruh Pangkalan Data Provinsi (19 Wilayah)
+  async getMasterDatabase() {
+    return {
+      success: true,
+      statusCode: 200,
+      totalWilayah: db.getWilayahList().length,
+      totalAtlet: db.getAthletes().length,
+      totalTim: db.getTeams().length,
+      totalVenue: db.getVenues().length,
+      wilayah: db.getWilayahList(),
+      atlet: db.getAthletes(),
+      tim: db.getTeams(),
+      venue: db.getVenues()
+    };
+  },
+
   // Kalender Kejurda & Porprov
   async getEvents() {
     const events = db.getEvents();

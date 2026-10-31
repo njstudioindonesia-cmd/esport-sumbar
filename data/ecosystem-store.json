@@ -1,6 +1,6 @@
 {
   "version": "2.4.0",
-  "lastUpdated": "2026-10-30T19:46:02.247Z",
+  "lastUpdated": "2026-10-31T11:33:09.189Z",
   "users": [
     {
       "id": "usr-super",
@@ -72,6 +72,199 @@
       "ign": "SHADOWFOX",
       "pasporId": "PBESI-SB-2026-MOB-871",
       "wilayah": "Kota Payakumbuh",
+      "permissions": [
+        "atlet:self"
+      ]
+    },
+    {
+      "id": "usr-pengcab-solok",
+      "role": "pengcab",
+      "email": "pengcab.solok@esi-sumbar.or.id",
+      "passwordHash": "PengcabSolok2026!",
+      "nama": "Pengcab ESI Kota Solok",
+      "instansi": "Pengurus Cabang ESI Kota Solok",
+      "wilayah": "Kota Solok",
+      "permissions": [
+        "pengcab:solok:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-sawahlunto",
+      "role": "pengcab",
+      "email": "pengcab.sawahlunto@esi-sumbar.or.id",
+      "passwordHash": "PengcabSawahlunto2026!",
+      "nama": "Pengcab ESI Kota Sawahlunto",
+      "instansi": "Pengurus Cabang ESI Kota Sawahlunto",
+      "wilayah": "Kota Sawahlunto",
+      "permissions": [
+        "pengcab:sawahlunto:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-padangpanjang",
+      "role": "pengcab",
+      "email": "pengcab.padangpanjang@esi-sumbar.or.id",
+      "passwordHash": "PengcabPadangpanjang2026!",
+      "nama": "Pengcab ESI Kota Padang Panjang",
+      "instansi": "Pengurus Cabang ESI Kota Padang Panjang",
+      "wilayah": "Kota Padang Panjang",
+      "permissions": [
+        "pengcab:padangpanjang:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-pariaman",
+      "role": "pengcab",
+      "email": "pengcab.pariaman@esi-sumbar.or.id",
+      "passwordHash": "PengcabPariaman2026!",
+      "nama": "Pengcab ESI Kota Pariaman",
+      "instansi": "Pengurus Cabang ESI Kota Pariaman",
+      "wilayah": "Kota Pariaman",
+      "permissions": [
+        "pengcab:pariaman:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-agam",
+      "role": "pengcab",
+      "email": "pengcab.agam@esi-sumbar.or.id",
+      "passwordHash": "PengcabAgam2026!",
+      "nama": "Pengcab ESI Kab. Agam",
+      "instansi": "Pengurus Cabang ESI Kab. Agam",
+      "wilayah": "Kab. Agam",
+      "permissions": [
+        "pengcab:agam:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-tanahdatar",
+      "role": "pengcab",
+      "email": "pengcab.tanahdatar@esi-sumbar.or.id",
+      "passwordHash": "PengcabTanahdatar2026!",
+      "nama": "Pengcab ESI Kab. Tanah Datar",
+      "instansi": "Pengurus Cabang ESI Kab. Tanah Datar",
+      "wilayah": "Kab. Tanah Datar",
+      "permissions": [
+        "pengcab:tanahdatar:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-limapuluhkota",
+      "role": "pengcab",
+      "email": "pengcab.limapuluhkota@esi-sumbar.or.id",
+      "passwordHash": "PengcabLimapuluhkota2026!",
+      "nama": "Pengcab ESI Kab. Lima Puluh Kota",
+      "instansi": "Pengurus Cabang ESI Kab. Lima Puluh Kota",
+      "wilayah": "Kab. Lima Puluh Kota",
+      "permissions": [
+        "pengcab:limapuluhkota:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-padangpariaman",
+      "role": "pengcab",
+      "email": "pengcab.padangpariaman@esi-sumbar.or.id",
+      "passwordHash": "PengcabPadangpariaman2026!",
+      "nama": "Pengcab ESI Kab. Padang Pariaman",
+      "instansi": "Pengurus Cabang ESI Kab. Padang Pariaman",
+      "wilayah": "Kab. Padang Pariaman",
+      "permissions": [
+        "pengcab:padangpariaman:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-pesisirselatan",
+      "role": "pengcab",
+      "email": "pengcab.pesisirselatan@esi-sumbar.or.id",
+      "passwordHash": "PengcabPesisirselatan2026!",
+      "nama": "Pengcab ESI Kab. Pesisir Selatan",
+      "instansi": "Pengurus Cabang ESI Kab. Pesisir Selatan",
+      "wilayah": "Kab. Pesisir Selatan",
+      "permissions": [
+        "pengcab:pesisirselatan:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-solokselatan",
+      "role": "pengcab",
+      "email": "pengcab.solokselatan@esi-sumbar.or.id",
+      "passwordHash": "PengcabSolokselatan2026!",
+      "nama": "Pengcab ESI Kab. Solok Selatan",
+      "instansi": "Pengurus Cabang ESI Kab. Solok Selatan",
+      "wilayah": "Kab. Solok Selatan",
+      "permissions": [
+        "pengcab:solokselatan:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-sijunjung",
+      "role": "pengcab",
+      "email": "pengcab.sijunjung@esi-sumbar.or.id",
+      "passwordHash": "PengcabSijunjung2026!",
+      "nama": "Pengcab ESI Kab. Sijunjung",
+      "instansi": "Pengurus Cabang ESI Kab. Sijunjung",
+      "wilayah": "Kab. Sijunjung",
+      "permissions": [
+        "pengcab:sijunjung:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-dharmasraya",
+      "role": "pengcab",
+      "email": "pengcab.dharmasraya@esi-sumbar.or.id",
+      "passwordHash": "PengcabDharmasraya2026!",
+      "nama": "Pengcab ESI Kab. Dharmasraya",
+      "instansi": "Pengurus Cabang ESI Kab. Dharmasraya",
+      "wilayah": "Kab. Dharmasraya",
+      "permissions": [
+        "pengcab:dharmasraya:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-pasaman",
+      "role": "pengcab",
+      "email": "pengcab.pasaman@esi-sumbar.or.id",
+      "passwordHash": "PengcabPasaman2026!",
+      "nama": "Pengcab ESI Kab. Pasaman",
+      "instansi": "Pengurus Cabang ESI Kab. Pasaman",
+      "wilayah": "Kab. Pasaman",
+      "permissions": [
+        "pengcab:pasaman:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-pasamanbarat",
+      "role": "pengcab",
+      "email": "pengcab.pasamanbarat@esi-sumbar.or.id",
+      "passwordHash": "PengcabPasamanbarat2026!",
+      "nama": "Pengcab ESI Kab. Pasaman Barat",
+      "instansi": "Pengurus Cabang ESI Kab. Pasaman Barat",
+      "wilayah": "Kab. Pasaman Barat",
+      "permissions": [
+        "pengcab:pasamanbarat:*"
+      ]
+    },
+    {
+      "id": "usr-pengcab-kepulauanmentawai",
+      "role": "pengcab",
+      "email": "pengcab.kepulauanmentawai@esi-sumbar.or.id",
+      "passwordHash": "PengcabKepulauanmentawai2026!",
+      "nama": "Pengcab ESI Kab. Kepulauan Mentawai",
+      "instansi": "Pengurus Cabang ESI Kab. Kepulauan Mentawai",
+      "wilayah": "Kab. Kepulauan Mentawai",
+      "permissions": [
+        "pengcab:kepulauanmentawai:*"
+      ]
+    },
+    {
+      "id": "usr-atl-9180",
+      "role": "atlet",
+      "email": "budi.sniper@gmail.com",
+      "passwordHash": "AtletSumbar2026!",
+      "nama": "Budi Santoso Pratama",
+      "ign": "JAMGADANG_SNIPER",
+      "pasporId": "PBESI-SB-2026-PUB-170",
+      "wilayah": "Kota Bukittinggi",
       "permissions": [
         "atlet:self"
       ]
@@ -289,6 +482,27 @@
     }
   ],
   "atlet": [
+    {
+      "id": "atl-9180",
+      "pasporId": "PBESI-SB-2026-PUB-170",
+      "nama": "Budi Santoso Pratama",
+      "ign": "JAMGADANG_SNIPER",
+      "game": "PUBG Mobile",
+      "role": "Sniper / Scout",
+      "wilayah": "Kota Bukittinggi",
+      "nik": "1375011204010005",
+      "email": "budi.sniper@gmail.com",
+      "ovr": 87,
+      "statusPelatda": "POTENSI DAERAH",
+      "lisensiStatus": "TERVERIFIKASI PBESI",
+      "foto": "/images/athlete-v4nd4l.jpg",
+      "statusLFT": true,
+      "prestasi": [
+        "Pendaftar Paspor Digital Baru 2026"
+      ],
+      "verifiedBadge": "PBESI SUMBAR OFFICIAL",
+      "verifiedAt": "2026-10-31T11:33:09.189Z"
+    },
     {
       "id": "atl-2247",
       "pasporId": "PBESI-SB-2026-MOB-871",
@@ -552,6 +766,49 @@
   ],
   "antreanVerifikasi": [
     {
+      "id": "reg-pla-89180",
+      "bidang": "player",
+      "nama": "Budi Santoso Pratama",
+      "ign": "JAMGADANG_SNIPER",
+      "game": "PUBG Mobile",
+      "role": "Sniper / Scout",
+      "wilayah": "Kota Bukittinggi",
+      "nik": "1375011204010005",
+      "email": "budi.sniper@gmail.com",
+      "kontak": "0812-7788-9900",
+      "generatedPasporId": "PBESI-SB-2026-PUB-170",
+      "athlete": {
+        "id": "atl-9180",
+        "pasporId": "PBESI-SB-2026-PUB-170",
+        "nama": "Budi Santoso Pratama",
+        "ign": "JAMGADANG_SNIPER",
+        "game": "PUBG Mobile",
+        "role": "Sniper / Scout",
+        "wilayah": "Kota Bukittinggi",
+        "nik": "1375011204010005",
+        "email": "budi.sniper@gmail.com",
+        "ovr": 87,
+        "statusPelatda": "POTENSI DAERAH",
+        "lisensiStatus": "TERVERIFIKASI PBESI",
+        "foto": "/images/athlete-v4nd4l.jpg",
+        "statusLFT": true,
+        "prestasi": [
+          "Pendaftar Paspor Digital Baru 2026"
+        ],
+        "verifiedBadge": "PBESI SUMBAR OFFICIAL",
+        "verifiedAt": "2026-10-31T11:33:09.189Z"
+      },
+      "status": "approved_pengprov",
+      "submittedAt": "2026-10-31T11:33:09.180Z",
+      "pengcabVerified": true,
+      "pengcabVerifiedAt": "2026-10-31T11:33:09.186Z",
+      "pengcabNotes": "KTP Bukittinggi sah & verified",
+      "processedAt": "2026-10-31T11:33:09.186Z",
+      "pengprovVerified": true,
+      "pengprovVerifiedAt": "2026-10-31T11:33:09.188Z",
+      "notes": "Disahkan oleh Sekretariat Pengprov ESI Sumbar"
+    },
+    {
       "id": "reg-pla-62246",
       "bidang": "player",
       "nama": "Rifki Pratama Yudha",
@@ -775,5 +1032,83 @@
       "totalHadiah": "Rp 100.000.000",
       "status": "Upcoming"
     }
-  ]
+  ],
+  "cardSettings": {
+    "activeTemplate": "white-luxury",
+    "templates": [
+      {
+        "id": "white-luxury",
+        "name": "White Luxury (Default Resmi)",
+        "badge": "Resmi PBESI",
+        "bg": "bg-white",
+        "border": "border-black/15"
+      },
+      {
+        "id": "crimson-gold",
+        "name": "Crimson Gold (Pelatda Edition)",
+        "badge": "Edisi Kejurda",
+        "bg": "bg-gradient-to-br from-crimson-900 to-black",
+        "border": "border-amber-400"
+      },
+      {
+        "id": "cyber-dark",
+        "name": "Cyber Onyx (Pro Player)",
+        "badge": "Division 1",
+        "bg": "bg-[#111318]",
+        "border": "border-white/20"
+      },
+      {
+        "id": "emerald-master",
+        "name": "Emerald Master (Certified)",
+        "badge": "Lisensi Sah",
+        "bg": "bg-emerald-950",
+        "border": "border-emerald-500"
+      }
+    ],
+    "verificationBadge": {
+      "icon": "shield-check",
+      "label": "TERVERIFIKASI PBESI",
+      "color": "emerald",
+      "enabled": true
+    },
+    "pelatdaBadge": {
+      "icon": "award",
+      "label": "PELATDA PON XXI",
+      "color": "amber",
+      "enabled": true
+    },
+    "cardHoloShimmer": true,
+    "showOvrRating": true,
+    "lastUpdated": "2026-10-31T11:32:46.176Z"
+  },
+  "bannerAds": {
+    "heroTop": {
+      "enabled": true,
+      "badge": "PORTAL RESMI // ESI SUMBAR 2026",
+      "title": "PASPOR RESMI ATLET & TALENTA ESPORT SUMATERA BARAT",
+      "subtitle": "Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.",
+      "ctaText": "Daftar Kartu",
+      "ctaLink": "/daftar",
+      "imageUrl": "/pbesi-logo.png"
+    },
+    "sponsorSlots": [
+      {
+        "id": "sp-1",
+        "name": "Pengprov PBESI Sumbar",
+        "category": "Regulator Resmi",
+        "status": "Aktif",
+        "logo": "/pbesi-logo.png",
+        "link": "/about"
+      },
+      {
+        "id": "sp-2",
+        "name": "Esport Sumbar Platform",
+        "category": "Official Provider",
+        "status": "Aktif",
+        "logo": "/images/esport-sumbar-logo.png",
+        "link": "/"
+      }
+    ],
+    "lastUpdated": "2026-10-31T11:32:46.177Z"
+  }
 }

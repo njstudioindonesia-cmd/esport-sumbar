@@ -151,10 +151,22 @@
       }
     },
 
-    // 7. PENGPROV ESI SUMBAR
+    // 7. PENGPROV ESI SUMBAR (REGULATOR TINGKAT I)
     pengprov: {
       async getSummary() {
         return request('/pengprov/summary');
+      },
+      async getVerificationQueue() {
+        return request('/pengprov/queue');
+      },
+      async approveLicense(id, notes = '', statusPelatda = null) {
+        return request('/pengprov/approve-license', {
+          method: 'POST',
+          body: JSON.stringify({ id, notes, statusPelatda })
+        });
+      },
+      async getMasterDatabase() {
+        return request('/pengprov/master-database');
       },
       async getPelatda() {
         return request('/pengprov/pelatda');
@@ -170,10 +182,20 @@
       }
     },
 
-    // 8. PENGCAB ESI KAB/KOTA
+    // 8. PENGCAB ESI KAB/KOTA (REGULATOR TINGKAT II)
     pengcab: {
       async getData(region = 'Kota Padang') {
         return request(`/pengcab/data?region=${encodeURIComponent(region)}`);
+      },
+      async getRegionalQueue(region = '') {
+        const qs = region ? `?region=${encodeURIComponent(region)}` : '';
+        return request(`/pengcab/queue${qs}`);
+      },
+      async filterAction(id, action, notes = '', pengcabName = '') {
+        return request('/pengcab/filter-action', {
+          method: 'POST',
+          body: JSON.stringify({ id, action, notes, pengcabName })
+        });
       },
       async issueRekomendasi(payload) {
         return request('/pengcab/rekomendasi', {
@@ -189,7 +211,38 @@
       }
     },
 
-    // 9. TELEMETRY & REALTIME DATABASE STATS
+    // 9. SUPER ADMIN (CARD DESIGN STUDIO & BANNER ADS MANAGER)
+    admin: {
+      async getCardSettings() {
+        return request('/admin/settings/card');
+      },
+      async saveCardSettings(settings) {
+        return request('/admin/settings/card', {
+          method: 'POST',
+          body: JSON.stringify(settings)
+        });
+      },
+      async getBannerAds() {
+        return request('/admin/settings/banners');
+      },
+      async saveBannerAds(banners) {
+        return request('/admin/settings/banners', {
+          method: 'POST',
+          body: JSON.stringify(banners)
+        });
+      },
+      async getAccounts() {
+        return request('/admin/accounts');
+      },
+      async createAccount(accountData) {
+        return request('/admin/accounts', {
+          method: 'POST',
+          body: JSON.stringify(accountData)
+        });
+      }
+    },
+
+    // 10. TELEMETRY & REALTIME DATABASE STATS
     stats: {
       cachedMetrics: null,
       pollTimer: null,

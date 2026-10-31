@@ -162,6 +162,24 @@ export async function dispatchApiRequest(req, res) {
       return;
     }
 
+    if (pathname === '/api/pengprov/queue' && req.method === 'GET') {
+      const result = await MicroPengprov.getVerificationQueue();
+      sendJson(res, result.statusCode || 200, result);
+      return;
+    }
+
+    if (pathname === '/api/pengprov/approve-license' && req.method === 'POST') {
+      const result = await MicroPengprov.approveLicense(body);
+      sendJson(res, result.statusCode || 200, result);
+      return;
+    }
+
+    if (pathname === '/api/pengprov/master-database' && req.method === 'GET') {
+      const result = await MicroPengprov.getMasterDatabase();
+      sendJson(res, result.statusCode || 200, result);
+      return;
+    }
+
     if (pathname === '/api/pengprov/pelatda' && req.method === 'GET') {
       const result = await MicroPengprov.getPelatdaRoster();
       sendJson(res, result.statusCode || 200, result);
@@ -187,6 +205,18 @@ export async function dispatchApiRequest(req, res) {
       return;
     }
 
+    if (pathname === '/api/pengcab/queue' && req.method === 'GET') {
+      const result = await MicroPengcab.getRegionalQueue(query);
+      sendJson(res, result.statusCode || 200, result);
+      return;
+    }
+
+    if (pathname === '/api/pengcab/filter-action' && req.method === 'POST') {
+      const result = await MicroPengcab.filterAction(body);
+      sendJson(res, result.statusCode || 200, result);
+      return;
+    }
+
     if (pathname === '/api/pengcab/rekomendasi' && req.method === 'POST') {
       const result = await MicroPengcab.issueRekomendasi(body);
       sendJson(res, result.statusCode || 201, result);
@@ -196,6 +226,40 @@ export async function dispatchApiRequest(req, res) {
     if (pathname === '/api/pengcab/domisili-verify' && ['PUT', 'POST'].includes(req.method)) {
       const result = await MicroPengcab.verifyDomisili(body);
       sendJson(res, result.statusCode || 200, result);
+      return;
+    }
+
+    // SUPER ADMIN SYSTEM CUSTOMIZATION & SETTINGS
+    if (pathname === '/api/admin/settings/card') {
+      const { db } = await import('./store/db.js');
+      if (req.method === 'POST') {
+        const updated = db.updateCardSettings(body);
+        sendJson(res, 200, { success: true, message: "Pengaturan visual kartu berhasil diperbarui!", data: updated });
+      } else {
+        sendJson(res, 200, { success: true, data: db.getCardSettings() });
+      }
+      return;
+    }
+
+    if (pathname === '/api/admin/settings/banners') {
+      const { db } = await import('./store/db.js');
+      if (req.method === 'POST') {
+        const updated = db.updateBannerAds(body);
+        sendJson(res, 200, { success: true, message: "Pengaturan banner iklan web berhasil disimpan!", data: updated });
+      } else {
+        sendJson(res, 200, { success: true, data: db.getBannerAds() });
+      }
+      return;
+    }
+
+    if (pathname === '/api/admin/accounts') {
+      const { db } = await import('./store/db.js');
+      if (req.method === 'POST') {
+        const newAdmin = db.createAdminAccount(body);
+        sendJson(res, 201, { success: true, message: "Akun pengurus berhasil ditambahkan!", data: newAdmin });
+      } else {
+        sendJson(res, 200, { success: true, data: db.getAllAdmins() });
+      }
       return;
     }
 

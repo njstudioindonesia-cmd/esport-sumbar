@@ -44,6 +44,51 @@ export const MicroPengcab = {
     };
   },
 
+  // Antrean Verifikasi Khusus Pengcab Daerah (Tahap 1: Filterisasi Anti-Akun Palsu)
+  async getRegionalQueue(query) {
+    const region = query?.region || query?.wilayah || null;
+    const queue = db.getPengcabQueue(region);
+    return {
+      success: true,
+      statusCode: 200,
+      wilayah: region || "Semua Wilayah",
+      totalAntrean: queue.length,
+      data: queue
+    };
+  },
+
+  // Aksi Filterisasi Pengcab (Loloskan ke ESI Sumbar vs Tolak Akun Palsu)
+  async filterAction(body) {
+    const { id, action, notes, pengcabName } = body || {};
+    if (!id || !action) {
+      return {
+        success: false,
+        statusCode: 400,
+        message: "ID pendaftar dan jenis aksi (lolos / tolak) wajib diisi."
+      };
+    }
+
+    const updated = db.filterRegistrationByPengcab(id, action, notes || '', pengcabName || 'Pengcab ESI Daerah');
+    if (!updated) {
+      return {
+        success: false,
+        statusCode: 404,
+        message: `Pendaftar dengan ID ${id} tidak ditemukan.`
+      };
+    }
+
+    const isLolos = action === 'lolos' || action === 'approve';
+    return {
+      success: true,
+      statusCode: 200,
+      action: action,
+      message: isLolos
+        ? `Akun ${updated.nama} (${updated.ign || 'Pendaftar'}) telah diverifikasi asli oleh ${pengcabName} dan berhasil diteruskan ke Pengprov ESI Sumbar untuk pengesahan lisensi!`
+        : `Akun ${updated.nama} telah ditolak sebagai akun palsu/data tidak sah.`,
+      data: updated
+    };
+  },
+
   // Terbitkan Surat Rekomendasi Turnamen Daerah
   async issueRekomendasi(body) {
     const { wilayah, namaTurnamen, penyelenggara, tanggalEvent, game, venue } = body || {};

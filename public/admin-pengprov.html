@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <title>Dashboard ESI SUMBAR (Pengprov) – ESPORT SUMBAR</title>
-  <meta name="description" content="Dashboard Eksekutif Pengurus Provinsi (Pengprov) ESI Sumatera Barat. Pembinaan prestasi atlet Pelatda, koordinasi 19 Pengcab daerah, dan kalender turnamen resmi." />
+  <meta name="description" content="Dashboard Eksekutif Pengurus Provinsi (Pengprov) ESI Sumatera Barat. Pusat pengesahan lisensi PBESI resmi, verifikasi berkas lolos Pengcab, dan Pelatda PON." />
 
   <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,10 +42,7 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Favicon & Brand Icons -->
   <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
-  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
 
   <style>
     html, body {
@@ -54,10 +51,10 @@
     }
 
     body {
-      background-color: #0F0A0B;
+      background-color: #0F090B;
       color: #F4F1EE;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(182, 18, 27, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 50% 0%, rgba(182, 18, 27, 0.16) 0%, transparent 60%),
         linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
       background-size: 100% 100%, 32px 32px, 32px 32px;
@@ -75,23 +72,23 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
+  <script src="/js/microsystem-client.js"></script>
 </head>
 <body class="font-sans antialiased selection:bg-crimson-800 selection:text-white pb-24 min-h-screen">
 
   <!-- ============================================================== -->
-  <!-- 1. TOP EXECUTIVE LEVEL SWITCHER                                -->
+  <!-- 1. TOP EXECUTIVE LEVEL SWITCHER (NAVIGASI 3 TINGKAT ADMIN)     -->
   <!-- ============================================================== -->
-  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/90 border-b border-white/10 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
+  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/95 border-b border-crimson-800/30 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
       
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-crimson-500 animate-pulse"></span>
         <span class="text-[10px] font-mono uppercase font-bold tracking-wider text-crimson-400">
-          PORTAL ADMINISTRASI EKOSISTEM:
+          PORTAL ADMINISTRASI:
         </span>
       </div>
 
-      <!-- 3 Level Admin Selector Chips -->
       <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
         <!-- 1. Super Admin -->
         <a href="/admin-super" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
@@ -100,15 +97,15 @@
         </a>
 
         <!-- 2. ESI Sumbar (Pengprov - Active) -->
-        <a href="/admin-pengprov" class="px-3 py-1 rounded-xl bg-crimson-800 text-white font-mono text-[11px] font-black uppercase flex items-center gap-1.5 shadow-sm app-tap">
+        <a href="/admin-pengprov" class="px-3 py-1 rounded-xl bg-gradient-to-r from-crimson-800 to-crimson-700 text-white font-mono text-[11px] font-black uppercase flex items-center gap-1.5 shadow-sm app-tap">
           <i data-lucide="landmark" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span>2. ESI Sumbar (Aktif)</span>
+          <span>2. ESI Sumbar (Legalitas)</span>
         </a>
 
         <!-- 3. ESI Kota / Kab -->
         <a href="/admin-pengcab" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
           <i data-lucide="map-pin" class="w-3.5 h-3.5 text-sky-400"></i>
-          <span>3. ESI Kota / Kab</span>
+          <span>3. ESI 19 Kab/Kota</span>
         </a>
 
         <!-- Link to Live Website -->
@@ -129,7 +126,7 @@
       
       <div class="flex items-center gap-3.5">
         <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-800 to-crimson-950 flex items-center justify-center p-2.5 shadow-lg shadow-crimson-900/40 ring-1 ring-white/20 shrink-0">
-          <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+          <img src="/pbesi-logo.png" alt="PBESI Logo" class="w-full h-full object-contain filter brightness-110" />
         </div>
         <div>
           <div class="flex items-center gap-2">
@@ -137,20 +134,25 @@
               PENGPROV <span class="text-crimson-500">ESI SUMATERA BARAT</span>
             </h1>
             <span class="px-2 py-0.5 rounded-md bg-crimson-800/40 text-crimson-300 border border-crimson-700/40 text-[9px] font-mono font-bold uppercase">
-              REGULATOR TINGKAT I
+              PORTAL 2 // LEGALITAS & LISENSI RESMI
             </span>
           </div>
           <p class="text-xs font-mono text-white/60 mt-1 flex items-center gap-1.5">
-            <span>SK PBESI: 018/PBESI/SK-SUMBAR/2024 • Pembinaan 19 Pengcab Kabupaten/Kota</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>SK PBESI: 018/PBESI/SK-SUMBAR/2024 • Otoritas Pengesahan Lisensi & Sertifikasi 19 Wilayah</span>
           </p>
         </div>
       </div>
 
-      <!-- Quick Provincial Actions -->
+      <!-- Quick Actions -->
       <div class="flex items-center gap-2">
-        <button type="button" onclick="showNewEventModal()" class="px-3.5 py-2 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
+        <button type="button" onclick="loadPengprovData()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-amber-300"></i>
+          <span>Muat Ulang Berkas</span>
+        </button>
+        <button type="button" onclick="openNewEventModal()" class="px-3.5 py-2 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
           <i data-lucide="calendar-plus" class="w-3.5 h-3.5 text-amber-300"></i>
-          <span>Buat Jadwal Kejurda</span>
+          <span>Buat Agenda Kejurda</span>
         </button>
       </div>
 
@@ -158,64 +160,64 @@
   </header>
 
   <!-- ============================================================== -->
-  <!-- 3. METRIC COUNTERS                                             -->
+  <!-- 3. REALTIME METRIC COUNTERS                                    -->
   <!-- ============================================================== -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
     
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
       
-      <!-- Card 1 -->
-      <div class="rounded-3xl bg-[#1A1113] border border-crimson-800/30 p-4 shadow-lg shadow-crimson-950/20 flex flex-col justify-between">
+      <!-- Card 1: Antrean Pengesahan Lisensi -->
+      <div class="rounded-3xl bg-[#1A1114] border border-amber-500/40 p-4 shadow-lg shadow-amber-950/20 flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold text-crimson-400">Atlet Pelatda PON</span>
+          <span class="text-[10px] font-mono uppercase font-bold text-amber-300">Menunggu Pengesahan PBESI</span>
+          <i data-lucide="file-check-2" class="w-4 h-4 text-amber-400"></i>
+        </div>
+        <div>
+          <div id="statPendingPengprov" class="font-display text-3xl sm:text-4xl text-amber-400 leading-none">5 BERKAS</div>
+          <div class="text-[10px] font-mono text-amber-300/80 mt-1">
+            Lolos Seleksi Pengcab Daerah
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Atlet Pelatda PON -->
+      <div class="rounded-3xl bg-[#1A1114] border border-crimson-800/30 p-4 shadow-lg shadow-crimson-950/20 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-white/60 mb-2">
+          <span class="text-[10px] font-mono uppercase font-bold text-crimson-400">Atlet Pelatda PON XXI</span>
           <i data-lucide="medal" class="w-4 h-4 text-amber-400"></i>
         </div>
         <div>
-          <div class="font-display text-3xl sm:text-4xl text-amber-400 leading-none">24 ATLET</div>
+          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="pelatdaCount">25 ATLET</div>
           <div class="text-[10px] font-mono text-white/60 mt-1">
-            4 Divisi Cabor Esports
+            4 Cabor Esports Resmi
           </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="rounded-3xl bg-[#1A1113] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+      <!-- Card 3: 19 Pengcab Daerah -->
+      <div class="rounded-3xl bg-[#1A1114] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">19 Pengcab Daerah</span>
+          <span class="text-[10px] font-mono uppercase font-bold text-emerald-400">19 Pengcab Terakreditasi</span>
           <i data-lucide="landmark" class="w-4 h-4 text-emerald-400"></i>
         </div>
         <div>
-          <div class="font-display text-3xl sm:text-4xl text-white leading-none">19 / 19</div>
+          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="pengcabAktif">19/19</div>
           <div class="text-[10px] font-mono text-emerald-400 mt-1">
-            Status SK: 100% Aktif
+            100% Sentra Pembinaan Aktif
           </div>
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="rounded-3xl bg-[#1A1113] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+      <!-- Card 4: Klub Akreditasi PBESI -->
+      <div class="rounded-3xl bg-[#1A1114] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">Turnamen Provinsi</span>
-          <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
+          <span class="text-[10px] font-mono uppercase font-bold text-sky-400">Klub Berlisensi Sah</span>
+          <i data-lucide="shield" class="w-4 h-4 text-sky-400"></i>
         </div>
         <div>
-          <div class="font-display text-3xl sm:text-4xl text-white leading-none">8 EVENT</div>
+          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="klubAkreditasi" data-stat-suffix="+">42+ KLUB</div>
           <div class="text-[10px] font-mono text-white/60 mt-1">
-            Piala Gubernur & Porprov 2026
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="rounded-3xl bg-[#1A1113] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
-        <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">Klub Divisi Utama</span>
-          <i data-lucide="shield" class="w-4 h-4 text-crimson-400"></i>
-        </div>
-        <div>
-          <div class="font-display text-3xl sm:text-4xl text-white leading-none">42 KLUB</div>
-          <div class="text-[10px] font-mono text-white/60 mt-1">
-            Terakreditasi Pengprov ESI
+            Grade A & B Terdaftar
           </div>
         </div>
       </div>
@@ -223,268 +225,414 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- 4. PENGPROV FUNCTIONAL TABS                                    -->
+    <!-- 4. MASTER FUNCTIONAL TABS (ESI SUMBAR)                         -->
     <!-- ============================================================== -->
-    <div class="bg-[#1A1113] rounded-2xl p-1.5 border border-white/10 shadow-sm flex items-center gap-1 mb-5 overflow-x-auto no-scrollbar">
-      <button type="button" id="tabBtnPengcab" onclick="switchPengprovTab('pengcab')" class="flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap">
-        <i data-lucide="landmark" class="w-4 h-4 text-amber-300"></i>
-        <span>19 Pengcab Daerah</span>
+    <div class="bg-[#1A1114] rounded-2xl p-1.5 border border-white/10 shadow-sm flex items-center gap-1 mb-6 overflow-x-auto no-scrollbar">
+      
+      <!-- Tab 1: Pengesahan Lisensi -->
+      <button type="button" id="tabBtnLicense" onclick="switchPengprovTab('license')" class="flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-black uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap">
+        <i data-lucide="check-check" class="w-4 h-4 text-amber-300"></i>
+        <span>1. Pengesahan & Legalitas Lisensi PBESI</span>
       </button>
+
+      <!-- Tab 2: Master Database Provinsi -->
+      <button type="button" id="tabBtnProvDb" onclick="switchPengprovTab('prov-db')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="database" class="w-4 h-4 text-sky-400"></i>
+        <span>2. Pangkalan Data 19 Wilayah</span>
+      </button>
+
+      <!-- Tab 3: Pelatda PON XXI -->
       <button type="button" id="tabBtnPelatda" onclick="switchPengprovTab('pelatda')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
         <i data-lucide="medal" class="w-4 h-4 text-amber-400"></i>
-        <span>Pelatda PON & Seleknas</span>
+        <span>3. Kontingen Pelatda PON XXI</span>
       </button>
+
+      <!-- Tab 4: Kalender Kejurda -->
       <button type="button" id="tabBtnEvents" onclick="switchPengprovTab('events')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
-        <i data-lucide="calendar" class="w-4 h-4 text-sky-400"></i>
-        <span>Kalender Kejurda & Porprov</span>
+        <i data-lucide="calendar" class="w-4 h-4 text-emerald-400"></i>
+        <span>4. Jadwal Kejurda & Turnamen</span>
       </button>
-      <button type="button" id="tabBtnKlub" onclick="switchPengprovTab('klub')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
-        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
-        <span>Akreditasi Klub Tier 1</span>
-      </button>
+
     </div>
 
     <!-- ============================================================== -->
-    <!-- 5. TAB 1: 19 PENGCAB DAERAH MONITORING                         -->
+    <!-- TAB 1: PENGESAHAN LISENSI & LEGALITAS PBESI (APPROVAL HUB)     -->
     <!-- ============================================================== -->
-    <div id="sectionPengcab" class="space-y-4">
-      <div class="flex items-center justify-between pb-1">
-        <span class="text-xs font-mono font-bold uppercase text-white/70">
-          Status & Evaluasi 19 Pengcab ESI Kabupaten/Kota Se-Sumatera Barat
-        </span>
-        <a href="/admin-pengcab" class="text-xs font-mono text-amber-300 hover:text-amber-200 font-bold flex items-center gap-1 app-tap">
-          <span>Buka Dashboard Pengcab Daerah</span>
-          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </a>
+    <div id="sectionLicense" class="space-y-4">
+      
+      <div class="bg-[#1A1114] border border-amber-500/30 rounded-3xl p-5 shadow-xl">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4 pb-3 border-b border-white/10">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">OTORITAS SERTIFIKASI TINGKAT I</span>
+            <h3 class="font-display text-2xl text-white uppercase mt-0.5">Pengesahan Lisensi Resmi PBESI Sumbar</h3>
+            <p class="text-xs text-white/70 font-sans">Berkas di bawah ini telah diverifikasi keaslian datanya oleh Pengcab ESI daerah dan siap diterbitkan paspor resmi.</p>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 font-mono text-xs font-bold border border-amber-400/30">
+            Otoritas: Pengprov ESI Sumbar
+          </span>
+        </div>
+
+        <div id="licenseQueueContainer" class="space-y-3">
+          <!-- Rendered via JS -->
+        </div>
       </div>
 
-      <div class="bg-[#1A1113] rounded-3xl border border-white/10 overflow-hidden shadow-xl">
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: PANGKALAN DATA 19 WILAYAH (PROVINCIAL MASTER DB)        -->
+    <!-- ============================================================== -->
+    <div id="sectionProvDb" class="hidden space-y-4">
+      
+      <div class="flex items-center justify-between flex-wrap gap-2 bg-[#1A1114] p-4 rounded-2xl border border-white/10">
+        <div>
+          <h3 class="font-display text-xl text-white uppercase">Pusat Data 19 Kabupaten & Kota</h3>
+          <p class="text-xs text-white/60">Sentral pangkalan data sebaran atlet, tim dan venue se-Sumatera Barat.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="provDbSearch" oninput="filterProvTable()" placeholder="Cari nama atau wilayah..." class="px-3 py-1.5 bg-black/50 border border-white/15 rounded-xl text-xs font-mono text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-crimson-500" />
+        </div>
+      </div>
+
+      <div class="bg-[#1A1114] rounded-3xl border border-white/10 overflow-hidden shadow-xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="border-b border-white/10 text-[10px] font-mono uppercase text-white/50 bg-black/40">
-                <th class="py-3 px-4">Kabupaten / Kota</th>
-                <th class="py-3 px-4">Ketua Pengcab</th>
-                <th class="py-3 px-4">Nomor SK Pengprov</th>
-                <th class="py-3 px-4 text-center">Atlet Terdata</th>
-                <th class="py-3 px-4 text-center">Status SK</th>
-                <th class="py-3 px-4 text-right">Aksi Koordinasi</th>
+                <th class="py-3 px-4">Nama Lengkap</th>
+                <th class="py-3 px-4">IGN / Tipe</th>
+                <th class="py-3 px-4">Asal Pengcab</th>
+                <th class="py-3 px-4">Nomor Paspor / Lisensi</th>
+                <th class="py-3 px-4">Status Prestasi</th>
+                <th class="py-3 px-4 text-right">Legalitas</th>
               </tr>
             </thead>
-            <tbody id="pengcabTableBody" class="divide-y divide-white/5 text-xs font-sans">
-              <!-- Rendered by JS -->
+            <tbody id="provDbTableBody" class="divide-y divide-white/5 text-xs font-sans">
+              <!-- Rendered via JS -->
             </tbody>
           </table>
         </div>
       </div>
+
     </div>
 
     <!-- ============================================================== -->
-    <!-- 6. TAB 2: PELATDA PON & SELEKSI KEJURNAS                       -->
+    <!-- TAB 3: KONTINGEN PELATDA PON XXI SUMBAR                        -->
     <!-- ============================================================== -->
     <div id="sectionPelatda" class="hidden space-y-4">
-      <div class="bg-[#1A1113] rounded-3xl p-5 border border-white/10 space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+      
+      <div class="bg-[#1A1114] rounded-3xl border border-white/10 p-5 shadow-xl">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4 border-b border-white/10 pb-3">
           <div>
-            <h3 class="font-display text-2xl text-white uppercase">Daftar Kontingen Pelatda PON ESI Sumbar</h3>
-            <p class="text-xs text-white/60">Pemain dengan OVR 90+ yang dipanggil mengikuti pemusatan latihan daerah.</p>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">PEMBINAAN PRESTASI DAERAH</span>
+            <h3 class="font-display text-2xl text-white uppercase mt-0.5">Roster Atlet Pelatda PON XXI Sumbar</h3>
+            <p class="text-xs text-white/60 font-sans">Daftar atlet pilihan berprestasi tinggi yang menjalani pemusatan latihan daerah.</p>
           </div>
-          <span class="px-3 py-1 rounded-full bg-amber-400 text-ink text-[10px] font-mono font-black uppercase">
-            TARGET: MEDALI EMAS PON
+          <span class="px-3 py-1 rounded-full bg-amber-400 text-ink font-mono text-xs font-black uppercase">
+            Kontingen PON Sumbar
           </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <!-- Athlete 1 -->
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-xl bg-canvas overflow-hidden border border-white/20 shrink-0">
-                <img src="/images/athlete-v4nd4l.jpg" alt="V4ND4L" class="w-full h-full object-cover object-top" />
-              </div>
-              <div>
-                <div class="font-display text-xl text-white uppercase leading-none">V4ND4L</div>
-                <div class="text-xs text-white/70">Muhammad Rayden</div>
-                <div class="text-[10px] font-mono text-amber-300">VALORANT • Kota Padang</div>
-              </div>
-            </div>
-            <div class="text-right">
-              <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-base font-bold flex items-center justify-center shadow">
-                96
-              </div>
-              <span class="text-[8px] font-mono text-emerald-400 font-bold block mt-1">INTI PON</span>
-            </div>
-          </div>
-
-          <!-- Athlete 2 -->
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between">
-            <div class="w-12 h-12 rounded-xl bg-canvas overflow-hidden border border-white/20 shrink-0">
-              <img src="/images/athlete-pro-player.jpg" alt="F4LC0N" class="w-full h-full object-cover object-top" />
-            </div>
-            <div class="flex-1 px-3">
-              <div class="font-display text-xl text-white uppercase leading-none">F4LC0N</div>
-              <div class="text-xs text-white/70">Fajri Alamsyah</div>
-              <div class="text-[10px] font-mono text-amber-300">MLBB • Bukittinggi</div>
-            </div>
-            <div class="text-right">
-              <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-base font-bold flex items-center justify-center shadow">
-                95
-              </div>
-              <span class="text-[8px] font-mono text-emerald-400 font-bold block mt-1">INTI PON</span>
-            </div>
-          </div>
-
-          <!-- Athlete 3 -->
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between">
-            <div class="w-12 h-12 rounded-xl bg-canvas overflow-hidden border border-white/20 shrink-0">
-              <img src="/images/athlete-v4nd4l.jpg" alt="SHADOW" class="w-full h-full object-cover object-top" />
-            </div>
-            <div class="flex-1 px-3">
-              <div class="font-display text-xl text-white uppercase leading-none">SHADOW</div>
-              <div class="text-xs text-white/70">Rendy Prasetya</div>
-              <div class="text-[10px] font-mono text-amber-300">VALORANT • Kota Padang</div>
-            </div>
-            <div class="text-right">
-              <div class="w-8 h-8 rounded-xl bg-amber-400 text-ink font-display text-base font-bold flex items-center justify-center shadow">
-                94
-              </div>
-              <span class="text-[8px] font-mono text-emerald-400 font-bold block mt-1">INTI PON</span>
-            </div>
-          </div>
+        <div id="pelatdaCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Rendered via JS -->
         </div>
       </div>
+
     </div>
 
     <!-- ============================================================== -->
-    <!-- 7. TAB 3: KALENDER KEJURDA & PORPROV                           -->
+    <!-- TAB 4: JADWAL KEJURDA & TURNAMEN RESMI                         -->
     <!-- ============================================================== -->
     <div id="sectionEvents" class="hidden space-y-4">
-      <div class="bg-[#1A1113] rounded-3xl p-5 border border-white/10 space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+      
+      <div class="bg-[#1A1114] rounded-3xl border border-white/10 p-5 shadow-xl">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4 border-b border-white/10 pb-3">
           <div>
-            <h3 class="font-display text-2xl text-white uppercase">Agenda Kejuaraan Resmi Pengprov ESI</h3>
-            <p class="text-xs text-white/60">Kalender turnamen resmi penentu ranking dan poin lisensi atlet.</p>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">KALENDER KEJURAAN RESMI</span>
+            <h3 class="font-display text-2xl text-white uppercase mt-0.5">Jadwal Kejurda & Porprov ESI Sumbar</h3>
+            <p class="text-xs text-white/60 font-sans">Agenda turnamen tingkat provinsi dengan poin ranking atlet resmi.</p>
           </div>
-          <button type="button" onclick="showNewEventModal()" class="px-3 py-1.5 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase app-tap">
-            + Tambah Event
+          <button onclick="openNewEventModal()" class="px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all app-tap">
+            + Tambah Agenda
           </button>
         </div>
 
-        <div class="space-y-2.5">
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-amber-400 text-ink">TINGKAT PROVINSI</span>
-              <h4 class="font-display text-2xl text-white uppercase mt-1">Piala Gubernur Sumatera Barat 2026</h4>
-              <div class="text-xs font-mono text-white/60">Lokasi: GOR H. Agus Salim, Kota Padang • Total Hadiah: Rp 100.000.000</div>
-            </div>
-            <span class="px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold uppercase self-start sm:self-auto">
-              15 - 20 DESEMBER 2026
-            </span>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-crimson-800 text-white">KEJURDA ESI SUMBAR</span>
-              <h4 class="font-display text-2xl text-white uppercase mt-1">Kejuaraan Daerah Antar-Pengcab 2026</h4>
-              <div class="text-xs font-mono text-white/60">Peserta: Kontingen 19 Pengcab Daerah • Game: Valorant, MLBB, PUBG, FF, Tekken</div>
-            </div>
-            <span class="px-3 py-1 rounded-xl bg-sky-500/20 text-sky-400 font-mono text-xs font-bold uppercase self-start sm:self-auto">
-              JANUARI 2027
-            </span>
-          </div>
+        <div id="eventsContainer" class="space-y-3">
+          <!-- Rendered via JS -->
         </div>
       </div>
-    </div>
 
-    <!-- ============================================================== -->
-    <!-- 8. TAB 4: AKREDITASI KLUB TIER 1                               -->
-    <!-- ============================================================== -->
-    <div id="sectionKlub" class="hidden space-y-4">
-      <div class="bg-[#1A1113] rounded-3xl p-5 border border-white/10 space-y-3">
-        <h3 class="font-display text-2xl text-white uppercase pb-2 border-b border-white/10">Standarisasi Klub Pembina Daerah</h3>
-        <p class="text-xs text-white/60">Klub yang memenuhi syarat sertifikasi Pelatda Tier 1 mendapatkan lisensi prioritas atlet Porprov.</p>
-        
-        <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-crimson-800 text-white flex items-center justify-center font-bold">
-              <i data-lucide="shield" class="w-5 h-5 text-amber-300"></i>
-            </div>
-            <div>
-              <div class="font-bold text-white text-sm">Minang Pride Esports</div>
-              <div class="text-[10px] font-mono text-amber-300">Tier 1 Pelatda • Padang • No. Reg: ESI-SB-KLUB-001</div>
-            </div>
-          </div>
-          <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold uppercase">
-            GRADE A PROV
-          </span>
-        </div>
-      </div>
     </div>
 
   </main>
 
-  <script>
-    const PENGCAB_LIST = [
-      { name: "Kota Padang", leader: "Drs. Hendri Septa, B.Bus", sk: "SK-01/ESI-SB/2024", athletes: 186, status: "AKTIF" },
-      { name: "Kota Bukittinggi", leader: "H. Erman Safar, SH", sk: "SK-02/ESI-SB/2024", athletes: 142, status: "AKTIF" },
-      { name: "Kota Payakumbuh", leader: "Rida Ananda, M.Si", sk: "SK-03/ESI-SB/2024", athletes: 98, status: "AKTIF" },
-      { name: "Kota Pariaman", leader: "Yota Balad, S.STP", sk: "SK-04/ESI-SB/2024", athletes: 76, status: "AKTIF" },
-      { name: "Kota Solok", leader: "Dr. H. Ramadhani Kirana", sk: "SK-05/ESI-SB/2024", athletes: 64, status: "AKTIF" },
-      { name: "Kab. Agam", leader: "Dr. H. Andri Warman, MM", sk: "SK-06/ESI-SB/2024", athletes: 88, status: "AKTIF" },
-      { name: "Kab. Tanah Datar", leader: "Eka Putra, SE, MM", sk: "SK-07/ESI-SB/2024", athletes: 72, status: "AKTIF" },
-      { name: "Kab. 50 Kota", leader: "Safaruddin Dt. Bandaro", sk: "SK-08/ESI-SB/2024", athletes: 68, status: "AKTIF" },
-      { name: "Kab. Pesisir Selatan", leader: "Drs. Rusma Yul Anwar", sk: "SK-09/ESI-SB/2024", athletes: 54, status: "AKTIF" },
-      { name: "Kab. Pasaman Barat", leader: "H. Hamsuardi, S.Ag", sk: "SK-10/ESI-SB/2024", athletes: 48, status: "AKTIF" }
-    ];
+  <!-- Modal Buat Event Kejurda -->
+  <div id="newEventModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="w-full max-w-md bg-[#1C1215] border border-white/15 rounded-3xl p-6 text-paper shadow-2xl relative">
+      <button onclick="closeNewEventModal()" class="absolute top-4 right-4 text-white/60 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
 
-    function renderPengcabTable() {
-      const tbody = document.getElementById('pengcabTableBody');
-      tbody.innerHTML = PENGCAB_LIST.map(p => `
-        <tr class="hover:bg-white/[0.02] transition-colors">
-          <td class="py-3 px-4 font-bold text-white">${p.name}</td>
-          <td class="py-3 px-4 text-white/80">${p.leader}</td>
-          <td class="py-3 px-4 font-mono text-[11px] text-amber-300">${p.sk}</td>
-          <td class="py-3 px-4 text-center font-mono font-bold text-white">${p.athletes} Atlet</td>
-          <td class="py-3 px-4 text-center">
-            <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[9px] font-mono font-bold uppercase">
-              ${p.status}
-            </span>
-          </td>
-          <td class="py-3 px-4 text-right">
-            <a href="/admin-pengcab?region=${encodeURIComponent(p.name)}" class="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[10px] font-bold uppercase transition-all app-tap">
-              Buka Pengcab
-            </a>
-          </td>
-        </tr>
+      <h3 class="font-display text-2xl text-white uppercase tracking-wide mb-1">Terbitkan Agenda Kejurda</h3>
+      <p class="text-xs text-white/60 font-sans mb-4">Tambahkan jadwal turnamen resmi ke kalender publik Pengprov ESI Sumbar.</p>
+
+      <form onsubmit="handleCreateEventSubmit(event)" class="space-y-3 font-sans text-xs">
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Judul Kejuaraan</label>
+          <input type="text" id="eventJudul" required placeholder="cth: Kejurda ESI Sumbar 2026" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-crimson-500" />
+        </div>
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Tanggal Pelaksanaan</label>
+          <input type="text" id="eventTanggal" required placeholder="cth: 15 - 20 Desember 2026" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-crimson-500" />
+        </div>
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Lokasi / Venue</label>
+          <input type="text" id="eventLokasi" required placeholder="cth: Auditorium UNP Padang" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-crimson-500" />
+        </div>
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Cabang Game</label>
+          <input type="text" id="eventGame" required placeholder="cth: Valorant, MLBB, PUBG Mobile" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-crimson-500" />
+        </div>
+        <div class="pt-3 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeNewEventModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white font-mono text-xs font-bold app-tap">Batal</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase app-tap">Terbitkan Jadwal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="pengprovToast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-emerald-600 text-white font-mono text-xs font-bold shadow-2xl transition-all opacity-0 pointer-events-none transform translate-y-3">
+    Perubahan berhasil disimpan!
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    let masterData = [];
+
+    function showPengprovToast(msg, isError = false) {
+      const toast = document.getElementById('pengprovToast');
+      toast.textContent = msg;
+      toast.className = `fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl ${isError ? 'bg-crimson-600' : 'bg-emerald-600'} text-white font-mono text-xs font-bold shadow-2xl transition-all opacity-100 pointer-events-auto transform translate-y-0`;
+      setTimeout(() => {
+        toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-emerald-600 text-white font-mono text-xs font-bold shadow-2xl transition-all opacity-0 pointer-events-none transform translate-y-3';
+      }, 3500);
+    }
+
+    function switchPengprovTab(tabId) {
+      const tabs = ['license', 'prov-db', 'pelatda', 'events'];
+      tabs.forEach(t => {
+        const key = t === 'prov-db' ? 'ProvDb' : (t.charAt(0).toUpperCase() + t.slice(1));
+        const sec = document.getElementById('section' + key);
+        const btn = document.getElementById('tabBtn' + key);
+        if (t === tabId) {
+          if (sec) sec.classList.remove('hidden');
+          if (btn) btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-black uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap";
+        } else {
+          if (sec) sec.classList.add('hidden');
+          if (btn) btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap";
+        }
+      });
+      lucide.createIcons();
+    }
+
+    async function loadPengprovData() {
+      try {
+        if (window.EsportSumbarAPI) {
+          await EsportSumbarAPI.stats.initLiveCounters();
+        }
+
+        // 1. Load verification queue
+        const resQ = await fetch('/api/pengprov/queue').then(r => r.json()).catch(() => ({}));
+        if (resQ && resQ.data) {
+          renderLicenseQueue(resQ.data);
+          const badge = document.getElementById('statPendingPengprov');
+          if (badge) badge.textContent = `${resQ.data.length} BERKAS`;
+        }
+
+        // 2. Load master database
+        const resM = await fetch('/api/pengprov/master-database').then(r => r.json()).catch(() => ({}));
+        if (resM && resM.success) {
+          masterData = resM.atlet || [];
+          renderProvDbTable(masterData);
+        }
+
+        // 3. Load pelatda
+        const resP = await fetch('/api/pengprov/pelatda').then(r => r.json()).catch(() => ({}));
+        if (resP && resP.data) {
+          renderPelatdaGrid(resP.data);
+        }
+
+        // 4. Load events
+        const resE = await fetch('/api/pengprov/events').then(r => r.json()).catch(() => ({}));
+        if (resE && resE.data) {
+          renderEventsList(resE.data);
+        }
+
+        showPengprovToast("Sinkronisasi berkas Pengprov ESI Sumbar selesai!");
+      } catch (e) {
+        console.warn("Load pengprov data error:", e);
+      }
+    }
+
+    function renderLicenseQueue(queue) {
+      const container = document.getElementById('licenseQueueContainer');
+      if (!container) return;
+
+      if (queue.length === 0) {
+        container.innerHTML = '<div class="py-10 text-center text-white/50 font-mono text-xs">Semua berkas telah disahkan dan terbit lisensi. Tidak ada antrean tertunda.</div>';
+        return;
+      }
+
+      container.innerHTML = queue.map(item => `
+        <div class="p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-amber-400/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-crimson-800 text-white font-mono text-[10px] font-bold uppercase">${item.bidang || 'Player'}</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono text-[10px]">
+                ${item.pengcabNotes || 'Lolos Filterisasi Wilayah'}
+              </span>
+              <span class="text-[10px] font-mono text-white/50">${item.wilayah || 'Kota Padang'}</span>
+            </div>
+            <div class="text-base font-bold text-white flex items-center gap-2">
+              <span>${item.nama}</span>
+              ${item.ign ? `<span class="text-xs font-mono text-amber-300">(${item.ign})</span>` : ''}
+            </div>
+            <div class="text-xs text-white/70 font-mono">
+              Game: ${item.game || 'Multi-Platform'} • Role: ${item.role || 'Flex'} • NIK: ${item.nik || '-'}
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="approveLicenseAction('${item.id}', '${item.nama}')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg app-tap">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>Sahkan & Terbitkan Lisensi PBESI</span>
+            </button>
+          </div>
+        </div>
       `).join('');
       lucide.createIcons();
     }
 
-    function switchPengprovTab(tab) {
-      ['pengcab', 'pelatda', 'events', 'klub'].forEach(t => {
-        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
-        const sec = document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1));
-        if (btn && sec) {
-          if (t === tab) {
-            btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap";
-            sec.classList.remove('hidden');
-          } else {
-            btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap";
-            sec.classList.add('hidden');
-          }
-        }
-      });
+    async function approveLicenseAction(id, name) {
+      if (!confirm(`Apakah Anda yakin mengesahkan lisensi resmi PBESI untuk ${name}?`)) return;
+
+      const res = await fetch('/api/pengprov/approve-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, notes: 'Disahkan oleh Sekretariat Pengprov ESI Sumbar' })
+      }).then(r => r.json()).catch(() => ({}));
+
+      if (res && res.success) {
+        showPengprovToast(res.message);
+        loadPengprovData();
+      } else {
+        showPengprovToast(res.message || 'Gagal mengesahkan lisensi.', true);
+      }
     }
 
-    function showNewEventModal() {
-      alert("Form pembuatan turnamen provinsi dibuka. Jadwal akan disinkronkan ke kalender resmi ESI Sumbar.");
+    function renderProvDbTable(items) {
+      const tbody = document.getElementById('provDbTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = items.map(a => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="py-3 px-4 font-bold text-white">${a.nama}</td>
+          <td class="py-3 px-4 font-mono text-amber-300">${a.ign}</td>
+          <td class="py-3 px-4 text-white/80">${a.wilayah}</td>
+          <td class="py-3 px-4 font-mono text-sky-400 text-[11px]">${a.pasporId}</td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300">
+              ${a.statusPelatda || 'Potensi'}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-right">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-400 font-bold">
+              TERVERIFIKASI
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterProvTable() {
+      const q = document.getElementById('provDbSearch').value.toLowerCase();
+      const filtered = masterData.filter(a => 
+        (a.nama && a.nama.toLowerCase().includes(q)) || 
+        (a.ign && a.ign.toLowerCase().includes(q)) || 
+        (a.wilayah && a.wilayah.toLowerCase().includes(q))
+      );
+      renderProvDbTable(filtered);
+    }
+
+    function renderPelatdaGrid(pelatda) {
+      const grid = document.getElementById('pelatdaCardsGrid');
+      if (!grid) return;
+      grid.innerHTML = pelatda.map(p => `
+        <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center gap-3">
+          <img src="${p.foto || '/images/athlete-v4nd4l.jpg'}" class="w-12 h-12 rounded-xl object-cover border border-amber-400/50 shrink-0" />
+          <div class="min-w-0 flex-1">
+            <div class="text-xs font-mono font-bold text-amber-300 uppercase truncate">${p.ign}</div>
+            <div class="text-sm font-bold text-white truncate">${p.nama}</div>
+            <div class="text-[10px] font-mono text-white/60">${p.game} • ${p.wilayah}</div>
+          </div>
+          <div class="px-2 py-1 rounded-lg bg-amber-500/20 text-amber-300 font-display text-sm font-bold">
+            OVR ${p.ovr || 90}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderEventsList(events) {
+      const container = document.getElementById('eventsContainer');
+      if (!container) return;
+      container.innerHTML = events.map(e => `
+        <div class="p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="text-xs font-mono text-emerald-400 font-bold uppercase">${e.tanggal} • ${e.lokasi}</div>
+            <div class="text-base font-bold text-white">${e.judul || e.nama}</div>
+            <div class="text-xs font-mono text-white/60">Cabor: ${Array.isArray(e.cabor) ? e.cabor.join(', ') : (e.game || 'Multi-Cabor')}</div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-crimson-800/40 text-crimson-300 border border-crimson-700/40 font-mono text-xs font-bold self-start sm:self-center">
+            ${e.status || 'Upcoming'}
+          </span>
+        </div>
+      `).join('');
+    }
+
+    function openNewEventModal() {
+      const m = document.getElementById('newEventModal');
+      m.classList.remove('opacity-0', 'pointer-events-none');
+      m.classList.add('opacity-100', 'pointer-events-auto');
+    }
+
+    function closeNewEventModal() {
+      const m = document.getElementById('newEventModal');
+      m.classList.add('opacity-0', 'pointer-events-none');
+      m.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+
+    async function handleCreateEventSubmit(e) {
+      e.preventDefault();
+      const judul = document.getElementById('eventJudul').value;
+      const tanggal = document.getElementById('eventTanggal').value;
+      const lokasi = document.getElementById('eventLokasi').value;
+      const game = document.getElementById('eventGame').value;
+
+      const res = await fetch('/api/pengprov/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ judul, tanggal, lokasi, game })
+      }).then(r => r.json()).catch(() => ({}));
+
+      closeNewEventModal();
+      showPengprovToast("Agenda Kejurda resmi berhasil diterbitkan!");
+      loadPengprovData();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      renderPengcabTable();
+      loadPengprovData();
     });
   </script>
-
-  <script src="/js/microsystem-client.js"></script>
 </body>
 </html>

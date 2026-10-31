@@ -31,12 +31,35 @@ class EcosystemDatabase {
       } else {
         this.saveSync();
       }
+      this.ensurePengcabAccounts();
     } catch (err) {
       // In read-only environments like Vercel Serverless, file write might fail.
       // We gracefully fallback to full in-memory operations.
       this.isWritable = false;
-      // console.warn('[EcosystemDB] Running in in-memory mode:', err.message);
+      this.ensurePengcabAccounts();
     }
+  }
+
+  ensurePengcabAccounts() {
+    if (!this.memory.users) this.memory.users = [];
+    const regions = this.memory.wilayah || [];
+    regions.forEach(r => {
+      const slug = r.nama.toLowerCase().replace(/kota |kab\. /g, '').replace(/\s+/g, '');
+      const existing = this.memory.users.find(u => u.wilayah === r.nama || u.email === `pengcab.${slug}@esi-sumbar.or.id`);
+      if (!existing) {
+        const capital = slug.charAt(0).toUpperCase() + slug.slice(1);
+        this.memory.users.push({
+          id: `usr-pengcab-${slug}`,
+          role: "pengcab",
+          email: `pengcab.${slug}@esi-sumbar.or.id`,
+          passwordHash: `Pengcab${capital}2026!`,
+          nama: `Pengcab ESI ${r.nama}`,
+          instansi: `Pengurus Cabang ESI ${r.nama}`,
+          wilayah: r.nama,
+          permissions: [`pengcab:${slug}:*`]
+        });
+      }
+    });
   }
 
   saveSync() {
@@ -247,6 +270,214 @@ class EcosystemDatabase {
 
     this.saveSync();
     return item;
+  }
+
+  // =================== 2-TIER VERIFIKASI (PENGCAB -> PENGPROV ESI SUMBAR) ===================
+  getPengcabQueue(wilayah = null) {
+    let list = this.memory.antreanVerifikasi || [];
+    if (wilayah && wilayah !== 'all' && wilayah !== 'Semua') {
+      const cleanW = String(wilayah).trim().toLowerCase();
+      list = list.filter(q => {
+        const qWil = String(q.wilayah || '').trim().toLowerCase();
+        return qWil.includes(cleanW) || cleanW.includes(qWil);
+      });
+    }
+    return list;
+  }
+
+  getPengprovQueue() {
+    let list = this.memory.antreanVerifikasi || [];
+    // ESI Sumbar memverifikasi entitas yang telah lolos filter Pengcab ATAU pendaftaran provinsi
+    return list.filter(q => 
+      q.status === 'pending_pengprov' || 
+      q.status === 'pending' || 
+      q.pengcabVerified === true ||
+      !q.status ||
+      q.status === 'pending_pengcab'
+    );
+  }
+
+  filterRegistrationByPengcab(id, action, notes = '', pengcabName = 'Pengcab ESI') {
+    const item = this.memory.antreanVerifikasi.find(q => q.id === id);
+    if (!item) return null;
+
+    if (action === 'lolos' || action === 'approve') {
+      item.status = 'pending_pengprov';
+      item.pengcabVerified = true;
+      item.pengcabVerifiedAt = new Date().toISOString();
+      item.pengcabNotes = notes || `Lolos seleksi kependudukan & berkas asli oleh ${pengcabName}`;
+    } else {
+      item.status = 'rejected_pengcab';
+      item.pengcabVerified = false;
+      item.pengcabNotes = notes || `Ditolak ${pengcabName}: Akun palsu / data tidak sesuai domisili`;
+    }
+    item.processedAt = new Date().toISOString();
+    this.saveSync();
+    return item;
+  }
+
+  approveRegistrationByPengprov(id, notes = '', options = {}) {
+    const item = this.memory.antreanVerifikasi.find(q => q.id === id);
+    if (!item) return null;
+
+    item.status = 'approved_pengprov';
+    item.pengprovVerified = true;
+    item.pengprovVerifiedAt = new Date().toISOString();
+    item.notes = notes || 'Disahkan & Diterbitkan Lisensi Resmi PBESI Sumbar';
+
+    // 1. Issue official PBESI Passport & Verified Badge for Player
+    if (item.bidang === 'player') {
+      const gameCode = (item.game || "ESP").substring(0, 3).toUpperCase();
+      const rand = Math.floor(100 + Math.random() * 900);
+      const pasporId = item.generatedPasporId || `PBESI-SB-2026-${gameCode}-${rand}`;
+      item.generatedPasporId = pasporId;
+
+      let existing = this.memory.atlet.find(a => a.pasporId === pasporId || a.id === item.athlete?.id);
+      if (existing) {
+        existing.lisensiStatus = "TERVERIFIKASI PBESI";
+        existing.statusPelatda = options.statusPelatda || existing.statusPelatda || "POTENSI DAERAH";
+        existing.verifiedBadge = "PBESI SUMBAR OFFICIAL";
+        existing.verifiedAt = new Date().toISOString();
+      } else {
+        const newAthlete = {
+          id: item.athlete?.id || `atl-${Date.now().toString().slice(-4)}`,
+          pasporId,
+          nama: item.nama,
+          ign: item.ign || "PLAYER",
+          game: item.game || "Multi-Platform",
+          role: item.role || "Flex",
+          wilayah: item.wilayah || "Kota Padang",
+          nik: item.nik || "-",
+          email: item.email || "",
+          ovr: Math.floor(88 + Math.random() * 8),
+          statusPelatda: options.statusPelatda || "POTENSI DAERAH",
+          lisensiStatus: "TERVERIFIKASI PBESI",
+          verifiedBadge: "PBESI SUMBAR OFFICIAL",
+          foto: item.foto || "/images/athlete-v4nd4l.jpg",
+          statusLFT: false,
+          prestasi: ["Lisensi Resmi PBESI ESI Sumbar 2026"]
+        };
+        this.memory.atlet.unshift(newAthlete);
+      }
+    } else if (item.bidang === 'team') {
+      this.memory.tim.push({
+        id: `tim-${Date.now().toString().slice(-4)}`,
+        nama: item.nama,
+        wilayah: item.wilayah || "Sumatera Barat",
+        tier: "Klub Terakreditasi",
+        game: [item.game || "Mobile Legends"],
+        rosterCount: item.rosterCount || 5,
+        kapten: item.kapten || item.nama,
+        manager: item.pic || "Manajemen Klub",
+        logo: "/images/esport-sumbar-logo.png",
+        akreditasi: "Grade A (PBESI Terakreditasi)",
+        prestasiUtama: "Klub Sah PBESI ESI Sumbar",
+        roster: []
+      });
+    } else if (item.bidang === 'venue') {
+      this.memory.venue.push({
+        id: `ven-${Date.now().toString().slice(-4)}`,
+        nama: item.nama,
+        wilayah: item.wilayah || "Sumatera Barat",
+        alamat: item.alamat || "Sumatera Barat",
+        spek: item.spek || item.kapasitas || "Standard Arena",
+        kapasitas: item.kapasitas || "30 Pengunjung",
+        grade: "Grade A Terakreditasi PBESI",
+        pic: item.kontak || "-"
+      });
+    }
+
+    this.saveSync();
+    return item;
+  }
+
+  // =================== CARD DESIGN & VISUAL STUDIO (SUPER ADMIN) ===================
+  getCardSettings() {
+    if (!this.memory.cardSettings) {
+      this.memory.cardSettings = {
+        activeTemplate: "white-luxury",
+        templates: [
+          { id: "white-luxury", name: "White Luxury (Default Resmi)", badge: "Resmi PBESI", bg: "bg-white", border: "border-black/15" },
+          { id: "crimson-gold", name: "Crimson Gold (Pelatda Edition)", badge: "Edisi Kejurda", bg: "bg-gradient-to-br from-crimson-900 to-black", border: "border-amber-400" },
+          { id: "cyber-dark", name: "Cyber Onyx (Pro Player)", badge: "Division 1", bg: "bg-[#111318]", border: "border-white/20" },
+          { id: "emerald-master", name: "Emerald Master (Certified)", badge: "Lisensi Sah", bg: "bg-emerald-950", border: "border-emerald-500" }
+        ],
+        verificationBadge: {
+          icon: "shield-check",
+          label: "TERVERIFIKASI PBESI",
+          color: "emerald",
+          enabled: true
+        },
+        pelatdaBadge: {
+          icon: "award",
+          label: "PELATDA PON XXI",
+          color: "amber",
+          enabled: true
+        },
+        cardHoloShimmer: true,
+        showOvrRating: true,
+        lastUpdated: new Date().toISOString()
+      };
+      this.saveSync();
+    }
+    return this.memory.cardSettings;
+  }
+
+  updateCardSettings(settings) {
+    this.memory.cardSettings = Object.assign({}, this.getCardSettings(), settings, { lastUpdated: new Date().toISOString() });
+    this.saveSync();
+    return this.memory.cardSettings;
+  }
+
+  // =================== WEB BANNER & ADS MANAGER (SUPER ADMIN) ===================
+  getBannerAds() {
+    if (!this.memory.bannerAds) {
+      this.memory.bannerAds = {
+        heroTop: {
+          enabled: true,
+          badge: "PORTAL RESMI // ESI SUMBAR 2026",
+          title: "PASPOR RESMI ATLET & TALENTA ESPORT SUMATERA BARAT",
+          subtitle: "Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.",
+          ctaText: "Daftar Kartu",
+          ctaLink: "/daftar",
+          imageUrl: "/pbesi-logo.png"
+        },
+        sponsorSlots: [
+          { id: "sp-1", name: "Pengprov PBESI Sumbar", category: "Regulator Resmi", status: "Aktif", logo: "/pbesi-logo.png", link: "/about" },
+          { id: "sp-2", name: "Esport Sumbar Platform", category: "Official Provider", status: "Aktif", logo: "/images/esport-sumbar-logo.png", link: "/" }
+        ],
+        lastUpdated: new Date().toISOString()
+      };
+      this.saveSync();
+    }
+    return this.memory.bannerAds;
+  }
+
+  updateBannerAds(payload) {
+    this.memory.bannerAds = Object.assign({}, this.getBannerAds(), payload, { lastUpdated: new Date().toISOString() });
+    this.saveSync();
+    return this.memory.bannerAds;
+  }
+
+  // =================== ADMIN ACCOUNTS (19 PENGCAB + PENGPROV + SUPER) ===================
+  getAllAdmins() {
+    return (this.memory.users || []).filter(u => u.role === 'super' || u.role === 'pengprov' || u.role === 'pengcab');
+  }
+
+  createAdminAccount(userData) {
+    const newAdmin = {
+      id: `usr-${userData.role}-${Date.now().toString().slice(-4)}`,
+      role: userData.role || 'pengcab',
+      email: userData.email,
+      passwordHash: userData.password || 'AdminSumbar2026!',
+      nama: userData.nama,
+      instansi: userData.instansi || `Pengurus ${userData.role.toUpperCase()}`,
+      wilayah: userData.wilayah || 'Sumatera Barat',
+      permissions: userData.role === 'super' ? ['*'] : [`${userData.role}:*`]
+    };
+    this.memory.users.push(newAdmin);
+    this.saveSync();
+    return newAdmin;
   }
 
   // =================== BURSA TRANSFER & LFT ===================

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <title>Super Admin Master Control – ESPORT SUMBAR</title>
-  <meta name="description" content="Dashboard Super Admin Platform Provider Esport Sumatera Barat. Master control pusat data, verifikasi berkas, dan tata kelola sistem ekosistem esport se-Sumatera Barat." />
+  <meta name="description" content="Dashboard Super Admin Platform Provider Esport Sumatera Barat. Master control database, Card Visual Studio, dan Web Banner Ads Manager." />
 
   <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,9 +43,8 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Favicon & Brand Icons -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
-  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
 
   <style>
     html, body {
@@ -54,10 +53,10 @@
     }
 
     body {
-      background-color: #0E0F12;
+      background-color: #0B0C0E;
       color: #F4F1EE;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(224, 34, 45, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.1) 0%, transparent 55%),
         linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
       background-size: 100% 100%, 32px 32px, 32px 32px;
@@ -74,26 +73,35 @@
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 3D Mini Card Preview */
+    .preview-card-stage {
+      perspective: 1000px;
+    }
+    .preview-card-wrapper {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
   </style>
   <script src="/js/microsystem-client.js"></script>
 </head>
-<body class="font-sans antialiased selection:bg-crimson-800 selection:text-white pb-24 min-h-screen">
+<body class="font-sans antialiased selection:bg-amber-500 selection:text-ink pb-24 min-h-screen">
 
   <!-- ============================================================== -->
   <!-- 1. TOP EXECUTIVE LEVEL SWITCHER (NAVIGASI 3 TINGKAT ADMIN)     -->
   <!-- ============================================================== -->
-  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/90 border-b border-white/10 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
+  <aside aria-label="Navigasi Tingkat Admin" class="bg-black/95 border-b border-amber-500/20 px-4 py-2 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
       
       <!-- Label Mode -->
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
         <span class="text-[10px] font-mono uppercase font-bold tracking-wider text-amber-300">
-          PORTAL ADMINISTRASI EKOSISTEM:
+          PORTAL ADMINISTRASI:
         </span>
       </div>
 
-      <!-- 3 Level Admin Selector Chips -->
+      <!-- 3 Level Distinct Admin URL Chips -->
       <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
         <!-- 1. Super Admin (Active) -->
         <a href="/admin-super" class="px-3 py-1 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-ink font-mono text-[11px] font-black uppercase flex items-center gap-1.5 shadow-sm app-tap">
@@ -104,19 +112,19 @@
         <!-- 2. ESI Sumbar (Pengprov) -->
         <a href="/admin-pengprov" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
           <i data-lucide="landmark" class="w-3.5 h-3.5 text-crimson-400"></i>
-          <span>2. ESI Sumbar (Pengprov)</span>
+          <span>2. ESI Sumbar (Legalitas)</span>
         </a>
 
         <!-- 3. ESI Kota / Kab (Pengcab) -->
         <a href="/admin-pengcab" class="px-3 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
           <i data-lucide="map-pin" class="w-3.5 h-3.5 text-sky-400"></i>
-          <span>3. ESI Kota / Kab</span>
+          <span>3. ESI 19 Kab/Kota</span>
         </a>
 
         <!-- Link to Live Website -->
         <a href="/" target="_blank" class="px-2.5 py-1 rounded-xl bg-crimson-800/80 hover:bg-crimson-700 text-white font-mono text-[10px] font-bold uppercase transition-all flex items-center gap-1 ml-2 app-tap">
           <i data-lucide="external-link" class="w-3 h-3"></i>
-          <span class="hidden sm:inline">Lihat Web</span>
+          <span class="hidden sm:inline">Web Publik</span>
         </a>
       </div>
 
@@ -130,32 +138,32 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
       
       <div class="flex items-center gap-3.5">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-crimson-700 to-crimson-900 flex items-center justify-center p-2.5 shadow-lg shadow-crimson-900/30 ring-1 ring-white/20 shrink-0">
-          <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-full h-full object-contain filter brightness-110" />
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center p-2.5 shadow-lg shadow-amber-900/40 ring-1 ring-white/20 shrink-0">
+          <i data-lucide="shield-alert" class="w-6 h-6 text-ink"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
             <h1 class="font-display text-2xl sm:text-3xl text-white tracking-wide uppercase leading-none">
-              SUPER ADMIN <span class="text-crimson-500">ESPORT SUMBAR</span>
+              SUPER ADMIN <span class="text-amber-400">MASTER CONTROL</span>
             </h1>
             <span class="px-2 py-0.5 rounded-md bg-amber-400/20 text-amber-300 border border-amber-400/30 text-[9px] font-mono font-bold uppercase">
-              MASTER ROLE
+              PORTAL 1 // PROVIDER
             </span>
           </div>
           <p class="text-xs font-mono text-white/60 mt-1 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Platform Provider Resmi • Engine Versi 2.4-Production • 19 Wilayah Terhubung</span>
+            <span>Master Pusat Data, Card Visual Studio, Banner Iklan & Akses 19 Pengcab</span>
           </p>
         </div>
       </div>
 
       <!-- Quick Actions -->
       <div class="flex items-center gap-2">
-        <button type="button" onclick="refreshDashboard()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
+        <button type="button" onclick="loadAllSuperAdminData()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-mono text-xs font-bold uppercase transition-all flex items-center gap-1.5 app-tap">
           <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-amber-300"></i>
           <span>Sinkronkan Data</span>
         </button>
-        <button type="button" onclick="showNewAdminModal()" class="px-3.5 py-2 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
+        <button type="button" onclick="openNewAdminModal()" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-ink font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
           <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
           <span>Tambah Pengurus</span>
         </button>
@@ -165,65 +173,65 @@
   </header>
 
   <!-- ============================================================== -->
-  <!-- 3. METRIC COUNTERS (4-COL GRID)                                -->
+  <!-- 3. REALTIME METRIC COUNTERS                                    -->
   <!-- ============================================================== -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
     
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
       
-      <!-- Card 1 -->
-      <div class="rounded-3xl bg-[#16181D] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+      <!-- Card 1: Total Database -->
+      <div class="rounded-3xl bg-[#14161C] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">Total Database</span>
+          <span class="text-[10px] font-mono uppercase font-bold text-sky-400">Total Database Global</span>
           <i data-lucide="database" class="w-4 h-4 text-sky-400"></i>
         </div>
         <div>
-          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="totalDatabase">1.409</div>
+          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="totalDatabase" data-stat-suffix="+">1.411+</div>
           <div class="text-[10px] font-mono text-emerald-400 mt-1 flex items-center gap-1">
-            <i data-lucide="trending-up" class="w-3 h-3"></i>
-            <span>+28 pendaftar minggu ini</span>
+            <i data-lucide="check-circle" class="w-3 h-3"></i>
+            <span>Terkumpul dari 19 Kab/Kota</span>
           </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="rounded-3xl bg-[#16181D] border border-amber-500/30 p-4 shadow-lg shadow-amber-950/20 flex flex-col justify-between">
+      <!-- Card 2: Paspor Aktif -->
+      <div class="rounded-3xl bg-[#14161C] border border-amber-500/30 p-4 shadow-lg shadow-amber-950/20 flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold text-amber-300">Antrean Verifikasi</span>
-          <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+          <span class="text-[10px] font-mono uppercase font-bold text-amber-300">Paspor Digital 3D</span>
+          <i data-lucide="id-card" class="w-4 h-4 text-amber-400"></i>
         </div>
         <div>
-          <div id="pendingCountBadge" class="font-display text-3xl sm:text-4xl text-amber-400 leading-none" data-stat="antreanVerifikasi">2</div>
+          <div class="font-display text-3xl sm:text-4xl text-amber-400 leading-none" data-stat="pasporAktif">986</div>
           <div class="text-[10px] font-mono text-amber-300/80 mt-1">
-            Perlu persetujuan berkas
+            Lisensi Digital Terverifikasi
           </div>
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="rounded-3xl bg-[#16181D] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+      <!-- Card 3: Pengcab Daerah -->
+      <div class="rounded-3xl bg-[#14161C] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">Pengcab ESI Daerah</span>
+          <span class="text-[10px] font-mono uppercase font-bold text-emerald-400">19 Pengcab Daerah</span>
           <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
         </div>
         <div>
           <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="pengcabAktif">19/19</div>
           <div class="text-[10px] font-mono text-emerald-400 mt-1">
-            100% Wilayah Terakreditasi
+            100% Wilayah Memiliki Akun
           </div>
         </div>
       </div>
 
-      <!-- Card 4 -->
-      <div class="rounded-3xl bg-[#16181D] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
+      <!-- Card 4: Antrean Verifikasi -->
+      <div class="rounded-3xl bg-[#14161C] border border-crimson-800/40 p-4 shadow-lg flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">Paspor 3D Aktif</span>
-          <i data-lucide="id-card" class="w-4 h-4 text-crimson-400"></i>
+          <span class="text-[10px] font-mono uppercase font-bold text-crimson-400">Antrean Masuk</span>
+          <i data-lucide="clock" class="w-4 h-4 text-crimson-400"></i>
         </div>
         <div>
-          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="pasporAktif">984</div>
+          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="antreanVerifikasi">9</div>
           <div class="text-[10px] font-mono text-white/60 mt-1">
-            Lisensi Digital Resmi
+            Menunggu Verifikasi & Filter
           </div>
         </div>
       </div>
@@ -233,70 +241,70 @@
     <!-- ============================================================== -->
     <!-- 4. MASTER FUNCTIONAL TABS                                      -->
     <!-- ============================================================== -->
-    <div class="bg-[#16181D] rounded-2xl p-1.5 border border-white/10 shadow-sm flex items-center gap-1 mb-5 overflow-x-auto no-scrollbar">
-      <button type="button" id="tabBtnQueue" onclick="switchMasterTab('queue')" class="flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap">
-        <i data-lucide="check-square" class="w-4 h-4 text-amber-300"></i>
-        <span>Antrean Verifikasi (24)</span>
+    <div class="bg-[#14161C] rounded-2xl p-1.5 border border-white/10 shadow-sm flex items-center gap-1 mb-6 overflow-x-auto no-scrollbar">
+      
+      <!-- Tab 1: Database Master -->
+      <button type="button" id="tabBtnDatabase" onclick="switchSuperTab('database')" class="flex-1 py-2.5 px-3 rounded-xl bg-amber-500 text-ink font-mono text-xs font-black uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap">
+        <i data-lucide="database" class="w-4 h-4"></i>
+        <span>1. Database Master Global</span>
       </button>
-      <button type="button" id="tabBtnEntities" onclick="switchMasterTab('entities')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
-        <i data-lucide="users" class="w-4 h-4 text-sky-400"></i>
-        <span>Database 5 Bidang</span>
+
+      <!-- Tab 2: Card Studio -->
+      <button type="button" id="tabBtnCardStudio" onclick="switchSuperTab('card-studio')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="palette" class="w-4 h-4 text-amber-300"></i>
+        <span>2. Studio Desain Kartu & Simbol</span>
       </button>
-      <button type="button" id="tabBtnAdmins" onclick="switchMasterTab('admins')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
-        <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i>
-        <span>Kelola Hak Akses Pengurus</span>
+
+      <!-- Tab 3: Banner Ads Manager -->
+      <button type="button" id="tabBtnBanners" onclick="switchSuperTab('banners')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="megaphone" class="w-4 h-4 text-sky-400"></i>
+        <span>3. Banner Iklan & Sponsor Web</span>
       </button>
-      <button type="button" id="tabBtnLogs" onclick="switchMasterTab('logs')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
-        <i data-lucide="activity" class="w-4 h-4 text-amber-400"></i>
-        <span>Audit Trail & Log</span>
+
+      <!-- Tab 4: Pengurus Accounts -->
+      <button type="button" id="tabBtnAccounts" onclick="switchSuperTab('accounts')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
+        <i data-lucide="key" class="w-4 h-4 text-emerald-400"></i>
+        <span>4. Kelola Akun 19 Pengcab</span>
       </button>
+
     </div>
 
     <!-- ============================================================== -->
-    <!-- 5. TAB 1: ANTREAN VERIFIKASI (APPROVAL WORKFLOW)               -->
+    <!-- TAB 1: DATABASE MASTER GLOBAL                                  -->
     <!-- ============================================================== -->
-    <div id="sectionQueue" class="space-y-4">
+    <div id="sectionDatabase" class="space-y-4">
       
-      <!-- Sub-filter per bidang pendaftaran -->
-      <div class="flex items-center justify-between flex-wrap gap-2 pb-2">
-        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-          <button type="button" onclick="filterQueue('all')" id="qFilter-all" class="px-3 py-1.5 rounded-xl bg-white/20 text-white font-mono text-xs font-bold uppercase transition-all app-tap">
-            Semua (5)
-          </button>
-          <button type="button" onclick="filterQueue('player')" id="qFilter-player" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase transition-all app-tap">
-            Player (2)
-          </button>
-          <button type="button" onclick="filterQueue('pelatih')" id="qFilter-pelatih" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase transition-all app-tap">
-            Pelatih (1)
-          </button>
-          <button type="button" onclick="filterQueue('team')" id="qFilter-team" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase transition-all app-tap">
-            Team (1)
-          </button>
-          <button type="button" onclick="filterQueue('venue')" id="qFilter-venue" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase transition-all app-tap">
-            Venue (1)
-          </button>
+      <!-- Filter Bar -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#14161C] p-4 rounded-2xl border border-white/10">
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="setEntityFilter('all')" id="btnEnt-all" class="px-3 py-1.5 rounded-xl bg-white/20 text-white font-mono text-xs font-bold uppercase app-tap">Semua</button>
+          <button onclick="setEntityFilter('atlet')" id="btnEnt-atlet" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Atlet & Player</button>
+          <button onclick="setEntityFilter('tim')" id="btnEnt-tim" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Tim & Klub</button>
+          <button onclick="setEntityFilter('venue')" id="btnEnt-venue" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Venue & Arena</button>
         </div>
 
-        <span class="text-xs font-mono text-white/50">Moderasi Langsung Super Admin</span>
+        <div class="relative w-full sm:w-64">
+          <i data-lucide="search" class="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input type="text" id="globalDbSearch" oninput="filterGlobalTable()" placeholder="Cari IGN, nama, wilayah..." class="w-full pl-9 pr-3 py-2 bg-black/50 border border-white/10 rounded-xl text-xs font-mono text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-amber-400" />
+        </div>
       </div>
 
-      <!-- Queue Table / Mobile Card Stack -->
-      <div class="bg-[#16181D] rounded-3xl border border-white/10 overflow-hidden shadow-xl">
+      <!-- Master Table -->
+      <div class="bg-[#14161C] rounded-3xl border border-white/10 overflow-hidden shadow-xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="border-b border-white/10 text-[10px] font-mono uppercase text-white/50 bg-black/40">
-                <th class="py-3 px-4">Pendaftar & Entitas</th>
-                <th class="py-3 px-4">Bidang</th>
-                <th class="py-3 px-4">Cabang Game / Kategori</th>
-                <th class="py-3 px-4">Wilayah</th>
-                <th class="py-3 px-4">Waktu Masuk</th>
-                <th class="py-3 px-4 text-center">Status Berkas</th>
-                <th class="py-3 px-4 text-right">Aksi Super Admin</th>
+                <th class="py-3 px-4">Entitas / Nama</th>
+                <th class="py-3 px-4">Kategori / IGN</th>
+                <th class="py-3 px-4">Game / Divisi</th>
+                <th class="py-3 px-4">Wilayah 19 Kab/Kota</th>
+                <th class="py-3 px-4">Status Lisensi</th>
+                <th class="py-3 px-4 text-right">Aksi</th>
               </tr>
             </thead>
-            <tbody id="queueTableBody" class="divide-y divide-white/5 text-xs font-sans">
-              <!-- Rendered by JavaScript -->
+            <tbody id="globalMasterTableBody" class="divide-y divide-white/5 text-xs font-sans">
+              <!-- Rendered via JS -->
             </tbody>
           </table>
         </div>
@@ -305,487 +313,625 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- 6. TAB 2: DATABASE 5 BIDANG (MASTER DIRECTORY)                 -->
+    <!-- TAB 2: STUDIO DESAIN KARTU & SIMBOL (CARD VISUAL STUDIO)        -->
     <!-- ============================================================== -->
-    <div id="sectionEntities" class="hidden space-y-4">
-      <div class="bg-[#16181D] rounded-3xl p-5 border border-white/10 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h3 class="font-display text-2xl text-white uppercase">Master Database Terpadu 19 Wilayah</h3>
-            <p class="text-xs text-white/60">Pangkalan data resmi seluruh entitas berlisensi ESI Sumatera Barat.</p>
+    <div id="sectionCardStudio" class="hidden space-y-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left 7 cols: Controls & Settings -->
+        <div class="lg:col-span-7 space-y-5">
+          
+          <div class="bg-[#14161C] rounded-3xl border border-white/10 p-5 sm:p-6 space-y-5">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">DESAIN TEMPLATE UTAMA</span>
+              <h3 class="font-display text-2xl text-white uppercase mt-0.5">Pilih Tema & Bentuk Kartu</h3>
+              <p class="text-xs text-white/60 font-sans">Ubah tema visual standar yang diterapkan pada seluruh kartu atlet di web.</p>
+            </div>
+
+            <!-- Template Grid -->
+            <div class="grid grid-cols-2 gap-3" id="templatePickerGrid">
+              
+              <div onclick="selectCardTemplate('white-luxury')" id="tpl-white-luxury" class="p-3.5 rounded-2xl border-2 border-amber-400 bg-white/10 cursor-pointer app-tap transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-white">White Luxury</span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                </div>
+                <p class="text-[10px] text-white/60 font-mono">Default Resmi • Front Putih Mewah + Back Cover Crimson PBESI</p>
+              </div>
+
+              <div onclick="selectCardTemplate('crimson-gold')" id="tpl-crimson-gold" class="p-3.5 rounded-2xl border border-white/10 hover:border-white/30 bg-black/40 cursor-pointer app-tap transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-white">Crimson Gold</span>
+                  <span class="text-[10px] font-mono text-amber-300">Kejurda</span>
+                </div>
+                <p class="text-[10px] text-white/60 font-mono">Cover Merah Marun Emas • Khusus Atlet Juara & Pelatda</p>
+              </div>
+
+              <div onclick="selectCardTemplate('cyber-dark')" id="tpl-cyber-dark" class="p-3.5 rounded-2xl border border-white/10 hover:border-white/30 bg-black/40 cursor-pointer app-tap transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-white">Cyber Onyx</span>
+                  <span class="text-[10px] font-mono text-sky-400">Pro</span>
+                </div>
+                <p class="text-[10px] text-white/60 font-mono">Dark Neon Metalik • High Contrast Cyberpunk</p>
+              </div>
+
+              <div onclick="selectCardTemplate('emerald-master')" id="tpl-emerald-master" class="p-3.5 rounded-2xl border border-white/10 hover:border-white/30 bg-black/40 cursor-pointer app-tap transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold text-white">Emerald Master</span>
+                  <span class="text-[10px] font-mono text-emerald-400">Elite</span>
+                </div>
+                <p class="text-[10px] text-white/60 font-mono">Hijau Zamrud Berlian • Sertifikasi Wasit & Pelatih Berlisensi</p>
+              </div>
+
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" placeholder="Cari nama, IGN, klub..." class="px-3.5 py-2 rounded-xl bg-black/40 border border-white/10 text-xs text-white placeholder:text-white/40 focus:outline-none focus:border-crimson-600" />
-            <button type="button" class="px-3.5 py-2 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase app-tap">
-              Export Excel
-            </button>
+
+          <!-- Card Symbols & Verification Badge Settings -->
+          <div class="bg-[#14161C] rounded-3xl border border-white/10 p-5 sm:p-6 space-y-4">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">SIMBOL & ICON VERIFIKASI RESMI</span>
+              <h3 class="font-display text-2xl text-white uppercase mt-0.5">Pengaturan Badge Kartu</h3>
+              <p class="text-xs text-white/60 font-sans">Atur simbol verifikasi PBESI yang otomatis tersemat pada kartu atlet yang disahkan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Teks Badge Verifikasi</label>
+                <input type="text" id="badgeLabelInput" value="TERVERIFIKASI PBESI SUMBAR" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Pilihan Icon Verifikasi</label>
+                <select id="badgeIconSelect" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-amber-400">
+                  <option value="shield-check">Shield Check (Perisai Resmi)</option>
+                  <option value="check-circle-2">Check Circle (Bulat Emas)</option>
+                  <option value="award">Award Medal (Bintang Kejuaraan)</option>
+                  <option value="sparkles">Sparkles Hologram</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="shimmerEffectToggle" checked class="rounded border-white/20 text-amber-500 focus:ring-0 w-4 h-4" />
+                <span class="text-xs font-mono text-white/80">Aktifkan Efek Foil Shimmer 3D</span>
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="ovrRatingToggle" checked class="rounded border-white/20 text-amber-500 focus:ring-0 w-4 h-4" />
+                <span class="text-xs font-mono text-white/80">Tampilkan Skor OVR Atlet</span>
+              </label>
+            </div>
+
+            <div class="pt-2">
+              <button onclick="saveCardStudioSettings()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-ink font-mono text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-lg app-tap">
+                <i data-lucide="save" class="w-4 h-4"></i>
+                <span>Terapkan Perubahan ke Web</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right 5 cols: Live Interactive Card Preview -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-start">
+          <div class="sticky top-20 w-full max-w-xs bg-[#14161C] border border-white/10 rounded-3xl p-5 shadow-2xl flex flex-col items-center">
+            
+            <div class="text-center mb-3">
+              <span class="text-[9px] font-mono font-bold text-amber-400 uppercase tracking-widest">LIVE 3D CARD PREVIEW</span>
+              <h4 id="previewCardTitle" class="font-display text-xl text-white uppercase">PREVIEW KARTU ATLET</h4>
+            </div>
+
+            <!-- Card Render Stage -->
+            <div class="w-full max-w-[260px] aspect-[1/1.42] rounded-2xl bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none" id="previewCardBox">
+              <div class="flex items-center justify-between z-10">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-lg bg-crimson-800 p-1 flex items-center justify-center shadow-sm">
+                    <img src="/images/esport-sumbar-logo.png" class="w-full h-full object-contain filter brightness-125" />
+                  </div>
+                  <span id="previewPelatdaBadge" class="px-2 py-0.5 rounded text-[8px] font-mono font-bold uppercase bg-amber-400 text-ink">PELATDA PON</span>
+                </div>
+                <div class="px-2 py-0.5 rounded bg-black text-amber-400 font-display text-xs">OVR 96</div>
+              </div>
+
+              <!-- Photo Area -->
+              <div class="my-auto w-full aspect-[4/3] rounded-xl overflow-hidden border border-black/10 relative bg-black/5">
+                <img src="/images/athlete-v4nd4l.jpg" class="w-full h-full object-cover" />
+              </div>
+
+              <!-- Bottom Meta -->
+              <div class="z-10 pt-2 border-t border-black/10">
+                <div class="text-[10px] text-ink/60 font-mono">Nama Lengkap</div>
+                <div class="font-bold text-ink text-sm leading-tight flex items-center gap-1">
+                  <span>Muhammad Rayden</span>
+                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600 inline"></i>
+                </div>
+                <div class="mt-1 flex items-center justify-between">
+                  <span class="text-[9px] font-mono text-crimson-800 font-black">VALORANT // V4ND4L</span>
+                  <span id="previewCardBadgeLabel" class="text-[8px] font-mono text-emerald-700 font-bold bg-emerald-100 px-1.5 py-0.5 rounded">TERVERIFIKASI PBESI</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-[10px] text-white/50 font-mono text-center mt-4">
+              Perubahan template & badge otomatis live ke seluruh kartu atlet di web publik.
+            </p>
+
           </div>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-          <div class="p-3.5 rounded-2xl bg-black/30 border border-white/5 text-center">
-            <div class="text-[10px] font-mono text-white/50 uppercase font-bold">Player Terdata</div>
-            <div class="font-display text-2xl text-white mt-1">1,042</div>
-            <div class="text-[9px] font-mono text-emerald-400">894 Terverifikasi</div>
-          </div>
-          <div class="p-3.5 rounded-2xl bg-black/30 border border-white/5 text-center">
-            <div class="text-[10px] font-mono text-white/50 uppercase font-bold">Pelatih Lisensi</div>
-            <div class="font-display text-2xl text-amber-400 mt-1">48</div>
-            <div class="text-[9px] font-mono text-amber-300">PBESI Tingkat A/B/C</div>
-          </div>
-          <div class="p-3.5 rounded-2xl bg-black/30 border border-white/5 text-center">
-            <div class="text-[10px] font-mono text-white/50 uppercase font-bold">Tim & Klub</div>
-            <div class="font-display text-2xl text-crimson-400 mt-1">112</div>
-            <div class="text-[9px] font-mono text-white/60">19 Wilayah</div>
-          </div>
-          <div class="p-3.5 rounded-2xl bg-black/30 border border-white/5 text-center">
-            <div class="text-[10px] font-mono text-white/50 uppercase font-bold">Komunitas</div>
-            <div class="font-display text-2xl text-sky-400 mt-1">186</div>
-            <div class="text-[9px] font-mono text-sky-300">Guild & Kampus</div>
-          </div>
-          <div class="p-3.5 rounded-2xl bg-black/30 border border-white/5 text-center">
-            <div class="text-[10px] font-mono text-white/50 uppercase font-bold">Gaming Arena</div>
-            <div class="font-display text-2xl text-emerald-400 mt-1">40</div>
-            <div class="text-[9px] font-mono text-emerald-300">Grade A Standar</div>
-          </div>
-        </div>
       </div>
+
     </div>
 
     <!-- ============================================================== -->
-    <!-- 7. TAB 3: HAK AKSES PENGURUS (ROLE MANAGEMENT)                 -->
+    <!-- TAB 3: BANNER IKLAN & SPONSOR WEB (ADS MANAGER)                -->
     <!-- ============================================================== -->
-    <div id="sectionAdmins" class="hidden space-y-4">
-      <div class="bg-[#16181D] rounded-3xl p-5 border border-white/10 space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+    <div id="sectionBanners" class="hidden space-y-6">
+      
+      <div class="bg-[#14161C] rounded-3xl border border-white/10 p-5 sm:p-6 space-y-5">
+        
+        <div class="flex items-center justify-between flex-wrap gap-2 border-b border-white/10 pb-4">
           <div>
-            <h3 class="font-display text-2xl text-white uppercase">Daftar Akun Pengurus & Otoritas Sistem</h3>
-            <p class="text-xs text-white/60">Hak akses login admin Pengprov ESI Sumbar dan 19 Pengcab Daerah.</p>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold">PROMOSI & SPONSORSHIP</span>
+            <h3 class="font-display text-2xl text-white uppercase mt-0.5">Kelola Banner Iklan Website</h3>
+            <p class="text-xs text-white/60 font-sans">Atur penempatan banner sponsor, pengumuman agenda, dan link mitra pada web utama.</p>
           </div>
-          <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono font-bold uppercase">
-            21 Akun Aktif
+          <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold">
+            Live Web Display
           </span>
         </div>
 
-        <div class="space-y-2.5">
-          <!-- Admin Row 1: Super Admin -->
-          <div class="p-3.5 rounded-2xl bg-black/40 border border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-amber-500 text-ink flex items-center justify-center font-bold">
-                <i data-lucide="crown" class="w-5 h-5"></i>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Headline Pengumuman / Iklan</label>
+              <input type="text" id="bannerTitleInput" value="PASPOR RESMI ATLET & TALENTA ESPORT SUMATERA BARAT" class="w-full px-3 py-2.5 bg-black/60 border border-white/15 rounded-xl text-xs font-sans text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Subjudul / Deskripsi Banner</label>
+              <textarea id="bannerSubtitleInput" rows="3" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-sans text-white focus:outline-none focus:ring-1 focus:ring-amber-400">Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.</textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Teks Tombol Aksi</label>
+                <input type="text" id="bannerCtaTextInput" value="Daftar Kartu" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
               </div>
               <div>
-                <div class="font-bold text-white text-sm">Platform Provider Master Admin</div>
-                <div class="text-[10px] font-mono text-amber-300">superadmin@esportsumbar.id • Otoritas Penuh Platform</div>
+                <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Link Tujuan (URL)</label>
+                <input type="text" id="bannerCtaLinkInput" value="/daftar" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
               </div>
             </div>
-            <span class="px-3 py-1 rounded-xl bg-amber-400/20 text-amber-300 text-[10px] font-mono font-bold uppercase self-start sm:self-auto">
-              SUPER ADMIN
-            </span>
           </div>
 
-          <!-- Admin Row 2: Pengprov ESI -->
-          <div class="p-3.5 rounded-2xl bg-black/40 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-crimson-800 text-white flex items-center justify-center font-bold">
-                <i data-lucide="landmark" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="font-bold text-white text-sm">Sekretariat Pengprov ESI Sumatera Barat</div>
-                <div class="text-[10px] font-mono text-white/60">pengprov@esisumbar.or.id • Verifikator Provinsi & Pelatda</div>
-              </div>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Badge Tag Promosi</label>
+              <input type="text" id="bannerBadgeInput" value="PORTAL RESMI // ESI SUMBAR 2026" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
             </div>
-            <span class="px-3 py-1 rounded-xl bg-crimson-800/30 text-crimson-400 text-[10px] font-mono font-bold uppercase self-start sm:self-auto">
-              PENGPROV ADMIN
-            </span>
+
+            <div>
+              <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">URL Logo / Gambar Sponsor</label>
+              <input type="text" id="bannerImageInput" value="/pbesi-logo.png" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
+            </div>
+
+            <div class="pt-4 flex items-center justify-between">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="bannerActiveToggle" checked class="rounded border-white/20 text-emerald-500 focus:ring-0 w-4 h-4" />
+                <span class="text-xs font-mono text-white">Status Banner: AKTIF TAYANG</span>
+              </label>
+
+              <button onclick="saveBannerAdsSettings()" class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-ink font-mono text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-lg app-tap">
+                <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                <span>Simpan Banner</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Admin Row 3: Pengcab Padang -->
-          <div class="p-3.5 rounded-2xl bg-black/40 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-sky-800 text-white flex items-center justify-center font-bold">
-                <i data-lucide="map-pin" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="font-bold text-white text-sm">Pengcab ESI Kota Padang</div>
-                <div class="text-[10px] font-mono text-white/60">admin.padang@esisumbar.or.id • Verifikator Daerah Kota Padang</div>
-              </div>
-            </div>
-            <span class="px-3 py-1 rounded-xl bg-sky-800/30 text-sky-400 text-[10px] font-mono font-bold uppercase self-start sm:self-auto">
-              PENGCAB KOTA
-            </span>
-          </div>
-
-          <!-- Admin Row 4: Pengcab Bukittinggi -->
-          <div class="p-3.5 rounded-2xl bg-black/40 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-sky-800 text-white flex items-center justify-center font-bold">
-                <i data-lucide="map-pin" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="font-bold text-white text-sm">Pengcab ESI Kota Bukittinggi</div>
-                <div class="text-[10px] font-mono text-white/60">admin.bukittinggi@esisumbar.or.id • Verifikator Daerah Bukittinggi</div>
-              </div>
-            </div>
-            <span class="px-3 py-1 rounded-xl bg-sky-800/30 text-sky-400 text-[10px] font-mono font-bold uppercase self-start sm:self-auto">
-              PENGCAB KOTA
-            </span>
-          </div>
         </div>
+
       </div>
+
     </div>
 
     <!-- ============================================================== -->
-    <!-- 8. TAB 4: AUDIT TRAIL & LOGS                                   -->
+    <!-- TAB 4: KELOLA AKUN 19 PENGCAB                                  -->
     <!-- ============================================================== -->
-    <div id="sectionLogs" class="hidden space-y-4">
-      <div class="bg-[#16181D] rounded-3xl p-5 border border-white/10 space-y-3">
-        <h3 class="font-display text-2xl text-white uppercase pb-2 border-b border-white/10">Log Aktivitas Sistem</h3>
-        <div id="auditLogsContainer" class="space-y-2 text-xs font-mono">
-          <!-- Rendered by JS -->
+    <div id="sectionAccounts" class="hidden space-y-4">
+      
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h3 class="font-display text-2xl text-white uppercase">Akses Login 19 Pengcab Daerah</h3>
+          <p class="text-xs text-white/60 font-sans">Daftar kredensial dan hak akses pengurus cabang kabupaten & kota.</p>
+        </div>
+        <button onclick="openNewAdminModal()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold uppercase transition-all shadow-md flex items-center gap-1.5 app-tap">
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+          <span>Buat Akun Baru</span>
+        </button>
+      </div>
+
+      <div class="bg-[#14161C] rounded-3xl border border-white/10 overflow-hidden shadow-xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-white/10 text-[10px] font-mono uppercase text-white/50 bg-black/40">
+                <th class="py-3 px-4">Wilayah Cabang</th>
+                <th class="py-3 px-4">Nama Akun</th>
+                <th class="py-3 px-4">Email Login</th>
+                <th class="py-3 px-4">Role Akses</th>
+                <th class="py-3 px-4 text-center">Status</th>
+                <th class="py-3 px-4 text-right">Tindakan</th>
+              </tr>
+            </thead>
+            <tbody id="adminAccountsTableBody" class="divide-y divide-white/5 text-xs font-sans">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
         </div>
       </div>
+
     </div>
 
   </main>
 
   <!-- ============================================================== -->
-  <!-- 9. DETAIL & APPROVAL MODAL                                     -->
+  <!-- MODAL: TAMBAH AKUN PENGURUS BARU                               -->
   <!-- ============================================================== -->
-  <div id="approvalModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-[#1A1C23] text-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-white/10 relative">
-      <button type="button" onclick="closeApprovalModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white app-tap">
-        <i data-lucide="x" class="w-4 h-4"></i>
+  <div id="newAdminModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="w-full max-w-md bg-[#16181F] border border-white/15 rounded-3xl p-6 text-paper shadow-2xl relative">
+      <button onclick="closeNewAdminModal()" class="absolute top-4 right-4 text-white/60 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-12 h-12 rounded-2xl bg-crimson-800 text-white flex items-center justify-center font-bold text-xl shadow-md" id="modalIcon">
-          <i data-lucide="id-card" class="w-6 h-6 text-amber-300"></i>
-        </div>
+      <h3 class="font-display text-2xl text-white uppercase tracking-wide mb-1">Tambah Akun Pengurus</h3>
+      <p class="text-xs text-white/60 font-sans mb-4">Buat akses login resmi untuk perwakilan Pengcab atau ESI Sumbar.</p>
+
+      <form onsubmit="handleCreateAdminSubmit(event)" class="space-y-3 font-sans text-xs">
         <div>
-          <span class="px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-amber-400 text-ink" id="modalCategoryBadge">
-            PLAYER / ATLET
-          </span>
-          <h3 class="font-display text-2xl text-white leading-tight uppercase mt-0.5" id="modalEntityTitle">
-            Nama Entitas
-          </h3>
-          <div class="text-xs font-mono text-white/60" id="modalEntitySub">ID Registrasi</div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Nama Lengkap Pengurus</label>
+          <input type="text" id="adminNama" required placeholder="cth: Rahmat Hidayat, S.Kom" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
         </div>
-      </div>
 
-      <!-- Detail Box -->
-      <div class="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-2 text-xs font-mono mb-5" id="modalDataContent">
-        <!-- Injected -->
-      </div>
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Email Resmi Pengurus</label>
+          <input type="email" id="adminEmail" required placeholder="cth: pengcab.solok@esi-sumbar.or.id" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
+        </div>
 
-      <!-- Action Buttons -->
-      <div class="grid grid-cols-2 gap-2">
-        <button type="button" onclick="confirmApprove()" class="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-md app-tap">
-          <i data-lucide="check" class="w-4 h-4"></i>
-          <span>Setujui & Terbitkan Paspor</span>
-        </button>
-        <button type="button" onclick="confirmReject()" class="py-3 px-4 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-md app-tap">
-          <i data-lucide="x-circle" class="w-4 h-4"></i>
-          <span>Minta Revisi / Tolak</span>
-        </button>
-      </div>
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Wilayah Cabang</label>
+          <select id="adminWilayah" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white focus:outline-none focus:ring-1 focus:ring-amber-400">
+            <option value="Kota Padang">Kota Padang</option>
+            <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+            <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+            <option value="Kota Solok">Kota Solok</option>
+            <option value="Kota Sawahlunto">Kota Sawahlunto</option>
+            <option value="Kota Padang Panjang">Kota Padang Panjang</option>
+            <option value="Kota Pariaman">Kota Pariaman</option>
+            <option value="Kab. Agam">Kab. Agam</option>
+            <option value="Kab. Lima Puluh Kota">Kab. Lima Puluh Kota</option>
+            <option value="Kab. Tanah Datar">Kab. Tanah Datar</option>
+            <option value="Kab. Padang Pariaman">Kab. Padang Pariaman</option>
+            <option value="Kab. Pesisir Selatan">Kab. Pesisir Selatan</option>
+            <option value="Kab. Solok">Kab. Solok</option>
+            <option value="Kab. Solok Selatan">Kab. Solok Selatan</option>
+            <option value="Kab. Sijunjung">Kab. Sijunjung</option>
+            <option value="Kab. Dharmasraya">Kab. Dharmasraya</option>
+            <option value="Kab. Pasaman">Kab. Pasaman</option>
+            <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
+            <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-mono text-[10px] uppercase text-white/60 mb-1">Password Sementara</label>
+          <input type="text" id="adminPass" value="Pengcab2026!" class="w-full px-3 py-2 bg-black/50 border border-white/15 rounded-xl text-white font-mono focus:outline-none focus:ring-1 focus:ring-amber-400" />
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeNewAdminModal()" class="px-4 py-2 rounded-xl bg-white/10 text-white font-mono text-xs font-bold app-tap">Batal</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-amber-500 text-ink font-mono text-xs font-bold uppercase app-tap">Simpan Akun</button>
+        </div>
+      </form>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="adminToast" class="fixed bottom-6 right-6 z-50 bg-emerald-600 text-white px-4 py-3 rounded-2xl shadow-2xl font-mono text-xs font-bold flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-    <i data-lucide="check-circle" class="w-4 h-4 text-white"></i>
-    <span id="toastMsg">Tindakan berhasil dieksekusi.</span>
+  <div id="toastMessage" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-emerald-600 text-white font-mono text-xs font-bold shadow-2xl transition-all opacity-0 pointer-events-none transform translate-y-3">
+    Perubahan berhasil disimpan!
   </div>
 
-  <!-- ============================================================== -->
-  <!-- 10. JAVASCRIPT MASTER SUPER ADMIN ENGINE                       -->
-  <!-- ============================================================== -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    // DATASET MASTER QUEUE
-    let QUEUE_DATA = [
-      {
-        id: "REG-2026-ATH-089",
-        name: "Muhammad Rayhan",
-        ign: "SKYFALL",
-        category: "player",
-        game: "VALORANT",
-        role: "Duelist / Initiator",
-        rank: "Radiant #110",
-        region: "Kota Padang",
-        time: "10 menit lalu",
-        phone: "081234567890",
-        status: "MENUNGGU PERSETUJUAN"
-      },
-      {
-        id: "REG-2026-COA-012",
-        name: "Aldo Wijaya, S.Kom",
-        ign: "COACH ALDO",
-        category: "pelatih",
-        game: "Mobile Legends",
-        role: "Head Coach (Lisensi B)",
-        rank: "Mantan Pro Coach",
-        region: "Kota Bukittinggi",
-        time: "24 menit lalu",
-        phone: "081299887711",
-        status: "MENUNGGU PERSETUJUAN"
-      },
-      {
-        id: "REG-2026-TIM-005",
-        name: "Sago Peak Esports",
-        ign: "TAG: SAGO",
-        category: "team",
-        game: "Mobile Legends: Bang Bang",
-        role: "Divisi Utama (5 Roster)",
-        rank: "Juara Piala ESI",
-        region: "Kota Payakumbuh",
-        time: "1 jam lalu",
-        phone: "081255443322",
-        status: "MENUNGGU PERSETUJUAN"
-      },
-      {
-        id: "REG-2026-VEN-008",
-        name: "Cyberia Esports Arena",
-        ign: "ARENA GRADE A",
-        category: "venue",
-        game: "40 Rig PC (RTX 4070)",
-        role: "Dedicated Gaming Arena",
-        rank: "Fiber 1 Gbps",
-        region: "Kota Padang",
-        time: "2 jam lalu",
-        phone: "081233221100",
-        status: "MENUNGGU PERSETUJUAN"
-      },
-      {
-        id: "REG-2026-ATH-090",
-        name: "Rizky Alamsyah",
-        ign: "PHANTOM-X",
-        category: "player",
-        game: "Free Fire",
-        role: "Rusher / Entry",
-        rank: "Master Elite",
-        region: "Kab. Tanah Datar",
-        time: "3 jam lalu",
-        phone: "081277889900",
-        status: "MENUNGGU PERSETUJUAN"
-      }
-    ];
+    let globalEntities = [];
+    let currentFilter = 'all';
 
-    let currentQueueCategory = 'all';
-    let selectedQueueItem = null;
-
-    function renderQueue() {
-      const tbody = document.getElementById('queueTableBody');
-      const filtered = QUEUE_DATA.filter(item => {
-        if (currentQueueCategory === 'all') return true;
-        return item.category === currentQueueCategory;
-      });
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="7" class="py-8 text-center text-white/50 font-mono text-xs">
-              Tidak ada antrean berkas dalam kategori ini.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      tbody.innerHTML = filtered.map(item => {
-        const catBadge = {
-          player: 'bg-crimson-800/40 text-crimson-300 border border-crimson-700/40',
-          pelatih: 'bg-amber-500/20 text-amber-300 border border-amber-500/40',
-          team: 'bg-purple-800/40 text-purple-300 border border-purple-700/40',
-          venue: 'bg-emerald-800/40 text-emerald-300 border border-emerald-700/40',
-          komunitas: 'bg-sky-800/40 text-sky-300 border border-sky-700/40'
-        }[item.category] || 'bg-white/10 text-white';
-
-        return `
-          <tr class="hover:bg-white/[0.02] transition-colors">
-            <td class="py-3 px-4">
-              <div class="font-bold text-white">${item.name}</div>
-              <div class="text-[10px] font-mono text-amber-400">${item.ign}</div>
-            </td>
-            <td class="py-3 px-4">
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase font-bold ${catBadge}">
-                ${item.category}
-              </span>
-            </td>
-            <td class="py-3 px-4">
-              <div class="font-mono text-white/90 text-xs">${item.game}</div>
-              <div class="text-[10px] text-white/50 font-mono">${item.role}</div>
-            </td>
-            <td class="py-3 px-4 font-mono text-white/80 text-xs">
-              ${item.region}
-            </td>
-            <td class="py-3 px-4 font-mono text-white/50 text-[11px]">
-              ${item.time}
-            </td>
-            <td class="py-3 px-4 text-center">
-              <span class="px-2 py-0.5 rounded-md bg-amber-400/10 text-amber-400 border border-amber-400/20 text-[9px] font-mono font-bold uppercase">
-                ${item.status}
-              </span>
-            </td>
-            <td class="py-3 px-4 text-right">
-              <button type="button" onclick="openApprovalModal('${item.id}')" class="px-3 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-[11px] font-bold uppercase transition-all shadow-sm app-tap">
-                Periksa Berkas
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      lucide.createIcons();
-    }
-
-    function filterQueue(cat) {
-      currentQueueCategory = cat;
-      ['all', 'player', 'pelatih', 'team', 'venue'].forEach(c => {
-        const btn = document.getElementById('qFilter-' + c);
-        if (btn) {
-          if (c === cat) {
-            btn.className = "px-3 py-1.5 rounded-xl bg-white/20 text-white font-mono text-xs font-bold uppercase transition-all app-tap";
-          } else {
-            btn.className = "px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase transition-all app-tap";
-          }
-        }
-      });
-      renderQueue();
-    }
-
-    function switchMasterTab(tab) {
-      const tabs = ['queue', 'entities', 'admins', 'logs'];
-      tabs.forEach(t => {
-        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
-        const sec = document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1));
-        if (btn && sec) {
-          if (t === tab) {
-            btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-crimson-800 text-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap";
-            sec.classList.remove('hidden');
-          } else {
-            btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap";
-            sec.classList.add('hidden');
-          }
-        }
-      });
-    }
-
-    function openApprovalModal(id) {
-      selectedQueueItem = QUEUE_DATA.find(i => i.id === id);
-      if (!selectedQueueItem) return;
-
-      document.getElementById('modalCategoryBadge').textContent = selectedQueueItem.category.toUpperCase();
-      document.getElementById('modalEntityTitle').textContent = selectedQueueItem.name;
-      document.getElementById('modalEntitySub').textContent = `${selectedQueueItem.id} • ${selectedQueueItem.ign}`;
-
-      document.getElementById('modalDataContent').innerHTML = `
-        <div class="flex justify-between py-1 border-b border-white/5">
-          <span class="text-white/50">Cabang Game:</span>
-          <span class="font-bold text-white">${selectedQueueItem.game}</span>
-        </div>
-        <div class="flex justify-between py-1 border-b border-white/5">
-          <span class="text-white/50">Spesialisasi / Role:</span>
-          <span class="font-bold text-white">${selectedQueueItem.role}</span>
-        </div>
-        <div class="flex justify-between py-1 border-b border-white/5">
-          <span class="text-white/50">Rank / Kualifikasi:</span>
-          <span class="font-bold text-amber-400">${selectedQueueItem.rank}</span>
-        </div>
-        <div class="flex justify-between py-1 border-b border-white/5">
-          <span class="text-white/50">Wilayah Domisili:</span>
-          <span class="font-bold text-white">${selectedQueueItem.region}</span>
-        </div>
-        <div class="flex justify-between py-1">
-          <span class="text-white/50">Kontak WhatsApp:</span>
-          <span class="font-bold text-emerald-400">${selectedQueueItem.phone}</span>
-        </div>
-      `;
-
-      const modal = document.getElementById('approvalModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeApprovalModal() {
-      const modal = document.getElementById('approvalModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    async function confirmApprove() {
-      if (selectedQueueItem && window.EsportSumbarAPI) {
-        try {
-          await window.EsportSumbarAPI.registrasi.updateStatus(selectedQueueItem.id, 'approved', 'Disetujui oleh Super Admin');
-        } catch(e) { console.warn('Backend update error:', e); }
-      }
-      if (!selectedQueueItem) return;
-      showToast(`✓ Berkas ${selectedQueueItem.name} (${selectedQueueItem.ign}) disetujui. Paspor Digital resmi telah diterbitkan!`);
-      
-      // Remove from queue
-      QUEUE_DATA = QUEUE_DATA.filter(i => i.id !== selectedQueueItem.id);
-      document.getElementById('pendingCountBadge').textContent = QUEUE_DATA.length;
-      closeApprovalModal();
-      renderQueue();
-      addAuditLog(`Super Admin menyetujui penerbitan Paspor Digital untuk ${selectedQueueItem.name} (${selectedQueueItem.id})`);
-    }
-
-    function confirmReject() {
-      if (!selectedQueueItem) return;
-      showToast(`Status berkas ${selectedQueueItem.name} diperbarui: Memerlukan revisi data.`);
-      QUEUE_DATA = QUEUE_DATA.filter(i => i.id !== selectedQueueItem.id);
-      document.getElementById('pendingCountBadge').textContent = QUEUE_DATA.length;
-      closeApprovalModal();
-      renderQueue();
-      addAuditLog(`Super Admin meminta revisi berkas pendaftaran ${selectedQueueItem.name} (${selectedQueueItem.id})`);
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('adminToast');
-      document.getElementById('toastMsg').textContent = msg;
-      toast.classList.remove('translate-y-20', 'opacity-0');
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById('toastMessage');
+      toast.textContent = msg;
+      toast.className = `fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl ${isError ? 'bg-crimson-600' : 'bg-emerald-600'} text-white font-mono text-xs font-bold shadow-2xl transition-all opacity-100 pointer-events-auto transform translate-y-0`;
       setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-emerald-600 text-white font-mono text-xs font-bold shadow-2xl transition-all opacity-0 pointer-events-none transform translate-y-3';
       }, 3500);
     }
 
-    function addAuditLog(text) {
-      const container = document.getElementById('auditLogsContainer');
-      const timeStr = new Date().toLocaleTimeString('id-ID');
-      const logItem = document.createElement('div');
-      logItem.className = "p-2.5 rounded-xl bg-black/40 border border-white/5 text-white/80 flex items-center justify-between";
-      logItem.innerHTML = `
-        <span class="flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-          <span>${text}</span>
-        </span>
-        <span class="text-white/40 text-[10px]">${timeStr} WIB</span>
-      `;
-      container.prepend(logItem);
+    function switchSuperTab(tabId) {
+      const tabs = ['database', 'card-studio', 'banners', 'accounts'];
+      tabs.forEach(t => {
+        const sec = document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1).replace('-s', 'S'));
+        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1).replace('-s', 'S'));
+        if (t === tabId) {
+          if (sec) sec.classList.remove('hidden');
+          if (btn) {
+            btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-amber-500 text-ink font-mono text-xs font-black uppercase transition-all flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap app-tap";
+          }
+        } else {
+          if (sec) sec.classList.add('hidden');
+          if (btn) {
+            btn.className = "flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap";
+          }
+        }
+      });
+      lucide.createIcons();
     }
 
-    function refreshDashboard() {
-      showToast("Data platform berhasil disinkronkan dengan basis data 19 Pengcab.");
+    async function loadAllSuperAdminData() {
+      try {
+        // 1. Load telemetry
+        if (window.EsportSumbarAPI) {
+          await EsportSumbarAPI.stats.initLiveCounters();
+        }
+
+        // 2. Load master database
+        const resMaster = await fetch('/api/pengprov/master-database').then(r => r.json()).catch(() => ({}));
+        if (resMaster && resMaster.success) {
+          const combined = [];
+          (resMaster.atlet || []).forEach(a => combined.push({ ...a, type: 'atlet' }));
+          (resMaster.tim || []).forEach(t => combined.push({ ...t, type: 'tim' }));
+          (resMaster.venue || []).forEach(v => combined.push({ ...v, type: 'venue' }));
+          globalEntities = combined;
+          renderGlobalTable(globalEntities);
+        }
+
+        // 3. Load accounts
+        const resAcc = await fetch('/api/admin/accounts').then(r => r.json()).catch(() => ({}));
+        if (resAcc && resAcc.data) {
+          renderAccountsTable(resAcc.data);
+        }
+
+        // 4. Load card settings
+        const resCard = await fetch('/api/admin/settings/card').then(r => r.json()).catch(() => ({}));
+        if (resCard && resCard.data) {
+          applyCardSettingsToUI(resCard.data);
+        }
+
+        // 5. Load banner settings
+        const resBanners = await fetch('/api/admin/settings/banners').then(r => r.json()).catch(() => ({}));
+        if (resBanners && resBanners.data) {
+          applyBannerSettingsToUI(resBanners.data);
+        }
+
+        showToast("Sinkronisasi pangkalan data Super Admin selesai!");
+      } catch (e) {
+        console.warn("Load super admin data error:", e);
+      }
     }
 
-    function showNewAdminModal() {
-      showToast("Form tambah pengurus baru dibuka untuk verifikasi akun.");
+    function renderGlobalTable(items) {
+      const tbody = document.getElementById('globalMasterTableBody');
+      if (!tbody) return;
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-white/40 font-mono">Belum ada data pada filter ini.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = items.map(it => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="py-3 px-4 font-bold text-white">${it.nama}</td>
+          <td class="py-3 px-4 font-mono text-white/70 uppercase text-[11px]">${it.ign || it.type.toUpperCase()}</td>
+          <td class="py-3 px-4 font-mono text-amber-300 text-[11px]">${Array.isArray(it.game) ? it.game.join(', ') : (it.game || '-')}</td>
+          <td class="py-3 px-4 text-white/80">${it.wilayah || 'Sumatera Barat'}</td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              ${it.lisensiStatus || it.akreditasi || 'Aktif'}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-right">
+            <a href="/katalog" target="_blank" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono text-[10px]">Detail</a>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function filterGlobalTable() {
+      const q = document.getElementById('globalDbSearch').value.toLowerCase();
+      const filtered = globalEntities.filter(it => {
+        const matchType = currentFilter === 'all' || it.type === currentFilter;
+        const matchQuery = !q || (it.nama && it.nama.toLowerCase().includes(q)) || (it.ign && it.ign.toLowerCase().includes(q)) || (it.wilayah && it.wilayah.toLowerCase().includes(q));
+        return matchType && matchQuery;
+      });
+      renderGlobalTable(filtered);
+    }
+
+    function setEntityFilter(type) {
+      currentFilter = type;
+      ['all', 'atlet', 'tim', 'venue'].forEach(t => {
+        const b = document.getElementById('btnEnt-' + t);
+        if (b) {
+          b.className = t === type ? "px-3 py-1.5 rounded-xl bg-white/20 text-white font-mono text-xs font-bold uppercase app-tap" : "px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap";
+        }
+      });
+      filterGlobalTable();
+    }
+
+    function selectCardTemplate(tplId) {
+      const box = document.getElementById('previewCardBox');
+      const label = document.getElementById('previewCardTitle');
+      ['white-luxury', 'crimson-gold', 'cyber-dark', 'emerald-master'].forEach(id => {
+        const el = document.getElementById('tpl-' + id);
+        if (el) {
+          if (id === tplId) {
+            el.className = "p-3.5 rounded-2xl border-2 border-amber-400 bg-white/10 cursor-pointer app-tap transition-all";
+          } else {
+            el.className = "p-3.5 rounded-2xl border border-white/10 hover:border-white/30 bg-black/40 cursor-pointer app-tap transition-all";
+          }
+        }
+      });
+
+      if (tplId === 'crimson-gold') {
+        box.className = "w-full max-w-[260px] aspect-[1/1.42] rounded-2xl bg-gradient-to-br from-crimson-900 to-black border-2 border-amber-400 text-white p-4 flex flex-col justify-between shadow-2xl relative select-none";
+        label.textContent = "CRIMSON GOLD // PELATDA";
+      } else if (tplId === 'cyber-dark') {
+        box.className = "w-full max-w-[260px] aspect-[1/1.42] rounded-2xl bg-[#111318] border border-white/20 text-white p-4 flex flex-col justify-between shadow-2xl relative select-none";
+        label.textContent = "CYBER ONYX // PRO PLAYER";
+      } else if (tplId === 'emerald-master') {
+        box.className = "w-full max-w-[260px] aspect-[1/1.42] rounded-2xl bg-emerald-950 border border-emerald-500 text-white p-4 flex flex-col justify-between shadow-2xl relative select-none";
+        label.textContent = "EMERALD MASTER // CERTIFIED";
+      } else {
+        box.className = "w-full max-w-[260px] aspect-[1/1.42] rounded-2xl bg-white border border-black/15 text-ink p-4 flex flex-col justify-between shadow-2xl relative select-none";
+        label.textContent = "WHITE LUXURY // DEFAULT";
+      }
+    }
+
+    async function saveCardStudioSettings() {
+      const badgeLabel = document.getElementById('badgeLabelInput').value;
+      const icon = document.getElementById('badgeIconSelect').value;
+      const shimmer = document.getElementById('shimmerEffectToggle').checked;
+      const ovr = document.getElementById('ovrRatingToggle').checked;
+
+      const payload = {
+        verificationBadge: {
+          label: badgeLabel,
+          icon: icon,
+          enabled: true
+        },
+        cardHoloShimmer: shimmer,
+        showOvrRating: ovr
+      };
+
+      const res = await fetch('/api/admin/settings/card', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(r => r.json()).catch(() => ({}));
+
+      document.getElementById('previewCardBadgeLabel').textContent = badgeLabel;
+      showToast("Desain kartu & icon verifikasi berhasil disimpan dan aktif di web!");
+    }
+
+    async function saveBannerAdsSettings() {
+      const title = document.getElementById('bannerTitleInput').value;
+      const subtitle = document.getElementById('bannerSubtitleInput').value;
+      const ctaText = document.getElementById('bannerCtaTextInput').value;
+      const ctaLink = document.getElementById('bannerCtaLinkInput').value;
+      const badge = document.getElementById('bannerBadgeInput').value;
+      const imageUrl = document.getElementById('bannerImageInput').value;
+      const enabled = document.getElementById('bannerActiveToggle').checked;
+
+      const payload = {
+        heroTop: {
+          enabled,
+          badge,
+          title,
+          subtitle,
+          ctaText,
+          ctaLink,
+          imageUrl
+        }
+      };
+
+      const res = await fetch('/api/admin/settings/banners', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(r => r.json()).catch(() => ({}));
+
+      showToast("Pengaturan banner iklan web berhasil disimpan!");
+    }
+
+    function applyCardSettingsToUI(settings) {
+      if (!settings) return;
+      if (settings.verificationBadge?.label) {
+        document.getElementById('badgeLabelInput').value = settings.verificationBadge.label;
+        document.getElementById('previewCardBadgeLabel').textContent = settings.verificationBadge.label;
+      }
+      if (settings.verificationBadge?.icon) {
+        document.getElementById('badgeIconSelect').value = settings.verificationBadge.icon;
+      }
+      if (settings.activeTemplate) {
+        selectCardTemplate(settings.activeTemplate);
+      }
+    }
+
+    function applyBannerSettingsToUI(bannerAds) {
+      if (!bannerAds || !bannerAds.heroTop) return;
+      const b = bannerAds.heroTop;
+      if (b.title) document.getElementById('bannerTitleInput').value = b.title;
+      if (b.subtitle) document.getElementById('bannerSubtitleInput').value = b.subtitle;
+      if (b.ctaText) document.getElementById('bannerCtaTextInput').value = b.ctaText;
+      if (b.ctaLink) document.getElementById('bannerCtaLinkInput').value = b.ctaLink;
+      if (b.badge) document.getElementById('bannerBadgeInput').value = b.badge;
+      if (b.imageUrl) document.getElementById('bannerImageInput').value = b.imageUrl;
+      document.getElementById('bannerActiveToggle').checked = b.enabled ?? true;
+    }
+
+    function renderAccountsTable(accounts) {
+      const tbody = document.getElementById('adminAccountsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = accounts.map(acc => `
+        <tr class="hover:bg-white/5 transition-colors">
+          <td class="py-3 px-4 font-bold text-white">${acc.wilayah || 'Sumatera Barat'}</td>
+          <td class="py-3 px-4 text-white/80">${acc.nama}</td>
+          <td class="py-3 px-4 font-mono text-amber-300 text-[11px]">${acc.email}</td>
+          <td class="py-3 px-4 font-mono uppercase text-[10px] text-sky-400 font-bold">${acc.role}</td>
+          <td class="py-3 px-4 text-center">
+            <span class="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/20 text-emerald-400">Aktif</span>
+          </td>
+          <td class="py-3 px-4 text-right">
+            <a href="/login?email=${encodeURIComponent(acc.email)}" class="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-mono text-[10px]">Uji Login</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openNewAdminModal() {
+      const modal = document.getElementById('newAdminModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100', 'pointer-events-auto');
+    }
+
+    function closeNewAdminModal() {
+      const modal = document.getElementById('newAdminModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+
+    async function handleCreateAdminSubmit(e) {
+      e.preventDefault();
+      const nama = document.getElementById('adminNama').value;
+      const email = document.getElementById('adminEmail').value;
+      const wilayah = document.getElementById('adminWilayah').value;
+      const pass = document.getElementById('adminPass').value;
+
+      const res = await fetch('/api/admin/accounts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nama, email, wilayah, password: pass, role: 'pengcab' })
+      }).then(r => r.json()).catch(() => ({}));
+
+      closeNewAdminModal();
+      showToast(`Akun pengurus ${wilayah} berhasil ditambahkan!`);
+      loadAllSuperAdminData();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      renderQueue();
-
-      // Sample Audit Logs
-      const logs = [
-        "Sistem memvalidasi lisensi otomatis atlet ID PBESI-SB-2026-VAL-96",
-        "Pengcab ESI Bukittinggi mengajukan jadwal seleksi kejurda",
-        "Klub Minang Pride Esports memperbarui line-up roster divisi MLBB",
-        "Pengprov ESI Sumbar menerbitkan SK Akreditasi Venue Cyberia Arena Padang"
-      ];
-      logs.forEach(l => addAuditLog(l));
+      loadAllSuperAdminData();
     });
   </script>
-
 </body>
 </html>
