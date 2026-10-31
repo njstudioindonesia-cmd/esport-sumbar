@@ -1,6 +1,6 @@
 {
   "version": "2.4.0",
-  "lastUpdated": "2026-10-31T12:32:03.197Z",
+  "lastUpdated": "2026-10-31T12:51:35.526Z",
   "users": [
     {
       "id": "usr-super",
@@ -317,6 +317,32 @@
       "permissions": [
         "atlet:self"
       ]
+    },
+    {
+      "id": "usr-atl-5286",
+      "role": "atlet",
+      "email": "test.player.alur@gmail.com",
+      "passwordHash": "password123",
+      "nama": "Test Player Alur Minimalis",
+      "ign": "TESTPLAYER",
+      "pasporId": "PBESI-SB-2026-MOB-659",
+      "wilayah": "Kota Padang",
+      "permissions": [
+        "atlet:self"
+      ]
+    },
+    {
+      "id": "usr-atl-5526",
+      "role": "atlet",
+      "email": "kyrox.sumbar@gmail.com",
+      "passwordHash": "securepass2026",
+      "nama": "Rizky Alamsyah",
+      "ign": "KYROX",
+      "pasporId": "PBESI-SB-2026-MOB-585",
+      "wilayah": "Kota Padang",
+      "permissions": [
+        "atlet:self"
+      ]
     }
   ],
   "wilayah": [
@@ -531,6 +557,44 @@
     }
   ],
   "atlet": [
+    {
+      "id": "atl-5526",
+      "pasporId": "PBESI-SB-2026-MOB-585",
+      "nama": "Rizky Alamsyah",
+      "ign": "KYROX",
+      "game": "Mobile Legends",
+      "role": "Flex / All-Role",
+      "wilayah": "Kota Padang",
+      "nik": "-",
+      "email": "kyrox.sumbar@gmail.com",
+      "ovr": 93,
+      "statusPelatda": "POTENSI DAERAH",
+      "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+      "foto": "/images/athlete-v4nd4l.jpg",
+      "statusLFT": true,
+      "prestasi": [
+        "Pendaftar Paspor Digital Baru 2026"
+      ]
+    },
+    {
+      "id": "atl-5286",
+      "pasporId": "PBESI-SB-2026-MOB-659",
+      "nama": "Test Player Alur Minimalis",
+      "ign": "TESTPLAYER",
+      "game": "Mobile Legends",
+      "role": "Gold Laner",
+      "wilayah": "Kota Padang",
+      "nik": "-",
+      "email": "test.player.alur@gmail.com",
+      "ovr": 95,
+      "statusPelatda": "POTENSI DAERAH",
+      "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+      "foto": "/images/athlete-v4nd4l.jpg",
+      "statusLFT": true,
+      "prestasi": [
+        "Pendaftar Paspor Digital Baru 2026"
+      ]
+    },
     {
       "id": "atl-3197",
       "pasporId": "PBESI-SB-2026-MOB-161",
@@ -833,6 +897,78 @@
     }
   ],
   "antreanVerifikasi": [
+    {
+      "id": "reg-pla-95526",
+      "bidang": "player",
+      "nama": "Rizky Alamsyah",
+      "wilayah": "Kota Padang",
+      "telepon": "081299887766",
+      "email": "kyrox.sumbar@gmail.com",
+      "password": "securepass2026",
+      "source": "mobile-app",
+      "ign": "KYROX",
+      "game": "Mobile Legends",
+      "role": "Flex / All-Role",
+      "playerStatus": "LFT",
+      "generatedPasporId": "PBESI-SB-2026-MOB-585",
+      "athlete": {
+        "id": "atl-5526",
+        "pasporId": "PBESI-SB-2026-MOB-585",
+        "nama": "Rizky Alamsyah",
+        "ign": "KYROX",
+        "game": "Mobile Legends",
+        "role": "Flex / All-Role",
+        "wilayah": "Kota Padang",
+        "nik": "-",
+        "email": "kyrox.sumbar@gmail.com",
+        "ovr": 93,
+        "statusPelatda": "POTENSI DAERAH",
+        "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+        "foto": "/images/athlete-v4nd4l.jpg",
+        "statusLFT": true,
+        "prestasi": [
+          "Pendaftar Paspor Digital Baru 2026"
+        ]
+      },
+      "status": "pending",
+      "submittedAt": "2026-10-31T12:51:35.526Z"
+    },
+    {
+      "id": "reg-pla-75286",
+      "bidang": "player",
+      "nama": "Test Player Alur Minimalis",
+      "wilayah": "Kota Padang",
+      "telepon": "081234567890",
+      "email": "test.player.alur@gmail.com",
+      "password": "password123",
+      "ign": "TESTPLAYER",
+      "game": "Mobile Legends",
+      "role": "Gold Laner",
+      "playerStatus": "LFT",
+      "source": "mobile-app",
+      "generatedPasporId": "PBESI-SB-2026-MOB-659",
+      "athlete": {
+        "id": "atl-5286",
+        "pasporId": "PBESI-SB-2026-MOB-659",
+        "nama": "Test Player Alur Minimalis",
+        "ign": "TESTPLAYER",
+        "game": "Mobile Legends",
+        "role": "Gold Laner",
+        "wilayah": "Kota Padang",
+        "nik": "-",
+        "email": "test.player.alur@gmail.com",
+        "ovr": 95,
+        "statusPelatda": "POTENSI DAERAH",
+        "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+        "foto": "/images/athlete-v4nd4l.jpg",
+        "statusLFT": true,
+        "prestasi": [
+          "Pendaftar Paspor Digital Baru 2026"
+        ]
+      },
+      "status": "pending",
+      "submittedAt": "2026-10-31T12:51:15.286Z"
+    },
     {
       "id": "reg-pla-23197",
       "bidang": "player",
