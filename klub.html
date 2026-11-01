@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F5F6FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Klub & Tim Resmi – ESPORT SUMBAR</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000', // Telkomsel Red
+              700: '#B80000',
+              800: '#900000',
+            },
+            surface: {
+              canvas: '#F5F6FA',
+              card: '#FFFFFF',
+              dark: '#1A1D26',
+              muted: '#687083',
+              border: '#EAECEF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/microsystem-client.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      background-color: #F5F6FA;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 96px; /* Space for bottom dock */
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- TOP APP BAR (COMPACT MYTELKOMSEL HEADER)                      -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Klub & Tim Resmi</h1>
+          <p class="text-[10px] text-surface-muted font-medium">PBESI SUMATERA BARAT</p>
+        </div>
+      </div>
+      <div>
+        
+      <a href="/daftar-team" class="px-3 py-1.5 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center gap-1 tap-action">
+        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+        <span>Daftar</span>
+      </a>
+    
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- MAIN APP CONTAINER                                             -->
+  <!-- ============================================================== -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+    
+    <!-- SUMMARY PROVIDER CARD -->
+    <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white to-emerald-50/50 border border-gray-100">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-[11px] font-bold tracking-wider text-emerald-600 uppercase">Direktori Klub & Tim</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+          <i data-lucide="shield" class="w-3 h-3 text-emerald-600"></i>
+          Roster Resmi
+        </span>
+      </div>
+      <h2 class="text-xl font-extrabold text-surface-dark tracking-tight leading-snug">
+        Klub & Roster Terakreditasi PBESI Sumatera Barat
+      </h2>
+      <p class="text-xs text-surface-muted mt-1 leading-relaxed">
+        Pangkalan data resmi klub esports daerah, verifikasi susunan roster pemain, dan hak keikutsertaan turnamen kejuaraan resmi.
+      </p>
+
+      <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-surface-dark">64+</span>
+          <span class="text-[10px] text-surface-muted font-medium">Klub Terdata</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-emerald-600">Grade A</span>
+          <span class="text-[10px] text-surface-muted font-medium">Standar Pengprov</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-brand-600">100%</span>
+          <span class="text-[10px] text-surface-muted font-medium">Hak Kejurda</span>
+        </div>
+      </div>
+
+      <a href="/daftar-team" class="mt-4 w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/20">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Pendaftaran Klub / Roster Baru</span>
+      </a>
+    </div>
+
+    <!-- SEARCH & FILTER -->
+    <div class="space-y-2">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-surface-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="searchTeam" 
+          oninput="filterTeams()"
+          placeholder="Cari klub, kapten, atau kota..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark placeholder-surface-muted focus:outline-none focus:border-brand-600 shadow-sm"
+        />
+      </div>
+
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 hide-scrollbar" id="teamFilterBar">
+        <button onclick="setFilterTeam('semua', this)" class="px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action">Semua Klub</button>
+        <button onclick="setFilterTeam('Grade A', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Grade A</button>
+        <button onclick="setFilterTeam('Grade B', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Grade B</button>
+        <button onclick="setFilterTeam('Kota Padang', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Kota Padang</button>
+        <button onclick="setFilterTeam('Bukittinggi', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Bukittinggi</button>
+      </div>
+    </div>
+
+    <!-- TEAM CARDS -->
+    <div class="space-y-3" id="teamListContainer">
+      
+        <div class="team-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-grade="Grade A (Pengprov ESI)" 
+             data-name="minang pride esports" 
+             data-kapten="muhammad rayden (v4nd4l)" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Minang Pride Esports</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang • 6 Roster</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="user-check" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kapten: Muhammad Rayden (V4ND4L)</span>
+                </p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Divisi Game:</span>
+              <span class="text-surface-muted">Valorant, Mobile Legends</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Prestasi:</span>
+              <span class="text-emerald-700 font-semibold truncate max-w-[200px]">Medali Emas Porprov Sumbar & Juara Kejurda 2025</span>
+            </div>
+          </div>
+
+          <!-- Roster Tags -->
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Lineup Roster Resmi:</span>
+            <div class="flex flex-wrap gap-1.5">
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  V4ND4L <span class="text-surface-muted">(Duelist / IGL)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  F4LCON <span class="text-surface-muted">(Initiator)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  RECON <span class="text-surface-muted">(Controller)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  ARES <span class="text-surface-muted">(Sentinel)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  VIPER <span class="text-surface-muted">(Flex Smoker)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  NIGHT <span class="text-surface-muted">(Sub-Flex)</span>
+                </span>
+              
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Manager: Doni Prasetya, SE</span>
+            <a href="/daftar-team" class="text-brand-600 font-bold text-xs flex items-center gap-1 tap-action hover:underline">
+              <span>Kelola Tim</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="team-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-grade="Grade A (Pengprov ESI)" 
+             data-name="singgalang rangers" 
+             data-kapten="ilham 'ranger1' saputra" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Singgalang Rangers</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Bukittinggi • 5 Roster</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="user-check" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kapten: Ilham 'Ranger1' Saputra</span>
+                </p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Divisi Game:</span>
+              <span class="text-surface-muted">Mobile Legends, PUBG Mobile</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Prestasi:</span>
+              <span class="text-emerald-700 font-semibold truncate max-w-[200px]">Juara 2 Piala Walikota Bukittinggi 2025</span>
+            </div>
+          </div>
+
+          <!-- Roster Tags -->
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Lineup Roster Resmi:</span>
+            <div class="flex flex-wrap gap-1.5">
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  RANGER1 <span class="text-surface-muted">(Jungler / IGL)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  TITAN <span class="text-surface-muted">(EXP Laner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  CHRONOS <span class="text-surface-muted">(Roamer)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  SNIPE <span class="text-surface-muted">(Goldlaner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  MAGE <span class="text-surface-muted">(Midlaner)</span>
+                </span>
+              
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Manager: Rahmat Hidayat</span>
+            <a href="/daftar-team" class="text-brand-600 font-bold text-xs flex items-center gap-1 tap-action hover:underline">
+              <span>Kelola Tim</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="team-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-grade="Grade A (Pengprov ESI)" 
+             data-name="ranah minang cyber" 
+             data-kapten="fajri alamsyah (f4lcon)" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Ranah Minang Cyber</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Bukittinggi • 5 Roster</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="user-check" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kapten: Fajri Alamsyah (F4LCON)</span>
+                </p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Divisi Game:</span>
+              <span class="text-surface-muted">Mobile Legends, PUBG Mobile</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Prestasi:</span>
+              <span class="text-emerald-700 font-semibold truncate max-w-[200px]">Runner Up Kejurda ESI Sumbar 2025</span>
+            </div>
+          </div>
+
+          <!-- Roster Tags -->
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Lineup Roster Resmi:</span>
+            <div class="flex flex-wrap gap-1.5">
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  F4LCON <span class="text-surface-muted">(Jungler / IGL)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  RAIKOU <span class="text-surface-muted">(Midlaner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  GLORY <span class="text-surface-muted">(Goldlaner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  TITAN <span class="text-surface-muted">(EXP Laner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  SHADOW <span class="text-surface-muted">(Roamer)</span>
+                </span>
+              
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Manager: Rahmat Hidayat</span>
+            <a href="/daftar-team" class="text-brand-600 font-bold text-xs flex items-center gap-1 tap-action hover:underline">
+              <span>Kelola Tim</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="team-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-grade="Grade B (Pengcab ESI)" 
+             data-name="singgalang knights" 
+             data-kapten="aldi gunawan (night)" 
+             data-wilayah="kota padang panjang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Singgalang Knights</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang Panjang • 5 Roster</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="user-check" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kapten: Aldi Gunawan (NIGHT)</span>
+                </p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 whitespace-nowrap">
+              GRADE B
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Divisi Game:</span>
+              <span class="text-surface-muted">Valorant, Free Fire</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Prestasi:</span>
+              <span class="text-emerald-700 font-semibold truncate max-w-[200px]">Juara 1 Turnamen Walikota Cup</span>
+            </div>
+          </div>
+
+          <!-- Roster Tags -->
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Lineup Roster Resmi:</span>
+            <div class="flex flex-wrap gap-1.5">
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  NIGHT <span class="text-surface-muted">(Duelist)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  FROST <span class="text-surface-muted">(Initiator)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  BLAZE <span class="text-surface-muted">(Sentinel)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  WAVE <span class="text-surface-muted">(Controller)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  ECHO <span class="text-surface-muted">(Flex)</span>
+                </span>
+              
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Manager: Ilham Fadillah</span>
+            <a href="/daftar-team" class="text-brand-600 font-bold text-xs flex items-center gap-1 tap-action hover:underline">
+              <span>Kelola Tim</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="team-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-grade="Grade B (Pengcab ESI)" 
+             data-name="bareh solok esports club" 
+             data-kapten="deni saputra (ares)" 
+             data-wilayah="kota solok">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Bareh Solok Esports Club</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Solok • 5 Roster</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="user-check" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kapten: Deni Saputra (ARES)</span>
+                </p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100 whitespace-nowrap">
+              GRADE B
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Divisi Game:</span>
+              <span class="text-surface-muted">Mobile Legends</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-bold text-surface-dark">Prestasi:</span>
+              <span class="text-emerald-700 font-semibold truncate max-w-[200px]">Medali Perunggu Porprov Sumbar</span>
+            </div>
+          </div>
+
+          <!-- Roster Tags -->
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Lineup Roster Resmi:</span>
+            <div class="flex flex-wrap gap-1.5">
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  ARES <span class="text-surface-muted">(EXP Laner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  SOLOK_PRIDE <span class="text-surface-muted">(Jungler)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  KING_DEN <span class="text-surface-muted">(Midlaner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  VIPER_S <span class="text-surface-muted">(Goldlaner)</span>
+                </span>
+              
+                <span class="px-2 py-0.5 rounded-md bg-white border border-gray-200 text-[10px] font-mono text-surface-dark font-semibold">
+                  SHIELD_M <span class="text-surface-muted">(Roamer)</span>
+                </span>
+              
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Manager: Surya Dharma</span>
+            <a href="/daftar-team" class="text-brand-600 font-bold text-xs flex items-center gap-1 tap-action hover:underline">
+              <span>Kelola Tim</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+      
+    </div>
+
+    <script>
+      let activeTeamFilter = 'semua';
+
+      function setFilterTeam(filter, btn) {
+        activeTeamFilter = filter;
+        document.querySelectorAll('#teamFilterBar button').forEach(b => {
+          b.className = 'px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action';
+        });
+        btn.className = 'px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action';
+        filterTeams();
+      }
+
+      function filterTeams() {
+        const query = document.getElementById('searchTeam').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.team-card');
+        
+        cards.forEach(card => {
+          const grade = card.getAttribute('data-grade');
+          const name = card.getAttribute('data-name');
+          const kapten = card.getAttribute('data-kapten');
+          const wilayah = card.getAttribute('data-wilayah');
+
+          const matchFilter = activeTeamFilter === 'semua' || 
+                              grade.toLowerCase().includes(activeTeamFilter.toLowerCase()) || 
+                              wilayah.toLowerCase().includes(activeTeamFilter.toLowerCase());
+          const matchQuery = !query || name.includes(query) || kapten.includes(query) || wilayah.includes(query);
+
+          if (matchFilter && matchQuery) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM DOCK (MYTELKOMSEL 5-TAB APP NAV)                 -->
+  <!-- ============================================================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-lg border-t border-surface-border shadow-lg">
+    <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- Beranda -->
+      <a href="/" class="flex flex-col items-center gap-0.5 tap-action text-brand-600">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Beranda</span>
+      </a>
+
+      <!-- Paspor -->
+      <a href="/paspor" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="id-card" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Paspor</span>
+      </a>
+
+      <!-- FLOATING DAFTAR (+) BUTTON -->
+      <div class="relative -top-3">
+        <a href="/daftar" class="w-13 h-13 w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-lg shadow-brand-600/35 border-3 border-white tap-action">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
+        </a>
+      </div>
+
+      <!-- Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="map" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Wilayah</span>
+      </a>
+
+      <!-- Akun / Masuk -->
+      <a href="/login" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Akun</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

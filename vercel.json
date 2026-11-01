@@ -100,6 +100,54 @@
       "destination": "/daftar.html"
     },
     {
+      "source": "/paspor",
+      "destination": "/paspor.html"
+    },
+    {
+      "source": "/atlet",
+      "destination": "/paspor.html"
+    },
+    {
+      "source": "/pelatih",
+      "destination": "/pelatih.html"
+    },
+    {
+      "source": "/tim",
+      "destination": "/tim.html"
+    },
+    {
+      "source": "/teams",
+      "destination": "/tim.html"
+    },
+    {
+      "source": "/klub",
+      "destination": "/tim.html"
+    },
+    {
+      "source": "/roster",
+      "destination": "/tim.html"
+    },
+    {
+      "source": "/komunitas",
+      "destination": "/komunitas.html"
+    },
+    {
+      "source": "/venue",
+      "destination": "/venue.html"
+    },
+    {
+      "source": "/arena",
+      "destination": "/venue.html"
+    },
+    {
+      "source": "/turnamen",
+      "destination": "/turnamen.html"
+    },
+    {
+      "source": "/event",
+      "destination": "/turnamen.html"
+    },
+    {
       "source": "/bursa",
       "destination": "/bursa.html"
     },
@@ -112,16 +160,12 @@
       "destination": "/bursa.html"
     },
     {
-      "source": "/tim",
-      "destination": "/tim.html"
+      "source": "/wilayah",
+      "destination": "/wilayah.html"
     },
     {
-      "source": "/roster",
-      "destination": "/tim.html"
-    },
-    {
-      "source": "/teams",
-      "destination": "/tim.html"
+      "source": "/pengcab",
+      "destination": "/wilayah.html"
     },
     {
       "source": "/cari",
@@ -134,22 +178,6 @@
     {
       "source": "/profile",
       "destination": "/profile.html"
-    },
-    {
-      "source": "/profil",
-      "destination": "/profile.html"
-    },
-    {
-      "source": "/katalog",
-      "destination": "/katalog.html"
-    },
-    {
-      "source": "/wilayah",
-      "destination": "/wilayah.html"
-    },
-    {
-      "source": "/atlet",
-      "destination": "/atlet.html"
     },
     {
       "source": "/about",

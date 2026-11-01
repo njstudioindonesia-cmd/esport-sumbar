@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F5F6FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Komunitas Game – ESPORT SUMBAR</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000', // Telkomsel Red
+              700: '#B80000',
+              800: '#900000',
+            },
+            surface: {
+              canvas: '#F5F6FA',
+              card: '#FFFFFF',
+              dark: '#1A1D26',
+              muted: '#687083',
+              border: '#EAECEF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/microsystem-client.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      background-color: #F5F6FA;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 96px; /* Space for bottom dock */
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- TOP APP BAR (COMPACT MYTELKOMSEL HEADER)                      -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Komunitas Game</h1>
+          <p class="text-[10px] text-surface-muted font-medium">PBESI SUMATERA BARAT</p>
+        </div>
+      </div>
+      <div>
+        
+      <a href="/daftar-komunitas" class="px-3 py-1.5 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center gap-1 tap-action">
+        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+        <span>Afiliasi</span>
+      </a>
+    
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- MAIN APP CONTAINER                                             -->
+  <!-- ============================================================== -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+    
+    <!-- SUMMARY PROVIDER CARD -->
+    <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white to-purple-50/50 border border-gray-100">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-[11px] font-bold tracking-wider text-purple-600 uppercase">Komunitas Gamers</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200/60">
+          <i data-lucide="users" class="w-3 h-3 text-purple-600"></i>
+          Afiliasi Daerah
+        </span>
+      </div>
+      <h2 class="text-xl font-extrabold text-surface-dark tracking-tight leading-snug">
+        Komunitas Game Resmi Binaan ESI Sumatera Barat
+      </h2>
+      <p class="text-xs text-surface-muted mt-1 leading-relaxed">
+        Wadah silaturahmi gamers ranah Minang, penerbitan surat rekomendasi kegiatan/event, serta jalur scouting talenta akar rumput.
+      </p>
+
+      <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-surface-dark">42+</span>
+          <span class="text-[10px] text-surface-muted font-medium">Komunitas</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-purple-600">15.000+</span>
+          <span class="text-[10px] text-surface-muted font-medium">Gamers Aktif</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-emerald-600">Izin Sah</span>
+          <span class="text-[10px] text-surface-muted font-medium">Rekomendasi</span>
+        </div>
+      </div>
+
+      <a href="/daftar-komunitas" class="mt-4 w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/20">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Pendaftaran Afiliasi Komunitas</span>
+      </a>
+    </div>
+
+    <!-- FILTER & SEARCH -->
+    <div class="space-y-2">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-surface-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="searchKomunitas" 
+          oninput="filterKomunitas()"
+          placeholder="Cari komunitas, game, atau kota..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark placeholder-surface-muted focus:outline-none focus:border-brand-600 shadow-sm"
+        />
+      </div>
+
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 hide-scrollbar" id="komunitasFilterBar">
+        <button onclick="setFilterKomunitas('semua', this)" class="px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action">Semua Game</button>
+        <button onclick="setFilterKomunitas('Mobile Legends', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Mobile Legends</button>
+        <button onclick="setFilterKomunitas('Valorant', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Valorant</button>
+        <button onclick="setFilterKomunitas('PUBG Mobile', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">PUBG Mobile</button>
+        <button onclick="setFilterKomunitas('Free Fire', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Free Fire</button>
+      </div>
+    </div>
+
+    <!-- COMMUNITY LIST -->
+    <div class="space-y-3" id="communityListContainer">
+      
+        <div class="community-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="mlbb community padang" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 flex-shrink-0">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">MLBB Community Padang</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang</p>
+                <p class="text-[10px] text-purple-700 font-bold mt-0.5">4.200+ Anggota</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-100 whitespace-nowrap">
+              Mobile Legends
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1">
+            <span class="text-[10px] text-surface-muted block font-semibold">Agenda Rutin:</span>
+            <p class="text-[11px] font-medium text-surface-dark leading-snug">Mabar Mingguan, Turnamen Mini Cup & Coaching Clinic</p>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Ketua: Ilham Pratama, S.Kom</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ketua%20MLBB%20Community%20Padang,%20saya%20tertarik%20bergabung%20dengan%20komunitas%20resmi." 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Gabung</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="community-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-game="Valorant" 
+             data-name="valorant minang hub" 
+             data-wilayah="sumatera barat (regional)">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 flex-shrink-0">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Valorant Minang Hub</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Sumatera Barat (Regional)</p>
+                <p class="text-[10px] text-purple-700 font-bold mt-0.5">1.850+ Anggota</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-100 whitespace-nowrap">
+              Valorant
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1">
+            <span class="text-[10px] text-surface-muted block font-semibold">Agenda Rutin:</span>
+            <p class="text-[11px] font-medium text-surface-dark leading-snug">Custom Scrim Rutin, Scouting Roster, Watch Party VCT</p>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Ketua: Rizky Ramadhan</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ketua%20Valorant%20Minang%20Hub,%20saya%20tertarik%20bergabung%20dengan%20komunitas%20resmi." 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Gabung</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="community-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-game="PUBG Mobile" 
+             data-name="pubg mobile ranah minang" 
+             data-wilayah="bukittinggi & payakumbuh">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 flex-shrink-0">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">PUBG Mobile Ranah Minang</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Bukittinggi & Payakumbuh</p>
+                <p class="text-[10px] text-purple-700 font-bold mt-0.5">3.100+ Anggota</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-100 whitespace-nowrap">
+              PUBG Mobile
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1">
+            <span class="text-[10px] text-surface-muted block font-semibold">Agenda Rutin:</span>
+            <p class="text-[11px] font-medium text-surface-dark leading-snug">Fast Tournament Malam Minggu & Seleksi Grassroot</p>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Ketua: Fikri Maulana</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ketua%20PUBG%20Mobile%20Ranah%20Minang,%20saya%20tertarik%20bergabung%20dengan%20komunitas%20resmi." 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Gabung</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="community-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-game="Free Fire" 
+             data-name="free fire minang pride squad" 
+             data-wilayah="solok & pesisir selatan">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 flex-shrink-0">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Free Fire Minang Pride Squad</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Solok & Pesisir Selatan</p>
+                <p class="text-[10px] text-purple-700 font-bold mt-0.5">2.700+ Anggota</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-100 whitespace-nowrap">
+              Free Fire
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1">
+            <span class="text-[10px] text-surface-muted block font-semibold">Agenda Rutin:</span>
+            <p class="text-[11px] font-medium text-surface-dark leading-snug">Turnamen Komunitas Pelajar & Mabar Guild</p>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Ketua: Aldi Wijaya</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ketua%20Free%20Fire%20Minang%20Pride%20Squad,%20saya%20tertarik%20bergabung%20dengan%20komunitas%20resmi." 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Gabung</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="community-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-game="Tekken 8 & Street Fighter" 
+             data-name="sumbar fighting game community (fgc)" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 flex-shrink-0">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Sumbar Fighting Game Community (FGC)</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang</p>
+                <p class="text-[10px] text-purple-700 font-bold mt-0.5">450+ Anggota</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-100 whitespace-nowrap">
+              Tekken 8 & Street Fighter
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1">
+            <span class="text-[10px] text-surface-muted block font-semibold">Agenda Rutin:</span>
+            <p class="text-[11px] font-medium text-surface-dark leading-snug">Monthly Offline Gathering di Minang Cyber Lounge</p>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">Ketua: Dr. Hendra Gunawan</span>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ketua%20Sumbar%20Fighting%20Game%20Community%20(FGC),%20saya%20tertarik%20bergabung%20dengan%20komunitas%20resmi." 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Gabung</span>
+            </a>
+          </div>
+
+        </div>
+      
+    </div>
+
+    <script>
+      let activeKomunitasGame = 'semua';
+
+      function setFilterKomunitas(game, btn) {
+        activeKomunitasGame = game;
+        document.querySelectorAll('#komunitasFilterBar button').forEach(b => {
+          b.className = 'px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action';
+        });
+        btn.className = 'px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action';
+        filterKomunitas();
+      }
+
+      function filterKomunitas() {
+        const query = document.getElementById('searchKomunitas').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.community-card');
+        
+        cards.forEach(card => {
+          const game = card.getAttribute('data-game');
+          const name = card.getAttribute('data-name');
+          const wilayah = card.getAttribute('data-wilayah');
+
+          const matchGame = activeKomunitasGame === 'semua' || game.toLowerCase().includes(activeKomunitasGame.toLowerCase());
+          const matchQuery = !query || name.includes(query) || wilayah.includes(query);
+
+          if (matchGame && matchQuery) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM DOCK (MYTELKOMSEL 5-TAB APP NAV)                 -->
+  <!-- ============================================================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-lg border-t border-surface-border shadow-lg">
+    <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- Beranda -->
+      <a href="/" class="flex flex-col items-center gap-0.5 tap-action text-brand-600">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Beranda</span>
+      </a>
+
+      <!-- Paspor -->
+      <a href="/paspor" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="id-card" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Paspor</span>
+      </a>
+
+      <!-- FLOATING DAFTAR (+) BUTTON -->
+      <div class="relative -top-3">
+        <a href="/daftar" class="w-13 h-13 w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-lg shadow-brand-600/35 border-3 border-white tap-action">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
+        </a>
+      </div>
+
+      <!-- Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="map" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Wilayah</span>
+      </a>
+
+      <!-- Akun / Masuk -->
+      <a href="/login" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Akun</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

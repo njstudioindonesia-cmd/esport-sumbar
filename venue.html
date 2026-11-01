@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F5F6FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Arena & Venue Esports – ESPORT SUMBAR</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000', // Telkomsel Red
+              700: '#B80000',
+              800: '#900000',
+            },
+            surface: {
+              canvas: '#F5F6FA',
+              card: '#FFFFFF',
+              dark: '#1A1D26',
+              muted: '#687083',
+              border: '#EAECEF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/microsystem-client.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      background-color: #F5F6FA;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 96px; /* Space for bottom dock */
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- TOP APP BAR (COMPACT MYTELKOMSEL HEADER)                      -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Arena & Venue Esports</h1>
+          <p class="text-[10px] text-surface-muted font-medium">PBESI SUMATERA BARAT</p>
+        </div>
+      </div>
+      <div>
+        
+      <a href="/daftar-venue" class="px-3 py-1.5 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center gap-1 tap-action">
+        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+        <span>Akreditasi</span>
+      </a>
+    
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- MAIN APP CONTAINER                                             -->
+  <!-- ============================================================== -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+    
+    <!-- SUMMARY PROVIDER CARD -->
+    <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white to-rose-50/50 border border-gray-100">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-[11px] font-bold tracking-wider text-rose-600 uppercase">Arena & Game Center</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200/60">
+          <i data-lucide="map-pin" class="w-3 h-3 text-rose-600"></i>
+          Akreditasi Resmi
+        </span>
+      </div>
+      <h2 class="text-xl font-extrabold text-surface-dark tracking-tight leading-snug">
+        Arena & Game Center Terakreditasi PBESI Sumatera Barat
+      </h2>
+      <p class="text-xs text-surface-muted mt-1 leading-relaxed">
+        Standarisasi spesifikasi PC, bandwidth fiber optic dedicated, panggung turnamen, dan verifikasi keselamatan venue kompetisi.
+      </p>
+
+      <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-surface-dark">28+</span>
+          <span class="text-[10px] text-surface-muted font-medium">Venue Resmi</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-rose-600">Grade A</span>
+          <span class="text-[10px] text-surface-muted font-medium">Standar Turnamen</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-emerald-600">500 Mbps</span>
+          <span class="text-[10px] text-surface-muted font-medium">Dedicated FO</span>
+        </div>
+      </div>
+
+      <a href="/daftar-venue" class="mt-4 w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/20">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Pendaftaran Akreditasi Venue</span>
+      </a>
+    </div>
+
+    <!-- FILTER & SEARCH -->
+    <div class="space-y-2">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-surface-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="searchVenue" 
+          oninput="filterVenue()"
+          placeholder="Cari arena, kota, atau spesifikasi..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark placeholder-surface-muted focus:outline-none focus:border-brand-600 shadow-sm"
+        />
+      </div>
+
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 hide-scrollbar" id="venueFilterBar">
+        <button onclick="setFilterVenue('semua', this)" class="px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action">Semua Wilayah</button>
+        <button onclick="setFilterVenue('Kota Padang', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Kota Padang</button>
+        <button onclick="setFilterVenue('Bukittinggi', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Bukittinggi</button>
+        <button onclick="setFilterVenue('Payakumbuh', this)" class="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">Payakumbuh</button>
+      </div>
+    </div>
+
+    <!-- VENUE LIST -->
+    <div class="space-y-3" id="venueListContainer">
+      
+        <div class="venue-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-wilayah="kota padang" 
+             data-name="minang cyber lounge padang" 
+             data-grade="Grade A Standar Kompetisi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Minang Cyber Lounge Padang</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-rose-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang</p>
+                <p class="text-[10px] text-surface-muted mt-0.5 line-clamp-1">Jl. Khatib Sulaiman No. 42, Padang Barat</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5 text-[11px]">
+            <div class="flex items-start gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600 flex-shrink-0 mt-0.5"></i>
+              <span class="text-surface-dark font-medium">30 PC Rig RTX 4070 • 240Hz Monitor • FO 500 Mbps</span>
+            </div>
+            <div class="flex items-center justify-between text-surface-muted">
+              <span>Kapasitas: 80 Pengunjung / 6 Stage Tournament</span>
+              <span class="font-bold text-emerald-700">Terakreditasi</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">PIC: Hendra Wijaya (0812-6677-8899)</span>
+            <a href="https://maps.google.com/?q=Minang%20Cyber%20Lounge%20Padang%20Jl.%20Khatib%20Sulaiman%20No.%2042%2C%20Padang%20Barat" 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              <span>Rute Maps</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="venue-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-wilayah="kota padang" 
+             data-name="nexus esports arena ulak karang" 
+             data-grade="Grade A Standar Kompetisi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Nexus Esports Arena Ulak Karang</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-rose-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang</p>
+                <p class="text-[10px] text-surface-muted mt-0.5 line-clamp-1">Jl. Ulak Karang Selatan, Padang Utara</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5 text-[11px]">
+            <div class="flex items-start gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600 flex-shrink-0 mt-0.5"></i>
+              <span class="text-surface-dark font-medium">40 PC Rig RTX 3060 • 165Hz Monitor • Mobile Arena Hub</span>
+            </div>
+            <div class="flex items-center justify-between text-surface-muted">
+              <span>Kapasitas: 100 Pengunjung</span>
+              <span class="font-bold text-emerald-700">Terakreditasi</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">PIC: Budi Santoso (0813-7788-9900)</span>
+            <a href="https://maps.google.com/?q=Nexus%20Esports%20Arena%20Ulak%20Karang%20Jl.%20Ulak%20Karang%20Selatan%2C%20Padang%20Utara" 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              <span>Rute Maps</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="venue-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-wilayah="kota bukittinggi" 
+             data-name="jam gadang gaming space" 
+             data-grade="Grade B Hub Komunitas">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Jam Gadang Gaming Space</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-rose-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Bukittinggi</p>
+                <p class="text-[10px] text-surface-muted mt-0.5 line-clamp-1">Jl. Ahmad Yani No. 15, Bukittinggi</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 whitespace-nowrap">
+              GRADE B
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5 text-[11px]">
+            <div class="flex items-start gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600 flex-shrink-0 mt-0.5"></i>
+              <span class="text-surface-dark font-medium">25 PC Rig RTX 3070 • 180Hz Monitor</span>
+            </div>
+            <div class="flex items-center justify-between text-surface-muted">
+              <span>Kapasitas: 60 Pengunjung</span>
+              <span class="font-bold text-emerald-700">Terakreditasi</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">PIC: Ahmad Fauzi (0821-5566-7788)</span>
+            <a href="https://maps.google.com/?q=Jam%20Gadang%20Gaming%20Space%20Jl.%20Ahmad%20Yani%20No.%2015%2C%20Bukittinggi" 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              <span>Rute Maps</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="venue-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-wilayah="kota bukittinggi" 
+             data-name="jam gadang esports arena" 
+             data-grade="Grade A Standar Kompetisi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Jam Gadang Esports Arena</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-rose-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Bukittinggi</p>
+                <p class="text-[10px] text-surface-muted mt-0.5 line-clamp-1">Jl. Sudirman No. 15, Bukittinggi</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5 text-[11px]">
+            <div class="flex items-start gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600 flex-shrink-0 mt-0.5"></i>
+              <span class="text-surface-dark font-medium">25 PC Rig RTX 4060 Ti • VIP Mobile Stage • FO 300 Mbps</span>
+            </div>
+            <div class="flex items-center justify-between text-surface-muted">
+              <span>Kapasitas: 60 Pengunjung / Live Stream Booth</span>
+              <span class="font-bold text-emerald-700">Terakreditasi</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">PIC: Riki Syahputra (0813-7788-9900)</span>
+            <a href="https://maps.google.com/?q=Jam%20Gadang%20Esports%20Arena%20Jl.%20Sudirman%20No.%2015%2C%20Bukittinggi" 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              <span>Rute Maps</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="venue-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-wilayah="kota payakumbuh" 
+             data-name="payakumbuh gaming space" 
+             data-grade="Grade B Standar Komunitas">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Payakumbuh Gaming Space</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-rose-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Payakumbuh</p>
+                <p class="text-[10px] text-surface-muted mt-0.5 line-clamp-1">Jl. Soekarno-Hatta No. 89, Payakumbuh Barat</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 whitespace-nowrap">
+              GRADE B
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5 text-[11px]">
+            <div class="flex items-start gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600 flex-shrink-0 mt-0.5"></i>
+              <span class="text-surface-dark font-medium">20 PC Gaming Rig • Cafe & Lounge • FO 250 Mbps</span>
+            </div>
+            <div class="flex items-center justify-between text-surface-muted">
+              <span>Kapasitas: 50 Pengunjung</span>
+              <span class="font-bold text-emerald-700">Terakreditasi</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">PIC: Ferry Gunawan (0812-4455-6677)</span>
+            <a href="https://maps.google.com/?q=Payakumbuh%20Gaming%20Space%20Jl.%20Soekarno-Hatta%20No.%2089%2C%20Payakumbuh%20Barat" 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              <span>Rute Maps</span>
+            </a>
+          </div>
+
+        </div>
+      
+        <div class="venue-card app-card rounded-2xl p-4 bg-white space-y-3" 
+             data-wilayah="kota padang panjang" 
+             data-name="singgalang cyber hall" 
+             data-grade="Grade A Arena Mobile">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 flex-shrink-0">
+                <i data-lucide="map-pin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark">Singgalang Cyber Hall</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-rose-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kota Padang Panjang</p>
+                <p class="text-[10px] text-surface-muted mt-0.5 line-clamp-1">Jl. Sutan Syahrir No. 20, Padang Panjang</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100 whitespace-nowrap">
+              GRADE A
+            </span>
+          </div>
+
+          <div class="bg-gray-50/80 rounded-xl p-2.5 border border-gray-100 space-y-1.5 text-[11px]">
+            <div class="flex items-start gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-brand-600 flex-shrink-0 mt-0.5"></i>
+              <span class="text-surface-dark font-medium">Mobile Esports Arena • High Speed Wi-Fi 6 • LED Wall Stage</span>
+            </div>
+            <div class="flex items-center justify-between text-surface-muted">
+              <span>Kapasitas: 100 Pengunjung</span>
+              <span class="font-bold text-emerald-700">Terakreditasi</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-[10px] text-surface-muted">PIC: Zulkifli (0821-9988-7766)</span>
+            <a href="https://maps.google.com/?q=Singgalang%20Cyber%20Hall%20Jl.%20Sutan%20Syahrir%20No.%2020%2C%20Padang%20Panjang" 
+               target="_blank" 
+               class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+              <span>Rute Maps</span>
+            </a>
+          </div>
+
+        </div>
+      
+    </div>
+
+    <script>
+      let activeVenueWilayah = 'semua';
+
+      function setFilterVenue(wilayah, btn) {
+        activeVenueWilayah = wilayah;
+        document.querySelectorAll('#venueFilterBar button').forEach(b => {
+          b.className = 'px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action';
+        });
+        btn.className = 'px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action';
+        filterVenue();
+      }
+
+      function filterVenue() {
+        const query = document.getElementById('searchVenue').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.venue-card');
+        
+        cards.forEach(card => {
+          const wilayah = card.getAttribute('data-wilayah');
+          const name = card.getAttribute('data-name');
+
+          const matchWilayah = activeVenueWilayah === 'semua' || wilayah.includes(activeVenueWilayah.toLowerCase());
+          const matchQuery = !query || name.includes(query) || wilayah.includes(query);
+
+          if (matchWilayah && matchQuery) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM DOCK (MYTELKOMSEL 5-TAB APP NAV)                 -->
+  <!-- ============================================================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-lg border-t border-surface-border shadow-lg">
+    <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- Beranda -->
+      <a href="/" class="flex flex-col items-center gap-0.5 tap-action text-brand-600">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Beranda</span>
+      </a>
+
+      <!-- Paspor -->
+      <a href="/paspor" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="id-card" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Paspor</span>
+      </a>
+
+      <!-- FLOATING DAFTAR (+) BUTTON -->
+      <div class="relative -top-3">
+        <a href="/daftar" class="w-13 h-13 w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-lg shadow-brand-600/35 border-3 border-white tap-action">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
+        </a>
+      </div>
+
+      <!-- Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="map" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Wilayah</span>
+      </a>
+
+      <!-- Akun / Masuk -->
+      <a href="/login" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Akun</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
