@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F5F6FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Pengajuan Lisensi Resmi – ESPORT SUMBAR</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000',
+              700: '#B80000',
+              800: '#900000',
+            },
+            surface: {
+              canvas: '#F5F6FA',
+              card: '#FFFFFF',
+              dark: '#1A1D26',
+              muted: '#687083',
+              border: '#EAECEF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/microsystem-client.js"></script>
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      background-color: #F5F6FA;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 96px;
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
+
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/profile" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Pengajuan Lisensi Resmi</h1>
+          <p class="text-[10px] text-surface-muted font-medium">PBESI SUMATERA BARAT</p>
+        </div>
+      </div>
+      <div>
+        <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+          Verifikasi ESI
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+
+    <!-- HERO PROMOTIONAL CARD: MENGAPA LISENSI RESMI? -->
+    <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-emerald-50/40 border border-gray-100 space-y-3">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shrink-0">
+          <i data-lucide="badge-check" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-black text-surface-dark">Dapatkan Lencana Verifikasi Resmi</h2>
+          <p class="text-[10px] text-surface-muted">Tingkatkan status akun platform Anda menjadi atlet/entitas terverifikasi.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100 text-xs">
+        <div class="bg-gray-50 rounded-xl p-2.5 space-y-0.5">
+          <div class="flex items-center gap-1 text-emerald-700 font-bold text-[11px]">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            <span>Lencana Centang</span>
+          </div>
+          <p class="text-[10px] text-surface-muted">Tampil di profil & kartu identitas</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-2.5 space-y-0.5">
+          <div class="flex items-center gap-1 text-brand-600 font-bold text-[11px]">
+            <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+            <span>Hak Kejurda/Porprov</span>
+          </div>
+          <p class="text-[10px] text-surface-muted">Akses turnamen resmi binaan ESI</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM PENGAJUAN LISENSI -->
+    <div class="app-card rounded-3xl p-5 bg-white space-y-4">
+      <div class="border-b border-gray-100 pb-2">
+        <h3 class="text-xs font-bold text-surface-dark uppercase tracking-wider">Formulir Verifikasi Identitas</h3>
+        <p class="text-[11px] text-surface-muted">Berkas akan dikirimkan ke Pengcab domisili Anda untuk diverifikasi.</p>
+      </div>
+
+      <div id="licenseAlertBox" class="hidden p-3 rounded-xl text-xs border"></div>
+
+      <form id="licenseForm" onsubmit="handleLicenseSubmit(event)" class="space-y-3.5">
+
+        <!-- NIK / KTP / KIA -->
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-surface-dark">Nomor Induk Kependudukan (NIK KTP / KIA):</label>
+          <input 
+            type="text" 
+            id="inputNik" 
+            required 
+            placeholder="16 Digit NIK sesuai KTP/KIA" 
+            class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark font-mono focus:outline-none focus:bg-white focus:border-brand-600"
+          />
+        </div>
+
+        <!-- Pengcab Tujuan -->
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-surface-dark">Pengcab Verifikator (Sesuai Domisili KTP):</label>
+          <select id="selectPengcab" class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600">
+            <option value="Kota Padang">Pengcab ESI Kota Padang</option>
+            <option value="Kota Bukittinggi">Pengcab ESI Kota Bukittinggi</option>
+            <option value="Kota Payakumbuh">Pengcab ESI Kota Payakumbuh</option>
+            <option value="Kota Solok">Pengcab ESI Kota Solok</option>
+            <option value="Kota Sawahlunto">Pengcab ESI Kota Sawahlunto</option>
+            <option value="Kota Padang Panjang">Pengcab ESI Kota Padang Panjang</option>
+            <option value="Kota Pariaman">Pengcab ESI Kota Pariaman</option>
+            <option value="Kab. Agam">Pengcab ESI Kab. Agam</option>
+            <option value="Kab. Tanah Datar">Pengcab ESI Kab. Tanah Datar</option>
+            <option value="Kab. Lima Puluh Kota">Pengcab ESI Kab. Lima Puluh Kota</option>
+            <option value="Kab. Padang Pariaman">Pengcab ESI Kab. Padang Pariaman</option>
+            <option value="Kab. Pesisir Selatan">Pengcab ESI Kab. Pesisir Selatan</option>
+            <option value="Kab. Solok">Pengcab ESI Kab. Solok</option>
+            <option value="Kab. Solok Selatan">Pengcab ESI Kab. Solok Selatan</option>
+            <option value="Kab. Sijunjung">Pengcab ESI Kab. Sijunjung</option>
+            <option value="Kab. Dharmasraya">Pengcab ESI Kab. Dharmasraya</option>
+            <option value="Kab. Pasaman">Pengcab ESI Kab. Pasaman</option>
+            <option value="Kab. Pasaman Barat">Pengcab ESI Kab. Pasaman Barat</option>
+            <option value="Kab. Kepulauan Mentawai">Pengcab ESI Kab. Kepulauan Mentawai</option>
+          </select>
+        </div>
+
+        <!-- Unggah Foto KTP / Kartu Pelajar -->
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-surface-dark">Foto KTP / KIA / Kartu Pelajar:</label>
+          <div class="border-2 border-dashed border-gray-200 rounded-2xl p-4 text-center hover:border-brand-600 transition-colors cursor-pointer bg-gray-50/50" onclick="document.getElementById('inputKtpFile').click()">
+            <input type="file" id="inputKtpFile" accept="image/*" class="hidden" onchange="handleKtpPreview(event)" />
+            <div id="ktpPlaceholder" class="space-y-1">
+              <i data-lucide="file-up" class="w-6 h-6 text-surface-muted mx-auto"></i>
+              <span class="text-xs font-bold text-surface-dark block">Ketuk untuk Unggah Dokumen KTP</span>
+              <span class="text-[10px] text-surface-muted block">Format JPG/PNG, pastikan nama & foto terbaca jelas</span>
+            </div>
+            <img id="ktpPreviewImg" src="" alt="Preview KTP" class="hidden max-h-36 mx-auto rounded-xl object-contain border border-gray-200" />
+          </div>
+        </div>
+
+        <!-- Portofolio / Catatan Prestasi -->
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-surface-dark">Riwayat Prestasi / Turnamen (Opsional):</label>
+          <textarea 
+            id="inputPrestasi" 
+            rows="2" 
+            placeholder="Contoh: Juara 1 Turnamen Walikota Cup 2025..." 
+            class="w-full px-3.5 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600 resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Checkbox Persetujuan -->
+        <label class="flex items-start gap-2 pt-1 cursor-pointer select-none">
+          <input type="checkbox" id="checkAgreeLicense" required checked class="w-4 h-4 rounded text-brand-600 focus:ring-brand-600 border-gray-300 mt-0.5" />
+          <span class="text-[11px] text-surface-muted leading-snug">
+            Saya menyatakan data kependudukan ini sah dan bersedia diverifikasi oleh Pengurus Cabang PBESI setempat.
+          </span>
+        </label>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          id="btnSubmitLicense"
+          class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/25 mt-2"
+        >
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span id="btnSubmitLicenseText">Kirim Pengajuan Lisensi Resmi</span>
+        </button>
+
+      </form>
+    </div>
+
+  </main>
+
+  <script>
+    let ktpBase64 = '';
+
+    function handleKtpPreview(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        ktpBase64 = ev.target.result;
+        document.getElementById('ktpPlaceholder').classList.add('hidden');
+        const img = document.getElementById('ktpPreviewImg');
+        img.src = ktpBase64;
+        img.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function handleLicenseSubmit(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById('licenseAlertBox');
+      const submitBtn = document.getElementById('btnSubmitLicense');
+      const submitText = document.getElementById('btnSubmitLicenseText');
+
+      const nik = document.getElementById('inputNik').value.trim();
+      const wilayah = document.getElementById('selectPengcab').value;
+      const prestasi = document.getElementById('inputPrestasi').value.trim();
+
+      if (!nik || nik.length < 10) {
+        alertBox.className = "p-2.5 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700";
+        alertBox.textContent = "Silakan masukkan NIK KTP yang valid.";
+        alertBox.classList.remove('hidden');
+        return;
+      }
+
+      alertBox.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitText.textContent = "Mengirimkan pengajuan...";
+
+      // Get logged in user data
+      let currentUser = {};
+      try {
+        const raw = localStorage.getItem('esi_user_session');
+        if (raw) currentUser = JSON.parse(raw);
+      } catch (e) {}
+
+      const payload = {
+        userId: currentUser.id || null,
+        nama: currentUser.nama || 'Atlet Esport',
+        ign: currentUser.ign || 'PLAYER',
+        pasporId: currentUser.pasporId || null,
+        wilayah: wilayah,
+        nik: nik,
+        kategori: 'Lisensi Atlet Daerah',
+        dokumenKtp: ktpBase64 || null,
+        buktiPrestasi: prestasi
+      };
+
+      try {
+        const res = await EsportSumbarAPI.lisensi.ajukan(payload);
+        if (res.success) {
+          // Update user session status to waiting
+          currentUser.lisensiStatus = 'MENUNGGU VERIFIKASI PENGCAB';
+          currentUser.wilayah = wilayah;
+          localStorage.setItem('esi_user_session', JSON.stringify(currentUser));
+
+          alertBox.className = "p-3 rounded-xl text-xs border bg-emerald-50 border-emerald-200 text-emerald-800 space-y-1";
+          alertBox.innerHTML = '<div class="font-bold flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i><span>Pengajuan Berhasil Dikirimkan!</span></div><p class="text-[11px] text-emerald-700">Berkas Anda telah diteruskan ke Pengcab ' + wilayah + '. Status verifikasi dapat dipantau di halaman Profil.</p>';
+          alertBox.classList.remove('hidden');
+          lucide.createIcons();
+
+          document.querySelector('form').classList.add('hidden');
+
+          setTimeout(() => {
+            window.location.href = '/profile';
+          }, 1800);
+        } else {
+          alertBox.className = "p-2.5 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700";
+          alertBox.textContent = res.message || "Gagal mengirimkan pengajuan.";
+          alertBox.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitText.textContent = "Kirim Pengajuan Lisensi Resmi";
+        }
+      } catch (err) {
+        alertBox.className = "p-2.5 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700";
+        alertBox.textContent = "Terjadi gangguan sistem. Silakan coba beberapa saat lagi.";
+        alertBox.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitText.textContent = "Kirim Pengajuan Lisensi Resmi";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

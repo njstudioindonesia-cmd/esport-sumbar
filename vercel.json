@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/pengajuan-lisensi",
+      "destination": "/pengajuan-lisensi.html"
+    },
+    {
+      "source": "/lisensi",
+      "destination": "/pengajuan-lisensi.html"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api?route=$1"
     },

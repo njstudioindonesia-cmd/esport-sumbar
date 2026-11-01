@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-[#F3F4F8]">
+<html lang="id" class="h-full bg-[#F5F6FA]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Pendaftaran Sertifikasi Pelatih – ESPORT SUMBAR</title>
-  <meta name="description" content="Formulir resmi pendaftaran Pelatih / Coach di ekosistem esport Sumatera Barat." />
+  <title>Daftar Pelatih / Coach – ESPORT SUMBAR</title>
 
-  <!-- Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,227 +16,179 @@
         extend: {
           colors: {
             brand: {
-              50: '#FDF2F2',
-              100: '#FDE8E8',
-              500: '#E00000',
-              600: '#CC0000',
-              700: '#B30000',
-              800: '#8A0000'
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000',
+              700: '#B80000',
+              800: '#900000',
             },
             surface: {
+              canvas: '#F5F6FA',
               card: '#FFFFFF',
-              bg: '#F5F6FA',
               dark: '#1A1D26',
-              muted: '#717684'
+              muted: '#687083',
+              border: '#EAECEF',
             }
           },
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
-            mono: ['"Space Grotesk"', 'monospace']
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           }
         }
       }
     };
   </script>
 
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="/js/microsystem-client.js"></script>
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
-  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
 
   <style>
-    * {
-      -webkit-tap-highlight-color: transparent;
-      box-sizing: border-box;
-    }
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     body {
-      background-color: #EDEEF2;
+      background-color: #F5F6FA;
       color: #1A1D26;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 96px;
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
     }
     .tap-action {
-      transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.12s ease;
-      user-select: none;
+      transition: transform 0.12s ease, opacity 0.12s ease;
     }
     .tap-action:active {
       transform: scale(0.97);
     }
-    .app-card {
-      background: #FFFFFF;
-      box-shadow: 0 4px 20px -2px rgba(24, 39, 75, 0.05), 0 2px 6px -1px rgba(24, 39, 75, 0.02);
-      border: 1px solid rgba(230, 232, 240, 0.8);
-    }
-    .provider-card {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FBFBFC 100%);
-      box-shadow: 0 8px 30px -4px rgba(24, 39, 75, 0.08), 0 2px 8px -1px rgba(24, 39, 75, 0.04);
-      border: 1px solid rgba(220, 224, 235, 0.9);
-      position: relative;
-    }
-    .provider-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #E00000 0%, #FF4D4D 100%);
-      border-radius: 20px 20px 0 0;
-    }
-    .safe-bottom {
-      padding-bottom: max(5.5rem, calc(4.5rem + env(safe-area-inset-bottom)));
-    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-brand-600 selection:text-white">
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
 
-  <!-- MOBILE CONTAINER -->
-  <div class="w-full max-w-md min-h-screen bg-[#F8F9FC] sm:border-x sm:border-gray-200/80 sm:shadow-2xl relative flex flex-col justify-start">
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/daftar" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Daftar Akun Pelatih / Coach</h1>
+          <p class="text-[10px] text-surface-muted font-medium">ESPORT SUMATERA BARAT</p>
+        </div>
+      </div>
+      <div>
+        <a href="/daftar" class="px-2.5 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-[11px] font-semibold text-surface-muted tap-action">
+          Ganti
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <!-- 1. TOP APP BAR -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 py-3 flex items-center justify-between">
-      <a href="/daftar" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-surface-dark tap-action" aria-label="Ganti Kategori">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </a>
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-md mx-auto px-4 pt-3 space-y-3.5">
 
-      <!-- Step Indicator -->
-      <div class="flex items-center gap-2">
-        <span class="text-xs font-bold text-surface-dark">Formulir Pelatih / Coach</span>
-        <div class="flex items-center gap-1">
-          <span id="dotStep1" class="w-2 h-2 rounded-full bg-brand-600"></span>
-          <span id="dotStep2" class="w-2 h-2 rounded-full bg-gray-200"></span>
+    <!-- 1. LIVE CARD PREVIEW (MEMBER PLATFORM - BELUM TERVERIFIKASI) -->
+    <div class="app-card rounded-2xl p-4 bg-white border border-gray-200 shadow-sm space-y-3">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+        <div class="flex items-center gap-1.5">
+          <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-5 h-5 object-contain" />
+          <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider">KARTU MEMBER PLATFORM</span>
+        </div>
+        <!-- UNVERIFIED BADGE (NO ESI BADGE YET) -->
+        <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-gray-100 text-surface-muted border border-gray-200 flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+          <span>BELUM TERVERIFIKASI</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="relative w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shrink-0">
+          <img id="cardAvatarImg" src="/images/athlete-pro-player.jpg" alt="Avatar" class="w-full h-full object-cover" />
+          <button type="button" onclick="document.getElementById('inputPhotoFile').click()" class="absolute inset-0 bg-black/40 text-white flex flex-col items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
+            <i data-lucide="camera" class="w-4 h-4"></i>
+            <span class="text-[8px] font-bold">Foto</span>
+          </button>
+        </div>
+
+        <div class="flex-1 min-w-0">
+          <h2 id="cardTitleDisplay" class="text-base font-extrabold text-surface-dark truncate leading-tight">NAMA PENGGUNA</h2>
+          <p id="cardSubtitleDisplay" class="text-xs text-surface-muted truncate">Nama Lengkap</p>
+          <div class="flex items-center gap-1.5 mt-1">
+            <span id="cardMeta1" class="px-2 py-0.5 rounded text-[9px] font-bold bg-gray-100 text-surface-dark uppercase">MOBILE LEGENDS</span>
+            <span id="cardMeta2" class="text-[10px] text-surface-muted truncate uppercase">PELATIH // PADANG</span>
+          </div>
         </div>
       </div>
 
-      <a href="/daftar" class="px-3 py-1 rounded-full bg-gray-100 hover:bg-gray-200 text-surface-muted text-xs font-bold font-mono tap-action">
-        Ganti
-      </a>
-    </header>
-
-    <!-- 2. SCROLLABLE CONTENT -->
-    <main class="flex-1 px-4 pt-3 space-y-3.5 safe-bottom">
-
-      <!-- THE LIVE PHYSICAL/DIGITAL PROVIDER CARD (CENTERPIECE) -->
-      <div class="provider-card rounded-2xl p-4">
-        
-        <!-- Top Row: Logo & Category Chip -->
-        <div class="flex items-center justify-between pb-2.5 border-b border-gray-100">
-          <div class="flex items-center gap-2">
-            <img src="/images/esport-sumbar-logo.png" alt="ESI" class="w-5 h-5 object-contain" />
-            <div>
-              <div class="text-[9px] font-bold tracking-tight text-surface-dark uppercase leading-none">PENGPROV PBESI</div>
-              <div class="text-[7.5px] font-bold tracking-widest text-brand-600 uppercase">SUMATERA BARAT</div>
-            </div>
-          </div>
-
-          <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-brand-50 text-brand-700 border border-brand-200/60 uppercase">
-            LISENSI PELATIH
-          </span>
-        </div>
-
-        <!-- Middle Body: Avatar Photo + Live Details -->
-        <div class="py-3 flex items-center gap-3.5">
-          
-          <!-- Avatar Frame with Camera Trigger -->
-          <div class="relative cursor-pointer shrink-0 group" onclick="document.getElementById('inputPhotoFile').click()">
-            <div class="w-16 h-16 rounded-2xl border-2 border-brand-500/30 overflow-hidden bg-gray-100 flex items-center justify-center shadow-sm">
-              <img id="cardAvatarImg" src="/images/athlete-pro-player.jpg" alt="Foto" class="w-full h-full object-cover" />
-            </div>
-            <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-md border-2 border-white">
-              <i data-lucide="camera" class="w-3 h-3"></i>
-            </div>
-          </div>
-
-          <!-- Dynamic Info -->
-          <div class="flex-1 min-w-0">
-            <h2 id="cardTitleDisplay" class="text-base font-extrabold text-surface-dark truncate leading-tight">
-              COACH DANIEL
-            </h2>
-            <div id="cardSubtitleDisplay" class="text-xs text-surface-muted truncate mt-0.5">
-              Daniel Pratama, S.Or.
-            </div>
-
-            <div class="mt-1 flex items-center gap-1.5 flex-wrap">
-              <span id="cardMeta1" class="px-1.5 py-0.2 rounded text-[8.5px] font-mono font-bold bg-gray-100 text-surface-dark">
-                MOBILE LEGENDS
-              </span>
-              <span id="cardMeta2" class="text-[9px] font-mono text-surface-muted">
-                EXP: 3 TAHUN // PADANG
-              </span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Bottom Row: Card ID & Official Badge -->
-        <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-[10px] font-mono">
-          <div>
-            <span class="text-surface-muted block text-[8px] uppercase">NOMOR LISENSI RESMI</span>
-            <span class="text-emerald-700 font-bold">PBESI-SB-2026-VAL-982</span>
-          </div>
-          <span class="text-surface-muted flex items-center gap-1">
-            <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i>
-            <span>Verifikasi Pengcab</span>
-          </span>
-        </div>
-
-      </div>
-
-      <!-- Quick Upload Action Bar -->
-      <div class="flex items-center justify-between px-1 text-xs">
-        <span class="text-surface-muted text-[11px]">Format: JPG, PNG, WEBP</span>
-        <button type="button" onclick="document.getElementById('inputPhotoFile').click()" class="text-brand-600 hover:underline font-bold text-xs flex items-center gap-1 tap-action">
-          <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-          <span>Unggah Pas Foto Pelatih</span>
+      <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-[10px] text-surface-muted">
+        <span>Status Akun: Member Komunitas</span>
+        <button type="button" onclick="document.getElementById('inputPhotoFile').click()" class="text-brand-600 font-bold hover:underline flex items-center gap-1">
+          <i data-lucide="upload" class="w-3 h-3"></i>
+          <span>Ganti Foto</span>
         </button>
       </div>
+    </div>
 
-      <input type="file" id="inputPhotoFile" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
+    <!-- HIDDEN PHOTO INPUT -->
+    <input type="file" id="inputPhotoFile" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
 
-      <!-- STEPPER FORM -->
-      <div class="app-card rounded-2xl p-4 bg-white">
+    <!-- 2. ULTRA-SIMPLE REGISTRATION FORM (1 SCREEN ONLY) -->
+    <div class="app-card rounded-2xl p-4 bg-white space-y-3.5">
+      <div class="border-b border-gray-100 pb-2">
+        <h3 class="text-xs font-bold text-surface-dark uppercase tracking-wider">Formulir Pendaftaran Cepat</h3>
+        <p class="text-[11px] text-surface-muted">Cukup isi data pokok di bawah untuk langsung membuat akun.</p>
+      </div>
+
+      <!-- Alert Box -->
+      <div id="formAlertBox" class="hidden p-2.5 rounded-xl text-xs border"></div>
+
+      <form id="simpleRegForm" onsubmit="handleRegistrationSubmit(event)" class="space-y-3">
+
+        <!-- Input Nama Lengkap / Entitas -->
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-surface-dark">Nama Lengkap:</label>
+          <input 
+            type="text" 
+            id="inputNama" 
+            required 
+            oninput="syncCard()"
+            placeholder="Contoh: Muhammad Rayden" 
+            class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600"
+          />
+        </div>
+
         
-        <!-- STEP 1: IDENTITAS BIDANG -->
-        <div id="sectionStep1" class="space-y-3">
-          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-            <span class="text-xs font-bold text-brand-600 uppercase">Tahap 1: Data Identitas</span>
-            <span class="text-[11px] text-surface-muted">1 dari 2</span>
-          </div>
+  <div class="grid grid-cols-2 gap-2">
+    <div class="space-y-1">
+      <label class="block text-xs font-bold text-surface-dark">Cabor / Game Dilatih:</label>
+      <select id="inputGame" onchange="syncCard()" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600">
+        <option value="Mobile Legends">Mobile Legends</option>
+        <option value="Valorant">Valorant</option>
+        <option value="PUBG Mobile">PUBG Mobile</option>
+        <option value="Free Fire">Free Fire</option>
+        <option value="Multi-Game">Multi-Game</option>
+      </select>
+    </div>
+    <div class="space-y-1">
+      <label class="block text-xs font-bold text-surface-dark">Klub / Afiliasi Tim:</label>
+      <input 
+        type="text" 
+        id="inputRole" 
+        oninput="syncCard()"
+        placeholder="Nama Tim / Independen" 
+        class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600"
+      />
+    </div>
+  </div>
 
-          
-      <div class="space-y-1">
-        <label class="block text-xs font-semibold text-surface-dark">Nama Lengkap Pelatih (Beserta Gelar):</label>
-        <input type="text" id="inputNama" value="Daniel Pratama, S.Or." oninput="syncCard()" required placeholder="Nama lengkap Anda" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600" />
-      </div>
 
-      <div class="grid grid-cols-2 gap-2.5">
+        <!-- Domisili 19 Kota/Kabupaten -->
         <div class="space-y-1">
-          <label class="block text-xs font-semibold text-surface-dark">Game Spesialisasi:</label>
-          <select id="inputGame" onchange="syncCard()" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs font-mono text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600">
-            <option value="Mobile Legends" selected>Mobile Legends</option>
-            <option value="PUBG Mobile">PUBG Mobile</option>
-            <option value="Free Fire">Free Fire</option>
-            <option value="Valorant">Valorant</option>
-            <option value="Multi-Game">Semua Game (General)</option>
-          </select>
-        </div>
-        <div class="space-y-1">
-          <label class="block text-xs font-semibold text-surface-dark">Pengalaman (Tahun):</label>
-          <input type="number" id="inputExp" value="3" oninput="syncCard()" placeholder="Contoh: 3" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600" />
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-2.5">
-        <div class="space-y-1">
-          <label class="block text-xs font-semibold text-surface-dark">Sertifikasi Coaching:</label>
-          <input type="text" id="inputSertifikat" placeholder="Lisensi PBESI C" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600" />
-        </div>
-        <div class="space-y-1">
-          <label class="block text-xs font-semibold text-surface-dark">Domisili 19 Wilayah:</label>
-          <select id="inputWilayah" onchange="syncCard()" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs font-mono text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600">
-            <option value="Kota Padang" selected>Kota Padang</option>
+          <label class="block text-xs font-bold text-surface-dark">Kota / Kabupaten Domisili:</label>
+          <select id="inputWilayah" onchange="syncCard()" class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600">
+            <option value="Kota Padang">Kota Padang</option>
             <option value="Kota Bukittinggi">Kota Bukittinggi</option>
             <option value="Kota Payakumbuh">Kota Payakumbuh</option>
             <option value="Kota Solok">Kota Solok</option>
@@ -260,143 +209,92 @@
             <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
           </select>
         </div>
-      </div>
-    
 
-          <button type="button" onclick="goToStep(2)" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-brand-600/20 tap-action mt-2">
-            <span>Lanjut ke Kontak & Akun</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- STEP 2: KONTAK & AKUN -->
-        <div id="sectionStep2" class="hidden space-y-3">
-          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-            <span class="text-xs font-bold text-brand-600 uppercase">Tahap 2: Kontak & Akun</span>
-            <button type="button" onclick="goToStep(1)" class="text-xs font-semibold text-surface-muted hover:text-surface-dark flex items-center gap-1">
-              <i data-lucide="arrow-left" class="w-3 h-3"></i>
-              <span>Kembali</span>
-            </button>
-          </div>
-
-          <div id="formAlertBox" class="hidden p-2 rounded-xl text-xs border"></div>
-
-          <div class="grid grid-cols-2 gap-2.5">
-            <div class="space-y-1">
-              <label class="block text-xs font-semibold text-surface-dark">No. WhatsApp:</label>
-              <input type="tel" id="inputTelepon" required placeholder="08123456789" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600" />
-            </div>
-            <div class="space-y-1">
-              <label class="block text-xs font-semibold text-surface-dark">Email Aktif:</label>
-              <input type="email" id="inputEmail" required placeholder="nama@email.com" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600" />
-            </div>
-          </div>
-
+        <!-- Kontak WhatsApp & Password in 2-cols -->
+        <div class="grid grid-cols-2 gap-2">
           <div class="space-y-1">
-            <label class="block text-xs font-semibold text-surface-dark">Kata Sandi Akun Paspor:</label>
-            <input type="password" id="inputPassword" required placeholder="Minimal 6 karakter" class="w-full px-3.5 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600" />
+            <label class="block text-xs font-bold text-surface-dark">No. WhatsApp:</label>
+            <input 
+              type="tel" 
+              id="inputTelepon" 
+              required 
+              placeholder="08123456789" 
+              class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600"
+            />
           </div>
-
-          <label class="flex items-start gap-2 pt-1 cursor-pointer">
-            <input type="checkbox" id="checkAgree" checked class="w-4 h-4 mt-0.5 rounded accent-brand-600" />
-            <span class="text-[11px] text-surface-muted leading-tight">
-              Saya menyatakan seluruh data dan foto yang diunggah adalah sah dan tunduk pada kode etik resmi PBESI Sumatera Barat.
-            </span>
-          </label>
-
-          <button type="button" id="btnSubmitFinal" onclick="handleDedicatedSubmit()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-brand-600/20 tap-action">
-            <i data-lucide="check-circle" class="w-4 h-4"></i>
-            <span id="btnSubmitText">Kirim Pendaftaran Resmi</span>
-          </button>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-surface-dark">Kata Sandi Akun:</label>
+            <input 
+              type="password" 
+              id="inputPassword" 
+              required 
+              placeholder="Min. 6 Karakter" 
+              class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:bg-white focus:border-brand-600"
+            />
+          </div>
         </div>
 
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          id="btnSubmitReg"
+          class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/25 mt-2"
+        >
+          <i data-lucide="user-plus" class="w-4 h-4"></i>
+          <span id="btnSubmitText">Daftar Akun Pelatih / Coach</span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- SUCCESS NOTIFICATION CONTAINER (SHOWN AFTER SUBMIT) -->
+    <div id="successCard" class="hidden app-card rounded-2xl p-5 bg-white text-center space-y-4">
+      <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
+        <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
+      </div>
+      <div>
+        <h3 class="text-base font-extrabold text-surface-dark">Akun Anda Berhasil Dibuat!</h3>
+        <p class="text-xs text-surface-muted mt-1 leading-relaxed">
+          Selamat datang di platform Esport Sumbar. Akun Anda telah aktif sebagai member platform.
+        </p>
       </div>
 
-      <!-- SUKSES CONTAINER -->
-      <div id="successContainer" class="hidden app-card rounded-2xl p-5 text-center space-y-4">
-        <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
-          <i data-lucide="check" class="w-6 h-6 stroke-[3]"></i>
-        </div>
-
-        <div>
-          <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold uppercase">
-            BERKAS DITERIMA
-          </span>
-          <h2 class="text-base font-extrabold text-surface-dark mt-2">Pendaftaran Berhasil Dikirimkan</h2>
-          <p class="text-xs text-surface-muted mt-1 max-w-xs mx-auto">
-            Berkas Anda telah diteruskan ke antrean verifikasi Pengcab 19 wilayah untuk pemeriksaan berkas domisili.
-          </p>
-        </div>
-
-        <div class="bg-gray-50 rounded-xl p-3 text-left space-y-1.5 text-xs">
-          <div class="flex justify-between">
-            <span class="text-surface-muted">Nomor Berkas:</span>
-            <span id="receiptId" class="font-bold text-brand-600 font-mono">REG-9821</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-surface-muted">Nama:</span>
-            <span id="receiptNama" class="font-bold text-surface-dark">Muhammad Rayden</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-surface-muted">Wilayah:</span>
-            <span id="receiptWilayah" class="font-bold text-surface-dark">Kota Padang</span>
-          </div>
-          <div class="flex justify-between border-t border-gray-200 pt-1.5">
-            <span class="text-surface-muted">ID Paspor Sementara:</span>
-            <span id="receiptPaspor" class="font-bold text-emerald-600 font-mono">PBESI-SB-2026-VAL-982</span>
-          </div>
-        </div>
-
-        <div class="space-y-2 pt-1">
-          <a href="/profile" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 tap-action">
-            <span>Buka Paspor Digital Saya</span>
-          </a>
-          <a href="/" class="w-full py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-surface-dark font-semibold text-xs flex items-center justify-center gap-1.5 tap-action">
-            <span>Kembali ke Beranda</span>
-          </a>
-        </div>
+      <!-- Action: Go to Profile to apply for license -->
+      <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-left space-y-1 text-xs">
+        <span class="font-bold text-surface-dark block">Langkah Berikutnya:</span>
+        <p class="text-surface-muted text-[11px]">
+          Buka profil Anda untuk melihat kartu member, melengkapi biodata, atau mengajukan <strong>Lisensi Resmi PBESI Sumbar</strong> untuk memperoleh Lencana Verifikasi.
+        </p>
       </div>
 
-    </main>
+      <a href="/profile" class="block w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs tap-action shadow-md shadow-brand-600/20">
+        Buka Profil Saya Sekarang
+      </a>
+    </div>
 
-  </div>
+  </main>
 
   <script>
     const currentBidang = 'pelatih';
     let currentUploadedPhotoData = '';
 
-    function goToStep(step) {
-      if (step === 1) {
-        document.getElementById('sectionStep1').classList.remove('hidden');
-        document.getElementById('sectionStep2').classList.add('hidden');
-        document.getElementById('dotStep1').className = "w-2 h-2 rounded-full bg-brand-600";
-        document.getElementById('dotStep2').className = "w-2 h-2 rounded-full bg-gray-200";
-      } else {
-        const nama = document.getElementById('inputNama')?.value.trim();
-        if (!nama) {
-          alert('Silakan lengkapi nama Anda terlebih dahulu.');
-          return;
-        }
-        document.getElementById('sectionStep1').classList.add('hidden');
-        document.getElementById('sectionStep2').classList.remove('hidden');
-        document.getElementById('dotStep1').className = "w-2 h-2 rounded-full bg-gray-200";
-        document.getElementById('dotStep2').className = "w-2 h-2 rounded-full bg-brand-600";
-      }
-      lucide.createIcons();
-    }
-
     function syncCard() {
       const nama = document.getElementById('inputNama')?.value.trim() || 'Nama Lengkap';
       const wilayah = (document.getElementById('inputWilayah')?.value || 'Kota Padang').replace('Kota ', '').replace('Kab. ', '');
       
-      
-      const game = document.getElementById('inputGame')?.value || 'MOBILE LEGENDS';
-      const exp = document.getElementById('inputExp')?.value || '3';
-      document.getElementById('cardTitleDisplay').textContent = nama.toUpperCase();
-      document.getElementById('cardSubtitleDisplay').textContent = 'SERTIFIKASI PELATIH RESMI';
+      const ignInput = document.getElementById('inputIgn');
+      const gameInput = document.getElementById('inputGame');
+      const roleInput = document.getElementById('inputRole');
+
+      const titleDisplay = ignInput ? (ignInput.value.trim() || 'NICKNAME') : nama;
+      const subtitleDisplay = ignInput ? nama : 'Member Platform';
+      const game = gameInput ? gameInput.value : 'ESPORT SUMBAR';
+      const role = roleInput ? roleInput.value.trim() : 'PELATIH';
+
+      document.getElementById('cardTitleDisplay').textContent = titleDisplay.toUpperCase();
+      document.getElementById('cardSubtitleDisplay').textContent = subtitleDisplay;
       document.getElementById('cardMeta1').textContent = game.toUpperCase();
-      document.getElementById('cardMeta2').textContent = ('EXP: ' + exp + ' THN // ' + wilayah).toUpperCase();
-    
+      document.getElementById('cardMeta2').textContent = (role + ' // ' + wilayah).toUpperCase();
     }
 
     function handlePhotoUpload(event) {
@@ -424,90 +322,87 @@
       reader.readAsDataURL(file);
     }
 
-    async function handleDedicatedSubmit() {
-      const tel = document.getElementById('inputTelepon')?.value.trim();
-      const email = document.getElementById('inputEmail')?.value.trim();
-      const pass = document.getElementById('inputPassword')?.value;
-      const agree = document.getElementById('checkAgree')?.checked;
+    async function handleRegistrationSubmit(e) {
+      e.preventDefault();
       const alertBox = document.getElementById('formAlertBox');
-      const submitBtn = document.getElementById('btnSubmitFinal');
+      const submitBtn = document.getElementById('btnSubmitReg');
       const submitText = document.getElementById('btnSubmitText');
 
-      if (!tel || !email || !pass) {
-        alertBox.className = "p-2 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700 flex items-center gap-1.5";
-        alertBox.innerHTML = '<i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-600"></i> <span>Silakan lengkapi nomor WhatsApp, email, dan password.</span>';
-        alertBox.classList.remove('hidden');
-        lucide.createIcons();
-        return;
-      }
+      const nama = document.getElementById('inputNama').value.trim();
+      const wilayah = document.getElementById('inputWilayah').value;
+      const telepon = document.getElementById('inputTelepon').value.trim();
+      const password = document.getElementById('inputPassword').value;
 
-      if (!agree) {
-        alertBox.className = "p-2 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700 flex items-center gap-1.5";
-        alertBox.innerHTML = '<i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-600"></i> <span>Wajib menyetujui pernyataan kode etik.</span>';
+      if (!nama || !telepon || !password) {
+        alertBox.className = "p-2.5 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700";
+        alertBox.textContent = "Silakan lengkapi nama, nomor WhatsApp, dan kata sandi.";
         alertBox.classList.remove('hidden');
-        lucide.createIcons();
         return;
       }
 
       alertBox.classList.add('hidden');
       submitBtn.disabled = true;
-      submitText.textContent = "Memproses berkas...";
-
-      const nama = document.getElementById('inputNama').value.trim();
-      const wilayah = document.getElementById('inputWilayah').value;
+      submitText.textContent = "Membuat akun...";
 
       const payload = {
         nama,
         wilayah,
-        telepon: tel,
-        email,
-        password: pass,
+        telepon,
+        password,
+        email: telepon + '@esportsumbar.id',
         foto: currentUploadedPhotoData || document.getElementById('cardAvatarImg').src,
-        source: 'provider-mobile-app'
+        isVerified: false,
+        lencanaVerifikasi: false,
+        lisensiStatus: 'BELUM TERVERIFIKASI'
       };
 
-      
-      payload.game = document.getElementById('inputGame')?.value || 'Multi-Game';
-      payload.pengalaman = document.getElementById('inputExp')?.value || '3';
-      payload.sertifikasi = document.getElementById('inputSertifikat')?.value.trim() || '-';
-    
+      if (document.getElementById('inputIgn')) payload.ign = document.getElementById('inputIgn').value.trim();
+      if (document.getElementById('inputGame')) payload.game = document.getElementById('inputGame').value;
+      if (document.getElementById('inputRole')) payload.role = document.getElementById('inputRole').value.trim();
 
       try {
         const res = await EsportSumbarAPI.registrasi.submit(currentBidang, payload);
-
         if (res.success) {
-          const rec = res.data;
-          document.getElementById('receiptId').textContent = rec.id || 'REG-' + Date.now().toString().slice(-4);
-          document.getElementById('receiptNama').textContent = nama;
-          document.getElementById('receiptWilayah').textContent = wilayah;
-          document.getElementById('receiptPaspor').textContent = rec.generatedPasporId || 'PBESI-SB-2026-PENDING';
-          
-          document.querySelector('.provider-card').classList.add('hidden');
-          document.querySelector('.app-card').classList.add('hidden');
-          document.getElementById('successContainer').classList.remove('hidden');
+          // Save local session as unverified platform member
+          const userSession = {
+            id: res.data?.id || 'usr-' + Date.now(),
+            nama: nama,
+            ign: payload.ign || nama,
+            wilayah: wilayah,
+            game: payload.game || 'Multi-Game',
+            roleTitle: payload.role || 'PELATIH',
+            pasporId: 'SB-MEM-' + Math.floor(1000 + Math.random() * 9000),
+            ovr: 88,
+            isVerified: false,
+            lencanaVerifikasi: false,
+            lisensiStatus: 'BELUM TERVERIFIKASI',
+            foto: payload.foto
+          };
+          localStorage.setItem('esi_user_session', JSON.stringify(userSession));
+          localStorage.setItem('esi_auth_token', 'token-mem-' + Date.now());
+
+          document.querySelector('form').classList.add('hidden');
+          document.getElementById('successCard').classList.remove('hidden');
           lucide.createIcons();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-          alertBox.className = "p-2 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700 flex items-center gap-1.5";
-          alertBox.innerHTML = '<i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-600"></i> <span>' + (res.message || 'Gagal mengirimkan.') + '</span>';
+          alertBox.className = "p-2.5 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700";
+          alertBox.textContent = res.message || "Gagal membuat akun.";
           alertBox.classList.remove('hidden');
-          lucide.createIcons();
           submitBtn.disabled = false;
-          submitText.textContent = "Kirim Pendaftaran Resmi";
+          submitText.textContent = "Daftar Akun Pelatih / Coach";
         }
       } catch (err) {
-        alertBox.className = "p-2 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700 flex items-center gap-1.5";
-        alertBox.innerHTML = '<i data-lucide="alert-circle" class="w-3.5 h-3.5 text-red-600"></i> <span>Kesalahan koneksi sistem. Silakan coba lagi.</span>';
+        alertBox.className = "p-2.5 rounded-xl text-xs border bg-red-50 border-red-200 text-red-700";
+        alertBox.textContent = "Terjadi gangguan jaringan. Silakan coba lagi.";
         alertBox.classList.remove('hidden');
-        lucide.createIcons();
         submitBtn.disabled = false;
-        submitText.textContent = "Kirim Pendaftaran Resmi";
+        submitText.textContent = "Daftar Akun Pelatih / Coach";
       }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      syncCard();
     });
   </script>
 </body>

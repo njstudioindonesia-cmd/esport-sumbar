@@ -132,6 +132,16 @@
       }
     },
 
+    // LISENSI RESMI ESI
+    lisensi: {
+      async ajukan(data) {
+        return request('/lisensi/ajukan', {
+          method: 'POST',
+          body: JSON.stringify(data)
+        });
+      }
+    },
+
     // 2. REGISTRASI & MODERASI
     registrasi: {
       async submit(bidang, data) {

@@ -163,6 +163,39 @@ class EcosystemDatabase {
     return list;
   }
 
+    addLicenseApplication(payload) {
+    const appId = `lic-${Date.now().toString().slice(-5)}`;
+    const appRecord = {
+      id: appId,
+      type: "license_application",
+      userId: payload.userId || null,
+      nama: payload.nama || "",
+      ign: payload.ign || "",
+      wilayah: payload.wilayah || "Kota Padang",
+      nik: payload.nik || "",
+      kategori: payload.kategori || "Lisensi Atlet",
+      dokumenKtp: payload.dokumenKtp || null,
+      buktiPrestasi: payload.buktiPrestasi || "",
+      status: "pending_pengcab",
+      submittedAt: new Date().toISOString()
+    };
+    if (!this.memory.antreanVerifikasi) this.memory.antreanVerifikasi = [];
+    this.memory.antreanVerifikasi.unshift(appRecord);
+
+    // Update user & athlete record status to "MENUNGGU VERIFIKASI PENGCAB"
+    const athlete = this.memory.atlet.find(a => a.pasporId === payload.pasporId || a.nama === payload.nama || (payload.ign && a.ign === payload.ign));
+    if (athlete) {
+      athlete.lisensiStatus = "MENUNGGU VERIFIKASI PENGCAB";
+    }
+    const user = this.memory.users.find(u => u.pasporId === payload.pasporId || u.email === payload.email || (payload.ign && u.ign === payload.ign));
+    if (user) {
+      user.lisensiStatus = "MENUNGGU VERIFIKASI PENGCAB";
+    }
+
+    this.saveSync();
+    return appRecord;
+  }
+
   addRegistration(bidang, payload) {
     const newId = `reg-${bidang.substring(0, 3)}-${Date.now().toString().slice(-5)}`;
     let generatedPasporId = null;

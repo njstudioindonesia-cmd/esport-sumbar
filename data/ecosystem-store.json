@@ -1,6 +1,6 @@
 {
   "version": "2.4.0",
-  "lastUpdated": "2026-11-01T06:31:36.643Z",
+  "lastUpdated": "2026-11-01T11:07:58.369Z",
   "users": [
     {
       "id": "usr-super",
@@ -11,7 +11,8 @@
       "instansi": "Platform Provider Esport Sumbar",
       "permissions": [
         "*"
-      ]
+      ],
+      "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB"
     },
     {
       "id": "usr-pengprov",
@@ -929,6 +930,20 @@
     }
   ],
   "antreanVerifikasi": [
+    {
+      "id": "lic-78369",
+      "type": "license_application",
+      "userId": null,
+      "nama": "Fajar Pratama",
+      "ign": "FAJAR7",
+      "wilayah": "Kota Padang",
+      "nik": "1371012345678901",
+      "kategori": "Lisensi Atlet Daerah",
+      "dokumenKtp": null,
+      "buktiPrestasi": "",
+      "status": "pending_pengcab",
+      "submittedAt": "2026-11-01T11:07:58.369Z"
+    },
     {
       "id": "reg-pla-96643",
       "bidang": "player",

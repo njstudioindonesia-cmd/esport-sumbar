@@ -113,6 +113,13 @@ export async function dispatchApiRequest(req, res) {
       return;
     }
 
+    // PENGAJUAN LISENSI RESMI ESI
+    if (pathname === '/api/lisensi/ajukan' && req.method === 'POST') {
+      const result = await MicroRegistrasi.submitLicenseApplication(body);
+      sendJson(res, result.statusCode || 201, result);
+      return;
+    }
+
     // PASPOR DIGITAL ATLET
     const matchPaspor = pathname.match(/^\/api\/paspor\/([a-zA-Z0-9_-]+)$/);
     if (matchPaspor && req.method === 'GET') {

@@ -52,6 +52,24 @@ export const MicroRegistrasi = {
     };
   },
 
+  // POST: Pengajuan lisensi resmi ESI dari profil
+  async submitLicenseApplication(payload) {
+    if (!payload || !payload.nik) {
+      return {
+        success: false,
+        statusCode: 400,
+        message: "Nomor NIK / Identitas KTP wajib diisi untuk verifikasi lisensi resmi."
+      };
+    }
+    const appRecord = db.addLicenseApplication(payload);
+    return {
+      success: true,
+      statusCode: 201,
+      message: `Pengajuan lisensi resmi berhasil dikirimkan ke Pengcab ${payload.wilayah || 'domisili'}. Status dapat dipantau di halaman Profil.`,
+      data: appRecord
+    };
+  },
+
   // PUT: Moderasi pendaftaran (Setujui / Tolak oleh Super Admin)
   async updateStatus(id, body) {
     if (!id) {
