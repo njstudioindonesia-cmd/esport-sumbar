@@ -1,205 +1,211 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-[#EAEAEA]">
+<html lang="id" class="h-full bg-[#0A0B0E]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Pilih Kategori – ESPORT SUMBAR</title>
-  <meta name="description" content="Pilih kategori pendaftaran resmi ekosistem esport Sumatera Barat: Player, Pelatih, Tim, Komunitas, dan Venue berlisensi Pengprov PBESI Sumbar." />
-
-  <!-- Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <title>Pilih Identitas Ekosistem – ESPORT SUMBAR</title>
+  <meta name="description" content="Pilih lisensi digital resmi Pengprov ESI Sumatera Barat: Paspor Atlet, Pelatih, Klub, Komunitas, dan Venue." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#FDF2F2',
-              100: '#FDE8E8',
-              500: '#D61622',
-              600: '#B3121B',
-              700: '#8F0E15'
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
-            mono: ['"Space Grotesk"', 'monospace']
-          }
-        }
-      }
-    };
-  </script>
-
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
-  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
-
   <style>
-    * {
-      -webkit-tap-highlight-color: transparent;
-      box-sizing: border-box;
-    }
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     body {
-      background-color: #EDEDF0;
-      color: #0F1012;
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background-color: #0A0B0E;
+      color: #F3F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .tap-action {
-      transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-      user-select: none;
+    .card-preview {
+      box-shadow: 0 16px 32px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .tap-action:active {
-      transform: scale(0.97);
+    .card-preview:active {
+      transform: scale(0.975);
     }
-    .safe-bottom {
-      padding-bottom: max(1rem, env(safe-area-inset-bottom));
-    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .safe-bottom { padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-[#B3121B] selection:text-white">
+<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-[#D61622] selection:text-white">
 
   <!-- ============================================================== -->
-  <!-- COMPACT MODERN MOBILE SHELL (FITS IN SINGLE SCREEN)            -->
+  <!-- COMPACT MOBILE IDENTITY DECK (SINGLE SCREEN FIT)               -->
   <!-- ============================================================== -->
-  <div class="w-full max-w-md min-h-screen h-screen flex flex-col justify-between bg-[#F7F7F9] sm:border-x sm:border-black/[0.06] sm:shadow-2xl relative px-4 py-3">
+  <div class="w-full max-w-md min-h-screen h-screen flex flex-col justify-between bg-[#0F1015] sm:border-x sm:border-white/10 sm:shadow-2xl relative px-4 py-3">
 
-    <!-- 1. STICKY APP HEADER -->
+    <!-- 1. APP HEADER -->
     <header class="flex items-center justify-between pt-1 pb-2">
-      <a href="/" class="w-9 h-9 rounded-full bg-black/[0.04] hover:bg-black/[0.08] flex items-center justify-center text-black/70 tap-action" aria-label="Kembali ke Beranda">
+      <a href="/" class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/80 transition-colors" aria-label="Kembali ke Beranda">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
       </a>
 
       <div class="flex items-center gap-2">
         <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-6 h-6 object-contain" />
-        <span class="font-bold text-sm tracking-wide text-black">
-          ESPORT <span class="text-[#B3121B]">SUMBAR</span>
+        <span class="font-bold text-sm tracking-wide text-white">
+          ESPORT <span class="text-[#D61622]">SUMBAR</span>
         </span>
       </div>
 
-      <a href="/login" class="px-3.5 py-1.5 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-xs font-semibold text-black/80 flex items-center gap-1.5 tap-action">
+      <a href="/login" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-xs font-semibold text-white/80 flex items-center gap-1.5 transition-colors">
         <span>Masuk</span>
-        <i data-lucide="log-in" class="w-3.5 h-3.5 text-[#B3121B]"></i>
       </a>
     </header>
 
-    <!-- 2. MAIN SECTOR PICKER (BENTO GRID, ZERO BLOAT) -->
+    <!-- 2. MAIN SECTION (COMPACT IDENTITY DECK) -->
     <main class="flex-1 flex flex-col justify-center py-2">
       
       <!-- Headline -->
-      <div class="mb-4">
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#B3121B]/10 text-[#B3121B] text-[10px] font-bold tracking-wider uppercase mb-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#B3121B] animate-pulse"></span>
-          Pendaftaran Resmi
+      <div class="mb-3 px-1">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#D61622]/15 text-[#D61622] text-[10px] font-bold tracking-wider uppercase mb-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#D61622] animate-pulse"></span>
+          IDENTITAS RESMI PBESI
         </div>
-        <h1 class="text-2xl font-extrabold text-black tracking-tight leading-tight">
-          Pilih Kategori
-        </h1>
-        <p class="text-xs text-black/50 mt-0.5">
-          Tentukan peran Anda di ekosistem esports Sumbar.
-        </p>
+        <h1 class="text-2xl font-extrabold text-white tracking-tight">Pilih Lisensi Digital</h1>
+        <p class="text-xs text-white/50 mt-0.5">Pilih kartu identitas ekosistem yang ingin Anda terbitkan.</p>
       </div>
 
-      <!-- Categories Container -->
-      <div class="space-y-2.5">
+      <!-- 5 SLEEK IDENTITY CARDS -->
+      <div class="space-y-2">
 
-        <!-- 01. PLAYER / ATLET (HERO FEATURED CARD) -->
-        <a href="/daftar-player" class="group block p-4 rounded-2xl bg-white border border-black/[0.08] hover:border-[#B3121B]/50 hover:shadow-md shadow-sm tap-action relative overflow-hidden">
+        <!-- 01. PASPOR ATLET (HERO) -->
+        <a href="/daftar-player" class="card-preview group block p-3.5 rounded-2xl bg-gradient-to-r from-[#1A1C27] to-[#12131A] border border-white/10 hover:border-amber-400/50 relative overflow-hidden">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3.5">
-              <div class="w-12 h-12 rounded-xl bg-[#0F1012] text-amber-400 flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 transition-transform">
-                <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400/20 to-black border border-amber-400/30 text-amber-400 flex items-center justify-center shrink-0">
+                <i data-lucide="gamepad-2" class="w-5 h-5"></i>
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="text-base font-bold text-black group-hover:text-[#B3121B] transition-colors">Player / Atlet</span>
-                  <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">Paspor 3D</span>
+                  <span class="text-sm font-extrabold text-white group-hover:text-amber-400 transition-colors">Paspor Digital Atlet</span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-amber-400/10 text-amber-400 border border-amber-400/20">3D CARD</span>
                 </div>
-                <p class="text-xs text-black/50 mt-0.5">Lisensi PBESI & Bursa LFT</p>
+                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
+                  <span>Player / Atlet</span>
+                  <span>•</span>
+                  <span class="text-amber-300/80">Lisensi & Bursa LFT</span>
+                </div>
               </div>
             </div>
-            <div class="w-8 h-8 rounded-full bg-black/[0.04] group-hover:bg-[#B3121B] group-hover:text-white flex items-center justify-center text-black/40 transition-colors shrink-0">
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </div>
           </div>
         </a>
 
-        <!-- 2x2 BENTO GRID -->
-        <div class="grid grid-cols-2 gap-2.5">
-
-          <!-- 02. PELATIH / COACH -->
-          <a href="/daftar-pelatih" class="group p-3.5 rounded-2xl bg-white border border-black/[0.08] hover:border-[#B3121B]/50 hover:shadow-md shadow-sm tap-action flex flex-col justify-between h-28">
-            <div class="flex items-start justify-between">
-              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 border border-sky-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+        <!-- 02. LISENSI PELATIH -->
+        <a href="/daftar-pelatih" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-sky-400/50 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-400/20 text-sky-400 flex items-center justify-center shrink-0">
                 <i data-lucide="graduation-cap" class="w-5 h-5"></i>
               </div>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-black/25 group-hover:text-[#B3121B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-extrabold text-white group-hover:text-sky-400 transition-colors">Sertifikasi Pelatih</span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-sky-400/10 text-sky-400 border border-sky-400/20">LISENSI</span>
+                </div>
+                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
+                  <span>Pelatih / Coach</span>
+                  <span>•</span>
+                  <span>Binaan Pelatda</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 class="font-bold text-sm text-black group-hover:text-[#B3121B] transition-colors">Pelatih / Coach</h3>
-              <span class="text-[11px] text-black/50 block mt-0.5">Sertifikasi & Pelatda</span>
+            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </div>
-          </a>
+          </div>
+        </a>
 
-          <!-- 03. TEAM / KLUB -->
-          <a href="/daftar-team" class="group p-3.5 rounded-2xl bg-white border border-black/[0.08] hover:border-[#B3121B]/50 hover:shadow-md shadow-sm tap-action flex flex-col justify-between h-28">
-            <div class="flex items-start justify-between">
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+        <!-- 03. CHARTER KLUB -->
+        <a href="/daftar-team" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-emerald-400/50 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-400/20 text-emerald-400 flex items-center justify-center shrink-0">
                 <i data-lucide="shield" class="w-5 h-5"></i>
               </div>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-black/25 group-hover:text-[#B3121B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-extrabold text-white group-hover:text-emerald-400 transition-colors">Charter Klub Esports</span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">ROSTER</span>
+                </div>
+                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
+                  <span>Team / Klub</span>
+                  <span>•</span>
+                  <span>Hak Kejurda Resmi</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 class="font-bold text-sm text-black group-hover:text-[#B3121B] transition-colors">Team / Klub</h3>
-              <span class="text-[11px] text-black/50 block mt-0.5">Roster & Turnamen</span>
+            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </div>
-          </a>
+          </div>
+        </a>
 
-          <!-- 04. KOMUNITAS -->
-          <a href="/daftar-komunitas" class="group p-3.5 rounded-2xl bg-white border border-black/[0.08] hover:border-[#B3121B]/50 hover:shadow-md shadow-sm tap-action flex flex-col justify-between h-28">
-            <div class="flex items-start justify-between">
-              <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 border border-purple-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+        <!-- 04. AFILIASI KOMUNITAS -->
+        <a href="/daftar-komunitas" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-purple-400/50 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-400/20 text-purple-400 flex items-center justify-center shrink-0">
                 <i data-lucide="users" class="w-5 h-5"></i>
               </div>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-black/25 group-hover:text-[#B3121B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-extrabold text-white group-hover:text-purple-400 transition-colors">Afiliasi Komunitas</span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-purple-400/10 text-purple-400 border border-purple-400/20">19 PENGCAB</span>
+                </div>
+                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
+                  <span>Komunitas Game</span>
+                  <span>•</span>
+                  <span>Izin Rekomendasi</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 class="font-bold text-sm text-black group-hover:text-[#B3121B] transition-colors">Komunitas</h3>
-              <span class="text-[11px] text-black/50 block mt-0.5">Afiliasi 19 Daerah</span>
+            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </div>
-          </a>
+          </div>
+        </a>
 
-          <!-- 05. VENUE & ARENA -->
-          <a href="/daftar-venue" class="group p-3.5 rounded-2xl bg-white border border-black/[0.08] hover:border-[#B3121B]/50 hover:shadow-md shadow-sm tap-action flex flex-col justify-between h-28">
-            <div class="flex items-start justify-between">
-              <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+        <!-- 05. AKREDITASI VENUE -->
+        <a href="/daftar-venue" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-rose-400/50 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-400/20 text-rose-400 flex items-center justify-center shrink-0">
                 <i data-lucide="map-pin" class="w-5 h-5"></i>
               </div>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-black/25 group-hover:text-[#B3121B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-extrabold text-white group-hover:text-rose-400 transition-colors">Akreditasi Arena Game</span>
+                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-rose-400/10 text-rose-400 border border-rose-400/20">VENUE</span>
+                </div>
+                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
+                  <span>Game Center</span>
+                  <span>•</span>
+                  <span>Sertifikasi Turnamen</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 class="font-bold text-sm text-black group-hover:text-[#B3121B] transition-colors">Venue & Arena</h3>
-              <span class="text-[11px] text-black/50 block mt-0.5">Akreditasi Turnamen</span>
+            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </div>
-          </a>
-
-        </div>
+          </div>
+        </a>
 
       </div>
 
     </main>
 
-    <!-- 3. FOOTER -->
-    <footer class="pt-2 pb-1 text-center safe-bottom border-t border-black/[0.05]">
-      <p class="text-xs text-black/50">
-        Sudah terdaftar? <a href="/login" class="font-bold text-[#B3121B] hover:underline">Masuk ke Akun</a>
+    <!-- 3. BOTTOM HELPER -->
+    <footer class="pt-2 pb-1 text-center safe-bottom border-t border-white/[0.06]">
+      <p class="text-xs text-white/50">
+        Sudah memiliki lisensi? <a href="/login" class="font-bold text-[#D61622] hover:underline">Masuk ke Akun Paspor</a>
       </p>
     </footer>
 

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-[#E5E5E8]">
+<html lang="id" class="h-full bg-[#0A0B0E]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Pendaftaran Komunitas Game – ESPORT SUMBAR</title>
-  <meta name="description" content="Formulir resmi Komunitas Game esport Sumatera Barat berlisensi Pengprov PBESI Sumbar." />
+  <title>Studio Afiliasi Komunitas – ESPORT SUMBAR</title>
+  <meta name="description" content="Formulir resmi Komunitas Game berlisensi Pengprov ESI Sumatera Barat." />
 
-  <!-- Google Fonts: Bebas Neue, Space Grotesk, Manrope -->
+  <!-- Fonts: Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,29 +18,20 @@
       theme: {
         extend: {
           colors: {
-            canvas: "#E8E8EB",
-            paper: "#F7F7F9",
-            ink: "#0B0C0E",
-            crimson: {
-              400: "#E52E38",
-              500: "#D61622",
-              600: "#B3121B",
-              700: "#8F0E15",
-              800: "#700A10",
-              900: "#4D060B"
+            brand: {
+              red: '#D61622',
+              dark: '#0C0D12'
             }
           },
           fontFamily: {
-            display: ['"Bebas Neue"', 'sans-serif'],
-            mono: ['"Space Grotesk"', 'monospace'],
-            sans: ['"Manrope"', 'sans-serif']
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace']
           }
         }
       }
     };
   </script>
 
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="/js/microsystem-client.js"></script>
 
@@ -49,56 +40,49 @@
   <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
 
   <style>
-    * {
-      -webkit-tap-highlight-color: transparent;
-      box-sizing: border-box;
-    }
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     body {
-      background-color: #ECECEE;
-      color: #0B0C0E;
-      font-family: 'Manrope', -apple-system, sans-serif;
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(179, 18, 27, 0.05) 0%, transparent 60%),
-        linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 24px 24px, 24px 24px;
+      background-color: #0A0B0E;
+      color: #F3F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .tap-action {
-      transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
-      user-select: none;
+    
+    /* Titanium / Holographic Card Surface */
+    .card-surface {
+      background: linear-gradient(145deg, #181A24 0%, #0F1017 100%);
+      position: relative;
+      box-shadow: 
+        0 20px 40px -15px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
     }
-    .tap-action:active {
-      transform: scale(0.975);
+    .card-surface::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 15%, rgba(214, 22, 34, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 15% 85%, rgba(217, 119, 6, 0.12) 0%, transparent 45%);
+      pointer-events: none;
+      border-radius: inherit;
     }
-    .safe-bottom {
-      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-    }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Custom select styling */
-    select {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-      background-position: right 0.75rem center;
-      background-repeat: no-repeat;
-      background-size: 1.25em 1.25em;
-      padding-right: 2.5rem;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
     }
+    .tap-action:active { transform: scale(0.97); }
+    .safe-bottom { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-crimson-600 selection:text-white">
+<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-[#D61622] selection:text-white">
 
   <!-- ============================================================== -->
-  <!-- MOBILE APP SHELL                                               -->
+  <!-- NATIVE MOBILE STUDIO SHELL                                     -->
   <!-- ============================================================== -->
-  <div class="w-full max-w-md min-h-screen flex flex-col bg-[#F5F5F7] sm:border-x sm:border-black/[0.08] sm:shadow-2xl relative pb-28">
+  <div class="w-full max-w-md min-h-screen flex flex-col bg-[#0F1015] sm:border-x sm:border-white/10 sm:shadow-2xl relative pb-28">
 
-    <!-- 1. TOP APP BAR -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-black/[0.06] px-4 py-3 flex items-center justify-between">
-      <a href="/daftar" class="w-9 h-9 rounded-full bg-black/[0.04] hover:bg-black/[0.08] flex items-center justify-center text-ink/80 hover:text-ink tap-action" aria-label="Ganti Kategori">
+    <!-- 1. STICKY TOP APP BAR -->
+    <header class="sticky top-0 z-40 bg-[#0F1015]/90 backdrop-blur-xl border-b border-white/[0.06] px-4 py-3 flex items-center justify-between">
+      <a href="/daftar" class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/80 tap-action" aria-label="Ganti Kategori">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
       </a>
 
@@ -106,99 +90,191 @@
         <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-6 h-6 object-contain" />
         <div class="text-left">
           <div class="flex items-center gap-1 leading-none">
-            <span class="font-display text-base tracking-wider text-ink">ESPORT</span>
-            <span class="font-display text-base tracking-wider text-crimson-600">SUMBAR</span>
+            <span class="font-extrabold text-xs tracking-wider text-white">STUDIO LISENSI</span>
+            <span class="font-extrabold text-xs tracking-wider text-[#D61622]">DIGITAL</span>
           </div>
-          <span class="text-[8px] font-mono tracking-widest text-ink/50 uppercase block">PORTAL REGISTRASI</span>
+          <span class="text-[8px] font-mono tracking-widest text-white/40 uppercase block">Komunitas Game</span>
         </div>
       </div>
 
-      <a href="/login" class="px-3 py-1.5 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-ink text-[11px] font-mono font-bold flex items-center gap-1.5 tap-action">
-        <i data-lucide="log-in" class="w-3.5 h-3.5 text-crimson-600"></i>
-        <span>Masuk</span>
+      <a href="/daftar" class="px-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-amber-400 text-[11px] font-mono font-bold flex items-center gap-1 tap-action">
+        <span>Ganti</span>
+        <i data-lucide="refresh-cw" class="w-3 h-3"></i>
       </a>
     </header>
 
-    <!-- 2. STEP PROGRESS INDICATOR -->
-    <div class="px-5 pt-3 pb-2 bg-white/70 border-b border-black/[0.04]">
-      <div class="flex items-center justify-between text-[11px] font-mono mb-1.5">
-        <span class="text-ink/60 font-semibold uppercase tracking-wider">LANGKAH 02 // DATA KOMUNITAS GAME</span>
-        <span class="text-crimson-600 font-bold">2 / 2</span>
-      </div>
-      <div class="w-full h-1 bg-black/[0.08] rounded-full overflow-hidden">
-        <div class="h-full bg-crimson-600 w-full rounded-full"></div>
-      </div>
-    </div>
-
-    <!-- ============================================================== -->
-    <!-- 3. MAIN FORM CONTAINER                                         -->
-    <!-- ============================================================== -->
-    <main id="formContainer" class="flex-1 px-4 py-4 space-y-4">
+    <!-- 2. LIVE INTERACTIVE CARD STAGE -->
+    <section class="px-4 pt-4 pb-2 flex flex-col items-center">
       
-      <!-- Current Sector Card Header -->
-      <div class="p-3.5 rounded-2xl bg-white border border-black/[0.08] shadow-sm flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-crimson-600 text-white flex items-center justify-center shrink-0">
-            <i data-lucide="users" class="w-4 h-4"></i>
+      <!-- Interactive Card Container -->
+      <div id="liveCardElement" class="w-full card-surface rounded-3xl p-5 relative overflow-hidden transition-all duration-300">
+        
+        <!-- Top Row: PBESI Sumbar Emblem + Hologram + Badge -->
+        <div class="flex items-center justify-between z-10 relative mb-3">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-black/60 border border-white/15 p-1 flex items-center justify-center">
+              <img src="/images/esport-sumbar-logo.png" class="w-full h-full object-contain" />
+            </div>
+            <div>
+              <div class="text-[9px] font-mono font-bold tracking-widest uppercase text-white/80 leading-none">PENGPROV PBESI</div>
+              <div class="text-[7.5px] font-mono tracking-widest uppercase text-[#D61622] font-bold">SUMATERA BARAT</div>
+            </div>
           </div>
-          <div>
-            <span class="text-[9px] font-mono uppercase font-bold text-crimson-600 block leading-none">KATEGORI DIPILIH</span>
-            <span class="text-sm font-bold text-ink">Komunitas Game</span>
+
+          <!-- Live Status Pill -->
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/10">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            <span class="text-[9px] font-mono font-bold text-amber-300 uppercase tracking-wider">AFILIASI 19 PENGCAB</span>
           </div>
         </div>
-        <a href="/daftar" class="text-[11px] font-mono font-bold text-ink/60 hover:text-ink px-2.5 py-1 rounded-lg bg-black/[0.04] tap-action">
-          Ganti
-        </a>
+
+        <!-- Middle Body: Avatar Photo + Realtime IGN/Name & Details -->
+        <div class="flex items-center gap-4 z-10 relative my-2">
+          
+          <!-- Avatar Frame with Clickable Photo Upload Trigger -->
+          <div class="relative group cursor-pointer shrink-0" onclick="document.getElementById('inputPhotoFile').click()">
+            <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#D61622] via-amber-500 to-white/20 p-[1.5px] shadow-lg">
+              <div class="w-full h-full rounded-[14px] bg-[#141620] overflow-hidden relative flex items-center justify-center">
+                <img id="cardAvatarImg" src="/images/esport-sumbar-logo.png" alt="Foto" class="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                
+                <!-- Overlay Camera Pill -->
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity text-white">
+                  <i data-lucide="camera" class="w-5 h-5 text-amber-300"></i>
+                  <span class="text-[8px] font-mono font-bold mt-0.5">Ubah</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#D61622] text-white flex items-center justify-center shadow-md border-2 border-[#13151D]">
+              <i data-lucide="camera" class="w-3 h-3"></i>
+            </div>
+          </div>
+
+          <!-- Dynamic Info -->
+          <div class="flex-1 min-w-0">
+            
+      <div class="flex items-center gap-1.5">
+        <span id="cardExtra1" class="px-2 py-0.5 rounded text-[8.5px] font-mono font-bold uppercase bg-purple-500/20 text-purple-400 border border-purple-500/30">
+          MOBILE LEGENDS
+        </span>
+        <span id="cardExtra2" class="text-[9px] font-mono text-white/50 truncate">
+          MEMBERS: 250+
+        </span>
+      </div>
+    
+
+            <!-- Primary Heading -->
+            <h2 id="cardTitleDisplay" class="text-xl font-extrabold text-white tracking-tight truncate mt-0.5">
+              KOMUNITAS MLBB PADANG
+            </h2>
+
+            <!-- Real Name / Subtitle -->
+            <div id="cardSubtitleDisplay" class="text-xs text-white/70 font-medium truncate">
+              AFILIASI RESMI PENGCAB
+            </div>
+
+            <!-- Wilayah -->
+            <div class="flex items-center gap-1 mt-1 text-[10px] font-mono text-white/50">
+              <i data-lucide="map-pin" class="w-3 h-3 text-[#D61622]"></i>
+              <span id="cardWilayahDisplay">KOTA PADANG</span>
+            </div>
+          </div>
+
+          <!-- Score / Badge -->
+          <div class="flex flex-col items-center justify-center shrink-0 w-11 h-11 rounded-2xl bg-white/[0.05] border border-white/10">
+            <span class="text-[7.5px] font-mono text-white/40 uppercase">HUB</span>
+            <span class="text-base font-extrabold text-amber-400 leading-none">19</span>
+          </div>
+
+        </div>
+
+        <!-- Bottom Bar: Passport ID + Chip Watermark -->
+        <div class="mt-3 pt-2.5 border-t border-white/[0.08] flex items-center justify-between z-10 relative">
+          <div>
+            <span class="text-[8px] font-mono uppercase text-white/40 block leading-tight">NOMOR SERTIFIKASI RESMI</span>
+            <span id="cardPasporDisplay" class="text-[10px] font-mono font-bold text-emerald-400">PBESI-SB-2026-VAL-982</span>
+          </div>
+
+          <div class="flex items-center gap-1 text-[9px] font-mono text-white/40">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>TERVERIFIKASI</span>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Alert Notification -->
-      <div id="formAlertBox" class="hidden p-3 rounded-xl font-mono text-xs border"></div>
+      <!-- Quick Upload Button Hint -->
+      <div class="w-full mt-2 flex items-center justify-between px-1 text-[11px] font-mono">
+        <span class="text-white/40">Pratinjau Kartu Realtime</span>
+        <button type="button" onclick="document.getElementById('inputPhotoFile').click()" class="text-amber-400 hover:underline font-bold flex items-center gap-1 tap-action">
+          <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+          <span>Unggah Logo Komunitas</span>
+        </button>
+      </div>
 
-      <!-- FORM CONTENT -->
+      <!-- Hidden Real File Input -->
+      <input type="file" id="inputPhotoFile" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
+
+    </section>
+
+    <!-- 3. MINIMALIST STREAMLINED FORM -->
+    <main id="formContainer" class="flex-1 px-4 pt-3">
+      
+      <div class="mb-3">
+        <span class="text-[10px] font-mono font-bold text-[#D61622] uppercase tracking-wider block">LANGKAH 02 // PENGISIAN DATA</span>
+        <h3 class="text-lg font-extrabold text-white tracking-tight">DATA AFILIASI KOMUNITAS</h3>
+      </div>
+
+      <div id="formAlertBox" class="hidden mb-3 p-3 rounded-xl font-mono text-xs border"></div>
+
       <form id="dedicatedForm" onsubmit="handleDedicatedSubmit(event)" class="space-y-3.5">
-
-        <!-- NAMA FIELD -->
+        
+        <!-- NAMA LENGKAP -->
         <div class="space-y-1">
-          <label class="block text-xs font-mono font-bold text-ink/75">Nama Komunitas Esport:</label>
+          <label class="block text-xs font-mono font-bold text-white/70">Nama Komunitas:</label>
           <input 
             type="text" 
             id="inputNama" 
             required 
-            placeholder="Contoh: Komunitas MLBB Bukittinggi" 
-            class="w-full px-3.5 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-sans text-ink placeholder-ink/30 focus:outline-none focus:ring-2 focus:ring-crimson-600 focus:border-transparent transition-all shadow-sm"
+            value="AFILIASI RESMI PENGCAB"
+            oninput="syncCardPreview()"
+            placeholder="Contoh: Komunitas Mobile Legends Padang" 
+            class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-sans text-white placeholder-white/30 focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all"
           />
         </div>
 
-        <!-- DYNAMIC FIELDS FOR THIS SECTOR -->
+        <!-- EXTRA SECTOR FIELDS -->
         
-        <div class="grid grid-cols-2 gap-2.5">
-          <div class="space-y-1">
-            <label class="block text-xs font-mono font-bold text-ink/75">Fokus Game:</label>
-            <select id="inputGame" required class="w-full px-3 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-mono text-ink focus:outline-none focus:ring-2 focus:ring-crimson-600 shadow-sm">
-              <option value="Mobile Legends">Mobile Legends</option>
-              <option value="PUBG Mobile">PUBG Mobile</option>
-              <option value="Free Fire">Free Fire</option>
-              <option value="All-Games">Lintas Game (All Games)</option>
-            </select>
-          </div>
-          <div class="space-y-1">
-            <label class="block text-xs font-mono font-bold text-ink/75">Estimasi Anggota:</label>
-            <input type="number" id="inputAnggota" placeholder="Contoh: 150" class="w-full px-3 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-sans text-ink placeholder-ink/30 focus:outline-none focus:ring-2 focus:ring-crimson-600 shadow-sm" />
-          </div>
+      <div class="grid grid-cols-2 gap-2.5">
+        <div class="space-y-1">
+          <label class="block text-xs font-mono font-bold text-white/70">Game Basis Komunitas:</label>
+          <select id="inputGame" required onchange="syncCardPreview()" class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-mono text-white focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all">
+            <option value="Mobile Legends" selected>Mobile Legends</option>
+            <option value="PUBG Mobile">PUBG Mobile</option>
+            <option value="Free Fire">Free Fire</option>
+            <option value="Valorant">Valorant</option>
+            <option value="Multi-Community">Multi-Game Community</option>
+          </select>
         </div>
         <div class="space-y-1">
-          <label class="block text-xs font-mono font-bold text-ink/75">Ketua Komunitas:</label>
-          <input type="text" id="inputKetua" required placeholder="Nama ketua komunitas" class="w-full px-3 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-sans text-ink placeholder-ink/30 focus:outline-none focus:ring-2 focus:ring-crimson-600 shadow-sm" />
+          <label class="block text-xs font-mono font-bold text-white/70">Perkiraan Anggota:</label>
+          <input type="text" id="inputMemberCount" value="250+" oninput="syncCardPreview()" placeholder="Contoh: 150+" class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-sans text-white placeholder-white/30 focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all" />
         </div>
+      </div>
+      <div class="space-y-1">
+        <label class="block text-xs font-mono font-bold text-white/70">Ketua / Koordinator Komunitas:</label>
+        <input type="text" id="inputKetua" placeholder="Nama ketua komunitas" class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-sans text-white placeholder-white/30 focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all" />
+      </div>
     
 
         <!-- DOMISILI 19 WILAYAH -->
         <div class="space-y-1">
-          <label class="block text-xs font-mono font-bold text-ink/75">Domisili Kota / Kabupaten (19 Wilayah):</label>
+          <label class="block text-xs font-mono font-bold text-white/70">Domisili Kota / Kabupaten (19 Wilayah):</label>
           <select 
             id="inputWilayah" 
             required 
-            class="w-full px-3.5 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-mono text-ink focus:outline-none focus:ring-2 focus:ring-crimson-600 focus:border-transparent transition-all shadow-sm"
+            onchange="syncCardPreview()"
+            class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-mono text-white focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all"
           >
             <option value="Kota Padang" selected>Kota Padang</option>
             <option value="Kota Bukittinggi">Kota Bukittinggi</option>
@@ -220,50 +296,49 @@
             <option value="Kab. Pasaman Barat">Kab. Pasaman Barat</option>
             <option value="Kab. Kepulauan Mentawai">Kab. Kepulauan Mentawai</option>
           </select>
-          <span class="text-[10px] text-ink/45 block">Pengcab wilayah ini akan memverifikasi berkas KTP domisili Anda.</span>
         </div>
 
         <!-- KONTAK FIELD -->
         <div class="grid grid-cols-2 gap-2.5">
           <div class="space-y-1">
-            <label class="block text-xs font-mono font-bold text-ink/75">No. WhatsApp:</label>
+            <label class="block text-xs font-mono font-bold text-white/70">No. WhatsApp:</label>
             <input 
               type="tel" 
               id="inputTelepon" 
               required 
               placeholder="08123456789" 
-              class="w-full px-3 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-sans text-ink placeholder-ink/30 focus:outline-none focus:ring-2 focus:ring-crimson-600 focus:border-transparent transition-all shadow-sm"
+              class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-sans text-white placeholder-white/30 focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all"
             />
           </div>
           <div class="space-y-1">
-            <label class="block text-xs font-mono font-bold text-ink/75">Email Aktif:</label>
+            <label class="block text-xs font-mono font-bold text-white/70">Email Aktif:</label>
             <input 
               type="email" 
               id="inputEmail" 
               required 
               placeholder="nama@email.com" 
-              class="w-full px-3 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-sans text-ink placeholder-ink/30 focus:outline-none focus:ring-2 focus:ring-crimson-600 focus:border-transparent transition-all shadow-sm"
+              class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-sans text-white placeholder-white/30 focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all"
             />
           </div>
         </div>
 
         <!-- PASSWORD FIELD -->
         <div class="space-y-1">
-          <label class="block text-xs font-mono font-bold text-ink/75">Kata Sandi Akun (untuk login paspor):</label>
+          <label class="block text-xs font-mono font-bold text-white/70">Kata Sandi Akun Paspor:</label>
           <input 
             type="password" 
             id="inputPassword" 
             required 
             placeholder="Minimal 6 karakter" 
-            class="w-full px-3.5 py-2.5 bg-white border border-black/[0.12] rounded-xl text-xs font-sans text-ink placeholder-ink/30 focus:outline-none focus:ring-2 focus:ring-crimson-600 focus:border-transparent transition-all shadow-sm"
+            class="w-full px-3.5 py-3 bg-[#151722] border border-white/10 rounded-2xl text-xs font-sans text-white placeholder-white/30 focus:outline-none focus:border-[#D61622] focus:ring-1 focus:ring-[#D61622] transition-all"
           />
         </div>
 
-        <!-- PERSETUJUAN RESMI -->
+        <!-- PERSETUJUAN -->
         <label class="flex items-start gap-2.5 pt-1 cursor-pointer">
-          <input type="checkbox" id="checkAgree" required checked class="w-4 h-4 mt-0.5 rounded accent-crimson-600" />
-          <span class="text-[11px] text-ink/70 leading-snug">
-            Saya menyatakan data yang saya kirimkan adalah sah dan tunduk pada kode etik resmi PBESI Sumatera Barat.
+          <input type="checkbox" id="checkAgree" required checked class="w-4 h-4 mt-0.5 rounded accent-[#D61622]" />
+          <span class="text-[11px] text-white/60 leading-snug">
+            Saya menyatakan data dan foto yang diunggah adalah sah dan tunduk pada kode etik resmi PBESI Sumatera Barat.
           </span>
         </label>
 
@@ -271,85 +346,122 @@
 
     </main>
 
-    <!-- ============================================================== -->
-    <!-- 4. STEP 3: SUKSES PENDAFTARAN & TIKET PASPOR                   -->
-    <!-- ============================================================== -->
+    <!-- 4. STEP 3: SUKSES PENDAFTARAN & TIKET PASPOR -->
     <main id="successContainer" class="hidden flex-1 px-4 py-8 flex flex-col items-center justify-center text-center space-y-5">
-      
-      <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-500 flex items-center justify-center text-emerald-600 shadow-md">
+      <div class="w-14 h-14 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-emerald-400 shadow-md">
         <i data-lucide="check" class="w-7 h-7 stroke-[3]"></i>
       </div>
 
       <div>
-        <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold uppercase border border-emerald-200">
+        <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-mono font-bold uppercase border border-emerald-500/30">
           BERKAS RESMI DITERIMA
         </span>
-        <h2 class="font-display text-2xl tracking-tight text-ink uppercase mt-2">Pendaftaran Berhasil!</h2>
-        <p class="text-xs text-ink/60 max-w-xs mx-auto mt-1 leading-relaxed">
-          Data Anda telah diteruskan ke antrean verifikasi tahap 1 Pengcab untuk pemeriksaan domisili.
+        <h2 class="text-2xl font-extrabold tracking-tight text-white uppercase mt-2">Pendaftaran Berhasil!</h2>
+        <p class="text-xs text-white/60 max-w-xs mx-auto mt-1 leading-relaxed">
+          Data dan kartu lisensi Anda telah diteruskan ke antrean verifikasi Pengcab 19 wilayah.
         </p>
       </div>
 
       <!-- Digital Receipt Card -->
-      <div class="w-full bg-white border border-black/[0.1] rounded-2xl p-4 text-left space-y-2.5 shadow-md">
-        <div class="flex items-center justify-between border-b border-black/[0.06] pb-2">
-          <span class="text-[10px] font-mono text-ink/50 uppercase">Nomor Berkas</span>
-          <span id="receiptId" class="text-xs font-mono font-bold text-crimson-600">REG-PLY-9821</span>
+      <div class="w-full bg-[#151722] border border-white/10 rounded-2xl p-4 text-left space-y-2.5 shadow-md">
+        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+          <span class="text-[10px] font-mono text-white/50 uppercase">Nomor Berkas</span>
+          <span id="receiptId" class="text-xs font-mono font-bold text-[#D61622]">REG-9821</span>
         </div>
         <div class="flex items-center justify-between">
-          <span class="text-[11px] text-ink/60">Nama Terdaftar</span>
-          <span id="receiptNama" class="text-xs font-bold text-ink">Muhammad Rayden</span>
+          <span class="text-[11px] text-white/60">Nama Terdaftar</span>
+          <span id="receiptNama" class="text-xs font-bold text-white">Muhammad Rayden</span>
         </div>
         <div class="flex items-center justify-between">
-          <span class="text-[11px] text-ink/60">Kategori Bidang</span>
-          <span class="text-xs font-mono text-ink font-bold uppercase">Komunitas Game</span>
+          <span class="text-[11px] text-white/60">Kategori Bidang</span>
+          <span class="text-xs font-mono text-white font-bold uppercase">Komunitas Game</span>
         </div>
         <div class="flex items-center justify-between">
-          <span class="text-[11px] text-ink/60">Pengcab Wilayah</span>
-          <span id="receiptWilayah" class="text-xs font-bold text-ink">Kota Padang</span>
+          <span class="text-[11px] text-white/60">Pengcab Wilayah</span>
+          <span id="receiptWilayah" class="text-xs font-bold text-white">Kota Padang</span>
         </div>
-        <div class="flex items-center justify-between border-t border-black/[0.06] pt-2">
-          <span class="text-[10px] font-mono text-ink/50 uppercase">ID Paspor Sementara</span>
-          <span id="receiptPaspor" class="text-xs font-mono font-bold text-emerald-600">PBESI-SB-2026-VAL-982</span>
+        <div class="flex items-center justify-between border-t border-white/10 pt-2">
+          <span class="text-[10px] font-mono text-white/50 uppercase">ID Paspor Sementara</span>
+          <span id="receiptPaspor" class="text-xs font-mono font-bold text-emerald-400">PBESI-SB-2026-VAL-982</span>
         </div>
       </div>
 
       <!-- Action Buttons -->
       <div class="w-full space-y-2 pt-2">
-        <a href="/profile" class="w-full py-3.5 px-4 rounded-xl bg-crimson-600 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-crimson-900/20 tap-action">
+        <a href="/profile" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#D61622] to-red-700 hover:from-red-600 hover:to-red-800 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-red-950/40 tap-action">
           <i data-lucide="id-card" class="w-4 h-4 text-amber-300"></i>
           <span>Buka Paspor Digital Saya</span>
         </a>
-        <a href="/" class="w-full py-2.5 px-4 rounded-xl bg-black/[0.05] hover:bg-black/[0.08] text-ink/80 font-mono text-xs font-bold uppercase flex items-center justify-center gap-2 tap-action">
+        <a href="/" class="w-full py-2.5 px-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] text-white font-mono text-xs font-bold uppercase flex items-center justify-center gap-2 tap-action">
           <i data-lucide="home" class="w-4 h-4"></i>
           <span>Kembali ke Beranda</span>
         </a>
       </div>
-
     </main>
 
-    <!-- ============================================================== -->
-    <!-- 5. STICKY BOTTOM ACTION BAR                                    -->
-    <!-- ============================================================== -->
-    <div id="stickyBottomAction" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-black/[0.08] px-4 py-3 safe-bottom flex justify-center">
-      <div class="w-full max-w-md flex items-center justify-between gap-3">
+    <!-- 5. STICKY BOTTOM ACTION BAR -->
+    <div id="stickyBottomAction" class="fixed bottom-0 left-0 right-0 z-40 bg-[#0F1015]/95 backdrop-blur-xl border-t border-white/[0.08] px-4 py-3 safe-bottom flex justify-center">
+      <div class="w-full max-w-md">
         <button 
           type="button" 
           id="btnSubmitAppForm" 
           onclick="triggerDedicatedSubmit()"
-          class="w-full py-3.5 px-5 rounded-2xl bg-crimson-600 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-crimson-900/30 tap-action"
+          class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#D61622] to-red-700 hover:from-red-600 hover:to-red-800 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-red-950/50 tap-action"
         >
-          <i data-lucide="send" class="w-4 h-4 text-amber-300"></i>
-          <span id="btnSubmitText">KIRIM PENDAFTARAN RESMI</span>
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+          <span id="btnSubmitText">TERBITKAN LISENSI RESMI</span>
         </button>
       </div>
     </div>
 
   </div>
 
-  <!-- SCRIPT -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
     const currentBidang = 'komunitas';
+    let currentUploadedPhotoData = '';
+
+    function syncCardPreview() {
+      const nama = document.getElementById('inputNama')?.value.trim() || 'Nama Lengkap';
+      const wilayah = document.getElementById('inputWilayah')?.value || 'Kota Padang';
+      document.getElementById('cardWilayahDisplay').textContent = wilayah.toUpperCase();
+      
+      
+      const game = document.getElementById('inputGame')?.value || 'COMMUNITY';
+      const members = document.getElementById('inputMemberCount')?.value || '100+';
+      document.getElementById('cardTitleDisplay').textContent = nama.toUpperCase();
+      document.getElementById('cardSubtitleDisplay').textContent = 'AFILIASI RESMI PENGCAB';
+      if (document.getElementById('cardExtra1')) document.getElementById('cardExtra1').textContent = game.toUpperCase();
+      if (document.getElementById('cardExtra2')) document.getElementById('cardExtra2').textContent = 'MEMBERS: ' + members;
+    
+    }
+
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          // Resize & crop to square 400x400 on canvas
+          const canvas = document.createElement('canvas');
+          canvas.width = 400;
+          canvas.height = 400;
+          const ctx = canvas.getContext('2d');
+          
+          const minDim = Math.min(img.width, img.height);
+          const sx = (img.width - minDim) / 2;
+          const sy = (img.height - minDim) / 2;
+          ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 400, 400);
+
+          currentUploadedPhotoData = canvas.toDataURL('image/jpeg', 0.85);
+          document.getElementById('cardAvatarImg').src = currentUploadedPhotoData;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
 
     function triggerDedicatedSubmit() {
       const form = document.getElementById('dedicatedForm');
@@ -366,7 +478,7 @@
 
       alertBox.classList.add('hidden');
       submitBtn.disabled = true;
-      submitText.textContent = "MENGIRIMKAN BERKAS...";
+      submitText.textContent = "MEMPROSES DOKUMEN...";
 
       const nama = document.getElementById('inputNama').value.trim();
       const wilayah = document.getElementById('inputWilayah').value;
@@ -380,13 +492,14 @@
         telepon,
         email,
         password,
-        source: 'mobile-app'
+        foto: currentUploadedPhotoData || document.getElementById('cardAvatarImg').src,
+        source: 'mobile-app-studio'
       };
 
       
-        payload.game = document.getElementById('inputGame')?.value || 'All-Games';
-        payload.anggota = document.getElementById('inputAnggota')?.value || '50';
-        payload.ketua = document.getElementById('inputKetua')?.value.trim() || nama;
+      payload.game = document.getElementById('inputGame')?.value || 'Multi-Community';
+      payload.members = document.getElementById('inputMemberCount')?.value || '100+';
+      payload.ketua = document.getElementById('inputKetua')?.value.trim() || '-';
     
 
       try {
@@ -405,25 +518,26 @@
           lucide.createIcons();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-          alertBox.className = "p-3 rounded-xl font-mono text-xs border bg-rose-50 border-rose-300 text-rose-700 flex items-center gap-2";
-          alertBox.innerHTML = `<i data-lucide="alert-triangle" class="w-4 h-4 text-rose-600"></i> <span>${res.message || 'Gagal mengirimkan pendaftaran.'}</span>`;
+          alertBox.className = "p-3 rounded-xl font-mono text-xs border bg-rose-950/60 border-rose-500/40 text-rose-300 flex items-center gap-2";
+          alertBox.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400"></i> <span>' + (res.message || 'Gagal mengirimkan pendaftaran.') + '</span>';
           alertBox.classList.remove('hidden');
           lucide.createIcons();
           submitBtn.disabled = false;
-          submitText.textContent = "KIRIM PENDAFTARAN RESMI";
+          submitText.textContent = "TERBITKAN LISENSI RESMI";
         }
       } catch (err) {
-        alertBox.className = "p-3 rounded-xl font-mono text-xs border bg-rose-50 border-rose-300 text-rose-700 flex items-center gap-2";
-        alertBox.innerHTML = '<i data-lucide="alert-circle" class="w-4 h-4 text-rose-600"></i> <span>Kesalahan jaringan. Silakan coba lagi.</span>';
+        alertBox.className = "p-3 rounded-xl font-mono text-xs border bg-rose-950/60 border-rose-500/40 text-rose-300 flex items-center gap-2";
+        alertBox.innerHTML = '<i data-lucide="alert-circle" class="w-4 h-4 text-rose-400"></i> <span>Kesalahan koneksi sistem. Silakan coba lagi.</span>';
         alertBox.classList.remove('hidden');
         lucide.createIcons();
         submitBtn.disabled = false;
-        submitText.textContent = "KIRIM PENDAFTARAN RESMI";
+        submitText.textContent = "TERBITKAN LISENSI RESMI";
       }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      syncCardPreview();
     });
   </script>
 </body>
