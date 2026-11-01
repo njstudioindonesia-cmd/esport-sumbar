@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F5F6FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Detail Wilayah – ESPORT SUMBAR</title>
+  <meta name="description" content="Detail profil ekosistem esports daerah, atlet terdaftar, klub binaan, arena venue, dan mitra kolaborasi pengcab se-Sumatera Barat." />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000', // Telkomsel Red
+              700: '#B80000',
+              800: '#900000',
+            },
+            surface: {
+              canvas: '#F5F6FA',
+              card: '#FFFFFF',
+              dark: '#1A1D26',
+              muted: '#687083',
+              border: '#EAECEF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      background-color: #F5F6FA;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 120px;
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- TOP APP BAR                                                    -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/wilayah" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight" id="topBarRegionName">Detail Wilayah</h1>
+          <p class="text-[10px] text-brand-600 font-bold tracking-wide uppercase">ESPORT SUMBAR</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button onclick="shareWilayah()" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200" title="Bagikan">
+          <i data-lucide="share-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- MAIN APP CONTAINER                                             -->
+  <!-- ============================================================== -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+
+    <!-- 1. REGION SELECTOR (QUICK SWITCHER) -->
+    <div class="app-card rounded-2xl p-3 bg-white flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2 text-xs text-surface-muted font-medium">
+        <i data-lucide="map" class="w-4 h-4 text-brand-600"></i>
+        <span>Pilih Wilayah:</span>
+      </div>
+      <select id="regionSelect" onchange="onRegionSelectChange(this.value)" class="text-xs font-bold text-surface-dark bg-gray-50 border border-gray-200 rounded-xl px-3 py-1.5 focus:outline-none focus:border-brand-600">
+        <!-- populated dynamically -->
+      </select>
+    </div>
+
+    <!-- 2. REGION HERO PROFILE CARD -->
+    <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-red-50/30 border border-gray-100 space-y-4">
+      
+      <div class="flex items-center justify-between">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-brand-50 text-brand-600 border border-brand-100" id="badgeType">
+          <i data-lucide="map-pin" class="w-3 h-3"></i>
+          <span>KOTA • HUB UTAMA</span>
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+          <span>Mitra Kolaborasi ESI Aktif</span>
+        </span>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-black text-surface-dark tracking-tight leading-tight" id="heroRegionTitle">
+          Kota Padang
+        </h2>
+        <p class="text-xs text-surface-muted mt-1 leading-relaxed" id="heroRegionSubtitle">
+          Pusat ekosistem esports Sumatera Barat dengan konsentrasi atlet kompetitif, klub resmi, dan arena turnamen terbesar.
+        </p>
+      </div>
+
+      <!-- KEY STATS GRID -->
+      <div class="grid grid-cols-4 gap-2 pt-3 border-t border-gray-100 text-center">
+        <div class="bg-gray-50/90 rounded-2xl p-2.5 border border-gray-100">
+          <span class="block text-base font-extrabold text-surface-dark" id="statAtlet">186</span>
+          <span class="text-[9px] text-surface-muted font-medium">Atlet Terdata</span>
+        </div>
+        <div class="bg-gray-50/90 rounded-2xl p-2.5 border border-gray-100">
+          <span class="block text-base font-extrabold text-brand-600" id="statTim">24</span>
+          <span class="text-[9px] text-surface-muted font-medium">Klub / Tim</span>
+        </div>
+        <div class="bg-gray-50/90 rounded-2xl p-2.5 border border-gray-100">
+          <span class="block text-base font-extrabold text-emerald-600" id="statVenue">6</span>
+          <span class="text-[9px] text-surface-muted font-medium">Arena Venue</span>
+        </div>
+        <div class="bg-gray-50/90 rounded-2xl p-2.5 border border-gray-100">
+          <span class="block text-base font-extrabold text-amber-600" id="statPorprov">18</span>
+          <span class="text-[9px] text-surface-muted font-medium">Gelar Porprov</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. MITRA KOLABORASI PENGCAB CARD -->
+    <div class="app-card rounded-2xl p-4 bg-white space-y-3">
+      <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-red-50 text-brand-600 flex items-center justify-center font-bold text-xs">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Mitra Kolaborasi Pengurus Cabang</h3>
+            <p class="text-[10px] text-surface-muted">PBESI Wilayah Mitra ESPORT SUMBAR</p>
+          </div>
+        </div>
+        <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-green-50 text-green-700" id="pengcabSkBadge">SK-01/ESI-SB/2024</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 text-xs">
+        <div>
+          <span class="text-[10px] text-surface-muted block font-medium">Ketua Pengcab Mitra:</span>
+          <span class="font-bold text-surface-dark block mt-0.5" id="pengcabKetua">Drs. Hendri Septa, B.Bus</span>
+        </div>
+        <div>
+          <span class="text-[10px] text-surface-muted block font-medium">Pusat Sekretariat:</span>
+          <span class="font-bold text-surface-dark block mt-0.5 truncate" id="pengcabSekretariat">GOR H. Agus Salim, Padang</span>
+        </div>
+      </div>
+
+      <div class="pt-2 flex items-center gap-2">
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Esport%20Sumbar,%20saya%20ingin%20koordinasi%20wilayah" target="_blank" class="flex-1 py-2 px-3 rounded-xl bg-gray-50 hover:bg-emerald-50 hover:text-emerald-700 border border-gray-200 text-xs font-bold text-surface-dark flex items-center justify-center gap-1.5 tap-action transition-colors">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Hubungi Koordinator</span>
+        </a>
+        <button onclick="showSkModal()" class="py-2 px-3 rounded-xl bg-gray-50 hover:bg-gray-100 border border-gray-200 text-xs font-bold text-surface-dark flex items-center gap-1 tap-action transition-colors">
+          <i data-lucide="file-check-2" class="w-3.5 h-3.5 text-brand-600"></i>
+          <span>Legalitas</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. SECTION TABS BAR -->
+    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 hide-scrollbar" id="sectionTabBar">
+      <button onclick="switchTab('atlet', this)" class="px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action">
+        Atlet Terdata (<span id="tabCountAtlet">0</span>)
+      </button>
+      <button onclick="switchTab('klub', this)" class="px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">
+        Klub & Tim (<span id="tabCountKlub">0</span>)
+      </button>
+      <button onclick="switchTab('venue', this)" class="px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">
+        Arena Venue (<span id="tabCountVenue">0</span>)
+      </button>
+      <button onclick="switchTab('turnamen', this)" class="px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action">
+        Turnamen Daerah
+      </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB CONTENT: ATLET TERDATA                                     -->
+    <!-- ============================================================== -->
+    <div id="tabContentAtlet" class="space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold text-surface-dark uppercase tracking-wider">Pangkalan Data Atlet Wilayah</h3>
+        <span class="text-[10px] text-surface-muted">Tervalidasi Paspor Digital</span>
+      </div>
+
+      <div class="space-y-2.5" id="atletListContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB CONTENT: KLUB & TIM                                        -->
+    <!-- ============================================================== -->
+    <div id="tabContentKlub" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold text-surface-dark uppercase tracking-wider">Klub & Organisasi Wilayah</h3>
+        <span class="text-[10px] text-surface-muted">Terakreditasi ESPORT SUMBAR</span>
+      </div>
+
+      <div class="space-y-2.5" id="klubListContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB CONTENT: ARENA VENUE                                       -->
+    <!-- ============================================================== -->
+    <div id="tabContentVenue" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold text-surface-dark uppercase tracking-wider">Arena & Game Center Rekomendasi</h3>
+        <span class="text-[10px] text-surface-muted">Standar Turnamen</span>
+      </div>
+
+      <div class="space-y-2.5" id="venueListContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB CONTENT: TURNAMEN DAERAH                                   -->
+    <!-- ============================================================== -->
+    <div id="tabContentTurnamen" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold text-surface-dark uppercase tracking-wider">Kalender Turnamen & Kejuaraan</h3>
+        <span class="text-[10px] text-surface-muted">Agenda Kompetisi</span>
+      </div>
+
+      <div class="space-y-2.5" id="turnamenListContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- 5. PROVIDER COLLABORATION FOOTNOTE CARD -->
+    <div class="app-card rounded-2xl p-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white space-y-2">
+      <div class="flex items-center gap-2">
+        <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR" class="w-6 h-6 object-contain" />
+        <span class="text-xs font-extrabold tracking-wide text-red-400">ESPORT SUMBAR</span>
+        <span class="text-[9px] px-2 py-0.5 rounded bg-white/10 text-white/80">Platform Provider</span>
+      </div>
+      <p class="text-[11px] text-gray-300 leading-relaxed">
+        <strong>ESPORT SUMBAR</strong> adalah brand provider platform resmi ekosistem esports Sumatera Barat. Kami berkolaborasi dengan Pengurus Provinsi ESI Sumbar dan 19 Pengurus Cabang ESI Kota & Kabupaten untuk standardisasi lisensi, paspor atlet, dan pembinaan atlet daerah.
+      </p>
+    </div>
+
+    <!-- 6. FOOTER COPYRIGHT -->
+    <footer class="pt-2 pb-6 text-center space-y-1 text-surface-muted text-[11px]">
+      <div class="font-bold text-surface-dark">ESPORT SUMBAR</div>
+      <p class="text-[10px] text-surface-muted">
+        Hak Cipta &copy; 2026 ESPORT SUMBAR. Seluruh hak cipta dilindungi undang-undang.<br/>
+        Berkolaborasi dengan ESI Sumatera Barat.
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- MODAL LEGALITAS KEMITRAAN                                      -->
+  <!-- ============================================================== -->
+  <div id="skModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+        <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Status Kemitraan Pengcab</h4>
+        <button onclick="closeSkModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-200/80 space-y-1.5">
+          <div class="text-[10px] text-surface-muted uppercase font-semibold">SK Pengukuhan Kemitraan:</div>
+          <div class="font-extrabold text-brand-600 text-sm" id="modalSkNum">SK-01/ESI-SB/2024</div>
+          <div class="text-[11px] text-surface-muted" id="modalWilayahTitle">Pengurus Cabang ESI Kota Padang</div>
+        </div>
+
+        <div class="space-y-1 text-[11px] text-surface-muted leading-relaxed">
+          <p>• Terdaftar sebagai wilayah operasional aktif dalam platform digital ESPORT SUMBAR.</p>
+          <p>• Berwenang melakukan validasi domisili dan rekomendasi lisensi atlet binaan.</p>
+          <p>• Tersinkronisasi dengan database Pengprov ESI Sumatera Barat.</p>
+        </div>
+
+        <button onclick="closeSkModal()" class="w-full py-2.5 rounded-xl bg-brand-600 text-white font-bold text-xs tap-action">
+          Tutup Informasi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE)    -->
+  <!-- ============================================================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+    <div class="max-w-md mx-auto h-16 px-2 grid grid-cols-5 items-end relative pb-2">
+      
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="home" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Beranda</span>
+      </a>
+
+      <!-- 2. Paspor -->
+      <a href="/paspor" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="id-card" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Paspor</span>
+      </a>
+
+      <!-- 3. Daftar (Center Elevated Button) -->
+      <a href="/daftar" class="flex flex-col items-center justify-end h-full pb-1 tap-action relative group">
+        <div class="absolute -top-5 w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 shadow-[0_6px_16px_rgba(224,0,0,0.35)] text-white flex items-center justify-center border-4 border-white transition-transform active:scale-95">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.8]"></i>
+        </div>
+        <span class="text-[10px] text-surface-dark font-bold leading-none">Daftar</span>
+      </a>
+
+      <!-- 4. Wilayah (Active) -->
+      <a href="/wilayah" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-brand-600">
+        <i data-lucide="map" class="w-5 h-5 stroke-[2.2] mb-1"></i>
+        <span class="text-[10px] font-bold leading-none">Wilayah</span>
+      </a>
+
+      <!-- 5. Akun -->
+      <a href="/profile" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="user" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Akun</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- ============================================================== -->
+  <!-- CLIENT JAVASCRIPT & REGION DATA ENGINE                         -->
+  <!-- ============================================================== -->
+  <script>
+    // DATA DICTIONARY 19 KOTA & KABUPATEN
+    const WILAYAH_DATA = [
+      {
+        id: "kota-padang",
+        nama: "Kota Padang",
+        type: "Kota",
+        tagline: "Ibukota Provinsi • Hub Esports Utama Sumatera Barat",
+        desc: "Pusat ekosistem esport terbesar dengan basis atlet binaan terpadu, pusat turnamen provinsi, dan konektivitas venue gaming modern.",
+        sk: "SK-01/ESI-SB/2024",
+        ketua: "Drs. Hendri Septa, B.Bus",
+        sekretariat: "GOR H. Agus Salim, Padang",
+        atlet: 186,
+        tim: 24,
+        venue: 6,
+        porprov: 18
+      },
+      {
+        id: "kota-bukittinggi",
+        nama: "Kota Bukittinggi",
+        type: "Kota",
+        tagline: "Pusat Esports Wilayah Agam Raya & Dataran Tinggi",
+        desc: "Kota wisata dengan penetrasi komunitas mobile gaming dan turnamen grassroots yang dinamis serta klub-klub esports legendaris.",
+        sk: "SK-02/ESI-SB/2024",
+        ketua: "H. Erman Safar, SH",
+        sekretariat: "Jam Gadang Sport Hub, Bukittinggi",
+        atlet: 142,
+        tim: 16,
+        venue: 4,
+        porprov: 14
+      },
+      {
+        id: "kota-payakumbuh",
+        nama: "Kota Payakumbuh",
+        type: "Kota",
+        tagline: "Sentra Komunitas Mobile & PC Gaming Luak Limopuluah",
+        desc: "Lumbung talenta muda esports dengan konsistensi kompetisi mingguan dan pembinaan atlet usia dini berprestasi.",
+        sk: "SK-03/ESI-SB/2024",
+        ketua: "Drs. H. Riza Falepi, ST, MT",
+        sekretariat: "GOR M. Yamin, Payakumbuh",
+        atlet: 118,
+        tim: 12,
+        venue: 3,
+        porprov: 12
+      },
+      {
+        id: "kota-pariaman",
+        nama: "Kota Pariaman",
+        type: "Kota",
+        tagline: "Hub Esports Pesisir Barat Sumatera Barat",
+        desc: "Pengembangan komunitas gaming maritim dengan integrasi festival digital dan regenerasi squad atlet muda.",
+        sk: "SK-07/ESI-SB/2024",
+        ketua: "Prof. Dr. Genius Umar, M.Si",
+        sekretariat: "Pantai Gandoriah Youth Center",
+        atlet: 94,
+        tim: 10,
+        venue: 3,
+        porprov: 10
+      },
+      {
+        id: "kota-solok",
+        nama: "Kota Solok",
+        type: "Kota",
+        tagline: "Sentra Esport Penghubung Lintas Tengah Sumbar",
+        desc: "Akselerasi atlet divisi Mobile Legends dan PUBG Mobile dengan dukungan fasilitas pembinaan daerah yang terarah.",
+        sk: "SK-04/ESI-SB/2024",
+        ketua: "H. Zul Elfian Umar, SH, M.Si",
+        sekretariat: "Lapangan Merdeka, Solok",
+        atlet: 84,
+        tim: 9,
+        venue: 2,
+        porprov: 9
+      },
+      {
+        id: "kota-sawahlunto",
+        nama: "Kota Sawahlunto",
+        type: "Kota",
+        tagline: "Ekosistem Esport Kota Warisan Dunia",
+        desc: "Kreativitas pemuda berbasis komunitas game dengan pemanfaatan ruang publik cagar budaya untuk turnamen esport.",
+        sk: "SK-05/ESI-SB/2024",
+        ketua: "Deri Asta, SH",
+        sekretariat: "Ombilin Heritage Hall, Sawahlunto",
+        atlet: 62,
+        tim: 7,
+        venue: 2,
+        porprov: 7
+      },
+      {
+        id: "kota-padang-panjang",
+        nama: "Kota Padang Panjang",
+        type: "Kota",
+        tagline: "Serambi Mekah Digital Esports Hub",
+        desc: "Ekosistem esport pelajar dan santri dengan fokus sportivitas, disiplin latihan, dan integritas kompetisi.",
+        sk: "SK-06/ESI-SB/2024",
+        ketua: "Fadly Amran, B.B.A",
+        sekretariat: "GOR Chatib Sulaiman, Padang Panjang",
+        atlet: 76,
+        tim: 8,
+        venue: 2,
+        porprov: 8
+      },
+      {
+        id: "kab-agam",
+        nama: "Kab. Agam",
+        type: "Kabupaten",
+        tagline: "Lumbung Talenta Esports Terluas di Agam Raya",
+        desc: "Pemberdayaan gamer lintas kecamatan dari pesisir Tiku hingga perbukitan Maninjau dengan potensi squad kompetitif.",
+        sk: "SK-08/ESI-SB/2024",
+        ketua: "Dr. H. Andri Warman, MM",
+        sekretariat: "Lubuk Basung Sport Arena",
+        atlet: 135,
+        tim: 15,
+        venue: 4,
+        porprov: 14
+      },
+      {
+        id: "kab-tanah-datar",
+        nama: "Kab. Tanah Datar",
+        type: "Kabupaten",
+        tagline: "Pusat Kebudayaan & Esports Luak Nan Tuo",
+        desc: "Kombinasi nilai sportivitas Minangkabau dengan pembinaan esports modern di Batusangkar dan sekitarnya.",
+        sk: "SK-09/ESI-SB/2024",
+        ketua: "Eka Putra, SE, MM",
+        sekretariat: "Pagaruyung Youth Center, Batusangkar",
+        atlet: 112,
+        tim: 13,
+        venue: 3,
+        porprov: 12
+      },
+      {
+        id: "kab-lima-puluh-kota",
+        nama: "Kab. Lima Puluh Kota",
+        type: "Kabupaten",
+        tagline: "Basis Gamer Harau & Lembah Nan Subur",
+        desc: "Jejaring komunitas esport aktif di pelosok nagari dengan talenta mobile gaming yang rutin mengikuti kualifikasi daerah.",
+        sk: "SK-10/ESI-SB/2024",
+        ketua: "Safaruddin Dt. Bandaro Rajo",
+        sekretariat: "Kompleks Kantor Bupati, Sarilamak",
+        atlet: 108,
+        tim: 12,
+        venue: 3,
+        porprov: 11
+      },
+      {
+        id: "kab-padang-pariaman",
+        nama: "Kab. Padang Pariaman",
+        type: "Kabupaten",
+        tagline: "Gerbang Udara & Ekosistem Esports Koridor Bandara",
+        desc: "Daerah penyangga ibukota dengan pertumbuhan klub esport nagari dan fasilitas arena game yang terus berkembang.",
+        sk: "SK-11/ESI-SB/2024",
+        ketua: "Suhatri Bur, SE, MM",
+        sekretariat: "IKK Parit Malintang",
+        atlet: 124,
+        tim: 14,
+        venue: 3,
+        porprov: 13
+      },
+      {
+        id: "kab-pesisir-selatan",
+        nama: "Kab. Pesisir Selatan",
+        type: "Kabupaten",
+        tagline: "Jalur Pesisir Panjang Mandeh Esports",
+        desc: "Pembinaan gamer dari Tarusan hingga Silaut dengan fokus game mobile kompetitif dan penjaringan talenta pesisir.",
+        sk: "SK-12/ESI-SB/2024",
+        ketua: "Drs. Rusma Yul Anwar, M.Pd",
+        sekretariat: "GOR Ilyas Yakoub, Painan",
+        atlet: 130,
+        tim: 14,
+        venue: 3,
+        porprov: 13
+      },
+      {
+        id: "kab-solok",
+        nama: "Kab. Solok",
+        type: "Kabupaten",
+        tagline: "Sentra Tiga Danau Esports Community",
+        desc: "Dukungan penuh bagi atlet nagari sekitar Danau Singkarak dan Danau Kembar menuju ajang kompetisi resmi tingkat provinsi.",
+        sk: "SK-13/ESI-SB/2024",
+        ketua: "Capt. H. Epyardi Asda, M.Mar",
+        sekretariat: "Kompleks Arosuka, Solok",
+        atlet: 98,
+        tim: 10,
+        venue: 2,
+        porprov: 10
+      },
+      {
+        id: "kab-solok-selatan",
+        nama: "Kab. Solok Selatan",
+        type: "Kabupaten",
+        tagline: "Nagari Seribu Rumah Gadang Esports",
+        desc: "Akselerasi penetrasi esports di kawasan selatan Sumatera Barat dengan kaderisasi atlet muda berbakat.",
+        sk: "SK-14/ESI-SB/2024",
+        ketua: "H. Khairunas, S.IP, M.Si",
+        sekretariat: "Padang Aro Youth Center",
+        atlet: 68,
+        tim: 7,
+        venue: 2,
+        porprov: 7
+      },
+      {
+        id: "kab-sijunjung",
+        nama: "Kab. Sijunjung",
+        type: "Kabupaten",
+        tagline: "Geopark Silokek Esports Movement",
+        desc: "Pengembangan talenta muda ranah Lansek Manih yang gigih bersaing di kancah turnamen regional.",
+        sk: "SK-15/ESI-SB/2024",
+        ketua: "Benny Dwifa Yuswir, S.STP, M.Si",
+        sekretariat: "Muaro Sijunjung Sport Hub",
+        atlet: 74,
+        tim: 8,
+        venue: 2,
+        porprov: 8
+      },
+      {
+        id: "kab-dharmasraya",
+        nama: "Kab. Dharmasraya",
+        type: "Kabupaten",
+        tagline: "Pintu Masuk Lintas Timur Sumatera",
+        desc: "Komunitas esport lintas batas dengan dinamisme tinggi dan squad turnamen yang aktif menembus kancah nasional.",
+        sk: "SK-16/ESI-SB/2024",
+        ketua: "Sutan Riska Tuanku Kerajaan, SE",
+        sekretariat: "Sport Center Koto Padang, Pulau Punjung",
+        atlet: 88,
+        tim: 9,
+        venue: 2,
+        porprov: 9
+      },
+      {
+        id: "kab-pasaman",
+        nama: "Kab. Pasaman",
+        type: "Kabupaten",
+        tagline: "Wilayah Khatulistiwa Bonjol Esports",
+        desc: "Penguatan fondasi atlet daerah di utara provinsi dengan pembinaan komunitas nagari yang berkesinambungan.",
+        sk: "SK-17/ESI-SB/2024",
+        ketua: "H. Benny Utama, SH, MM",
+        sekretariat: "GOR Tuanku Rao, Lubuk Sikaping",
+        atlet: 72,
+        tim: 8,
+        venue: 2,
+        porprov: 8
+      },
+      {
+        id: "kab-pasaman-barat",
+        nama: "Kab. Pasaman Barat",
+        type: "Kabupaten",
+        tagline: "Tuah Basamo Esports Hub",
+        desc: "Sentra gamer pesisir utara dengan gairah kompetisi tinggi di divisi Mobile Legends dan Free Fire.",
+        sk: "SK-18/ESI-SB/2024",
+        ketua: "H. Hamsuardi, S.Ag",
+        sekretariat: "Simpang Empat Esports Center",
+        atlet: 96,
+        tim: 11,
+        venue: 3,
+        porprov: 10
+      },
+      {
+        id: "kab-kepulauan-mentawai",
+        nama: "Kab. Kepulauan Mentawai",
+        type: "Kabupaten",
+        tagline: "Bumi Sikerei Kepulauan Esports",
+        desc: "Pengembangan talenta maritim kepulauan dengan koneksi satelit digital dan dedikasi tinggi para gamer muda Tuapejat.",
+        sk: "SK-19/ESI-SB/2024",
+        ketua: "Fernando Jongguran Simanjuntak",
+        sekretariat: "Tuapejat Hub, Sipora Mentawai",
+        atlet: 48,
+        tim: 5,
+        venue: 1,
+        porprov: 6
+      }
+    ];
+
+    // MOCK ATLET SEED PER WILAYAH
+    const ATLET_POOL = [
+      { ign: "V4ND4L", nama: "Muhammad Rayden", game: "Valorant", ovr: 96, wilayah: "Kota Padang", role: "Duelist", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "FAJAR7", nama: "Fajar Pratama", game: "Mobile Legends", ovr: 92, wilayah: "Kota Padang", role: "Jungler", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "KYROX", nama: "Rizky Alamsyah", game: "Mobile Legends", ovr: 93, wilayah: "Kota Padang", role: "Flex / Mid", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SKYL1NE", nama: "Aditya Ramadhan", game: "Mobile Legends", ovr: 95, wilayah: "Kota Padang", role: "Gold Laner", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "Z4NN", nama: "Fauzan Hakim", game: "Mobile Legends", ovr: 94, wilayah: "Kota Bukittinggi", role: "Roamer", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "JAMGADANG_SNIPER", nama: "Budi Santoso", game: "PUBG Mobile", ovr: 87, wilayah: "Kota Bukittinggi", role: "Sniper", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "FLASH", nama: "Fadhil Pratama", game: "Valorant", ovr: 94, wilayah: "Kota Bukittinggi", role: "Initiator", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "NIGHTHAWK", nama: "Ahmad Fauzi", game: "Valorant", ovr: 92, wilayah: "Kota Bukittinggi", role: "Controller", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SHADOWFOX", nama: "Rifki Pratama", game: "Mobile Legends", ovr: 89, wilayah: "Kota Payakumbuh", role: "EXP Laner", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SHADOW", nama: "Rizky Ramadhan", game: "PUBG Mobile", ovr: 92, wilayah: "Kota Payakumbuh", role: "Rusher", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "GANDORIAH_BOY", nama: "Iqbal Maulana", game: "Free Fire", ovr: 90, wilayah: "Kota Pariaman", role: "Rusher", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SINGKARAK_KING", nama: "Aldi Gunawan", game: "Mobile Legends", ovr: 88, wilayah: "Kota Solok", role: "Mage", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "OMBILIN_BEAST", nama: "Rian Hidayat", game: "PUBG Mobile", ovr: 86, wilayah: "Kota Sawahlunto", role: "Scout", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SERAMBI_SNIPER", nama: "Hafiz Ridho", game: "Valorant", ovr: 91, wilayah: "Kota Padang Panjang", role: "Sentinel", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "MANINJAU_ACE", nama: "Bayu Anggara", game: "Mobile Legends", ovr: 90, wilayah: "Kab. Agam", role: "Jungler", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "PAGARUYUNG_WARRIOR", nama: "Teguh Ilham", game: "PUBG Mobile", ovr: 88, wilayah: "Kab. Tanah Datar", role: "Support", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "HARAU_TITAN", nama: "Dimas Saputra", game: "Mobile Legends", ovr: 89, wilayah: "Kab. Lima Puluh Kota", role: "EXP Laner", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "PARIT_HUNTER", nama: "Wahyu Firmansyah", game: "Free Fire", ovr: 87, wilayah: "Kab. Padang Pariaman", role: "Fragger", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "MANDEH_GHOST", nama: "Ilham Akbar", game: "Mobile Legends", ovr: 91, wilayah: "Kab. Pesisir Selatan", role: "Gold Laner", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "AROSUKA_PRIDE", nama: "Yoga Pratama", game: "PUBG Mobile", ovr: 85, wilayah: "Kab. Solok", role: "Captain", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "GADANG_STORM", nama: "Fauzi Anwar", game: "Mobile Legends", ovr: 86, wilayah: "Kab. Solok Selatan", role: "Mid Laner", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SILOKEK_RAIDER", nama: "Bima Arya", game: "Valorant", ovr: 88, wilayah: "Kab. Sijunjung", role: "Duelist", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "DHARMAS_PHOENIX", nama: "Andre Kurnia", game: "Mobile Legends", ovr: 90, wilayah: "Kab. Dharmasraya", role: "Jungler", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "BONJOL_VIPER", nama: "Rahmat Hidayat", game: "Free Fire", ovr: 85, wilayah: "Kab. Pasaman", role: "Rusher", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "BASAMO_KID", nama: "Dedi Setiawan", game: "PUBG Mobile", ovr: 89, wilayah: "Kab. Pasaman Barat", role: "Scout", foto: "/images/athlete-v4nd4l.jpg" },
+      { ign: "SIKEREI_FORCE", nama: "Yohanes Samaloisa", game: "Mobile Legends", ovr: 86, wilayah: "Kab. Kepulauan Mentawai", role: "Roamer", foto: "/images/athlete-v4nd4l.jpg" }
+    ];
+
+    let currentRegion = WILAYAH_DATA[0];
+
+    // INITIALIZE PAGE
+    function init() {
+      // 1. Populate Dropdown
+      const select = document.getElementById('regionSelect');
+      select.innerHTML = '';
+      WILAYAH_DATA.forEach(w => {
+        const opt = document.createElement('option');
+        opt.value = w.id;
+        opt.textContent = w.nama;
+        select.appendChild(opt);
+      });
+
+      // 2. Parse Query Param ?id=
+      const params = new URLSearchParams(window.location.search);
+      const reqId = params.get('id') || params.get('daerah') || 'kota-padang';
+      const matched = WILAYAH_DATA.find(w => w.id === reqId.toLowerCase() || w.nama.toLowerCase().includes(reqId.toLowerCase()));
+      
+      if (matched) {
+        currentRegion = matched;
+      } else {
+        currentRegion = WILAYAH_DATA[0];
+      }
+
+      select.value = currentRegion.id;
+      renderRegion();
+      lucide.createIcons();
+    }
+
+    function onRegionSelectChange(newId) {
+      const target = WILAYAH_DATA.find(w => w.id === newId);
+      if (target) {
+        currentRegion = target;
+        // update url without reload
+        const newUrl = window.location.pathname + '?id=' + currentRegion.id;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+        renderRegion();
+        lucide.createIcons();
+      }
+    }
+
+    function renderRegion() {
+      // Top bar & Hero
+      document.getElementById('topBarRegionName').textContent = currentRegion.nama;
+      document.getElementById('heroRegionTitle').textContent = currentRegion.nama;
+      document.getElementById('heroRegionSubtitle').textContent = currentRegion.desc;
+      
+      const badgeType = document.getElementById('badgeType');
+      badgeType.innerHTML = `<i data-lucide="map-pin" class="w-3 h-3"></i><span>${currentRegion.type.toUpperCase()} • ${currentRegion.type === 'Kota' ? 'HUB REGIONAL' : 'BINAAN DAERAH'}</span>`;
+
+      // Stats
+      document.getElementById('statAtlet').textContent = currentRegion.atlet;
+      document.getElementById('statTim').textContent = currentRegion.tim;
+      document.getElementById('statVenue').textContent = currentRegion.venue;
+      document.getElementById('statPorprov').textContent = currentRegion.porprov;
+
+      // Pengcab info
+      document.getElementById('pengcabSkBadge').textContent = currentRegion.sk;
+      document.getElementById('pengcabKetua').textContent = currentRegion.ketua;
+      document.getElementById('pengcabSekretariat').textContent = currentRegion.sekretariat;
+
+      // Modal info
+      document.getElementById('modalSkNum').textContent = currentRegion.sk;
+      document.getElementById('modalWilayahTitle').textContent = `Pengurus Cabang ESI ${currentRegion.nama}`;
+
+      // Render tab counts & items
+      renderAtletSection();
+      renderKlubSection();
+      renderVenueSection();
+      renderTurnamenSection();
+    }
+
+    function renderAtletSection() {
+      const container = document.getElementById('atletListContainer');
+      // Filter athletes matching this region or regional fallbacks
+      let athletes = ATLET_POOL.filter(a => a.wilayah.toLowerCase() === currentRegion.nama.toLowerCase());
+      
+      if (athletes.length === 0) {
+        // synthesize representative athletes
+        athletes = [
+          { ign: currentRegion.nama.replace(/[^a-zA-Z]/g, '').toUpperCase() + "_PRIDE", nama: "Talenta Binaan " + currentRegion.nama, game: "Mobile Legends", ovr: 88, role: "All-Role", foto: "/images/athlete-v4nd4l.jpg" },
+          { ign: "RANAH_" + currentRegion.id.substring(0,4).toUpperCase(), nama: "Atlet Muda " + currentRegion.nama, game: "PUBG Mobile", ovr: 86, role: "Rusher", foto: "/images/athlete-v4nd4l.jpg" }
+        ];
+      }
+
+      document.getElementById('tabCountAtlet').textContent = athletes.length;
+
+      let html = '';
+      athletes.forEach(a => {
+        html += `
+          <div class="app-card rounded-2xl p-3.5 bg-white space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="relative w-11 h-11 rounded-full overflow-hidden bg-gray-100 border border-gray-200">
+                  <img src="${a.foto}" alt="${a.ign}" class="w-full h-full object-cover" onerror="this.src='/images/athlete-v4nd4l.jpg'"/>
+                  <span class="absolute bottom-0 inset-x-0 bg-red-600 text-[8px] text-white font-extrabold text-center py-0.2 leading-tight">${a.ovr}</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <h4 class="text-xs font-black text-surface-dark">${a.ign}</h4>
+                    <i data-lucide="badge-check" class="w-3.5 h-3.5 text-emerald-600 fill-emerald-100"></i>
+                  </div>
+                  <p class="text-[11px] text-surface-muted">${a.nama}</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[9px] font-extrabold bg-red-50 text-brand-600 border border-red-100">${a.game}</span>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-[10px]">
+              <span class="text-surface-muted">Peran: <strong class="text-surface-dark">${a.role}</strong></span>
+              <a href="/paspor" class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1 tap-action">
+                <span>Lihat Paspor</span>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderKlubSection() {
+      const container = document.getElementById('klubListContainer');
+      const clubs = [
+        { name: `${currentRegion.nama} Esports Club`, division: "MLBB & PUBG Mobile", roster: "12 Atlet", tier: "Akreditasi Grade A" },
+        { name: `Ranah ${currentRegion.nama} Gaming`, division: "Valorant & Free Fire", roster: "8 Atlet", tier: "Akreditasi Grade B" }
+      ];
+
+      document.getElementById('tabCountKlub').textContent = clubs.length;
+
+      let html = '';
+      clubs.forEach(c => {
+        html += `
+          <div class="app-card rounded-2xl p-3.5 bg-white space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gray-900 text-white flex items-center justify-center font-black text-xs">
+                  ${c.name.substring(0,2).toUpperCase()}
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-surface-dark">${c.name}</h4>
+                  <p class="text-[10px] text-surface-muted">${c.division}</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700">${c.tier}</span>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-[10px] text-surface-muted">
+              <span>Roster Resmi: <strong class="text-surface-dark">${c.roster}</strong></span>
+              <span class="text-brand-600 font-bold">Domisili Resmi</span>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function renderVenueSection() {
+      const container = document.getElementById('venueListContainer');
+      const venues = [
+        { name: `Arena Gaming Center ${currentRegion.nama}`, addr: currentRegion.sekretariat, spec: "30 PC Spek Turnamen • Fiber 200 Mbps • Mobile Booth" },
+        { name: `Youth Cyber Hub ${currentRegion.nama}`, addr: "Kawasan Pusat Komunitas Daerah", spec: "Dedicated Mobile Gaming Station & Stream Pod" }
+      ];
+
+      document.getElementById('tabCountVenue').textContent = venues.length;
+
+      let html = '';
+      venues.forEach(v => {
+        html += `
+          <div class="app-card rounded-2xl p-3.5 bg-white space-y-2">
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="text-xs font-bold text-surface-dark">${v.name}</h4>
+                <p class="text-[10px] text-surface-muted mt-0.5"><i data-lucide="map-pin" class="w-3 h-3 inline text-red-500 mr-1"></i>${v.addr}</p>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700">Terakreditasi</span>
+            </div>
+            <div class="text-[10px] bg-gray-50 rounded-xl p-2 border border-gray-100 text-surface-dark">
+              <strong>Spesifikasi:</strong> ${v.spec}
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function renderTurnamenSection() {
+      const container = document.getElementById('turnamenListContainer');
+      const events = [
+        { title: `Piala Walikota/Bupati ${currentRegion.nama} 2026`, game: "Mobile Legends & Valorant", prize: "Total Hadiah Rp 15.000.000", date: "Mendatang • Kuartal 2 2026" },
+        { title: `Liga Grassroots Pelajar ${currentRegion.nama}`, game: "PUBG Mobile & Free Fire", prize: "Sertifikat Pembinaan & Medali", date: "Pendaftaran Buka Segera" }
+      ];
+
+      let html = '';
+      events.forEach(e => {
+        html += `
+          <div class="app-card rounded-2xl p-3.5 bg-white space-y-2">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-700">${e.game}</span>
+                <h4 class="text-xs font-bold text-surface-dark mt-1">${e.title}</h4>
+              </div>
+              <span class="text-[10px] font-bold text-brand-600">${e.date}</span>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-[10px] text-surface-muted">
+              <span>${e.prize}</span>
+              <a href="/turnamen" class="text-brand-600 font-bold hover:underline">Info Detail →</a>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function switchTab(tabName, btn) {
+      document.querySelectorAll('#sectionTabBar button').forEach(b => {
+        b.className = 'px-3.5 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 tap-action';
+      });
+      btn.className = 'px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action';
+
+      document.getElementById('tabContentAtlet').classList.add('hidden');
+      document.getElementById('tabContentKlub').classList.add('hidden');
+      document.getElementById('tabContentVenue').classList.add('hidden');
+      document.getElementById('tabContentTurnamen').classList.add('hidden');
+
+      if (tabName === 'atlet') document.getElementById('tabContentAtlet').classList.remove('hidden');
+      if (tabName === 'klub') document.getElementById('tabContentKlub').classList.remove('hidden');
+      if (tabName === 'venue') document.getElementById('tabContentVenue').classList.remove('hidden');
+      if (tabName === 'turnamen') document.getElementById('tabContentTurnamen').classList.remove('hidden');
+
+      lucide.createIcons();
+    }
+
+    function showSkModal() {
+      document.getElementById('skModal').classList.remove('hidden');
+    }
+
+    function closeSkModal() {
+      document.getElementById('skModal').classList.add('hidden');
+    }
+
+    function shareWilayah() {
+      if (navigator.share) {
+        navigator.share({
+          title: `Ekosistem Esport ${currentRegion.nama} - ESPORT SUMBAR`,
+          text: `Cek data profil esport, atlet terdaftar, klub dan venue di ${currentRegion.nama} melalui ESPORT SUMBAR.`,
+          url: window.location.href
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Tautan halaman wilayah berhasil disalin!');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      init();
+    });
+  </script>
+</body>
+</html>

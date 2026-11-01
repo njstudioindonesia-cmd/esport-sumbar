@@ -450,7 +450,7 @@
       </div>
 
       <div class="text-xs text-paper/50 font-mono text-center md:text-right">
-        © 2026 ESPORT SUMBAR. Official Partner ESI Sumatera Barat.
+        Hak Cipta &copy; 2026 ESPORT SUMBAR. Seluruh hak cipta dilindungi undang-undang.<br/>Berkolaborasi dengan ESI Sumatera Barat.
       </div>
     </div>
   </footer>
@@ -465,47 +465,43 @@
     });
   </script>
 
-<!-- Mobile Bottom Dock (5 Unique Destinations) -->
-  <!-- ============================================================== -->
-  <!-- MOBILE BOTTOM DOCK (5 SERIES BUTTONS)                          -->
-  <!-- ============================================================== -->
-  <div id="mobile-bottom-dock" class="md:hidden fixed bottom-2 inset-x-2 z-50 flex justify-center pointer-events-none select-none">
-    <div class="w-full max-w-[350px] bg-white/95 backdrop-blur-xl border border-black/10 rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.18)] px-1.5 py-1.5 flex items-center justify-between pointer-events-auto">
+<!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE) -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+    <div class="max-w-md mx-auto h-16 px-2 grid grid-cols-5 items-end relative pb-2">
       
-      <!-- 1. Home -->
-      <a href="/" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
-        <i data-lucide="home" class="w-5 h-5 "></i>
-        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Home</span>
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="home" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Beranda</span>
       </a>
 
-      <!-- 2. Katalog -->
-      <a href="/katalog" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
-        <i data-lucide="layout-grid" class="w-5 h-5 "></i>
-        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Katalog</span>
+      <!-- 2. Paspor -->
+      <a href="/paspor" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="id-card" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Paspor</span>
       </a>
 
-      <!-- 3. Pencarian (Center Elevated Glowing FAB) -->
-      <a href="/cari" class="relative -top-3.5 flex flex-col items-center justify-center shrink-0 app-tap group px-0.5">
-        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-crimson-900 via-crimson-700 to-crimson-500 text-white shadow-[0_8px_20px_-2px_rgba(179,18,27,0.55)] border-[3px] border-white flex items-center justify-center transform group-active:scale-95 transition-transform ">
-          <i data-lucide="search" class="w-5 h-5 text-white stroke-[2.5]"></i>
+      <!-- 3. Daftar (Center Elevated Button) -->
+      <a href="/daftar" class="flex flex-col items-center justify-end h-full pb-1 tap-action relative group">
+        <div class="absolute -top-5 w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 shadow-[0_6px_16px_rgba(224,0,0,0.35)] text-white flex items-center justify-center border-4 border-white transition-transform active:scale-95">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.8]"></i>
         </div>
-        <span class="text-[8.5px] font-mono font-bold text-ink/80 -mt-0.5 tracking-tight">Pencarian</span>
+        <span class="text-[10px] text-surface-dark font-bold leading-none">Daftar</span>
       </a>
 
       <!-- 4. Wilayah -->
-      <a href="/wilayah" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
-        <i data-lucide="map-pin" class="w-5 h-5 "></i>
-        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Wilayah</span>
+      <a href="/wilayah" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="map" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Wilayah</span>
       </a>
 
-      <!-- 5. Profile -->
-      <a href="/profile" class="w-12 flex flex-col items-center justify-center py-0.5 shrink-0 text-ink/60 hover:text-crimson-700 transition-colors app-tap">
-        <i data-lucide="user" class="w-5 h-5 "></i>
-        <span class="text-[8.5px] font-mono mt-0.5 leading-none">Profile</span>
+      <!-- 5. Akun -->
+      <a href="/profile" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="user" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Akun</span>
       </a>
 
     </div>
-  </div>
-  <!-- /MOBILE BOTTOM DOCK -->
+  </nav>
 </body>
 </html>

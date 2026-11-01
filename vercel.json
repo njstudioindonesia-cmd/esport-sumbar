@@ -172,6 +172,14 @@
       "destination": "/wilayah.html"
     },
     {
+      "source": "/wilayah-detail",
+      "destination": "/wilayah-detail.html"
+    },
+    {
+      "source": "/wilayah-detail/(.*)",
+      "destination": "/wilayah-detail.html"
+    },
+    {
       "source": "/pengcab",
       "destination": "/wilayah.html"
     },
