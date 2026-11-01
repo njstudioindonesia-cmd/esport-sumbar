@@ -291,37 +291,41 @@
   <!-- ============================================================== -->
   <!-- FIXED BOTTOM DOCK (MYTELKOMSEL 5-TAB APP NAV)                 -->
   <!-- ============================================================== -->
-  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-lg border-t border-surface-border shadow-lg">
-    <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE)    -->
+  <!-- ============================================================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/80 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+    <div class="max-w-md mx-auto px-2 py-2 flex items-center justify-around relative">
       
-      <!-- Beranda -->
-      <a href="/" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
-        <i data-lucide="home" class="w-5 h-5"></i>
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center gap-1 py-1 px-3 text-surface-muted hover:text-surface-dark tap-action">
+        <i data-lucide="home" class="w-5 h-5 stroke-[1.8]"></i>
         <span class="text-[10px] font-medium">Beranda</span>
       </a>
 
-      <!-- Paspor -->
-      <a href="/paspor" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
-        <i data-lucide="id-card" class="w-5 h-5"></i>
+      <!-- 2. Paspor -->
+      <a href="/paspor" class="flex flex-col items-center gap-1 py-1 px-3 text-surface-muted hover:text-surface-dark tap-action">
+        <i data-lucide="id-card" class="w-5 h-5 stroke-[1.8]"></i>
         <span class="text-[10px] font-medium">Paspor</span>
       </a>
 
-      <!-- FLOATING DAFTAR (+) BUTTON -->
-      <div class="relative -top-3">
-        <a href="/daftar" class="w-12 h-12 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-lg shadow-brand-600/35 border-3 border-white tap-action">
+      <!-- 3. Daftar (Center Elevated Button) -->
+      <a href="/daftar" class="flex flex-col items-center -mt-5 tap-action group">
+        <div class="w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-600/30 border-4 border-white transition-transform active:scale-95">
           <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
-        </a>
-      </div>
+        </div>
+        <span class="text-[10px] text-surface-dark font-bold mt-0.5">Daftar</span>
+      </a>
 
-      <!-- Wilayah -->
-      <a href="/wilayah" class="flex flex-col items-center gap-0.5 tap-action text-surface-muted hover:text-surface-dark">
-        <i data-lucide="map" class="w-5 h-5"></i>
+      <!-- 4. Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center gap-1 py-1 px-3 text-surface-muted hover:text-surface-dark tap-action">
+        <i data-lucide="map" class="w-5 h-5 stroke-[1.8]"></i>
         <span class="text-[10px] font-medium">Wilayah</span>
       </a>
 
-      <!-- Akun / Masuk (ACTIVE TAB) -->
-      <a href="/login" class="flex flex-col items-center gap-0.5 tap-action text-brand-600">
-        <i data-lucide="user" class="w-5 h-5"></i>
+      <!-- 5. Akun -->
+      <a href="/profile" class="flex flex-col items-center gap-1 py-1 px-3 text-brand-600 tap-action">
+        <i data-lucide="user" class="w-5 h-5 stroke-[2.2]"></i>
         <span class="text-[10px] font-bold">Akun</span>
       </a>
 
