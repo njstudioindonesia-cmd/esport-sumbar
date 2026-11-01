@@ -297,6 +297,290 @@
 
       </div>
 
+      
+      <!-- ============================================================== -->
+      <!-- 2B. CONNECTED BUSINESS & MONETIZATION COCKPIT (INTERLINKED)     -->
+      <!-- ============================================================== -->
+      <div id="connectedBusinessCockpit" class="space-y-3">
+
+        <!-- BUSINESS COCKPIT: ATLET -->
+        <div id="bizAtletCard" class="app-card rounded-3xl p-4 bg-white border border-red-100 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+              <span class="text-[11px] font-black text-brand-700 uppercase tracking-wider">Bursa Karir & Nilai Pasar</span>
+            </div>
+            <a href="/bisnis" class="text-[10px] font-bold text-brand-600 hover:underline flex items-center gap-0.5">
+              <span>Ke Bursa</span>
+              <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+          <!-- Market Value & Wallet Summary -->
+          <div class="grid grid-cols-2 gap-2">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Estimasi Market Value</div>
+              <div class="text-sm font-black text-emerald-600 mt-0.5">Rp 3.500.000<span class="text-[9px] text-surface-muted font-normal">/bln</span></div>
+              <div class="text-[9px] text-surface-muted mt-0.5 font-medium">Berdasarkan OVR 96 & Lisensi</div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Dompet Hadiah & Insentif</div>
+              <div class="text-sm font-black text-surface-dark mt-0.5">Rp 1.750.000</div>
+              <div class="text-[9px] text-emerald-600 font-bold mt-0.5">Siap Dicairkan</div>
+            </div>
+          </div>
+
+          <!-- Real-Time Incoming Contract Offer from Team -->
+          <div id="atletContractOfferBox" class="p-3 rounded-2xl bg-gradient-to-br from-amber-50 to-red-50 border border-amber-200/80 space-y-2">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span class="text-xs font-black text-amber-900" id="atletOfferTitle">Tawaran Kontrak: Minang Pride Esports</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-200 text-amber-800">Menunggu Respon</span>
+            </div>
+            <div class="text-[11px] text-amber-950 font-medium" id="atletOfferDetails">
+              Gaji: <strong class="text-brand-700">Rp 4.200.000/bln</strong> • Bonus: <strong>Rp 1.500.000</strong> • Durasi: <strong>6 Bulan</strong>
+            </div>
+            <div class="flex items-center gap-2 pt-1">
+              <button type="button" onclick="acceptTeamContract()" class="flex-1 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold tap-action shadow-sm">
+                Terima Kontrak Klub
+              </button>
+              <button type="button" onclick="alert('Pesan negosiasi telah dikirim ke Manager Minang Pride Esports.')" class="px-3 py-1.5 rounded-xl bg-white border border-amber-300 text-amber-900 text-xs font-bold tap-action">
+                Negosiasi
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Connected Services for Atlet -->
+          <div class="pt-1">
+            <div class="text-[10px] text-surface-muted font-bold uppercase tracking-wider mb-2">Tingkatkan Karir & Performa:</div>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="quickBookCoach('Coach Arief Rahman', 100000)" class="p-2.5 rounded-2xl bg-amber-50/70 border border-amber-100 text-left tap-action hover:bg-amber-100/50">
+                <div class="text-[10px] text-amber-800 font-bold flex items-center gap-1">
+                  <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                  <span>Analisis Replay VOD</span>
+                </div>
+                <div class="text-xs font-black text-surface-dark mt-0.5">Coach Arief (Grade A)</div>
+                <div class="text-[9px] text-amber-700 font-bold mt-1">Rp 100.000 / sesi →</div>
+              </button>
+              <button type="button" onclick="quickBookVenue('Minang Cyber Lounge', 45000)" class="p-2.5 rounded-2xl bg-sky-50/70 border border-sky-100 text-left tap-action hover:bg-sky-100/50">
+                <div class="text-[10px] text-sky-800 font-bold flex items-center gap-1">
+                  <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
+                  <span>Sewa Slot PC VIP</span>
+                </div>
+                <div class="text-xs font-black text-surface-dark mt-0.5">Minang Cyber Padang</div>
+                <div class="text-[9px] text-sky-700 font-bold mt-1">Rp 45.000 / 3 Jam →</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUSINESS COCKPIT: TIM -->
+        <div id="bizTimCard" class="app-card rounded-3xl p-4 bg-white border border-emerald-100 shadow-sm space-y-3 hidden">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              <span class="text-[11px] font-black text-emerald-700 uppercase tracking-wider">Keuangan Klub & Roster Payroll</span>
+            </div>
+            <a href="/bisnis" class="text-[10px] font-bold text-emerald-600 hover:underline flex items-center gap-0.5">
+              <span>Bursa Transfer</span>
+              <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+          <!-- Treasury & Payroll -->
+          <div class="grid grid-cols-2 gap-2">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Kas Operasional Klub</div>
+              <div class="text-sm font-black text-emerald-600 mt-0.5" id="timTreasuryText">Rp 18.500.000</div>
+              <div class="text-[9px] text-surface-muted mt-0.5 font-medium">Dana Siap Belanja</div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Beban Gaji Roster</div>
+              <div class="text-sm font-black text-brand-600 mt-0.5">Rp 12.000.000<span class="text-[9px] text-surface-muted font-normal">/bln</span></div>
+              <div class="text-[9px] text-surface-muted mt-0.5 font-medium">5 Atlet Utama Digaji</div>
+            </div>
+          </div>
+
+          <!-- Quick Action: Kirim Kontrak ke Atlet LFT -->
+          <div class="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="text-xs font-bold text-emerald-900">Bursa Rekrutmen & Kontrak Atlet</div>
+              <span class="text-[10px] text-emerald-700 font-bold">48 Atlet LFT</span>
+            </div>
+            <p class="text-[11px] text-surface-muted leading-tight">
+              Kirimkan penawaran kontrak resmi kepada atlet binaan daerah. Kontrak akan langsung tampil di beranda atlet terkait.
+            </p>
+            <div class="flex items-center gap-2 pt-1">
+              <button type="button" onclick="openTimOfferModal()" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold tap-action shadow-sm flex items-center justify-center gap-1.5">
+                <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                <span>Ajukan Kontrak ke Atlet</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- B2B Connections: Sewa Bootcamp & Jasa Pelatih -->
+          <div class="pt-1">
+            <div class="text-[10px] text-surface-muted font-bold uppercase tracking-wider mb-2">Fasilitas & Pendamping Taktis Tim:</div>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="timBookBootcamp('Minang Cyber Lounge', 1200000)" class="p-2.5 rounded-2xl bg-sky-50/70 border border-sky-100 text-left tap-action hover:bg-sky-100/50">
+                <div class="text-[10px] text-sky-800 font-bold flex items-center gap-1">
+                  <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                  <span>Bootcamp Venue (3 Hari)</span>
+                </div>
+                <div class="text-xs font-black text-surface-dark mt-0.5">Minang Cyber Lounge</div>
+                <div class="text-[9px] text-sky-700 font-bold mt-1">Rp 1.200.000 / Tim →</div>
+              </button>
+              <button type="button" onclick="timContractCoach('Coach Arief Rahman', 2500000)" class="p-2.5 rounded-2xl bg-amber-50/70 border border-amber-100 text-left tap-action hover:bg-amber-100/50">
+                <div class="text-[10px] text-amber-800 font-bold flex items-center gap-1">
+                  <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                  <span>Head Coach Kejurda</span>
+                </div>
+                <div class="text-xs font-black text-surface-dark mt-0.5">Coach Arief (Grade A)</div>
+                <div class="text-[9px] text-amber-700 font-bold mt-1">Rp 2.500.000 / Event →</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BUSINESS COCKPIT: VENUE -->
+        <div id="bizVenueCard" class="app-card rounded-3xl p-4 bg-white border border-sky-100 shadow-sm space-y-3 hidden">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-sky-600 animate-pulse"></span>
+              <span class="text-[11px] font-black text-sky-700 uppercase tracking-wider">Kasir & Manajemen Pendapatan Arena</span>
+            </div>
+            <a href="/bisnis" class="text-[10px] font-bold text-sky-600 hover:underline flex items-center gap-0.5">
+              <span>Katalog Venue</span>
+              <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+          <!-- Venue Financials -->
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Omset Hari Ini</div>
+              <div class="text-xs font-black text-emerald-600 mt-0.5" id="venueDailyIncomeText">Rp 1.850.000</div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Omset Bulan Ini</div>
+              <div class="text-xs font-black text-surface-dark mt-0.5">Rp 14.200.000</div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Okupansi Rig</div>
+              <div class="text-xs font-black text-sky-600 mt-0.5">24/30 PC (80%)</div>
+            </div>
+          </div>
+
+          <!-- Incoming Orders from Tim & Atlet (Real-Time Order Manager) -->
+          <div class="p-3 rounded-2xl bg-sky-50/70 border border-sky-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="text-xs font-bold text-sky-900">Pemesanan Fasilitas Masuk (Realtime)</div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-sky-200 text-sky-800" id="venueOrderCountBadge">2 Booking</span>
+            </div>
+
+            <!-- Booking 1: Tim Bootcamp -->
+            <div id="venueOrder1" class="p-2.5 rounded-xl bg-white border border-gray-100 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-surface-dark">Paket Bootcamp 3 Hari (Minang Pride)</div>
+                <div class="text-[10px] text-surface-muted">5 PC Rig RTX 4070 • Nilai: <strong class="text-emerald-600">Rp 1.200.000</strong></div>
+              </div>
+              <button type="button" onclick="confirmVenueBooking('venueOrder1', 1200000)" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold tap-action shadow-sm">
+                Konfirmasi
+              </button>
+            </div>
+
+            <!-- Booking 2: Atlet VIP -->
+            <div id="venueOrder2" class="p-2.5 rounded-xl bg-white border border-gray-100 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-surface-dark">Slot VIP Gaming 3 Jam (V4ND4L)</div>
+                <div class="text-[10px] text-surface-muted">PC VIP Stage • Nilai: <strong class="text-emerald-600">Rp 45.000</strong></div>
+              </div>
+              <button type="button" onclick="confirmVenueBooking('venueOrder2', 45000)" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold tap-action shadow-sm">
+                Konfirmasi
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1 text-xs">
+            <span class="text-surface-muted">Tarif: Regular Rp 8k/j • VIP Rp 15k/j</span>
+            <button type="button" onclick="alert('Pengaturan tarif rental arena berhasil disesuaikan!')" class="text-sky-700 font-bold hover:underline">
+              Ubah Tarif Rental
+            </button>
+          </div>
+        </div>
+
+        <!-- BUSINESS COCKPIT: PELATIH -->
+        <div id="bizPelatihCard" class="app-card rounded-3xl p-4 bg-white border border-amber-100 shadow-sm space-y-3 hidden">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+              <span class="text-[11px] font-black text-amber-700 uppercase tracking-wider">Dompet Jasa & Tarif Coaching</span>
+            </div>
+            <a href="/bisnis" class="text-[10px] font-bold text-amber-600 hover:underline flex items-center gap-0.5">
+              <span>Katalog Playbook</span>
+              <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+
+          <!-- Coach Earnings Summary -->
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Total Saldo Jasa</div>
+              <div class="text-xs font-black text-emerald-600 mt-0.5" id="coachWalletText">Rp 6.400.000</div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Sesi Selesai</div>
+              <div class="text-xs font-black text-surface-dark mt-0.5">28 Sesi</div>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Playbook Terjual</div>
+              <div class="text-xs font-black text-brand-600 mt-0.5">42 Unduhan</div>
+            </div>
+          </div>
+
+          <!-- Incoming Coaching Requests from Atlet & Tim (Real-Time) -->
+          <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="text-xs font-bold text-amber-900">Permintaan Coaching Masuk (Realtime)</div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-200 text-amber-800" id="coachRequestCountBadge">2 Permintaan</span>
+            </div>
+
+            <!-- Request 1: VOD Review from V4ND4L -->
+            <div id="coachReq1" class="p-2.5 rounded-xl bg-white border border-gray-100 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-surface-dark">Analisis Replay VOD (V4ND4L)</div>
+                <div class="text-[10px] text-surface-muted">Sesi Taktis 1 Jam • Honor: <strong class="text-emerald-600">Rp 100.000</strong></div>
+              </div>
+              <button type="button" onclick="acceptCoachRequest('coachReq1', 100000)" class="px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-[10px] font-bold tap-action shadow-sm">
+                Terima Sesi
+              </button>
+            </div>
+
+            <!-- Request 2: Head Coach from Minang Pride -->
+            <div id="coachReq2" class="p-2.5 rounded-xl bg-white border border-gray-100 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-surface-dark">Kontrak Analis Kejurda (Minang Pride)</div>
+                <div class="text-[10px] text-surface-muted">Pendampingan Turnamen • Honor: <strong class="text-emerald-600">Rp 2.500.000</strong></div>
+              </div>
+              <button type="button" onclick="acceptCoachRequest('coachReq2', 2500000)" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold tap-action shadow-sm">
+                Tanda Tangani
+              </button>
+            </div>
+          </div>
+
+          <!-- Playbook Monitization -->
+          <div class="flex items-center justify-between pt-1 text-xs">
+            <span class="text-surface-muted">Playbook Aktif: 2 Judul (Rp 49k & Rp 59k)</span>
+            <button type="button" onclick="alert('Formulir penerbitan materi taktis baru dibuka!')" class="text-amber-700 font-bold hover:underline">
+              + Terbitkan Modul Baru
+            </button>
+          </div>
+        </div>
+
+      </div>
+
       <!-- ============================================================== -->
       <!-- 3. PROFESSIONAL 8-ICON MENU GRID (MYTELKOMSEL SIGNATURE)       -->
       <!-- ============================================================== -->
@@ -597,12 +881,12 @@
         <span class="text-[10px] font-medium leading-none">Paspor</span>
       </a>
 
-      <!-- 3. Daftar (Center Elevated Button) -->
-      <a href="/daftar" class="flex flex-col items-center justify-end h-full pb-1 tap-action relative group">
+      <!-- 3. Bisnis & Hub Aksi (Center Elevated Button) -->
+      <a href="/bisnis" class="flex flex-col items-center justify-end h-full pb-1 tap-action relative group">
         <div class="absolute -top-5 w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 shadow-[0_6px_16px_rgba(224,0,0,0.35)] text-white flex items-center justify-center border-4 border-white transition-transform active:scale-95">
           <i data-lucide="plus" class="w-6 h-6 stroke-[2.8]"></i>
         </div>
-        <span class="text-[10px] text-surface-dark font-bold leading-none">Daftar</span>
+        <span class="text-[10px] text-brand-600 font-bold leading-none">Bisnis</span>
       </a>
 
       <!-- 4. Wilayah -->
@@ -664,24 +948,32 @@
       document.getElementById('dashCardTim').classList.add('hidden');
       document.getElementById('dashCardVenue').classList.add('hidden');
       document.getElementById('dashCardPelatih').classList.add('hidden');
+      ['bizAtletCard', 'bizTimCard', 'bizVenueCard', 'bizPelatihCard'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
 
       const badgeText = document.getElementById('dashHeroBadgeText');
       const headerUser = document.getElementById('headerUserName');
 
       if (role === 'atlet') {
         document.getElementById('dashCardAtlet').classList.remove('hidden');
+        const bc = document.getElementById('bizAtletCard'); if (bc) bc.classList.remove('hidden');
         badgeText.textContent = 'PORTAL ATLET';
         headerUser.textContent = 'V4ND4L (Atlet)';
       } else if (role === 'tim') {
         document.getElementById('dashCardTim').classList.remove('hidden');
+        const bc = document.getElementById('bizTimCard'); if (bc) bc.classList.remove('hidden');
         badgeText.textContent = 'PORTAL TIM';
         headerUser.textContent = 'Minang Pride (Tim)';
       } else if (role === 'venue') {
         document.getElementById('dashCardVenue').classList.remove('hidden');
+        const bc = document.getElementById('bizVenueCard'); if (bc) bc.classList.remove('hidden');
         badgeText.textContent = 'PORTAL VENUE';
         headerUser.textContent = 'Minang Cyber (Venue)';
       } else if (role === 'pelatih') {
         document.getElementById('dashCardPelatih').classList.remove('hidden');
+        const bc = document.getElementById('bizPelatihCard'); if (bc) bc.classList.remove('hidden');
         badgeText.textContent = 'PORTAL PELATIH';
         headerUser.textContent = 'Coach Arief (Pelatih)';
       }

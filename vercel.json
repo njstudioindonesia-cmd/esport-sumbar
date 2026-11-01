@@ -4,6 +4,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/bisnis",
+      "destination": "/bisnis.html"
+    },
+    {
       "source": "/pengajuan-lisensi",
       "destination": "/pengajuan-lisensi.html"
     },

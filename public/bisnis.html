@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F3F4F8]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Pusat Bursa & Bisnis Ekosistem – ESPORT SUMBAR</title>
+  <meta name="description" content="Pusat transaksi bisnis resmi ekosistem esport: bursa transfer atlet, sewa bootcamp venue, jasa coaching pelatih, dan turnamen berhadiah resmi ESPORT SUMBAR." />
+
+  <!-- Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FDF2F2',
+              100: '#FDE8E8',
+              500: '#E00000',
+              600: '#CC0000',
+              700: '#B30000',
+              800: '#8A0000'
+            },
+            surface: {
+              card: '#FFFFFF',
+              bg: '#F5F6FA',
+              dark: '#1A1D26',
+              muted: '#717684'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body { background-color: #EDEEF2; color: #1A1D26; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .tap-action { transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.12s ease; user-select: none; }
+    .tap-action:active { transform: scale(0.96); }
+    .app-card {
+      background: #FFFFFF;
+      box-shadow: 0 4px 20px -2px rgba(24, 39, 75, 0.05), 0 2px 6px -1px rgba(24, 39, 75, 0.02);
+      border: 1px solid rgba(230, 232, 240, 0.8);
+    }
+    .safe-bottom { padding-bottom: max(5.5rem, calc(4.5rem + env(safe-area-inset-bottom))); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-brand-600 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- NATIVE MOBILE APP SHELL                                        -->
+  <!-- ============================================================== -->
+  <div class="w-full max-w-md min-h-screen bg-[#F8F9FC] sm:border-x sm:border-gray-200/80 sm:shadow-2xl relative flex flex-col justify-start">
+
+    <!-- 1. TOP APP BAR (HEADER) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200/70 flex items-center justify-center text-surface-dark tap-action" aria-label="Kembali ke Beranda">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <div class="text-xs font-black text-surface-dark tracking-tight leading-none">Bursa & Bisnis Ekosistem</div>
+          <div class="text-[10px] text-brand-600 font-bold uppercase tracking-wider mt-0.5">ESPORT SUMBAR</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/70">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Bursa Aktif</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- SCROLLABLE BODY -->
+    <main class="flex-1 px-4 py-4 space-y-4 safe-bottom">
+
+      <!-- HERO OVERVIEW CARD -->
+      <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-red-50/40 relative overflow-hidden">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-600"></span>
+            <span class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">Pasar Digital Terhubung</span>
+          </div>
+          <span class="text-[10px] font-bold text-surface-muted">19 Kab & Kota</span>
+        </div>
+        <h1 class="text-lg font-black text-surface-dark tracking-tight mt-1">
+          Pusat Transaksi & Monetisasi Esport Sumatera Barat
+        </h1>
+        <p class="text-xs text-surface-muted mt-1 leading-relaxed">
+          Platform transaksi komersial resmi menghubungkan atlet bebas transfer, tim kompetitif, arena gaming tersertifikasi, dan pelatih berlisensi.
+        </p>
+
+        <!-- Financial Summary Grid -->
+        <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
+          <div class="p-2.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+            <div class="text-[10px] text-surface-muted font-medium">Bursa Transfer</div>
+            <div class="text-sm font-black text-brand-600 mt-0.5">48 Atlet</div>
+            <div class="text-[9px] text-surface-muted mt-0.5">Tersedia LFT</div>
+          </div>
+          <div class="p-2.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+            <div class="text-[10px] text-surface-muted font-medium">Fasilitas Arena</div>
+            <div class="text-sm font-black text-sky-600 mt-0.5">14 Venue</div>
+            <div class="text-[9px] text-surface-muted mt-0.5">Siap Bootcamp</div>
+          </div>
+          <div class="p-2.5 rounded-2xl bg-gray-50/80 border border-gray-100">
+            <div class="text-[10px] text-surface-muted font-medium">Jasa Pelatih</div>
+            <div class="text-sm font-black text-amber-600 mt-0.5">18 Coach</div>
+            <div class="text-[9px] text-surface-muted mt-0.5">Lisensi A/B</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE CATEGORY TABS -->
+      <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-white border border-gray-200/80 shadow-sm overflow-x-auto no-scrollbar">
+        <button type="button" onclick="switchBisnisTab('transfer')" id="btnTabTransfer" class="px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="users" class="w-3.5 h-3.5"></i>
+          <span>Bursa Transfer Atlet</span>
+        </button>
+        <button type="button" onclick="switchBisnisTab('bootcamp')" id="btnTabBootcamp" class="px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action text-surface-muted hover:text-surface-dark flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
+          <span>Sewa Venue Bootcamp</span>
+        </button>
+        <button type="button" onclick="switchBisnisTab('coaching')" id="btnTabCoaching" class="px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action text-surface-muted hover:text-surface-dark flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+          <span>Jasa Coaching</span>
+        </button>
+        <button type="button" onclick="switchBisnisTab('turnamen')" id="btnTabTurnamen" class="px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action text-surface-muted hover:text-surface-dark flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+          <span>Prize Pool Turnamen</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: BURSA TRANSFER ATLET -->
+      <div id="sectionTransfer" class="space-y-3">
+        <div class="flex items-center justify-between px-1">
+          <div class="text-xs font-bold text-surface-dark uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-600"></i>
+            <span>Daftar Talenta Bebas Transfer (LFT)</span>
+          </div>
+          <span class="text-[11px] text-surface-muted">Market Value Terverifikasi</span>
+        </div>
+
+        <!-- Atlet Card 1: V4ND4L -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 hover:border-brand-200 transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200">
+                <img src="/images/athlete-v4nd4l.jpg" alt="V4ND4L" class="w-full h-full object-cover" onerror="this.src='/images/esport-sumbar-logo.png'" />
+                <div class="absolute bottom-0 inset-x-0 bg-brand-600 text-white text-[9px] font-black text-center py-0.2">96</div>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm font-black text-surface-dark">V4ND4L</span>
+                  <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">✓</span>
+                </div>
+                <div class="text-[11px] text-surface-muted">Muhammad Rayden • Kota Padang</div>
+                <div class="text-[10px] font-bold text-brand-700 mt-0.5">VALORANT // Duelist (IGL)</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Market Value</div>
+              <div class="text-xs font-black text-emerald-600">Rp 3.500.000<span class="text-[9px] text-surface-muted font-normal">/bln</span></div>
+              <span class="inline-block mt-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200/60">Free Agent</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+            <div class="text-[10px] text-surface-muted">
+              Winrate: <span class="font-bold text-surface-dark">74.2%</span> • Turnamen: <span class="font-bold text-surface-dark">18 Menang</span>
+            </div>
+            <button type="button" onclick="openOfferModal('V4ND4L', 'Muhammad Rayden', '3.500.000')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm">
+              <i data-lucide="file-signature" class="w-3.5 h-3.5"></i>
+              <span>Ajukan Kontrak</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Atlet Card 2: FAJAR7 -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 hover:border-brand-200 transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200">
+                <img src="/images/athlete-fajar.jpg" alt="FAJAR7" class="w-full h-full object-cover" onerror="this.src='/images/esport-sumbar-logo.png'" />
+                <div class="absolute bottom-0 inset-x-0 bg-brand-600 text-white text-[9px] font-black text-center py-0.2">92</div>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm font-black text-surface-dark">FAJAR7</span>
+                  <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">✓</span>
+                </div>
+                <div class="text-[11px] text-surface-muted">Fajar Pratama • Kota Padang</div>
+                <div class="text-[10px] font-bold text-sky-700 mt-0.5">Mobile Legends // Jungler Assassin</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Market Value</div>
+              <div class="text-xs font-black text-emerald-600">Rp 2.800.000<span class="text-[9px] text-surface-muted font-normal">/bln</span></div>
+              <span class="inline-block mt-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200/60">Free Agent</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+            <div class="text-[10px] text-surface-muted">
+              Winrate: <span class="font-bold text-surface-dark">69.8%</span> • KDA: <span class="font-bold text-surface-dark">5.4</span>
+            </div>
+            <button type="button" onclick="openOfferModal('FAJAR7', 'Fajar Pratama', '2.800.000')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm">
+              <i data-lucide="file-signature" class="w-3.5 h-3.5"></i>
+              <span>Ajukan Kontrak</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Atlet Card 3: KYROX -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 hover:border-brand-200 transition-all">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200">
+                <img src="/images/athlete-kyrox.jpg" alt="KYROX" class="w-full h-full object-cover" onerror="this.src='/images/esport-sumbar-logo.png'" />
+                <div class="absolute bottom-0 inset-x-0 bg-brand-600 text-white text-[9px] font-black text-center py-0.2">93</div>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-sm font-black text-surface-dark">KYROX</span>
+                  <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[8px] font-bold">✓</span>
+                </div>
+                <div class="text-[11px] text-surface-muted">Rizky Alamsyah • Kota Bukittinggi</div>
+                <div class="text-[10px] font-bold text-indigo-700 mt-0.5">Mobile Legends // Midlaner / Flex</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[9px] text-surface-muted uppercase font-bold">Market Value</div>
+              <div class="text-xs font-black text-emerald-600">Rp 3.100.000<span class="text-[9px] text-surface-muted font-normal">/bln</span></div>
+              <span class="inline-block mt-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200/60">Free Agent</span>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+            <div class="text-[10px] text-surface-muted">
+              Winrate: <span class="font-bold text-surface-dark">71.5%</span> • Roaming: <span class="font-bold text-surface-dark">High Impact</span>
+            </div>
+            <button type="button" onclick="openOfferModal('KYROX', 'Rizky Alamsyah', '3.100.000')" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm">
+              <i data-lucide="file-signature" class="w-3.5 h-3.5"></i>
+              <span>Ajukan Kontrak</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: SEWA VENUE BOOTCAMP -->
+      <div id="sectionBootcamp" class="space-y-3 hidden">
+        <div class="flex items-center justify-between px-1">
+          <div class="text-xs font-bold text-surface-dark uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-sky-600"></i>
+            <span>Gaming Arena & Bootcamp Terakreditasi</span>
+          </div>
+          <span class="text-[11px] text-surface-muted">Booking Resmi E-Pass</span>
+        </div>
+
+        <!-- Venue Card 1: Minang Cyber Lounge -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-sky-50 text-sky-700 border border-sky-200/60">PADANG BARAT</span>
+              <div class="text-base font-black text-surface-dark mt-1">Minang Cyber Lounge</div>
+              <div class="text-xs text-surface-muted">Jl. Khatib Sulaiman No. 42, Kota Padang</div>
+              <div class="text-[11px] text-sky-700 font-mono mt-1">30 Rig RTX 4070 • 240Hz • Dedicated Fiber</div>
+            </div>
+            <div class="text-right">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Siap Booking
+              </span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-gray-100">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[10px] text-surface-muted font-medium">Paket VIP PC Satuan</div>
+              <div class="text-xs font-bold text-surface-dark mt-0.5">Rp 15.000 / Jam</div>
+              <button type="button" onclick="bookVenuePass('Minang Cyber Lounge', 'VIP PC 3 Jam (RTX 4070)', 45000)" class="w-full mt-2 py-1.5 rounded-xl bg-gray-900 text-white text-[11px] font-bold tap-action">
+                Sewa Slot VIP
+              </button>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-brand-50/60 border border-brand-100">
+              <div class="text-[10px] text-brand-700 font-bold">Paket Bootcamp Tim 3 Hari</div>
+              <div class="text-xs font-black text-brand-600 mt-0.5">Rp 1.200.000 / Tim</div>
+              <button type="button" onclick="bookVenuePass('Minang Cyber Lounge', 'Bootcamp Suite 3 Hari (5 PC)', 1200000)" class="w-full mt-2 py-1.5 rounded-xl bg-brand-600 text-white text-[11px] font-bold tap-action shadow-sm">
+                Sewa Bootcamp Tim
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Venue Card 2: Bukittinggi Gaming Hub -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-sky-50 text-sky-700 border border-sky-200/60">BUKITTINGGI PUSAT</span>
+              <div class="text-base font-black text-surface-dark mt-1">Bukittinggi Gaming Hub</div>
+              <div class="text-xs text-surface-muted">Jl. Sudirman No. 18, Jam Gadang Area</div>
+              <div class="text-[11px] text-sky-700 font-mono mt-1">20 Rig RTX 4060 Ti • 180Hz • Soundproof Booth</div>
+            </div>
+            <div class="text-right">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Siap Booking
+              </span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-gray-100">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[10px] text-surface-muted font-medium">Paket VIP PC Satuan</div>
+              <div class="text-xs font-bold text-surface-dark mt-0.5">Rp 12.000 / Jam</div>
+              <button type="button" onclick="bookVenuePass('Bukittinggi Gaming Hub', 'VIP PC 3 Jam (RTX 4060)', 36000)" class="w-full mt-2 py-1.5 rounded-xl bg-gray-900 text-white text-[11px] font-bold tap-action">
+                Sewa Slot VIP
+              </button>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-brand-50/60 border border-brand-100">
+              <div class="text-[10px] text-brand-700 font-bold">Paket Bootcamp Tim 3 Hari</div>
+              <div class="text-xs font-black text-brand-600 mt-0.5">Rp 950.000 / Tim</div>
+              <button type="button" onclick="bookVenuePass('Bukittinggi Gaming Hub', 'Bootcamp Suite 3 Hari (5 PC)', 950000)" class="w-full mt-2 py-1.5 rounded-xl bg-brand-600 text-white text-[11px] font-bold tap-action shadow-sm">
+                Sewa Bootcamp Tim
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: JASA COACHING PELATIH -->
+      <div id="sectionCoaching" class="space-y-3 hidden">
+        <div class="flex items-center justify-between px-1">
+          <div class="text-xs font-bold text-surface-dark uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span>Pelatih Berlisensi & Playbook Taktis</span>
+          </div>
+          <span class="text-[11px] text-surface-muted">Sertifikasi Grade A/B</span>
+        </div>
+
+        <!-- Coach Card: Coach Arief -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-black text-lg border border-amber-200">
+                CA
+              </div>
+              <div>
+                <div class="text-sm font-black text-surface-dark">Coach Arief Rahman</div>
+                <div class="text-[11px] text-surface-muted">Lisensi Grade A PBESI • Spesialis Macro & VOD</div>
+                <div class="text-[10px] font-bold text-amber-700 mt-0.5">Rating: 4.9/5.0 (34 Ulasan)</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60">Open Sesi</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-gray-100">
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[10px] text-surface-muted font-medium">Analisis Replay VOD (1 Jam)</div>
+              <div class="text-xs font-bold text-surface-dark mt-0.5">Rp 100.000 / sesi</div>
+              <button type="button" onclick="bookCoachingSession('Coach Arief Rahman', 'Analisis Replay VOD', 100000)" class="w-full mt-2 py-1.5 rounded-xl bg-amber-600 text-white text-[11px] font-bold tap-action shadow-sm">
+                Pesan Sesi VOD
+              </button>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
+              <div class="text-[10px] text-surface-muted font-medium">Kontrak Pelatih Tim (Kejurda)</div>
+              <div class="text-xs font-bold text-surface-dark mt-0.5">Rp 2.500.000 / event</div>
+              <button type="button" onclick="bookCoachingSession('Coach Arief Rahman', 'Kontrak Pelatih Tim Kejurda', 2500000)" class="w-full mt-2 py-1.5 rounded-xl bg-gray-900 text-white text-[11px] font-bold tap-action">
+                Kontrak Pelatih Tim
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playbook Digital Catalog -->
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 space-y-2">
+          <div class="text-xs font-bold text-surface-dark uppercase tracking-wider flex items-center justify-between">
+            <span>Playbook Taktis Digital Resmi</span>
+            <span class="text-[10px] text-brand-600">Terbitan Pelatih</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-surface-dark">Meta Drafting MLBB S14 Sumbar</div>
+              <div class="text-[10px] text-surface-muted">PDF Analisis 24 Halaman • 27x Terunduh</div>
+            </div>
+            <div class="text-right">
+              <div class="text-xs font-black text-brand-600">Rp 49.000</div>
+              <button type="button" onclick="alert('Pembelian Playbook Berhasil! Tautan unduhan materi taktis telah dikirim ke akun Anda.')" class="mt-1 px-3 py-1 rounded-lg bg-brand-600 text-white text-[10px] font-bold tap-action">Beli Modul</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: PRIZE POOL TURNAMEN -->
+      <div id="sectionTurnamen" class="space-y-3 hidden">
+        <div class="flex items-center justify-between px-1">
+          <div class="text-xs font-bold text-surface-dark uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span>Turnamen Resmi & Slot Kejuaraan</span>
+          </div>
+          <span class="text-[11px] text-surface-muted">Hadiah Bergaransi PBESI</span>
+        </div>
+
+        <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200/60">KEJURDA 2026</span>
+              <div class="text-base font-black text-surface-dark mt-1">Piala Gubernur ESPORT SUMBAR 2026</div>
+              <div class="text-xs text-surface-muted">Kualifikasi 19 Daerah Menuju Porprov & Pra-PON</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[9px] text-surface-muted font-bold">TOTAL PRIZE POOL</div>
+              <div class="text-sm font-black text-emerald-600">Rp 50.000.000</div>
+            </div>
+          </div>
+          <div class="pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-surface-muted">Biaya Slot: <span class="font-bold text-emerald-600">GRATIS (Disubsidi ESI)</span></span>
+            <button type="button" onclick="alert('Pendaftaran Tim Anda untuk Piala Gubernur 2026 telah diterima! Silakan pantau tab Akun untuk jadwal pertandingan.')" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold tap-action shadow-sm">
+              Daftarkan Tim Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM NOTIFICATION CARD -->
+      <div class="app-card rounded-3xl p-4 bg-gradient-to-r from-red-600 to-brand-700 text-white shadow-lg">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+            <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+          </div>
+          <div class="flex-1">
+            <div class="text-xs font-black tracking-tight">Perjanjian Kontrak & Transaksi Sah</div>
+            <div class="text-[11px] text-white/80 leading-relaxed mt-0.5">
+              Seluruh transaksi kontrak pemain, sewa venue, dan jasa pelatih dilindungi oleh regulasi Provider ESPORT SUMBAR.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER COPYRIGHT -->
+    <footer class="py-4 px-4 text-center border-t border-gray-200/60 bg-white">
+      <div class="text-[11px] font-bold text-surface-dark">ESPORT SUMBAR – Provider Ekosistem Resmi</div>
+      <div class="text-[10px] text-surface-muted mt-0.5">
+        Hak Cipta © 2026 ESPORT SUMBAR. Seluruh hak cipta dilindungi undang-undang. Berkolaborasi dengan ESI Sumatera Barat.
+      </div>
+    </footer>
+
+    <!-- ============================================================== -->
+    <!-- FIXED BOTTOM NAVIGATION BAR (UNIFIED 5-TAB BAR)                -->
+    <!-- ============================================================== -->
+    <nav class="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+      <div class="max-w-md mx-auto h-16 px-2 grid grid-cols-5 items-end relative pb-2">
+        
+        <!-- 1. Beranda -->
+        <a href="/" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+          <i data-lucide="home" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+          <span class="text-[10px] font-medium leading-none">Beranda</span>
+        </a>
+
+        <!-- 2. Paspor -->
+        <a href="/paspor" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+          <i data-lucide="id-card" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+          <span class="text-[10px] font-medium leading-none">Paspor</span>
+        </a>
+
+        <!-- 3. Bisnis (Center Elevated Button - Active on /bisnis) -->
+        <a href="/bisnis" class="flex flex-col items-center justify-end h-full pb-1 tap-action relative group">
+          <div class="absolute -top-5 w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 shadow-[0_6px_16px_rgba(224,0,0,0.35)] text-white flex items-center justify-center border-4 border-white transition-transform active:scale-95">
+            <i data-lucide="plus" class="w-6 h-6 stroke-[2.8]"></i>
+          </div>
+          <span class="text-[10px] text-brand-600 font-bold leading-none">Bisnis</span>
+        </a>
+
+        <!-- 4. Wilayah -->
+        <a href="/wilayah" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+          <i data-lucide="map" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+          <span class="text-[10px] font-medium leading-none">Wilayah</span>
+        </a>
+
+        <!-- 5. Akun -->
+        <a href="/profile" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+          <i data-lucide="user" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+          <span class="text-[10px] font-medium leading-none">Akun</span>
+        </a>
+
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- MODAL: AJUKAN KONTRAK ATLET -->
+  <div id="modalOffer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-3xl p-5 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+        <div>
+          <div class="text-sm font-black text-surface-dark">Ajukan Penawaran Kontrak</div>
+          <div class="text-[11px] text-surface-muted" id="offerTargetSubtitle">Kepada Atlet LFT</div>
+        </div>
+        <button type="button" onclick="closeOfferModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action">
+          ✕
+        </button>
+      </div>
+
+      <form onsubmit="submitOfferForm(event)" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-surface-dark mb-1">Klub Pengaju Kontrak</label>
+          <input type="text" id="offerFromTeam" value="Minang Pride Esports" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-bold text-surface-dark bg-gray-50" readonly />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-surface-dark mb-1">Gaji Pokok Bulanan (IDR)</label>
+          <input type="text" id="offerSalary" value="Rp 4.200.000" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-surface-dark focus:border-brand-600 focus:outline-none" required />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-surface-dark mb-1">Bonus Penandatanganan (Signing Bonus)</label>
+          <input type="text" id="offerBonus" value="Rp 1.500.000" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-surface-dark focus:border-brand-600 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-surface-dark mb-1">Durasi Kontrak</label>
+          <select id="offerDuration" class="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-surface-dark focus:border-brand-600 focus:outline-none">
+            <option value="6 Bulan">6 Bulan (1 Musim Kompetisi)</option>
+            <option value="1 Tahun">1 Tahun Penuh</option>
+            <option value="Event Only (Kejurda)">Event Kejurda Saja</option>
+          </select>
+        </div>
+
+        <div class="pt-2 flex items-center gap-2">
+          <button type="submit" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs tap-action shadow-md">
+            Kirimkan Kontrak Resmi
+          </button>
+          <button type="button" onclick="closeOfferModal()" class="px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-surface-dark font-bold text-xs tap-action">
+            Batal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Tab Switching
+    function switchBisnisTab(tabName) {
+      const tabs = ['transfer', 'bootcamp', 'coaching', 'turnamen'];
+      tabs.forEach(t => {
+        const sec = document.getElementById('section' + t.charAt(0).toUpperCase() + t.slice(1));
+        const btn = document.getElementById('btnTab' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (t === tabName) {
+          if (sec) sec.classList.remove('hidden');
+          if (btn) {
+            btn.className = "px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap";
+          }
+        } else {
+          if (sec) sec.classList.add('hidden');
+          if (btn) {
+            btn.className = "px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action text-surface-muted hover:text-surface-dark flex items-center gap-1.5 whitespace-nowrap";
+          }
+        }
+      });
+      lucide.createIcons();
+    }
+
+    // Modal Offer Controller
+    let currentTargetAtlet = '';
+    function openOfferModal(ign, nama, val) {
+      currentTargetAtlet = ign;
+      document.getElementById('offerTargetSubtitle').textContent = 'Kepada Atlet: ' + ign + ' (' + nama + ')';
+      document.getElementById('modalOffer').classList.remove('hidden');
+    }
+    function closeOfferModal() {
+      document.getElementById('modalOffer').classList.add('hidden');
+    }
+
+    function submitOfferForm(e) {
+      e.preventDefault();
+      const team = document.getElementById('offerFromTeam').value;
+      const salary = document.getElementById('offerSalary').value;
+      const bonus = document.getElementById('offerBonus').value;
+      const duration = document.getElementById('offerDuration').value;
+
+      // Save to state
+      try {
+        let raw = localStorage.getItem('esport_sumbar_ecosystem_state');
+        let state = raw ? JSON.parse(raw) : {};
+        if (!state.contractOffers) state.contractOffers = [];
+        state.contractOffers.unshift({
+          id: 'off-' + Date.now(),
+          fromTeam: team,
+          toAtlet: currentTargetAtlet,
+          salary: salary,
+          bonus: bonus,
+          duration: duration,
+          date: 'Baru saja',
+          status: 'pending'
+        });
+        localStorage.setItem('esport_sumbar_ecosystem_state', JSON.stringify(state));
+      } catch (err) {}
+
+      closeOfferModal();
+      alert('Tawaran kontrak resmi berhasil dikirimkan ke ' + currentTargetAtlet + '! Atlet dapat meninjau dan menerima kontrak di halaman beranda / profil mereka.');
+    }
+
+    function bookVenuePass(venueName, packageName, price) {
+      try {
+        let raw = localStorage.getItem('esport_sumbar_ecosystem_state');
+        let state = raw ? JSON.parse(raw) : {};
+        if (!state.venueBookings) state.venueBookings = [];
+        state.venueBookings.unshift({
+          id: 'vb-' + Date.now(),
+          venueName: venueName,
+          package: packageName,
+          price: price,
+          date: 'Hari ini',
+          status: 'confirmed',
+          ePass: 'PASS-' + Math.floor(1000 + Math.random() * 9000)
+        });
+        localStorage.setItem('esport_sumbar_ecosystem_state', JSON.stringify(state));
+      } catch (err) {}
+      alert('Reservasi Fasilitas ' + venueName + ' Berhasil! E-Pass akses telah diterbitkan dan tersimpan di ekosistem akun Anda.');
+    }
+
+    function bookCoachingSession(coachName, sessionType, fee) {
+      try {
+        let raw = localStorage.getItem('esport_sumbar_ecosystem_state');
+        let state = raw ? JSON.parse(raw) : {};
+        if (!state.coachingBookings) state.coachingBookings = [];
+        state.coachingBookings.unshift({
+          id: 'cb-' + Date.now(),
+          coachName: coachName,
+          sessionType: sessionType,
+          fee: fee,
+          date: 'Hari ini',
+          status: 'confirmed',
+          meetLink: 'https://discord.gg/esport-sumbar-coaching'
+        });
+        localStorage.setItem('esport_sumbar_ecosystem_state', JSON.stringify(state));
+      } catch (err) {}
+      alert('Sesi Bimbingan bersama ' + coachName + ' Berhasil Dipesan! Akses ruang taktis telah aktif di dashboard akun Anda.');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
