@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-[#0A0B0E]">
+<html lang="id" class="h-full bg-[#07080A]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Pilih Identitas Ekosistem – ESPORT SUMBAR</title>
+  <title>Pilih Paspor Resmi – ESPORT SUMBAR</title>
   <meta name="description" content="Pilih lisensi digital resmi Pengprov ESI Sumatera Barat: Paspor Atlet, Pelatih, Klub, Komunitas, dan Venue." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -16,202 +16,282 @@
   <style>
     * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     body {
-      background-color: #0A0B0E;
-      color: #F3F4F6;
+      background-color: #07080A;
+      color: #FFFFFF;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
     }
-    .card-preview {
-      box-shadow: 0 16px 32px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    
+    .vault-card {
+      position: relative;
+      background: linear-gradient(160deg, #161822 0%, #0C0D14 100%);
+      border-radius: 28px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .card-preview:active {
-      transform: scale(0.975);
+    .vault-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 29px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(214,22,34,0.5) 45%, rgba(217,119,6,0.3) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active { transform: scale(0.97); }
     .safe-bottom { padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-[#D61622] selection:text-white">
 
-  <!-- ============================================================== -->
-  <!-- COMPACT MOBILE IDENTITY DECK (SINGLE SCREEN FIT)               -->
-  <!-- ============================================================== -->
-  <div class="w-full max-w-md min-h-screen h-screen flex flex-col justify-between bg-[#0F1015] sm:border-x sm:border-white/10 sm:shadow-2xl relative px-4 py-3">
+  <div class="w-full max-w-md min-h-screen h-screen flex flex-col justify-between bg-[#07080A] sm:border-x sm:border-white/10 relative px-4 py-3">
 
-    <!-- 1. APP HEADER -->
-    <header class="flex items-center justify-between pt-1 pb-2">
-      <a href="/" class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/80 transition-colors" aria-label="Kembali ke Beranda">
+    <!-- 1. MINIMALIST TOP NAV -->
+    <header class="flex items-center justify-between pt-1 pb-1">
+      <a href="/" class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/80 tap-action">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
       </a>
 
       <div class="flex items-center gap-2">
         <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-6 h-6 object-contain" />
-        <span class="font-bold text-sm tracking-wide text-white">
+        <span class="font-extrabold text-sm tracking-wide text-white">
           ESPORT <span class="text-[#D61622]">SUMBAR</span>
         </span>
       </div>
 
-      <a href="/login" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-xs font-semibold text-white/80 flex items-center gap-1.5 transition-colors">
+      <a href="/login" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-xs font-semibold text-white/80 flex items-center gap-1.5 tap-action">
         <span>Masuk</span>
       </a>
     </header>
 
-    <!-- 2. MAIN SECTION (COMPACT IDENTITY DECK) -->
-    <main class="flex-1 flex flex-col justify-center py-2">
+    <!-- 2. CARD VAULT SHOWCASE -->
+    <main class="flex-1 flex flex-col justify-center items-center py-1">
       
       <!-- Headline -->
-      <div class="mb-3 px-1">
-        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#D61622]/15 text-[#D61622] text-[10px] font-bold tracking-wider uppercase mb-1">
+      <div class="w-full text-center mb-2.5">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D61622]/15 border border-[#D61622]/30 text-[#D61622] text-[10px] font-mono font-bold tracking-widest uppercase mb-1">
           <span class="w-1.5 h-1.5 rounded-full bg-[#D61622] animate-pulse"></span>
-          IDENTITAS RESMI PBESI
+          DIGITAL IDENTITY VAULT
         </div>
-        <h1 class="text-2xl font-extrabold text-white tracking-tight">Pilih Lisensi Digital</h1>
-        <p class="text-xs text-white/50 mt-0.5">Pilih kartu identitas ekosistem yang ingin Anda terbitkan.</p>
+        <h1 class="text-2xl font-black text-white tracking-tight">Pilih Lisensi Resmi</h1>
+        <p class="text-xs text-white/50 mt-0.5">Pilih kartu ekosistem yang ingin Anda terbitkan.</p>
       </div>
 
-      <!-- 5 SLEEK IDENTITY CARDS -->
-      <div class="space-y-2">
-
-        <!-- 01. PASPOR ATLET (HERO) -->
-        <a href="/daftar-player" class="card-preview group block p-3.5 rounded-2xl bg-gradient-to-r from-[#1A1C27] to-[#12131A] border border-white/10 hover:border-amber-400/50 relative overflow-hidden">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400/20 to-black border border-amber-400/30 text-amber-400 flex items-center justify-center shrink-0">
-                <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+      <!-- INTERACTIVE CAROUSEL STAGE -->
+      <div class="w-full relative px-2 my-auto">
+        
+        <!-- CARD PREVIEW -->
+        <div id="activeCardBox" class="vault-card w-full aspect-[1/1.36] max-w-[285px] mx-auto p-4 flex flex-col justify-between relative overflow-hidden select-none">
+          
+          <!-- Top Row: PBESI Crest + Badge -->
+          <div class="flex items-center justify-between z-10 relative">
+            <div class="flex items-center gap-1.5">
+              <div class="w-7 h-7 rounded-lg bg-black/60 border border-white/15 p-1 flex items-center justify-center">
+                <img src="/images/esport-sumbar-logo.png" class="w-full h-full object-contain" />
               </div>
               <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-extrabold text-white group-hover:text-amber-400 transition-colors">Paspor Digital Atlet</span>
-                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-amber-400/10 text-amber-400 border border-amber-400/20">3D CARD</span>
-                </div>
-                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
-                  <span>Player / Atlet</span>
-                  <span>•</span>
-                  <span class="text-amber-300/80">Lisensi & Bursa LFT</span>
-                </div>
+                <div class="text-[8.5px] font-mono font-black tracking-widest uppercase text-white/90 leading-none">PENGPROV PBESI</div>
+                <div class="text-[7px] font-mono tracking-widest uppercase text-[#D61622] font-black">SUMATERA BARAT</div>
               </div>
             </div>
-            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </div>
-          </div>
-        </a>
 
-        <!-- 02. LISENSI PELATIH -->
-        <a href="/daftar-pelatih" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-sky-400/50 relative overflow-hidden">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-400/20 text-sky-400 flex items-center justify-center shrink-0">
-                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-extrabold text-white group-hover:text-sky-400 transition-colors">Sertifikasi Pelatih</span>
-                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-sky-400/10 text-sky-400 border border-sky-400/20">LISENSI</span>
-                </div>
-                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
-                  <span>Pelatih / Coach</span>
-                  <span>•</span>
-                  <span>Binaan Pelatda</span>
-                </div>
-              </div>
-            </div>
-            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            <!-- Card Category Pill -->
+            <div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/15">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span id="cardBadgeText" class="text-[8.5px] font-mono font-bold text-amber-300 uppercase tracking-wider">PASPOR 3D</span>
             </div>
           </div>
-        </a>
 
-        <!-- 03. CHARTER KLUB -->
-        <a href="/daftar-team" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-emerald-400/50 relative overflow-hidden">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-400/20 text-emerald-400 flex items-center justify-center shrink-0">
-                <i data-lucide="shield" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-extrabold text-white group-hover:text-emerald-400 transition-colors">Charter Klub Esports</span>
-                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">ROSTER</span>
-                </div>
-                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
-                  <span>Team / Klub</span>
-                  <span>•</span>
-                  <span>Hak Kejurda Resmi</span>
+          <!-- Middle: Hero Athlete Portrait -->
+          <div class="my-auto z-10 relative flex flex-col items-center">
+            
+            <div class="relative mb-2">
+              <div class="w-20 h-20 rounded-2xl p-[2px] bg-gradient-to-tr from-amber-400 via-[#D61622] to-white/40 shadow-xl shadow-amber-500/10">
+                <div class="w-full h-full rounded-[14px] bg-[#12131C] overflow-hidden flex items-center justify-center">
+                  <img id="cardHeroImg" src="/images/athlete-v4nd4l.jpg" alt="Preview" class="w-full h-full object-cover" />
                 </div>
               </div>
+              <div id="cardOvrBadge" class="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-md bg-black/80 border border-white/20 text-[8px] font-mono font-bold text-amber-400">
+                OVR 95
+              </div>
             </div>
-            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </div>
-          </div>
-        </a>
 
-        <!-- 04. AFILIASI KOMUNITAS -->
-        <a href="/daftar-komunitas" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-purple-400/50 relative overflow-hidden">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-400/20 text-purple-400 flex items-center justify-center shrink-0">
-                <i data-lucide="users" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-extrabold text-white group-hover:text-purple-400 transition-colors">Afiliasi Komunitas</span>
-                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-purple-400/10 text-purple-400 border border-purple-400/20">19 PENGCAB</span>
-                </div>
-                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
-                  <span>Komunitas Game</span>
-                  <span>•</span>
-                  <span>Izin Rekomendasi</span>
-                </div>
-              </div>
+            <!-- Header -->
+            <h2 id="cardHeroTitle" class="text-xl font-black text-white tracking-tight text-center leading-none">
+              V4ND4L
+            </h2>
+            <div id="cardHeroSub" class="text-xs text-white/60 font-medium text-center mt-0.5">
+              Muhammad Rayden
             </div>
-            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </div>
-          </div>
-        </a>
 
-        <!-- 05. AKREDITASI VENUE -->
-        <a href="/daftar-venue" class="card-preview group block p-3 rounded-2xl bg-[#14161F] border border-white/10 hover:border-rose-400/50 relative overflow-hidden">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-400/20 text-rose-400 flex items-center justify-center shrink-0">
-                <i data-lucide="map-pin" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-extrabold text-white group-hover:text-rose-400 transition-colors">Akreditasi Arena Game</span>
-                  <span class="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-rose-400/10 text-rose-400 border border-rose-400/20">VENUE</span>
-                </div>
-                <div class="text-[11px] text-white/50 flex items-center gap-2 mt-0.5 font-mono">
-                  <span>Game Center</span>
-                  <span>•</span>
-                  <span>Sertifikasi Turnamen</span>
-                </div>
-              </div>
+            <!-- Game & Role Pill -->
+            <div id="cardHeroMeta" class="mt-1.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-full bg-[#D61622]/20 border border-[#D61622]/40 text-[#D61622] text-[8.5px] font-mono font-bold">
+                MOBILE LEGENDS
+              </span>
+              <span class="text-[8.5px] font-mono text-white/50">ROAMER // PADANG</span>
             </div>
-            <div class="w-7 h-7 rounded-full bg-white/[0.05] group-hover:bg-[#D61622] group-hover:text-white flex items-center justify-center text-white/40 shrink-0 transition-colors">
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+
+          </div>
+
+          <!-- Bottom: Scannable Security -->
+          <div class="pt-2.5 border-t border-white/[0.08] flex items-center justify-between z-10 relative">
+            <div>
+              <span class="text-[7px] font-mono uppercase text-white/40 block leading-none mb-0.5">NOMOR REGISTRASI</span>
+              <span id="cardHeroId" class="text-[9.5px] font-mono font-bold text-emerald-400">PBESI-SB-2026-VAL-982</span>
+            </div>
+            
+            <div class="flex items-center gap-1 text-[8px] font-mono text-white/50">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span>OFFICIAL SEAL</span>
             </div>
           </div>
-        </a>
+
+        </div>
+
+        <!-- 5 CATEGORY SELECTOR PILLS -->
+        <div class="grid grid-cols-5 gap-1.5 mt-3 px-1">
+          <button type="button" onclick="selectCardRole('player')" id="pill-player" class="py-2 px-1 rounded-xl bg-white text-black text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1 shadow-md">
+            <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+            <span>Atlet</span>
+          </button>
+          <button type="button" onclick="selectCardRole('pelatih')" id="pill-pelatih" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
+            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+            <span>Pelatih</span>
+          </button>
+          <button type="button" onclick="selectCardRole('team')" id="pill-team" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            <span>Klub</span>
+          </button>
+          <button type="button" onclick="selectCardRole('komunitas')" id="pill-komunitas" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>Komunitas</span>
+          </button>
+          <button type="button" onclick="selectCardRole('venue')" id="pill-venue" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <span>Venue</span>
+          </button>
+        </div>
 
       </div>
 
     </main>
 
-    <!-- 3. BOTTOM HELPER -->
-    <footer class="pt-2 pb-1 text-center safe-bottom border-t border-white/[0.06]">
-      <p class="text-xs text-white/50">
-        Sudah memiliki lisensi? <a href="/login" class="font-bold text-[#D61622] hover:underline">Masuk ke Akun Paspor</a>
+    <!-- 3. PRIMARY ACTION & DIRECT LINK -->
+    <footer class="pt-2 pb-1 safe-bottom space-y-1.5">
+      <a 
+        id="btnContinueToForm" 
+        href="/daftar-player" 
+        class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#D61622] to-red-700 hover:from-red-600 hover:to-red-800 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-red-950/60 tap-action"
+      >
+        <span id="btnContinueText">BUAT PASPOR ATLET SEKARANG</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+
+      <p class="text-[11px] text-center text-white/40">
+        Sudah memiliki akun? <a href="/login" class="text-[#D61622] hover:underline font-bold">Masuk di Sini</a>
       </p>
     </footer>
 
   </div>
 
   <script>
+    const CARD_DATA = {
+      player: {
+        badge: 'PASPOR 3D',
+        ovr: 'OVR 95',
+        img: '/images/athlete-v4nd4l.jpg',
+        title: 'V4ND4L',
+        sub: 'Muhammad Rayden',
+        meta: '<span class="px-2 py-0.5 rounded-full bg-[#D61622]/20 border border-[#D61622]/40 text-[#D61622] text-[8.5px] font-mono font-bold">MOBILE LEGENDS</span><span class="text-[8.5px] font-mono text-white/50">ROAMER // PADANG</span>',
+        btnText: 'BUAT PASPOR ATLET SEKARANG',
+        link: '/daftar-player'
+      },
+      pelatih: {
+        badge: 'LISENSI PELATIH',
+        ovr: 'PRO COACH',
+        img: '/images/athlete-pro-player.jpg',
+        title: 'COACH DANIEL',
+        sub: 'Daniel Pratama, S.Or.',
+        meta: '<span class="px-2 py-0.5 rounded-full bg-sky-500/20 border border-sky-500/40 text-sky-400 text-[8.5px] font-mono font-bold">SERTIFIKASI PBESI</span><span class="text-[8.5px] font-mono text-white/50">EXP: 3 TAHUN</span>',
+        btnText: 'DAFTAR LISENSI PELATIH',
+        link: '/daftar-pelatih'
+      },
+      team: {
+        badge: 'CHARTER KLUB',
+        ovr: 'TIER KLUB',
+        img: '/images/esport-sumbar-logo.png',
+        title: 'MINANG PRIDE',
+        sub: 'Official Esports Club',
+        meta: '<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[8.5px] font-mono font-bold">ROSTER RESMI</span><span class="text-[8.5px] font-mono text-white/50">DIVISI UTAMA</span>',
+        btnText: 'DAFTARKAN KLUB / TIM',
+        link: '/daftar-team'
+      },
+      komunitas: {
+        badge: 'AFILIASI PENGCAB',
+        ovr: 'HUB 19',
+        img: '/images/esport-sumbar-logo.png',
+        title: 'MLBB PADANG',
+        sub: 'Komunitas Resmi Daerah',
+        meta: '<span class="px-2 py-0.5 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 text-[8.5px] font-mono font-bold">19 WILAYAH</span><span class="text-[8.5px] font-mono text-white/50">250+ MEMBERS</span>',
+        btnText: 'AFILIASIKAN KOMUNITAS',
+        link: '/daftar-komunitas'
+      },
+      venue: {
+        badge: 'AKREDITASI ARENA',
+        ovr: 'GRADE A',
+        img: '/images/esport-sumbar-logo.png',
+        title: 'TITIK KUMPUL',
+        sub: 'Gaming Arena & Hub',
+        meta: '<span class="px-2 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-400 text-[8.5px] font-mono font-bold">GRADE A ARENA</span><span class="text-[8.5px] font-mono text-white/50">40 SEATS</span>',
+        btnText: 'AKREDITASI VENUE ANDA',
+        link: '/daftar-venue'
+      }
+    };
+
+    function selectCardRole(role) {
+      const data = CARD_DATA[role];
+      if (!data) return;
+
+      ['player', 'pelatih', 'team', 'komunitas', 'venue'].forEach(r => {
+        const btn = document.getElementById('pill-' + r);
+        if (r === role) {
+          btn.className = "py-2 px-1 rounded-xl bg-white text-black text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1 shadow-md";
+        } else {
+          btn.className = "py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1";
+        }
+      });
+
+      const box = document.getElementById('activeCardBox');
+      box.style.transform = 'scale(0.96)';
+      box.style.opacity = '0.7';
+
+      setTimeout(() => {
+        document.getElementById('cardBadgeText').textContent = data.badge;
+        document.getElementById('cardOvrBadge').textContent = data.ovr;
+        document.getElementById('cardHeroImg').src = data.img;
+        document.getElementById('cardHeroTitle').textContent = data.title;
+        document.getElementById('cardHeroSub').textContent = data.sub;
+        document.getElementById('cardHeroMeta').innerHTML = data.meta;
+        document.getElementById('btnContinueText').textContent = data.btnText;
+        document.getElementById('btnContinueToForm').href = data.link;
+
+        box.style.transform = 'scale(1)';
+        box.style.opacity = '1';
+        lucide.createIcons();
+      }, 150);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
     });
