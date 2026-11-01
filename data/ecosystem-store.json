@@ -1,6 +1,6 @@
 {
   "version": "2.4.0",
-  "lastUpdated": "2026-10-31T12:51:35.526Z",
+  "lastUpdated": "2026-11-01T06:31:36.643Z",
   "users": [
     {
       "id": "usr-super",
@@ -343,6 +343,19 @@
       "permissions": [
         "atlet:self"
       ]
+    },
+    {
+      "id": "usr-atl-6643",
+      "role": "atlet",
+      "email": "fajar@gmail.com",
+      "passwordHash": "password123",
+      "nama": "Fajar Pratama",
+      "ign": "FAJAR7",
+      "pasporId": "PBESI-SB-2026-MOB-999",
+      "wilayah": "Kota Padang",
+      "permissions": [
+        "atlet:self"
+      ]
     }
   ],
   "wilayah": [
@@ -557,6 +570,25 @@
     }
   ],
   "atlet": [
+    {
+      "id": "atl-6643",
+      "pasporId": "PBESI-SB-2026-MOB-999",
+      "nama": "Fajar Pratama",
+      "ign": "FAJAR7",
+      "game": "Mobile Legends",
+      "role": "Jungler",
+      "wilayah": "Kota Padang",
+      "nik": "-",
+      "email": "fajar@gmail.com",
+      "ovr": 92,
+      "statusPelatda": "POTENSI DAERAH",
+      "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+      "foto": "/images/athlete-v4nd4l.jpg",
+      "statusLFT": true,
+      "prestasi": [
+        "Pendaftar Paspor Digital Baru 2026"
+      ]
+    },
     {
       "id": "atl-5526",
       "pasporId": "PBESI-SB-2026-MOB-585",
@@ -897,6 +929,40 @@
     }
   ],
   "antreanVerifikasi": [
+    {
+      "id": "reg-pla-96643",
+      "bidang": "player",
+      "nama": "Fajar Pratama",
+      "wilayah": "Kota Padang",
+      "telepon": "08123456789",
+      "email": "fajar@gmail.com",
+      "password": "password123",
+      "ign": "FAJAR7",
+      "game": "Mobile Legends",
+      "role": "Jungler",
+      "generatedPasporId": "PBESI-SB-2026-MOB-999",
+      "athlete": {
+        "id": "atl-6643",
+        "pasporId": "PBESI-SB-2026-MOB-999",
+        "nama": "Fajar Pratama",
+        "ign": "FAJAR7",
+        "game": "Mobile Legends",
+        "role": "Jungler",
+        "wilayah": "Kota Padang",
+        "nik": "-",
+        "email": "fajar@gmail.com",
+        "ovr": 92,
+        "statusPelatda": "POTENSI DAERAH",
+        "lisensiStatus": "MENUNGGU VERIFIKASI PENGCAB",
+        "foto": "/images/athlete-v4nd4l.jpg",
+        "statusLFT": true,
+        "prestasi": [
+          "Pendaftar Paspor Digital Baru 2026"
+        ]
+      },
+      "status": "pending",
+      "submittedAt": "2026-11-01T06:31:36.643Z"
+    },
     {
       "id": "reg-pla-95526",
       "bidang": "player",

@@ -1,297 +1,281 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-[#07080A]">
+<html lang="id" class="h-full bg-[#F3F4F8]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Pilih Paspor Resmi – ESPORT SUMBAR</title>
-  <meta name="description" content="Pilih lisensi digital resmi Pengprov ESI Sumatera Barat: Paspor Atlet, Pelatih, Klub, Komunitas, dan Venue." />
-  
+  <title>Pilih Layanan Lisensi – ESPORT SUMBAR</title>
+  <meta name="description" content="Katalog pendaftaran resmi ekosistem esport Sumatera Barat berlisensi Pengprov PBESI Sumbar." />
+
+  <!-- Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FDF2F2',
+              100: '#FDE8E8',
+              500: '#E00000',
+              600: '#CC0000',
+              700: '#B30000',
+              800: '#8A0000'
+            },
+            surface: {
+              card: '#FFFFFF',
+              bg: '#F5F6FA',
+              dark: '#1A1D26',
+              muted: '#717684'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <style>
-    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-    body {
-      background-color: #07080A;
-      color: #FFFFFF;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .vault-card {
-      position: relative;
-      background: linear-gradient(160deg, #161822 0%, #0C0D14 100%);
-      border-radius: 28px;
-      box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.9),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 1px rgba(255, 255, 255, 0.2);
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .vault-card::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 29px;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(214,22,34,0.5) 45%, rgba(217,119,6,0.3) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
 
-    .tap-action {
-      transition: transform 0.12s ease, opacity 0.12s ease;
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
     }
-    .tap-action:active { transform: scale(0.97); }
-    .safe-bottom { padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
+    body {
+      background-color: #EDEEF2;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .tap-action {
+      transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.12s ease;
+      user-select: none;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+    .app-card {
+      background: #FFFFFF;
+      box-shadow: 0 4px 20px -2px rgba(24, 39, 75, 0.05), 0 2px 6px -1px rgba(24, 39, 75, 0.02);
+      border: 1px solid rgba(230, 232, 240, 0.8);
+    }
+    .safe-bottom {
+      padding-bottom: max(5.5rem, calc(4.5rem + env(safe-area-inset-bottom)));
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-[#D61622] selection:text-white">
+<body class="min-h-screen flex flex-col items-center justify-start antialiased selection:bg-brand-600 selection:text-white">
 
-  <div class="w-full max-w-md min-h-screen h-screen flex flex-col justify-between bg-[#07080A] sm:border-x sm:border-white/10 relative px-4 py-3">
+  <!-- MOBILE CONTAINER -->
+  <div class="w-full max-w-md min-h-screen bg-[#F8F9FC] sm:border-x sm:border-gray-200/80 sm:shadow-2xl relative flex flex-col justify-start">
 
-    <!-- 1. MINIMALIST TOP NAV -->
-    <header class="flex items-center justify-between pt-1 pb-1">
-      <a href="/" class="w-9 h-9 rounded-full bg-white/[0.06] hover:bg-white/[0.1] flex items-center justify-center text-white/80 tap-action">
+    <!-- 1. TOP APP BAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 py-3 flex items-center justify-between">
+      <a href="/" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-surface-dark tap-action">
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
       </a>
 
-      <div class="flex items-center gap-2">
-        <img src="/images/esport-sumbar-logo.png" alt="Logo" class="w-6 h-6 object-contain" />
-        <span class="font-extrabold text-sm tracking-wide text-white">
-          ESPORT <span class="text-[#D61622]">SUMBAR</span>
-        </span>
+      <div class="text-center">
+        <div class="text-xs font-bold text-surface-dark">Katalog Layanan Lisensi</div>
+        <div class="text-[9px] text-surface-muted font-mono uppercase tracking-wider">PBESI SUMATERA BARAT</div>
       </div>
 
-      <a href="/login" class="px-3.5 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-xs font-semibold text-white/80 flex items-center gap-1.5 tap-action">
-        <span>Masuk</span>
+      <a href="/login" class="px-3 py-1.5 rounded-full bg-brand-50 text-brand-600 text-xs font-bold font-mono tap-action">
+        Masuk
       </a>
     </header>
 
-    <!-- 2. CARD VAULT SHOWCASE -->
-    <main class="flex-1 flex flex-col justify-center items-center py-1">
-      
-      <!-- Headline -->
-      <div class="w-full text-center mb-2.5">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D61622]/15 border border-[#D61622]/30 text-[#D61622] text-[10px] font-mono font-bold tracking-widest uppercase mb-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#D61622] animate-pulse"></span>
-          DIGITAL IDENTITY VAULT
+    <!-- 2. SCROLLABLE CATALOG CONTENT -->
+    <main class="flex-1 px-4 pt-3 space-y-3.5 safe-bottom">
+
+      <!-- Hero Header Banner -->
+      <div class="app-card rounded-3xl p-4 bg-gradient-to-r from-brand-700 to-brand-600 text-white relative overflow-hidden">
+        <div class="relative z-10 space-y-1">
+          <span class="px-2 py-0.5 rounded-full bg-white/20 text-white text-[9px] font-bold uppercase tracking-wider">
+            PORTAL PENDAFTARAN RESMI
+          </span>
+          <h1 class="text-lg font-extrabold tracking-tight">Pilih Kategori Lisensi</h1>
+          <p class="text-xs text-white/80 max-w-xs">Pilih entitas Anda untuk mendapatkan verifikasi berjenjang dari Pengcab dan legalitas Pengprov PBESI.</p>
         </div>
-        <h1 class="text-2xl font-black text-white tracking-tight">Pilih Lisensi Resmi</h1>
-        <p class="text-xs text-white/50 mt-0.5">Pilih kartu ekosistem yang ingin Anda terbitkan.</p>
       </div>
 
-      <!-- INTERACTIVE CAROUSEL STAGE -->
-      <div class="w-full relative px-2 my-auto">
-        
-        <!-- CARD PREVIEW -->
-        <div id="activeCardBox" class="vault-card w-full aspect-[1/1.36] max-w-[285px] mx-auto p-4 flex flex-col justify-between relative overflow-hidden select-none">
-          
-          <!-- Top Row: PBESI Crest + Badge -->
-          <div class="flex items-center justify-between z-10 relative">
-            <div class="flex items-center gap-1.5">
-              <div class="w-7 h-7 rounded-lg bg-black/60 border border-white/15 p-1 flex items-center justify-center">
-                <img src="/images/esport-sumbar-logo.png" class="w-full h-full object-contain" />
+      <!-- 5 CATEGORY CARDS (MYTELKOMSEL PACKAGE CARD STYLE) -->
+      <div class="space-y-2.5">
+
+        <!-- 01. PLAYER / ATLET -->
+        <a href="/daftar-player" class="app-card rounded-2xl p-4 block hover:border-brand-500/50 transition-all tap-action">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-red-50 border border-red-100 text-brand-600 flex items-center justify-center shrink-0">
+                <i data-lucide="gamepad-2" class="w-5 h-5"></i>
               </div>
               <div>
-                <div class="text-[8.5px] font-mono font-black tracking-widest uppercase text-white/90 leading-none">PENGPROV PBESI</div>
-                <div class="text-[7px] font-mono tracking-widest uppercase text-[#D61622] font-black">SUMATERA BARAT</div>
-              </div>
-            </div>
-
-            <!-- Card Category Pill -->
-            <div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/15">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-              <span id="cardBadgeText" class="text-[8.5px] font-mono font-bold text-amber-300 uppercase tracking-wider">PASPOR 3D</span>
-            </div>
-          </div>
-
-          <!-- Middle: Hero Athlete Portrait -->
-          <div class="my-auto z-10 relative flex flex-col items-center">
-            
-            <div class="relative mb-2">
-              <div class="w-20 h-20 rounded-2xl p-[2px] bg-gradient-to-tr from-amber-400 via-[#D61622] to-white/40 shadow-xl shadow-amber-500/10">
-                <div class="w-full h-full rounded-[14px] bg-[#12131C] overflow-hidden flex items-center justify-center">
-                  <img id="cardHeroImg" src="/images/athlete-v4nd4l.jpg" alt="Preview" class="w-full h-full object-cover" />
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-bold text-surface-dark">Player / Atlet Esport</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200">PASPOR 3D</span>
                 </div>
-              </div>
-              <div id="cardOvrBadge" class="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-md bg-black/80 border border-white/20 text-[8px] font-mono font-bold text-amber-400">
-                OVR 95
+                <p class="text-xs text-surface-muted mt-0.5">Penerbitan paspor digital resmi, lisensi atlet daerah, dan bursa transfer LFT.</p>
               </div>
             </div>
-
-            <!-- Header -->
-            <h2 id="cardHeroTitle" class="text-xl font-black text-white tracking-tight text-center leading-none">
-              V4ND4L
-            </h2>
-            <div id="cardHeroSub" class="text-xs text-white/60 font-medium text-center mt-0.5">
-              Muhammad Rayden
-            </div>
-
-            <!-- Game & Role Pill -->
-            <div id="cardHeroMeta" class="mt-1.5 flex items-center gap-1.5">
-              <span class="px-2 py-0.5 rounded-full bg-[#D61622]/20 border border-[#D61622]/40 text-[#D61622] text-[8.5px] font-mono font-bold">
-                MOBILE LEGENDS
-              </span>
-              <span class="text-[8.5px] font-mono text-white/50">ROAMER // PADANG</span>
-            </div>
-
           </div>
+          <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-surface-muted text-[11px]">Integrasi: 19 Pengcab Kab/Kota</span>
+            <span class="text-brand-600 flex items-center gap-1 font-bold">
+              <span>Buka Formulir</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </a>
 
-          <!-- Bottom: Scannable Security -->
-          <div class="pt-2.5 border-t border-white/[0.08] flex items-center justify-between z-10 relative">
-            <div>
-              <span class="text-[7px] font-mono uppercase text-white/40 block leading-none mb-0.5">NOMOR REGISTRASI</span>
-              <span id="cardHeroId" class="text-[9.5px] font-mono font-bold text-emerald-400">PBESI-SB-2026-VAL-982</span>
-            </div>
-            
-            <div class="flex items-center gap-1 text-[8px] font-mono text-white/50">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-              <span>OFFICIAL SEAL</span>
+        <!-- 02. PELATIH / COACH -->
+        <a href="/daftar-pelatih" class="app-card rounded-2xl p-4 block hover:border-brand-500/50 transition-all tap-action">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 text-sky-600 flex items-center justify-center shrink-0">
+                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-bold text-surface-dark">Pelatih / Coach</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-sky-50 text-sky-700 border border-sky-200">SERTIFIKASI</span>
+                </div>
+                <p class="text-xs text-surface-muted mt-0.5">Sertifikasi pelatih resmi, pendataan lisensi kepelatihan, dan akses pembinaan Pelatda.</p>
+              </div>
             </div>
           </div>
+          <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-surface-muted text-[11px]">Binaan: Pelatda PON Sumbar</span>
+            <span class="text-brand-600 flex items-center gap-1 font-bold">
+              <span>Buka Formulir</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </a>
 
-        </div>
+        <!-- 03. TEAM / KLUB -->
+        <a href="/daftar-team" class="app-card rounded-2xl p-4 block hover:border-brand-500/50 transition-all tap-action">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                <i data-lucide="shield" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-bold text-surface-dark">Team / Klub Esports</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">ROSTER</span>
+                </div>
+                <p class="text-xs text-surface-muted mt-0.5">Pendaftaran organisasi dan validasi roster untuk keikutsertaan turnamen kejuaraan daerah.</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-surface-muted text-[11px]">Hak: Kejurda & Porprov</span>
+            <span class="text-brand-600 flex items-center gap-1 font-bold">
+              <span>Buka Formulir</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </a>
 
-        <!-- 5 CATEGORY SELECTOR PILLS -->
-        <div class="grid grid-cols-5 gap-1.5 mt-3 px-1">
-          <button type="button" onclick="selectCardRole('player')" id="pill-player" class="py-2 px-1 rounded-xl bg-white text-black text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1 shadow-md">
-            <i data-lucide="gamepad-2" class="w-4 h-4"></i>
-            <span>Atlet</span>
-          </button>
-          <button type="button" onclick="selectCardRole('pelatih')" id="pill-pelatih" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
-            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-            <span>Pelatih</span>
-          </button>
-          <button type="button" onclick="selectCardRole('team')" id="pill-team" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
-            <i data-lucide="shield" class="w-4 h-4"></i>
-            <span>Klub</span>
-          </button>
-          <button type="button" onclick="selectCardRole('komunitas')" id="pill-komunitas" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
-            <i data-lucide="users" class="w-4 h-4"></i>
-            <span>Komunitas</span>
-          </button>
-          <button type="button" onclick="selectCardRole('venue')" id="pill-venue" class="py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1">
-            <i data-lucide="map-pin" class="w-4 h-4"></i>
-            <span>Venue</span>
-          </button>
-        </div>
+        <!-- 04. KOMUNITAS GAME -->
+        <a href="/daftar-komunitas" class="app-card rounded-2xl p-4 block hover:border-brand-500/50 transition-all tap-action">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                <i data-lucide="users" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-bold text-surface-dark">Komunitas Game</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-purple-50 text-purple-700 border border-purple-200">AFILIASI</span>
+                </div>
+                <p class="text-xs text-surface-muted mt-0.5">Afiliasi kemitraan ke 19 Pengcab daerah dan izin rekomendasi penyelenggaraan event.</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-surface-muted text-[11px]">Legalitas: Rekomendasi Resmi</span>
+            <span class="text-brand-600 flex items-center gap-1 font-bold">
+              <span>Buka Formulir</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </a>
+
+        <!-- 05. VENUE & ARENA -->
+        <a href="/daftar-venue" class="app-card rounded-2xl p-4 block hover:border-brand-500/50 transition-all tap-action">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-sm font-bold text-surface-dark">Venue & Game Center</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-rose-50 text-rose-700 border border-rose-200">AKREDITASI</span>
+                </div>
+                <p class="text-xs text-surface-muted mt-0.5">Akreditasi fasilitas turnamen resmi dan integrasi titik kumpul pembinaan atlet daerah.</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-surface-muted text-[11px]">Sertifikasi: Hub Turnamen ESI</span>
+            <span class="text-brand-600 flex items-center gap-1 font-bold">
+              <span>Buka Formulir</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </a>
 
       </div>
 
     </main>
 
-    <!-- 3. PRIMARY ACTION & DIRECT LINK -->
-    <footer class="pt-2 pb-1 safe-bottom space-y-1.5">
-      <a 
-        id="btnContinueToForm" 
-        href="/daftar-player" 
-        class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#D61622] to-red-700 hover:from-red-600 hover:to-red-800 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-red-950/60 tap-action"
-      >
-        <span id="btnContinueText">BUAT PASPOR ATLET SEKARANG</span>
-        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    <!-- 3. FIXED BOTTOM NAVIGATION BAR -->
+    <nav class="fixed bottom-0 max-w-md w-full bg-white/95 backdrop-blur-md border-t border-gray-200/80 px-2 py-2 z-50 flex items-center justify-around shadow-lg">
+      <a href="/" class="flex flex-col items-center gap-1 py-1 px-3 text-surface-muted hover:text-surface-dark tap-action">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Beranda</span>
       </a>
 
-      <p class="text-[11px] text-center text-white/40">
-        Sudah memiliki akun? <a href="/login" class="text-[#D61622] hover:underline font-bold">Masuk di Sini</a>
-      </p>
-    </footer>
+      <a href="/daftar" class="flex flex-col items-center gap-1 py-1 px-3 text-brand-600 tap-action">
+        <i data-lucide="id-card" class="w-5 h-5 stroke-[2.2]"></i>
+        <span class="text-[10px] font-bold">Paspor</span>
+      </a>
+
+      <a href="/daftar-player" class="flex flex-col items-center -mt-5 tap-action">
+        <div class="w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-600/30 border-4 border-white">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
+        </div>
+        <span class="text-[10px] font-bold text-surface-dark mt-0.5">Daftar</span>
+      </a>
+
+      <a href="/#pengcabSection" class="flex flex-col items-center gap-1 py-1 px-3 text-surface-muted hover:text-surface-dark tap-action">
+        <i data-lucide="map" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Wilayah</span>
+      </a>
+
+      <a href="/login" class="flex flex-col items-center gap-1 py-1 px-3 text-surface-muted hover:text-surface-dark tap-action">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] font-medium">Akun</span>
+      </a>
+    </nav>
 
   </div>
 
   <script>
-    const CARD_DATA = {
-      player: {
-        badge: 'PASPOR 3D',
-        ovr: 'OVR 95',
-        img: '/images/athlete-v4nd4l.jpg',
-        title: 'V4ND4L',
-        sub: 'Muhammad Rayden',
-        meta: '<span class="px-2 py-0.5 rounded-full bg-[#D61622]/20 border border-[#D61622]/40 text-[#D61622] text-[8.5px] font-mono font-bold">MOBILE LEGENDS</span><span class="text-[8.5px] font-mono text-white/50">ROAMER // PADANG</span>',
-        btnText: 'BUAT PASPOR ATLET SEKARANG',
-        link: '/daftar-player'
-      },
-      pelatih: {
-        badge: 'LISENSI PELATIH',
-        ovr: 'PRO COACH',
-        img: '/images/athlete-pro-player.jpg',
-        title: 'COACH DANIEL',
-        sub: 'Daniel Pratama, S.Or.',
-        meta: '<span class="px-2 py-0.5 rounded-full bg-sky-500/20 border border-sky-500/40 text-sky-400 text-[8.5px] font-mono font-bold">SERTIFIKASI PBESI</span><span class="text-[8.5px] font-mono text-white/50">EXP: 3 TAHUN</span>',
-        btnText: 'DAFTAR LISENSI PELATIH',
-        link: '/daftar-pelatih'
-      },
-      team: {
-        badge: 'CHARTER KLUB',
-        ovr: 'TIER KLUB',
-        img: '/images/esport-sumbar-logo.png',
-        title: 'MINANG PRIDE',
-        sub: 'Official Esports Club',
-        meta: '<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[8.5px] font-mono font-bold">ROSTER RESMI</span><span class="text-[8.5px] font-mono text-white/50">DIVISI UTAMA</span>',
-        btnText: 'DAFTARKAN KLUB / TIM',
-        link: '/daftar-team'
-      },
-      komunitas: {
-        badge: 'AFILIASI PENGCAB',
-        ovr: 'HUB 19',
-        img: '/images/esport-sumbar-logo.png',
-        title: 'MLBB PADANG',
-        sub: 'Komunitas Resmi Daerah',
-        meta: '<span class="px-2 py-0.5 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 text-[8.5px] font-mono font-bold">19 WILAYAH</span><span class="text-[8.5px] font-mono text-white/50">250+ MEMBERS</span>',
-        btnText: 'AFILIASIKAN KOMUNITAS',
-        link: '/daftar-komunitas'
-      },
-      venue: {
-        badge: 'AKREDITASI ARENA',
-        ovr: 'GRADE A',
-        img: '/images/esport-sumbar-logo.png',
-        title: 'TITIK KUMPUL',
-        sub: 'Gaming Arena & Hub',
-        meta: '<span class="px-2 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-400 text-[8.5px] font-mono font-bold">GRADE A ARENA</span><span class="text-[8.5px] font-mono text-white/50">40 SEATS</span>',
-        btnText: 'AKREDITASI VENUE ANDA',
-        link: '/daftar-venue'
-      }
-    };
-
-    function selectCardRole(role) {
-      const data = CARD_DATA[role];
-      if (!data) return;
-
-      ['player', 'pelatih', 'team', 'komunitas', 'venue'].forEach(r => {
-        const btn = document.getElementById('pill-' + r);
-        if (r === role) {
-          btn.className = "py-2 px-1 rounded-xl bg-white text-black text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1 shadow-md";
-        } else {
-          btn.className = "py-2 px-1 rounded-xl bg-white/[0.06] text-white/70 hover:text-white text-[11px] font-extrabold font-mono transition-all tap-action flex flex-col items-center justify-center gap-1";
-        }
-      });
-
-      const box = document.getElementById('activeCardBox');
-      box.style.transform = 'scale(0.96)';
-      box.style.opacity = '0.7';
-
-      setTimeout(() => {
-        document.getElementById('cardBadgeText').textContent = data.badge;
-        document.getElementById('cardOvrBadge').textContent = data.ovr;
-        document.getElementById('cardHeroImg').src = data.img;
-        document.getElementById('cardHeroTitle').textContent = data.title;
-        document.getElementById('cardHeroSub').textContent = data.sub;
-        document.getElementById('cardHeroMeta').innerHTML = data.meta;
-        document.getElementById('btnContinueText').textContent = data.btnText;
-        document.getElementById('btnContinueToForm').href = data.link;
-
-        box.style.transform = 'scale(1)';
-        box.style.opacity = '1';
-        lucide.createIcons();
-      }, 150);
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
     });
