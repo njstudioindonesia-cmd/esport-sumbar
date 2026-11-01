@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Akun & Paspor Saya – ESPORT SUMBAR</title>
+  <title>Profil Akun – ESPORT SUMBAR</title>
+  <meta name="description" content="Dashboard profil personal dan manajemen ekosistem resmi ESPORT SUMBAR untuk Atlet, Tim, Venue, dan Pelatih." />
 
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,7 +22,7 @@
               50: '#FFF1F2',
               100: '#FFE4E6',
               500: '#F43F5E',
-              600: '#E00000',
+              600: '#E00000', // Telkomsel Red
               700: '#B80000',
               800: '#900000',
             },
@@ -39,9 +42,12 @@
     };
   </script>
 
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="/js/microsystem-client.js"></script>
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
 
   <style>
     * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
@@ -62,8 +68,13 @@
     .tap-action:active {
       transform: scale(0.97);
     }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 3D Flip Card */
     .flip-card {
       perspective: 1000px;
+      min-height: 250px;
     }
     .flip-card-inner {
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -83,7 +94,9 @@
 </head>
 <body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
 
-  <!-- TOP APP BAR -->
+  <!-- ============================================================== -->
+  <!-- TOP APP BAR                                                    -->
+  <!-- ============================================================== -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
     <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -91,12 +104,12 @@
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </a>
         <div>
-          <h1 class="text-sm font-bold text-surface-dark leading-tight">Profil & Paspor Saya</h1>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight" id="topProfileTitle">Profil Akun</h1>
           <p class="text-[10px] text-brand-600 font-bold uppercase tracking-wider">ESPORT SUMBAR</p>
         </div>
       </div>
-      <div>
-        <button onclick="handleLogout()" class="px-3 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-xs font-semibold text-brand-600 flex items-center gap-1 tap-action">
+      <div class="flex items-center gap-1.5">
+        <button onclick="handleLogout()" class="px-2.5 py-1.5 rounded-full bg-red-50 text-brand-600 hover:bg-red-100 text-xs font-bold flex items-center gap-1 tap-action transition-colors">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
           <span>Keluar</span>
         </button>
@@ -104,182 +117,475 @@
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
+  <!-- ============================================================== -->
+  <!-- MAIN APP CONTAINER                                             -->
+  <!-- ============================================================== -->
   <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
 
-    <!-- 1. KARTU IDENTITAS FLIP (DINAMIS VERIFIKASI) -->
-    <div class="flip-card cursor-pointer" id="passportFlipCard" onclick="toggleCardFlip()">
-      <div class="flip-card-inner relative w-full rounded-3xl" id="passportCardInner">
-        
-        <!-- FRONT OF CARD -->
-        <div class="flip-front app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-red-50/40 border-2 border-red-100/80 shadow-md space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="/images/esport-sumbar-logo.png" alt="PBESI" class="w-7 h-7 object-contain" />
+    <!-- 1. DYNAMIC BIDANG / ROLE SWITCHER PILL BAR -->
+    <div class="app-card rounded-2xl p-2.5 bg-white flex items-center justify-between gap-2 shadow-sm">
+      <span class="text-[11px] font-bold text-surface-muted pl-1">Peran Akun:</span>
+      <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar" id="roleSwitcherPills">
+        <button onclick="switchRole('atlet')" id="pillRoleAtlet" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm">🎮 Atlet</button>
+        <button onclick="switchRole('tim')" id="pillRoleTim" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🛡️ Tim</button>
+        <button onclick="switchRole('venue')" id="pillRoleVenue" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">📍 Venue</button>
+        <button onclick="switchRole('pelatih')" id="pillRolePelatih" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🎓 Pelatih</button>
+      </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 1: PROFIL ATLET (PLAYER)                               -->
+    <!-- ============================================================== -->
+    <div id="sectionProfilAtlet" class="space-y-4">
+      
+      <!-- 3D FLIP PASPOR ATLET CARD -->
+      <div class="flip-card cursor-pointer" id="passportFlipCard" onclick="toggleCardFlip()">
+        <div class="flip-card-inner relative w-full rounded-3xl" id="passportCardInner">
+          
+          <!-- FRONT OF CARD -->
+          <div class="flip-front app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-red-50/40 border-2 border-red-100/80 shadow-md space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <img src="/images/esport-sumbar-logo.png" alt="PBESI" class="w-7 h-7 object-contain" />
+                <div>
+                  <span class="text-[11px] font-extrabold text-surface-dark uppercase tracking-wider block leading-tight">ESPORT SUMBAR</span>
+                  <span class="text-[9px] font-bold text-brand-600 uppercase tracking-widest block leading-tight">PASPOR DIGITAL ATLET</span>
+                </div>
+              </div>
+
+              <!-- DYNAMIC VERIFICATION BADGE -->
+              <div id="verifiedBadgeSlot">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1 shadow-sm">
+                  <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i>
+                  <span>TERVERIFIKASI RESMI</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3.5">
+              <div class="relative w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 border-2 border-brand-600 shadow-sm shrink-0">
+                <img id="userAvatar" src="/images/athlete-v4nd4l.jpg" alt="Avatar" class="w-full h-full object-cover" />
+                <span id="userOvrBadge" class="absolute bottom-0 inset-x-0 bg-brand-600 text-white text-[9px] font-black text-center py-0.5">96</span>
+              </div>
               <div>
-                <span class="text-[11px] font-extrabold text-surface-dark uppercase tracking-wider block leading-tight">ESPORT SUMBAR</span>
-                <span class="text-[9px] font-bold text-brand-600 uppercase tracking-widest block leading-tight">PASPOR DIGITAL</span>
+                <div class="flex items-center gap-1.5">
+                  <h2 id="userIgn" class="text-lg font-black text-surface-dark leading-tight">V4ND4L</h2>
+                  <i data-lucide="badge-check" id="iconVerifiedCheck" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p id="userName" class="text-xs font-semibold text-surface-muted">Muhammad Rayden</p>
+                <div class="flex items-center gap-1.5 mt-1">
+                  <span id="userGame" class="px-2 py-0.5 rounded text-[9px] font-bold bg-brand-600 text-white">VALORANT</span>
+                  <span id="userRole" class="text-[10px] font-semibold text-surface-dark uppercase">DUELIST // PADANG</span>
+                </div>
               </div>
             </div>
 
-            <!-- DYNAMIC VERIFICATION BADGE -->
-            <div id="verifiedBadgeSlot">
-              <!-- Rendered via JS -->
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-surface-muted border border-gray-200">
-                BELUM TERVERIFIKASI
+            <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
+              <div>
+                <span class="text-[9px] font-bold text-surface-muted uppercase tracking-wider block" id="labelLicense">ID Paspor Digital Resmi</span>
+                <span id="userPasporId" class="font-mono text-xs font-bold text-brand-600">ESSB-2026-VAL-96</span>
+              </div>
+              <div class="text-right flex items-center gap-1 text-[11px] font-bold text-surface-muted">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-brand-600"></i>
+                <span>Ketuk Membalik</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BACK OF CARD -->
+          <div class="flip-back absolute inset-0 app-card rounded-3xl p-5 bg-gradient-to-br from-gray-900 to-black text-white border-2 border-white/20 shadow-md flex flex-col justify-between">
+            <div class="flex items-center justify-between border-b border-white/10 pb-2">
+              <span class="text-[10px] font-mono text-gray-400 uppercase tracking-widest">PASSPORT ENCRYPTED NFC / QR</span>
+              <span id="backStatusPill" class="text-[9px] font-bold text-emerald-400">STATUS: TERVERIFIKASI RESMI</span>
+            </div>
+
+            <div class="flex items-center justify-center gap-4 py-2">
+              <div class="w-20 h-20 bg-white p-1.5 rounded-xl flex items-center justify-center shadow-lg">
+                <img src="/images/esport-sumbar-logo.png" alt="QR" class="w-12 h-12 object-contain" />
+              </div>
+              <div class="text-left text-xs space-y-1">
+                <span class="text-[10px] text-gray-400 block">Identitas Elektronik:</span>
+                <p id="backPasporId" class="font-mono font-bold text-amber-400 text-xs">ESSB-2026-VAL-96</p>
+                <p id="backHakAkses" class="text-[10px] text-gray-300">Hak Akses: Kejurda & Porprov 2026</p>
+                <p id="backVerifStatus" class="text-[9px] text-gray-400">Status: Sah Pengcab Padang & ESI Sumbar</p>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-gray-400">
+              <span>Pangkalan Data Resmi ESPORT SUMBAR</span>
+              <span class="font-bold text-white flex items-center gap-1">
+                <i data-lucide="rotate-cw" class="w-3 h-3 text-brand-500"></i>
+                <span>Kembali</span>
               </span>
             </div>
           </div>
 
-          <div class="flex items-center gap-3.5">
-            <div class="relative w-16 h-16 rounded-2xl overflow-hidden bg-gray-100 border-2 border-brand-600 shadow-sm shrink-0">
-              <img id="userAvatar" src="/images/athlete-v4nd4l.jpg" alt="Avatar" class="w-full h-full object-cover" />
-              <span id="userOvrBadge" class="absolute bottom-0 inset-x-0 bg-brand-600 text-white text-[9px] font-black text-center py-0.5">
-                88
-              </span>
-            </div>
-            <div>
-              <div class="flex items-center gap-1.5">
-                <h2 id="userIgn" class="text-lg font-black text-surface-dark leading-tight">MEMBER</h2>
-                <!-- VERIFIED CHECKMARK (HIDDEN BY DEFAULT UNTIL VERIFIED) -->
-                <i data-lucide="badge-check" id="iconVerifiedCheck" class="w-4 h-4 text-emerald-600 hidden"></i>
-              </div>
-              <p id="userName" class="text-xs font-semibold text-surface-muted">Nama Member</p>
-              <div class="flex items-center gap-1.5 mt-1">
-                <span id="userGame" class="px-2 py-0.5 rounded text-[9px] font-bold bg-brand-600 text-white">MOBILE LEGENDS</span>
-                <span id="userRole" class="text-[10px] font-semibold text-surface-dark uppercase">PLAYER // PADANG</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-            <div>
-              <span class="text-[9px] font-bold text-surface-muted uppercase tracking-wider block" id="labelLicense">ID Member Platform</span>
-              <span id="userPasporId" class="font-mono text-xs font-bold text-brand-600">SB-MEM-9921</span>
-            </div>
-            <div class="text-right flex items-center gap-1 text-[11px] font-bold text-surface-muted">
-              <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-brand-600"></i>
-              <span>Ketuk Membalik</span>
-            </div>
-          </div>
         </div>
-
-        <!-- BACK OF CARD -->
-        <div class="flip-back absolute inset-0 app-card rounded-3xl p-5 bg-gradient-to-br from-gray-900 to-black text-white border-2 border-white/20 shadow-md flex flex-col justify-between">
-          <div class="flex items-center justify-between border-b border-white/10 pb-2">
-            <span class="text-[10px] font-mono text-gray-400 uppercase tracking-widest">SMART CARD IDENTIFICATION</span>
-            <span id="backStatusPill" class="text-[9px] font-bold text-gray-400">MEMBER PLATFORM</span>
-          </div>
-
-          <div class="flex items-center justify-center gap-4 py-2">
-            <div class="w-20 h-20 bg-white p-1.5 rounded-xl flex items-center justify-center shadow-lg">
-              <img src="/images/esport-sumbar-logo.png" alt="QR" class="w-12 h-12 object-contain" />
-            </div>
-            <div class="text-left text-xs space-y-1">
-              <span class="text-[10px] text-gray-400 block">Identitas Elektronik:</span>
-              <p id="backPasporId" class="font-mono font-bold text-amber-400 text-xs">SB-MEM-9921</p>
-              <p id="backHakAkses" class="text-[10px] text-gray-300">Hak Akses: Member Komunitas</p>
-              <p id="backVerifStatus" class="text-[9px] text-gray-400">Status: Belum Terverifikasi</p>
-            </div>
-          </div>
-
-          <div class="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-gray-400">
-            <span>Validasi Keaslian Kartu</span>
-            <span class="font-bold text-white flex items-center gap-1">
-              <i data-lucide="rotate-cw" class="w-3 h-3 text-brand-500"></i>
-              <span>Kembali</span>
-            </span>
-          </div>
-        </div>
-
       </div>
+
+      <!-- STATUS VERIFIKASI & MINTA LENCANA -->
+      <div id="atletVerifCtaBanner" class="app-card rounded-2xl p-4 bg-gradient-to-r from-amber-500/10 via-red-500/10 to-amber-500/10 border border-amber-200 space-y-2.5">
+        <div class="flex items-start gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark leading-tight">Pengajuan Lencana Verifikasi Resmi</h3>
+            <p class="text-[11px] text-surface-muted mt-0.5 leading-relaxed">
+              Dapatkan <strong>Lencana Verifikasi (Centang Hijau)</strong> pada kartu Anda, nomor lisensi sah daerah, dan izin ikut Kejurda/Porprov melalui validasi domisili.
+            </p>
+          </div>
+        </div>
+        <button onclick="showRequestVerifModal()" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 tap-action shadow-md shadow-brand-600/20">
+          <i data-lucide="badge-check" class="w-4 h-4"></i>
+          <span>Minta Lencana Verifikasi Sekarang</span>
+        </button>
+      </div>
+
+      <!-- FITUR UTAMA ATLET: CARI TIM & DAFTARKAN DIRI PADA TIM -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-red-50 text-brand-600 flex items-center justify-center font-bold text-xs">
+              <i data-lucide="users" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold text-surface-dark">Status Keanggotaan Tim</h3>
+              <p class="text-[10px] text-surface-muted">Bursa Transfer & Rekrutmen</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700" id="atletTeamStatusBadge">Free Agent (LFT)</span>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-surface-muted block">Tim / Klub Saat Ini:</span>
+            <span class="text-xs font-extrabold text-surface-dark block mt-0.5" id="atletCurrentTeamName">Belum Tergabung dalam Tim</span>
+          </div>
+          <button onclick="openFindTeamModal()" class="px-3 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold flex items-center gap-1.5 tap-action shadow-sm shadow-brand-600/20">
+            <i data-lucide="search" class="w-3.5 h-3.5"></i>
+            <span>Cari & Daftar ke Tim</span>
+          </button>
+        </div>
+
+        <!-- RIWAYAT LAMARAN TIM ATLET -->
+        <div class="space-y-1.5 pt-1">
+          <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Riwayat Pendaftaran Tim Anda:</span>
+          <div id="atletApplicationList" class="space-y-2">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 2. SPECIAL CTA BANNER FOR UNVERIFIED USERS (AJUKAN LISENSI RESMI) -->
-    <div id="unverifiedCtaBanner" class="app-card rounded-2xl p-4 bg-gradient-to-r from-amber-500/10 via-red-500/10 to-amber-500/10 border border-amber-200 space-y-2.5">
-      <div class="flex items-start gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm">
-          <i data-lucide="shield-alert" class="w-5 h-5"></i>
+    <!-- ============================================================== -->
+    <!-- SECTION 2: PROFIL TIM (KLUB / ORGANISASI)                      -->
+    <!-- ============================================================== -->
+    <div id="sectionProfilTim" class="space-y-4 hidden">
+      
+      <!-- KARTU IDENTITAS TIM -->
+      <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-emerald-50/40 border-2 border-emerald-100 shadow-md space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <img src="/images/esport-sumbar-logo.png" alt="Logo Tim" class="w-7 h-7 object-contain" />
+            <div>
+              <span class="text-[11px] font-extrabold text-surface-dark uppercase tracking-wider block leading-tight">ESPORT SUMBAR</span>
+              <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-widest block leading-tight">KLUB & ROSTER RESMI</span>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            Terakreditasi Grade A
+          </span>
         </div>
+
+        <div class="flex items-center gap-3.5">
+          <div class="w-16 h-16 rounded-2xl bg-gray-900 text-white flex items-center justify-center font-black text-xl shadow-md shrink-0 border border-emerald-400">
+            MPE
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h2 class="text-lg font-black text-surface-dark leading-tight" id="teamName">Minang Pride Esports</h2>
+              <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+            </div>
+            <p class="text-xs font-semibold text-surface-muted">Manager: Doni Prasetya, SE</p>
+            <div class="flex items-center gap-1.5 mt-1">
+              <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-600 text-white">VALORANT & MLBB</span>
+              <span class="text-[10px] font-semibold text-surface-dark uppercase">KOTA PADANG</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-gray-100 grid grid-cols-3 gap-2 text-center text-xs">
+          <div class="bg-gray-50 rounded-xl p-2 border border-gray-100">
+            <span class="block font-black text-surface-dark" id="teamTotalRoster">6</span>
+            <span class="text-[9px] text-surface-muted font-medium">Total Roster</span>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-2 border border-gray-100">
+            <span class="block font-black text-brand-600" id="teamActiveTournamentCount">1</span>
+            <span class="text-[9px] text-surface-muted font-medium">Turnamen Aktif</span>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-2 border border-gray-100">
+            <span class="block font-black text-emerald-600">18</span>
+            <span class="text-[9px] text-surface-muted font-medium">Gelar Juara</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FITUR 1: LIHAT LINE UP & SUSUN ROSTER (TAMPIL DI PUBLIK) -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Line-Up & Roster Resmi Tim</h3>
+            <p class="text-[10px] text-surface-muted">Susun Starting 5 & Cadangan (Dapat dilihat publik)</p>
+          </div>
+          <a href="/tim" target="_blank" class="text-[10px] font-bold text-brand-600 hover:underline flex items-center gap-1">
+            <span>Tampilan Publik</span>
+            <i data-lucide="external-link" class="w-3 h-3"></i>
+          </a>
+        </div>
+
+        <!-- LIST ROSTER ITEMS -->
+        <div id="teamRosterList" class="space-y-2.5">
+          <!-- Populated via JS -->
+        </div>
+
+        <div class="p-2.5 rounded-xl bg-gray-50 border border-gray-200/80 text-[10px] text-surface-muted leading-relaxed">
+          💡 <em>Klik "Jadikan Starting" atau "Jadikan Cadangan" untuk memindahkan pemain. Roster ini otomatis tampil di direktori tim publik dan halaman wilayah.</em>
+        </div>
+      </div>
+
+      <!-- FITUR 2: REKRUT ANGGOTA & PERMOHONAN MASUK -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Rekrutmen & Pendaftaran Atlet</h3>
+            <p class="text-[10px] text-surface-muted">Rekrut anggota dari pangkalan data atlet terdaftar</p>
+          </div>
+          <button onclick="openRecruitModal()" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm shadow-emerald-600/20">
+            <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+            <span>Rekrut Atlet</span>
+          </button>
+        </div>
+
+        <!-- PERMOHONAN MASUK DARI ATLET -->
+        <div class="space-y-1.5">
+          <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Permohonan Masuk dari Atlet:</span>
+          <div id="teamApplicantList" class="space-y-2">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- FITUR 3: PENDAFTARAN TURNAMEN OLEH TIM -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Pendaftaran Turnamen Aktif</h3>
+            <p class="text-[10px] text-surface-muted">Daftarkan roster tim ke kompetisi resmi</p>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-700">Pendaftaran Buka</span>
+        </div>
+
+        <div class="space-y-2" id="teamTournamentAvailableList">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 3: PROFIL VENUE (GAMING ARENA / GAME CENTER)           -->
+    <!-- ============================================================== -->
+    <div id="sectionProfilVenue" class="space-y-4 hidden">
+      
+      <!-- KARTU IDENTITAS VENUE -->
+      <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-sky-50/40 border-2 border-sky-100 shadow-md space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <img src="/images/esport-sumbar-logo.png" alt="Venue" class="w-7 h-7 object-contain" />
+            <div>
+              <span class="text-[11px] font-extrabold text-surface-dark uppercase tracking-wider block leading-tight">ESPORT SUMBAR</span>
+              <span class="text-[9px] font-bold text-sky-600 uppercase tracking-widest block leading-tight">ARENA TERAKREDITASI</span>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 text-sky-700 border border-sky-200">
+            Grade A Standar Kompetisi
+          </span>
+        </div>
+
         <div>
-          <h3 class="text-xs font-bold text-surface-dark leading-tight">Belum Memiliki Lencana Verifikasi Resmi?</h3>
-          <p class="text-[11px] text-surface-muted mt-0.5 leading-relaxed">
-            Ajukan lisensi resmi ESPORT SUMBAR x ESI Sumbar untuk memperoleh <strong>Lencana Verifikasi (Centang)</strong> pada kartu Anda, nomor lisensi sah daerah, dan izin ikut Kejurda/Porprov.
+          <h2 class="text-lg font-black text-surface-dark leading-tight" id="venueName">Minang Cyber Lounge Padang</h2>
+          <p class="text-xs font-semibold text-surface-muted mt-0.5 flex items-center gap-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-red-500"></i>
+            <span id="venueAddress">Jl. Khatib Sulaiman No. 42, Padang Barat</span>
           </p>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-brand-600 text-white">30 PC RTX 4070</span>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Fiber 500 Mbps</span>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-gray-100 text-surface-dark">Stage 80 Pax</span>
+          </div>
+        </div>
+
+        <!-- TOGGLE KETERSEDIAAN BOOKING -->
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-surface-muted block font-medium">Status Operasional Venue:</span>
+            <span class="text-xs font-extrabold text-emerald-600" id="venueAvailabilityStatus">Buka untuk Bootcamp & Turnamen</span>
+          </div>
+          <button onclick="toggleVenueBookingStatus()" id="btnToggleVenueStatus" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold tap-action shadow-sm">
+            Aktif Menerima
+          </button>
         </div>
       </div>
-      <a href="/pengajuan-lisensi" class="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 tap-action shadow-md shadow-brand-600/20">
-        <i data-lucide="badge-check" class="w-4 h-4"></i>
-        <span>Ajukan Lisensi Resmi ESI Sekarang</span>
-      </a>
-    </div>
 
-    <!-- 3. BANNER KHUSUS PENGAJUAN SEDANG PROSES -->
-    <div id="pendingReviewBanner" class="hidden app-card rounded-2xl p-4 bg-sky-50 border border-sky-200 space-y-1.5 text-xs text-sky-900">
-      <div class="flex items-center gap-2 font-bold text-sky-800">
-        <i data-lucide="clock" class="w-4 h-4 text-sky-600 animate-spin"></i>
-        <span>Pengajuan Lisensi Sedang Ditinjau Pengcab</span>
+      <!-- FITUR VENUE 1: FASILITAS & TARIF SEWA -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <h3 class="text-xs font-bold text-surface-dark">Fasilitas & Spesifikasi Teknis</h3>
+          <span class="text-[10px] text-surface-muted">Spesifikasi Turnamen</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
+            <span class="text-[10px] text-surface-muted block">Rig Gaming</span>
+            <span class="font-extrabold text-surface-dark block mt-0.5">30 Unit PC RTX 4070</span>
+            <span class="text-[9px] text-emerald-600 font-bold">Monitor 240Hz 0.5ms</span>
+          </div>
+          <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
+            <span class="text-[10px] text-surface-muted block">Koneksi Internet</span>
+            <span class="font-extrabold text-surface-dark block mt-0.5">Dedicated 500 Mbps</span>
+            <span class="text-[9px] text-emerald-600 font-bold">Dual ISP Redundant</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-sky-50/60 border border-sky-100 flex items-center justify-between text-xs">
+          <div>
+            <span class="text-[10px] text-sky-800 font-medium block">Tarif Bootcamp Tim:</span>
+            <strong class="text-surface-dark text-xs">Rp 350.000 / hari (5 PC Stage)</strong>
+          </div>
+          <button onclick="alert('Form tarif diperbarui')" class="px-2.5 py-1.5 rounded-xl bg-white border border-sky-200 text-sky-700 text-[10px] font-bold tap-action">
+            Ubah Tarif
+          </button>
+        </div>
       </div>
-      <p class="text-[11px] text-sky-700 leading-relaxed">
-        Berkas identitas KTP Anda sedang dalam proses verifikasi berjenjang oleh Pengcab daerah. Lencana verifikasi akan otomatis terbit setelah disetujui.
-      </p>
+
+      <!-- FITUR VENUE 2: MANAJEMEN BOOKING MASUK DARI TIM -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Reservasi & Booking Masuk</h3>
+            <p class="text-[10px] text-surface-muted">Permintaan bootcamp & sparing offline dari tim</p>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-brand-50 text-brand-600" id="venueBookingCountBadge">2 Booking</span>
+        </div>
+
+        <div id="venueBookingList" class="space-y-2.5">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
     </div>
 
-    <!-- 4. KUOTA STATUS & LAYANAN ATLET -->
-    <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+    <!-- ============================================================== -->
+    <!-- SECTION 4: PROFIL PELATIH (COACH / TRAINER)                    -->
+    <!-- ============================================================== -->
+    <div id="sectionProfilPelatih" class="space-y-4 hidden">
+      
+      <!-- KARTU LISENSI KEPELATIHAN -->
+      <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white via-white to-amber-50/40 border-2 border-amber-100 shadow-md space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <img src="/images/esport-sumbar-logo.png" alt="Coach" class="w-7 h-7 object-contain" />
+            <div>
+              <span class="text-[11px] font-extrabold text-surface-dark uppercase tracking-wider block leading-tight">ESPORT SUMBAR</span>
+              <span class="text-[9px] font-bold text-amber-600 uppercase tracking-widest block leading-tight">LISENSI KEPELATIHAN RESMI</span>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+            Grade A Daerah
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3.5">
+          <div class="w-16 h-16 rounded-2xl bg-amber-600 text-white flex items-center justify-center font-black text-xl shadow-md shrink-0 overflow-hidden border-2 border-amber-400">
+            <img src="/images/athlete-v4nd4l.jpg" alt="Coach" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h2 class="text-lg font-black text-surface-dark leading-tight" id="coachName">Coach Arief 'Sensei' Rahman</h2>
+              <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+            </div>
+            <p class="text-xs font-semibold text-surface-muted">No. Lisensi: ESSB-COACH-2026-008</p>
+            <div class="flex items-center gap-1.5 mt-1">
+              <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-600 text-white">MLBB & VALORANT</span>
+              <span class="text-[10px] font-semibold text-surface-dark uppercase">KOTA PADANG</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-surface-muted block font-medium">Status Ketersediaan Coaching:</span>
+            <span class="text-xs font-extrabold text-emerald-600" id="coachAvailabilityStatus">Buka Bimbingan Atlet & Tim</span>
+          </div>
+          <button onclick="toggleCoachStatus()" id="btnToggleCoachStatus" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold tap-action shadow-sm">
+            Tersedia
+          </button>
+        </div>
+      </div>
+
+      <!-- FITUR PELATIH 1: MODUL & PLAYBOOK STRATEGI -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Modul & Playbook Strategi</h3>
+            <p class="text-[10px] text-surface-muted">Materi pelatihan drafting, rotasi, & VOD review</p>
+          </div>
+          <button onclick="openAddPlaybookModal()" class="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm shadow-amber-600/20">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Tambah Playbook</span>
+          </button>
+        </div>
+
+        <div id="coachPlaybookList" class="space-y-2.5">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- FITUR PELATIH 2: PERMINTAAN COACHING DARI ATLET / TIM -->
+      <div class="app-card rounded-3xl p-4 bg-white space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
+          <div>
+            <h3 class="text-xs font-bold text-surface-dark">Permintaan Bimbingan Coaching</h3>
+            <p class="text-[10px] text-surface-muted">Permohonan evaluasi performa & sparing</p>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-700" id="coachRequestCountBadge">2 Permintaan</span>
+        </div>
+
+        <div id="coachRequestList" class="space-y-2.5">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- QUICK ACTIONS & SETTINGS                                       -->
+    <!-- ============================================================== -->
+    <div class="app-card rounded-3xl p-4 bg-white space-y-2">
       <span class="text-[11px] font-bold text-surface-muted uppercase tracking-wider block">
-        Status & Informasi Akun
+        Pusat Layanan & Navigasi Cepat
       </span>
 
-      <div class="grid grid-cols-2 gap-2 text-xs">
-        <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
-          <span class="text-[10px] text-surface-muted font-medium block">Poin Performa (OVR)</span>
-          <span class="text-lg font-black text-brand-600" id="tileOvr">88 Poin</span>
-          <span class="text-[9px] text-surface-muted block mt-0.5 font-bold" id="tileGrade">Member Terdaftar</span>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
-          <span class="text-[10px] text-surface-muted font-medium block">Status Lisensi</span>
-          <span class="text-xs font-bold text-surface-dark block mt-0.5 truncate" id="tileLisensiStatus">Belum Terverifikasi</span>
-          <span class="text-[9px] text-surface-muted block mt-0.5">Status Resmi</span>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
-          <span class="text-[10px] text-surface-muted font-medium block">Bursa Transfer LFT</span>
-          <span class="text-xs font-bold text-indigo-600 block mt-0.5">Aktif (Tersedia)</span>
-          <span class="text-[9px] text-surface-muted block mt-0.5">Scouting Terbuka</span>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
-          <span class="text-[10px] text-surface-muted font-medium block">Hak Turnamen</span>
-          <span class="text-xs font-bold text-surface-dark block mt-0.5" id="tileHakTurnamen">Turnamen Komunitas</span>
-          <span class="text-[9px] text-surface-muted block mt-0.5">Tingkat Event</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. MENU AKSI CEPAT -->
-    <div class="app-card rounded-3xl p-4 bg-white space-y-1 divide-y divide-gray-100">
-      
-      <!-- Pengajuan Lisensi Resmi link -->
-      <a href="/pengajuan-lisensi" class="w-full py-3 flex items-center justify-between text-left tap-action">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
-            <i data-lucide="badge-check" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold text-surface-dark">Pengajuan Lisensi & Verifikasi ESI</h4>
-            <p class="text-[10px] text-surface-muted">Upload berkas untuk memperoleh lencana centang resmi</p>
-          </div>
-        </div>
-        <i data-lucide="chevron-right" class="w-4 h-4 text-surface-muted"></i>
-      </a>
-
       <!-- Bursa Transfer LFT -->
-      <a href="/bursa" class="w-full py-3 flex items-center justify-between text-left tap-action">
+      <a href="/bursa" class="w-full py-2.5 flex items-center justify-between text-left tap-action border-b border-gray-100">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
-            <i data-lucide="repeat" class="w-5 h-5"></i>
+          <div class="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
+            <i data-lucide="repeat" class="w-4 h-4"></i>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-surface-dark">Bursa Transfer Pemain (LFT)</h4>
+            <h4 class="text-xs font-bold text-surface-dark">Bursa Transfer Atlet (LFT)</h4>
             <p class="text-[10px] text-surface-muted">Cari tim baru atau buka ketersediaan rekrutmen</p>
           </div>
         </div>
@@ -287,42 +593,34 @@
       </a>
 
       <!-- Kalender Turnamen -->
-      <a href="/turnamen" class="w-full py-3 flex items-center justify-between text-left tap-action">
+      <a href="/turnamen" class="w-full py-2.5 flex items-center justify-between text-left tap-action border-b border-gray-100">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
-            <i data-lucide="trophy" class="w-5 h-5"></i>
+          <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
+            <i data-lucide="trophy" class="w-4 h-4"></i>
           </div>
           <div>
             <h4 class="text-xs font-bold text-surface-dark">Kalender & Pendaftaran Event</h4>
-            <p class="text-[10px] text-surface-muted">Lihat jadwal turnamen dan kompetisi terbuka</p>
+            <p class="text-[10px] text-surface-muted">Lihat jadwal kejuaraan resmi se-Sumatera Barat</p>
           </div>
         </div>
         <i data-lucide="chevron-right" class="w-4 h-4 text-surface-muted"></i>
       </a>
 
-      <!-- Unduh Kartu Paspor -->
-      <button onclick="downloadPassportCard()" class="w-full py-3 flex items-center justify-between text-left tap-action">
+      <!-- Direktori Wilayah -->
+      <a href="/wilayah" class="w-full py-2.5 flex items-center justify-between text-left tap-action">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-red-50 text-brand-600 flex items-center justify-center border border-red-100">
-            <i data-lucide="download" class="w-5 h-5"></i>
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+            <i data-lucide="map" class="w-4 h-4"></i>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-surface-dark">Unduh Kartu Identitas Digital</h4>
-            <p class="text-[10px] text-surface-muted">Simpan gambar kartu ke perangkat smartphone</p>
+            <h4 class="text-xs font-bold text-surface-dark">Direktori 19 Wilayah</h4>
+            <p class="text-[10px] text-surface-muted">Lihat data atlet, klub, dan venue di tiap daerah</p>
           </div>
         </div>
         <i data-lucide="chevron-right" class="w-4 h-4 text-surface-muted"></i>
-      </button>
-
+      </a>
     </div>
 
-    <!-- LOGOUT BUTTON -->
-    <button onclick="handleLogout()" class="w-full py-3 rounded-2xl bg-white border border-red-200 text-brand-600 font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-sm hover:bg-red-50">
-      <i data-lucide="log-out" class="w-4 h-4"></i>
-      <span>Keluar dari Akun</span>
-    </button>
-
-  
     <!-- PROVIDER COLLABORATION & COPYRIGHT FOOTER -->
     <div class="app-card rounded-2xl p-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white space-y-2 mt-6">
       <div class="flex items-center gap-2">
@@ -344,10 +642,123 @@
     </footer>
   </main>
 
-  <!-- FIXED BOTTOM DOCK (MYTELKOMSEL 5-TAB APP NAV) -->
   <!-- ============================================================== -->
-  <!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE)    -->
+  <!-- MODAL: CARI TIM & DAFTAR DIRI (UNTUK ATLET)                    -->
   <!-- ============================================================== -->
+  <div id="findTeamModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+        <div>
+          <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Cari & Daftar ke Tim</h4>
+          <p class="text-[10px] text-surface-muted">Ajukan diri untuk bergabung ke tim resmi</p>
+        </div>
+        <button onclick="closeFindTeamModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3" id="availableTeamsToApply">
+        <!-- populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: REKRUT ATLET (UNTUK TIM)                                -->
+  <!-- ============================================================== -->
+  <div id="recruitModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+        <div>
+          <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Bursa Rekrutmen Atlet</h4>
+          <p class="text-[10px] text-surface-muted">Pilih talenta untuk dimasukkan ke roster tim</p>
+        </div>
+        <button onclick="closeRecruitModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3" id="availablePlayersToRecruit">
+        <!-- populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: AJUKAN LENCANA VERIFIKASI RESMI                         -->
+  <!-- ============================================================== -->
+  <div id="verifRequestModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+        <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Permintaan Lencana Verifikasi</h4>
+        <button onclick="closeRequestVerifModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form onsubmit="submitVerifRequest(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-[10px] font-bold text-surface-dark mb-1">Nomor Induk Kependudukan (NIK):</label>
+          <input type="text" required placeholder="1371xxxxxxxxxxxx" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600" />
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-surface-dark mb-1">Kabupaten / Kota Domisili ESI:</label>
+          <select id="verifRegionSelect" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600">
+            <option value="Kota Padang">Kota Padang</option>
+            <option value="Kota Bukittinggi">Kota Bukittinggi</option>
+            <option value="Kota Payakumbuh">Kota Payakumbuh</option>
+            <option value="Kab. Agam">Kab. Agam</option>
+            <option value="Kab. Solok">Kab. Solok</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-surface-dark mb-1">Foto Bukti KTP / Kartu Pelajar:</label>
+          <input type="file" accept="image/*" class="w-full text-[11px] text-surface-muted file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-gray-100 file:text-surface-dark hover:file:bg-gray-200" />
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-brand-600 text-white font-bold text-xs tap-action">
+          Kirim Pengajuan ke Pengcab
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: TAMBAH PLAYBOOK (PELATIH)                               -->
+  <!-- ============================================================== -->
+  <div id="addPlaybookModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+        <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Tambah Playbook Taktis</h4>
+        <button onclick="closeAddPlaybookModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form onsubmit="submitNewPlaybook(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-[10px] font-bold text-surface-dark mb-1">Judul Materi / Strategi:</label>
+          <input type="text" id="inputPlaybookTitle" required placeholder="Contoh: Makro Rotasi Turtle Season 35" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600" />
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-surface-dark mb-1">Divisi Game:</label>
+          <select id="inputPlaybookGame" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600">
+            <option value="Mobile Legends">Mobile Legends</option>
+            <option value="Valorant">Valorant</option>
+            <option value="PUBG Mobile">PUBG Mobile</option>
+            <option value="Free Fire">Free Fire</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-surface-dark mb-1">Level Pembinaan:</label>
+          <input type="text" id="inputPlaybookLevel" required placeholder="Contoh: Tingkat Porprov / Tier 1" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-surface-dark focus:outline-none focus:border-brand-600" />
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-amber-600 text-white font-bold text-xs tap-action">
+          Simpan Playbook
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- ============================================================== -->
   <!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE)    -->
   <!-- ============================================================== -->
@@ -380,7 +791,7 @@
         <span class="text-[10px] font-medium leading-none">Wilayah</span>
       </a>
 
-      <!-- 5. Akun -->
+      <!-- 5. Akun (Active) -->
       <a href="/profile" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-brand-600">
         <i data-lucide="user" class="w-5 h-5 stroke-[2.2] mb-1"></i>
         <span class="text-[10px] font-bold leading-none">Akun</span>
@@ -389,124 +800,660 @@
     </div>
   </nav>
 
+  <!-- ============================================================== -->
+  <!-- CLIENT JAVASCRIPT: INTERCONNECTED MULTI-ROLE ENGINE            -->
+  <!-- ============================================================== -->
   <script>
+    // SHARED ECOSYSTEM INTERCONNECTED STATE
+    const DEFAULT_ECOSYSTEM_STATE = {
+      activeRole: 'atlet',
+      atlet: {
+        id: "atl-01",
+        nama: "Muhammad Rayden",
+        ign: "V4ND4L",
+        game: "VALORANT",
+        roleTitle: "Duelist",
+        wilayah: "Kota Padang",
+        ovr: 96,
+        pasporId: "ESSB-2026-VAL-96",
+        isVerified: true,
+        foto: "/images/athlete-v4nd4l.jpg",
+        currentTeam: null, // Free Agent
+        applications: [
+          { teamName: "Minang Pride Esports", date: "Hari ini", status: "Menunggu Review" }
+        ]
+      },
+      tim: {
+        id: "tim-1",
+        nama: "Minang Pride Esports",
+        manager: "Doni Prasetya, SE",
+        wilayah: "Kota Padang",
+        game: "Valorant & Mobile Legends",
+        akreditasi: "Grade A Standar PBESI Sumbar",
+        roster: [
+          { ign: "V4ND4L", nama: "Muhammad Rayden", role: "Duelist / IGL", ovr: 96, isStarting: true },
+          { ign: "F4LCON", nama: "Fajri Alamsyah", role: "Initiator", ovr: 92, isStarting: true },
+          { ign: "RECON", nama: "Iqbal Maulana", role: "Controller", ovr: 90, isStarting: true },
+          { ign: "BLITZ", nama: "Aldi Gunawan", role: "Sentinel", ovr: 89, isStarting: true },
+          { ign: "VIPER", nama: "Fajar Pratama", role: "Flex", ovr: 91, isStarting: true },
+          { ign: "PHANTOM", nama: "Reza Mahendra", role: "Sub-Duelist", ovr: 87, isStarting: false }
+        ],
+        applicants: [
+          { id: "app-1", ign: "KYROX", nama: "Rizky Alamsyah", game: "Mobile Legends", role: "Flex / Mid", ovr: 93, waktu: "2 jam lalu" },
+          { id: "app-2", ign: "Z4NN", nama: "Fauzan Hakim", game: "Mobile Legends", role: "Roamer", ovr: 94, waktu: "1 hari lalu" }
+        ],
+        tournaments: [
+          { id: "tour-1", name: "Piala Gubernur PBESI Sumbar 2026", prize: "Rp 50.000.000", isRegistered: true },
+          { id: "tour-2", name: "Liga Grassroots Pelajar & Komunitas 2026", prize: "Medali & Pembinaan", isRegistered: false }
+        ]
+      },
+      venue: {
+        id: "ven-1",
+        nama: "Minang Cyber Lounge Padang",
+        alamat: "Jl. Khatib Sulaiman No. 42, Padang Barat",
+        spek: "30 PC Rig RTX 4070 • 240Hz Monitor • Dedicated Fiber 500 Mbps",
+        isOpenForBooking: true,
+        bookings: [
+          { id: "b-1", teamName: "Minang Pride Esports", event: "Bootcamp Pra-Turnamen", durasi: "3 Hari (5 PC)", status: "Terkonfirmasi" },
+          { id: "b-2", teamName: "Singgalang Rangers", event: "Sparing Offline LAN", durasi: "1 Hari (10 PC)", status: "Menunggu Konfirmasi" }
+        ]
+      },
+      pelatih: {
+        id: "coa-1",
+        nama: "Coach Arief 'Sensei' Rahman, S.Or",
+        noLisensi: "ESSB-COACH-2026-008",
+        lisensi: "Lisensi Pelatih PBESI Daerah (Grade A)",
+        isOpenForCoaching: true,
+        playbooks: [
+          { id: "pb-1", title: "Drafting Meta & Counter-Pick Strategy 2026", game: "Mobile Legends", level: "Lanjutan / Turnamen" },
+          { id: "pb-2", title: "Default Setups & Retake Protocol Haven / Ascent", game: "Valorant", level: "Tier 1 Pelatda" },
+          { id: "pb-3", title: "Early Game Macro & Objective Control Timer", game: "Mobile Legends", level: "Grassroots & Akademi" }
+        ],
+        requests: [
+          { id: "r-1", from: "FAJAR7 (Jungler)", type: "Privat 1-on-1 VOD Review", time: "Hari Ini, 20.00 WIB", status: "Menunggu Jadwal" },
+          { id: "r-2", from: "Singgalang Rangers", type: "Review Sparing Tim MLBB", time: "Sabtu, 14 Nov 2026", status: "Diterima" }
+        ]
+      }
+    };
+
+    // Load or initialize state
+    function getEcosystemState() {
+      try {
+        const raw = localStorage.getItem('esport_sumbar_ecosystem_state');
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      localStorage.setItem('esport_sumbar_ecosystem_state', JSON.stringify(DEFAULT_ECOSYSTEM_STATE));
+      return DEFAULT_ECOSYSTEM_STATE;
+    }
+
+    function saveEcosystemState(state) {
+      localStorage.setItem('esport_sumbar_ecosystem_state', JSON.stringify(state));
+    }
+
+    let state = getEcosystemState();
+
+    // CARD FLIP CONTROLLER
     function toggleCardFlip() {
-      document.getElementById('passportFlipCard').classList.toggle('flipped');
+      const card = document.getElementById('passportFlipCard');
+      if (card) card.classList.toggle('flipped');
     }
 
-    function downloadPassportCard() {
-      alert('Kartu identitas platform berhasil diunduh dalam format gambar HD.');
+    // ROLE SWITCHER LOGIC
+    function switchRole(newRole) {
+      state.activeRole = newRole;
+      saveEcosystemState(state);
+
+      // Also sync user session
+      let userSession = {
+        role: newRole,
+        nama: newRole === 'atlet' ? state.atlet.nama :
+              newRole === 'tim' ? state.tim.nama :
+              newRole === 'venue' ? state.venue.nama : state.pelatih.nama,
+        email: `${newRole}@esportsumbar.id`
+      };
+      localStorage.setItem('esi_user_session', JSON.stringify(userSession));
+
+      renderActiveRole();
+      lucide.createIcons();
     }
 
-    function handleLogout() {
-      if (confirm('Apakah Anda yakin ingin keluar dari akun?')) {
-        localStorage.removeItem('esi_auth_token');
-        localStorage.removeItem('esi_user_session');
-        window.location.href = '/login';
+    function renderActiveRole() {
+      const currentRole = state.activeRole || 'atlet';
+
+      // 1. Update pills
+      ['atlet', 'tim', 'venue', 'pelatih'].forEach(r => {
+        const pill = document.getElementById(`pillRole${r.charAt(0).toUpperCase() + r.slice(1)}`);
+        if (pill) {
+          if (r === currentRole) {
+            pill.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm";
+          } else {
+            pill.className = "px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200";
+          }
+        }
+      });
+
+      // 2. Hide all sections
+      document.getElementById('sectionProfilAtlet').classList.add('hidden');
+      document.getElementById('sectionProfilTim').classList.add('hidden');
+      document.getElementById('sectionProfilVenue').classList.add('hidden');
+      document.getElementById('sectionProfilPelatih').classList.add('hidden');
+
+      // 3. Show active section & render content
+      if (currentRole === 'atlet') {
+        document.getElementById('topProfileTitle').textContent = 'Profil Atlet';
+        document.getElementById('sectionProfilAtlet').classList.remove('hidden');
+        renderAtletProfile();
+      } else if (currentRole === 'tim') {
+        document.getElementById('topProfileTitle').textContent = 'Profil & Roster Tim';
+        document.getElementById('sectionProfilTim').classList.remove('hidden');
+        renderTimProfile();
+      } else if (currentRole === 'venue') {
+        document.getElementById('topProfileTitle').textContent = 'Profil & Fasilitas Venue';
+        document.getElementById('sectionProfilVenue').classList.remove('hidden');
+        renderVenueProfile();
+      } else if (currentRole === 'pelatih') {
+        document.getElementById('topProfileTitle').textContent = 'Profil & Lisensi Pelatih';
+        document.getElementById('sectionProfilPelatih').classList.remove('hidden');
+        renderPelatihProfile();
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      let isVerified = false;
-      let userData = {
-        nama: 'Muhammad Rayden',
-        ign: 'V4ND4L',
-        game: 'VALORANT',
-        roleTitle: 'DUELIST',
-        wilayah: 'Padang',
-        pasporId: 'ESSB-2026-VAL-982',
-        ovr: 96,
-        isVerified: true,
-        lisensiStatus: 'TERVERIFIKASI RESMI'
-      };
+    // ==========================================
+    // RENDER ROLE 1: ATLET
+    // ==========================================
+    function renderAtletProfile() {
+      const a = state.atlet;
+      document.getElementById('userIgn').textContent = a.ign;
+      document.getElementById('userName').textContent = a.nama;
+      document.getElementById('userGame').textContent = a.game.toUpperCase();
+      document.getElementById('userRole').textContent = (a.roleTitle + ' // ' + a.wilayah).toUpperCase();
+      document.getElementById('userPasporId').textContent = a.pasporId;
+      document.getElementById('backPasporId').textContent = a.pasporId;
+      document.getElementById('userOvrBadge').textContent = a.ovr;
 
+      // Verification banner
+      const verifBanner = document.getElementById('atletVerifCtaBanner');
+      if (a.isVerified) {
+        verifBanner.classList.add('hidden');
+      } else {
+        verifBanner.classList.remove('hidden');
+      }
+
+      // Team status
+      const teamBadge = document.getElementById('atletTeamStatusBadge');
+      const teamNameEl = document.getElementById('atletCurrentTeamName');
+      if (a.currentTeam) {
+        teamBadge.textContent = 'Anggota Tim';
+        teamBadge.className = 'px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700';
+        teamNameEl.textContent = a.currentTeam;
+      } else {
+        teamBadge.textContent = 'Free Agent (LFT)';
+        teamBadge.className = 'px-2 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700';
+        teamNameEl.textContent = 'Belum Tergabung dalam Tim (Bebas Transfer)';
+      }
+
+      // Applications list
+      const appContainer = document.getElementById('atletApplicationList');
+      if (a.applications && a.applications.length > 0) {
+        appContainer.innerHTML = a.applications.map(app => `
+          <div class="p-2.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-between text-xs">
+            <div>
+              <strong class="text-surface-dark block">${app.teamName}</strong>
+              <span class="text-[10px] text-surface-muted">Dikirim: ${app.date}</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[9px] font-bold ${app.status.includes('Diterima') ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+              ${app.status}
+            </span>
+          </div>
+        `).join('');
+      } else {
+        appContainer.innerHTML = '<p class="text-[11px] text-surface-muted italic">Belum ada permohonan tim yang dikirim.</p>';
+      }
+    }
+
+    // Modal Cari Tim
+    function openFindTeamModal() {
+      const container = document.getElementById('availableTeamsToApply');
+      const teams = [
+        { name: "Minang Pride Esports", game: "Valorant & MLBB", div: "Pelatda Grade A", need: "Membuka trial Duelist / Roamer" },
+        { name: "Singgalang Rangers", game: "Mobile Legends", div: "Divisi Utama Bukittinggi", need: "Mencari Jungler & Midlaner" },
+        { name: "Ranah Cyber Academy", game: "Valorant & Free Fire", div: "Akademi Grassroots", need: "Membuka audisi talenta muda" }
+      ];
+
+      container.innerHTML = teams.map(t => `
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 space-y-2">
+          <div class="flex items-start justify-between">
+            <div>
+              <h5 class="text-xs font-black text-surface-dark">${t.name}</h5>
+              <span class="text-[10px] text-surface-muted">${t.game} • ${t.div}</span>
+            </div>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700">Open Recruitment</span>
+          </div>
+          <p class="text-[10px] text-surface-dark font-medium bg-white p-2 rounded-lg border border-gray-100">
+            📌 Kebutuhan: ${t.need}
+          </p>
+          <button onclick="applyToTeam('${t.name}')" class="w-full py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold tap-action transition-colors">
+            Daftarkan Diri ke Tim Ini
+          </button>
+        </div>
+      `).join('');
+
+      document.getElementById('findTeamModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeFindTeamModal() {
+      document.getElementById('findTeamModal').classList.add('hidden');
+    }
+
+    function applyToTeam(teamName) {
+      state.atlet.applications.unshift({
+        teamName: teamName,
+        date: "Baru saja",
+        status: "Menunggu Review"
+      });
+
+      // Interkoneksi: Tambahkan ke applicants tim
+      if (teamName === state.tim.nama) {
+        state.tim.applicants.unshift({
+          id: `app-${Date.now()}`,
+          ign: state.atlet.ign,
+          nama: state.atlet.nama,
+          game: state.atlet.game,
+          role: state.atlet.roleTitle,
+          ovr: state.atlet.ovr,
+          waktu: "Baru saja"
+        });
+      }
+
+      saveEcosystemState(state);
+      closeFindTeamModal();
+      renderAtletProfile();
+      alert(`Permohonan gabung ke ${teamName} berhasil dikirim! Tim akan meninjau berkas paspor digital Anda.`);
+    }
+
+    // Modal Request Verifikasi
+    function showRequestVerifModal() {
+      document.getElementById('verifRequestModal').classList.remove('hidden');
+    }
+    function closeRequestVerifModal() {
+      document.getElementById('verifRequestModal').classList.add('hidden');
+    }
+    function submitVerifRequest(e) {
+      e.preventDefault();
+      state.atlet.isVerified = true;
+      state.atlet.lisensiStatus = "TERVERIFIKASI RESMI";
+      saveEcosystemState(state);
+      closeRequestVerifModal();
+      renderAtletProfile();
+      alert('Pengajuan verifikasi berhasil dikirim dan disetujui Pengcab daerah! Lencana verifikasi resmi Anda kini aktif.');
+    }
+
+    // ==========================================
+    // RENDER ROLE 2: TIM (KLUB / ORGANISASI)
+    // ==========================================
+    function renderTimProfile() {
+      const t = state.tim;
+      document.getElementById('teamName').textContent = t.nama;
+      document.getElementById('teamTotalRoster').textContent = t.roster.length;
+      document.getElementById('teamActiveTournamentCount').textContent = t.tournaments.filter(x => x.isRegistered).length;
+
+      // 1. Render Roster
+      const rosterContainer = document.getElementById('teamRosterList');
+      rosterContainer.innerHTML = t.roster.map((m, idx) => `
+        <div class="p-3 rounded-2xl border ${m.isStarting ? 'bg-emerald-50/40 border-emerald-200' : 'bg-gray-50 border-gray-200'} flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg ${m.isStarting ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-surface-muted'} flex items-center justify-center font-bold text-[10px]">
+              ${idx + 1}
+            </span>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <strong class="text-surface-dark">${m.ign}</strong>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-bold ${m.isStarting ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-200 text-gray-700'}">
+                  ${m.isStarting ? 'STARTING 5' : 'CADANGAN'}
+                </span>
+              </div>
+              <p class="text-[10px] text-surface-muted">${m.nama} • ${m.role} (OVR ${m.ovr})</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <button onclick="toggleRosterRole(${idx})" class="p-1.5 rounded-lg bg-white border border-gray-200 text-[10px] font-bold text-surface-dark hover:bg-gray-100 tap-action" title="Ubah Status">
+              ${m.isStarting ? 'Jadikan Cadangan' : 'Jadikan Starting'}
+            </button>
+            <button onclick="removeRosterMember(${idx})" class="p-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 tap-action" title="Hapus">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // 2. Render Applicants
+      const appContainer = document.getElementById('teamApplicantList');
+      if (t.applicants && t.applicants.length > 0) {
+        appContainer.innerHTML = t.applicants.map((app, idx) => `
+          <div class="p-3 rounded-2xl bg-white border border-gray-200 shadow-sm flex items-center justify-between text-xs">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <strong class="text-surface-dark">${app.ign}</strong>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-bold bg-red-50 text-brand-600">OVR ${app.ovr}</span>
+              </div>
+              <p class="text-[10px] text-surface-muted">${app.nama} • Posisi: ${app.role}</p>
+              <span class="text-[9px] text-gray-400">Masuk: ${app.waktu}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button onclick="acceptApplicant(${idx})" class="px-2.5 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-[10px] tap-action">
+                Terima
+              </button>
+              <button onclick="rejectApplicant(${idx})" class="px-2 py-1.5 rounded-xl bg-gray-100 text-surface-muted font-bold text-[10px] tap-action">
+                Tolak
+              </button>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        appContainer.innerHTML = '<p class="text-[11px] text-surface-muted italic">Tidak ada permohonan masuk saat ini.</p>';
+      }
+
+      // 3. Render Available Tournaments
+      const tourContainer = document.getElementById('teamTournamentAvailableList');
+      tourContainer.innerHTML = t.tournaments.map((tour, idx) => `
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between text-xs">
+          <div>
+            <strong class="text-surface-dark block">${tour.name}</strong>
+            <span class="text-[10px] text-brand-600 font-bold">Total Hadiah: ${tour.prize}</span>
+          </div>
+          ${tour.isRegistered ? 
+            `<span class="px-2.5 py-1 rounded-xl bg-emerald-50 text-emerald-700 font-bold text-[10px] border border-emerald-200 flex items-center gap-1">
+               <i data-lucide="check" class="w-3 h-3"></i> Terdaftar Resmi
+             </span>` :
+            `<button onclick="registerTeamToTournament(${idx})" class="px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs tap-action shadow-sm shadow-brand-600/20">
+               Daftar Turnamen
+             </button>`
+          }
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function toggleRosterRole(idx) {
+      state.tim.roster[idx].isStarting = !state.tim.roster[idx].isStarting;
+      saveEcosystemState(state);
+      renderTimProfile();
+    }
+
+    function removeRosterMember(idx) {
+      if (confirm(`Keluarkan ${state.tim.roster[idx].ign} dari roster tim?`)) {
+        state.tim.roster.splice(idx, 1);
+        saveEcosystemState(state);
+        renderTimProfile();
+      }
+    }
+
+    function acceptApplicant(idx) {
+      const app = state.tim.applicants[idx];
+      state.tim.roster.push({
+        ign: app.ign,
+        nama: app.nama,
+        role: app.role,
+        ovr: app.ovr,
+        isStarting: false
+      });
+      state.tim.applicants.splice(idx, 1);
+
+      // Interkoneksi: update status atlet jika cocok
+      if (state.atlet.ign === app.ign) {
+        state.atlet.currentTeam = state.tim.nama;
+        state.atlet.applications.forEach(a => {
+          if (a.teamName === state.tim.nama) a.status = "Diterima (Resmi Anggota)";
+        });
+      }
+
+      saveEcosystemState(state);
+      renderTimProfile();
+      alert(`Selamat! ${app.ign} resmi bergabung ke dalam roster ${state.tim.nama}.`);
+    }
+
+    function rejectApplicant(idx) {
+      state.tim.applicants.splice(idx, 1);
+      saveEcosystemState(state);
+      renderTimProfile();
+    }
+
+    function registerTeamToTournament(idx) {
+      state.tim.tournaments[idx].isRegistered = true;
+      saveEcosystemState(state);
+      renderTimProfile();
+      alert(`Pendaftaran Roster Tim ke '${state.tim.tournaments[idx].name}' BERHASIL! Slot kompetisi Anda telah dikonfirmasi.`);
+    }
+
+    // Modal Rekrut Atlet
+    function openRecruitModal() {
+      const container = document.getElementById('availablePlayersToRecruit');
+      const freeAgents = [
+        { ign: "JAMGADANG_SNIPER", nama: "Budi Santoso", game: "PUBG Mobile", role: "Sniper", ovr: 87, wilayah: "Bukittinggi" },
+        { ign: "SHADOWFOX", nama: "Rifki Pratama", game: "Mobile Legends", role: "EXP Laner", ovr: 89, wilayah: "Payakumbuh" },
+        { ign: "GANDORIAH_BOY", nama: "Iqbal Maulana", game: "Free Fire", role: "Rusher", ovr: 90, wilayah: "Pariaman" }
+      ];
+
+      container.innerHTML = freeAgents.map(fa => `
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between text-xs">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <strong class="text-surface-dark">${fa.ign}</strong>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-bold bg-red-50 text-brand-600">OVR ${fa.ovr}</span>
+            </div>
+            <p class="text-[10px] text-surface-muted">${fa.nama} • ${fa.game}</p>
+            <span class="text-[9px] text-surface-dark">${fa.role} // ${fa.wilayah}</span>
+          </div>
+          <button onclick="recruitFreeAgent('${fa.ign}', '${fa.nama}', '${fa.role}', ${fa.ovr})" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs tap-action">
+            Rekrut
+          </button>
+        </div>
+      `).join('');
+
+      document.getElementById('recruitModal').classList.remove('hidden');
+    }
+
+    function closeRecruitModal() {
+      document.getElementById('recruitModal').classList.add('hidden');
+    }
+
+    function recruitFreeAgent(ign, nama, role, ovr) {
+      state.tim.roster.push({
+        ign: ign,
+        nama: nama,
+        role: role,
+        ovr: ovr,
+        isStarting: false
+      });
+      saveEcosystemState(state);
+      closeRecruitModal();
+      renderTimProfile();
+      alert(`Tawaran diterima! ${ign} berhasil dimasukkan ke line-up cadangan tim.`);
+    }
+
+    // ==========================================
+    // RENDER ROLE 3: VENUE (GAMING ARENA)
+    // ==========================================
+    function renderVenueProfile() {
+      const v = state.venue;
+      document.getElementById('venueName').textContent = v.nama;
+      document.getElementById('venueAddress').textContent = v.alamat;
+
+      const availStatus = document.getElementById('venueAvailabilityStatus');
+      const btnToggle = document.getElementById('btnToggleVenueStatus');
+      if (v.isOpenForBooking) {
+        availStatus.textContent = "Buka untuk Bootcamp & Turnamen";
+        availStatus.className = "text-xs font-extrabold text-emerald-600";
+        btnToggle.textContent = "Buka Reservasi";
+        btnToggle.className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold tap-action shadow-sm";
+      } else {
+        availStatus.textContent = "Sedang Penuh / Tutup Booking";
+        availStatus.className = "text-xs font-extrabold text-red-600";
+        btnToggle.textContent = "Tutup Booking";
+        btnToggle.className = "px-3 py-1.5 rounded-xl bg-gray-500 text-white text-xs font-bold tap-action shadow-sm";
+      }
+
+      // Booking requests
+      document.getElementById('venueBookingCountBadge').textContent = `${v.bookings.length} Reservasi`;
+      const bookingContainer = document.getElementById('venueBookingList');
+      bookingContainer.innerHTML = v.bookings.map((b, idx) => `
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between text-xs">
+          <div>
+            <strong class="text-surface-dark block">${b.teamName}</strong>
+            <span class="text-[10px] text-surface-muted block">${b.event} • ${b.durasi}</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            ${b.status === 'Terkonfirmasi' ? 
+              `<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700">Terkonfirmasi</span>` :
+              `<button onclick="confirmVenueBooking(${idx})" class="px-2.5 py-1.5 rounded-xl bg-brand-600 text-white font-bold text-[10px] tap-action">
+                 Konfirmasi
+               </button>`
+            }
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function toggleVenueBookingStatus() {
+      state.venue.isOpenForBooking = !state.venue.isOpenForBooking;
+      saveEcosystemState(state);
+      renderVenueProfile();
+    }
+
+    function confirmVenueBooking(idx) {
+      state.venue.bookings[idx].status = 'Terkonfirmasi';
+      saveEcosystemState(state);
+      renderVenueProfile();
+      alert('Reservasi bootcamp tim berhasil dikonfirmasi dan jadwal arena terkunci.');
+    }
+
+    // ==========================================
+    // RENDER ROLE 4: PELATIH (COACH)
+    // ==========================================
+    function renderPelatihProfile() {
+      const p = state.pelatih;
+      document.getElementById('coachName').textContent = p.nama;
+
+      const availStatus = document.getElementById('coachAvailabilityStatus');
+      const btnToggle = document.getElementById('btnToggleCoachStatus');
+      if (p.isOpenForCoaching) {
+        availStatus.textContent = "Buka Bimbingan Atlet & Tim";
+        availStatus.className = "text-xs font-extrabold text-emerald-600";
+        btnToggle.textContent = "Aktif Buka";
+        btnToggle.className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold tap-action shadow-sm";
+      } else {
+        availStatus.textContent = "Jadwal Penuh (Tidak Buka)";
+        availStatus.className = "text-xs font-extrabold text-red-600";
+        btnToggle.textContent = "Tutup Sesi";
+        btnToggle.className = "px-3 py-1.5 rounded-xl bg-gray-500 text-white text-xs font-bold tap-action shadow-sm";
+      }
+
+      // Playbooks
+      const playbookContainer = document.getElementById('coachPlaybookList');
+      playbookContainer.innerHTML = p.playbooks.map(pb => `
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-start justify-between text-xs">
+          <div>
+            <span class="px-1.5 py-0.2 rounded text-[8px] font-bold bg-amber-50 text-amber-700">${pb.game}</span>
+            <strong class="text-surface-dark block mt-1">${pb.title}</strong>
+            <span class="text-[10px] text-surface-muted">${pb.level}</span>
+          </div>
+          <button onclick="alert('Membuka kurikulum: ' + '${pb.title}')" class="px-2 py-1 rounded-lg bg-white border border-gray-200 text-[10px] font-bold text-surface-dark tap-action">
+            Buka
+          </button>
+        </div>
+      `).join('');
+
+      // Coaching Requests
+      document.getElementById('coachRequestCountBadge').textContent = `${p.requests.length} Permintaan`;
+      const requestContainer = document.getElementById('coachRequestList');
+      requestContainer.innerHTML = p.requests.map((r, idx) => `
+        <div class="p-3 rounded-2xl bg-white border border-gray-100 shadow-sm flex items-center justify-between text-xs">
+          <div>
+            <strong class="text-surface-dark block">${r.from}</strong>
+            <span class="text-[10px] text-surface-muted block">${r.type}</span>
+            <span class="text-[9px] text-amber-700 font-bold">${r.time}</span>
+          </div>
+          <div>
+            ${r.status === 'Diterima' ? 
+              `<span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700">Terjadwal</span>` :
+              `<button onclick="acceptCoachingRequest(${idx})" class="px-2.5 py-1.5 rounded-xl bg-amber-600 text-white font-bold text-[10px] tap-action">
+                 Jadwalkan
+               </button>`
+            }
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function toggleCoachStatus() {
+      state.pelatih.isOpenForCoaching = !state.pelatih.isOpenForCoaching;
+      saveEcosystemState(state);
+      renderPelatihProfile();
+    }
+
+    function acceptCoachingRequest(idx) {
+      state.pelatih.requests[idx].status = 'Diterima';
+      saveEcosystemState(state);
+      renderPelatihProfile();
+      alert('Sesi coaching telah dikonfirmasi dan ditambahkan ke kalender pelatihan Anda.');
+    }
+
+    // Modal Add Playbook
+    function openAddPlaybookModal() {
+      document.getElementById('addPlaybookModal').classList.remove('hidden');
+    }
+    function closeAddPlaybookModal() {
+      document.getElementById('addPlaybookModal').classList.add('hidden');
+    }
+    function submitNewPlaybook(e) {
+      e.preventDefault();
+      const title = document.getElementById('inputPlaybookTitle').value.trim();
+      const game = document.getElementById('inputPlaybookGame').value;
+      const level = document.getElementById('inputPlaybookLevel').value.trim();
+
+      state.pelatih.playbooks.unshift({
+        id: `pb-${Date.now()}`,
+        title: title,
+        game: game,
+        level: level
+      });
+      saveEcosystemState(state);
+      closeAddPlaybookModal();
+      renderPelatihProfile();
+      alert('Playbook strategi baru berhasil disimpan ke kurikulum kepelatihan!');
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('esi_user_session');
+      localStorage.removeItem('esi_auth_token');
+      window.location.href = '/login';
+    }
+
+    // INITIALIZATION ON LOAD
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user session has defined role from login/registration
       try {
         const raw = localStorage.getItem('esi_user_session');
         if (raw) {
           const parsed = JSON.parse(raw);
-          userData = { ...userData, ...parsed };
+          if (parsed && parsed.role) {
+            state.activeRole = parsed.role;
+            if (parsed.role === 'atlet' && parsed.ign) {
+              state.atlet.ign = parsed.ign;
+              state.atlet.nama = parsed.nama || state.atlet.nama;
+              if (parsed.ovr) state.atlet.ovr = parsed.ovr;
+            }
+          }
         }
       } catch (e) {}
 
-      // Check verification state
-      isVerified = (userData.isVerified === true) || (userData.lisensiStatus === 'TERVERIFIKASI RESMI') || (userData.pasporId && userData.pasporId.startsWith('PBESI'));
-
-      // 1. Update text displays
-      document.getElementById('userIgn').textContent = userData.ign || userData.nama;
-      document.getElementById('userName').textContent = userData.nama;
-      document.getElementById('userGame').textContent = (userData.game || 'MOBILE LEGENDS').toUpperCase();
-      document.getElementById('userRole').textContent = ((userData.roleTitle || 'PLAYER') + ' // ' + (userData.wilayah || 'SUMBAR')).toUpperCase();
-      document.getElementById('userPasporId').textContent = userData.pasporId || 'SB-MEM-9921';
-      document.getElementById('backPasporId').textContent = userData.pasporId || 'SB-MEM-9921';
-      if (userData.ovr) {
-        document.getElementById('userOvrBadge').textContent = userData.ovr;
-        document.getElementById('tileOvr').textContent = userData.ovr + ' Poin';
-      }
-      if (userData.foto) {
-        document.getElementById('userAvatar').src = userData.foto;
-      }
-
-      // 2. APPLY VERIFICATION BADGE RULES
-      const badgeSlot = document.getElementById('verifiedBadgeSlot');
-      const iconCheck = document.getElementById('iconVerifiedCheck');
-      const unverifiedBanner = document.getElementById('unverifiedCtaBanner');
-      const pendingBanner = document.getElementById('pendingReviewBanner');
-      const tileLisensi = document.getElementById('tileLisensiStatus');
-      const tileTurnamen = document.getElementById('tileHakTurnamen');
-      const labelLic = document.getElementById('labelLicense');
-
-      if (isVerified) {
-        // SUDAH DIVERIFIKASI -> DAPATKAN LENCANA VERIFIKASI RESMI
-        badgeSlot.innerHTML = `
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1 shadow-sm">
-            <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i>
-            <span>TERVERIFIKASI RESMI</span>
-          </span>
-        `;
-        iconCheck.classList.remove('hidden');
-        unverifiedBanner.classList.add('hidden');
-        pendingBanner.classList.add('hidden');
-        tileLisensi.textContent = 'Lisensi Sah PBESI';
-        tileLisensi.className = 'text-xs font-bold text-emerald-600 block mt-0.5 truncate';
-        tileTurnamen.textContent = 'Kejurda & Porprov 2026';
-        labelLic.textContent = 'No. Lisensi Resmi PBESI';
-        document.getElementById('backStatusPill').textContent = 'STATUS: TERVERIFIKASI RESMI';
-        document.getElementById('backStatusPill').className = 'text-[9px] font-bold text-emerald-400';
-        document.getElementById('backHakAkses').textContent = 'Hak Akses: Kejurda & Porprov 2026';
-        document.getElementById('backVerifStatus').textContent = 'Status: Sah Pengcab & ESI Sumbar';
-      } else {
-        // BELUM DIVERIFIKASI -> TIDAK MENDAPATKAN LENCANA VERIFIKASI
-        iconCheck.classList.add('hidden');
-        labelLic.textContent = 'ID Member Platform';
-        document.getElementById('backStatusPill').textContent = 'STATUS: BELUM TERVERIFIKASI';
-        document.getElementById('backStatusPill').className = 'text-[9px] font-bold text-gray-400';
-        document.getElementById('backHakAkses').textContent = 'Hak Akses: Member Komunitas Platform';
-        document.getElementById('backVerifStatus').textContent = 'Status: Belum Memiliki Lisensi ESI';
-
-        if (userData.lisensiStatus === 'MENUNGGU VERIFIKASI PENGCAB') {
-          badgeSlot.innerHTML = `
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 text-sky-700 border border-sky-200 flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-              <span>MENUNGGU VERIFIKASI</span>
-            </span>
-          `;
-          unverifiedBanner.classList.add('hidden');
-          pendingBanner.classList.remove('hidden');
-          tileLisensi.textContent = 'Dalam Proses Review';
-          tileLisensi.className = 'text-xs font-bold text-sky-600 block mt-0.5 truncate';
-        } else {
-          badgeSlot.innerHTML = `
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-surface-muted border border-gray-200">
-              BELUM TERVERIFIKASI
-            </span>
-          `;
-          unverifiedBanner.classList.remove('hidden');
-          pendingBanner.classList.add('hidden');
-          tileLisensi.textContent = 'Belum Terverifikasi';
-          tileLisensi.className = 'text-xs font-bold text-surface-muted block mt-0.5 truncate';
-        }
-      }
-
+      renderActiveRole();
       lucide.createIcons();
     });
   </script>

@@ -2,11 +2,14 @@ import { db } from '../store/db.js';
 
 /**
  * MICROSERVICES: AUTHENTICATION & SINGLE SIGN-ON (SSO)
- * Mengatur hak akses terisolasi untuk masing-masing portal:
- * - Public / Umum: Paspor Atlet, Player, Tim, Komunitas, Venue (/login)
- * - Super Admin: Master control platform & aset visual (/admin-super)
- * - Pengprov ESI Sumbar: Otoritas legalitas & lisensi PBESI (/admin-pengprov)
- * - Pengcab 19 Kab/Kota: Verifikasi tahap 1 terisolasi per daerah (/admin-pengcab)
+ * Mengatur hak akses terisolasi untuk masing-masing bidang di ekosistem ESPORT SUMBAR:
+ * - Atlet (Player)
+ * - Tim (Klub / Organisasi)
+ * - Venue (Gaming Arena / Game Center)
+ * - Pelatih (Coach / Trainer)
+ * - Pengcab 19 Kab/Kota
+ * - Pengprov ESI Sumbar
+ * - Super Admin
  */
 export const MicroAuth = {
   name: "auth",
@@ -28,17 +31,12 @@ export const MicroAuth = {
     // ==========================================================
     // 1. ISOLASI PORTAL: SUPER ADMIN (/admin-super)
     // ==========================================================
-    if (targetPortal === 'super') {
-      const superUser = db.memory.users.find(u => 
-        u.role === 'super' && 
-        (u.email.toLowerCase() === cleanId || cleanId.includes('super') || cleanId.includes('admin'))
-      );
-
+    if (targetPortal === 'super' || cleanId.includes('super') || cleanId === 'admin@esportsumbar.id') {
       const isValidPassword = password === 'SuperAdminSumbar2026!' || 
                               password === 'admin123' || 
-                              (superUser && superUser.passwordHash === password);
+                              password === 'SumbarSuper2026!';
 
-      if ((superUser && isValidPassword) || (cleanId.includes('admin') && isValidPassword)) {
+      if (isValidPassword) {
         const token = `esi-super-${Date.now().toString(36)}`;
         return {
           success: true,
@@ -46,37 +44,26 @@ export const MicroAuth = {
           message: "Autentikasi Super Administrator Sah.",
           token,
           user: {
-            id: superUser?.id || "usr-super",
+            id: "usr-super",
             role: "super",
-            nama: superUser?.nama || "Super Administrator Platform",
-            email: superUser?.email || identifier,
+            nama: "Super Admin Platform",
+            email: "admin@esportsumbar.id",
             permissions: ["*"]
           },
           redirectUrl: "/admin-super"
         };
       }
-
-      return {
-        success: false,
-        statusCode: 401,
-        message: "Kredensial Super Admin tidak valid atau tidak memiliki hak akses master."
-      };
     }
 
     // ==========================================================
     // 2. ISOLASI PORTAL: PENGPROV ESI SUMBAR (/admin-pengprov)
     // ==========================================================
-    if (targetPortal === 'pengprov') {
-      const pengprovUser = db.memory.users.find(u => 
-        u.role === 'pengprov' && 
-        (u.email.toLowerCase() === cleanId || cleanId.includes('pengprov') || cleanId.includes('sekretariat'))
-      );
-
+    if (targetPortal === 'pengprov' || cleanId.includes('pengprov') || cleanId.includes('sekretariat')) {
       const isValidPassword = password === 'PengprovSumbar2026!' || 
                               password === 'pengprov123' || 
-                              (pengprovUser && pengprovUser.passwordHash === password);
+                              password === 'PengprovESI2026!';
 
-      if ((pengprovUser && isValidPassword) || (cleanId.includes('pengprov') && isValidPassword)) {
+      if (isValidPassword) {
         const token = `esi-pengprov-${Date.now().toString(36)}`;
         return {
           success: true,
@@ -84,77 +71,141 @@ export const MicroAuth = {
           message: "Autentikasi Otoritas Pengprov ESI Sumbar Sah.",
           token,
           user: {
-            id: pengprovUser?.id || "usr-pengprov",
+            id: "usr-pengprov",
             role: "pengprov",
-            nama: pengprovUser?.nama || "Sekretariat Pengprov ESI Sumbar",
-            email: pengprovUser?.email || identifier,
+            nama: "Sekretariat Pengprov ESI Sumbar",
+            email: "pengprov@esi-sumbar.or.id",
             instansi: "Pengurus Provinsi PBESI Sumatera Barat",
             permissions: ["pengprov:*", "license:approve", "roster:manage"]
           },
           redirectUrl: "/admin-pengprov"
         };
       }
-
-      return {
-        success: false,
-        statusCode: 401,
-        message: "Kredensial Otoritas Pengprov ESI Sumbar tidak valid."
-      };
     }
 
     // ==========================================================
     // 3. ISOLASI PORTAL: PENGCAB 19 KAB/KOTA (/admin-pengcab)
     // ==========================================================
-    if (targetPortal === 'pengcab') {
-      const targetRegion = region || null;
-      
-      // Cari akun pengcab berdasarkan email atau nama daerah
-      const pengcabUser = db.memory.users.find(u => {
-        if (u.role !== 'pengcab') return false;
-        const matchEmail = u.email && u.email.toLowerCase() === cleanId;
-        const matchRegion = targetRegion && u.wilayah && u.wilayah.toLowerCase() === targetRegion.toLowerCase();
-        const slug = u.wilayah ? u.wilayah.toLowerCase().replace(/kota |kab\. /g, '').replace(/\s+/g, '') : '';
-        const matchSlug = slug && cleanId.includes(slug);
-        return matchEmail || (matchRegion && matchSlug);
-      }) || db.memory.users.find(u => u.role === 'pengcab' && targetRegion && u.wilayah.toLowerCase() === targetRegion.toLowerCase());
-
-      const targetWilayah = pengcabUser?.wilayah || targetRegion || "Kota Padang";
-      const cleanSlug = targetWilayah.toLowerCase().replace(/kota |kab\. /g, '').replace(/\s+/g, '');
+    if (targetPortal === 'pengcab' || cleanId.includes('pengcab')) {
+      const targetRegion = region || "Kota Padang";
+      const cleanSlug = targetRegion.toLowerCase().replace(/kota |kab\. /g, '').replace(/\s+/g, '');
       const capital = cleanSlug.charAt(0).toUpperCase() + cleanSlug.slice(1);
       
       const isValidPassword = password === `Pengcab${capital}2026!` || 
                               password === 'pengcab123' || 
                               password === 'pbesi123' ||
-                              (pengcabUser && pengcabUser.passwordHash === password);
+                              password === 'PengcabPadang2026!';
 
-      if ((pengcabUser && isValidPassword) || (cleanId.includes('pengcab') && isValidPassword)) {
+      if (isValidPassword) {
         const token = `esi-pengcab-${Date.now().toString(36)}`;
         return {
           success: true,
           statusCode: 200,
-          message: `Autentikasi Pengcab ESI ${targetWilayah} Berhasil.`,
+          message: `Autentikasi Pengcab ESI ${targetRegion} Berhasil.`,
           token,
           user: {
-            id: pengcabUser?.id || `usr-pengcab-${cleanSlug}`,
+            id: `usr-pengcab-${cleanSlug}`,
             role: "pengcab",
-            nama: pengcabUser?.nama || `Pengcab ESI ${targetWilayah}`,
-            wilayah: targetWilayah,
-            email: pengcabUser?.email || identifier,
+            nama: `Pengcab ESI ${targetRegion}`,
+            wilayah: targetRegion,
+            email: identifier,
             permissions: [`pengcab:${cleanSlug}:*`, "filter:verify"]
           },
-          redirectUrl: `/admin-pengcab?region=${encodeURIComponent(targetWilayah)}`
+          redirectUrl: `/admin-pengcab?region=${encodeURIComponent(targetRegion)}`
         };
       }
-
-      return {
-        success: false,
-        statusCode: 401,
-        message: `Kredensial Pengcab ESI untuk wilayah ${targetRegion || 'daerah'} tidak valid.`
-      };
     }
 
     // ==========================================================
-    // 4. ISOLASI PORTAL: UMUM & ATLET (/login)
+    // 4. PORTAL PUBLIK: ROLE TIM (KLUB / ORGANISASI)
+    // ==========================================================
+    if (cleanId.includes('tim') || cleanId.includes('minangpride') || cleanId.includes('pride') || cleanId === 'tim@esportsumbar.id') {
+      if (password === 'tim123' || password === 'pride123' || password === 'password123') {
+        const token = `esi-tim-${Date.now().toString(36)}`;
+        return {
+          success: true,
+          statusCode: 200,
+          message: "Autentikasi Akun Tim Resmi Berhasil.",
+          token,
+          user: {
+            id: "tim-1",
+            role: "tim",
+            nama: "Minang Pride Esports",
+            manager: "Doni Prasetya, SE",
+            email: "official@minangpride.com",
+            wilayah: "Kota Padang",
+            game: "Mobile Legends & Valorant",
+            akreditasi: "Grade A (Pengprov ESI)",
+            logo: "/images/esport-sumbar-logo.png",
+            prestasiUtama: "Medali Emas Porprov Sumbar & Juara Kejurda 2025",
+            isVerified: true
+          },
+          redirectUrl: "/profile"
+        };
+      }
+    }
+
+    // ==========================================================
+    // 5. PORTAL PUBLIK: ROLE VENUE (GAMING ARENA)
+    // ==========================================================
+    if (cleanId.includes('venue') || cleanId.includes('cyber') || cleanId.includes('arena') || cleanId === 'venue@esportsumbar.id') {
+      if (password === 'venue123' || password === 'cyber123' || password === 'password123') {
+        const token = `esi-venue-${Date.now().toString(36)}`;
+        return {
+          success: true,
+          statusCode: 200,
+          message: "Autentikasi Akun Venue Resmi Berhasil.",
+          token,
+          user: {
+            id: "ven-1",
+            role: "venue",
+            nama: "Minang Cyber Lounge Padang",
+            pic: "Hendra Wijaya",
+            kontak: "0812-6677-8899",
+            email: "info@minangcyber.id",
+            wilayah: "Kota Padang",
+            alamat: "Jl. Khatib Sulaiman No. 42, Padang Barat",
+            spek: "30 PC Rig RTX 4070 • 240Hz Monitor • FO 500 Mbps",
+            grade: "Grade A Standar Kompetisi Resmi",
+            isOpenForBooking: true,
+            isVerified: true
+          },
+          redirectUrl: "/profile"
+        };
+      }
+    }
+
+    // ==========================================================
+    // 6. PORTAL PUBLIK: ROLE PELATIH (COACH / TRAINER)
+    // ==========================================================
+    if (cleanId.includes('pelatih') || cleanId.includes('coach') || cleanId.includes('arief') || cleanId === 'pelatih@esportsumbar.id') {
+      if (password === 'pelatih123' || password === 'coach123' || password === 'password123') {
+        const token = `esi-pelatih-${Date.now().toString(36)}`;
+        return {
+          success: true,
+          statusCode: 200,
+          message: "Autentikasi Akun Pelatih Resmi Berhasil.",
+          token,
+          user: {
+            id: "coa-1",
+            role: "pelatih",
+            nama: "Coach Arief 'Sensei' Rahman, S.Or",
+            email: "coach.arief@esportsumbar.id",
+            wilayah: "Kota Padang",
+            game: "Mobile Legends & Valorant",
+            lisensi: "Lisensi Kepelatihan Daerah (Grade A)",
+            noLisensi: "ESSB-COACH-2026-008",
+            foto: "/images/athlete-coach.jpg",
+            isOpenForCoaching: true,
+            isVerified: true
+          },
+          redirectUrl: "/profile"
+        };
+      }
+    }
+
+    // ==========================================================
+    // 7. PORTAL PUBLIK: ROLE ATLET (DEFAULT)
     // ==========================================================
     const user = db.findUser(identifier, password);
     if (user && user.role === 'atlet') {
@@ -173,21 +224,21 @@ export const MicroAuth = {
           ign: user.ign || athleteData?.ign || null,
           wilayah: user.wilayah || athleteData?.wilayah || null,
           pasporId: user.pasporId || null,
-          game: athleteData?.game || "Multi-Platform",
-          roleTitle: athleteData?.role || "Player",
-          ovr: athleteData?.ovr || 90,
-          lisensiStatus: athleteData?.lisensiStatus || "TERVERIFIKASI PBESI",
+          game: athleteData?.game || "VALORANT",
+          roleTitle: athleteData?.role || "Duelist",
+          ovr: athleteData?.ovr || 96,
+          lisensiStatus: athleteData?.lisensiStatus || "TERVERIFIKASI RESMI",
           statusPelatda: athleteData?.statusPelatda || "POTENSI DAERAH",
           foto: athleteData?.foto || "/images/athlete-v4nd4l.jpg",
-          permissions: user.permissions
+          isVerified: true
         },
         redirectUrl: "/profile"
       };
     }
 
-    // Demo fallback untuk Atlet Umum
-    if (cleanId.startsWith("pbesi") || cleanId.includes("rayden") || cleanId.includes("v4nd4l") || cleanId === 'player@esportsumbar.id') {
-      if (password === 'rayden123' || password === 'player123' || password === 'atlet123') {
+    // Demo fallback untuk Atlet V4ND4L
+    if (cleanId.startsWith("pbesi") || cleanId.startsWith("essb") || cleanId.includes("rayden") || cleanId.includes("v4nd4l") || cleanId === 'atlet@esportsumbar.id' || cleanId === 'player@esportsumbar.id') {
+      if (password === 'atlet123' || password === 'rayden123' || password === 'player123' || password === 'password123') {
         return {
           success: true,
           statusCode: 200,
@@ -198,13 +249,14 @@ export const MicroAuth = {
             role: "atlet",
             nama: "Muhammad Rayden",
             ign: "V4ND4L",
-            pasporId: "PBESI-SB-2026-VAL-96",
+            pasporId: "ESSB-2026-VAL-96",
             game: "VALORANT",
             roleTitle: "Duelist / Entry Fragger",
             wilayah: "Kota Padang",
             ovr: 96,
             statusPelatda: "PELATDA PON • OVR 96",
-            lisensiStatus: "LISENSI TERVERIFIKASI PBESI",
+            lisensiStatus: "TERVERIFIKASI RESMI",
+            isVerified: true,
             foto: "/images/athlete-v4nd4l.jpg"
           },
           redirectUrl: "/profile"

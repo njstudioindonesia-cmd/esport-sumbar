@@ -119,67 +119,185 @@
     <!-- SCROLLABLE APP BODY -->
     <main class="flex-1 px-4 pt-3 space-y-4 safe-bottom">
 
+      
+      <!-- 1. DYNAMIC BIDANG / ROLE SWITCHER FOR HOME DASHBOARD -->
+      <div class="app-card rounded-2xl p-2.5 bg-white flex items-center justify-between gap-2 shadow-sm">
+        <span class="text-[11px] font-bold text-surface-muted pl-1">Dashboard:</span>
+        <div class="flex items-center gap-1 overflow-x-auto hide-scrollbar" id="dashboardRolePills">
+          <button onclick="switchDashboardRole('atlet')" id="dashPillAtlet" class="px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all tap-action bg-brand-600 text-white shadow-sm">🎮 Atlet</button>
+          <button onclick="switchDashboardRole('tim')" id="dashPillTim" class="px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🛡️ Tim</button>
+          <button onclick="switchDashboardRole('venue')" id="dashPillVenue" class="px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">📍 Venue</button>
+          <button onclick="switchDashboardRole('pelatih')" id="dashPillPelatih" class="px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🎓 Pelatih</button>
+        </div>
+      </div>
+
       <!-- ============================================================== -->
-      <!-- 2. CORE PROVIDER ACCOUNT CARD (LIKE MYTELKOMSEL QUOTA HERO)    -->
+      <!-- 2. DYNAMIC PROVIDER HERO CARD (DIFFERENT PER BIDANG)            -->
       <!-- ============================================================== -->
-      <div class="app-card rounded-3xl p-4 relative overflow-hidden bg-white">
+      <div class="app-card rounded-3xl p-4 relative overflow-hidden bg-white shadow-sm border border-gray-100">
         
         <!-- Top Card Row: Official Branding & Status -->
         <div class="flex items-center justify-between pb-3 border-b border-gray-100">
           <div class="flex items-center gap-2">
-            <img src="/images/esport-sumbar-logo.png" alt="ESI" class="w-5 h-5 object-contain" />
-            <div><span class="text-[11px] font-black tracking-tight text-surface-dark block leading-none">ESPORT SUMBAR</span><span class="text-[9px] text-surface-muted font-medium">Berkolaborasi dengan ESI Sumbar</span></div>
+            <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR" class="w-5 h-5 object-contain" />
+            <div>
+              <span class="text-[11px] font-black tracking-tight text-surface-dark block leading-none">ESPORT SUMBAR</span>
+              <span class="text-[9px] text-surface-muted font-medium">Berkolaborasi dengan ESI Sumbar</span>
+            </div>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1" id="dashHeroBadge">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-            <span>PROVIDER RESMI</span>
+            <span id="dashHeroBadgeText">PORTAL ATLET</span>
           </span>
         </div>
 
-        <!-- Middle Card Row: Account / License Snapshot -->
-        <div class="py-3 flex items-start justify-between">
-          <div>
-            <div class="text-[11px] text-surface-muted font-medium">Layanan Identitas Utama</div>
-            <div class="text-lg font-extrabold text-surface-dark tracking-tight mt-0.5">
-              Paspor Digital Atlet 3D
+        <!-- HERO CONTENT: ATLET -->
+        <div id="dashCardAtlet" class="space-y-3 pt-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[11px] text-surface-muted font-medium">Identitas Atlet Digital</div>
+              <div class="text-lg font-black text-surface-dark tracking-tight mt-0.5" id="dashAtletTitle">
+                V4ND4L (Muhammad Rayden)
+              </div>
+              <div class="text-xs text-surface-muted font-mono mt-0.5 flex items-center gap-1.5">
+                <span class="text-brand-600 font-bold" id="dashAtletTeam">Free Agent (LFT)</span>
+                <span>•</span>
+                <span id="dashAtletGame">VALORANT // PADANG</span>
+              </div>
             </div>
-            <div class="text-xs text-surface-muted font-mono mt-0.5 flex items-center gap-1.5">
-              <span>ESSB-2026-VAL-982</span>
-              <span>•</span>
-              <span class="text-brand-600 font-bold">19 Wilayah</span>
+            <div class="text-right">
+              <div class="text-[10px] text-surface-muted font-medium">Poin Performa</div>
+              <div class="text-xl font-black text-brand-600 font-mono" id="dashAtletOvr">96</div>
+              <div class="text-[9px] text-emerald-600 font-bold mt-0.5">Terverifikasi Resmi</div>
             </div>
           </div>
-          
-          <div class="text-right">
-            <div class="text-[10px] text-surface-muted font-medium">Database Terdaftar</div>
-            <div class="text-base font-extrabold text-brand-600 font-mono" id="heroStatAtlet">
-              986+ Atlet
-            </div>
-            <div class="text-[10px] text-emerald-600 font-semibold mt-0.5">
-              100% Terverifikasi
-            </div>
+          <div class="pt-2.5 border-t border-gray-100 grid grid-cols-3 gap-2">
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="search" class="w-3.5 h-3.5"></i>
+              <span>Cari Tim</span>
+            </a>
+            <a href="/paspor" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="id-card" class="w-3.5 h-3.5 text-surface-muted"></i>
+              <span>Paspor 3D</span>
+            </a>
+            <a href="/turnamen" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="trophy" class="w-3.5 h-3.5 text-surface-muted"></i>
+              <span>Turnamen</span>
+            </a>
           </div>
         </div>
 
-        <!-- Bottom Action Buttons inside Card -->
-        <div class="pt-2.5 border-t border-gray-100 grid grid-cols-3 gap-2">
-          <a href="/daftar-player" class="py-2 px-2 rounded-xl bg-brand-50 hover:bg-brand-100/80 text-brand-700 text-xs font-bold flex items-center justify-center gap-1.5 tap-action">
-            <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-brand-600"></i>
-            <span>Daftar</span>
-          </a>
-          <a href="/daftar" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1.5 tap-action">
-            <i data-lucide="layers" class="w-3.5 h-3.5 text-surface-muted"></i>
-            <span>Layanan</span>
-          </a>
-          <a href="/login" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1.5 tap-action">
-            <i data-lucide="id-card" class="w-3.5 h-3.5 text-surface-muted"></i>
-            <span>Paspor</span>
-          </a>
+        <!-- HERO CONTENT: TIM -->
+        <div id="dashCardTim" class="space-y-3 pt-3 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[11px] text-emerald-700 font-bold uppercase tracking-wider">Klub Esports Terakreditasi</div>
+              <div class="text-lg font-black text-surface-dark tracking-tight mt-0.5">
+                Minang Pride Esports
+              </div>
+              <div class="text-xs text-surface-muted font-mono mt-0.5 flex items-center gap-1.5">
+                <span class="text-emerald-700 font-bold">Grade A</span>
+                <span>•</span>
+                <span>Kota Padang • MLBB & Valorant</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-surface-muted font-medium">Kesiapan Roster</div>
+              <div class="text-lg font-black text-emerald-600 font-mono">5/5 Ready</div>
+              <div class="text-[9px] text-brand-600 font-bold mt-0.5">1 Turnamen Aktif</div>
+            </div>
+          </div>
+          <div class="pt-2.5 border-t border-gray-100 grid grid-cols-3 gap-2">
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="users" class="w-3.5 h-3.5"></i>
+              <span>Roster Tim</span>
+            </a>
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+              <span>Rekrut Atlet</span>
+            </a>
+            <a href="/turnamen" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-surface-muted"></i>
+              <span>Turnamen</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO CONTENT: VENUE -->
+        <div id="dashCardVenue" class="space-y-3 pt-3 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[11px] text-sky-700 font-bold uppercase tracking-wider">Gaming Arena Terakreditasi</div>
+              <div class="text-lg font-black text-surface-dark tracking-tight mt-0.5">
+                Minang Cyber Lounge Padang
+              </div>
+              <div class="text-xs text-surface-muted font-mono mt-0.5 flex items-center gap-1.5">
+                <span class="text-sky-700 font-bold">30 PC RTX 4070</span>
+                <span>•</span>
+                <span>Fiber 500 Mbps Dedicated</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-surface-muted font-medium">Status Operasional</div>
+              <div class="text-sm font-black text-emerald-600 mt-0.5">SIAP SEWA</div>
+              <div class="text-[9px] text-sky-700 font-bold mt-0.5">2 Booking Tim</div>
+            </div>
+          </div>
+          <div class="pt-2.5 border-t border-gray-100 grid grid-cols-3 gap-2">
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+              <span>Fasilitas</span>
+            </a>
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i>
+              <span>Booking Masuk</span>
+            </a>
+            <a href="/venue" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-surface-muted"></i>
+              <span>Direktori</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO CONTENT: PELATIH -->
+        <div id="dashCardPelatih" class="space-y-3 pt-3 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[11px] text-amber-700 font-bold uppercase tracking-wider">Pelatih & Analis Berlisensi</div>
+              <div class="text-lg font-black text-surface-dark tracking-tight mt-0.5">
+                Coach Arief Rahman
+              </div>
+              <div class="text-xs text-surface-muted font-mono mt-0.5 flex items-center gap-1.5">
+                <span class="text-amber-700 font-bold">Grade A Daerah</span>
+                <span>•</span>
+                <span>MLBB & Valorant Specialist</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-surface-muted font-medium">Status Coaching</div>
+              <div class="text-sm font-black text-emerald-600 mt-0.5">OPEN SESI</div>
+              <div class="text-[9px] text-amber-700 font-bold mt-0.5">2 Permintaan Masuk</div>
+            </div>
+          </div>
+          <div class="pt-2.5 border-t border-gray-100 grid grid-cols-3 gap-2">
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+              <span>Playbook</span>
+            </a>
+            <a href="/profile" class="py-2 px-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+              <span>Jadwal Coaching</span>
+            </a>
+            <a href="/pelatih" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1 tap-action">
+              <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-surface-muted"></i>
+              <span>Direktori</span>
+            </a>
+          </div>
         </div>
 
       </div>
 
-      <!-- ============================================================== -->
+      <!-- ==============================================================
       <!-- 3. PROFESSIONAL 8-ICON MENU GRID (MYTELKOMSEL SIGNATURE)       -->
       <!-- ============================================================== -->
       <div class="app-card rounded-3xl p-4 bg-white">
@@ -523,7 +641,82 @@
       }
     }
 
+    
+    let currentDashRole = 'atlet';
+
+    function switchDashboardRole(role) {
+      currentDashRole = role;
+
+      // Update pills
+      ['atlet', 'tim', 'venue', 'pelatih'].forEach(r => {
+        const pill = document.getElementById('dashPill' + r.charAt(0).toUpperCase() + r.slice(1));
+        if (pill) {
+          if (r === role) {
+            pill.className = "px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all tap-action bg-brand-600 text-white shadow-sm";
+          } else {
+            pill.className = "px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200";
+          }
+        }
+      });
+
+      // Hide all cards
+      document.getElementById('dashCardAtlet').classList.add('hidden');
+      document.getElementById('dashCardTim').classList.add('hidden');
+      document.getElementById('dashCardVenue').classList.add('hidden');
+      document.getElementById('dashCardPelatih').classList.add('hidden');
+
+      const badgeText = document.getElementById('dashHeroBadgeText');
+      const headerUser = document.getElementById('headerUserName');
+
+      if (role === 'atlet') {
+        document.getElementById('dashCardAtlet').classList.remove('hidden');
+        badgeText.textContent = 'PORTAL ATLET';
+        headerUser.textContent = 'V4ND4L (Atlet)';
+      } else if (role === 'tim') {
+        document.getElementById('dashCardTim').classList.remove('hidden');
+        badgeText.textContent = 'PORTAL TIM';
+        headerUser.textContent = 'Minang Pride (Tim)';
+      } else if (role === 'venue') {
+        document.getElementById('dashCardVenue').classList.remove('hidden');
+        badgeText.textContent = 'PORTAL VENUE';
+        headerUser.textContent = 'Minang Cyber (Venue)';
+      } else if (role === 'pelatih') {
+        document.getElementById('dashCardPelatih').classList.remove('hidden');
+        badgeText.textContent = 'PORTAL PELATIH';
+        headerUser.textContent = 'Coach Arief (Pelatih)';
+      }
+
+      // Sync user session
+      try {
+        let userSession = {
+          role: role,
+          nama: role === 'atlet' ? 'Muhammad Rayden (V4ND4L)' :
+                role === 'tim' ? 'Minang Pride Esports' :
+                role === 'venue' ? 'Minang Cyber Lounge' : 'Coach Arief Rahman',
+          email: role + '@esportsumbar.id'
+        };
+        localStorage.setItem('esi_user_session', JSON.stringify(userSession));
+      } catch (e) {}
+
+      lucide.createIcons();
+    }
+
+    function initDashboardUser() {
+      try {
+        const raw = localStorage.getItem('esi_user_session');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.role) {
+            switchDashboardRole(parsed.role);
+            return;
+          }
+        }
+      } catch (e) {}
+      switchDashboardRole('atlet');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      initDashboardUser();
       lucide.createIcons();
       loadStats();
     });
