@@ -124,7 +124,7 @@
       <div class="app-card rounded-2xl p-2.5 bg-white flex items-center justify-between gap-2 shadow-sm">
         <span class="text-[11px] font-bold text-surface-muted pl-1">Dashboard:</span>
         <div class="flex items-center gap-1 overflow-x-auto hide-scrollbar" id="dashboardRolePills">
-          <button onclick="switchDashboardRole('atlet')" id="dashPillAtlet" class="px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all tap-action bg-brand-600 text-white shadow-sm">🎮 Atlet</button>
+          <button onclick="switchDashboardRole('player')" id="dashPillPlayer" class="px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all tap-action bg-brand-600 text-white shadow-sm">🎮 Player</button>
           <button onclick="switchDashboardRole('tim')" id="dashPillTim" class="px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🛡️ Tim</button>
           <button onclick="switchDashboardRole('venue')" id="dashPillVenue" class="px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">📍 Venue</button>
           <button onclick="switchDashboardRole('pelatih')" id="dashPillPelatih" class="px-2.5 py-1 rounded-xl text-[10px] font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🎓 Pelatih</button>
@@ -147,27 +147,27 @@
           </div>
           <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center gap-1" id="dashHeroBadge">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-            <span id="dashHeroBadgeText">PORTAL ATLET</span>
+            <span id="dashHeroBadgeText">PORTAL PLAYER</span>
           </span>
         </div>
 
-        <!-- HERO CONTENT: ATLET -->
-        <div id="dashCardAtlet" class="space-y-3 pt-3">
+        <!-- HERO CONTENT: PLAYER -->
+        <div id="dashCardPlayer" class="space-y-3 pt-3">
           <div class="flex items-start justify-between">
             <div>
-              <div class="text-[11px] text-surface-muted font-medium">Identitas Atlet Digital</div>
-              <div class="text-lg font-black text-surface-dark tracking-tight mt-0.5" id="dashAtletTitle">
+              <div class="text-[11px] text-surface-muted font-medium">Identitas Player Digital</div>
+              <div class="text-lg font-black text-surface-dark tracking-tight mt-0.5" id="dashPlayerTitle">
                 V4ND4L (Muhammad Rayden)
               </div>
               <div class="text-xs text-surface-muted font-mono mt-0.5 flex items-center gap-1.5">
-                <span class="text-brand-600 font-bold" id="dashAtletTeam">Free Agent (LFT)</span>
+                <span class="text-brand-600 font-bold" id="dashPlayerTeam">Free Agent (LFT)</span>
                 <span>•</span>
-                <span id="dashAtletGame">VALORANT // PADANG</span>
+                <span id="dashPlayerGame">VALORANT // PADANG</span>
               </div>
             </div>
             <div class="text-right">
               <div class="text-[10px] text-surface-muted font-medium">Poin Performa</div>
-              <div class="text-xl font-black text-brand-600 font-mono" id="dashAtletOvr">96</div>
+              <div class="text-xl font-black text-brand-600 font-mono" id="dashPlayerOvr">96</div>
               <div class="text-[9px] text-emerald-600 font-bold mt-0.5">Terverifikasi Resmi</div>
             </div>
           </div>
@@ -214,7 +214,7 @@
             </a>
             <a href="/profile" class="py-2 px-2 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 text-xs font-bold flex items-center justify-center gap-1 tap-action">
               <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-              <span>Rekrut Atlet</span>
+              <span>Rekrut Player</span>
             </a>
             <a href="/turnamen" class="py-2 px-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-surface-dark text-xs font-bold flex items-center justify-center gap-1 tap-action">
               <i data-lucide="award" class="w-3.5 h-3.5 text-surface-muted"></i>
@@ -303,8 +303,8 @@
       <!-- ============================================================== -->
       <div id="connectedBusinessCockpit" class="space-y-3">
 
-        <!-- BUSINESS COCKPIT: ATLET -->
-        <div id="bizAtletCard" class="app-card rounded-3xl p-4 bg-white border border-red-100 shadow-sm space-y-3">
+        <!-- BUSINESS COCKPIT: PLAYER -->
+        <div id="bizPlayerCard" class="app-card rounded-3xl p-4 bg-white border border-red-100 shadow-sm space-y-3">
           <div class="flex items-center justify-between border-b border-gray-100 pb-2.5">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
@@ -331,15 +331,15 @@
           </div>
 
           <!-- Real-Time Incoming Contract Offer from Team -->
-          <div id="atletContractOfferBox" class="p-3 rounded-2xl bg-gradient-to-br from-amber-50 to-red-50 border border-amber-200/80 space-y-2">
+          <div id="playerContractOfferBox" class="p-3 rounded-2xl bg-gradient-to-br from-amber-50 to-red-50 border border-amber-200/80 space-y-2">
             <div class="flex items-start justify-between">
               <div class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                <span class="text-xs font-black text-amber-900" id="atletOfferTitle">Tawaran Kontrak: Minang Pride Esports</span>
+                <span class="text-xs font-black text-amber-900" id="playerOfferTitle">Tawaran Kontrak: Minang Pride Esports</span>
               </div>
               <span class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-200 text-amber-800">Menunggu Respon</span>
             </div>
-            <div class="text-[11px] text-amber-950 font-medium" id="atletOfferDetails">
+            <div class="text-[11px] text-amber-950 font-medium" id="playerOfferDetails">
               Gaji: <strong class="text-brand-700">Rp 4.200.000/bln</strong> • Bonus: <strong>Rp 1.500.000</strong> • Durasi: <strong>6 Bulan</strong>
             </div>
             <div class="flex items-center gap-2 pt-1">
@@ -352,7 +352,7 @@
             </div>
           </div>
 
-          <!-- Quick Connected Services for Atlet -->
+          <!-- Quick Connected Services for Player -->
           <div class="pt-1">
             <div class="text-[10px] text-surface-muted font-bold uppercase tracking-wider mb-2">Tingkatkan Karir & Performa:</div>
             <div class="grid grid-cols-2 gap-2">
@@ -399,23 +399,23 @@
             <div class="p-2.5 rounded-2xl bg-gray-50 border border-gray-100">
               <div class="text-[9px] text-surface-muted uppercase font-bold">Beban Gaji Roster</div>
               <div class="text-sm font-black text-brand-600 mt-0.5">Rp 12.000.000<span class="text-[9px] text-surface-muted font-normal">/bln</span></div>
-              <div class="text-[9px] text-surface-muted mt-0.5 font-medium">5 Atlet Utama Digaji</div>
+              <div class="text-[9px] text-surface-muted mt-0.5 font-medium">5 Player Utama Digaji</div>
             </div>
           </div>
 
-          <!-- Quick Action: Kirim Kontrak ke Atlet LFT -->
+          <!-- Quick Action: Kirim Kontrak ke Player LFT -->
           <div class="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-100 space-y-2">
             <div class="flex items-center justify-between">
-              <div class="text-xs font-bold text-emerald-900">Bursa Rekrutmen & Kontrak Atlet</div>
-              <span class="text-[10px] text-emerald-700 font-bold">48 Atlet LFT</span>
+              <div class="text-xs font-bold text-emerald-900">Bursa Rekrutmen & Kontrak Player</div>
+              <span class="text-[10px] text-emerald-700 font-bold">48 Player LFT</span>
             </div>
             <p class="text-[11px] text-surface-muted leading-tight">
-              Kirimkan penawaran kontrak resmi kepada atlet binaan daerah. Kontrak akan langsung tampil di beranda atlet terkait.
+              Kirimkan penawaran kontrak resmi kepada player binaan daerah. Kontrak akan langsung tampil di beranda player terkait.
             </p>
             <div class="flex items-center gap-2 pt-1">
               <button type="button" onclick="openTimOfferModal()" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold tap-action shadow-sm flex items-center justify-center gap-1.5">
                 <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-                <span>Ajukan Kontrak ke Atlet</span>
+                <span>Ajukan Kontrak ke Player</span>
               </button>
             </div>
           </div>
@@ -473,7 +473,7 @@
             </div>
           </div>
 
-          <!-- Incoming Orders from Tim & Atlet (Real-Time Order Manager) -->
+          <!-- Incoming Orders from Tim & Player (Real-Time Order Manager) -->
           <div class="p-3 rounded-2xl bg-sky-50/70 border border-sky-100 space-y-2">
             <div class="flex items-center justify-between">
               <div class="text-xs font-bold text-sky-900">Pemesanan Fasilitas Masuk (Realtime)</div>
@@ -491,7 +491,7 @@
               </button>
             </div>
 
-            <!-- Booking 2: Atlet VIP -->
+            <!-- Booking 2: Player VIP -->
             <div id="venueOrder2" class="p-2.5 rounded-xl bg-white border border-gray-100 flex items-center justify-between">
               <div>
                 <div class="text-xs font-bold text-surface-dark">Slot VIP Gaming 3 Jam (V4ND4L)</div>
@@ -540,7 +540,7 @@
             </div>
           </div>
 
-          <!-- Incoming Coaching Requests from Atlet & Tim (Real-Time) -->
+          <!-- Incoming Coaching Requests from Player & Tim (Real-Time) -->
           <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-100 space-y-2">
             <div class="flex items-center justify-between">
               <div class="text-xs font-bold text-amber-900">Permintaan Coaching Masuk (Realtime)</div>
@@ -587,12 +587,12 @@
       <div class="app-card rounded-3xl p-4 bg-white">
         <div class="grid grid-cols-4 gap-y-4 gap-x-2 text-center">
           
-          <!-- 1. Paspor Atlet -->
+          <!-- 1. Paspor Player -->
           <a href="/paspor" class="flex flex-col items-center gap-1.5 tap-action">
             <div class="w-12 h-12 rounded-2xl bg-red-50 text-brand-600 flex items-center justify-center border border-red-100/60 shadow-sm">
               <i data-lucide="id-card" class="w-5 h-5"></i>
             </div>
-            <span class="text-[11px] font-semibold text-surface-dark leading-tight">Paspor Atlet</span>
+            <span class="text-[11px] font-semibold text-surface-dark leading-tight">Paspor Player</span>
           </a>
 
           <!-- 2. Lisensi Pelatih -->
@@ -690,12 +690,12 @@
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               
               <div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-amber-500 text-black text-[9px] font-bold uppercase tracking-wider">
-                PEMBINAAN ATLET
+                PEMBINAAN PLAYER
               </div>
 
               <div class="absolute bottom-2.5 left-2.5 right-2.5 text-white">
                 <div class="text-xs font-bold leading-snug">Pelatda Terpadu Sumatera Barat</div>
-                <div class="text-[10px] text-white/80 line-clamp-1 mt-0.5">Program scouting dan pemusatan latihan atlet potensial.</div>
+                <div class="text-[10px] text-white/80 line-clamp-1 mt-0.5">Program scouting dan pemusatan latihan player potensial.</div>
               </div>
             </div>
           </div>
@@ -731,7 +731,7 @@
 
         <div class="space-y-2">
           
-          <!-- Row 1: Player / Atlet -->
+          <!-- Row 1: Player / Player -->
           <a href="/daftar-player" class="app-card rounded-2xl p-3 flex items-center justify-between hover:border-brand-500/40 transition-all tap-action">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-red-50 text-brand-600 flex items-center justify-center shrink-0">
@@ -739,7 +739,7 @@
               </div>
               <div>
                 <div class="flex items-center gap-1.5">
-                  <span class="text-xs font-bold text-surface-dark">Player / Atlet Esport</span>
+                  <span class="text-xs font-bold text-surface-dark">Player / Player Esport</span>
                   <span class="px-1.5 py-0.2 rounded text-[8.5px] font-bold bg-amber-50 text-amber-700 border border-amber-200">PASPOR 3D</span>
                 </div>
                 <div class="text-[11px] text-surface-muted mt-0.5">Penerbitan paspor digital & lisensi PBESI</div>
@@ -815,7 +815,7 @@
       </div>
 
       <!-- ============================================================== -->
-      <!-- 7. BURSA LFT & TALENTA ATLET                                   -->
+      <!-- 7. BURSA LFT & TALENTA PLAYER                                   -->
       <!-- ============================================================== -->
       <div id="bursaSection" class="space-y-2.5">
         <div class="flex items-center justify-between px-1">
@@ -825,9 +825,9 @@
 
         <div class="app-card rounded-2xl p-3.5 bg-gradient-to-r from-red-900 to-brand-700 text-white flex items-center justify-between">
           <div class="space-y-0.5">
-            <div class="text-[10px] font-mono uppercase tracking-wider text-red-200 font-bold">BURSA TRANSFER ATLET</div>
+            <div class="text-[10px] font-mono uppercase tracking-wider text-red-200 font-bold">BURSA TRANSFER PLAYER</div>
             <div class="text-sm font-extrabold leading-tight">Cari Talenta Esport Berlisensi</div>
-            <div class="text-[11px] text-white/80">Terhubung ke 142+ tim dan atlet se-Sumatera Barat.</div>
+            <div class="text-[11px] text-white/80">Terhubung ke 142+ tim dan player se-Sumatera Barat.</div>
           </div>
           <a href="/daftar-player" class="px-3 py-2 rounded-xl bg-white text-brand-700 text-xs font-bold font-mono shrink-0 tap-action shadow-md">
             Buka Bursa
@@ -917,7 +917,7 @@
         if (typeof EsportSumbarAPI !== 'undefined' && EsportSumbarAPI.stats) {
           const res = await EsportSumbarAPI.stats.getOverview();
           if (res && res.data) {
-            document.getElementById('heroStatAtlet').textContent = (res.data.atlet || 986) + ' Atlet';
+            document.getElementById('heroStatPlayer').textContent = (res.data.player || 986) + ' Player';
           }
         }
       } catch (e) {
@@ -926,13 +926,14 @@
     }
 
     
-    let currentDashRole = 'atlet';
+    let currentDashRole = 'player';
 
     function switchDashboardRole(role) {
+      if (role === 'atlet') role = 'player';
       currentDashRole = role;
 
       // Update pills
-      ['atlet', 'tim', 'venue', 'pelatih'].forEach(r => {
+      ['player', 'tim', 'venue', 'pelatih'].forEach(r => {
         const pill = document.getElementById('dashPill' + r.charAt(0).toUpperCase() + r.slice(1));
         if (pill) {
           if (r === role) {
@@ -944,11 +945,11 @@
       });
 
       // Hide all cards
-      document.getElementById('dashCardAtlet').classList.add('hidden');
+      document.getElementById('dashCardPlayer').classList.add('hidden');
       document.getElementById('dashCardTim').classList.add('hidden');
       document.getElementById('dashCardVenue').classList.add('hidden');
       document.getElementById('dashCardPelatih').classList.add('hidden');
-      ['bizAtletCard', 'bizTimCard', 'bizVenueCard', 'bizPelatihCard'].forEach(id => {
+      ['bizPlayerCard', 'bizTimCard', 'bizVenueCard', 'bizPelatihCard'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.add('hidden');
       });
@@ -956,11 +957,11 @@
       const badgeText = document.getElementById('dashHeroBadgeText');
       const headerUser = document.getElementById('headerUserName');
 
-      if (role === 'atlet') {
-        document.getElementById('dashCardAtlet').classList.remove('hidden');
-        const bc = document.getElementById('bizAtletCard'); if (bc) bc.classList.remove('hidden');
-        badgeText.textContent = 'PORTAL ATLET';
-        headerUser.textContent = 'V4ND4L (Atlet)';
+      if (role === 'player') {
+        document.getElementById('dashCardPlayer').classList.remove('hidden');
+        const bc = document.getElementById('bizPlayerCard'); if (bc) bc.classList.remove('hidden');
+        badgeText.textContent = 'PORTAL PLAYER';
+        headerUser.textContent = 'V4ND4L (Player)';
       } else if (role === 'tim') {
         document.getElementById('dashCardTim').classList.remove('hidden');
         const bc = document.getElementById('bizTimCard'); if (bc) bc.classList.remove('hidden');
@@ -982,7 +983,7 @@
       try {
         let userSession = {
           role: role,
-          nama: role === 'atlet' ? 'Muhammad Rayden (V4ND4L)' :
+          nama: role === 'player' ? 'Muhammad Rayden (V4ND4L)' :
                 role === 'tim' ? 'Minang Pride Esports' :
                 role === 'venue' ? 'Minang Cyber Lounge' : 'Coach Arief Rahman',
           email: role + '@esportsumbar.id'
@@ -1004,7 +1005,7 @@
           }
         }
       } catch (e) {}
-      switchDashboardRole('atlet');
+      switchDashboardRole('player');
     }
 
     document.addEventListener('DOMContentLoaded', () => {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Profil Akun – ESPORT SUMBAR</title>
-  <meta name="description" content="Dashboard profil personal dan manajemen ekosistem resmi ESPORT SUMBAR untuk Atlet, Tim, Venue, dan Pelatih." />
+  <meta name="description" content="Dashboard profil personal dan manajemen ekosistem resmi ESPORT SUMBAR untuk Player, Tim, Venue, dan Pelatih." />
 
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -126,7 +126,7 @@
     <div class="app-card rounded-2xl p-2.5 bg-white flex items-center justify-between gap-2 shadow-sm">
       <span class="text-[11px] font-bold text-surface-muted pl-1">Peran Akun:</span>
       <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar" id="roleSwitcherPills">
-        <button onclick="switchRole('atlet')" id="pillRoleAtlet" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm">🎮 Atlet</button>
+        <button onclick="switchRole('player')" id="pillRolePlayer" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm">🎮 Player</button>
         <button onclick="switchRole('tim')" id="pillRoleTim" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🛡️ Tim</button>
         <button onclick="switchRole('venue')" id="pillRoleVenue" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">📍 Venue</button>
         <button onclick="switchRole('pelatih')" id="pillRolePelatih" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all tap-action bg-gray-100 text-surface-dark hover:bg-gray-200">🎓 Pelatih</button>
@@ -134,11 +134,11 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- SECTION 1: PROFIL ATLET (PLAYER)                               -->
+    <!-- SECTION 1: PROFIL PLAYER (PLAYER)                               -->
     <!-- ============================================================== -->
-    <div id="sectionProfilAtlet" class="space-y-4">
+    <div id="sectionProfilPlayer" class="space-y-4">
       
-      <!-- 3D FLIP PASPOR ATLET CARD -->
+      <!-- 3D FLIP PASPOR PLAYER CARD -->
       <div class="flip-card cursor-pointer" id="passportFlipCard" onclick="toggleCardFlip()">
         <div class="flip-card-inner relative w-full rounded-3xl" id="passportCardInner">
           
@@ -149,7 +149,7 @@
                 <img src="/images/esport-sumbar-logo.png" alt="PBESI" class="w-7 h-7 object-contain" />
                 <div>
                   <span class="text-[11px] font-extrabold text-surface-dark uppercase tracking-wider block leading-tight">ESPORT SUMBAR</span>
-                  <span class="text-[9px] font-bold text-brand-600 uppercase tracking-widest block leading-tight">PASPOR DIGITAL ATLET</span>
+                  <span class="text-[9px] font-bold text-brand-600 uppercase tracking-widest block leading-tight">PASPOR DIGITAL PLAYER</span>
                 </div>
               </div>
 
@@ -224,7 +224,7 @@
       </div>
 
       <!-- STATUS VERIFIKASI & MINTA LENCANA -->
-      <div id="atletVerifCtaBanner" class="app-card rounded-2xl p-4 bg-gradient-to-r from-amber-500/10 via-red-500/10 to-amber-500/10 border border-amber-200 space-y-2.5">
+      <div id="playerVerifCtaBanner" class="app-card rounded-2xl p-4 bg-gradient-to-r from-amber-500/10 via-red-500/10 to-amber-500/10 border border-amber-200 space-y-2.5">
         <div class="flex items-start gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm">
             <i data-lucide="shield-alert" class="w-5 h-5"></i>
@@ -242,7 +242,7 @@
         </button>
       </div>
 
-      <!-- FITUR UTAMA ATLET: CARI TIM & DAFTARKAN DIRI PADA TIM -->
+      <!-- FITUR UTAMA PLAYER: CARI TIM & DAFTARKAN DIRI PADA TIM -->
       <div class="app-card rounded-3xl p-4 bg-white space-y-3">
         <div class="flex items-center justify-between pb-2 border-b border-gray-100">
           <div class="flex items-center gap-2">
@@ -254,13 +254,13 @@
               <p class="text-[10px] text-surface-muted">Bursa Transfer & Rekrutmen</p>
             </div>
           </div>
-          <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700" id="atletTeamStatusBadge">Free Agent (LFT)</span>
+          <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-50 text-blue-700" id="playerTeamStatusBadge">Free Agent (LFT)</span>
         </div>
 
         <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between">
           <div>
             <span class="text-[10px] text-surface-muted block">Tim / Klub Saat Ini:</span>
-            <span class="text-xs font-extrabold text-surface-dark block mt-0.5" id="atletCurrentTeamName">Belum Tergabung dalam Tim</span>
+            <span class="text-xs font-extrabold text-surface-dark block mt-0.5" id="playerCurrentTeamName">Belum Tergabung dalam Tim</span>
           </div>
           <button onclick="openFindTeamModal()" class="px-3 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold flex items-center gap-1.5 tap-action shadow-sm shadow-brand-600/20">
             <i data-lucide="search" class="w-3.5 h-3.5"></i>
@@ -268,10 +268,10 @@
           </button>
         </div>
 
-        <!-- RIWAYAT LAMARAN TIM ATLET -->
+        <!-- RIWAYAT LAMARAN TIM PLAYER -->
         <div class="space-y-1.5 pt-1">
           <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Riwayat Pendaftaran Tim Anda:</span>
-          <div id="atletApplicationList" class="space-y-2">
+          <div id="playerApplicationList" class="space-y-2">
             <!-- Populated via JS -->
           </div>
         </div>
@@ -359,18 +359,18 @@
       <div class="app-card rounded-3xl p-4 bg-white space-y-3">
         <div class="flex items-center justify-between pb-2 border-b border-gray-100">
           <div>
-            <h3 class="text-xs font-bold text-surface-dark">Rekrutmen & Pendaftaran Atlet</h3>
-            <p class="text-[10px] text-surface-muted">Rekrut anggota dari pangkalan data atlet terdaftar</p>
+            <h3 class="text-xs font-bold text-surface-dark">Rekrutmen & Pendaftaran Player</h3>
+            <p class="text-[10px] text-surface-muted">Rekrut anggota dari pangkalan data player terdaftar</p>
           </div>
           <button onclick="openRecruitModal()" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm shadow-emerald-600/20">
             <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
-            <span>Rekrut Atlet</span>
+            <span>Rekrut Player</span>
           </button>
         </div>
 
-        <!-- PERMOHONAN MASUK DARI ATLET -->
+        <!-- PERMOHONAN MASUK DARI PLAYER -->
         <div class="space-y-1.5">
-          <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Permohonan Masuk dari Atlet:</span>
+          <span class="text-[10px] font-bold text-surface-muted uppercase tracking-wider block">Permohonan Masuk dari Player:</span>
           <div id="teamApplicantList" class="space-y-2">
             <!-- Populated via JS -->
           </div>
@@ -527,7 +527,7 @@
         <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
           <div>
             <span class="text-[10px] text-surface-muted block font-medium">Status Ketersediaan Coaching:</span>
-            <span class="text-xs font-extrabold text-emerald-600" id="coachAvailabilityStatus">Buka Bimbingan Atlet & Tim</span>
+            <span class="text-xs font-extrabold text-emerald-600" id="coachAvailabilityStatus">Buka Bimbingan Player & Tim</span>
           </div>
           <button onclick="toggleCoachStatus()" id="btnToggleCoachStatus" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold tap-action shadow-sm">
             Tersedia
@@ -553,7 +553,7 @@
         </div>
       </div>
 
-      <!-- FITUR PELATIH 2: PERMINTAAN COACHING DARI ATLET / TIM -->
+      <!-- FITUR PELATIH 2: PERMINTAAN COACHING DARI PLAYER / TIM -->
       <div class="app-card rounded-3xl p-4 bg-white space-y-3">
         <div class="flex items-center justify-between pb-2 border-b border-gray-100">
           <div>
@@ -585,7 +585,7 @@
             <i data-lucide="repeat" class="w-4 h-4"></i>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-surface-dark">Bursa Transfer Atlet (LFT)</h4>
+            <h4 class="text-xs font-bold text-surface-dark">Bursa Transfer Player (LFT)</h4>
             <p class="text-[10px] text-surface-muted">Cari tim baru atau buka ketersediaan rekrutmen</p>
           </div>
         </div>
@@ -614,7 +614,7 @@
           </div>
           <div>
             <h4 class="text-xs font-bold text-surface-dark">Direktori 19 Wilayah</h4>
-            <p class="text-[10px] text-surface-muted">Lihat data atlet, klub, dan venue di tiap daerah</p>
+            <p class="text-[10px] text-surface-muted">Lihat data player, klub, dan venue di tiap daerah</p>
           </div>
         </div>
         <i data-lucide="chevron-right" class="w-4 h-4 text-surface-muted"></i>
@@ -643,7 +643,7 @@
   </main>
 
   <!-- ============================================================== -->
-  <!-- MODAL: CARI TIM & DAFTAR DIRI (UNTUK ATLET)                    -->
+  <!-- MODAL: CARI TIM & DAFTAR DIRI (UNTUK PLAYER)                    -->
   <!-- ============================================================== -->
   <div id="findTeamModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
@@ -664,13 +664,13 @@
   </div>
 
   <!-- ============================================================== -->
-  <!-- MODAL: REKRUT ATLET (UNTUK TIM)                                -->
+  <!-- MODAL: REKRUT PLAYER (UNTUK TIM)                                -->
   <!-- ============================================================== -->
   <div id="recruitModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-gray-100 pb-2">
         <div>
-          <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Bursa Rekrutmen Atlet</h4>
+          <h4 class="text-xs font-bold text-surface-dark uppercase tracking-wide">Bursa Rekrutmen Player</h4>
           <p class="text-[10px] text-surface-muted">Pilih talenta untuk dimasukkan ke roster tim</p>
         </div>
         <button onclick="closeRecruitModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
@@ -806,8 +806,8 @@
   <script>
     // SHARED ECOSYSTEM INTERCONNECTED STATE
     const DEFAULT_ECOSYSTEM_STATE = {
-      activeRole: 'atlet',
-      atlet: {
+      activeRole: 'player',
+      player: {
         id: "atl-01",
         nama: "Muhammad Rayden",
         ign: "V4ND4L",
@@ -900,13 +900,14 @@
 
     // ROLE SWITCHER LOGIC
     function switchRole(newRole) {
+      if (newRole === 'atlet') newRole = 'player';
       state.activeRole = newRole;
       saveEcosystemState(state);
 
       // Also sync user session
       let userSession = {
         role: newRole,
-        nama: newRole === 'atlet' ? state.atlet.nama :
+        nama: newRole === 'player' ? state.player.nama :
               newRole === 'tim' ? state.tim.nama :
               newRole === 'venue' ? state.venue.nama : state.pelatih.nama,
         email: `${newRole}@esportsumbar.id`
@@ -918,10 +919,10 @@
     }
 
     function renderActiveRole() {
-      const currentRole = state.activeRole || 'atlet';
+      const currentRole = state.activeRole || 'player';
 
       // 1. Update pills
-      ['atlet', 'tim', 'venue', 'pelatih'].forEach(r => {
+      ['player', 'tim', 'venue', 'pelatih'].forEach(r => {
         const pill = document.getElementById(`pillRole${r.charAt(0).toUpperCase() + r.slice(1)}`);
         if (pill) {
           if (r === currentRole) {
@@ -933,16 +934,16 @@
       });
 
       // 2. Hide all sections
-      document.getElementById('sectionProfilAtlet').classList.add('hidden');
+      document.getElementById('sectionProfilPlayer').classList.add('hidden');
       document.getElementById('sectionProfilTim').classList.add('hidden');
       document.getElementById('sectionProfilVenue').classList.add('hidden');
       document.getElementById('sectionProfilPelatih').classList.add('hidden');
 
       // 3. Show active section & render content
-      if (currentRole === 'atlet') {
-        document.getElementById('topProfileTitle').textContent = 'Profil Atlet';
-        document.getElementById('sectionProfilAtlet').classList.remove('hidden');
-        renderAtletProfile();
+      if (currentRole === 'player') {
+        document.getElementById('topProfileTitle').textContent = 'Profil Player';
+        document.getElementById('sectionProfilPlayer').classList.remove('hidden');
+        renderPlayerProfile();
       } else if (currentRole === 'tim') {
         document.getElementById('topProfileTitle').textContent = 'Profil & Roster Tim';
         document.getElementById('sectionProfilTim').classList.remove('hidden');
@@ -959,10 +960,10 @@
     }
 
     // ==========================================
-    // RENDER ROLE 1: ATLET
+    // RENDER ROLE 1: PLAYER
     // ==========================================
-    function renderAtletProfile() {
-      const a = state.atlet;
+    function renderPlayerProfile() {
+      const a = state.player;
       document.getElementById('userIgn').textContent = a.ign;
       document.getElementById('userName').textContent = a.nama;
       document.getElementById('userGame').textContent = a.game.toUpperCase();
@@ -972,7 +973,7 @@
       document.getElementById('userOvrBadge').textContent = a.ovr;
 
       // Verification banner
-      const verifBanner = document.getElementById('atletVerifCtaBanner');
+      const verifBanner = document.getElementById('playerVerifCtaBanner');
       if (a.isVerified) {
         verifBanner.classList.add('hidden');
       } else {
@@ -980,8 +981,8 @@
       }
 
       // Team status
-      const teamBadge = document.getElementById('atletTeamStatusBadge');
-      const teamNameEl = document.getElementById('atletCurrentTeamName');
+      const teamBadge = document.getElementById('playerTeamStatusBadge');
+      const teamNameEl = document.getElementById('playerCurrentTeamName');
       if (a.currentTeam) {
         teamBadge.textContent = 'Anggota Tim';
         teamBadge.className = 'px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-700';
@@ -993,7 +994,7 @@
       }
 
       // Applications list
-      const appContainer = document.getElementById('atletApplicationList');
+      const appContainer = document.getElementById('playerApplicationList');
       if (a.applications && a.applications.length > 0) {
         appContainer.innerHTML = a.applications.map(app => `
           <div class="p-2.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-between text-xs">
@@ -1047,7 +1048,7 @@
     }
 
     function applyToTeam(teamName) {
-      state.atlet.applications.unshift({
+      state.player.applications.unshift({
         teamName: teamName,
         date: "Baru saja",
         status: "Menunggu Review"
@@ -1057,18 +1058,18 @@
       if (teamName === state.tim.nama) {
         state.tim.applicants.unshift({
           id: `app-${Date.now()}`,
-          ign: state.atlet.ign,
-          nama: state.atlet.nama,
-          game: state.atlet.game,
-          role: state.atlet.roleTitle,
-          ovr: state.atlet.ovr,
+          ign: state.player.ign,
+          nama: state.player.nama,
+          game: state.player.game,
+          role: state.player.roleTitle,
+          ovr: state.player.ovr,
           waktu: "Baru saja"
         });
       }
 
       saveEcosystemState(state);
       closeFindTeamModal();
-      renderAtletProfile();
+      renderPlayerProfile();
       alert(`Permohonan gabung ke ${teamName} berhasil dikirim! Tim akan meninjau berkas paspor digital Anda.`);
     }
 
@@ -1081,11 +1082,11 @@
     }
     function submitVerifRequest(e) {
       e.preventDefault();
-      state.atlet.isVerified = true;
-      state.atlet.lisensiStatus = "TERVERIFIKASI RESMI";
+      state.player.isVerified = true;
+      state.player.lisensiStatus = "TERVERIFIKASI RESMI";
       saveEcosystemState(state);
       closeRequestVerifModal();
-      renderAtletProfile();
+      renderPlayerProfile();
       alert('Pengajuan verifikasi berhasil dikirim dan disetujui Pengcab daerah! Lencana verifikasi resmi Anda kini aktif.');
     }
 
@@ -1201,10 +1202,10 @@
       });
       state.tim.applicants.splice(idx, 1);
 
-      // Interkoneksi: update status atlet jika cocok
-      if (state.atlet.ign === app.ign) {
-        state.atlet.currentTeam = state.tim.nama;
-        state.atlet.applications.forEach(a => {
+      // Interkoneksi: update status player jika cocok
+      if (state.player.ign === app.ign) {
+        state.player.currentTeam = state.tim.nama;
+        state.player.applications.forEach(a => {
           if (a.teamName === state.tim.nama) a.status = "Diterima (Resmi Anggota)";
         });
       }
@@ -1227,7 +1228,7 @@
       alert(`Pendaftaran Roster Tim ke '${state.tim.tournaments[idx].name}' BERHASIL! Slot kompetisi Anda telah dikonfirmasi.`);
     }
 
-    // Modal Rekrut Atlet
+    // Modal Rekrut Player
     function openRecruitModal() {
       const container = document.getElementById('availablePlayersToRecruit');
       const freeAgents = [
@@ -1341,7 +1342,7 @@
       const availStatus = document.getElementById('coachAvailabilityStatus');
       const btnToggle = document.getElementById('btnToggleCoachStatus');
       if (p.isOpenForCoaching) {
-        availStatus.textContent = "Buka Bimbingan Atlet & Tim";
+        availStatus.textContent = "Buka Bimbingan Player & Tim";
         availStatus.className = "text-xs font-extrabold text-emerald-600";
         btnToggle.textContent = "Aktif Buka";
         btnToggle.className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold tap-action shadow-sm";
@@ -1444,10 +1445,10 @@
           const parsed = JSON.parse(raw);
           if (parsed && parsed.role) {
             state.activeRole = parsed.role;
-            if (parsed.role === 'atlet' && parsed.ign) {
-              state.atlet.ign = parsed.ign;
-              state.atlet.nama = parsed.nama || state.atlet.nama;
-              if (parsed.ovr) state.atlet.ovr = parsed.ovr;
+            if (parsed.role === 'player' && parsed.ign) {
+              state.player.ign = parsed.ign;
+              state.player.nama = parsed.nama || state.player.nama;
+              if (parsed.ovr) state.player.ovr = parsed.ovr;
             }
           }
         }

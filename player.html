@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#F5F6FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Paspor Digital Player – ESPORT SUMBAR</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF1F2',
+              100: '#FFE4E6',
+              500: '#F43F5E',
+              600: '#E00000', // Telkomsel Red
+              700: '#B80000',
+              800: '#900000',
+            },
+            surface: {
+              canvas: '#F5F6FA',
+              card: '#FFFFFF',
+              dark: '#1A1D26',
+              muted: '#687083',
+              border: '#EAECEF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/microsystem-client.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/esport-sumbar-logo.png" />
+  <link rel="apple-touch-icon" href="/images/esport-sumbar-logo.png" />
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body {
+      background-color: #F5F6FA;
+      color: #1A1D26;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding-bottom: 120px; /* Space for bottom dock */
+    }
+    .app-card {
+      background: #FFFFFF;
+      border: 1px solid #ECEEF2;
+      box-shadow: 0 4px 16px -2px rgba(26, 29, 38, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+    }
+    .tap-action {
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .tap-action:active {
+      transform: scale(0.97);
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-full antialiased text-surface-dark selection:bg-brand-600 selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- TOP APP BAR (COMPACT MYTELKOMSEL HEADER)                      -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border">
+    <div class="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action hover:bg-gray-200">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </a>
+        <div>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Paspor Digital Player</h1>
+          <p class="text-[10px] text-brand-600 font-bold uppercase tracking-wider">ESPORT SUMBAR</p>
+        </div>
+      </div>
+      <div>
+        
+      <a href="/daftar-player" class="px-3 py-1.5 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center gap-1 tap-action shadow-sm shadow-brand-600/30">
+        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+        <span>Daftar</span>
+      </a>
+    
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- MAIN APP CONTAINER                                             -->
+  <!-- ============================================================== -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+    
+    <!-- SUMMARY PROVIDER CARD -->
+    <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white to-gray-50/80 border border-gray-100">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-[11px] font-bold tracking-wider text-brand-600 uppercase">Paspor Digital Player</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Database Resmi
+        </span>
+      </div>
+      <h2 class="text-xl font-extrabold text-surface-dark tracking-tight leading-snug">
+        Pangkalan Data Paspor Digital Player ESPORT SUMBAR
+      </h2>
+      <p class="text-xs text-surface-muted mt-1 leading-relaxed">
+        Penerbitan identitas resmi player, validasi OVR performa, status lisensi binaan daerah, dan integritas bursa LFT. Berkolaborasi dengan ESI Sumatera Barat.
+      </p>
+
+      <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-surface-dark">986+</span>
+          <span class="text-[10px] text-surface-muted font-medium">Player Terdata</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-brand-600">19</span>
+          <span class="text-[10px] text-surface-muted font-medium">Kab / Kota</span>
+        </div>
+        <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
+          <span class="block text-base font-extrabold text-emerald-600">100%</span>
+          <span class="text-[10px] text-surface-muted font-medium">Terverifikasi ESI</span>
+        </div>
+      </div>
+
+      <a href="/daftar-player" class="mt-4 w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/20">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Penerbitan Paspor Player Baru</span>
+      </a>
+    </div>
+
+    <!-- SEARCH & HORIZONTAL FILTER TABS -->
+    <div class="space-y-2">
+      <!-- Search -->
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 text-surface-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="searchPlayer" 
+          oninput="filterAthletes()"
+          placeholder="Cari IGN, nama player, atau kota domisili..." 
+          class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark placeholder-surface-muted focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600 shadow-sm"
+        />
+      </div>
+
+      <!-- Filter chips -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 hide-scrollbar" id="gameFilterBar">
+        <button onclick="setFilterGame('semua', this)" class="filter-chip px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action">Semua Game</button>
+        <button onclick="setFilterGame('Mobile Legends', this)" class="filter-chip px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 hover:border-brand-600 tap-action">Mobile Legends</button>
+        <button onclick="setFilterGame('Valorant', this)" class="filter-chip px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 hover:border-brand-600 tap-action">Valorant</button>
+        <button onclick="setFilterGame('PUBG Mobile', this)" class="filter-chip px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 hover:border-brand-600 tap-action">PUBG Mobile</button>
+        <button onclick="setFilterGame('Free Fire', this)" class="filter-chip px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 hover:border-brand-600 tap-action">Free Fire</button>
+      </div>
+    </div>
+
+    <!-- ATHLETE CARDS LIST -->
+    <div class="space-y-3" id="athleteListContainer">
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="fajar pratama" 
+             data-ign="fajar7" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="FAJAR7" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  92
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">FAJAR7</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Fajar Pratama</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Padang</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                MOBILE LEGENDS
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MOB-999</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Jungler
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('FAJAR7', 'Fajar Pratama', 'Mobile Legends', 'Jungler', 'Kota Padang', 'ESSB-2026-MOB-999', '92', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="rizky alamsyah" 
+             data-ign="kyrox" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="KYROX" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  93
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">KYROX</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Rizky Alamsyah</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Padang</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                MOBILE LEGENDS
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MOB-585</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Flex / All-Role
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('KYROX', 'Rizky Alamsyah', 'Mobile Legends', 'Flex / All-Role', 'Kota Padang', 'ESSB-2026-MOB-585', '93', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="test player alur minimalis" 
+             data-ign="testplayer" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="TESTPLAYER" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  95
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">TESTPLAYER</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Test Player Alur Minimalis</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Padang</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                MOBILE LEGENDS
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MOB-659</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Gold Laner
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('TESTPLAYER', 'Test Player Alur Minimalis', 'Mobile Legends', 'Gold Laner', 'Kota Padang', 'ESSB-2026-MOB-659', '95', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="fauzan mobile tester" 
+             data-ign="z4nn" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="Z4NN" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  94
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">Z4NN</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Fauzan Mobile Tester</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Bukittinggi</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                MOBILE LEGENDS
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MOB-161</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Jungler / Retri God
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('Z4NN', 'Fauzan Mobile Tester', 'Mobile Legends', 'Jungler / Retri God', 'Kota Bukittinggi', 'ESSB-2026-MOB-161', '94', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="PUBG Mobile" 
+             data-name="budi santoso pratama" 
+             data-ign="jamgadang_sniper" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="JAMGADANG_SNIPER" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  87
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">JAMGADANG_SNIPER</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Budi Santoso Pratama</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Bukittinggi</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                PUBG MOBILE
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-PUB-170</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Sniper / Scout
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('JAMGADANG_SNIPER', 'Budi Santoso Pratama', 'PUBG Mobile', 'Sniper / Scout', 'Kota Bukittinggi', 'ESSB-2026-PUB-170', '87', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="rifki pratama yudha" 
+             data-ign="shadowfox" 
+             data-wilayah="kota payakumbuh">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="SHADOWFOX" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  89
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">SHADOWFOX</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Rifki Pratama Yudha</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Payakumbuh</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                MOBILE LEGENDS
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MOB-871</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Jungler / Assassin
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('SHADOWFOX', 'Rifki Pratama Yudha', 'Mobile Legends', 'Jungler / Assassin', 'Kota Payakumbuh', 'ESSB-2026-MOB-871', '89', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="VALORANT" 
+             data-name="ahmad fauzi rasyid" 
+             data-ign="nighthawk" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="NIGHTHAWK" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  92
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">NIGHTHAWK</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Ahmad Fauzi Rasyid</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Bukittinggi</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                VALORANT
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-VAL-699</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Duelist / Jett Main
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('NIGHTHAWK', 'Ahmad Fauzi Rasyid', 'VALORANT', 'Duelist / Jett Main', 'Kota Bukittinggi', 'ESSB-2026-VAL-699', '92', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Valorant" 
+             data-name="muhammad rayden" 
+             data-ign="v4nd4l" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="V4ND4L" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  96
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">V4ND4L</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Muhammad Rayden</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Padang</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                VALORANT
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-VAL-96</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Duelist / Entry Fragger
+              </span>
+              <span class="text-[10px] font-semibold text-amber-600">
+                PELATDA PON XXI
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('V4ND4L', 'Muhammad Rayden', 'Valorant', 'Duelist / Entry Fragger', 'Kota Padang', 'ESSB-2026-VAL-96', '96', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Valorant" 
+             data-name="fadhil pratama" 
+             data-ign="flash" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-pro-player.jpg" alt="FLASH" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  94
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">FLASH</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Fadhil Pratama</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Bukittinggi</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                VALORANT
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-VAL-94</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Initiator / Sova Specialist
+              </span>
+              <span class="text-[10px] font-semibold text-amber-600">
+                PELATDA PON XXI
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('FLASH', 'Fadhil Pratama', 'Valorant', 'Initiator / Sova Specialist', 'Kota Bukittinggi', 'ESSB-2026-VAL-94', '94', '/images/athlete-pro-player.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Mobile Legends" 
+             data-name="aditya ramadhan" 
+             data-ign="skyl1ne" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="SKYL1NE" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  95
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">SKYL1NE</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Aditya Ramadhan</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Padang</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                MOBILE LEGENDS
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MLB-95</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Jungler / Assassin
+              </span>
+              <span class="text-[10px] font-semibold text-amber-600">
+                PELATDA PON XXI
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('SKYL1NE', 'Aditya Ramadhan', 'Mobile Legends', 'Jungler / Assassin', 'Kota Padang', 'ESSB-2026-MLB-95', '95', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="PUBG Mobile" 
+             data-name="rizky ramadhan" 
+             data-ign="shadow" 
+             data-wilayah="kota payakumbuh">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-pro-player.jpg" alt="SHADOW" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  92
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">SHADOW</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Rizky Ramadhan</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Payakumbuh</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                PUBG MOBILE
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-PUB-92</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Scout / Rusher
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                SELEKNAS TIER 2
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('SHADOW', 'Rizky Ramadhan', 'PUBG Mobile', 'Scout / Rusher', 'Kota Payakumbuh', 'ESSB-2026-PUB-92', '92', '/images/athlete-pro-player.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Valorant" 
+             data-name="muhammad rayden" 
+             data-ign="v4nd4l" 
+             data-wilayah="kota padang">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="V4ND4L" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  96
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">V4ND4L</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Muhammad Rayden</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Padang</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                VALORANT
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-VAL-982</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Duelist / IGL
+              </span>
+              <span class="text-[10px] font-semibold text-amber-600">
+                PELATDA PON XXI
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('V4ND4L', 'Muhammad Rayden', 'Valorant', 'Duelist / IGL', 'Kota Padang', 'ESSB-2026-VAL-982', '96', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Valorant" 
+             data-name="fajri alamsyah" 
+             data-ign="f4lcon" 
+             data-wilayah="kota bukittinggi">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-pro-player.jpg" alt="F4LCON" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  92
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">F4LCON</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Fajri Alamsyah</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Bukittinggi</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                VALORANT
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-VAL-884</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Initiator
+              </span>
+              <span class="text-[10px] font-semibold text-amber-600">
+                PELATDA PON XXI
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('F4LCON', 'Fajri Alamsyah', 'Valorant', 'Initiator', 'Kota Bukittinggi', 'ESSB-2026-VAL-884', '92', '/images/athlete-pro-player.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="PUBG Mobile" 
+             data-name="kevin wijaya" 
+             data-ign="k3v1n" 
+             data-wilayah="kota payakumbuh">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="K3V1N" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  91
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">K3V1N</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Kevin Wijaya</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kota Payakumbuh</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                PUBG MOBILE
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-MOB-771</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Rusher / Scout
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('K3V1N', 'Kevin Wijaya', 'PUBG Mobile', 'Rusher / Scout', 'Kota Payakumbuh', 'ESSB-2026-MOB-771', '91', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Valorant" 
+             data-name="iqbal maulana" 
+             data-ign="recon" 
+             data-wilayah="kab. padang pariaman">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-pro-player.jpg" alt="RECON" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  90
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">RECON</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Iqbal Maulana</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kab. Padang Pariaman</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                VALORANT
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-VAL-662</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Controller
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('RECON', 'Iqbal Maulana', 'Valorant', 'Controller', 'Kab. Padang Pariaman', 'ESSB-2026-VAL-662', '90', '/images/athlete-pro-player.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+        <div class="athlete-card app-card rounded-2xl p-4 bg-white hover:border-gray-300 transition-all space-y-3" 
+             data-game="Free Fire" 
+             data-name="rayhan alif" 
+             data-ign="ray_boy" 
+             data-wilayah="kab. tanah datar">
+          
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative w-12 h-12 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0">
+                <img src="/images/athlete-v4nd4l.jpg" alt="RAY_BOY" class="w-full h-full object-cover" />
+                <span class="absolute bottom-0 inset-x-0 bg-brand-600/90 text-white text-[8px] font-black text-center py-0.5">
+                  89
+                </span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-surface-dark leading-tight">RAY_BOY</h3>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                </div>
+                <p class="text-xs font-medium text-surface-muted">Rayhan Alif</p>
+                <p class="text-[10px] text-surface-muted flex items-center gap-1 mt-0.5">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-600"></i>
+                  <span>Kab. Tanah Datar</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-brand-600 border border-red-100">
+                FREE FIRE
+              </span>
+              <p class="text-[9px] font-mono text-surface-muted mt-1">ESSB-2026-FF-551</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-gray-100 text-surface-dark">
+                Rusher
+              </span>
+              <span class="text-[10px] font-semibold text-surface-muted">
+                POTENSI DAERAH
+              </span>
+            </div>
+            
+            <button onclick="openPassportModal('RAY_BOY', 'Rayhan Alif', 'Free Fire', 'Rusher', 'Kab. Tanah Datar', 'ESSB-2026-FF-551', '89', '/images/athlete-v4nd4l.jpg')" 
+                    class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-brand-600 hover:text-white text-surface-dark font-bold text-[11px] flex items-center gap-1 tap-action transition-colors">
+              <i data-lucide="id-card" class="w-3.5 h-3.5"></i>
+              <span>Buka Paspor</span>
+            </button>
+          </div>
+
+        </div>
+      
+    </div>
+
+    <!-- PASSPORT PREVIEW MODAL -->
+    <div id="passportModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+      <div class="w-full max-w-sm bg-white rounded-3xl p-5 space-y-4 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+        
+        <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+          <div class="flex items-center gap-1.5">
+            <img src="/images/esport-sumbar-logo.png" alt="PBESI" class="w-5 h-5 object-contain" />
+            <span class="text-xs font-bold text-surface-dark uppercase tracking-wide">Paspor Digital PBESI</span>
+          </div>
+          <button onclick="closePassportModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-surface-muted hover:text-surface-dark">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- 3D CARD BOX -->
+        <div class="app-card rounded-2xl p-4 bg-gradient-to-br from-white via-red-50/20 to-white border-2 border-red-100 shadow-lg space-y-3">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gray-100 border-2 border-brand-600 shadow-sm">
+                <img id="modalAvatar" src="/images/athlete-v4nd4l.jpg" alt="Avatar" class="w-full h-full object-cover" />
+              </div>
+              <div>
+                <h4 id="modalIgn" class="text-base font-black text-surface-dark leading-tight">V4ND4L</h4>
+                <p id="modalName" class="text-xs font-medium text-surface-muted">Muhammad Rayden</p>
+                <div class="flex items-center gap-1 mt-1">
+                  <span id="modalGame" class="px-2 py-0.5 rounded text-[9px] font-bold bg-brand-600 text-white">VALORANT</span>
+                  <span id="modalRole" class="text-[10px] font-semibold text-surface-dark">DUELIST</span>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-[9px] font-bold text-surface-muted block uppercase">OVR RATING</span>
+              <span id="modalOvr" class="text-2xl font-black text-brand-600 leading-none">96</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-[10px] text-surface-muted">
+            <div>
+              <span class="block text-[8px] uppercase tracking-wider">No. Lisensi Sah</span>
+              <span id="modalPasporId" class="font-mono font-bold text-surface-dark">ESSB-2026-VAL-982</span>
+            </div>
+            <div class="text-right">
+              <span class="block text-[8px] uppercase tracking-wider">Wilayah Pengcab</span>
+              <span id="modalWilayah" class="font-bold text-surface-dark">Kota Padang</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="/daftar-player" class="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs text-center tap-action shadow-md shadow-brand-600/20">
+            Daftar Paspor Serupa
+          </a>
+          <button onclick="closePassportModal()" class="px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-surface-dark font-bold text-xs tap-action">
+            Tutup
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      let activeGameFilter = 'semua';
+
+      function setFilterGame(game, btn) {
+        activeGameFilter = game;
+        document.querySelectorAll('#gameFilterBar button').forEach(b => {
+          b.className = 'filter-chip px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-surface-muted border border-gray-200 hover:border-brand-600 tap-action';
+        });
+        btn.className = 'filter-chip px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap bg-brand-600 text-white tap-action';
+        filterAthletes();
+      }
+
+      function filterAthletes() {
+        const query = document.getElementById('searchPlayer').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.athlete-card');
+        
+        cards.forEach(card => {
+          const game = card.getAttribute('data-game');
+          const name = card.getAttribute('data-name');
+          const ign = card.getAttribute('data-ign');
+          const wilayah = card.getAttribute('data-wilayah');
+
+          const matchGame = activeGameFilter === 'semua' || game.toLowerCase() === activeGameFilter.toLowerCase();
+          const matchQuery = !query || name.includes(query) || ign.includes(query) || wilayah.includes(query);
+
+          if (matchGame && matchQuery) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      function openPassportModal(ign, name, game, role, wilayah, pasporId, ovr, foto) {
+        document.getElementById('modalIgn').textContent = ign;
+        document.getElementById('modalName').textContent = name;
+        document.getElementById('modalGame').textContent = game.toUpperCase();
+        document.getElementById('modalRole').textContent = role.toUpperCase();
+        document.getElementById('modalWilayah').textContent = wilayah;
+        document.getElementById('modalPasporId').textContent = pasporId;
+        document.getElementById('modalOvr').textContent = ovr;
+        document.getElementById('modalAvatar').src = foto || '/images/athlete-v4nd4l.jpg';
+        
+        document.getElementById('passportModal').classList.remove('hidden');
+        lucide.createIcons();
+      }
+
+      function closePassportModal() {
+        document.getElementById('passportModal').classList.add('hidden');
+      }
+    </script>
+  
+  
+    <!-- PROVIDER COLLABORATION & COPYRIGHT FOOTER -->
+    <div class="app-card rounded-2xl p-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white space-y-2 mt-6">
+      <div class="flex items-center gap-2">
+        <img src="/images/esport-sumbar-logo.png" alt="ESPORT SUMBAR" class="w-6 h-6 object-contain" />
+        <span class="text-xs font-extrabold tracking-wide text-red-400">ESPORT SUMBAR</span>
+        <span class="text-[9px] px-2 py-0.5 rounded bg-white/10 text-white/80">Platform Provider</span>
+      </div>
+      <p class="text-[11px] text-gray-300 leading-relaxed">
+        <strong>ESPORT SUMBAR</strong> adalah brand provider platform resmi ekosistem esports Sumatera Barat. Kami berkolaborasi dengan Pengurus Provinsi ESI Sumbar dan 19 Pengurus Cabang ESI Kota & Kabupaten.
+      </p>
+    </div>
+
+    <footer class="pt-2 pb-6 text-center space-y-1 text-surface-muted text-[11px]">
+      <div class="font-bold text-surface-dark">ESPORT SUMBAR</div>
+      <p class="text-[10px] text-surface-muted">
+        Hak Cipta &copy; 2026 ESPORT SUMBAR. Seluruh hak cipta dilindungi undang-undang.<br/>
+        Berkolaborasi dengan ESI Sumatera Barat.
+      </p>
+    </footer>
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM DOCK (MYTELKOMSEL 5-TAB APP NAV)                 -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE)    -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- FIXED BOTTOM NAVIGATION BAR (MYTELKOMSEL UNIFIED SIGNATURE)    -->
+  <!-- ============================================================== -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+    <div class="max-w-md mx-auto h-16 px-2 grid grid-cols-5 items-end relative pb-2">
+      
+      <!-- 1. Beranda -->
+      <a href="/" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="home" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Beranda</span>
+      </a>
+
+      <!-- 2. Paspor -->
+      <a href="/paspor" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-brand-600">
+        <i data-lucide="id-card" class="w-5 h-5 stroke-[2.2] mb-1"></i>
+        <span class="text-[10px] font-bold leading-none">Paspor</span>
+      </a>
+
+      <!-- 3. Bisnis & Hub Aksi (Center Elevated Button) -->
+      <a href="/bisnis" class="flex flex-col items-center justify-end h-full pb-1 tap-action relative group">
+        <div class="absolute -top-5 w-12 h-12 rounded-full bg-brand-600 hover:bg-brand-700 shadow-[0_6px_16px_rgba(224,0,0,0.35)] text-white flex items-center justify-center border-4 border-white transition-transform active:scale-95">
+          <i data-lucide="plus" class="w-6 h-6 stroke-[2.8]"></i>
+        </div>
+        <span class="text-[10px] text-surface-dark font-bold leading-none">Bisnis</span>
+      </a>
+
+      <!-- 4. Wilayah -->
+      <a href="/wilayah" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="map" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Wilayah</span>
+      </a>
+
+      <!-- 5. Akun -->
+      <a href="/profile" class="flex flex-col items-center justify-end h-full pb-1 tap-action text-surface-muted hover:text-surface-dark">
+        <i data-lucide="user" class="w-5 h-5 stroke-[1.8] mb-1"></i>
+        <span class="text-[10px] font-medium leading-none">Akun</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

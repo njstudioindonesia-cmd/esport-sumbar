@@ -1,7 +1,7 @@
 import { db } from '../store/db.js';
 
 /**
- * MICROSERVICES: PASPOR DIGITAL ATLET 3D
+ * MICROSERVICES: PASPOR DIGITAL PLAYER 3D
  * Menyediakan verifikasi paspor digital resmi PBESI, statistik rating, dan keaslian QR.
  */
 export const MicroPaspor = {
@@ -12,7 +12,7 @@ export const MicroPaspor = {
       return {
         success: false,
         statusCode: 400,
-        message: "Nomor Lisensi Paspor atau ID Atlet wajib dicantumkan."
+        message: "Nomor Lisensi Paspor atau ID Player wajib dicantumkan."
       };
     }
 

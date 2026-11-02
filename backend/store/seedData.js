@@ -1,6 +1,6 @@
 /**
  * SEED DATA EKOSISTEM ESPORT SUMATERA BARAT
- * Pangkalan data awal resmi: 19 Kabupaten/Kota, Atlet, Tim, Venue, Antrean, dan Lisensi
+ * Pangkalan data awal resmi: 19 Kabupaten/Kota, Player, Tim, Venue, Antrean, dan Lisensi
  */
 
 export const INITIAL_DATA = {
@@ -38,42 +38,42 @@ export const INITIAL_DATA = {
       permissions: ["pengcab:padang:*"]
     },
     {
-      id: "usr-atlet-v4nd4l",
-      role: "atlet",
+      id: "usr-player-v4nd4l",
+      role: "player",
       email: "rayden@v4nd4l.id",
       passwordHash: "RaydenV4nd4l2026",
       nama: "Muhammad Rayden",
       ign: "V4ND4L",
       pasporId: "PBESI-SB-2026-VAL-96",
-      permissions: ["atlet:self"]
+      permissions: ["player:self"]
     }
   ],
 
   // 19 Kabupaten / Kota Sumatera Barat
   wilayah: [
-    { nama: "Kota Padang", sk: "SK-01/ESI-SB/2024", ketua: "Drs. Hendri Septa, B.Bus", sekretariat: "GOR H. Agus Salim, Padang", atlet: 186, tim: 24, venue: 6, porprov: 18, status: "Aktif" },
-    { nama: "Kota Bukittinggi", sk: "SK-02/ESI-SB/2024", ketua: "H. Erman Safar, SH", sekretariat: "Jam Gadang Sport Hub, Bukittinggi", atlet: 142, tim: 16, venue: 4, porprov: 14, status: "Aktif" },
-    { nama: "Kota Payakumbuh", sk: "SK-03/ESI-SB/2024", ketua: "Drs. H. Riza Falepi, ST, MT", sekretariat: "GOR M. Yamin, Payakumbuh", atlet: 118, tim: 12, venue: 3, porprov: 12, status: "Aktif" },
-    { nama: "Kota Solok", sk: "SK-04/ESI-SB/2024", ketua: "H. Zul Elfian Umar, SH, M.Si", sekretariat: "Lapangan Merdeka, Solok", atlet: 84, tim: 9, venue: 2, porprov: 9, status: "Aktif" },
-    { nama: "Kota Sawahlunto", sk: "SK-05/ESI-SB/2024", ketua: "Deri Asta, SH", sekretariat: "Ombilin Heritage Hall, Sawahlunto", atlet: 62, tim: 7, venue: 2, porprov: 7, status: "Aktif" },
-    { nama: "Kota Padang Panjang", sk: "SK-06/ESI-SB/2024", ketua: "Fadly Amran, B.B.A", sekretariat: "GOR Chatib Sulaiman, Padang Panjang", atlet: 76, tim: 8, venue: 2, porprov: 8, status: "Aktif" },
-    { nama: "Kota Pariaman", sk: "SK-07/ESI-SB/2024", ketua: "Prof. Dr. Genius Umar, M.Si", sekretariat: "Pantai Gandoriah Youth Center", atlet: 94, tim: 10, venue: 3, porprov: 10, status: "Aktif" },
-    { nama: "Kab. Agam", sk: "SK-08/ESI-SB/2024", ketua: "Dr. H. Andri Warman, MM", sekretariat: "Lubuk Basung Sport Arena", atlet: 135, tim: 15, venue: 4, porprov: 14, status: "Aktif" },
-    { nama: "Kab. Tanah Datar", sk: "SK-09/ESI-SB/2024", ketua: "Eka Putra, SE, MM", sekretariat: "Pagaruyung Youth Center", atlet: 112, tim: 13, venue: 3, porprov: 12, status: "Aktif" },
-    { nama: "Kab. Lima Puluh Kota", sk: "SK-10/ESI-SB/2024", ketua: "Safaruddin Dt. Bandaro Rajo", sekretariat: "Kompleks Kantor Bupati, Sarilamak", atlet: 108, tim: 12, venue: 3, porprov: 11, status: "Aktif" },
-    { nama: "Kab. Padang Pariaman", sk: "SK-11/ESI-SB/2024", ketua: "Suhatri Bur, SE, MM", sekretariat: "IKK Parit Malintang", atlet: 124, tim: 14, venue: 3, porprov: 13, status: "Aktif" },
-    { nama: "Kab. Pesisir Selatan", sk: "SK-12/ESI-SB/2024", ketua: "Drs. Rusma Yul Anwar, M.Pd", sekretariat: "GOR Ilyas Yakoub, Painan", atlet: 130, tim: 14, venue: 3, porprov: 13, status: "Aktif" },
-    { nama: "Kab. Solok", sk: "SK-13/ESI-SB/2024", ketua: "Capt. H. Epyardi Asda, M.Mar", sekretariat: "Kompleks Arosuka, Solok", atlet: 98, tim: 10, venue: 2, porprov: 10, status: "Aktif" },
-    { nama: "Kab. Solok Selatan", sk: "SK-14/ESI-SB/2024", ketua: "H. Khairunas, S.IP, M.Si", sekretariat: "Padang Aro Youth Center", atlet: 68, tim: 7, venue: 2, porprov: 7, status: "Aktif" },
-    { nama: "Kab. Sijunjung", sk: "SK-15/ESI-SB/2024", ketua: "Benny Dwifa Yuswir, S.STP, M.Si", sekretariat: "Muaro Sijunjung Sport Hub", atlet: 74, tim: 8, venue: 2, porprov: 8, status: "Aktif" },
-    { nama: "Kab. Dharmasraya", sk: "SK-16/ESI-SB/2024", ketua: "Sutan Riska Tuanku Kerajaan, SE", sekretariat: "Sport Center Koto Padang", atlet: 88, tim: 9, venue: 2, porprov: 9, status: "Aktif" },
-    { nama: "Kab. Pasaman", sk: "SK-17/ESI-SB/2024", ketua: "H. Benny Utama, SH, MM", sekretariat: "GOR Tuanku Rao, Lubuk Sikaping", atlet: 72, tim: 8, venue: 2, porprov: 8, status: "Aktif" },
-    { nama: "Kab. Pasaman Barat", sk: "SK-18/ESI-SB/2024", ketua: "H. Hamsuardi, S.Ag", sekretariat: "Simpang Empat Esports Center", atlet: 96, tim: 11, venue: 3, porprov: 10, status: "Aktif" },
-    { nama: "Kab. Kepulauan Mentawai", sk: "SK-19/ESI-SB/2024", ketua: "Fernando Jongguran Simanjuntak", sekretariat: "Tuapejat Hub, Sipora Mentawai", atlet: 48, tim: 5, venue: 1, porprov: 6, status: "Aktif" }
+    { nama: "Kota Padang", sk: "SK-01/ESI-SB/2024", ketua: "Drs. Hendri Septa, B.Bus", sekretariat: "GOR H. Agus Salim, Padang", player: 186, tim: 24, venue: 6, porprov: 18, status: "Aktif" },
+    { nama: "Kota Bukittinggi", sk: "SK-02/ESI-SB/2024", ketua: "H. Erman Safar, SH", sekretariat: "Jam Gadang Sport Hub, Bukittinggi", player: 142, tim: 16, venue: 4, porprov: 14, status: "Aktif" },
+    { nama: "Kota Payakumbuh", sk: "SK-03/ESI-SB/2024", ketua: "Drs. H. Riza Falepi, ST, MT", sekretariat: "GOR M. Yamin, Payakumbuh", player: 118, tim: 12, venue: 3, porprov: 12, status: "Aktif" },
+    { nama: "Kota Solok", sk: "SK-04/ESI-SB/2024", ketua: "H. Zul Elfian Umar, SH, M.Si", sekretariat: "Lapangan Merdeka, Solok", player: 84, tim: 9, venue: 2, porprov: 9, status: "Aktif" },
+    { nama: "Kota Sawahlunto", sk: "SK-05/ESI-SB/2024", ketua: "Deri Asta, SH", sekretariat: "Ombilin Heritage Hall, Sawahlunto", player: 62, tim: 7, venue: 2, porprov: 7, status: "Aktif" },
+    { nama: "Kota Padang Panjang", sk: "SK-06/ESI-SB/2024", ketua: "Fadly Amran, B.B.A", sekretariat: "GOR Chatib Sulaiman, Padang Panjang", player: 76, tim: 8, venue: 2, porprov: 8, status: "Aktif" },
+    { nama: "Kota Pariaman", sk: "SK-07/ESI-SB/2024", ketua: "Prof. Dr. Genius Umar, M.Si", sekretariat: "Pantai Gandoriah Youth Center", player: 94, tim: 10, venue: 3, porprov: 10, status: "Aktif" },
+    { nama: "Kab. Agam", sk: "SK-08/ESI-SB/2024", ketua: "Dr. H. Andri Warman, MM", sekretariat: "Lubuk Basung Sport Arena", player: 135, tim: 15, venue: 4, porprov: 14, status: "Aktif" },
+    { nama: "Kab. Tanah Datar", sk: "SK-09/ESI-SB/2024", ketua: "Eka Putra, SE, MM", sekretariat: "Pagaruyung Youth Center", player: 112, tim: 13, venue: 3, porprov: 12, status: "Aktif" },
+    { nama: "Kab. Lima Puluh Kota", sk: "SK-10/ESI-SB/2024", ketua: "Safaruddin Dt. Bandaro Rajo", sekretariat: "Kompleks Kantor Bupati, Sarilamak", player: 108, tim: 12, venue: 3, porprov: 11, status: "Aktif" },
+    { nama: "Kab. Padang Pariaman", sk: "SK-11/ESI-SB/2024", ketua: "Suhatri Bur, SE, MM", sekretariat: "IKK Parit Malintang", player: 124, tim: 14, venue: 3, porprov: 13, status: "Aktif" },
+    { nama: "Kab. Pesisir Selatan", sk: "SK-12/ESI-SB/2024", ketua: "Drs. Rusma Yul Anwar, M.Pd", sekretariat: "GOR Ilyas Yakoub, Painan", player: 130, tim: 14, venue: 3, porprov: 13, status: "Aktif" },
+    { nama: "Kab. Solok", sk: "SK-13/ESI-SB/2024", ketua: "Capt. H. Epyardi Asda, M.Mar", sekretariat: "Kompleks Arosuka, Solok", player: 98, tim: 10, venue: 2, porprov: 10, status: "Aktif" },
+    { nama: "Kab. Solok Selatan", sk: "SK-14/ESI-SB/2024", ketua: "H. Khairunas, S.IP, M.Si", sekretariat: "Padang Aro Youth Center", player: 68, tim: 7, venue: 2, porprov: 7, status: "Aktif" },
+    { nama: "Kab. Sijunjung", sk: "SK-15/ESI-SB/2024", ketua: "Benny Dwifa Yuswir, S.STP, M.Si", sekretariat: "Muaro Sijunjung Sport Hub", player: 74, tim: 8, venue: 2, porprov: 8, status: "Aktif" },
+    { nama: "Kab. Dharmasraya", sk: "SK-16/ESI-SB/2024", ketua: "Sutan Riska Tuanku Kerajaan, SE", sekretariat: "Sport Center Koto Padang", player: 88, tim: 9, venue: 2, porprov: 9, status: "Aktif" },
+    { nama: "Kab. Pasaman", sk: "SK-17/ESI-SB/2024", ketua: "H. Benny Utama, SH, MM", sekretariat: "GOR Tuanku Rao, Lubuk Sikaping", player: 72, tim: 8, venue: 2, porprov: 8, status: "Aktif" },
+    { nama: "Kab. Pasaman Barat", sk: "SK-18/ESI-SB/2024", ketua: "H. Hamsuardi, S.Ag", sekretariat: "Simpang Empat Esports Center", player: 96, tim: 11, venue: 3, porprov: 10, status: "Aktif" },
+    { nama: "Kab. Kepulauan Mentawai", sk: "SK-19/ESI-SB/2024", ketua: "Fernando Jongguran Simanjuntak", sekretariat: "Tuapejat Hub, Sipora Mentawai", player: 48, tim: 5, venue: 1, porprov: 6, status: "Aktif" }
   ],
 
-  // Atlet Terverifikasi dengan Paspor Digital 3D
-  atlet: [
+  // Player Terverifikasi dengan Paspor Digital 3D
+  player: [
     {
       id: "atl-01",
       pasporId: "PBESI-SB-2026-VAL-96",

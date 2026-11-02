@@ -97,7 +97,7 @@
         </div>
         <div>
           <h2 class="text-sm font-black text-surface-dark">Dapatkan Lencana Verifikasi Resmi</h2>
-          <p class="text-[10px] text-surface-muted">Tingkatkan status akun platform Anda menjadi atlet/entitas terverifikasi.</p>
+          <p class="text-[10px] text-surface-muted">Tingkatkan status akun platform Anda menjadi player/entitas terverifikasi.</p>
         </div>
       </div>
 
@@ -284,12 +284,12 @@
 
       const payload = {
         userId: currentUser.id || null,
-        nama: currentUser.nama || 'Atlet Esport',
+        nama: currentUser.nama || 'Player Esport',
         ign: currentUser.ign || 'PLAYER',
         pasporId: currentUser.pasporId || null,
         wilayah: wilayah,
         nik: nik,
-        kategori: 'Lisensi Atlet Daerah',
+        kategori: 'Lisensi Player Daerah',
         dokumenKtp: ktpBase64 || null,
         buktiPrestasi: prestasi
       };

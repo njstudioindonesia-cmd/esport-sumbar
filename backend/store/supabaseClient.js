@@ -51,7 +51,7 @@ export async function getLiveStatsFromSupabase() {
 
     // 2. Fallback: Query tabel-tabel langsung jika RPC belum dieksekusi
     const [
-      { count: atletCount },
+      { count: playerCount },
       { count: timCount },
       { count: venueCount },
       { count: queueCount },
@@ -59,17 +59,17 @@ export async function getLiveStatsFromSupabase() {
       { count: eventCount },
       { count: lftCount }
     ] = await Promise.all([
-      supabaseInstance.from('atlet').select('*', { count: 'exact', head: true }),
+      supabaseInstance.from('player').select('*', { count: 'exact', head: true }),
       supabaseInstance.from('tim').select('*', { count: 'exact', head: true }),
       supabaseInstance.from('venue').select('*', { count: 'exact', head: true }),
       supabaseInstance.from('antrean_verifikasi').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
       supabaseInstance.from('wilayah').select('*', { count: 'exact', head: true }),
       supabaseInstance.from('kalender_event').select('*', { count: 'exact', head: true }),
-      supabaseInstance.from('atlet').select('*', { count: 'exact', head: true }).eq('status_lft', true)
+      supabaseInstance.from('player').select('*', { count: 'exact', head: true }).eq('status_lft', true)
     ]);
 
-    const totalDatabase = (atletCount || 0) + (timCount || 0) + (venueCount || 0) + 1400;
-    const pasporAktif = (atletCount || 0) + 980;
+    const totalDatabase = (playerCount || 0) + (timCount || 0) + (venueCount || 0) + 1400;
+    const pasporAktif = (playerCount || 0) + 980;
     const pengcabTotal = wilayahCount || 19;
 
     return {
@@ -80,7 +80,7 @@ export async function getLiveStatsFromSupabase() {
       pelatdaCount: 24,
       turnamenCount: (eventCount || 0) + 6,
       klubAkreditasi: (timCount || 0) + 40,
-      playerCount: (atletCount || 0) + 980,
+      playerCount: (playerCount || 0) + 980,
       timCount: (timCount || 0) + 40,
       venueCount: (venueCount || 0) + 32,
       lftCount: (lftCount || 0) + 4,
@@ -122,10 +122,10 @@ export async function syncRegistrationToSupabase(record) {
       return false;
     }
 
-    // Jika bidang player dan paspor diterbitkan, masukkan juga ke tabel atlet
+    // Jika bidang player dan paspor diterbitkan, masukkan juga ke tabel player
     if (record.bidang === 'player' && record.athlete) {
       const a = record.athlete;
-      await supabaseInstance.from('atlet').upsert({
+      await supabaseInstance.from('player').upsert({
         id: a.id,
         paspor_id: a.pasporId,
         nama: a.nama,

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Pusat Bursa & Bisnis Ekosistem – ESPORT SUMBAR</title>
-  <meta name="description" content="Pusat transaksi bisnis resmi ekosistem esport: bursa transfer atlet, sewa bootcamp venue, jasa coaching pelatih, dan turnamen berhadiah resmi ESPORT SUMBAR." />
+  <meta name="description" content="Pusat transaksi bisnis resmi ekosistem esport: bursa transfer player, sewa bootcamp venue, jasa coaching pelatih, dan turnamen berhadiah resmi ESPORT SUMBAR." />
 
   <!-- Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -106,14 +106,14 @@
           Pusat Transaksi & Monetisasi Esport Sumatera Barat
         </h1>
         <p class="text-xs text-surface-muted mt-1 leading-relaxed">
-          Platform transaksi komersial resmi menghubungkan atlet bebas transfer, tim kompetitif, arena gaming tersertifikasi, dan pelatih berlisensi.
+          Platform transaksi komersial resmi menghubungkan player bebas transfer, tim kompetitif, arena gaming tersertifikasi, dan pelatih berlisensi.
         </p>
 
         <!-- Financial Summary Grid -->
         <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
           <div class="p-2.5 rounded-2xl bg-gray-50/80 border border-gray-100">
             <div class="text-[10px] text-surface-muted font-medium">Bursa Transfer</div>
-            <div class="text-sm font-black text-brand-600 mt-0.5">48 Atlet</div>
+            <div class="text-sm font-black text-brand-600 mt-0.5">48 Player</div>
             <div class="text-[9px] text-surface-muted mt-0.5">Tersedia LFT</div>
           </div>
           <div class="p-2.5 rounded-2xl bg-gray-50/80 border border-gray-100">
@@ -133,7 +133,7 @@
       <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-white border border-gray-200/80 shadow-sm overflow-x-auto no-scrollbar">
         <button type="button" onclick="switchBisnisTab('transfer')" id="btnTabTransfer" class="px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action bg-brand-600 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="users" class="w-3.5 h-3.5"></i>
-          <span>Bursa Transfer Atlet</span>
+          <span>Bursa Transfer Player</span>
         </button>
         <button type="button" onclick="switchBisnisTab('bootcamp')" id="btnTabBootcamp" class="px-3 py-2 rounded-xl text-xs font-bold transition-all tap-action text-surface-muted hover:text-surface-dark flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
@@ -149,7 +149,7 @@
         </button>
       </div>
 
-      <!-- TAB 1: BURSA TRANSFER ATLET -->
+      <!-- TAB 1: BURSA TRANSFER PLAYER -->
       <div id="sectionTransfer" class="space-y-3">
         <div class="flex items-center justify-between px-1">
           <div class="text-xs font-bold text-surface-dark uppercase tracking-wider flex items-center gap-1.5">
@@ -159,7 +159,7 @@
           <span class="text-[11px] text-surface-muted">Market Value Terverifikasi</span>
         </div>
 
-        <!-- Atlet Card 1: V4ND4L -->
+        <!-- Player Card 1: V4ND4L -->
         <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 hover:border-brand-200 transition-all">
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
@@ -193,7 +193,7 @@
           </div>
         </div>
 
-        <!-- Atlet Card 2: FAJAR7 -->
+        <!-- Player Card 2: FAJAR7 -->
         <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 hover:border-brand-200 transition-all">
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
@@ -227,7 +227,7 @@
           </div>
         </div>
 
-        <!-- Atlet Card 3: KYROX -->
+        <!-- Player Card 3: KYROX -->
         <div class="app-card rounded-3xl p-4 bg-white border border-gray-100 hover:border-brand-200 transition-all">
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
@@ -500,13 +500,13 @@
 
   </div>
 
-  <!-- MODAL: AJUKAN KONTRAK ATLET -->
+  <!-- MODAL: AJUKAN KONTRAK PLAYER -->
   <div id="modalOffer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
     <div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-3xl p-5 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-gray-100 pb-3">
         <div>
           <div class="text-sm font-black text-surface-dark">Ajukan Penawaran Kontrak</div>
-          <div class="text-[11px] text-surface-muted" id="offerTargetSubtitle">Kepada Atlet LFT</div>
+          <div class="text-[11px] text-surface-muted" id="offerTargetSubtitle">Kepada Player LFT</div>
         </div>
         <button type="button" onclick="closeOfferModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-surface-dark tap-action">
           ✕
@@ -570,10 +570,10 @@
     }
 
     // Modal Offer Controller
-    let currentTargetAtlet = '';
+    let currentTargetPlayer = '';
     function openOfferModal(ign, nama, val) {
-      currentTargetAtlet = ign;
-      document.getElementById('offerTargetSubtitle').textContent = 'Kepada Atlet: ' + ign + ' (' + nama + ')';
+      currentTargetPlayer = ign;
+      document.getElementById('offerTargetSubtitle').textContent = 'Kepada Player: ' + ign + ' (' + nama + ')';
       document.getElementById('modalOffer').classList.remove('hidden');
     }
     function closeOfferModal() {
@@ -595,7 +595,7 @@
         state.contractOffers.unshift({
           id: 'off-' + Date.now(),
           fromTeam: team,
-          toAtlet: currentTargetAtlet,
+          toPlayer: currentTargetPlayer,
           salary: salary,
           bonus: bonus,
           duration: duration,
@@ -606,7 +606,7 @@
       } catch (err) {}
 
       closeOfferModal();
-      alert('Tawaran kontrak resmi berhasil dikirimkan ke ' + currentTargetAtlet + '! Atlet dapat meninjau dan menerima kontrak di halaman beranda / profil mereka.');
+      alert('Tawaran kontrak resmi berhasil dikirimkan ke ' + currentTargetPlayer + '! Player dapat meninjau dan menerima kontrak di halaman beranda / profil mereka.');
     }
 
     function bookVenuePass(venueName, packageName, price) {

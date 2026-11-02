@@ -27,7 +27,7 @@ export const MicroPengprov = {
     };
   },
 
-  // Atlet Pelatda PON XXI & Seleknas
+  // Player Pelatda PON XXI & Seleknas
   async getPelatdaRoster() {
     const allAthletes = db.getAthletes();
     const pelatda = allAthletes.filter(a => a.statusPelatda && a.statusPelatda.includes("PELATDA"));
@@ -36,7 +36,7 @@ export const MicroPengprov = {
       success: true,
       statusCode: 200,
       caborCount: 4, // Valorant, MLBB, PUBG Mobile, Free Fire
-      totalAtlet: pelatda.length,
+      totalPlayer: pelatda.length,
       data: pelatda
     };
   },
@@ -90,11 +90,11 @@ export const MicroPengprov = {
       success: true,
       statusCode: 200,
       totalWilayah: db.getWilayahList().length,
-      totalAtlet: db.getAthletes().length,
+      totalPlayer: db.getAthletes().length,
       totalTim: db.getTeams().length,
       totalVenue: db.getVenues().length,
       wilayah: db.getWilayahList(),
-      atlet: db.getAthletes(),
+      player: db.getAthletes(),
       tim: db.getTeams(),
       venue: db.getVenues()
     };

@@ -4,6 +4,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/atlet",
+      "destination": "/player.html"
+    },
+    {
       "source": "/bisnis",
       "destination": "/bisnis.html"
     },
@@ -116,7 +120,7 @@
       "destination": "/paspor.html"
     },
     {
-      "source": "/atlet",
+      "source": "/player",
       "destination": "/paspor.html"
     },
     {

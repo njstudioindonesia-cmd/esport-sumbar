@@ -3,7 +3,7 @@ import { db } from '../store/db.js';
 /**
  * MICROSERVICES: AUTHENTICATION & SINGLE SIGN-ON (SSO)
  * Mengatur hak akses terisolasi untuk masing-masing bidang di ekosistem ESPORT SUMBAR:
- * - Atlet (Player)
+ * - Player (Player)
  * - Tim (Klub / Organisasi)
  * - Venue (Gaming Arena / Game Center)
  * - Pelatih (Coach / Trainer)
@@ -205,21 +205,21 @@ export const MicroAuth = {
     }
 
     // ==========================================================
-    // 7. PORTAL PUBLIK: ROLE ATLET (DEFAULT)
+    // 7. PORTAL PUBLIK: ROLE PLAYER (DEFAULT)
     // ==========================================================
     const user = db.findUser(identifier, password);
-    if (user && user.role === 'atlet') {
+    if (user && user.role === 'player') {
       const token = `esi-token-${user.id}-${Date.now().toString(36)}`;
       const athleteData = user.pasporId ? db.getAthleteByIdOrPaspor(user.pasporId) : null;
       return {
         success: true,
         statusCode: 200,
-        message: "Autentikasi Paspor Digital Atlet Berhasil.",
+        message: "Autentikasi Paspor Digital Player Berhasil.",
         token,
         user: {
           id: user.id,
           nama: user.nama,
-          role: "atlet",
+          role: "player",
           email: user.email,
           ign: user.ign || athleteData?.ign || null,
           wilayah: user.wilayah || athleteData?.wilayah || null,
@@ -236,17 +236,17 @@ export const MicroAuth = {
       };
     }
 
-    // Demo fallback untuk Atlet V4ND4L
-    if (cleanId.startsWith("pbesi") || cleanId.startsWith("essb") || cleanId.includes("rayden") || cleanId.includes("v4nd4l") || cleanId === 'atlet@esportsumbar.id' || cleanId === 'player@esportsumbar.id') {
-      if (password === 'atlet123' || password === 'rayden123' || password === 'player123' || password === 'password123') {
+    // Demo fallback untuk Player V4ND4L
+    if (cleanId.startsWith("pbesi") || cleanId.startsWith("essb") || cleanId.includes("rayden") || cleanId.includes("v4nd4l") || cleanId === 'player@esportsumbar.id' || cleanId === 'player@esportsumbar.id') {
+      if (password === 'player123' || password === 'rayden123' || password === 'player123' || password === 'password123') {
         return {
           success: true,
           statusCode: 200,
-          message: "Paspor Digital Atlet ditemukan.",
-          token: `esi-atlet-${Date.now().toString(36)}`,
+          message: "Paspor Digital Player ditemukan.",
+          token: `esi-player-${Date.now().toString(36)}`,
           user: {
             id: "atl-01",
-            role: "atlet",
+            role: "player",
             nama: "Muhammad Rayden",
             ign: "V4ND4L",
             pasporId: "ESSB-2026-VAL-96",

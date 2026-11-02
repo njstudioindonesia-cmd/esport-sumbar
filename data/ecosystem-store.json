@@ -40,20 +40,20 @@
       ]
     },
     {
-      "id": "usr-atlet-v4nd4l",
-      "role": "atlet",
+      "id": "usr-player-v4nd4l",
+      "role": "player",
       "email": "rayden@v4nd4l.id",
       "passwordHash": "RaydenV4nd4l2026",
       "nama": "Muhammad Rayden",
       "ign": "V4ND4L",
       "pasporId": "PBESI-SB-2026-VAL-96",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
       "id": "usr-atl-7065",
-      "role": "atlet",
+      "role": "player",
       "email": "nighthawk@esportsumbar.id",
       "passwordHash": "Nighthawk2026!",
       "nama": "Ahmad Fauzi Rasyid",
@@ -61,12 +61,12 @@
       "pasporId": "PBESI-SB-2026-VAL-699",
       "wilayah": "Kota Bukittinggi",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
       "id": "usr-atl-2247",
-      "role": "atlet",
+      "role": "player",
       "email": "rifki@shadowfox.id",
       "passwordHash": "RifkiFox2026!",
       "nama": "Rifki Pratama Yudha",
@@ -74,7 +74,7 @@
       "pasporId": "PBESI-SB-2026-MOB-871",
       "wilayah": "Kota Payakumbuh",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
@@ -259,15 +259,15 @@
     },
     {
       "id": "usr-atl-9180",
-      "role": "atlet",
+      "role": "player",
       "email": "budi.sniper@gmail.com",
-      "passwordHash": "AtletSumbar2026!",
+      "passwordHash": "PlayerSumbar2026!",
       "nama": "Budi Santoso Pratama",
       "ign": "JAMGADANG_SNIPER",
       "pasporId": "PBESI-SB-2026-PUB-170",
       "wilayah": "Kota Bukittinggi",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
@@ -308,7 +308,7 @@
     },
     {
       "id": "usr-atl-3197",
-      "role": "atlet",
+      "role": "player",
       "email": "fauzan.test@esportsumbar.id",
       "passwordHash": "Password123!",
       "nama": "Fauzan Mobile Tester",
@@ -316,12 +316,12 @@
       "pasporId": "PBESI-SB-2026-MOB-161",
       "wilayah": "Kota Bukittinggi",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
       "id": "usr-atl-5286",
-      "role": "atlet",
+      "role": "player",
       "email": "test.player.alur@gmail.com",
       "passwordHash": "password123",
       "nama": "Test Player Alur Minimalis",
@@ -329,12 +329,12 @@
       "pasporId": "PBESI-SB-2026-MOB-659",
       "wilayah": "Kota Padang",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
       "id": "usr-atl-5526",
-      "role": "atlet",
+      "role": "player",
       "email": "kyrox.sumbar@gmail.com",
       "passwordHash": "securepass2026",
       "nama": "Rizky Alamsyah",
@@ -342,12 +342,12 @@
       "pasporId": "PBESI-SB-2026-MOB-585",
       "wilayah": "Kota Padang",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     },
     {
       "id": "usr-atl-6643",
-      "role": "atlet",
+      "role": "player",
       "email": "fajar@gmail.com",
       "passwordHash": "password123",
       "nama": "Fajar Pratama",
@@ -355,7 +355,7 @@
       "pasporId": "PBESI-SB-2026-MOB-999",
       "wilayah": "Kota Padang",
       "permissions": [
-        "atlet:self"
+        "player:self"
       ]
     }
   ],
@@ -365,7 +365,7 @@
       "sk": "SK-01/ESI-SB/2024",
       "ketua": "Drs. Hendri Septa, B.Bus",
       "sekretariat": "GOR H. Agus Salim, Padang",
-      "atlet": 186,
+      "player": 186,
       "tim": 24,
       "venue": 6,
       "porprov": 18,
@@ -376,7 +376,7 @@
       "sk": "SK-02/ESI-SB/2024",
       "ketua": "H. Erman Safar, SH",
       "sekretariat": "Jam Gadang Sport Hub, Bukittinggi",
-      "atlet": 142,
+      "player": 142,
       "tim": 16,
       "venue": 4,
       "porprov": 14,
@@ -387,7 +387,7 @@
       "sk": "SK-03/ESI-SB/2024",
       "ketua": "Drs. H. Riza Falepi, ST, MT",
       "sekretariat": "GOR M. Yamin, Payakumbuh",
-      "atlet": 118,
+      "player": 118,
       "tim": 12,
       "venue": 3,
       "porprov": 12,
@@ -398,7 +398,7 @@
       "sk": "SK-04/ESI-SB/2024",
       "ketua": "H. Zul Elfian Umar, SH, M.Si",
       "sekretariat": "Lapangan Merdeka, Solok",
-      "atlet": 84,
+      "player": 84,
       "tim": 9,
       "venue": 2,
       "porprov": 9,
@@ -409,7 +409,7 @@
       "sk": "SK-05/ESI-SB/2024",
       "ketua": "Deri Asta, SH",
       "sekretariat": "Ombilin Heritage Hall, Sawahlunto",
-      "atlet": 62,
+      "player": 62,
       "tim": 7,
       "venue": 2,
       "porprov": 7,
@@ -420,7 +420,7 @@
       "sk": "SK-06/ESI-SB/2024",
       "ketua": "Fadly Amran, B.B.A",
       "sekretariat": "GOR Chatib Sulaiman, Padang Panjang",
-      "atlet": 76,
+      "player": 76,
       "tim": 8,
       "venue": 2,
       "porprov": 8,
@@ -431,7 +431,7 @@
       "sk": "SK-07/ESI-SB/2024",
       "ketua": "Prof. Dr. Genius Umar, M.Si",
       "sekretariat": "Pantai Gandoriah Youth Center",
-      "atlet": 94,
+      "player": 94,
       "tim": 10,
       "venue": 3,
       "porprov": 10,
@@ -442,7 +442,7 @@
       "sk": "SK-08/ESI-SB/2024",
       "ketua": "Dr. H. Andri Warman, MM",
       "sekretariat": "Lubuk Basung Sport Arena",
-      "atlet": 135,
+      "player": 135,
       "tim": 15,
       "venue": 4,
       "porprov": 14,
@@ -453,7 +453,7 @@
       "sk": "SK-09/ESI-SB/2024",
       "ketua": "Eka Putra, SE, MM",
       "sekretariat": "Pagaruyung Youth Center",
-      "atlet": 112,
+      "player": 112,
       "tim": 13,
       "venue": 3,
       "porprov": 12,
@@ -464,7 +464,7 @@
       "sk": "SK-10/ESI-SB/2024",
       "ketua": "Safaruddin Dt. Bandaro Rajo",
       "sekretariat": "Kompleks Kantor Bupati, Sarilamak",
-      "atlet": 108,
+      "player": 108,
       "tim": 12,
       "venue": 3,
       "porprov": 11,
@@ -475,7 +475,7 @@
       "sk": "SK-11/ESI-SB/2024",
       "ketua": "Suhatri Bur, SE, MM",
       "sekretariat": "IKK Parit Malintang",
-      "atlet": 124,
+      "player": 124,
       "tim": 14,
       "venue": 3,
       "porprov": 13,
@@ -486,7 +486,7 @@
       "sk": "SK-12/ESI-SB/2024",
       "ketua": "Drs. Rusma Yul Anwar, M.Pd",
       "sekretariat": "GOR Ilyas Yakoub, Painan",
-      "atlet": 130,
+      "player": 130,
       "tim": 14,
       "venue": 3,
       "porprov": 13,
@@ -497,7 +497,7 @@
       "sk": "SK-13/ESI-SB/2024",
       "ketua": "Capt. H. Epyardi Asda, M.Mar",
       "sekretariat": "Kompleks Arosuka, Solok",
-      "atlet": 98,
+      "player": 98,
       "tim": 10,
       "venue": 2,
       "porprov": 10,
@@ -508,7 +508,7 @@
       "sk": "SK-14/ESI-SB/2024",
       "ketua": "H. Khairunas, S.IP, M.Si",
       "sekretariat": "Padang Aro Youth Center",
-      "atlet": 68,
+      "player": 68,
       "tim": 7,
       "venue": 2,
       "porprov": 7,
@@ -519,7 +519,7 @@
       "sk": "SK-15/ESI-SB/2024",
       "ketua": "Benny Dwifa Yuswir, S.STP, M.Si",
       "sekretariat": "Muaro Sijunjung Sport Hub",
-      "atlet": 74,
+      "player": 74,
       "tim": 8,
       "venue": 2,
       "porprov": 8,
@@ -530,7 +530,7 @@
       "sk": "SK-16/ESI-SB/2024",
       "ketua": "Sutan Riska Tuanku Kerajaan, SE",
       "sekretariat": "Sport Center Koto Padang",
-      "atlet": 88,
+      "player": 88,
       "tim": 9,
       "venue": 2,
       "porprov": 9,
@@ -541,7 +541,7 @@
       "sk": "SK-17/ESI-SB/2024",
       "ketua": "H. Benny Utama, SH, MM",
       "sekretariat": "GOR Tuanku Rao, Lubuk Sikaping",
-      "atlet": 72,
+      "player": 72,
       "tim": 8,
       "venue": 2,
       "porprov": 8,
@@ -552,7 +552,7 @@
       "sk": "SK-18/ESI-SB/2024",
       "ketua": "H. Hamsuardi, S.Ag",
       "sekretariat": "Simpang Empat Esports Center",
-      "atlet": 96,
+      "player": 96,
       "tim": 11,
       "venue": 3,
       "porprov": 10,
@@ -563,14 +563,14 @@
       "sk": "SK-19/ESI-SB/2024",
       "ketua": "Fernando Jongguran Simanjuntak",
       "sekretariat": "Tuapejat Hub, Sipora Mentawai",
-      "atlet": 48,
+      "player": 48,
       "tim": 5,
       "venue": 1,
       "porprov": 6,
       "status": "Aktif"
     }
   ],
-  "atlet": [
+  "player": [
     {
       "id": "atl-6643",
       "pasporId": "PBESI-SB-2026-MOB-999",
@@ -938,7 +938,7 @@
       "ign": "FAJAR7",
       "wilayah": "Kota Padang",
       "nik": "1371012345678901",
-      "kategori": "Lisensi Atlet Daerah",
+      "kategori": "Lisensi Player Daerah",
       "dokumenKtp": null,
       "buktiPrestasi": "",
       "status": "pending_pengcab",
@@ -1406,8 +1406,8 @@
     "heroTop": {
       "enabled": true,
       "badge": "PORTAL RESMI // ESI SUMBAR 2026",
-      "title": "PASPOR RESMI ATLET & TALENTA ESPORT SUMATERA BARAT",
-      "subtitle": "Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.",
+      "title": "PASPOR RESMI PLAYER & TALENTA ESPORT SUMATERA BARAT",
+      "subtitle": "Pangkalan data terpadu player, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.",
       "ctaText": "Daftar Kartu",
       "ctaLink": "/daftar",
       "imageUrl": "/pbesi-logo.png"

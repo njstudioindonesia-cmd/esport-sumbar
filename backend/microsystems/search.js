@@ -18,14 +18,14 @@ export const MicroSearch = {
     const districts = db.getWilayahList();
 
     const results = {
-      atlet: [],
+      player: [],
       tim: [],
       venue: [],
       wilayah: []
     };
 
     // Filter athletes
-    results.atlet = athletes.filter(a => {
+    results.player = athletes.filter(a => {
       const matchKey = !keyword || 
         a.nama.toLowerCase().includes(keyword) || 
         (a.ign && a.ign.toLowerCase().includes(keyword)) ||
@@ -63,7 +63,7 @@ export const MicroSearch = {
     }
 
     const totalMatches = 
-      results.atlet.length + 
+      results.player.length + 
       results.tim.length + 
       results.venue.length + 
       results.wilayah.length;

@@ -397,7 +397,7 @@
         if (res.success) {
           // Save local session as unverified platform member
           const userSession = {
-            role: 'atlet',
+            role: 'player',
             id: res.data?.id || 'usr-' + Date.now(),
             nama: nama,
             ign: payload.ign || nama,

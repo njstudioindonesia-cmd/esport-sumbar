@@ -99,7 +99,7 @@
 
       <div class="mb-5 p-3 rounded-xl bg-crimson-950/60 border border-crimson-700/50 text-crimson-200 text-xs font-mono flex items-start gap-2">
         <i data-lucide="shield-check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
-        <span>Pintu masuk resmi Pengurus Provinsi ESI Sumbar. Otoritas pengesahan lisensi atlet & surat keputusan keolahragaan.</span>
+        <span>Pintu masuk resmi Pengurus Provinsi ESI Sumbar. Otoritas pengesahan lisensi player & surat keputusan keolahragaan.</span>
       </div>
 
       <div id="pengprovLoginAlert" class="hidden mb-4 p-3 rounded-xl font-mono text-xs border"></div>
@@ -220,14 +220,14 @@
         </div>
       </div>
 
-      <!-- Card 2: Atlet Pelatda PON -->
+      <!-- Card 2: Player Pelatda PON -->
       <div class="rounded-3xl bg-[#1A1114] border border-crimson-800/30 p-4 shadow-lg shadow-crimson-950/20 flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold text-crimson-400">Atlet Pelatda PON XXI</span>
+          <span class="text-[10px] font-mono uppercase font-bold text-crimson-400">Player Pelatda PON XXI</span>
           <i data-lucide="medal" class="w-4 h-4 text-amber-400"></i>
         </div>
         <div>
-          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="pelatdaCount">25 ATLET</div>
+          <div class="font-display text-3xl sm:text-4xl text-white leading-none" data-stat="pelatdaCount">25 PLAYER</div>
           <div class="text-[10px] font-mono text-white/60 mt-1">
             4 Cabor Esports Resmi
           </div>
@@ -327,7 +327,7 @@
       <div class="flex items-center justify-between flex-wrap gap-2 bg-[#1A1114] p-4 rounded-2xl border border-white/10">
         <div>
           <h3 class="font-display text-xl text-white uppercase">Pusat Data 19 Kabupaten & Kota</h3>
-          <p class="text-xs text-white/60">Sentral pangkalan data sebaran atlet, tim dan venue se-Sumatera Barat.</p>
+          <p class="text-xs text-white/60">Sentral pangkalan data sebaran player, tim dan venue se-Sumatera Barat.</p>
         </div>
         <div class="flex items-center gap-2">
           <input type="text" id="provDbSearch" oninput="filterProvTable()" placeholder="Cari nama atau wilayah..." class="px-3 py-1.5 bg-black/50 border border-white/15 rounded-xl text-xs font-mono text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-crimson-500" />
@@ -365,8 +365,8 @@
         <div class="flex items-center justify-between flex-wrap gap-2 mb-4 border-b border-white/10 pb-3">
           <div>
             <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">PEMBINAAN PRESTASI DAERAH</span>
-            <h3 class="font-display text-2xl text-white uppercase mt-0.5">Roster Atlet Pelatda PON XXI Sumbar</h3>
-            <p class="text-xs text-white/60 font-sans">Daftar atlet pilihan berprestasi tinggi yang menjalani pemusatan latihan daerah.</p>
+            <h3 class="font-display text-2xl text-white uppercase mt-0.5">Roster Player Pelatda PON XXI Sumbar</h3>
+            <p class="text-xs text-white/60 font-sans">Daftar player pilihan berprestasi tinggi yang menjalani pemusatan latihan daerah.</p>
           </div>
           <span class="px-3 py-1 rounded-full bg-amber-400 text-ink font-mono text-xs font-black uppercase">
             Kontingen PON Sumbar
@@ -390,7 +390,7 @@
           <div>
             <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">KALENDER KEJURAAN RESMI</span>
             <h3 class="font-display text-2xl text-white uppercase mt-0.5">Jadwal Kejurda & Porprov ESI Sumbar</h3>
-            <p class="text-xs text-white/60 font-sans">Agenda turnamen tingkat provinsi dengan poin ranking atlet resmi.</p>
+            <p class="text-xs text-white/60 font-sans">Agenda turnamen tingkat provinsi dengan poin ranking player resmi.</p>
           </div>
           <button onclick="openNewEventModal()" class="px-3.5 py-1.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-mono text-xs font-bold uppercase transition-all app-tap">
             + Tambah Agenda
@@ -495,7 +495,7 @@
         // 2. Load master database
         const resM = await fetch('/api/pengprov/master-database').then(r => r.json()).catch(() => ({}));
         if (resM && resM.success) {
-          masterData = resM.atlet || [];
+          masterData = resM.player || [];
           renderProvDbTable(masterData);
         }
 

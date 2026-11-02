@@ -114,15 +114,15 @@ class EcosystemDatabase {
     return this.memory.users.find(u => u.id === userId);
   }
 
-  // =================== ATLET & PASPOR ===================
+  // =================== PLAYER & PASPOR ===================
   getAthletes() {
-    return this.memory.atlet || [];
+    return this.memory.player || [];
   }
 
   getAthleteByIdOrPaspor(idOrPaspor) {
     if (!idOrPaspor) return null;
     const clean = String(idOrPaspor).trim().toLowerCase();
-    return this.memory.atlet.find(a => 
+    return this.memory.player.find(a => 
       a.id.toLowerCase() === clean || 
       (a.pasporId && a.pasporId.toLowerCase() === clean) ||
       (a.ign && a.ign.toLowerCase() === clean)
@@ -173,7 +173,7 @@ class EcosystemDatabase {
       ign: payload.ign || "",
       wilayah: payload.wilayah || "Kota Padang",
       nik: payload.nik || "",
-      kategori: payload.kategori || "Lisensi Atlet",
+      kategori: payload.kategori || "Lisensi Player",
       dokumenKtp: payload.dokumenKtp || null,
       buktiPrestasi: payload.buktiPrestasi || "",
       status: "pending_pengcab",
@@ -183,7 +183,7 @@ class EcosystemDatabase {
     this.memory.antreanVerifikasi.unshift(appRecord);
 
     // Update user & athlete record status to "MENUNGGU VERIFIKASI PENGCAB"
-    const athlete = this.memory.atlet.find(a => a.pasporId === payload.pasporId || a.nama === payload.nama || (payload.ign && a.ign === payload.ign));
+    const athlete = this.memory.player.find(a => a.pasporId === payload.pasporId || a.nama === payload.nama || (payload.ign && a.ign === payload.ign));
     if (athlete) {
       athlete.lisensiStatus = "MENUNGGU VERIFIKASI PENGCAB";
     }
@@ -225,20 +225,20 @@ class EcosystemDatabase {
       };
 
       // Add to athlete registry so they can be looked up immediately
-      this.memory.atlet.unshift(athleteRecord);
+      this.memory.player.unshift(athleteRecord);
 
       // Create user auth record if email provided
       if (payload.email) {
         this.memory.users.push({
           id: `usr-${athleteRecord.id}`,
-          role: "atlet",
+          role: "player",
           email: payload.email,
-          passwordHash: payload.password || "AtletSumbar2026!",
+          passwordHash: payload.password || "PlayerSumbar2026!",
           nama: payload.nama,
           ign: payload.ign || "PLAYER",
           pasporId: generatedPasporId,
           wilayah: payload.wilayah || "Kota Padang",
-          permissions: ["atlet:self"]
+          permissions: ["player:self"]
         });
       }
     }
@@ -296,7 +296,7 @@ class EcosystemDatabase {
           statusLFT: false,
           prestasi: ["Pendaftar Terverifikasi Platform 2026"]
         };
-        this.memory.atlet.push(newAthlete);
+        this.memory.player.push(newAthlete);
         item.generatedPasporId = pasporId;
       } else if (item.bidang === "team") {
         this.memory.tim.push({
@@ -391,7 +391,7 @@ class EcosystemDatabase {
       const pasporId = item.generatedPasporId || `PBESI-SB-2026-${gameCode}-${rand}`;
       item.generatedPasporId = pasporId;
 
-      let existing = this.memory.atlet.find(a => a.pasporId === pasporId || a.id === item.athlete?.id);
+      let existing = this.memory.player.find(a => a.pasporId === pasporId || a.id === item.athlete?.id);
       if (existing) {
         existing.lisensiStatus = "TERVERIFIKASI PBESI";
         existing.statusPelatda = options.statusPelatda || existing.statusPelatda || "POTENSI DAERAH";
@@ -416,7 +416,7 @@ class EcosystemDatabase {
           statusLFT: false,
           prestasi: ["Lisensi Resmi PBESI ESI Sumbar 2026"]
         };
-        this.memory.atlet.unshift(newAthlete);
+        this.memory.player.unshift(newAthlete);
       }
     } else if (item.bidang === 'team') {
       this.memory.tim.push({
@@ -495,8 +495,8 @@ class EcosystemDatabase {
         heroTop: {
           enabled: true,
           badge: "PORTAL RESMI // ESI SUMBAR 2026",
-          title: "PASPOR RESMI ATLET & TALENTA ESPORT SUMATERA BARAT",
-          subtitle: "Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.",
+          title: "PASPOR RESMI PLAYER & TALENTA ESPORT SUMATERA BARAT",
+          subtitle: "Pangkalan data terpadu player, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.",
           ctaText: "Daftar Kartu",
           ctaLink: "/daftar",
           imageUrl: "/pbesi-logo.png"
@@ -541,7 +541,7 @@ class EcosystemDatabase {
 
   // =================== BURSA TRANSFER & LFT ===================
   getLFT() {
-    return this.memory.atlet.filter(a => a.statusLFT === true);
+    return this.memory.player.filter(a => a.statusLFT === true);
   }
 
   // =================== REKOMENDASI PENGCAB ===================
@@ -594,24 +594,24 @@ class EcosystemDatabase {
   // =================== STATS SUMMARY ===================
   getPlatformStats() {
     const totalDatabase = 
-      (this.memory.atlet?.length || 0) + 
+      (this.memory.player?.length || 0) + 
       (this.memory.tim?.length || 0) + 
       (this.memory.venue?.length || 0) + 1400; // calibrated to 1400+ ecosystem database
 
     const antreanCount = (this.memory.antreanVerifikasi || []).filter(q => q.status === "pending").length;
     const pengcabCount = this.memory.wilayah?.length || 19;
-    const pasporCount = (this.memory.atlet?.length || 0) + 980;
-    const lftCount = (this.memory.atlet || []).filter(a => a.statusLFT === true).length;
+    const pasporCount = (this.memory.player?.length || 0) + 980;
+    const lftCount = (this.memory.player || []).filter(a => a.statusLFT === true).length;
 
     return {
       totalDatabase,
       antreanVerifikasi: antreanCount,
       pengcabAktif: `${pengcabCount}/${pengcabCount}`,
       pasporAktif: pasporCount,
-      pelatdaCount: (this.memory.atlet || []).filter(a => a.statusPelatda && a.statusPelatda.includes("PELATDA")).length + 22,
+      pelatdaCount: (this.memory.player || []).filter(a => a.statusPelatda && a.statusPelatda.includes("PELATDA")).length + 22,
       turnamenCount: (this.memory.kalenderEvent?.length || 0) + 6,
       klubAkreditasi: (this.memory.tim?.length || 0) + 40,
-      playerCount: (this.memory.atlet?.length || 0) + 980,
+      playerCount: (this.memory.player?.length || 0) + 980,
       timCount: (this.memory.tim?.length || 0) + 40,
       venueCount: (this.memory.venue?.length || 0) + 32,
       lftCount: lftCount + 4,

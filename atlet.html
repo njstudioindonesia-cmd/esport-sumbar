@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Paspor Digital Atlet – ESPORT SUMBAR</title>
+  <title>Paspor Digital Player – ESPORT SUMBAR</title>
 
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,7 +84,7 @@
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </a>
         <div>
-          <h1 class="text-sm font-bold text-surface-dark leading-tight">Paspor Digital Atlet</h1>
+          <h1 class="text-sm font-bold text-surface-dark leading-tight">Paspor Digital Player</h1>
           <p class="text-[10px] text-brand-600 font-bold uppercase tracking-wider">ESPORT SUMBAR</p>
         </div>
       </div>
@@ -107,23 +107,23 @@
     <!-- SUMMARY PROVIDER CARD -->
     <div class="app-card rounded-3xl p-5 bg-gradient-to-br from-white to-gray-50/80 border border-gray-100">
       <div class="flex items-center justify-between mb-3">
-        <span class="text-[11px] font-bold tracking-wider text-brand-600 uppercase">Paspor Digital Atlet</span>
+        <span class="text-[11px] font-bold tracking-wider text-brand-600 uppercase">Paspor Digital Player</span>
         <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           Database Resmi
         </span>
       </div>
       <h2 class="text-xl font-extrabold text-surface-dark tracking-tight leading-snug">
-        Pangkalan Data Paspor Digital Atlet ESPORT SUMBAR
+        Pangkalan Data Paspor Digital Player ESPORT SUMBAR
       </h2>
       <p class="text-xs text-surface-muted mt-1 leading-relaxed">
-        Penerbitan identitas resmi atlet, validasi OVR performa, status lisensi binaan daerah, dan integritas bursa LFT. Berkolaborasi dengan ESI Sumatera Barat.
+        Penerbitan identitas resmi player, validasi OVR performa, status lisensi binaan daerah, dan integritas bursa LFT. Berkolaborasi dengan ESI Sumatera Barat.
       </p>
 
       <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-100 text-center">
         <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
           <span class="block text-base font-extrabold text-surface-dark">986+</span>
-          <span class="text-[10px] text-surface-muted font-medium">Atlet Terdata</span>
+          <span class="text-[10px] text-surface-muted font-medium">Player Terdata</span>
         </div>
         <div class="bg-gray-50/80 rounded-xl p-2 border border-gray-100">
           <span class="block text-base font-extrabold text-brand-600">19</span>
@@ -137,7 +137,7 @@
 
       <a href="/daftar-player" class="mt-4 w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 tap-action shadow-md shadow-brand-600/20">
         <i data-lucide="plus-circle" class="w-4 h-4"></i>
-        <span>Penerbitan Paspor Atlet Baru</span>
+        <span>Penerbitan Paspor Player Baru</span>
       </a>
     </div>
 
@@ -148,9 +148,9 @@
         <i data-lucide="search" class="w-4 h-4 text-surface-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
         <input 
           type="text" 
-          id="searchAtlet" 
+          id="searchPlayer" 
           oninput="filterAthletes()"
-          placeholder="Cari IGN, nama atlet, atau kota domisili..." 
+          placeholder="Cari IGN, nama player, atau kota domisili..." 
           class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-surface-dark placeholder-surface-muted focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600 shadow-sm"
         />
       </div>
@@ -1107,7 +1107,7 @@
       }
 
       function filterAthletes() {
-        const query = document.getElementById('searchAtlet').value.toLowerCase().trim();
+        const query = document.getElementById('searchPlayer').value.toLowerCase().trim();
         const cards = document.querySelectorAll('.athlete-card');
         
         cards.forEach(card => {

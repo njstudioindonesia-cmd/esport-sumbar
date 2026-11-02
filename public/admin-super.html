@@ -316,7 +316,7 @@
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#14161C] p-4 rounded-2xl border border-white/10">
         <div class="flex items-center gap-2 flex-wrap">
           <button onclick="setEntityFilter('all')" id="btnEnt-all" class="px-3 py-1.5 rounded-xl bg-white/20 text-white font-mono text-xs font-bold uppercase app-tap">Semua</button>
-          <button onclick="setEntityFilter('atlet')" id="btnEnt-atlet" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Atlet & Player</button>
+          <button onclick="setEntityFilter('player')" id="btnEnt-player" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Player & Player</button>
           <button onclick="setEntityFilter('tim')" id="btnEnt-tim" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Tim & Klub</button>
           <button onclick="setEntityFilter('venue')" id="btnEnt-venue" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap">Venue & Arena</button>
         </div>
@@ -364,7 +364,7 @@
             <div>
               <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">DESAIN TEMPLATE UTAMA</span>
               <h3 class="font-display text-2xl text-white uppercase mt-0.5">Pilih Tema & Bentuk Kartu</h3>
-              <p class="text-xs text-white/60 font-sans">Ubah tema visual standar yang diterapkan pada seluruh kartu atlet di web.</p>
+              <p class="text-xs text-white/60 font-sans">Ubah tema visual standar yang diterapkan pada seluruh kartu player di web.</p>
             </div>
 
             <!-- Template Grid -->
@@ -383,7 +383,7 @@
                   <span class="text-xs font-bold text-white">Crimson Gold</span>
                   <span class="text-[10px] font-mono text-amber-300">Kejurda</span>
                 </div>
-                <p class="text-[10px] text-white/60 font-mono">Cover Merah Marun Emas • Khusus Atlet Juara & Pelatda</p>
+                <p class="text-[10px] text-white/60 font-mono">Cover Merah Marun Emas • Khusus Player Juara & Pelatda</p>
               </div>
 
               <div onclick="selectCardTemplate('cyber-dark')" id="tpl-cyber-dark" class="p-3.5 rounded-2xl border border-white/10 hover:border-white/30 bg-black/40 cursor-pointer app-tap transition-all">
@@ -410,7 +410,7 @@
             <div>
               <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">SIMBOL & ICON VERIFIKASI RESMI</span>
               <h3 class="font-display text-2xl text-white uppercase mt-0.5">Pengaturan Badge Kartu</h3>
-              <p class="text-xs text-white/60 font-sans">Atur simbol verifikasi PBESI yang otomatis tersemat pada kartu atlet yang disahkan.</p>
+              <p class="text-xs text-white/60 font-sans">Atur simbol verifikasi PBESI yang otomatis tersemat pada kartu player yang disahkan.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -438,7 +438,7 @@
 
               <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" id="ovrRatingToggle" checked class="rounded border-white/20 text-amber-500 focus:ring-0 w-4 h-4" />
-                <span class="text-xs font-mono text-white/80">Tampilkan Skor OVR Atlet</span>
+                <span class="text-xs font-mono text-white/80">Tampilkan Skor OVR Player</span>
               </label>
             </div>
 
@@ -459,7 +459,7 @@
             
             <div class="text-center mb-3">
               <span class="text-[9px] font-mono font-bold text-amber-400 uppercase tracking-widest">LIVE 3D CARD PREVIEW</span>
-              <h4 id="previewCardTitle" class="font-display text-xl text-white uppercase">PREVIEW KARTU ATLET</h4>
+              <h4 id="previewCardTitle" class="font-display text-xl text-white uppercase">PREVIEW KARTU PLAYER</h4>
             </div>
 
             <!-- Card Render Stage -->
@@ -494,7 +494,7 @@
             </div>
 
             <p class="text-[10px] text-white/50 font-mono text-center mt-4">
-              Perubahan template & badge otomatis live ke seluruh kartu atlet di web publik.
+              Perubahan template & badge otomatis live ke seluruh kartu player di web publik.
             </p>
 
           </div>
@@ -527,12 +527,12 @@
           <div class="space-y-4">
             <div>
               <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Headline Pengumuman / Iklan</label>
-              <input type="text" id="bannerTitleInput" value="PASPOR RESMI ATLET & TALENTA ESPORT SUMATERA BARAT" class="w-full px-3 py-2.5 bg-black/60 border border-white/15 rounded-xl text-xs font-sans text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
+              <input type="text" id="bannerTitleInput" value="PASPOR RESMI PLAYER & TALENTA ESPORT SUMATERA BARAT" class="w-full px-3 py-2.5 bg-black/60 border border-white/15 rounded-xl text-xs font-sans text-white focus:outline-none focus:ring-1 focus:ring-amber-400" />
             </div>
 
             <div>
               <label class="block text-[11px] font-mono uppercase text-white/70 mb-1">Subjudul / Deskripsi Banner</label>
-              <textarea id="bannerSubtitleInput" rows="3" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-sans text-white focus:outline-none focus:ring-1 focus:ring-amber-400">Pangkalan data terpadu atlet, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.</textarea>
+              <textarea id="bannerSubtitleInput" rows="3" class="w-full px-3 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-sans text-white focus:outline-none focus:ring-1 focus:ring-amber-400">Pangkalan data terpadu player, tim & venue di 19 Kabupaten/Kota. Terbitkan kartu digital 3D berlisensi resmi ESI Sumbar.</textarea>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -730,7 +730,7 @@
         const resMaster = await fetch('/api/pengprov/master-database').then(r => r.json()).catch(() => ({}));
         if (resMaster && resMaster.success) {
           const combined = [];
-          (resMaster.atlet || []).forEach(a => combined.push({ ...a, type: 'atlet' }));
+          (resMaster.player || []).forEach(a => combined.push({ ...a, type: 'player' }));
           (resMaster.tim || []).forEach(t => combined.push({ ...t, type: 'tim' }));
           (resMaster.venue || []).forEach(v => combined.push({ ...v, type: 'venue' }));
           globalEntities = combined;
@@ -799,7 +799,7 @@
 
     function setEntityFilter(type) {
       currentFilter = type;
-      ['all', 'atlet', 'tim', 'venue'].forEach(t => {
+      ['all', 'player', 'tim', 'venue'].forEach(t => {
         const b = document.getElementById('btnEnt-' + t);
         if (b) {
           b.className = t === type ? "px-3 py-1.5 rounded-xl bg-white/20 text-white font-mono text-xs font-bold uppercase app-tap" : "px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 font-mono text-xs font-bold uppercase app-tap";

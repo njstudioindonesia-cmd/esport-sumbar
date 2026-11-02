@@ -32,12 +32,12 @@ export const MicroPengcab = {
       wilayah: targetName,
       pengcabDetails: regionInfo,
       stats: {
-        totalAtlet: localAthletes.length > 0 ? localAthletes.length : regionInfo.atlet,
+        totalPlayer: localAthletes.length > 0 ? localAthletes.length : regionInfo.player,
         kontingenPorprov: regionInfo.porprov,
         totalTim: localTeams.length > 0 ? localTeams.length : regionInfo.tim,
         suratRekomendasiDiterbitkan: recommendations.length > 0 ? recommendations.length : 4
       },
-      atletLokal: localAthletes,
+      playerLokal: localAthletes,
       timLokal: localTeams,
       venueLokal: localVenues,
       rekomendasiSurat: recommendations
@@ -118,21 +118,21 @@ export const MicroPengcab = {
     };
   },
 
-  // Verifikasi KTP / KIA Domisili Atlet untuk Porprov
+  // Verifikasi KTP / KIA Domisili Player untuk Porprov
   async verifyDomisili(body) {
     const { athleteId, status, notes } = body || {};
     if (!athleteId) {
       return {
         success: false,
         statusCode: 400,
-        message: "ID Atlet yang divalidasi wajib disertakan."
+        message: "ID Player yang divalidasi wajib disertakan."
       };
     }
 
     return {
       success: true,
       statusCode: 200,
-      message: `Status domisili atlet ${athleteId} berhasil diverifikasi sebagai: ${(status || 'SAH').toUpperCase()}.`,
+      message: `Status domisili player ${athleteId} berhasil diverifikasi sebagai: ${(status || 'SAH').toUpperCase()}.`,
       verifiedAt: new Date().toISOString(),
       notes: notes || "Tervalidasi sesuai database kependudukan Dukcapil Sumbar"
     };

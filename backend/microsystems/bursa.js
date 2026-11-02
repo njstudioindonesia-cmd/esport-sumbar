@@ -24,7 +24,7 @@ export const MicroBursa = {
     };
   },
 
-  // Kirim penawaran scouting dari tim/klub ke atlet
+  // Kirim penawaran scouting dari tim/klub ke player
   async submitScoutProposal(body) {
     const { athleteId, teamName, managerName, contact, offerNotes } = body || {};
 
@@ -32,7 +32,7 @@ export const MicroBursa = {
       return {
         success: false,
         statusCode: 400,
-        message: "ID Atlet, Nama Tim, dan Kontak PIC wajib diisi untuk mengajukan penawaran scouting."
+        message: "ID Player, Nama Tim, dan Kontak PIC wajib diisi untuk mengajukan penawaran scouting."
       };
     }
 
@@ -41,14 +41,14 @@ export const MicroBursa = {
       return {
         success: false,
         statusCode: 404,
-        message: "Atlet tidak ditemukan."
+        message: "Player tidak ditemukan."
       };
     }
 
     return {
       success: true,
       statusCode: 200,
-      message: `Tawaran scouting resmi dari '${teamName}' telah diteruskan ke agen & kontak atlet ${athlete.nama} (${athlete.ign}).`,
+      message: `Tawaran scouting resmi dari '${teamName}' telah diteruskan ke agen & kontak player ${athlete.nama} (${athlete.ign}).`,
       proposalId: `sct-${Date.now().toString(36)}`
     };
   },

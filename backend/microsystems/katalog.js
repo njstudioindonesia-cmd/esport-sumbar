@@ -2,7 +2,7 @@ import { db } from '../store/db.js';
 
 /**
  * MICROSERVICES: KATALOG EKOSISTEM
- * Menyediakan data kartu ekosistem resmi (atlet, tim, venue).
+ * Menyediakan data kartu ekosistem resmi (player, tim, venue).
  */
 export const MicroKatalog = {
   name: "katalog",
@@ -32,12 +32,12 @@ export const MicroKatalog = {
     let items = [];
     if (category === 'semua' || category === 'all') {
       items = [
-        ...athletes.map(a => ({ type: 'atlet', ...a })),
+        ...athletes.map(a => ({ type: 'player', ...a })),
         ...teams.map(t => ({ type: 'team', ...t })),
         ...venues.map(v => ({ type: 'venue', ...v }))
       ];
-    } else if (category === 'atlet' || category === 'player') {
-      items = athletes.map(a => ({ type: 'atlet', ...a }));
+    } else if (category === 'player' || category === 'player') {
+      items = athletes.map(a => ({ type: 'player', ...a }));
     } else if (category === 'team' || category === 'tim') {
       items = teams.map(t => ({ type: 'team', ...t }));
     } else if (category === 'venue') {

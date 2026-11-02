@@ -161,7 +161,7 @@
       }
     },
 
-    // 3. PASPOR DIGITAL ATLET
+    // 3. PASPOR DIGITAL PLAYER
     paspor: {
       async getDetail(idOrPaspor) {
         return request(`/paspor/${encodeURIComponent(idOrPaspor)}`);

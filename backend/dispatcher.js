@@ -120,7 +120,7 @@ export async function dispatchApiRequest(req, res) {
       return;
     }
 
-    // PASPOR DIGITAL ATLET
+    // PASPOR DIGITAL PLAYER
     const matchPaspor = pathname.match(/^\/api\/paspor\/([a-zA-Z0-9_-]+)$/);
     if (matchPaspor && req.method === 'GET') {
       const idOrPaspor = matchPaspor[1];

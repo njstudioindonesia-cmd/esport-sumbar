@@ -280,14 +280,14 @@
         </div>
       </div>
 
-      <!-- Card 2: Atlet Wilayah -->
+      <!-- Card 2: Player Wilayah -->
       <div class="rounded-3xl bg-[#101726] border border-white/10 p-4 shadow-lg flex flex-col justify-between">
         <div class="flex items-center justify-between text-white/60 mb-2">
-          <span class="text-[10px] font-mono uppercase font-bold">Atlet Berlisensi Wilayah</span>
+          <span class="text-[10px] font-mono uppercase font-bold">Player Berlisensi Wilayah</span>
           <i data-lucide="users" class="w-4 h-4 text-amber-400"></i>
         </div>
         <div>
-          <div id="statRegionalAtlet" class="font-display text-3xl sm:text-4xl text-white leading-none">186 ATLET</div>
+          <div id="statRegionalPlayer" class="font-display text-3xl sm:text-4xl text-white leading-none">186 PLAYER</div>
           <div class="text-[10px] font-mono text-white/60 mt-1">
             Terdata di Wilayah Ini
           </div>
@@ -338,7 +338,7 @@
       <!-- Tab 2: Pangkalan Data Wilayah -->
       <button type="button" id="tabBtnLocalDb" onclick="switchPengcabTab('local-db')" class="flex-1 py-2.5 px-3 rounded-xl bg-transparent text-white/70 hover:text-white hover:bg-white/5 font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 whitespace-nowrap app-tap">
         <i data-lucide="database" class="w-4 h-4 text-cyan-400"></i>
-        <span>2. Database Atlet & Klub Wilayah</span>
+        <span>2. Database Player & Klub Wilayah</span>
       </button>
 
       <!-- Tab 3: Surat Rekomendasi -->
@@ -380,13 +380,13 @@
     </div>
 
     <!-- ============================================================== -->
-    <!-- TAB 2: PANGKALAN DATA ATLET & KLUB WILAYAH                     -->
+    <!-- TAB 2: PANGKALAN DATA PLAYER & KLUB WILAYAH                     -->
     <!-- ============================================================== -->
     <div id="sectionLocalDb" class="hidden space-y-4">
       
       <div class="flex items-center justify-between flex-wrap gap-2 bg-[#101726] p-4 rounded-2xl border border-white/10">
         <div>
-          <h3 class="font-display text-xl text-white uppercase">Daftar Atlet & Klub Lokal Terdaftar</h3>
+          <h3 class="font-display text-xl text-white uppercase">Daftar Player & Klub Lokal Terdaftar</h3>
           <p class="text-xs text-white/60">Data khusus yang berdomisili di wilayah terpilih.</p>
         </div>
       </div>
@@ -444,8 +444,8 @@
       <div class="bg-[#101726] rounded-3xl border border-white/10 p-5 shadow-xl">
         <div class="mb-4 border-b border-white/10 pb-3">
           <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">SELEKSI PORPROV SUMATERA BARAT</span>
-          <h3 class="font-display text-2xl text-white uppercase mt-0.5">Kontingen Atlet Pilihan Daerah</h3>
-          <p class="text-xs text-white/60 font-sans">Daftar atlet terbaik perwakilan daerah untuk Porprov.</p>
+          <h3 class="font-display text-2xl text-white uppercase mt-0.5">Kontingen Player Pilihan Daerah</h3>
+          <p class="text-xs text-white/60 font-sans">Daftar player terbaik perwakilan daerah untuk Porprov.</p>
         </div>
 
         <div id="porprovGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -549,11 +549,11 @@
         if (resData && resData.pengcabDetails) {
           const d = resData.pengcabDetails;
           document.getElementById('regionOfficeMeta').textContent = `SK: ${d.sk || 'SK-ESI-SB/2024'} • Ketua: ${d.ketua || '-'} • Sekretariat: ${d.sekretariat || '-'}`;
-          document.getElementById('statRegionalAtlet').textContent = `${resData.stats.totalAtlet} ATLET`;
+          document.getElementById('statRegionalPlayer').textContent = `${resData.stats.totalPlayer} PLAYER`;
           document.getElementById('statRegionalTim').textContent = `${resData.stats.totalTim} TIM`;
           document.getElementById('statRegionalSurat').textContent = `${resData.stats.suratRekomendasiDiterbitkan} SURAT`;
           
-          regionalAthletes = resData.atletLokal || [];
+          regionalAthletes = resData.playerLokal || [];
           renderLocalDbTable(regionalAthletes);
           renderLettersList(resData.rekomendasiSurat || []);
           renderPorprovGrid(regionalAthletes);
@@ -646,7 +646,7 @@
       const tbody = document.getElementById('localDbTableBody');
       if (!tbody) return;
       if (items.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-white/40 font-mono">Belum ada data atlet lokal di wilayah ini.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-white/40 font-mono">Belum ada data player lokal di wilayah ini.</td></tr>';
         return;
       }
       tbody.innerHTML = items.map(a => `
